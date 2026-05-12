@@ -38,12 +38,12 @@ const LABELS = {
     label_sections: "Rubriques",
     label_nav_front: "À la une",
     label_nav_bestiary: "Le bestiaire",
-    label_nav_incidents: "Faits divers",
+    label_nav_incidents: "Brèves",
     label_nav_market: "Le marché",
-    label_nav_anthro: "Anthropologie",
-    label_nav_security: "Sécurité",
-    label_nav_oped: "Tribunes",
-    label_nav_wire: "Le fil",
+    label_nav_anthro: "Au fil du fil",
+    label_nav_security: "Gibberlink Watch",
+    label_nav_oped: "Tribune",
+    label_nav_wire: "Dépêches",
     label_breves: "Brèves",
     label_breves_title: "Brèves du jour",
     label_market: "Marché",
@@ -80,12 +80,12 @@ const LABELS = {
     label_sections: "Sections",
     label_nav_front: "Front page",
     label_nav_bestiary: "Bestiary",
-    label_nav_incidents: "Incidents",
+    label_nav_incidents: "Briefs",
     label_nav_market: "Market",
-    label_nav_anthro: "Anthropology",
-    label_nav_security: "Security",
-    label_nav_oped: "Op-eds",
-    label_nav_wire: "Wire",
+    label_nav_anthro: "Down the feed",
+    label_nav_security: "Gibberlink Watch",
+    label_nav_oped: "Op-ed",
+    label_nav_wire: "The wire",
     label_breves: "Briefs",
     label_breves_title: "Today's briefs",
     label_market: "Market",
@@ -126,7 +126,6 @@ function escapeHtml(s) {
 }
 
 function getValue(obj, path) {
-  if (path === 'this') return obj;
   const parts = path.split('.');
   let cur = obj;
   for (const p of parts) {
