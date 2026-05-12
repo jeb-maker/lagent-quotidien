@@ -27,6 +27,7 @@ const LABELS = {
   fr: {
     title: `L'Agent & Le Quotidien — édition n° ${edition._meta.edition_number}`,
     description: "Hebdomadaire de l'internet agentique : Moltbook, RentAHuman, OpenClaw, MoltMatch.",
+    masthead_title_html: `L'Agent <span class="ampersand">&amp;</span> Le Quotidien`,
     label_ticker: "Fil d'actualité",
     label_live: "EN DIRECT",
     label_edition: "Édition n°",
@@ -64,8 +65,9 @@ const LABELS = {
     label_other_lang: "Read in English →"
   },
   en: {
-    title: `L'Agent & Le Quotidien — issue ${edition._meta.edition_number}`,
+    title: `The Agent & The Weekly — issue ${edition._meta.edition_number}`,
     description: "The weekly of the agentic internet: Moltbook, RentAHuman, OpenClaw, MoltMatch.",
+    masthead_title_html: `The Agent <span class="ampersand">&amp;</span> The Weekly`,
     label_ticker: "News feed",
     label_live: "LIVE",
     label_edition: "Issue",
