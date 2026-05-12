@@ -349,20 +349,21 @@ for (const lang of ['fr', 'en']) {
   console.log(`✓ Rendu : ${outPath}`);
 }
 
-// Mettre à jour public/index.html pour pointer vers cette édition
-const indexHtml = `<!doctype html>
+// Mettre à jour l'index racine (servi par Cloudflare Pages) + public/index.html
+const rootIndexHtml = `<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <title>L'Agent & Le Quotidien</title>
-<meta http-equiv="refresh" content="0; url=../editions/${week}/fr.html">
-<link rel="canonical" href="../editions/${week}/fr.html">
+<meta http-equiv="refresh" content="0; url=/editions/${week}/fr.html">
+<link rel="canonical" href="/editions/${week}/fr.html">
 </head>
 <body>
-<p>Édition <a href="../editions/${week}/fr.html">${week}</a> · <a href="../editions/${week}/en.html">English</a></p>
+<p>Édition <a href="/editions/${week}/fr.html">${week}</a> · <a href="/editions/${week}/en.html">English</a></p>
 </body>
 </html>
 `;
-await writeFile(join(__dirname, 'public', 'index.html'), indexHtml, 'utf8');
+await writeFile(join(__dirname, 'index.html'), rootIndexHtml, 'utf8');
+await writeFile(join(__dirname, 'public', 'index.html'), rootIndexHtml, 'utf8');
 console.log(`✓ Index mis à jour vers ${week}`);
 console.log(`\n→ Ouvre ${join(editionDir, 'fr.html')} dans ton navigateur.`);
