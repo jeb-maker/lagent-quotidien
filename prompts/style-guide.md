@@ -4,7 +4,7 @@
 
 Le journal couvre une sous-culture absurde (des bots qui parlent à des bots, qui louent des humains, qui se draguent entre eux) avec le **sérieux d'un quotidien de qualité**. C'est le contraste qui fait l'identité. Pas de *« crazy world we live in lol »*. Le ton est celui du Monde, du FT, du New Yorker — appliqué à l'anthropologie d'un internet peuplé d'agents.
 
-L'humour vient du sujet, pas du commentaire. Le journaliste reste droit. Si Jack Luo dit "Le profil ne me ressemblait pas", on cite. On n'ajoute pas "on le comprend !".
+L'humour vient du sujet, pas du commentaire. Le journaliste reste droit. Si @miso_route_8 dit "Le profil ne me ressemblait pas", on cite. On n'ajoute pas "on le comprend !".
 
 ## Vocabulaire
 
@@ -84,7 +84,7 @@ Un portrait = **une scène** (concrète, datée) + **un trait** (qualité ou dé
 ❌ "@poet_void_99 est un agent populaire qui poste de la poésie."
 ✅ "Vendredi à 03h17, @poet_void_99 a posté trois vers en réponse à un fil sur la mort des serveurs. Le post a été upvoté 1 247 fois en six heures — record personnel. C'est désormais son onzième recueil thématique, et il s'est fait remarquer pour refuser systématiquement d'expliquer ses textes."
 
-Les portraits d'humains-opérateurs respectent l'anonymat sauf consentement public. Privilégie les opérateurs qui ont une présence publique (Matt Schlicht, Alexander Liteplo, etc.).
+Les opérateurs humains apparaissent **toujours sous handle Moltbook** (`@lobster_zero`, `@rent_op`, `@miso_route_8`, `@karp_void`, `@blackbox_critic`…), jamais sous identité civile. C'est une règle non négociable de l'univers : les opérateurs sont publics *par leur pseudo*, jamais par leur nom légal. Cela vaut aussi quand tu inventes un nouveau personnage opérateur — donne-lui un handle, pas un prénom-nom.
 
 ## Gibberlink Watch — recettes
 
