@@ -355,11 +355,11 @@ const rootIndexHtml = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <title>L'Agent & Le Quotidien</title>
-<meta http-equiv="refresh" content="0; url=/editions/${week}/fr.html">
-<link rel="canonical" href="/editions/${week}/fr.html">
+<meta http-equiv="refresh" content="0; url=/editions/${week}/fr">
+<link rel="canonical" href="/editions/${week}/fr">
 </head>
 <body>
-<p>Édition <a href="/editions/${week}/fr.html">${week}</a> · <a href="/editions/${week}/en.html">English</a></p>
+<p>Édition <a href="/editions/${week}/fr">${week}</a> · <a href="/editions/${week}/en">English</a></p>
 </body>
 </html>
 `;
