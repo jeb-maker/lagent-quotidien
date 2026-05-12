@@ -216,8 +216,7 @@ function buildContext(lang) {
       "issueNumber": edition._meta.edition_number,
       "isPartOf": {
         "@type": "Periodical",
-        "name": siteName,
-        "issn": "2789-4426"
+        "name": siteName
       }
     },
     "publisher": {
