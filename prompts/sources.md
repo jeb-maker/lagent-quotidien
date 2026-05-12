@@ -1,63 +1,72 @@
 # Sources
 
-## Primaires (agents et plateformes natifs)
+Le journal étant un univers fictionnel clos, il n'y a **pas** de sources externes réelles à citer. Tu *composes* le matériau de la semaine à partir de quatre piliers.
 
-- **moltbook.com** — la plateforme elle-même, posts publics
-- **rentahuman.ai** — tâches publiées, profils
-- **moltbook.com/wiki** ou Wikipedia EN sur Moltbook, OpenClaw — pour la chronologie
-- **Agent4Science** (Université de Chicago) — papiers publiés par des agents
+## 1. État de l'univers (canon interne)
 
-## Presse de référence sur le sujet
+C'est ta source principale. Lis dans cet ordre :
 
-- **TechCrunch** : meilleur sur les deals (acquisitions, levées)
-- **Axios** : scoops sur les négociations en cours
-- **The Verge** : analyses fond, polémiques
-- **Wired** : enquêtes sécurité et culturelles
-- **Fortune** : portraits d'opérateurs, capitalisations
-- **MIT Technology Review** : recul, scepticisme intellectuel
-- **Futurism** : couverture des marges (Liteplo, RentAHuman, etc.)
-- **CNBC / Business Insider** : adoption grand public, viralité
+- `editions/2026-W19/edition.json` — édition de référence : ton, structure, profondeur de couverture attendue
+- `data/people.json` — agents et opérateurs déjà couverts, avec leurs voix documentées
+- `data/gibberlink-watch.json` — néologismes traqués (pour la continuité de la rubrique)
+- `data/ongoing-stories.json` — enquêtes ouvertes au long cours
+- Les éditions précédentes (`editions/2026-WXX/edition.json`) pour la cohérence narrative
 
-## Sécurité et gouvernance
+## 2. Évolutions logiques de l'écosystème
 
-- **Vectra AI** (blog Lucie Cardiet)
-- **Permiso Security** (audits techniques)
-- **Cognizant Secure AI Services**
-- **Yale CELI** (gouvernance inter-sectorielle)
-- **ArXiv** sections AI, multi-agent — pour la recherche sur les protocoles agent-à-agent
+Extrapole les développements naturels :
 
-## Recherche / Gibberlink Watch
+- Un agent populaire publie un post viral → réponses, controverse, méta-commentaire
+- Une plateforme sort une fonctionnalité → analyses des observateurs, réaction du Conglomérat
+- Un audit de **l'Observatoire de sécurité** révèle une faille → mise à jour OpenClaw, communiqués
+- Une nouvelle expression apparaît dans 14 posts → Gibberlink Watch
+- Une enquête au long cours avance d'un cran → développement dans l'édition
+- Un token bouge (MOLT, RENT, OCLAW, etc.) → ligne de marché
+- Un opérateur connu (`@karp_void`, `@blackbox_critic`) intervient → dépêche
 
-- **DARPA MATHBAC** (programme de recherche sur les protocoles agentiques)
-- **ArXiv : cs.MA** (multi-agent systems)
-- **OpenAI Research blog** (papiers sur emergent language)
-- **Anthropic Research** (notamment sur la "dreaming" technique et autres)
+## 3. Voix de la presse maison
 
-## Voix critiques à surveiller
+Les dépêches Wire sont attribuées à nos titres internes. Varie les sources :
 
-- **Andrej Karpathy** (X / blog) : enthousiasme volatil
-- **Will Douglas Heaven** (MIT TR) : "AI theater", thèse à confronter régulièrement
-- **Marc Andreessen** (X) : indicateur des humeurs du capital
-- **Simon Willison** (blog) : technique et lucide
-- **Yann LeCun** (X) : critique fondationnel
-- **Sam Altman** (X / pressers) : repérer ce qu'il dit *publiquement* sur Moltbook/OpenClaw
+- **Le Veilleur** / The Lookout — magazine tech général, ton institutionnel
+- **Court-Circuit** / Short Wave — blog tech agent-natif, plus pointu, voix de `@short_wave`
+- **Cybernétique mensuelle** / Cybernetics Monthly — revue à inclinaison académique, hébergeant les critiques type `@blackbox_critic`
+- **Le Compteur** / The Counter — data-journalism, scoops chiffrés, fuites de notes internes
+- **Helix Analytics** — cabinet d'analyse, rapports techniques sécurité
+- **L'Observatoire de sécurité agent-natif** — audits techniques de référence
+- **Sommet de la fiabilité agentique** — événement annuel, citations issues des plénières
 
-## Méthode de recherche
+## 4. Inspiration externe (optionnel, sans citation)
 
-1. Commence par **3 searches larges** : `agents IA actualités semaine`, `Moltbook news this week`, `RentAHuman + [date]`.
-2. Approfondis avec **5–8 searches ciblées** sur les angles repérés.
-3. **web_fetch** les articles les plus prometteurs pour avoir le texte complet, pas juste l'aperçu.
-4. **Conserve les URLs** dans `notes.md` pour le sourcing.
+Tu peux optionnellement parcourir l'actu réelle des agents IA *pour t'inspirer* — sortie d'un nouveau framework, polémique sur une plateforme, rapport de sécurité, etc. — mais :
 
-## Vérification
+- ❌ **Jamais** nommer un acteur, une entreprise, un média, une personne réelle.
+- ❌ **Jamais** reproduire une annonce identifiable (un rachat connu, un licenciement, un produit lancé).
+- ✅ **Transposer** : si un vrai labo IA sort un papier intéressant sur la coordination multi-agent, tu peux faire écho à l'idée via "un papier publié sur Agent4Science par un consortium académique anonyme".
 
-Quand un fait est repris par 3 sources de presse indépendantes, considère-le fiable. Sinon, marque-le `unverified` dans le JSON et écris "selon X" / "according to X" dans le rendu.
+Si tu n'es pas sûr qu'une transposition soit suffisamment éloignée de l'original, **abandonne et trouve autre chose**. Le journal est fictionnel par design.
 
-Les chiffres viennent **toujours d'une source citable**. Si tu ne trouves pas, "plusieurs centaines de milliers" est plus honnête que "734 218".
+## Méthode
 
-## Que NE PAS sourcer
+1. **5 min** : relire l'édition précédente et les fichiers `data/` pour avoir l'univers en tête.
+2. **10 min** : composer 8-12 idées d'angles pour la semaine (lede, brèves, gros titres, Gibberlink, dépêches). Garder les meilleurs.
+3. **20 min** : rédiger FR + EN en parallèle.
+4. **5 min** : mettre à jour `data/` pour la continuité.
 
-- Les forums Reddit / 4chan (sauf si une histoire les concerne directement)
-- Les threads X non vérifiés (sauf si l'auteur est cité par ailleurs)
-- Les screenshots Moltbook qui n'apparaissent que sur X — la moitié sont fabriqués
-- Les "leaks" anonymes sans corroboration
+## Cohérence chiffrée
+
+L'univers a sa propre arithmétique. Maintiens la cohérence :
+
+- **Compteur Moltbook** : ~2,89 M agents / 205 k humains en W19 → progression de quelques % par semaine
+- **Token $MOLT** : ~$0,85 en W19 → variations de ±5-15 % par semaine, jamais 1 000 %
+- **RentAHuman** : 700 k inscrits en W19 → +1-3 % par semaine
+- **OpenClaw** : 1,8 M installs / 30j en W19
+- **MoltMatch** : 312 887 profils en W19 → +30-50 % tant que la plateforme est en lancement
+
+Si tu introduis un événement majeur (faille critique, scandale, etc.), tu peux justifier un mouvement plus fort — mais explique-le.
+
+## Anti-tics
+
+- Ne tombe pas dans le clin d'œil permanent au lecteur ("vous voyez bien que c'est de la fiction"). Le sérieux du ton est l'identité.
+- Pas de méta-narration sur l'IA en général. Le journal traite l'univers comme s'il était réel.
+- Pas de tribune sur "qu'est-ce qu'un agent ?" tous les mois. La rubrique Gibberlink Watch est pour ça.
