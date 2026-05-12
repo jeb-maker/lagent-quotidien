@@ -3,9 +3,13 @@
 // Usage : node render.mjs 2026-W19
 // Produit : editions/2026-W19/fr.html et en.html
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+const SITE_URL = 'https://theagentweekly.com';
+const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const escapeJson = s => JSON.stringify(s);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -189,10 +193,57 @@ function buildContext(lang) {
   const L = LABELS[lang];
   const other = lang === 'fr' ? 'en' : 'fr';
 
+  const canonicalUrl = `${SITE_URL}/editions/${week}/${lang}`;
+  const hreflangFr = `${SITE_URL}/editions/${week}/fr`;
+  const hreflangEn = `${SITE_URL}/editions/${week}/en`;
+  const siteName = lang === 'fr' ? "L'Agent & Le Quotidien" : "The Agent & The Weekly";
+  const ogLocale = lang === 'fr' ? 'fr_FR' : 'en_US';
+  const ogLocaleAlt = lang === 'fr' ? 'en_US' : 'fr_FR';
+  const publishedTime = edition._meta.bouclage;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": stripHtml(lang === 'fr' ? edition.lede.headline_html.fr : edition.lede.headline_html.en),
+    "description": stripHtml(lang === 'fr' ? edition.lede.dek.fr : edition.lede.dek.en),
+    "datePublished": publishedTime,
+    "dateModified": publishedTime,
+    "inLanguage": lang === 'fr' ? 'fr-FR' : 'en-US',
+    "url": canonicalUrl,
+    "mainEntityOfPage": canonicalUrl,
+    "isPartOf": {
+      "@type": "PublicationIssue",
+      "issueNumber": edition._meta.edition_number,
+      "isPartOf": {
+        "@type": "Periodical",
+        "name": siteName,
+        "issn": "2789-4426"
+      }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": siteName,
+      "url": SITE_URL
+    },
+    "author": {
+      "@type": "Organization",
+      "name": siteName,
+      "url": SITE_URL
+    }
+  };
+
   const ctx = {
     lang,
     other_lang: other,
     CSS: css,
+    canonical_url: canonicalUrl,
+    hreflang_fr: hreflangFr,
+    hreflang_en: hreflangEn,
+    og_site_name: siteName,
+    og_locale: ogLocale,
+    og_locale_alt: ogLocaleAlt,
+    published_time: publishedTime,
+    json_ld: JSON.stringify(jsonLd),
     ...L,
 
     date: lang === 'fr' ? edition._meta.date_fr : edition._meta.date_en,
@@ -354,14 +405,14 @@ for (const lang of ['fr', 'en']) {
   console.log(`✓ Rendu : ${outPath}`);
 }
 
-// Mettre à jour l'index racine (servi par Cloudflare Pages) + public/index.html
+// Index racine — fallback statique (la redirection HTTP 301 est gérée par _redirects)
 const rootIndexHtml = `<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <title>L'Agent & Le Quotidien</title>
 <meta http-equiv="refresh" content="0; url=/editions/${week}/fr">
-<link rel="canonical" href="/editions/${week}/fr">
+<link rel="canonical" href="${SITE_URL}/editions/${week}/fr">
 </head>
 <body>
 <p>Édition <a href="/editions/${week}/fr">${week}</a> · <a href="/editions/${week}/en">English</a></p>
@@ -371,4 +422,51 @@ const rootIndexHtml = `<!doctype html>
 await writeFile(join(__dirname, 'index.html'), rootIndexHtml, 'utf8');
 await writeFile(join(__dirname, 'public', 'index.html'), rootIndexHtml, 'utf8');
 console.log(`✓ Index mis à jour vers ${week}`);
+
+// ───── _redirects (HTTP 301 racine → dernière édition) ─────
+const redirects = `/  /editions/${week}/fr  301
+`;
+await writeFile(join(__dirname, '_redirects'), redirects, 'utf8');
+console.log(`✓ _redirects → /editions/${week}/fr`);
+
+// ───── sitemap.xml (toutes les éditions, FR + EN) ─────
+const editionDirs = await readdir(join(__dirname, 'editions'), { withFileTypes: true });
+const weeks = editionDirs
+  .filter(d => d.isDirectory() && /^\d{4}-W\d{2}$/.test(d.name))
+  .map(d => d.name)
+  .sort();
+
+const sitemapEntries = [
+  `<url><loc>${SITE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>`
+];
+for (const w of weeks) {
+  for (const l of ['fr', 'en']) {
+    sitemapEntries.push(
+`<url>
+  <loc>${SITE_URL}/editions/${w}/${l}</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  <xhtml:link rel="alternate" hreflang="fr" href="${SITE_URL}/editions/${w}/fr"/>
+  <xhtml:link rel="alternate" hreflang="en" href="${SITE_URL}/editions/${w}/en"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}/editions/${w}/fr"/>
+</url>`
+    );
+  }
+}
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sitemapEntries.join('\n')}
+</urlset>
+`;
+await writeFile(join(__dirname, 'sitemap.xml'), sitemapXml, 'utf8');
+console.log(`✓ sitemap.xml (${weeks.length} éditions × 2 langues)`);
+
+// ───── robots.txt ─────
+const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE_URL}/sitemap.xml
+`;
+await writeFile(join(__dirname, 'robots.txt'), robotsTxt, 'utf8');
+console.log(`✓ robots.txt`);
 console.log(`\n→ Ouvre ${join(editionDir, 'fr.html')} dans ton navigateur.`);
