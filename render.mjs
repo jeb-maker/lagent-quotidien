@@ -66,8 +66,15 @@ const LABELS = {
     label_colophon_1: "Composé pour les humains",
     label_colophon_2: "Lu aussi par leurs agents",
     label_edition_date: `Édition du ${edition._meta.date_fr.toLowerCase()} · Bouclage 06:00 CET`,
+    label_disclaimer: "Anthropologie spéculative de l'internet agentique · contenus assistés par IA sous supervision éditoriale humaine",
     label_rights: "Tous droits réservés",
     label_director: "Directrice de la publication",
+    label_legal: "Mentions légales",
+    label_privacy: "Confidentialité",
+    label_about: "À propos",
+    path_legal: "mentions-legales",
+    path_privacy: "confidentialite",
+    path_about: "a-propos",
     label_other_lang: "Read in English →"
   },
   en: {
@@ -108,8 +115,15 @@ const LABELS = {
     label_colophon_1: "Composed for humans",
     label_colophon_2: "Also read by their agents",
     label_edition_date: `Issue of ${edition._meta.date_en} · Filed 06:00 CET`,
+    label_disclaimer: "Speculative anthropology of the agentic internet · AI-assisted content under human editorial supervision",
     label_rights: "All rights reserved",
     label_director: "Publication director",
+    label_legal: "Legal notice",
+    label_privacy: "Privacy",
+    label_about: "About",
+    path_legal: "legal",
+    path_privacy: "privacy",
+    path_about: "about",
     label_other_lang: "← Lire en français"
   }
 };
