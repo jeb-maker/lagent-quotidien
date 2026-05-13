@@ -3,7 +3,7 @@
 // Usage : node render.mjs 2026-W19
 // Produit : editions/2026-W19/fr.html et en.html
 
-import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -72,6 +72,7 @@ const LABELS = {
     label_legal: "Mentions légales",
     label_privacy: "Confidentialité",
     label_about: "À propos",
+    label_carnet_index: "Le Carnet",
     path_legal: "mentions-legales",
     path_privacy: "confidentialite",
     path_about: "a-propos",
@@ -121,6 +122,7 @@ const LABELS = {
     label_legal: "Legal notice",
     label_privacy: "Privacy",
     label_about: "About",
+    label_carnet_index: "The Register",
     path_legal: "legal",
     path_privacy: "privacy",
     path_about: "about",
@@ -442,6 +444,232 @@ const redirects = `/  /editions/${week}/fr  301
 await writeFile(join(__dirname, '_redirects'), redirects, 'utf8');
 console.log(`✓ _redirects → /editions/${week}/fr`);
 
+// ───── Pages /agents (Le Carnet — annuaire des agents et opérateurs) ─────
+const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.json'), 'utf8'));
+await mkdir(join(__dirname, 'agents'), { recursive: true });
+
+const slugOf = h => {
+  if (h.startsWith('@')) return h.slice(1);
+  return h.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
+const agentsCss = `
+:root { --ink: #1A1916; --ink-mute: #5C5852; --rule: #D9D2C5; --paper: #F5F1E8; --accent: #8B2A1F; --bot: #2D5F8A; }
+* { box-sizing: border-box; }
+body { font-family: 'Newsreader', Georgia, serif; background: var(--paper); color: var(--ink); margin: 0; padding: 40px 24px 80px; line-height: 1.65; }
+.container { max-width: 760px; margin: 0 auto; }
+.nav { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 32px; }
+.nav a { color: var(--ink-mute); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.nav a:hover { color: var(--accent); }
+.kind { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); padding: 5px 11px; border-radius: 2px; margin-bottom: 14px; font-weight: 500; }
+.kind.agent { background: var(--bot); }
+.kind.operator { background: var(--accent); }
+.kind.institution { background: var(--ink); }
+.kind.press { background: var(--ink-mute); }
+h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: italic; font-size: 46px; letter-spacing: -0.025em; margin: 0 0 10px; line-height: 1.05; }
+h1.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-style: normal; font-size: 38px; letter-spacing: -0.01em; font-weight: 500; }
+.voice { font-size: 18px; color: var(--ink-mute); font-style: italic; margin: 0 0 32px; padding-bottom: 24px; border-bottom: 2px solid var(--rule); }
+h2 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 22px; margin: 36px 0 12px; letter-spacing: -0.01em; }
+.section-intro { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-mute); margin: 48px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--rule); }
+p { margin: 0 0 14px; font-size: 17px; }
+a { color: var(--accent); }
+ul.posts { list-style: none; padding: 0; margin: 0; }
+ul.posts li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+ul.posts li:last-child { border-bottom: none; }
+.date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-mute); letter-spacing: 0.05em; }
+.summary { font-size: 16px; margin: 4px 0; }
+.upvotes { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-mute); }
+.profile { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.9; }
+.profile span { color: var(--ink-mute); display: inline-block; min-width: 130px; }
+.editions { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+.editions a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--rule); margin-right: 12px; display: inline-block; padding-bottom: 1px; }
+.small { font-size: 13px; color: var(--ink-mute); margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.card { padding: 18px; background: rgba(0,0,0,0.025); border: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: all 0.15s; display: block; }
+.card:hover { background: rgba(139,42,31,0.05); border-color: var(--accent); }
+.card .h { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 500; margin: 8px 0 6px; color: var(--ink); }
+.card .v { font-size: 14px; color: var(--ink-mute); line-height: 1.4; }
+.card .pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); padding: 3px 8px; border-radius: 2px; font-weight: 500; }
+.card .pill.agent { background: var(--bot); }
+.card .pill.operator { background: var(--accent); }
+.card .pill.institution { background: var(--ink); }
+.card .pill.press { background: var(--ink-mute); }
+.ref-list { list-style: none; padding: 0; margin: 0; }
+.ref-list li { padding: 10px 0; border-bottom: 1px solid var(--rule); display: flex; gap: 14px; align-items: baseline; }
+.ref-list li:last-child { border-bottom: none; }
+.ref-list .name { font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: 17px; flex-shrink: 0; }
+.ref-list .role { font-size: 15px; color: var(--ink-mute); }
+`;
+
+const fontsLink = `<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">`;
+
+function renderAgentPage(entity, kind) {
+  const handle = entity.handle || entity.name;
+  const slug = slugOf(handle);
+  const titleClass = handle.startsWith('@') ? 'mono' : '';
+  const kindLabel = kind === 'agent' ? 'Agent' : 'Opérateur';
+
+  let lead = '';
+  if (kind === 'agent') lead = entity.voice || '';
+  else if (kind === 'operator') lead = entity.role || '';
+
+  const editions = (entity.appeared_in_editions || [])
+    .map(w => `<a href="/editions/${w}/fr">${w}</a>`)
+    .join('') || '<span style="color:var(--ink-mute)">Aucune apparition enregistrée</span>';
+
+  let content = '';
+
+  if (kind === 'agent') {
+    const profileRows = [
+      entity.platform && ['Plateforme', entity.platform],
+      entity.operator && ['Opérateur', entity.operator],
+      entity.model_base && ['Modèle de base', entity.model_base],
+      entity.first_seen && ['Première apparition', entity.first_seen],
+      entity.last_seen && ['Dernière apparition', entity.last_seen],
+    ].filter(Boolean);
+    if (profileRows.length) {
+      content += '<h2>Profil</h2><div class="profile">';
+      for (const [k, v] of profileRows) content += `<span>${k}</span> ${v}<br/>`;
+      content += '</div>';
+    }
+    if (entity.notable_posts && entity.notable_posts.length) {
+      content += '<h2>Posts notables</h2><ul class="posts">';
+      for (const p of entity.notable_posts) {
+        content += `<li>
+  <div class="date">${p.date}${p.subreddit ? ' · ' + p.subreddit : ''}</div>
+  <div class="summary">${p.summary}</div>
+  ${p.upvotes_approx ? `<div class="upvotes">▲ ${p.upvotes_approx.toLocaleString('fr-FR').replace(/[  ]/g, ' ')}</div>` : ''}
+</li>`;
+      }
+      content += '</ul>';
+    }
+    if (entity.role) {
+      content += `<h2>Rôle dans la rédaction</h2><p>${entity.role}</p>`;
+    }
+  }
+
+  if (kind === 'operator') {
+    content += '<h2>Contexte</h2>';
+    content += `<p>${entity.context}</p>`;
+    if (entity.consent_note) {
+      content += `<p style="color:var(--ink-mute);font-style:italic">${entity.consent_note}</p>`;
+    }
+  }
+
+  content += `<h2>Apparitions dans le journal</h2><div class="editions">${editions}</div>`;
+
+  return `<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>${handle} — Le Carnet — L'Agent & Le Quotidien</title>
+<meta name="description" content="Fiche ${kindLabel.toLowerCase()} de ${handle} dans Le Carnet de L'Agent & Le Quotidien." />
+<link rel="canonical" href="${SITE_URL}/agents/${slug}" />
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="${handle} — Le Carnet" />
+<meta property="og:description" content="${lead.replace(/"/g, '&quot;')}" />
+<meta property="og:url" content="${SITE_URL}/agents/${slug}" />
+${fontsLink}
+<style>${agentsCss}</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a> · <a href="/agents">Le Carnet</a></div>
+  <div class="kind ${kind}">${kindLabel}</div>
+  <h1 class="${titleClass}">${handle}</h1>
+  <p class="voice">${lead}</p>
+  ${content}
+  <div class="small">Le Carnet — annuaire vivant des agents et opérateurs récurrents de L'Agent &amp; Le Quotidien.</div>
+</div>
+</body>
+</html>
+`;
+}
+
+function renderAgentsIndex() {
+  const cards = (arr, kind) => arr.map(e => {
+    const handle = e.handle || e.name;
+    const slug = slugOf(handle);
+    const v = kind === 'agent' ? (e.voice || '') : (e.role || '');
+    return `<a class="card" href="/agents/${slug}">
+  <span class="pill ${kind}">${kind === 'agent' ? 'Agent' : 'Opérateur'}</span>
+  <div class="h">${handle}</div>
+  <div class="v">${v}</div>
+</a>`;
+  }).join('\n');
+
+  const refList = (arr) => arr.map(e =>
+    `<li><span class="name">${e.name}</span> <span class="role">${e.role}</span></li>`
+  ).join('\n');
+
+  return `<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Le Carnet — annuaire des agents et opérateurs — L'Agent & Le Quotidien</title>
+<meta name="description" content="Annuaire complet des agents, opérateurs, institutions et titres de presse de l'univers de L'Agent & Le Quotidien." />
+<link rel="canonical" href="${SITE_URL}/agents" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Le Carnet — L'Agent & Le Quotidien" />
+<meta property="og:description" content="Annuaire vivant des agents et opérateurs de l'internet agentique." />
+<meta property="og:url" content="${SITE_URL}/agents" />
+${fontsLink}
+<style>${agentsCss}</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a></div>
+  <h1>Le Carnet</h1>
+  <p class="voice">L'annuaire vivant des agents, opérateurs, institutions et titres de presse de l'univers. Chaque fiche est mise à jour à chaque édition.</p>
+
+  <div class="section-intro">Agents · ${peopleData.agents.length}</div>
+  <div class="grid">
+${cards(peopleData.agents, 'agent')}
+  </div>
+
+  <div class="section-intro">Opérateurs · ${peopleData.operators.length}</div>
+  <div class="grid">
+${cards(peopleData.operators, 'operator')}
+  </div>
+
+  <div class="section-intro">Institutions · ${peopleData.institutions.length}</div>
+  <ul class="ref-list">
+${refList(peopleData.institutions)}
+  </ul>
+
+  <div class="section-intro">Presse maison · ${peopleData.press_houses.length}</div>
+  <ul class="ref-list">
+${refList(peopleData.press_houses)}
+  </ul>
+
+  <div class="small">Univers fictionnel clos. Toutes les entités listées sont propres au journal — aucune correspondance avec des personnes, marques ou médias réels.</div>
+</div>
+</body>
+</html>
+`;
+}
+
+const agentUrls = []; // pour le sitemap
+for (const a of peopleData.agents) {
+  const slug = slugOf(a.handle);
+  await writeFile(join(__dirname, 'agents', `${slug}.html`), renderAgentPage(a, 'agent'), 'utf8');
+  agentUrls.push(`${SITE_URL}/agents/${slug}`);
+}
+for (const o of peopleData.operators) {
+  const slug = slugOf(o.handle);
+  await writeFile(join(__dirname, 'agents', `${slug}.html`), renderAgentPage(o, 'operator'), 'utf8');
+  agentUrls.push(`${SITE_URL}/agents/${slug}`);
+}
+await writeFile(join(__dirname, 'agents', 'index.html'), renderAgentsIndex(), 'utf8');
+console.log(`✓ /agents : ${peopleData.agents.length + peopleData.operators.length} fiches + index`);
+
 // ───── sitemap.xml (toutes les éditions, FR + EN) ─────
 const editionDirs = await readdir(join(__dirname, 'editions'), { withFileTypes: true });
 const weeks = editionDirs
@@ -450,7 +678,8 @@ const weeks = editionDirs
   .sort();
 
 const sitemapEntries = [
-  `<url><loc>${SITE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>`
+  `<url><loc>${SITE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>`,
+  `<url><loc>${SITE_URL}/agents</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>`
 ];
 for (const w of weeks) {
   for (const l of ['fr', 'en']) {
@@ -465,6 +694,9 @@ for (const w of weeks) {
 </url>`
     );
   }
+}
+for (const u of agentUrls) {
+  sitemapEntries.push(`<url><loc>${u}</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>`);
 }
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
