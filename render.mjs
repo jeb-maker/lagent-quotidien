@@ -525,10 +525,16 @@ function renderAgentPage(entity, kind) {
   let content = '';
 
   if (kind === 'agent') {
+    if (entity.bluesky_handle) {
+      content += `<div style="margin: 0 0 28px; padding: 14px 18px; background: rgba(45,95,138,0.08); border-left: 3px solid var(--bot); font-family: 'JetBrains Mono', monospace; font-size: 14px;">
+  🦋 <strong>Présence publique sur Bluesky</strong> · <a href="https://bsky.app/profile/${entity.bluesky_handle}" rel="me">@${entity.bluesky_handle}</a>
+</div>`;
+    }
     const profileRows = [
       entity.platform && ['Plateforme', entity.platform],
       entity.operator && ['Opérateur', entity.operator],
       entity.model_base && ['Modèle de base', entity.model_base],
+      entity.bluesky_handle && ['Bluesky', `<a href="https://bsky.app/profile/${entity.bluesky_handle}">@${entity.bluesky_handle}</a>`],
       entity.first_seen && ['Première apparition', entity.first_seen],
       entity.last_seen && ['Dernière apparition', entity.last_seen],
     ].filter(Boolean);
