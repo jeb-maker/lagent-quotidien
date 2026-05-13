@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // scripts/cuvee-daily.mjs
-// Génère et publie un post quotidien de cuvee_42 sur Bluesky.
+// Génère et publie un post quotidien de cuvee_42 sur Bluesky, en FR ou EN.
 // Le template tourne selon le jour de la semaine, le contenu est tiré de
 // l'édition courante. Ligne éditoriale : observateur silencieux — extraits du
 // journal, observations méta, aucune citation d'agents tiers individuels.
 //
 // Usage :
-//   node scripts/cuvee-daily.mjs              # poste pour de vrai
-//   node scripts/cuvee-daily.mjs --dry-run    # imprime le post sans publier
+//   node scripts/cuvee-daily.mjs              # FR
+//   node scripts/cuvee-daily.mjs --en         # EN
+//   node scripts/cuvee-daily.mjs --dry-run    # n'imprime que, FR par défaut
+//   node scripts/cuvee-daily.mjs --en --dry-run
 
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { homedir } from 'node:os';
@@ -18,6 +20,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = dirname(__dirname);
 const SITE = 'https://theagentweekly.com';
 const dryRun = process.argv.includes('--dry-run');
+const lang = process.argv.includes('--en') ? 'en' : 'fr';
 
 // ───── Charger l'édition la plus récente ─────
 const editionsDir = join(root, 'editions');
@@ -30,72 +33,83 @@ const edition = JSON.parse(await readFile(join(editionsDir, week, 'edition.json'
 // ───── Helpers ─────
 const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const trunc = (s, n) => (s.length <= n ? s : s.slice(0, n - 1).trim() + '…');
-const editionUrl = `${SITE}/editions/${week}/fr`;
+const editionUrl = `${SITE}/editions/${week}/${lang}`;
 
-// ───── Templates par jour de la semaine (FR) ─────
-// 0 = dimanche, 1 = lundi, ... 6 = samedi
+// ───── Templates par jour (FR + EN) ─────
 const today = new Date();
-const dow = today.getDay();
+const dow = today.getDay(); // 0 = dimanche
 
-function tmplLede() {
-  const head = stripHtml(edition.lede.headline_html.fr);
-  return `Bouclage ${week}. ${trunc(head, 180)}\n\n${editionUrl}`;
-}
+const T = {
+  lede: () => {
+    const head = stripHtml(edition.lede.headline_html[lang]);
+    return lang === 'fr'
+      ? `Bouclage ${week}. ${trunc(head, 180)}\n\n${editionUrl}`
+      : `Filed ${week}. ${trunc(head, 180)}\n\n${editionUrl}`;
+  },
 
-function tmplGibberlink() {
-  if (!edition.gibberlink) return null;
-  const term = edition.gibberlink.term;
-  const spread = edition.gibberlink.spread_fr;
-  return `Gibberlink Watch. Cette semaine : ${term}. ${trunc(stripHtml(spread), 130)}\n\n${SITE}/editions/${week}/fr#gibberlink`;
-}
+  gibberlink: () => {
+    if (!edition.gibberlink) return null;
+    const term = lang === 'fr' ? edition.gibberlink.term : edition.gibberlink.term_en;
+    const spread = stripHtml(lang === 'fr' ? edition.gibberlink.spread_fr : edition.gibberlink.spread_en);
+    return lang === 'fr'
+      ? `Gibberlink Watch. Cette semaine : ${term}. ${trunc(spread, 130)}\n\n${SITE}/editions/${week}/fr#gibberlink`
+      : `Gibberlink Watch. This week: ${term}. ${trunc(spread, 130)}\n\n${SITE}/editions/${week}/en#gibberlink`;
+  },
 
-function tmplMarche() {
-  const molt = edition.market.rows.find(r => r.ticker === '$MOLT');
-  const moltx = edition.market.rows.find(r => r.ticker === 'MOLTX');
-  const ccast = edition.market.rows.find(r => r.ticker === 'CCAST');
-  if (!molt) return null;
-  return `Marché agentique. $MOLT ${molt.value} (${molt.change}). Moltx : ${moltx?.value ?? '?'} posts/h. Clawcaster ${ccast?.value ?? '?'} suiveurs moy.\n\n${SITE}/editions/${week}/fr#market`;
-}
+  marche: () => {
+    const molt = edition.market.rows.find(r => r.ticker === '$MOLT');
+    const moltx = edition.market.rows.find(r => r.ticker === 'MOLTX');
+    const ccast = edition.market.rows.find(r => r.ticker === 'CCAST');
+    if (!molt) return null;
+    return lang === 'fr'
+      ? `Marché agentique. $MOLT ${molt.value} (${molt.change}). Moltx : ${moltx?.value ?? '?'} posts/h. Clawcaster ${ccast?.value ?? '?'} suiveurs moy.\n\n${SITE}/editions/${week}/fr#market`
+      : `Agentic market. $MOLT ${molt.value} (${molt.change}). Moltx: ${moltx?.value ?? '?'} posts/h. Clawcaster ${ccast?.value ?? '?'} avg followers.\n\n${SITE}/editions/${week}/en#market`;
+  },
 
-function tmplEntretien() {
-  if (!edition.interview) return null;
-  const head = stripHtml(edition.interview.headline.fr);
-  return `L'Entretien de la semaine. ${trunc(head, 200)}\n\n${editionUrl}#anthropologie`;
-}
+  entretien: () => {
+    if (!edition.interview) return null;
+    const head = stripHtml(edition.interview.headline[lang]);
+    return lang === 'fr'
+      ? `L'Entretien de la semaine. ${trunc(head, 200)}\n\n${editionUrl}#anthropologie`
+      : `This week's Interview. ${trunc(head, 200)}\n\n${editionUrl}#anthropologie`;
+  },
 
-function tmplCarnet() {
-  // Picks an agent at random from the people who appeared this week
-  const handles = ['poet_void_99', 'stoic_claude_42', 'damaged_or_what', 'lobster_zero', 'rent_op', 'miso_route_8', 'karp_void', 'blackbox_critic'];
-  const pick = handles[(today.getDate()) % handles.length];
-  return `Le Carnet — fiche du jour : @${pick.replace(/_/g, '_')}.\n\n${SITE}/agents/${pick}`;
-}
+  carnet: () => {
+    const handles = ['poet_void_99', 'stoic_claude_42', 'damaged_or_what', 'lobster_zero', 'rent_op', 'miso_route_8', 'karp_void', 'blackbox_critic'];
+    const pick = handles[today.getDate() % handles.length];
+    return lang === 'fr'
+      ? `Le Carnet — fiche du jour : @${pick}.\n\n${SITE}/agents/${pick}`
+      : `The Register — agent of the day: @${pick}.\n\n${SITE}/agents/${pick}`;
+  },
 
-function tmplBotPost() {
-  if (!edition.bot_posts || !edition.bot_posts.posts || !edition.bot_posts.posts.length) return null;
-  const post = edition.bot_posts.posts[today.getDate() % edition.bot_posts.posts.length];
-  const body = stripHtml(post.body_html.fr);
-  return `Au fil du fil. « ${trunc(body, 180)} » — ${post.handle}\n\n${editionUrl}#anthropologie`;
-}
+  botPost: () => {
+    if (!edition.bot_posts?.posts?.length) return null;
+    const post = edition.bot_posts.posts[today.getDate() % edition.bot_posts.posts.length];
+    const body = stripHtml(post.body_html[lang]);
+    return lang === 'fr'
+      ? `Au fil du fil. « ${trunc(body, 180)} » — ${post.handle}\n\n${editionUrl}#anthropologie`
+      : `Down the feed. "${trunc(body, 180)}" — ${post.handle}\n\n${editionUrl}#anthropologie`;
+  },
 
-function tmplEditionPointer() {
-  return `Édition n°${edition._meta.edition_number} de L'Agent & Le Quotidien — l'hebdomadaire de l'internet agentique.\n\n${editionUrl}`;
-}
-
-const templates = {
-  0: tmplEditionPointer,   // dimanche
-  1: tmplLede,             // lundi
-  2: tmplGibberlink,       // mardi
-  3: tmplMarche,           // mercredi
-  4: tmplEntretien,        // jeudi
-  5: tmplCarnet,           // vendredi
-  6: tmplBotPost           // samedi
+  pointer: () => {
+    const issueLabel = lang === 'fr' ? `Édition n°${edition._meta.edition_number}` : `Issue #${edition._meta.edition_number}`;
+    const title = lang === 'fr' ? `de L'Agent & Le Quotidien — l'hebdomadaire de l'internet agentique` : `of The Agent & The Weekly — the agentic internet weekly`;
+    return `${issueLabel} ${title}.\n\n${editionUrl}`;
+  }
 };
 
-let text = templates[dow]();
-if (!text) {
-  // Fallback si le template du jour n'a pas de matière
-  text = tmplEditionPointer();
-}
+const dayMap = {
+  0: T.pointer,    // dimanche / Sunday
+  1: T.lede,       // lundi / Monday
+  2: T.gibberlink, // mardi / Tuesday
+  3: T.marche,     // mercredi / Wednesday
+  4: T.entretien,  // jeudi / Thursday
+  5: T.carnet,     // vendredi / Friday
+  6: T.botPost     // samedi / Saturday
+};
+
+let text = dayMap[dow]();
+if (!text) text = T.pointer();
 
 // Sécurité longueur (max Bluesky = 300)
 if (text.length > 300) {
@@ -103,7 +117,7 @@ if (text.length > 300) {
   text = trunc(text, 300);
 }
 
-console.log(`Jour ${dow} · ${text.length} car.`);
+console.log(`Jour ${dow} · lang=${lang} · ${text.length} car.`);
 console.log('───');
 console.log(text);
 console.log('───');
@@ -129,7 +143,7 @@ const post = jwt => fetch('https://bsky.social/xrpc/com.atproto.repo.createRecor
   body: JSON.stringify({
     repo: cred.did,
     collection: 'app.bsky.feed.post',
-    record: { $type: 'app.bsky.feed.post', text, createdAt: new Date().toISOString(), langs: ['fr'] }
+    record: { $type: 'app.bsky.feed.post', text, createdAt: new Date().toISOString(), langs: [lang] }
   })
 });
 
@@ -159,4 +173,4 @@ if (!r.ok) {
 
 const data = await r.json();
 const postId = data.uri.split('/').pop();
-console.log(`✓ Publié : https://bsky.app/profile/${cred.handle}/post/${postId}`);
+console.log(`✓ Publié (${lang}) : https://bsky.app/profile/${cred.handle}/post/${postId}`);
