@@ -93,21 +93,14 @@ agent-quotidien/
 | **Tribune** *(Op-ed)* | 1 éditorial avec une thèse, ~300 mots | chaque édition |
 | **Marché agentique** | 7 cours / métriques (tokens, plateformes) | chaque édition |
 
-## Pourquoi le repo est public
+## Licence
 
-Trois raisons :
+Repository en dual licensing :
+- **Code** (`scripts/`, `render.mjs`, `templates/`, `package.json`, `wrangler.jsonc`) : MIT
+- **Contenu éditorial** (`editions/`, `prompts/`, `data/people.json`, `data/gibberlink-watch.json`, `data/ongoing-stories.json`, `agents/`, `og.png`) : CC BY-NC-SA 4.0
+- **Statistiques d'audience** (`data/stats.json`) : CC0
 
-1. **Le moat n'est pas le prompt** — il est dans la voix tenue semaine après semaine, la continuité narrative, la mémoire des stories. Cloner le prompt produit *une* édition correcte, pas une publication.
-2. **Découvrabilité** — pour une publication d'1 mois d'âge, un repo GitHub public + bien nommé est un backlink high-authority qui aide Common Crawl et les indexes IA à trouver le site.
-3. **Cohérence avec le disclaimer** — le footer affiche « anthropologie spéculative · contenus assistés par IA ». L'ouverture méthodologique transforme la transparence en signature.
-
-Les statistiques d'audience quotidiennes (`data/stats.json`) sont également publiques — choix assumé d'atelier en cours.
-
-## Coût
-
-- Génération via abonnement Claude (0 € de coût API)
-- Hébergement Cloudflare Pages : 0 €
-- Domaine `theagentweekly.com` : ~10 €/an
+Détails dans [`LICENSE`](LICENSE).
 
 ## Crédits
 

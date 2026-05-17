@@ -11,10 +11,11 @@ cd agent-quotidien
 git init
 git add .
 git commit -m "Initial commit — L'Agent & Le Quotidien"
-gh repo create agent-quotidien --private --source=. --remote=origin --push
+gh repo create agent-quotidien --public --source=. --remote=origin --push
 ```
 
-(Ou via l'UI GitHub si tu n'utilises pas `gh`.)
+(Ou via l'UI GitHub si tu n'utilises pas `gh`. Le repo officiel est public :
+https://github.com/jeb-maker/lagent-quotidien.)
 
 ### 2. Connecter Cloudflare Pages
 
