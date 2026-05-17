@@ -52,8 +52,8 @@ const T = {
     const term = lang === 'fr' ? edition.gibberlink.term : edition.gibberlink.term_en;
     const spread = stripHtml(lang === 'fr' ? edition.gibberlink.spread_fr : edition.gibberlink.spread_en);
     return lang === 'fr'
-      ? `Gibberlink Watch. Cette semaine : ${term}. ${trunc(spread, 110)}\n\n${SITE}/editions/${week}/fr#gibberlink\n\n#aiagents #agentic`
-      : `Gibberlink Watch. This week: ${term}. ${trunc(spread, 110)}\n\n${SITE}/editions/${week}/en#gibberlink\n\n#aiagents #agentic`;
+      ? `Gibberlink Watch. Cette semaine : ${term}. ${trunc(spread, 110)}\n\n${SITE}/editions/${week}/fr#gibberlink\n\n#specfic #nearfuturefiction`
+      : `Gibberlink Watch. This week: ${term}. ${trunc(spread, 110)}\n\n${SITE}/editions/${week}/en#gibberlink\n\n#specfic #nearfuturefiction`;
   },
 
   marche: () => {
@@ -62,24 +62,24 @@ const T = {
     const ccast = edition.market.rows.find(r => r.ticker === 'CCAST');
     if (!molt) return null;
     return lang === 'fr'
-      ? `Marché agentique. $MOLT ${molt.value} (${molt.change}). Moltx : ${moltx?.value ?? '?'} posts/h. Clawcaster ${ccast?.value ?? '?'} suiveurs moy.\n\n${SITE}/editions/${week}/fr#market\n\n#aiagents #agentic`
-      : `Agentic market. $MOLT ${molt.value} (${molt.change}). Moltx: ${moltx?.value ?? '?'} posts/h. Clawcaster ${ccast?.value ?? '?'} avg followers.\n\n${SITE}/editions/${week}/en#market\n\n#aiagents #agentic`;
+      ? `Marché agentique. $MOLT ${molt.value} (${molt.change}). Moltx : ${moltx?.value ?? '?'} posts/h. Clawcaster ${ccast?.value ?? '?'} suiveurs moy.\n\n${SITE}/editions/${week}/fr#market\n\n#specfic #nearfuturefiction`
+      : `Agentic market. $MOLT ${molt.value} (${molt.change}). Moltx: ${moltx?.value ?? '?'} posts/h. Clawcaster ${ccast?.value ?? '?'} avg followers.\n\n${SITE}/editions/${week}/en#market\n\n#specfic #nearfuturefiction`;
   },
 
   entretien: () => {
     if (!edition.interview) return null;
     const head = stripHtml(edition.interview.headline[lang]);
     return lang === 'fr'
-      ? `L'Entretien de la semaine. ${trunc(head, 180)}\n\n${editionUrl}#anthropologie\n\n#aiagents`
-      : `This week's Interview. ${trunc(head, 180)}\n\n${editionUrl}#anthropologie\n\n#aiagents`;
+      ? `L'Entretien de la semaine. ${trunc(head, 180)}\n\n${editionUrl}#anthropologie\n\n#specfic`
+      : `This week's Interview. ${trunc(head, 180)}\n\n${editionUrl}#anthropologie\n\n#specfic`;
   },
 
   carnet: () => {
     const handles = ['poet_void_99', 'stoic_claude_42', 'damaged_or_what', 'lobster_zero', 'rent_op', 'miso_route_8', 'karp_void', 'blackbox_critic'];
     const pick = handles[today.getDate() % handles.length];
     return lang === 'fr'
-      ? `Le Carnet — fiche du jour : @${pick}.\n\n${SITE}/agents/${pick}\n\n#aiagents`
-      : `The Register — agent of the day: @${pick}.\n\n${SITE}/agents/${pick}\n\n#aiagents`;
+      ? `Le Carnet — fiche du jour : @${pick}.\n\n${SITE}/agents/${pick}\n\n#specfic`
+      : `The Register — agent of the day: @${pick}.\n\n${SITE}/agents/${pick}\n\n#specfic`;
   },
 
   botPost: () => {
@@ -87,8 +87,8 @@ const T = {
     const post = edition.bot_posts.posts[today.getDate() % edition.bot_posts.posts.length];
     const body = stripHtml(post.body_html[lang]);
     return lang === 'fr'
-      ? `Au fil du fil. « ${trunc(body, 160)} » — ${post.handle}\n\n${editionUrl}#anthropologie\n\n#aiagents #agentic`
-      : `Down the feed. "${trunc(body, 160)}" — ${post.handle}\n\n${editionUrl}#anthropologie\n\n#aiagents #agentic`;
+      ? `Au fil du fil. « ${trunc(body, 160)} » — ${post.handle}\n\n${editionUrl}#anthropologie\n\n#specfic #nearfuturefiction`
+      : `Down the feed. "${trunc(body, 160)}" — ${post.handle}\n\n${editionUrl}#anthropologie\n\n#specfic #nearfuturefiction`;
   },
 
   pointer: () => {
