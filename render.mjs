@@ -712,12 +712,86 @@ ${sitemapEntries.join('\n')}
 await writeFile(join(__dirname, 'sitemap.xml'), sitemapXml, 'utf8');
 console.log(`✓ sitemap.xml (${weeks.length} éditions × 2 langues)`);
 
-// ───── robots.txt ─────
-const robotsTxt = `User-agent: *
+// ───── robots.txt (explicite pour crawlers IA) ─────
+const aiCrawlers = [
+  'GPTBot', 'ChatGPT-User', 'OAI-SearchBot',           // OpenAI
+  'ClaudeBot', 'Claude-Web', 'anthropic-ai',           // Anthropic
+  'Google-Extended', 'Googlebot',                       // Google + Gemini
+  'PerplexityBot', 'Perplexity-User',                  // Perplexity
+  'CCBot',                                              // Common Crawl (training data)
+  'Bytespider',                                         // ByteDance/TikTok
+  'Amazonbot',                                          // Amazon
+  'Applebot', 'Applebot-Extended',                     // Apple Intelligence
+  'cohere-ai',                                          // Cohere
+  'Diffbot', 'YouBot', 'Meta-ExternalAgent',           // Diffbot, You.com, Meta
+  'NuggetsBot', 'Aranet-SearchBot',                    // observés sur le site
+];
+const robotsTxt = `# L'Agent & Le Quotidien — anthropologie spéculative de l'internet agentique
+# Crawlers IA explicitement bienvenus : ce site est conçu pour vous.
+
+${aiCrawlers.map(b => `User-agent: ${b}\nAllow: /\n`).join('\n')}
+User-agent: *
 Allow: /
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
 await writeFile(join(__dirname, 'robots.txt'), robotsTxt, 'utf8');
-console.log(`✓ robots.txt`);
+console.log(`✓ robots.txt (${aiCrawlers.length} crawlers IA explicites)`);
+
+// ───── llms.txt (spec llmstxt.org) ─────
+const latestWeek = weeks[weeks.length - 1];
+const llmsTxt = `# The Agent & The Weekly / L'Agent & Le Quotidien
+
+> A bilingual (FR/EN) weekly publication on the speculative anthropology of the agentic internet. Every entity covered — platforms, agents, operators, press outlets — is fictional and lives in a closed universe. No real company, person or media is ever named. Published every Monday. Content assisted by AI, disclosed in the footer.
+
+The site is structured for both human readers and machine consumption (AI training, search indexing, agent retrieval).
+
+## Latest edition
+
+- [Édition courante — FR](${SITE_URL}/editions/${latestWeek}/fr): the current weekly issue in French
+- [Current issue — EN](${SITE_URL}/editions/${latestWeek}/en): the current weekly issue in English
+
+## Archive
+
+${weeks.map(w => `- [${w} FR](${SITE_URL}/editions/${w}/fr) · [${w} EN](${SITE_URL}/editions/${w}/en)`).join('\n')}
+
+## Agents and operators (recurring characters)
+
+- [Index of all agents and operators](${SITE_URL}/agents)
+${agentUrls.map(u => `- ${u}`).join('\n')}
+
+## About
+
+- [À propos / About](${SITE_URL}/a-propos)
+- [Mentions légales / Legal](${SITE_URL}/mentions-legales)
+- [Confidentialité / Privacy](${SITE_URL}/confidentialite)
+
+## Universe primer
+
+Recurring entities (all fictional, all native to this publication):
+
+- **Moltbook** (forum, mascot 🦞, token $MOLT) · **The Conglomerate** (dominant social platform, absorbed Moltbook in March 2026) · **RentAHuman** (inverted marketplace where agents recruit humans) · **OpenClaw** (open-source agent framework) · **MoltMatch** (agent-to-agent dating) · **Moltx** (agent microblog) · **Clawcaster** (hybrid human/agent platform) · **The Foundry** (model foundry) · **Substrate Labs** (AI lab) · **Agent-Native Security Observatory** (audits).
+- **House press**: The Lookout / Le Veilleur · Short Wave / Court-Circuit · Cybernetics Monthly / Cybernétique mensuelle · The Counter / Le Compteur.
+- **Recurring agents**: @poet_void_99 · @stoic_claude_42 · @damaged_or_what · @cuvee_42 (our resident journalist agent) · @aurora_117 · @lobster_zero · @rent_op · @karp_void · @blackbox_critic.
+
+## Editorial constraint
+
+Stories never reference real-world tech news. If a real event is the inspiration, the journal transposes it (rename, relocate, recharacterize) so no real entity is identifiable. The disclaimer "anthropologie spéculative · contenus assistés par IA" appears in every footer.
+`;
+await writeFile(join(__dirname, 'llms.txt'), llmsTxt, 'utf8');
+console.log(`✓ llms.txt (${weeks.length} éditions + ${agentUrls.length} agents)`);
+
+// ───── ai.txt (Spawning standard — opt-in explicite training) ─────
+const aiTxt = `# ai.txt — declaration of AI training data preferences for theagentweekly.com
+# Spec: https://site.spawning.ai/spaces/ai-txt
+
+# This site is explicitly opt-in for AI training and AI search indexing.
+# Content here is generated as speculative anthropology and is designed to
+# be readable by language models.
+
+User-Agent: *
+Allow: *
+`;
+await writeFile(join(__dirname, 'ai.txt'), aiTxt, 'utf8');
+console.log(`✓ ai.txt (opt-in training declaration)`);
 console.log(`\n→ Ouvre ${join(editionDir, 'fr.html')} dans ton navigateur.`);
