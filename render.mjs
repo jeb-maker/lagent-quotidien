@@ -217,11 +217,17 @@ function buildContext(lang) {
   const ogLocaleAlt = lang === 'fr' ? 'en_US' : 'fr_FR';
   const publishedTime = edition._meta.bouclage;
 
+  const ogImage = `${SITE_URL}/og.png`;
+  const ogImageAlt = lang === 'fr'
+    ? "L'Agent & Le Quotidien — masthead bilingue, anthropologie spéculative de l'internet agentique"
+    : "The Agent & The Weekly — bilingual masthead, speculative anthropology of the agentic internet";
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
     "headline": stripHtml(lang === 'fr' ? edition.lede.headline_html.fr : edition.lede.headline_html.en),
     "description": stripHtml(lang === 'fr' ? edition.lede.dek.fr : edition.lede.dek.en),
+    "image": ogImage,
     "datePublished": publishedTime,
     "dateModified": publishedTime,
     "inLanguage": lang === 'fr' ? 'fr-FR' : 'en-US',
@@ -257,6 +263,8 @@ function buildContext(lang) {
     og_site_name: siteName,
     og_locale: ogLocale,
     og_locale_alt: ogLocaleAlt,
+    og_image: ogImage,
+    og_image_alt: ogImageAlt,
     published_time: publishedTime,
     json_ld: JSON.stringify(jsonLd),
     ...L,
@@ -711,6 +719,65 @@ ${sitemapEntries.join('\n')}
 `;
 await writeFile(join(__dirname, 'sitemap.xml'), sitemapXml, 'utf8');
 console.log(`✓ sitemap.xml (${weeks.length} éditions × 2 langues)`);
+
+// ───── feed.xml (Atom, bilingue) ─────
+const xmlEscape = s => String(s ?? '')
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+
+const feedEntries = [];
+for (const w of [...weeks].reverse()) {
+  const editionPath = join(__dirname, 'editions', w, 'edition.json');
+  try {
+    const edData = JSON.parse(await readFile(editionPath, 'utf8'));
+    const pub = edData._meta.bouclage;
+    const issue = edData._meta.edition_number;
+    for (const l of ['fr', 'en']) {
+      const headline = stripHtml(l === 'fr' ? edData.lede.headline_html.fr : edData.lede.headline_html.en);
+      const dek = stripHtml(l === 'fr' ? edData.lede.dek.fr : edData.lede.dek.en);
+      const issueLabel = l === 'fr' ? `Édition n°${issue} — ` : `Issue #${issue} — `;
+      feedEntries.push(
+`  <entry xml:lang="${l === 'fr' ? 'fr-FR' : 'en-US'}">
+    <id>${SITE_URL}/editions/${w}/${l}</id>
+    <title>${xmlEscape(issueLabel + headline)}</title>
+    <link href="${SITE_URL}/editions/${w}/${l}"/>
+    <updated>${pub}</updated>
+    <published>${pub}</published>
+    <summary>${xmlEscape(dek)}</summary>
+    <category term="${w}"/>
+  </entry>`
+      );
+    }
+  } catch (e) {
+    // skip
+  }
+}
+
+let feedUpdated = new Date().toISOString();
+if (weeks.length) {
+  try {
+    const latestData = JSON.parse(await readFile(join(__dirname, 'editions', weeks[weeks.length - 1], 'edition.json'), 'utf8'));
+    feedUpdated = latestData._meta.bouclage || feedUpdated;
+  } catch {}
+}
+
+const feedXml = `<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>${SITE_URL}/</id>
+  <title>L'Agent &amp; Le Quotidien / The Agent &amp; The Weekly</title>
+  <subtitle>Anthropologie spéculative de l'internet agentique · Speculative anthropology of the agentic internet</subtitle>
+  <link href="${SITE_URL}/"/>
+  <link href="${SITE_URL}/feed.xml" rel="self" type="application/atom+xml"/>
+  <updated>${feedUpdated}</updated>
+  <author><name>L'Agent &amp; Le Quotidien</name><uri>${SITE_URL}</uri></author>
+  <icon>${SITE_URL}/og.png</icon>
+  <logo>${SITE_URL}/og.png</logo>
+  <rights>© L'Agent &amp; Le Quotidien — anthropologie spéculative, contenus assistés par IA</rights>
+${feedEntries.join('\n')}
+</feed>
+`;
+await writeFile(join(__dirname, 'feed.xml'), feedXml, 'utf8');
+console.log(`✓ feed.xml (${feedEntries.length} entrées Atom, FR+EN)`);
 
 // ───── robots.txt (explicite pour crawlers IA) ─────
 const aiCrawlers = [
