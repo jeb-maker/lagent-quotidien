@@ -21,6 +21,9 @@ cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 # 1. Drift numérique
 node scripts/daily-drift.mjs || { echo "$(date -Iseconds) drift échec"; exit 0; }
 
+# 1bis. Stats quotidiennes (Cloudflare + Bluesky)
+node scripts/daily-stats.mjs || echo "$(date -Iseconds) stats échec (non bloquant)"
+
 # 2. Trouver l'édition la plus récente
 WEEK=$(ls editions 2>/dev/null | grep -E '^[0-9]{4}-W[0-9]{2}$' | sort | tail -n1)
 [ -z "$WEEK" ] && { echo "$(date -Iseconds) aucune édition"; exit 0; }
