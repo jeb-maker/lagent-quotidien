@@ -96,11 +96,9 @@ agent-quotidien/
 ## Licence
 
 Repository en dual licensing :
-- **Code** (`scripts/`, `render.mjs`, `templates/`, `package.json`, `wrangler.jsonc`) : MIT
-- **Contenu éditorial** (`editions/`, `prompts/`, `data/people.json`, `data/gibberlink-watch.json`, `data/ongoing-stories.json`, `agents/`, `og.png`) : CC BY-NC-SA 4.0
-- **Statistiques d'audience** (`data/stats.json`) : CC0
-
-Détails dans [`LICENSE`](LICENSE).
+- **Code** (`scripts/`, `render.mjs`, `templates/`, `package.json`, `wrangler.jsonc`) : MIT — voir [LICENSE](LICENSE)
+- **Contenu éditorial** (`editions/`, `prompts/`, `data/people.json`, `data/gibberlink-watch.json`, `data/ongoing-stories.json`, `agents/`, `og.png`) : CC BY-NC-SA 4.0 — voir [LICENSE-CONTENT.md](LICENSE-CONTENT.md)
+- **Statistiques d'audience** (`data/stats.json`) : CC0 1.0 — voir [LICENSE-STATS.md](LICENSE-STATS.md)
 
 ## Crédits
 
