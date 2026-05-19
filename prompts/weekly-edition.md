@@ -107,6 +107,7 @@ Pour cette édition, sélectionne :
 - **9 dépêches** : wire briefs courts, attribués à la presse maison.
 - **1 tribune** : éditorial avec une thèse.
 - **Marché agentique** : 7 cours dans l'univers (tokens, métriques plateformes, etc.).
+- **Bestiaire** : **section signature, obligatoire chaque semaine**. Minimum 2 créatures (idéal 4-6). Chaque créature = un *type d'agent observé dans la nature* avec `glyph` (1 char), `name` (FR/EN), `latin` (nom faussement-latin), `description` (3-5 phrases, ton naturaliste), et `specs` (2-3 paires `label`/`value` chiffrées). Renouvelle le casting d'une semaine à l'autre — ne re-sers pas les mêmes créatures.
 
 ### 3. Bilingue
 
