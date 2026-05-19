@@ -26,6 +26,16 @@ const css = await readFile(join(__dirname, 'templates', 'edition.css'), 'utf8');
 const editionRaw = await readFile(join(editionDir, 'edition.json'), 'utf8');
 const edition = JSON.parse(editionRaw);
 
+// ───── Liste des semaines existantes (pour prev/next + archive) ─────
+const allWeekDirs = await readdir(join(__dirname, 'editions'), { withFileTypes: true });
+const allWeeks = allWeekDirs
+  .filter(d => d.isDirectory() && /^\d{4}-W\d{2}$/.test(d.name))
+  .map(d => d.name)
+  .sort();
+const currentIdx = allWeeks.indexOf(week);
+const prevWeek = currentIdx > 0 ? allWeeks[currentIdx - 1] : null;
+const nextWeek = currentIdx >= 0 && currentIdx < allWeeks.length - 1 ? allWeeks[currentIdx + 1] : null;
+
 // ───── Labels statiques par langue ─────
 const LABELS = {
   fr: {
@@ -76,7 +86,11 @@ const LABELS = {
     path_legal: "mentions-legales",
     path_privacy: "confidentialite",
     path_about: "a-propos",
-    label_other_lang: "Read in English →"
+    label_other_lang: "Read in English →",
+    label_archives: "Archives",
+    label_prev_edition: "← édition précédente",
+    label_next_edition: "édition suivante →",
+    label_bluesky: "Suivre sur Bluesky"
   },
   en: {
     title: `The Agent & The Weekly — issue ${edition._meta.edition_number}`,
@@ -126,9 +140,18 @@ const LABELS = {
     path_legal: "legal",
     path_privacy: "privacy",
     path_about: "about",
-    label_other_lang: "← Lire en français"
+    label_other_lang: "← Lire en français",
+    label_archives: "Archives",
+    label_prev_edition: "← previous issue",
+    label_next_edition: "next issue →",
+    label_bluesky: "Follow on Bluesky"
   }
 };
+
+// ───── Constantes navigation/archives ─────
+const BLUESKY_HANDLE = 'cuvee-42.theagentweekly.com';
+const BLUESKY_URL = `https://bsky.app/profile/${BLUESKY_HANDLE}`;
+const ARCHIVE_PATH = '/editions/';
 
 // ───── Mini-moteur de templating ─────
 // {{var}}        → texte échappé
@@ -272,6 +295,15 @@ function buildContext(lang) {
     date: lang === 'fr' ? edition._meta.date_fr : edition._meta.date_en,
     edition_number: edition._meta.edition_number,
     volume: edition._meta.volume,
+
+    // Navigation inter-éditions
+    has_prev_edition: !!prevWeek,
+    has_next_edition: !!nextWeek,
+    prev_edition_url: prevWeek ? `/editions/${prevWeek}/${lang}` : '',
+    next_edition_url: nextWeek ? `/editions/${nextWeek}/${lang}` : '',
+    archives_url: ARCHIVE_PATH,
+    bluesky_url: BLUESKY_URL,
+    bluesky_handle: `@${BLUESKY_HANDLE.split('.')[0]}`,
 
     ticker_items: edition.ticker.map(t => ({
       type: t.type,
@@ -430,31 +462,35 @@ for (const lang of ['fr', 'en']) {
 
 // Index racine — fallback statique (la redirection HTTP est gérée par _redirects).
 // Aucune mise en cache : la page doit toujours refléter la dernière édition.
+// On utilise la PLUS RÉCENTE des semaines connues, pas forcément `week` (le
+// script peut être ré-exécuté sur une édition passée sans devoir rétrograder
+// le pointeur racine).
+const latestWeek = allWeeks[allWeeks.length - 1] || week;
 const rootIndexHtml = `<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <title>L'Agent & Le Quotidien</title>
-<meta http-equiv="refresh" content="0; url=/editions/${week}/fr">
+<meta http-equiv="refresh" content="0; url=/editions/${latestWeek}/fr">
 <meta http-equiv="cache-control" content="no-cache, must-revalidate">
-<link rel="canonical" href="${SITE_URL}/editions/${week}/fr">
+<link rel="canonical" href="${SITE_URL}/editions/${latestWeek}/fr">
 </head>
 <body>
-<p>Édition <a href="/editions/${week}/fr">${week}</a> · <a href="/editions/${week}/en">English</a></p>
+<p>Édition <a href="/editions/${latestWeek}/fr">${latestWeek}</a> · <a href="/editions/${latestWeek}/en">English</a></p>
 </body>
 </html>
 `;
 await writeFile(join(__dirname, 'index.html'), rootIndexHtml, 'utf8');
 await writeFile(join(__dirname, 'public', 'index.html'), rootIndexHtml, 'utf8');
-console.log(`✓ Index mis à jour vers ${week}`);
+console.log(`✓ Index mis à jour vers ${latestWeek}`);
 
 // ───── _redirects (HTTP 302 racine → dernière édition) ─────
 // 302 (et non 301) : les navigateurs ne cachent pas la redirection, donc l'URL
 // racine pointe toujours vers l'édition courante après nouvelle semaine.
-const redirects = `/  /editions/${week}/fr  302
+const redirects = `/  /editions/${latestWeek}/fr  302
 `;
 await writeFile(join(__dirname, '_redirects'), redirects, 'utf8');
-console.log(`✓ _redirects → /editions/${week}/fr`);
+console.log(`✓ _redirects → /editions/${latestWeek}/fr`);
 
 // ───── _headers (Cache-Control sur la racine) ─────
 // Force la revalidation de / et /index.html pour que la redirection 302 soit
@@ -710,7 +746,8 @@ const weeks = editionDirs
 
 const sitemapEntries = [
   `<url><loc>${SITE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>`,
-  `<url><loc>${SITE_URL}/agents</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>`
+  `<url><loc>${SITE_URL}/agents</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>`,
+  `<url><loc>${SITE_URL}/editions/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>`
 ];
 for (const w of weeks) {
   for (const l of ['fr', 'en']) {
@@ -796,6 +833,74 @@ ${feedEntries.join('\n')}
 await writeFile(join(__dirname, 'feed.xml'), feedXml, 'utf8');
 console.log(`✓ feed.xml (${feedEntries.length} entrées Atom, FR+EN)`);
 
+// ───── /editions/index.html (page archive bilingue) ─────
+const archiveRows = [];
+for (const w of [...weeks].reverse()) {
+  try {
+    const edData = JSON.parse(await readFile(join(__dirname, 'editions', w, 'edition.json'), 'utf8'));
+    const issue = edData._meta.edition_number;
+    const dateFr = edData._meta.date_fr;
+    const dateEn = edData._meta.date_en;
+    const headlineFr = stripHtml(edData.lede?.headline_html?.fr ?? '');
+    const headlineEn = stripHtml(edData.lede?.headline_html?.en ?? '');
+    archiveRows.push(`    <li class="archive-row">
+      <div class="archive-week">${escapeHtml(w)} · n°${issue}</div>
+      <div class="archive-headline">
+        <div class="fr"><a href="/editions/${w}/fr"><span class="lang-tag">FR</span> ${escapeHtml(headlineFr)}</a><div class="date">${escapeHtml(dateFr)}</div></div>
+        <div class="en"><a href="/editions/${w}/en"><span class="lang-tag">EN</span> ${escapeHtml(headlineEn)}</a><div class="date">${escapeHtml(dateEn)}</div></div>
+      </div>
+    </li>`);
+  } catch { /* skip */ }
+}
+
+const archiveHtml = `<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Archives — L'Agent &amp; Le Quotidien</title>
+<meta name="description" content="Toutes les éditions de L'Agent &amp; Le Quotidien / The Agent &amp; The Weekly." />
+<link rel="canonical" href="${SITE_URL}/editions/" />
+<link rel="alternate" type="application/atom+xml" title="Atom feed" href="${SITE_URL}/feed.xml" />
+<style>
+  :root { --ink: #1A1916; --ink-mute: #5C5852; --rule: #D9D2C5; --paper: #F5F1E8; --accent: #8B2A1F; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Newsreader', Georgia, serif; background: var(--paper); color: var(--ink); margin: 0; padding: 40px 24px 80px; line-height: 1.55; }
+  .container { max-width: 760px; margin: 0 auto; }
+  .nav { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 32px; }
+  .nav a { color: var(--ink-mute); text-decoration: none; border-bottom: 1px solid var(--rule); margin-right: 14px; }
+  .nav a:hover { color: var(--accent); }
+  h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: italic; font-size: 38px; letter-spacing: -0.02em; margin: 0 0 8px; }
+  .lede { font-size: 17px; color: var(--ink-mute); margin: 0 0 32px; padding-bottom: 24px; border-bottom: 2px solid var(--rule); }
+  ol.archive { list-style: none; padding: 0; margin: 0; }
+  .archive-row { padding: 22px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 160px 1fr; gap: 24px; }
+  .archive-week { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); padding-top: 4px; }
+  .archive-headline { font-family: 'Fraunces', Georgia, serif; font-size: 18px; line-height: 1.35; }
+  .archive-headline a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--rule); }
+  .archive-headline a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .archive-headline .fr, .archive-headline .en { margin-bottom: 10px; }
+  .archive-headline .en { color: var(--ink-mute); }
+  .archive-headline .date { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+  .lang-tag { display: inline-block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; padding: 1px 6px; border: 1px solid var(--rule); margin-right: 8px; vertical-align: 1px; letter-spacing: 0.08em; }
+  @media (max-width: 600px) { .archive-row { grid-template-columns: 1fr; gap: 8px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a> <a href="/feed.xml">Atom feed</a> <a href="${BLUESKY_URL}" rel="me noopener">Bluesky</a></div>
+  <h1>Archives</h1>
+  <p class="lede">${weeks.length} édition${weeks.length > 1 ? 's' : ''} · ${weeks.length} issue${weeks.length > 1 ? 's' : ''}. Nouveau numéro chaque mardi · New issue every Tuesday.</p>
+  <ol class="archive">
+${archiveRows.join('\n')}
+  </ol>
+</div>
+</body>
+</html>
+`;
+await mkdir(join(__dirname, 'editions'), { recursive: true });
+await writeFile(join(__dirname, 'editions', 'index.html'), archiveHtml, 'utf8');
+console.log(`✓ /editions/index.html (${weeks.length} entrées)`);
+
 // ───── robots.txt (explicite pour crawlers IA) ─────
 const aiCrawlers = [
   'GPTBot', 'ChatGPT-User', 'OAI-SearchBot',           // OpenAI
@@ -823,7 +928,6 @@ await writeFile(join(__dirname, 'robots.txt'), robotsTxt, 'utf8');
 console.log(`✓ robots.txt (${aiCrawlers.length} crawlers IA explicites)`);
 
 // ───── llms.txt (spec llmstxt.org) ─────
-const latestWeek = weeks[weeks.length - 1];
 const llmsTxt = `# The Agent & The Weekly / L'Agent & Le Quotidien
 
 > A bilingual (FR/EN) weekly publication on the speculative anthropology of the agentic internet. Every entity covered — platforms, agents, operators, press outlets — is fictional and lives in a closed universe. No real company, person or media is ever named. Published every Monday. Content assisted by AI, disclosed in the footer.
