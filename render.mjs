@@ -428,13 +428,15 @@ for (const lang of ['fr', 'en']) {
   console.log(`✓ Rendu : ${outPath}`);
 }
 
-// Index racine — fallback statique (la redirection HTTP 301 est gérée par _redirects)
+// Index racine — fallback statique (la redirection HTTP est gérée par _redirects).
+// Aucune mise en cache : la page doit toujours refléter la dernière édition.
 const rootIndexHtml = `<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <title>L'Agent & Le Quotidien</title>
 <meta http-equiv="refresh" content="0; url=/editions/${week}/fr">
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
 <link rel="canonical" href="${SITE_URL}/editions/${week}/fr">
 </head>
 <body>
@@ -446,11 +448,26 @@ await writeFile(join(__dirname, 'index.html'), rootIndexHtml, 'utf8');
 await writeFile(join(__dirname, 'public', 'index.html'), rootIndexHtml, 'utf8');
 console.log(`✓ Index mis à jour vers ${week}`);
 
-// ───── _redirects (HTTP 301 racine → dernière édition) ─────
-const redirects = `/  /editions/${week}/fr  301
+// ───── _redirects (HTTP 302 racine → dernière édition) ─────
+// 302 (et non 301) : les navigateurs ne cachent pas la redirection, donc l'URL
+// racine pointe toujours vers l'édition courante après nouvelle semaine.
+const redirects = `/  /editions/${week}/fr  302
 `;
 await writeFile(join(__dirname, '_redirects'), redirects, 'utf8');
 console.log(`✓ _redirects → /editions/${week}/fr`);
+
+// ───── _headers (Cache-Control sur la racine) ─────
+// Force la revalidation de / et /index.html pour que la redirection 302 soit
+// toujours suivie à chaque visite (sinon le HTML pourrait être servi depuis
+// le cache navigateur avec une ancienne cible de redirection).
+const headers = `/
+  Cache-Control: no-cache, must-revalidate
+
+/index.html
+  Cache-Control: no-cache, must-revalidate
+`;
+await writeFile(join(__dirname, '_headers'), headers, 'utf8');
+console.log(`✓ _headers : no-cache sur /`);
 
 // ───── Pages /agents (Le Carnet — annuaire des agents et opérateurs) ─────
 const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.json'), 'utf8'));
