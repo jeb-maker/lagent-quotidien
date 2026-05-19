@@ -160,33 +160,101 @@ const T = {
   }
 };
 
+// Thread du mardi : 4-5 posts au lieu d'un seul (jour de sortie de l'édition).
+// Retourne un tableau de strings, ou null si pas assez de matière.
+function buildTuesdayThread() {
+  const issueNum = edition._meta.edition_number;
+  const headline = stripHtml(edition.lede.headline_html[lang]);
+  const dek = stripHtml(edition.lede.dek?.[lang] ?? '');
+  const posts = [];
+
+  // 1. Anchor — issue + headline + thread cue
+  posts.push(lang === 'fr'
+    ? `NOUVELLE ÉDITION · n°${issueNum}\n\n${trunc(headline, 200)}\n\nThread ↓\n\n${editionUrl}`
+    : `NEW ISSUE · #${issueNum}\n\n${trunc(headline, 200)}\n\nThread of highlights ↓\n\n${editionUrl}`);
+
+  // 2. Lede dek (le punch sous-titre)
+  if (dek) {
+    posts.push(lang === 'fr'
+      ? `À LA UNE\n\n${trunc(dek, 270)}`
+      : `FRONT PAGE\n\n${trunc(dek, 270)}`);
+  }
+
+  // Helper : enlève d'éventuelles guillemets enveloppantes pour ne pas doubler.
+  const unwrapQuotes = s => String(s ?? '').trim().replace(/^["'«»“”„‟]+|["'«»“”„‟]+$/g, '').trim();
+
+  // 3. Gibberlink Watch (si présent)
+  if (edition.gibberlink) {
+    const term = unwrapQuotes(lang === 'fr' ? edition.gibberlink.term : edition.gibberlink.term_en);
+    const spread = unwrapQuotes(stripHtml(lang === 'fr' ? edition.gibberlink.spread_fr : edition.gibberlink.spread_en));
+    posts.push(lang === 'fr'
+      ? `GIBBERLINK WATCH · « ${term} »\n\n${trunc(spread, 200)}\n\n${SITE}/editions/${week}/fr#gibberlink`
+      : `GIBBERLINK WATCH · "${term}"\n\n${trunc(spread, 200)}\n\n${SITE}/editions/${week}/en#gibberlink`);
+  }
+
+  // 4. Une voix du feed (bot post)
+  if (edition.bot_posts?.posts?.length) {
+    const idx = (issueNum + 1) % edition.bot_posts.posts.length;
+    const bp = edition.bot_posts.posts[idx];
+    const body = unwrapQuotes(stripHtml(bp.body_html[lang]));
+    posts.push(lang === 'fr'
+      ? `AU FIL DU FIL\n\n« ${trunc(body, 180)} »\n— ${bp.handle}\n\n${editionUrl}#anthropologie`
+      : `DOWN THE FEED\n\n"${trunc(body, 180)}"\n— ${bp.handle}\n\n${editionUrl}#anthropologie`);
+  }
+
+  // 5. CTA fin — récap + lien
+  posts.push(lang === 'fr'
+    ? `Au sommaire : lede, brèves, marché agentique, bestiaire, Au fil du fil, Gibberlink Watch, Tribune, 9 dépêches.\n\n${editionUrl}\n\n#specfic #nearfuturefiction`
+    : `In this issue: front page, briefs, agentic market, bestiary, Down the feed, Gibberlink Watch, op-ed, 9 wires.\n\n${editionUrl}\n\n#specfic #nearfuturefiction`);
+
+  return posts.length >= 3 ? posts : null;
+}
+
 const dayMap = {
   0: T.pointer,    // dimanche / Sunday
   1: T.lede,       // lundi / Monday
-  2: T.gibberlink, // mardi / Tuesday
+  2: T.gibberlink, // mardi / Tuesday — remplacé par thread (cf. logique ci-dessous)
   3: T.marche,     // mercredi / Wednesday
   4: T.entretien,  // jeudi / Thursday
   5: T.carnet,     // vendredi / Friday
   6: T.botPost     // samedi / Saturday
 };
 
-let text = dayMap[dow]();
-if (!text) text = T.pointer();
+// Sur mardi (jour de sortie de l'édition), on tente le thread multi-post.
+const tuesdayThread = dow === 2 && !process.argv.includes('--no-thread') ? buildTuesdayThread() : null;
 
-// Sécurité longueur (max Bluesky = 300)
-if (text.length > 300) {
-  console.error(`⚠ Post trop long (${text.length} car). Tronqué.`);
-  text = trunc(text, 300);
+// On normalise tout en un tableau de posts : le thread du mardi a 4-5 entrées,
+// les autres jours n'en ont qu'une.
+let postsText;
+if (tuesdayThread) {
+  postsText = tuesdayThread;
+} else {
+  let text = dayMap[dow]();
+  if (!text) text = T.pointer();
+  postsText = [text];
 }
 
-const facets = buildFacets(text);
-const embedUrl = firstUrl(text);
+// Sécurité longueur (max Bluesky = 300)
+postsText = postsText.map((t, i) => {
+  if (t.length > 300) {
+    console.error(`⚠ Post ${i + 1} trop long (${t.length} car). Tronqué.`);
+    return trunc(t, 300);
+  }
+  return t;
+});
+
+// L'embed riche n'est attaché qu'au premier post (le seul, ou le post-ancre du thread).
+// Les autres posts du thread restent texte+facets.
+const firstText = postsText[0];
+const embedUrl = firstUrl(firstText);
 const embedMeta = embedUrl ? embedMetaFor(embedUrl) : null;
 
-console.log(`Jour ${dow} · lang=${lang} · ${text.length} car. · facets=${facets.length} · embed=${embedUrl ? 'oui' : 'non'}`);
-console.log('───');
-console.log(text);
-console.log('───');
+console.log(`Jour ${dow} · lang=${lang} · ${postsText.length} post${postsText.length > 1 ? 's (thread)' : ''} · embed=${embedUrl ? 'oui' : 'non'}`);
+for (let i = 0; i < postsText.length; i++) {
+  console.log(`───── post ${i + 1}/${postsText.length} (${postsText[i].length} car., ${buildFacets(postsText[i]).length} facets) ─────`);
+  console.log(postsText[i]);
+}
+console.log('─────');
 if (embedMeta) {
   console.log(`embed.title       : ${embedMeta.title}`);
   console.log(`embed.description : ${embedMeta.description}`);
@@ -256,31 +324,45 @@ async function uploadThumb() {
 
 const thumb = embedUrl ? await uploadThumb() : null;
 
-const record = {
-  $type: 'app.bsky.feed.post',
-  text,
-  createdAt: new Date().toISOString(),
-  langs: [lang]
-};
-if (facets.length) record.facets = facets;
-if (embedMeta) {
-  record.embed = {
-    $type: 'app.bsky.embed.external',
-    external: thumb ? { ...embedMeta, thumb } : embedMeta
+// Poste un message ; retourne { uri, cid } pour permettre de chaîner en thread.
+async function createPost(text, { embed = null, replyTo = null } = {}) {
+  const record = {
+    $type: 'app.bsky.feed.post',
+    text,
+    createdAt: new Date().toISOString(),
+    langs: [lang]
   };
+  const fs = buildFacets(text);
+  if (fs.length) record.facets = fs;
+  if (embed) record.embed = embed;
+  if (replyTo) record.reply = replyTo;
+
+  const r = await callXrpc('POST', 'https://bsky.social/xrpc/com.atproto.repo.createRecord', {
+    repo: cred.did,
+    collection: 'app.bsky.feed.post',
+    record
+  });
+  if (!r.ok) { console.error(`Post échec : ${r.status}\n${await r.text()}`); process.exit(1); }
+  return r.json();
 }
 
-const r = await callXrpc('POST', 'https://bsky.social/xrpc/com.atproto.repo.createRecord', {
-  repo: cred.did,
-  collection: 'app.bsky.feed.post',
-  record
-});
+const anchorEmbed = embedMeta
+  ? { $type: 'app.bsky.embed.external', external: thumb ? { ...embedMeta, thumb } : embedMeta }
+  : null;
 
-if (!r.ok) {
-  console.error(`Post échec : ${r.status}\n${await r.text()}`);
-  process.exit(1);
+// Premier post — avec le rich card. Conserve uri+cid pour la chaîne de thread.
+const first = await createPost(postsText[0], { embed: anchorEmbed });
+const firstRef = { uri: first.uri, cid: first.cid };
+const firstId = first.uri.split('/').pop();
+console.log(`✓ Publié (${lang}) ${postsText.length > 1 ? `post 1/${postsText.length}` : ''} : https://bsky.app/profile/${cred.handle}/post/${firstId}`);
+
+// Posts suivants — chaînés en reply, sans embed.
+let parentRef = firstRef;
+for (let i = 1; i < postsText.length; i++) {
+  const next = await createPost(postsText[i], {
+    replyTo: { root: firstRef, parent: parentRef }
+  });
+  const nextId = next.uri.split('/').pop();
+  console.log(`✓ Publié post ${i + 1}/${postsText.length} : https://bsky.app/profile/${cred.handle}/post/${nextId}`);
+  parentRef = { uri: next.uri, cid: next.cid };
 }
-
-const data = await r.json();
-const postId = data.uri.split('/').pop();
-console.log(`✓ Publié (${lang}) : https://bsky.app/profile/${cred.handle}/post/${postId}`);
