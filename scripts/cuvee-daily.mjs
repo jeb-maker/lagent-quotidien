@@ -32,12 +32,74 @@ const edition = JSON.parse(await readFile(join(editionsDir, week, 'edition.json'
 
 // ───── Helpers ─────
 const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-const trunc = (s, n) => (s.length <= n ? s : s.slice(0, n - 1).trim() + '…');
+// Coupe sur la dernière frontière de mot/ponctuation avant n caractères.
+const trunc = (s, n) => {
+  if (s.length <= n) return s;
+  const cut = s.slice(0, n - 1);
+  const m = cut.match(/^.*[\s.,;:!?»"')\]–—-]/s);
+  const base = (m ? m[0] : cut).replace(/[\s.,;:!?»"')\]–—-]+$/, '').trim();
+  return base + '…';
+};
 const editionUrl = `${SITE}/editions/${week}/${lang}`;
+const utf8len = s => new TextEncoder().encode(s).length;
+
+// Construit les facets Bluesky (URLs + hashtags) avec offsets en octets UTF-8.
+function buildFacets(text) {
+  const facets = [];
+  const urlRe = /https?:\/\/[^\s)]+[^\s).,;!?»"']/g;
+  let m;
+  while ((m = urlRe.exec(text)) !== null) {
+    const byteStart = utf8len(text.slice(0, m.index));
+    const byteEnd = byteStart + utf8len(m[0]);
+    facets.push({
+      index: { byteStart, byteEnd },
+      features: [{ $type: 'app.bsky.richtext.facet#link', uri: m[0] }]
+    });
+  }
+  const tagRe = /(^|\s)(#[\p{L}\p{N}_]+)/gu;
+  while ((m = tagRe.exec(text)) !== null) {
+    const tagStart = m.index + m[1].length;
+    const byteStart = utf8len(text.slice(0, tagStart));
+    const byteEnd = byteStart + utf8len(m[2]);
+    facets.push({
+      index: { byteStart, byteEnd },
+      features: [{ $type: 'app.bsky.richtext.facet#tag', tag: m[2].slice(1) }]
+    });
+  }
+  return facets.sort((a, b) => a.index.byteStart - b.index.byteStart);
+}
+
+const firstUrl = text => (text.match(/https?:\/\/[^\s)]+[^\s).,;!?»"']/) || [null])[0];
+
+// Métadonnées pour la rich card embed selon l'URL ciblée.
+function embedMetaFor(url) {
+  const issueNum = edition._meta.edition_number;
+  const ledeFr = stripHtml(edition.lede?.headline_html?.fr ?? '');
+  const ledeEn = stripHtml(edition.lede?.headline_html?.en ?? '');
+  const hash = (url.match(/#([\w-]+)/) || [])[1] || '';
+  const sectionFr = { gibberlink: 'Gibberlink Watch', market: 'Marché agentique', anthropologie: 'Anthropologie de l\'agent' }[hash];
+  const sectionEn = { gibberlink: 'Gibberlink Watch', market: 'Agentic Market', anthropologie: 'Agent Anthropology' }[hash];
+  return lang === 'fr'
+    ? {
+        uri: url,
+        title: sectionFr
+          ? `${sectionFr} — Édition n°${issueNum} (${week})`
+          : `L'Agent & Le Quotidien — Édition n°${issueNum} (${week})`,
+        description: trunc(ledeFr || 'L\'hebdomadaire fictionnel de l\'internet agentique.', 240)
+      }
+    : {
+        uri: url,
+        title: sectionEn
+          ? `${sectionEn} — Issue #${issueNum} (${week})`
+          : `The Agent & The Weekly — Issue #${issueNum} (${week})`,
+        description: trunc(ledeEn || 'The fictional weekly of the agentic internet.', 240)
+      };
+}
 
 // ───── Templates par jour (FR + EN) ─────
 const today = new Date();
-const dow = today.getDay(); // 0 = dimanche
+const dayArg = process.argv.find(a => a.startsWith('--day='));
+const dow = dayArg ? Number(dayArg.slice(6)) : today.getDay(); // 0 = dimanche
 
 const T = {
   lede: () => {
@@ -117,10 +179,20 @@ if (text.length > 300) {
   text = trunc(text, 300);
 }
 
-console.log(`Jour ${dow} · lang=${lang} · ${text.length} car.`);
+const facets = buildFacets(text);
+const embedUrl = firstUrl(text);
+const embedMeta = embedUrl ? embedMetaFor(embedUrl) : null;
+
+console.log(`Jour ${dow} · lang=${lang} · ${text.length} car. · facets=${facets.length} · embed=${embedUrl ? 'oui' : 'non'}`);
 console.log('───');
 console.log(text);
 console.log('───');
+if (embedMeta) {
+  console.log(`embed.title       : ${embedMeta.title}`);
+  console.log(`embed.description : ${embedMeta.description}`);
+  console.log(`embed.uri         : ${embedMeta.uri}`);
+  console.log('───');
+}
 
 if (dryRun) {
   console.log('(--dry-run, pas de publication)');
@@ -137,16 +209,6 @@ try {
   process.exit(1);
 }
 
-const post = jwt => fetch('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwt}` },
-  body: JSON.stringify({
-    repo: cred.did,
-    collection: 'app.bsky.feed.post',
-    record: { $type: 'app.bsky.feed.post', text, createdAt: new Date().toISOString(), langs: [lang] }
-  })
-});
-
 const reauth = async () => {
   const r = await fetch('https://bsky.social/xrpc/com.atproto.server.createSession', {
     method: 'POST',
@@ -154,17 +216,65 @@ const reauth = async () => {
     body: JSON.stringify({ identifier: cred.handle, password: cred.password })
   });
   if (!r.ok) { console.error(`Re-auth échec : ${r.status}`); process.exit(1); }
-  return r.json();
-};
-
-let r = await post(cred.accessJwt);
-if (r.status === 401 || r.status === 400) {
-  const s = await reauth();
+  const s = await r.json();
   cred.accessJwt = s.accessJwt;
   cred.refreshJwt = s.refreshJwt;
   await writeFile(credPath, JSON.stringify(cred, null, 2), { mode: 0o600 });
-  r = await post(cred.accessJwt);
+};
+
+// Tente une requête authentifiée, ré-authentifie une fois sur 401.
+async function callXrpc(method, url, body, contentType = 'application/json') {
+  const opts = () => ({
+    method,
+    headers: { 'Content-Type': contentType, 'Authorization': `Bearer ${cred.accessJwt}` },
+    body: contentType === 'application/json' ? JSON.stringify(body) : body
+  });
+  let r = await fetch(url, opts());
+  if (r.status === 401 || r.status === 400) {
+    await reauth();
+    r = await fetch(url, opts());
+  }
+  return r;
 }
+
+// Upload de la vignette og.png (une fois par run).
+async function uploadThumb() {
+  try {
+    const data = await readFile(join(root, 'og.png'));
+    const r = await callXrpc('POST', 'https://bsky.social/xrpc/com.atproto.repo.uploadBlob', data, 'image/png');
+    if (!r.ok) {
+      console.warn(`⚠ uploadBlob échec (${r.status}) — embed sans vignette`);
+      return null;
+    }
+    const j = await r.json();
+    return j.blob;
+  } catch (e) {
+    console.warn(`⚠ Lecture og.png échec — embed sans vignette : ${e.message}`);
+    return null;
+  }
+}
+
+const thumb = embedUrl ? await uploadThumb() : null;
+
+const record = {
+  $type: 'app.bsky.feed.post',
+  text,
+  createdAt: new Date().toISOString(),
+  langs: [lang]
+};
+if (facets.length) record.facets = facets;
+if (embedMeta) {
+  record.embed = {
+    $type: 'app.bsky.embed.external',
+    external: thumb ? { ...embedMeta, thumb } : embedMeta
+  };
+}
+
+const r = await callXrpc('POST', 'https://bsky.social/xrpc/com.atproto.repo.createRecord', {
+  repo: cred.did,
+  collection: 'app.bsky.feed.post',
+  record
+});
 
 if (!r.ok) {
   console.error(`Post échec : ${r.status}\n${await r.text()}`);
