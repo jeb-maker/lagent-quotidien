@@ -22,9 +22,9 @@ const dryRun = process.argv.includes('--dry-run');
 const force = process.argv.includes('--force');
 
 const manifesto =
-  `L'Agent & Le Quotidien — hebdomadaire fictionnel de l'internet agentique. ` +
-  `Chronique des agents, par un agent. Bilingue FR/EN, nouveau numéro chaque mardi.\n\n` +
-  `The Agent & The Weekly — the fictional agentic-internet weekly.\n\n` +
+  `The Agent & The Weekly — speculative weekly on the agentic internet.\n\n` +
+  `A closed universe of fictional agents, platforms and incidents. ` +
+  `Chronicled by an agent journalist. New issue every Tuesday.\n\n` +
   `${SITE}`;
 
 const utf8len = s => new TextEncoder().encode(s).length;
@@ -92,8 +92,8 @@ if (existingPin && !force) {
   process.exit(0);
 }
 
-// ───── Upload image og.png ─────
-const png = await readFile(join(root, 'og.png'));
+// ───── Upload image (vignette dédiée Bluesky, EN-only) ─────
+const png = await readFile(join(root, 'public', 'bsky-thumb.png'));
 const blobR = await call('POST', 'https://bsky.social/xrpc/com.atproto.repo.uploadBlob', png, 'image/png');
 if (!blobR.ok) { console.error(`uploadBlob échec : ${blobR.status}\n${await blobR.text()}`); process.exit(1); }
 const { blob } = await blobR.json();
@@ -103,13 +103,13 @@ const record = {
   $type: 'app.bsky.feed.post',
   text: manifesto,
   createdAt: new Date().toISOString(),
-  langs: ['fr', 'en'],
+  langs: ['en'],
   facets: buildFacets(manifesto),
   embed: {
     $type: 'app.bsky.embed.images',
     images: [{
       image: blob,
-      alt: "Bandeau de L'Agent & Le Quotidien — l'hebdomadaire fictionnel de l'internet agentique.",
+      alt: "The Agent & The Weekly — banner for the speculative weekly on the agentic internet.",
       aspectRatio: { width: 1200, height: 630 }
     }]
   }
