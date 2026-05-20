@@ -359,10 +359,11 @@ async function callXrpc(method, url, body, contentType = 'application/json') {
   return r;
 }
 
-// Upload de la vignette og.png (une fois par run).
+// Upload de la vignette dédiée Bluesky (EN-only, contrairement à og.png
+// du site qui reste bilingue).
 async function uploadThumb() {
   try {
-    const data = await readFile(join(root, 'og.png'));
+    const data = await readFile(join(root, 'public', 'bsky-thumb.png'));
     const r = await callXrpc('POST', 'https://bsky.social/xrpc/com.atproto.repo.uploadBlob', data, 'image/png');
     if (!r.ok) {
       console.warn(`⚠ uploadBlob échec (${r.status}) — embed sans vignette`);
@@ -371,7 +372,7 @@ async function uploadThumb() {
     const j = await r.json();
     return j.blob;
   } catch (e) {
-    console.warn(`⚠ Lecture og.png échec — embed sans vignette : ${e.message}`);
+    console.warn(`⚠ Lecture bsky-thumb.png échec — embed sans vignette : ${e.message}`);
     return null;
   }
 }

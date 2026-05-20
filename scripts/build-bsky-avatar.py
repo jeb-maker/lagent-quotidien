@@ -15,6 +15,8 @@ SIZE = 1000
 
 PAPER = (0.984, 0.969, 0.937)
 INK = (0.094, 0.094, 0.094)
+INK_MUTE = (0.45, 0.45, 0.45)
+RULE = (0.78, 0.78, 0.78)
 ACCENT = (0.545, 0.165, 0.122)  # #8B2A1F, terracotta du site
 
 
@@ -173,7 +175,94 @@ def candidate_3():
     surf.write_to_png(str(OUT_DIR / "avatar-3.png"))
 
 
-# ───── Banner : 3000x1000, style masthead du journal ─────
+# ───── Vignette rich-card Bluesky : 1200x630, EN-only ─────
+# Sert de thumbnail dans les posts cuvee-daily.mjs et bluesky-pin.mjs.
+# Pas de mention bilingue (le compte Bluesky est EN-only).
+def thumb_en():
+    TW, TH = 1200, 630
+    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, TW, TH)
+    ctx = cairo.Context(surf)
+    ctx.rectangle(0, 0, TW, TH)
+    ctx.set_source_rgb(*PAPER)
+    ctx.fill()
+
+    # Cadre journal
+    ctx.set_source_rgb(*INK)
+    ctx.set_line_width(2)
+    ctx.rectangle(40, 40, TW - 80, TH - 80)
+    ctx.stroke()
+
+    # Kicker haut
+    ctx.set_source_rgb(*INK)
+    ctx.select_font_face("DejaVu Sans Mono", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+    ctx.set_font_size(15)
+    kicker = "SPECULATIVE  ANTHROPOLOGY  OF  THE  AGENTIC  INTERNET"
+    te = ctx.text_extents(kicker)
+    ctx.move_to((TW - te.width) / 2, 110)
+    ctx.show_text(kicker)
+
+    # Filet
+    ctx.set_line_width(1)
+    ctx.move_to(80, 135); ctx.line_to(TW - 80, 135); ctx.stroke()
+
+    # Titre monumental — taille calculée pour tenir dans le cadre (TW-160 d'usable)
+    ctx.set_source_rgb(*INK)
+    ctx.select_font_face("DejaVu Serif", cairo.FONT_SLANT_ITALIC, cairo.FONT_WEIGHT_BOLD)
+    ctx.set_font_size(78)
+    title = "The Agent & The Weekly"
+    te = ctx.text_extents(title)
+    ctx.move_to((TW - te.width) / 2, 310)
+    ctx.show_text(title)
+
+    # Sous-titre
+    ctx.set_source_rgb(*INK_MUTE)
+    ctx.select_font_face("DejaVu Sans Mono", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+    ctx.set_font_size(22)
+    sub = "Closed agentic universe  ·  New issue every Tuesday"
+    te = ctx.text_extents(sub)
+    ctx.move_to((TW - te.width) / 2, 380)
+    ctx.show_text(sub)
+
+    # Filet de séparation
+    ctx.set_source_rgb(*RULE)
+    ctx.move_to(TW / 2 - 200, 440); ctx.line_to(TW / 2 + 200, 440); ctx.stroke()
+
+    # URL
+    ctx.set_source_rgb(*ACCENT)
+    ctx.select_font_face("DejaVu Sans Mono", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+    ctx.set_font_size(20)
+    domain = "THEAGENTWEEKLY.COM"
+    te = ctx.text_extents(domain)
+    ctx.move_to((TW - te.width) / 2, 500)
+    ctx.show_text(domain)
+
+    # Footer fine
+    ctx.set_source_rgb(*INK_MUTE)
+    ctx.set_font_size(12)
+    ctx.select_font_face("DejaVu Sans Mono", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+    foot = "Vol. II  ·  Lobster Press  ·  AI-assisted, human-edited"
+    te = ctx.text_extents(foot)
+    ctx.move_to((TW - te.width) / 2, 540)
+    ctx.show_text(foot)
+
+    # L disc en bas à droite
+    ctx.set_source_rgb(*ACCENT)
+    ctx.arc(TW - 80, TH - 75, 22, 0, 2 * math.pi)
+    ctx.fill()
+    ctx.set_source_rgb(*PAPER)
+    ctx.select_font_face("DejaVu Serif", cairo.FONT_SLANT_ITALIC, cairo.FONT_WEIGHT_BOLD)
+    ctx.set_font_size(26)
+    te = ctx.text_extents("L")
+    ctx.move_to(TW - 80 - te.width / 2 - te.x_bearing, TH - 75 + te.height / 2 - 2)
+    ctx.show_text("L")
+
+    out = Path("/home/debian/agentic-news/agent-quotidien/public/bsky-thumb.png")
+    surf.write_to_png(str(out))
+
+
+# ───── Banner Bluesky : 3000x1000, EN-only ─────
+# Bluesky est en EN-only pour ce compte, donc la bannière reste sobre :
+# un seul titre, pas de mention bilingue.
 def banner():
     BW, BH = 3000, 1000
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, BW, BH)
@@ -191,76 +280,56 @@ def banner():
     ctx.rectangle(80, 80, BW - 160, BH - 160)
     ctx.stroke()
 
-    # Bandeau kicker en haut
+    # Kicker
     ctx.set_source_rgb(*INK)
     ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-    ctx.set_font_size(38)
-    kicker = "ANTHROPOLOGIE  SPÉCULATIVE  ·  AGENTIC  INTERNET  ·  VOL. II"
+    ctx.set_font_size(40)
+    kicker = "SPECULATIVE  ANTHROPOLOGY  OF  THE  AGENTIC  INTERNET  ·  VOL. II"
     ext = ctx.text_extents(kicker)
-    ctx.move_to((BW - ext.width) / 2, 175)
+    ctx.move_to((BW - ext.width) / 2, 240)
     ctx.show_text(kicker)
 
-    # Filet horizontal
     ctx.set_line_width(1.5)
-    ctx.move_to(180, 220); ctx.line_to(BW - 180, 220); ctx.stroke()
+    ctx.move_to(180, 290); ctx.line_to(BW - 180, 290); ctx.stroke()
 
-    # Nameplate FR — italique Fraunces-ish
+    # Titre monumental EN (dimensionné pour tenir entre les disques L)
     ctx.set_source_rgb(*INK)
     ctx.select_font_face("Serif", cairo.FONT_SLANT_ITALIC, cairo.FONT_WEIGHT_BOLD)
-    ctx.set_font_size(170)
-    fr = "L'Agent  &  Le Quotidien"
-    ext = ctx.text_extents(fr)
-    ctx.move_to((BW - ext.width) / 2, 420)
-    ctx.show_text(fr)
+    ctx.set_font_size(160)
+    title = "The Agent  &  The Weekly"
+    ext = ctx.text_extents(title)
+    ctx.move_to((BW - ext.width) / 2, 560)
+    ctx.show_text(title)
 
-    # Sous-titre FR
+    # Sous-titre
     ctx.set_source_rgb(*INK)
     ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-    ctx.set_font_size(32)
-    fr_sub = "hebdomadaire fictionnel  ·  univers clos  ·  nouveau numéro chaque mardi"
-    ext = ctx.text_extents(fr_sub)
-    ctx.move_to((BW - ext.width) / 2, 480)
-    ctx.show_text(fr_sub)
+    ctx.set_font_size(40)
+    sub = "closed agentic universe  ·  new issue every tuesday"
+    ext = ctx.text_extents(sub)
+    ctx.move_to((BW - ext.width) / 2, 660)
+    ctx.show_text(sub)
 
-    # Filet de séparation
     ctx.set_line_width(1.5)
-    ctx.move_to(BW / 2 - 200, 540); ctx.line_to(BW / 2 + 200, 540); ctx.stroke()
+    ctx.move_to(BW / 2 - 250, 730); ctx.line_to(BW / 2 + 250, 730); ctx.stroke()
 
-    # Nameplate EN
-    ctx.set_source_rgb(*INK)
-    ctx.select_font_face("Serif", cairo.FONT_SLANT_ITALIC, cairo.FONT_WEIGHT_BOLD)
-    ctx.set_font_size(150)
-    en = "The Agent  &  The Weekly"
-    ext = ctx.text_extents(en)
-    ctx.move_to((BW - ext.width) / 2, 720)
-    ctx.show_text(en)
-
-    # Sous-titre EN
-    ctx.set_source_rgb(*INK)
-    ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-    ctx.set_font_size(30)
-    en_sub = "speculative weekly  ·  closed universe  ·  new issue every tuesday"
-    ext = ctx.text_extents(en_sub)
-    ctx.move_to((BW - ext.width) / 2, 780)
-    ctx.show_text(en_sub)
-
-    # Pied : URL en accent
+    # URL en accent
     ctx.set_source_rgb(*ACCENT)
     ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-    ctx.set_font_size(34)
+    ctx.set_font_size(38)
     foot = "THEAGENTWEEKLY.COM"
     ext = ctx.text_extents(foot)
-    ctx.move_to((BW - ext.width) / 2, 880)
+    ctx.move_to((BW - ext.width) / 2, 800)
     ctx.show_text(foot)
 
-    # Petits disques décoratifs (rappel de l'avatar) aux extrémités
+    # Disques L décoratifs
     for x in [180, BW - 180]:
         ctx.set_source_rgb(*ACCENT)
-        ctx.arc(x, BH / 2, 50, 0, 2 * math.pi)
+        ctx.arc(x, BH / 2, 55, 0, 2 * math.pi)
         ctx.fill()
         ctx.set_source_rgb(*PAPER)
         ctx.select_font_face("Serif", cairo.FONT_SLANT_ITALIC, cairo.FONT_WEIGHT_BOLD)
-        ctx.set_font_size(72)
+        ctx.set_font_size(80)
         ext = ctx.text_extents("L")
         ctx.move_to(x - ext.width / 2 - ext.x_bearing, BH / 2 + ext.height / 2 - 4)
         ctx.show_text("L")
@@ -298,35 +367,28 @@ def banner_x():
     ctx.set_line_width(1)
     ctx.move_to(150, 130); ctx.line_to(BW - 150, 130); ctx.stroke()
 
-    # Nameplate FR
+    # Titre EN monumental
     ctx.set_source_rgb(*INK)
     ctx.select_font_face("Serif", cairo.FONT_SLANT_ITALIC, cairo.FONT_WEIGHT_BOLD)
-    ctx.set_font_size(72)
-    fr = "L'Agent  &  Le Quotidien"
-    ext = ctx.text_extents(fr)
-    ctx.move_to((BW - ext.width) / 2, 220)
-    ctx.show_text(fr)
-
-    # Nameplate EN
-    ctx.set_font_size(66)
+    ctx.set_font_size(110)
     en = "The Agent  &  The Weekly"
     ext = ctx.text_extents(en)
-    ctx.move_to((BW - ext.width) / 2, 300)
+    ctx.move_to((BW - ext.width) / 2, 280)
     ctx.show_text(en)
 
     # Sous-titre
     ctx.set_source_rgb(*INK)
     ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
-    ctx.set_font_size(20)
+    ctx.set_font_size(22)
     sub = "speculative weekly  ·  closed universe  ·  new issue every tuesday"
     ext = ctx.text_extents(sub)
-    ctx.move_to((BW - ext.width) / 2, 355)
+    ctx.move_to((BW - ext.width) / 2, 350)
     ctx.show_text(sub)
 
     # URL en accent
     ctx.set_source_rgb(*ACCENT)
     ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
-    ctx.set_font_size(24)
+    ctx.set_font_size(26)
     foot = "THEAGENTWEEKLY.COM"
     ext = ctx.text_extents(foot)
     ctx.move_to((BW - ext.width) / 2, 415)
@@ -340,4 +402,5 @@ candidate_2()
 candidate_3()
 banner()
 banner_x()
-print("✓ /tmp/avatar-{1,2,3}.png + /tmp/banner.png + /tmp/banner-x.png")
+thumb_en()
+print("✓ /tmp/avatar-{1,2,3}.png + /tmp/banner.png + /tmp/banner-x.png + public/bsky-thumb.png")
