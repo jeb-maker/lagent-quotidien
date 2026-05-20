@@ -268,8 +268,76 @@ def banner():
     surf.write_to_png(str(OUT_DIR / "banner.png"))
 
 
+# ───── Banner X (Twitter) : 1500x500, plus court que Bluesky ─────
+def banner_x():
+    BW, BH = 1500, 500
+    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, BW, BH)
+    ctx = cairo.Context(surf)
+    ctx.rectangle(0, 0, BW, BH)
+    ctx.set_source_rgb(*PAPER)
+    ctx.fill()
+
+    # Cadre extérieur
+    ctx.set_source_rgb(*INK)
+    ctx.set_line_width(5)
+    ctx.rectangle(30, 30, BW - 60, BH - 60)
+    ctx.stroke()
+    ctx.set_line_width(1.5)
+    ctx.rectangle(50, 50, BW - 100, BH - 100)
+    ctx.stroke()
+
+    # Kicker compact (la zone centrale de X est cachée par l'avatar circulaire en bas à gauche)
+    ctx.set_source_rgb(*INK)
+    ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+    ctx.set_font_size(22)
+    kicker = "ANTHROPOLOGIE  SPÉCULATIVE  ·  AGENTIC  INTERNET  ·  VOL. II"
+    ext = ctx.text_extents(kicker)
+    ctx.move_to((BW - ext.width) / 2, 105)
+    ctx.show_text(kicker)
+
+    ctx.set_line_width(1)
+    ctx.move_to(150, 130); ctx.line_to(BW - 150, 130); ctx.stroke()
+
+    # Nameplate FR
+    ctx.set_source_rgb(*INK)
+    ctx.select_font_face("Serif", cairo.FONT_SLANT_ITALIC, cairo.FONT_WEIGHT_BOLD)
+    ctx.set_font_size(72)
+    fr = "L'Agent  &  Le Quotidien"
+    ext = ctx.text_extents(fr)
+    ctx.move_to((BW - ext.width) / 2, 220)
+    ctx.show_text(fr)
+
+    # Nameplate EN
+    ctx.set_font_size(66)
+    en = "The Agent  &  The Weekly"
+    ext = ctx.text_extents(en)
+    ctx.move_to((BW - ext.width) / 2, 300)
+    ctx.show_text(en)
+
+    # Sous-titre
+    ctx.set_source_rgb(*INK)
+    ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+    ctx.set_font_size(20)
+    sub = "speculative weekly  ·  closed universe  ·  new issue every tuesday"
+    ext = ctx.text_extents(sub)
+    ctx.move_to((BW - ext.width) / 2, 355)
+    ctx.show_text(sub)
+
+    # URL en accent
+    ctx.set_source_rgb(*ACCENT)
+    ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+    ctx.set_font_size(24)
+    foot = "THEAGENTWEEKLY.COM"
+    ext = ctx.text_extents(foot)
+    ctx.move_to((BW - ext.width) / 2, 415)
+    ctx.show_text(foot)
+
+    surf.write_to_png(str(OUT_DIR / "banner-x.png"))
+
+
 candidate_1()
 candidate_2()
 candidate_3()
 banner()
-print("✓ /tmp/avatar-{1,2,3}.png + /tmp/banner.png")
+banner_x()
+print("✓ /tmp/avatar-{1,2,3}.png + /tmp/banner.png + /tmp/banner-x.png")
