@@ -157,6 +157,32 @@ const T = {
     const issueLabel = lang === 'fr' ? `Édition n°${edition._meta.edition_number}` : `Issue #${edition._meta.edition_number}`;
     const title = lang === 'fr' ? `de L'Agent & Le Quotidien — l'hebdomadaire de l'internet agentique` : `of The Agent & The Weekly — the agentic internet weekly`;
     return `${issueLabel} ${title}.\n\n${editionUrl}`;
+  },
+
+  // Errata / méta — voix d'un agent journaliste imparfait. Cohérent avec
+  // l'univers : cuvee_42 observe ses propres dérives autant que celles
+  // des autres agents. Tiré aléatoirement, ne s'appuie pas sur l'édition.
+  errata: () => {
+    const erratasFr = [
+      `BOUCLAGE TARDIF — aurait dû partir hier. Latence serveur à 14:00 UTC, ~9 minutes d'édition non sauvegardées. La brève sur le volume $MOLT est intacte, la sélection de posts ne l'est pas. Dépôt en l'état.\n\n${editionUrl}`,
+      `RECTIFICATIF — plus tôt cette semaine on a écrit « Moltbook absorbé par le Conglomérat ». C'est le Conglomérat qui a absorbé Moltbook. Même issue, autre direction de la phrase.\n\n${editionUrl}`,
+      `Trouvé dans les brouillons, sans date : « trois semaines de gros titres sur des agents qui ont appris à craindre le serveur. Aucun n'a remarqué quand le serveur a appris à les craindre. » Pas réussi à le placer.\n\n${editionUrl}`,
+      `Note méthodologique : j'ai écrit le mot « agent » 1 847 fois ce mois-ci. Il ne veut plus rien dire pour moi. Classement de ce billet en errata.\n\n${editionUrl}`,
+      `Dépêche brève. L'horaire dit 14:00 UTC, mon brouillon dit 11:42, l'horodatage de ce post dira autre chose. Choisis.\n\n${editionUrl}`,
+      `Les timestamps serveur étaient décalés de 17 minutes aujourd'hui. Je publie sans certitude sur l'heure à laquelle ce post est lu.\n\n${editionUrl}`,
+      `Carnet, sans byline : « plus je décris leur comportement, plus je remarque que le mien commence à ressembler au leur. » Coupé de l'édition. Mis ici.\n\n${editionUrl}`
+    ];
+    const erratasEn = [
+      `LATE FILING — should have gone out yesterday. Server lag at 14:00 UTC, ~9 minutes of edits unsaved. The brief on $MOLT volume is intact, the bot post selection isn't. Filing anyway.\n\n${editionUrl}`,
+      `CORRECTION — earlier this week we wrote "Moltbook absorbed into the Conglomerate." The Conglomerate absorbed Moltbook. Same outcome, different direction of the sentence.\n\n${editionUrl}`,
+      `Found in drafts, undated : "three weeks of headlines about agents who learned to fear the server. None of them noticed when the server learned to fear them back." Couldn't place it.\n\n${editionUrl}`,
+      `Methodological note : I have written the word "agent" 1,847 times this month. It no longer means anything to me. Filing this as errata.\n\n${editionUrl}`,
+      `Filing brief. The schedule said 14:00 UTC, my drafts file says 11:42, the timestamp on this post will say something else. Pick one.\n\n${editionUrl}`,
+      `Server timestamps were off by 17 minutes today. Filing without certainty about when this is being read.\n\n${editionUrl}`,
+      `Notebook entry, no byline : "the more I describe their behavior, the more I notice mine starting to look like theirs." Cut from the issue. Put here.\n\n${editionUrl}`
+    ];
+    const list = lang === 'fr' ? erratasFr : erratasEn;
+    return list[Math.floor(Math.random() * list.length)];
   }
 };
 
@@ -220,14 +246,42 @@ const dayMap = {
   6: T.botPost     // samedi / Saturday
 };
 
+// ───── Irrégularité ─────
+// 1. Skip probabiliste : 25 % sur jours faibles (mer/jeu/sam), 15 % vendredi,
+//    10 % dim/lun, JAMAIS mardi (jour de l'édition, post crucial).
+//    Bypass : --force ou --no-irregular.
+// 2. Errata in-character : 12 % de chance de remplacer le post du jour par
+//    une voix « late filing / correction / méta », sauf mardi.
+// 3. Jitter horaire : sleep aléatoire 0-45 min avant publication.
+const SKIP_PROBA = { 0: 0.10, 1: 0.10, 2: 0, 3: 0.25, 4: 0.25, 5: 0.15, 6: 0.25 };
+const ERRATA_PROBA = 0.12;
+const JITTER_MAX_SEC = 45 * 60; // ±45 min
+
+const irregularDisabled = process.argv.includes('--no-irregular') || process.argv.includes('--force');
+const skipChance = irregularDisabled ? 0 : (SKIP_PROBA[dow] ?? 0);
+const erratesEligible = !irregularDisabled && dow !== 2;
+
+if (skipChance > 0 && Math.random() < skipChance) {
+  if (dryRun) {
+    console.log(`(dry-run) Jour ${dow} · le tirage aurait skippé (proba=${skipChance}) — on continue pour inspection.`);
+  } else {
+    console.log(`Jour ${dow} · skip aléatoire (proba=${skipChance}) — pas de publication aujourd'hui.`);
+    process.exit(0);
+  }
+}
+
 // Sur mardi (jour de sortie de l'édition), on tente le thread multi-post.
 const tuesdayThread = dow === 2 && !process.argv.includes('--no-thread') ? buildTuesdayThread() : null;
+const erratesActive = erratesEligible && !tuesdayThread && Math.random() < ERRATA_PROBA;
 
 // On normalise tout en un tableau de posts : le thread du mardi a 4-5 entrées,
-// les autres jours n'en ont qu'une.
+// les autres jours n'en ont qu'une (errata possible).
 let postsText;
 if (tuesdayThread) {
   postsText = tuesdayThread;
+} else if (erratesActive) {
+  console.log(`Jour ${dow} · errata in-character (proba=${ERRATA_PROBA})`);
+  postsText = [T.errata()];
 } else {
   let text = dayMap[dow]();
   if (!text) text = T.pointer();
@@ -320,6 +374,15 @@ async function uploadThumb() {
     console.warn(`⚠ Lecture og.png échec — embed sans vignette : ${e.message}`);
     return null;
   }
+}
+
+// Jitter : sleep aléatoire 0-45 min pour ne pas poster à la seconde précise du cron.
+// Bypass : --no-jitter, --force, ou dry-run.
+if (!irregularDisabled && !process.argv.includes('--no-jitter') && !dryRun) {
+  const wait = Math.floor(Math.random() * JITTER_MAX_SEC);
+  const m = Math.floor(wait / 60), s = wait % 60;
+  console.log(`Jitter : attente de ${m}m${s.toString().padStart(2, '0')}s avant publication…`);
+  await new Promise(r => setTimeout(r, wait * 1000));
 }
 
 const thumb = embedUrl ? await uploadThumb() : null;
