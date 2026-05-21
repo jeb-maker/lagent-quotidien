@@ -744,8 +744,9 @@ const weeks = editionDirs
   .map(d => d.name)
   .sort();
 
+// `/` is intentionally omitted: it 302-redirects to the latest edition,
+// and Google flags redirecting URLs listed in sitemaps.
 const sitemapEntries = [
-  `<url><loc>${SITE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>`,
   `<url><loc>${SITE_URL}/agents</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>`,
   `<url><loc>${SITE_URL}/editions/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>`
 ];
