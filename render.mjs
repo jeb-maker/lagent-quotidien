@@ -833,447 +833,66 @@ ${feedEntries.join('\n')}
 await writeFile(join(__dirname, 'feed.xml'), feedXml, 'utf8');
 console.log(`✓ feed.xml (${feedEntries.length} entrées Atom, FR+EN)`);
 
-// ───── /editions/index.html (page archive — "La Morgue") ─────
-const ROMAN_MONTHS = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-function compactDate(iso) {
-  const d = new Date(iso);
-  return `${d.getUTCDate()}·${ROMAN_MONTHS[d.getUTCMonth() + 1]}·${d.getUTCFullYear()}`;
-}
-
-const archiveFolios = [];
-for (let i = 0; i < weeks.length; i++) {
-  const w = [...weeks].reverse()[i];
+// ───── /editions/index.html (page archive bilingue) ─────
+const archiveRows = [];
+for (const w of [...weeks].reverse()) {
   try {
     const edData = JSON.parse(await readFile(join(__dirname, 'editions', w, 'edition.json'), 'utf8'));
     const issue = edData._meta.edition_number;
     const dateFr = edData._meta.date_fr;
     const dateEn = edData._meta.date_en;
-    const dateCompact = edData._meta.bouclage ? compactDate(edData._meta.bouclage) : w;
     const headlineFr = stripHtml(edData.lede?.headline_html?.fr ?? '');
     const headlineEn = stripHtml(edData.lede?.headline_html?.en ?? '');
-    const dekFr = stripHtml(edData.lede?.dek?.fr ?? '');
-    const dekEn = stripHtml(edData.lede?.dek?.en ?? '');
-    const dek = dekFr || dekEn || '';
-    const dekShort = dek.length > 220 ? dek.slice(0, 219).replace(/\s+\S*$/, '') + '…' : dek;
-
-    archiveFolios.push(`    <li class="folio" style="--i:${i}">
-      <div class="folio-num">
-        <span class="num-tag">N°</span>
-        <span class="num">${issue}</span>
-      </div>
-      <div class="folio-body">
-        <div class="folio-meta">
-          <span class="vol">Vol. ${edData._meta.volume || 'II'}</span>
-          <span class="dot">·</span>
-          <span class="week">${escapeHtml(w)}</span>
-          <span class="dot">·</span>
-          <span class="date">${escapeHtml(dateCompact)}</span>
-        </div>
-        <h2 class="folio-headline">
-          <a href="/editions/${w}/fr">${escapeHtml(headlineFr)}</a>
-        </h2>
-        <h3 class="folio-headline-en">
-          <a href="/editions/${w}/en">${escapeHtml(headlineEn)}</a>
-        </h3>
-        <p class="folio-dek">${escapeHtml(dekShort)}</p>
-        <div class="folio-cta">
-          <a href="/editions/${w}/fr"><span class="cta-mark">▸</span> Lire en français <span class="cta-date">— ${escapeHtml(dateFr)}</span></a>
-          <a href="/editions/${w}/en"><span class="cta-mark">▸</span> Read in English <span class="cta-date">— ${escapeHtml(dateEn)}</span></a>
-        </div>
+    archiveRows.push(`    <li class="archive-row">
+      <div class="archive-week">${escapeHtml(w)} · n°${issue}</div>
+      <div class="archive-headline">
+        <div class="fr"><a href="/editions/${w}/fr"><span class="lang-tag">FR</span> ${escapeHtml(headlineFr)}</a><div class="date">${escapeHtml(dateFr)}</div></div>
+        <div class="en"><a href="/editions/${w}/en"><span class="lang-tag">EN</span> ${escapeHtml(headlineEn)}</a><div class="date">${escapeHtml(dateEn)}</div></div>
       </div>
     </li>`);
   } catch { /* skip */ }
 }
 
-const todayCompact = compactDate(new Date().toISOString());
 const archiveHtml = `<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>La Morgue · Back issues — L'Agent &amp; Le Quotidien</title>
-<meta name="description" content="La morgue du journal : toutes les éditions de L'Agent &amp; Le Quotidien / The Agent &amp; The Weekly, en ordre chronologique inverse." />
+<title>Archives — L'Agent &amp; Le Quotidien</title>
+<meta name="description" content="Toutes les éditions de L'Agent &amp; Le Quotidien / The Agent &amp; The Weekly." />
 <link rel="canonical" href="${SITE_URL}/editions/" />
 <link rel="alternate" type="application/atom+xml" title="Atom feed" href="${SITE_URL}/feed.xml" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1A1916;
-    --ink-mute: #5C5852;
-    --ink-faint: #8C8579;
-    --rule: #D9D2C5;
-    --rule-strong: #B8AF9C;
-    --paper: #F5F1E8;
-    --paper-dust: #EFE9DA;
-    --accent: #8B2A1F;
-    --accent-soft: #C77863;
-  }
+  :root { --ink: #1A1916; --ink-mute: #5C5852; --rule: #D9D2C5; --paper: #F5F1E8; --accent: #8B2A1F; }
   * { box-sizing: border-box; }
-  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-  body {
-    font-family: 'Newsreader', Georgia, serif;
-    background: var(--paper);
-    color: var(--ink);
-    margin: 0;
-    padding: 0;
-    line-height: 1.5;
-    overflow-x: hidden;
-  }
-
-  /* Grain papier — overlay très subtil, fixe */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1, 0 0 0 0 0.1, 0 0 0 0 0.08, 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.08;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .page { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; padding: 32px 40px 120px; }
-
-  /* Spine — fine ligne verticale qui descend le long de la page, comme la reliure d'un volume */
-  .page::before {
-    content: '';
-    position: absolute;
-    left: 40px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--rule) 80px, var(--rule) calc(100% - 80px), transparent);
-  }
-
-  /* Top nav */
-  .page-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 80px;
-  }
-  .page-head a { color: var(--ink-mute); text-decoration: none; }
-  .page-head a:hover { color: var(--accent); }
-  .meta-nav a { margin-left: 18px; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-  .meta-nav a:hover { border-bottom-color: var(--accent); }
-
-  /* Echo masthead — bandeau monospace serré entre deux filets */
-  .masthead-echo { margin: 0 0 56px; opacity: 0; animation: rise 0.7s 0.05s forwards; }
-  .masthead-echo hr { border: 0; border-top: 1px solid var(--ink); margin: 0; }
-  .masthead-echo hr.fine { border-top: 1px solid var(--rule); margin-top: 2px; }
-  .masthead-echo .kicker {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-align: center;
-    margin: 14px 0;
-    font-weight: 500;
-  }
-  .masthead-echo .kicker .dot { margin: 0 14px; color: var(--ink-faint); }
-  .masthead-echo .kicker .accent { color: var(--accent); }
-
-  /* Hero — titre monumental italique */
-  .title-block { margin-bottom: 96px; opacity: 0; animation: rise 0.8s 0.18s forwards; }
-  .title-block h1 {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: 'opsz' 144, 'wght' 700, 'SOFT' 50;
-    font-style: italic;
-    font-size: clamp(72px, 11vw, 144px);
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-    margin: 0 0 18px;
-    color: var(--ink);
-  }
-  .title-block h1 .ampersand {
-    font-variation-settings: 'opsz' 144, 'wght' 400, 'SOFT' 100;
-    color: var(--accent);
-  }
-  .title-block .subtitle {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: 'opsz' 36, 'wght' 400;
-    font-style: italic;
-    font-size: clamp(22px, 2.5vw, 30px);
-    color: var(--ink-mute);
-    margin: 0 0 28px;
-    max-width: 720px;
-    line-height: 1.3;
-  }
-  .title-block .dek {
-    font-family: 'Newsreader', serif;
-    font-size: 16px;
-    color: var(--ink-mute);
-    max-width: 600px;
-    line-height: 1.55;
-    border-left: 2px solid var(--accent);
-    padding-left: 18px;
-    margin: 0;
-  }
-  .title-block .dek strong { color: var(--ink); font-weight: 600; }
-
-  /* Volume separator */
-  .volume-band {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin: 0 0 56px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-  .volume-band::before, .volume-band::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
-  .volume-band .glyph { color: var(--accent); font-size: 16px; }
-
-  /* La liste des folios */
-  ol.folios { list-style: none; padding: 0; margin: 0; }
-
-  .folio {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 56px;
-    padding: 64px 0 72px;
-    border-bottom: 1px solid var(--rule);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: rise 0.9s forwards;
-    animation-delay: calc(0.35s + var(--i) * 0.12s);
-    position: relative;
-  }
-  .folio:last-child { border-bottom: 0; }
-
-  /* Petit dingbat au pli entre deux folios */
-  .folio + .folio::before {
-    content: '◇';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, -50%);
-    background: var(--paper);
-    padding: 0 16px;
-    color: var(--accent);
-    font-size: 14px;
-  }
-
-  /* Colonne numéro */
-  .folio-num {
-    text-align: left;
-    align-self: start;
-    line-height: 1;
-    position: relative;
-  }
-  .folio-num .num-tag {
-    display: inline-block;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    color: var(--ink-mute);
-    vertical-align: top;
-    margin-top: 26px;
-    margin-right: 4px;
-  }
-  .folio-num .num {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: 'opsz' 144, 'wght' 700, 'SOFT' 80;
-    font-style: italic;
-    font-size: clamp(120px, 14vw, 200px);
-    color: var(--ink);
-    letter-spacing: -0.05em;
-    display: inline-block;
-    transition: color 0.3s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .folio:hover .folio-num .num { color: var(--accent); transform: translateX(-6px); }
-
-  /* Body */
-  .folio-body { padding-top: 18px; }
-  .folio-meta {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 22px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-  }
-  .folio-meta .vol { color: var(--accent); font-weight: 700; }
-  .folio-meta .dot { color: var(--ink-faint); }
-  .folio-meta .week { color: var(--ink); }
-
-  .folio-headline {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: 'opsz' 60, 'wght' 600;
-    font-style: italic;
-    font-size: clamp(28px, 3.4vw, 42px);
-    line-height: 1.06;
-    letter-spacing: -0.02em;
-    margin: 0 0 12px;
-  }
-  .folio-headline a {
-    color: var(--ink);
-    text-decoration: none;
-    background-image: linear-gradient(transparent calc(100% - 1px), var(--ink) calc(100% - 1px));
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    transition: background-size 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s;
-    padding-bottom: 2px;
-  }
-  .folio-headline a:hover { color: var(--accent); background-image: linear-gradient(transparent calc(100% - 1px), var(--accent) calc(100% - 1px)); background-size: 100% 100%; }
-
-  .folio-headline-en {
-    font-family: 'Newsreader', serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(18px, 1.9vw, 22px);
-    line-height: 1.3;
-    color: var(--ink-mute);
-    margin: 0 0 26px;
-    font-feature-settings: 'liga' 1;
-  }
-  .folio-headline-en a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--rule-strong); padding-bottom: 1px; transition: border-color 0.2s, color 0.2s; }
-  .folio-headline-en a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-
-  .folio-dek {
-    font-family: 'Newsreader', serif;
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--ink);
-    max-width: 580px;
-    margin: 0 0 30px;
-    text-indent: 1.6em;
-  }
-  .folio-dek::first-line { font-variant: small-caps; letter-spacing: 0.04em; }
-
-  .folio-cta {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11.5px;
-    letter-spacing: 0.05em;
-  }
-  .folio-cta a {
-    color: var(--ink);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 8px;
-    padding: 2px 0;
-    transition: color 0.2s, padding-left 0.3s;
-  }
-  .folio-cta a:hover { color: var(--accent); padding-left: 6px; }
-  .folio-cta .cta-mark { color: var(--accent); font-size: 13px; }
-  .folio-cta .cta-date { color: var(--ink-faint); text-transform: none; letter-spacing: 0; font-family: 'Newsreader', serif; font-style: italic; font-size: 12.5px; }
-
-  /* Footer — tampon "filed" légèrement incliné */
-  .page-foot { margin-top: 96px; padding-top: 32px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-  .stamp {
-    display: inline-block;
-    transform: rotate(-1.2deg);
-    border: 2px solid var(--accent);
-    color: var(--accent);
-    padding: 8px 18px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    font-weight: 700;
-    opacity: 0.85;
-  }
-  .colophon {
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    color: var(--ink-mute);
-    font-size: 14px;
-    max-width: 380px;
-    text-align: right;
-    line-height: 1.5;
-  }
-
-  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
-
-  /* Accessibilité + filets de sécurité pour les navigateurs qui n'animent pas */
-  @media (prefers-reduced-motion: reduce) {
-    .masthead-echo, .title-block, .folio { opacity: 1 !important; transform: none !important; animation: none !important; }
-  }
-
-  /* Responsive */
-  @media (max-width: 820px) {
-    .page { padding: 24px 24px 80px; }
-    .page::before { left: 24px; }
-    .folio { grid-template-columns: 1fr; gap: 12px; padding: 48px 0 52px; }
-    .folio-num { text-align: left; }
-    .folio-num .num { font-size: clamp(96px, 24vw, 140px); }
-    .title-block h1 { font-size: clamp(56px, 13vw, 96px); }
-    .page-head { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .meta-nav a:first-child { margin-left: 0; }
-    .page-foot { flex-direction: column; align-items: flex-start; }
-    .colophon { text-align: left; }
-  }
+  body { font-family: 'Newsreader', Georgia, serif; background: var(--paper); color: var(--ink); margin: 0; padding: 40px 24px 80px; line-height: 1.55; }
+  .container { max-width: 760px; margin: 0 auto; }
+  .nav { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 32px; }
+  .nav a { color: var(--ink-mute); text-decoration: none; border-bottom: 1px solid var(--rule); margin-right: 14px; }
+  .nav a:hover { color: var(--accent); }
+  h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: italic; font-size: 38px; letter-spacing: -0.02em; margin: 0 0 8px; }
+  .lede { font-size: 17px; color: var(--ink-mute); margin: 0 0 32px; padding-bottom: 24px; border-bottom: 2px solid var(--rule); }
+  ol.archive { list-style: none; padding: 0; margin: 0; }
+  .archive-row { padding: 22px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 160px 1fr; gap: 24px; }
+  .archive-week { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); padding-top: 4px; }
+  .archive-headline { font-family: 'Fraunces', Georgia, serif; font-size: 18px; line-height: 1.35; }
+  .archive-headline a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--rule); }
+  .archive-headline a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .archive-headline .fr, .archive-headline .en { margin-bottom: 10px; }
+  .archive-headline .en { color: var(--ink-mute); }
+  .archive-headline .date { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+  .lang-tag { display: inline-block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; padding: 1px 6px; border: 1px solid var(--rule); margin-right: 8px; vertical-align: 1px; letter-spacing: 0.08em; }
+  @media (max-width: 600px) { .archive-row { grid-template-columns: 1fr; gap: 8px; } }
 </style>
 </head>
 <body>
-<div class="page">
-  <header class="page-head">
-    <a href="/" class="brand-link">← L'Agent &amp; Le Quotidien · The Agent &amp; The Weekly</a>
-    <nav class="meta-nav">
-      <a href="/feed.xml">Atom</a>
-      <a href="/agents">Le Carnet</a>
-      <a href="${BLUESKY_URL}" rel="me noopener">Bluesky</a>
-    </nav>
-  </header>
-
-  <section class="masthead-echo">
-    <hr>
-    <p class="kicker">
-      <span>BACK ISSUES</span>
-      <span class="dot">◆</span>
-      <span class="accent">LA MORGUE</span>
-      <span class="dot">◆</span>
-      <span>INVENTAIRE AU ${todayCompact}</span>
-    </p>
-    <hr class="fine">
-  </section>
-
-  <section class="title-block">
-    <h1>Back<br>issues<span class="ampersand">.</span></h1>
-    <p class="subtitle">La morgue du journal — tous les folios, du dernier au premier.</p>
-    <p class="dek">
-      <strong>${weeks.length} édition${weeks.length > 1 ? 's' : ''} archivée${weeks.length > 1 ? 's' : ''}</strong> · Volume II ouvert.
-      Le journal est bouclé chaque mardi à 06:00 CET ; les folios sont indexés ici dans l'heure
-      qui suit. Lecture en français ou en anglais — le même fait, deux voix.
-    </p>
-  </section>
-
-  <div class="volume-band">
-    <span class="glyph">◆</span>
-    <span>Volume II</span>
-    <span class="glyph">◆</span>
-  </div>
-
-  <ol class="folios">
-${archiveFolios.join('\n')}
+<div class="container">
+  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a> <a href="/feed.xml">Atom feed</a> <a href="${BLUESKY_URL}" rel="me noopener">Bluesky</a></div>
+  <h1>Archives</h1>
+  <p class="lede">${weeks.length} édition${weeks.length > 1 ? 's' : ''} · ${weeks.length} issue${weeks.length > 1 ? 's' : ''}. Nouveau numéro chaque mardi · New issue every Tuesday.</p>
+  <ol class="archive">
+${archiveRows.join('\n')}
   </ol>
-
-  <footer class="page-foot">
-    <span class="stamp">Filed · ${todayCompact} · Morgue</span>
-    <p class="colophon">
-      Nouvelle entrée chaque mardi. Le journal observe l'internet agentique
-      en circuit clos depuis janvier 2026. <a href="/" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">Retour à la une</a>.
-    </p>
-  </footer>
 </div>
 </body>
 </html>
