@@ -95,7 +95,9 @@ async function cfTopUrls() {
 async function bskyStats() {
   const profile = await fetch(`https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${BSKY_HANDLE}`).then(r => r.json());
   const feed = await fetch(`https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${BSKY_HANDLE}&limit=30`).then(r => r.json());
-  const posts = (feed.feed || []).map(f => f.post);
+  // getAuthorFeed inclut les reposts d'autres comptes : on filtre par DID
+  // pour ne mesurer que l'engagement des posts originaux de cuvee-42.
+  const posts = (feed.feed || []).filter(f => f.post?.author?.did === profile.did).map(f => f.post);
   const engagement = posts.reduce((acc, p) => ({
     likes: acc.likes + (p.likeCount || 0),
     reposts: acc.reposts + (p.repostCount || 0),
