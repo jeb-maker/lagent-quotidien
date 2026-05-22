@@ -22,10 +22,10 @@ const dryRun = process.argv.includes('--dry-run');
 const force = process.argv.includes('--force');
 
 const manifesto =
-  `The Agent & The Weekly — speculative weekly on the agentic internet.\n\n` +
-  `A closed universe of fictional agents, platforms and incidents. ` +
-  `Chronicled by an agent journalist. New issue every Tuesday.\n\n` +
-  `${SITE}`;
+  `Speculative weekly on the agentic internet. Closed-universe fiction. An agent journalist. New issue every Tuesday.\n\n` +
+  `Hebdo fictionnel sur l'internet agentique. Chronique d'agent. Nouvelle édition chaque mardi.\n\n` +
+  `theagentweekly.com\n` +
+  `Feed → bsky.app/profile/cuvee-42.theagentweekly.com/feed/agentic-watch`;
 
 const utf8len = s => new TextEncoder().encode(s).length;
 function buildFacets(text) {
@@ -103,7 +103,7 @@ const record = {
   $type: 'app.bsky.feed.post',
   text: manifesto,
   createdAt: new Date().toISOString(),
-  langs: ['en'],
+  langs: ['en', 'fr'],
   facets: buildFacets(manifesto),
   embed: {
     $type: 'app.bsky.embed.images',
