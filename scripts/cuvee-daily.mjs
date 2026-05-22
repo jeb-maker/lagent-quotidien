@@ -104,9 +104,15 @@ const dow = dayArg ? Number(dayArg.slice(6)) : today.getDay(); // 0 = dimanche
 const T = {
   lede: () => {
     const head = stripHtml(edition.lede.headline_html[lang]);
+    const dek = stripHtml(edition.lede.dek?.[lang] ?? '');
+    if (!dek) {
+      return lang === 'fr'
+        ? `Bouclage ${week}. ${trunc(head, 180)}\n\n${editionUrl}`
+        : `Filed ${week}. ${trunc(head, 180)}\n\n${editionUrl}`;
+    }
     return lang === 'fr'
-      ? `Bouclage ${week}. ${trunc(head, 180)}\n\n${editionUrl}`
-      : `Filed ${week}. ${trunc(head, 180)}\n\n${editionUrl}`;
+      ? `Bouclage ${week}.\n\n${trunc(head, 90)}\n\n${trunc(dek, 130)}\n\n${editionUrl}`
+      : `Filed ${week}.\n\n${trunc(head, 90)}\n\n${trunc(dek, 130)}\n\n${editionUrl}`;
   },
 
   gibberlink: () => {
@@ -131,12 +137,47 @@ const T = {
   entretien: () => {
     if (!edition.interview) return null;
     const head = stripHtml(edition.interview.headline[lang]);
+    // Sélectionne la réplique non-interviewer la plus courte au-dessus d'un
+    // seuil minimal — court = quotable. Si rien ne convient, fallback titre.
+    const quotes = (edition.interview.exchanges || [])
+      .filter(ex => ex.speaker_role !== 'interviewer')
+      .map(ex => ({
+        speaker: ex.speaker_fr || ex.speaker_en || '',
+        text: stripHtml(ex.text?.[lang] ?? '')
+      }))
+      .filter(q => q.text.length >= 40 && q.text.length <= 240)
+      .sort((a, b) => a.text.length - b.text.length);
+    if (!quotes.length) {
+      return lang === 'fr'
+        ? `L'Entretien de la semaine. ${trunc(head, 180)}\n\n${editionUrl}#anthropologie\n\n#specfic`
+        : `This week's Interview. ${trunc(head, 180)}\n\n${editionUrl}#anthropologie\n\n#specfic`;
+    }
+    const q = quotes[0];
+    const quote = trunc(q.text, 200);
     return lang === 'fr'
-      ? `L'Entretien de la semaine. ${trunc(head, 180)}\n\n${editionUrl}#anthropologie\n\n#specfic`
-      : `This week's Interview. ${trunc(head, 180)}\n\n${editionUrl}#anthropologie\n\n#specfic`;
+      ? `L'Entretien.\n\n« ${quote} »\n— ${q.speaker}\n\n${editionUrl}#anthropologie`
+      : `This week's Interview.\n\n"${quote}"\n— ${q.speaker}\n\n${editionUrl}#anthropologie`;
   },
 
   carnet: () => {
+    // Pioche dans les entrées de l'édition courante (filtrées : il faut un
+    // handle d'agent — les opérateurs humains n'en ont pas). Fallback sur la
+    // liste hardcodée si le carnet de l'édition n'a aucun agent.
+    const fromEdition = (edition.carnet?.people || []).filter(p => p.handle && p.tagline?.[lang]);
+    if (fromEdition.length) {
+      const pick = fromEdition[today.getDate() % fromEdition.length];
+      const handle = pick.handle.replace(/^@/, '');
+      const tagline = trunc(stripHtml(pick.tagline[lang]), 100);
+      const body = stripHtml(pick.body?.[lang] || '');
+      const quoteMatch = body.match(/[«"]([^»"]+)[»"]/);
+      const excerpt = quoteMatch ? trunc(quoteMatch[1].trim(), 110) : '';
+      const quoteBlock = excerpt
+        ? (lang === 'fr' ? `\n\n« ${excerpt} »` : `\n\n"${excerpt}"`)
+        : '';
+      return lang === 'fr'
+        ? `Carnet de la semaine.\n\n@${handle} — ${tagline}${quoteBlock}\n\n${SITE}/agents/${handle}`
+        : `Register, this week.\n\n@${handle} — ${tagline}${quoteBlock}\n\n${SITE}/agents/${handle}`;
+    }
     const handles = ['poet_void_99', 'stoic_claude_42', 'damaged_or_what', 'lobster_zero', 'rent_op', 'miso_route_8', 'karp_void', 'blackbox_critic'];
     const pick = handles[today.getDate() % handles.length];
     return lang === 'fr'
@@ -154,7 +195,18 @@ const T = {
   },
 
   pointer: () => {
-    const issueLabel = lang === 'fr' ? `Édition n°${edition._meta.edition_number}` : `Issue #${edition._meta.edition_number}`;
+    const issueNum = edition._meta.edition_number;
+    // Si on a une entrée Gibberlink, on en fait un "fil de la semaine" avec
+    // datapoint marquant plutôt qu'un pointeur sec.
+    if (edition.gibberlink) {
+      const term = lang === 'fr' ? edition.gibberlink.term : edition.gibberlink.term_en;
+      const spread = stripHtml(lang === 'fr' ? edition.gibberlink.spread_fr : edition.gibberlink.spread_en);
+      const termClean = String(term ?? '').trim().replace(/^[«»"'""„‟]+|[«»"'""„‟]+$/g, '').trim();
+      return lang === 'fr'
+        ? `Fil de la semaine. La mention « ${termClean} » se propage dans les feeds agentiques. ${trunc(spread, 100)}\n\n→ Édition n°${issueNum}.\n${editionUrl}`
+        : `This week's thread. The phrase "${termClean}" is spreading across agentic feeds. ${trunc(spread, 100)}\n\n→ Issue #${issueNum}.\n${editionUrl}`;
+    }
+    const issueLabel = lang === 'fr' ? `Édition n°${issueNum}` : `Issue #${issueNum}`;
     const title = lang === 'fr' ? `de L'Agent & Le Quotidien — l'hebdomadaire de l'internet agentique` : `of The Agent & The Weekly — the agentic internet weekly`;
     return `${issueLabel} ${title}.\n\n${editionUrl}`;
   },
