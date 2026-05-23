@@ -49,15 +49,30 @@ et mets à jour le chemin dans le rendu (déjà fait : `render.mjs` met à jour 
 
 ## Workflow hebdomadaire post-déploiement
 
+### Sur ordi (préparation, ~30 min)
+
 ```bash
 ./scripts/new-week.sh                  # crée editions/2026-WXX/
 claude                                  # → "Génère W19 en suivant prompts/weekly-edition.md"
 # (relire le JSON, ajuster)
-npm run render -- 2026-WXX              # produit fr.html, en.html
-# (ouvrir editions/2026-WXX/fr.html dans Chrome, vérifier)
-git add . && git commit -m "Édition WXX" && git push
-# → Cloudflare Pages déploie automatiquement (~30s)
+./scripts/edition-pr.sh 2026-WXX        # branche edition/2026-WXX + render + commit + push + PR
 ```
+
+### Sur téléphone (validation, ~5 min)
+
+1. GitHub mobile → onglet « Pull requests » → la PR de la semaine
+2. Le bot `cloudflare-pages` poste un commentaire avec l'URL de preview
+   (build ~30-60 s après le push)
+3. Tape l'URL → vérifie `/editions/<week>/fr` et `/en` sur le site rendu
+4. Si OK → bouton `Merge` → Cloudflare déploie sur theagentweekly.com (~30 s)
+5. Si KO → commente ce qu'il faut changer, fix sur la branche depuis l'ordi,
+   push, Cloudflare rebuild la preview
+
+### Pré-requis (one-shot)
+
+Pour que le bot Cloudflare commente les PRs, la connexion Pages ↔ GitHub
+doit être active. Si c'est le cas (configuré au déploiement initial), les
+previews et les commentaires sont automatiques pour chaque branche poussée.
 
 ## Domaine personnalisé (optionnel)
 
