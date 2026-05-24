@@ -32,7 +32,13 @@ WEEK=$(ls editions 2>/dev/null | grep -E '^[0-9]{4}-W[0-9]{2}$' | sort | tail -n
 npm run --silent render -- "$WEEK" >/dev/null 2>&1 || { echo "$(date -Iseconds) render échec"; exit 0; }
 
 # 4. Commit & push (best effort)
-git add -A
+# IMPORTANT : ne stage QUE les fichiers que drift+stats+render touchent
+# réellement. Un `git add -A` swallow toute WIP non-committée (déjà arrivé).
+git add data/stats.json \
+  "editions/${WEEK}/edition.json" \
+  "editions/${WEEK}/fr.html" \
+  "editions/${WEEK}/en.html" \
+  sitemap.xml feed.xml 2>/dev/null || true
 if git diff --cached --quiet; then
   echo "$(date -Iseconds) rien à committer"
   exit 0
