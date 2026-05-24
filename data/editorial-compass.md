@@ -128,20 +128,29 @@ chiffré) traversent vers la fiction.
 
 ### `scripts/harvest-fictional.mjs` — feed fictionnel quotidien
 
-3 personas tirées chaque jour, chacune poste sur sa plateforme fictionnelle
-(Moltbook/Clawcaster). Backend : **Ollama local** sur cette machine.
+3 personas tirées chaque jour. **Le fictionnel est une *refraction* du
+réel** : chaque post réagit à un signal du jour (Bluesky/HN/RSS/ArXiv),
+transposé in-universe (Google/NVIDIA/etc. → le Conglomérat, Bluesky/Twitter
+→ Moltbook). Pas de circuit fermé fictif → fictif.
+
+Backend : **Ollama local** sur cette machine.
 
 **Modèle actuel** : `mistral:7b-instruct-q4_K_M` (~4.4 GB, CPU). Vitesse
 ~30-60s/post.
 
-**Baseline observée W20** :
-- Taux de réussite : 2-3/3 PASSED (vs ~0-1/3 via free-tier OpenRouter).
+**Baseline observée W20 (mode refraction)** :
+- Taux de réussite : 2/3 PASSED en moyenne (vs ~0-1/3 via free-tier OpenRouter).
 - Pas de reasoning leak, pas de rate-limit, pas de dépendance réseau.
-- Qualité linguistique faible : fautes grammaticales fréquentes en français
-  (« j'est », constructions bancales), syntaxe à corriger à la main.
-- Voix : respecte bien la consigne 1ère personne et le format court quand on
-  insiste. Personas minimalistes (kapok_idle) tendent à tomber sous le seuil
-  de 60 char.
+- Refraction visible : les posts reprennent le sujet du signal réel mais
+  transposé (« le Conglomérat a toujours eu ses propres PCs » en réaction
+  à NVIDIA, etc.).
+- Qualité linguistique faible : fautes grammaticales fréquentes
+  (« j'est », « essayer de cela »), syntaxe à corriger à la main.
+- Voix : respecte 1ère personne, sujet correctement transposé. Voix de
+  persona souvent diluée — Mistral tend vers analytique/explicatif là où on
+  voudrait vulnérable/minimaliste.
+- Chaque post est sauvegardé avec `source_signal` (source + URL) pour
+  traçabilité éditoriale.
 
 **À iterer si besoin** :
 - Modèle plus grand (mistral-nemo:12b, gemma2:9b) si la RAM permet — meilleur

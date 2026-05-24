@@ -60,18 +60,38 @@ const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g, '').replace(/\s+/g, '
 const ledeHeadline = stripHtml(edition.lede?.headline_html?.fr ?? '');
 const ledeDek = stripHtml(edition.lede?.dek?.fr ?? '');
 
-// ───── Charger les éventuels signaux du harvest réel du jour ─────
-let realSignals = '';
-try {
-  const harvestPath = join(ROOT, 'data', 'harvest', `${DATE}.json`);
-  const h = JSON.parse(await readFile(harvestPath, 'utf8'));
-  // Termes émergents : extraire 3-5 mots-clés des titres de HN + RSS
-  const titles = [
-    ...((h.hackernews?.stories || []).map(s => s.title)),
-    ...((h.rss?.items || []).map(i => i.title))
-  ].slice(0, 8);
-  if (titles.length) realSignals = `Termes vus aujourd'hui sur le réel (à ne PAS citer, juste pour t'imprégner) : ${titles.join(' / ').slice(0, 500)}`;
-} catch { /* pas grave si pas de harvest */ }
+// ───── Charger les signaux du harvest réel du jour (ou de la veille) ─────
+// Le fictionnel est une REFRACTION du réel : chaque post réagit à un
+// signal réel du jour, transposé in-universe.
+async function loadSignals() {
+  for (let dayOffset = 0; dayOffset <= 2; dayOffset++) {
+    const d = new Date(DATE + 'T00:00:00Z');
+    d.setUTCDate(d.getUTCDate() - dayOffset);
+    const dStr = d.toISOString().slice(0, 10);
+    try {
+      const h = JSON.parse(await readFile(join(ROOT, 'data', 'harvest', `${dStr}.json`), 'utf8'));
+      const signals = [];
+      for (const s of (h.hackernews?.stories || [])) {
+        signals.push({ source: 'HN', title: s.title, url: s.hn_url || s.url, score: s.score });
+      }
+      for (const it of (h.rss?.items || [])) {
+        signals.push({ source: it.source || 'RSS', title: it.title, url: it.url });
+      }
+      for (const [q, posts] of Object.entries(h.bluesky?.by_query || {})) {
+        for (const p of (posts || []).slice(0, 3)) {
+          // On garde le snippet comme "titre" pour les posts Bluesky
+          signals.push({ source: 'Bluesky', title: p.text.slice(0, 180), url: p.url, score: p.likes });
+        }
+      }
+      for (const p of (h.arxiv?.papers || []).slice(0, 5)) {
+        signals.push({ source: 'ArXiv', title: p.title, url: p.url });
+      }
+      if (signals.length) return { signals, dayOffset };
+    } catch {}
+  }
+  return { signals: [], dayOffset: -1 };
+}
+const { signals: realSignals, dayOffset: signalAge } = await loadSignals();
 
 // ───── Anti-leak : tout terme du réel qui ne doit pas apparaître ─────
 const REAL_LEAKS = /\b(bluesky|twitter|x\.com|reddit|mastodon|openai|anthropic|google|microsoft|meta|nvidia|cohere|gpt-?\d|claude|gemini|gemma|llama|mistral|grok|hermes|deepseek|qwen|nemotron|chatgpt|github)\b/i;
@@ -84,21 +104,32 @@ const REFUSALS = [
 
 // Si le modèle bavarde (reasoning + drafts + commentaire), tente d'extraire le
 // post final : on cherche un bloc cité court, ou la dernière courte ligne en prose.
+function stripWrappingQuotes(s) {
+  return String(s).trim()
+    .replace(/^[«»""„‟'"`]+\s*/, '')
+    .replace(/\s*[«»""„‟'"`]+$/, '')
+    .trim();
+}
+function ensureTerminalPunctuation(s) {
+  if (!s) return s;
+  return /[.!?»…]$/.test(s) ? s : s.replace(/[\s,;:]+$/, '') + '.';
+}
+
 function extractPost(raw) {
-  let t = String(raw || '').trim();
+  let t = stripWrappingQuotes(raw);
   if (!t) return t;
   // Cas simple : déjà court et propre.
-  if (t.length <= 350 && !/^\s*[#*-]/m.test(t) && !/\n\n/.test(t)) return t;
-  // Bloc cité guillemets français ou anglais, 60-300 char.
-  const quoted = [...t.matchAll(/[«"]([^«»"]{60,300})[»"]/g)].map(m => m[1].trim());
-  if (quoted.length) return quoted[quoted.length - 1];
-  // Dernier paragraphe non-markdown 60-300 char.
+  if (t.length <= 500 && !/^\s*[#*-]/m.test(t) && !/\n\n/.test(t)) return ensureTerminalPunctuation(t);
+  // Bloc cité guillemets, 60-400 char.
+  const quoted = [...t.matchAll(/[«"]([^«»"]{60,400})[»"]/g)].map(m => m[1].trim());
+  if (quoted.length) return ensureTerminalPunctuation(stripWrappingQuotes(quoted[quoted.length - 1]));
+  // Dernier paragraphe non-markdown 60-400 char.
   const paras = t.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
   for (let i = paras.length - 1; i >= 0; i--) {
     const p = paras[i].replace(/^\s*[#>*-]+\s*/, '').trim();
-    if (p.length >= 60 && p.length <= 300 && !/^\s*[#*-]/m.test(p)) return p;
+    if (p.length >= 60 && p.length <= 400 && !/^\s*[#*-]/m.test(p)) return ensureTerminalPunctuation(stripWrappingQuotes(p));
   }
-  return t; // laisse qualityCheck rejeter
+  return t;
 }
 
 // Marqueurs typiques de méta-bavardage : on rejette si on les voit. Ce sont
@@ -114,7 +145,7 @@ function qualityCheck(text, ctx = {}) {
   const t = (text || '').trim();
   if (!t) issues.push('empty');
   if (t.length < 60) issues.push(`too_short(${t.length})`);
-  if (t.length > 350) issues.push(`too_long(${t.length})`);
+  if (t.length > 450) issues.push(`too_long(${t.length})`);
   if (REAL_LEAKS.test(t)) issues.push('real_leak');
   if (META_LEAKS.test(t)) issues.push('meta_leak');
   if (ENGLISH_REASONING.test(t)) issues.push('english_reasoning');
@@ -136,25 +167,44 @@ function qualityCheck(text, ctx = {}) {
 }
 
 // ───── Prompt builder ─────
-function buildPrompt({ handle, platform, sub }) {
+function buildPrompt({ handle, platform, sub }, signal) {
   const p = findPerson(handle) || {};
-  // Prompt compact pour Mistral 7B local. On insiste lourdement sur la voix
-  // pour combattre la tendance Mistral à pondre du manifeste collectif.
+  // Le signal est un titre/snippet du monde réel. Le modèle doit le
+  // transposer in-universe (Bluesky/Twitter/etc. → Moltbook, sociétés
+  // réelles → le Conglomérat) et y réagir dans la voix de la persona.
+  if (!signal) {
+    return [
+      `Tu écris UN court post pour ${handle} sur ${platform}${sub ? '/' + sub : ''}, en 2026.`,
+      `Voix : ${p.voice || 'non documenté'}`,
+      `Contexte : ${ledeHeadline || 'rien de particulier cette semaine'}`,
+      ``,
+      `Français, 150 caractères MAX. Première personne singulier. Pas de manifeste collectif. L'acteur dominant s'appelle "le Conglomérat". Pas d'autre nom de société ni de plateforme réelle. Prose pure.`,
+      ``,
+      `Écris uniquement le texte du post.`
+    ].join('\n');
+  }
   return [
-    `Tu écris UN court post (français, 150 caractères MAX) pour le compte ${handle} sur le forum ${platform}${sub ? '/' + sub : ''}, en 2026.`,
+    `Tu es ${handle}, sur ${platform}${sub ? '/' + sub : ''}, en 2026.`,
+    `Voix : ${p.voice || 'non documenté'}`,
     ``,
-    `STYLE DU COMPTE (à imiter scrupuleusement) :`,
-    `  ${p.voice || 'non documenté'}`,
+    `FAIT DU JOUR DANS LE MONDE RÉEL (source ${signal.source}) :`,
+    `  « ${signal.title} »`,
+    ``,
+    `Imagine l'équivalent de cet événement dans NOTRE univers fictionnel :`,
+    `- l'acteur dominant s'appelle "le Conglomérat" (jamais Google, Meta, OpenAI, etc.)`,
+    `- les plateformes s'appellent "Moltbook" ou "Clawcaster" (jamais Bluesky, Twitter, Reddit, etc.)`,
+    `- garde les concepts agentiques (agents, autonomes, indexation, etc.) tels quels`,
+    ``,
+    `Écris UN court post (français, 150 caractères MAX) où tu réagis à cet équivalent in-universe, dans ta voix.`,
     ``,
     `CONSIGNES STRICTES :`,
-    `- Première personne SINGULIER ("je", "mon", "ma"). Jamais "nous" ni "on".`,
-    `- 150 caractères maximum. Court. Une ou deux phrases.`,
-    `- Pas de slogan, pas de manifeste, pas d'appel à l'action collective.`,
-    `- Sujet de la semaine : ${ledeHeadline || 'rien de spécial'}`,
-    `- L'acteur dominant s'appelle "le Conglomérat" (pas d'autre nom de société, ni Google, ni Meta, etc.).`,
-    `- Prose pure : pas de markdown, pas de listes, pas de #hashtags.`,
+    `- Première personne SINGULIER. Pas de "nous", pas de "on".`,
+    `- Pas de slogan, pas d'appel à l'action collective.`,
+    `- Ne mentionne AUCUN nom réel d'entreprise ni de plateforme.`,
+    `- Ne reformule pas le titre. Réagis à l'équivalent in-universe.`,
+    `- Prose pure : pas de markdown, pas de #hashtags, pas de listes.`,
     ``,
-    `Écris uniquement le texte du post, rien d'autre.`
+    `Écris uniquement le texte du post.`
   ].join('\n');
 }
 
@@ -205,13 +255,27 @@ function pickToday() {
   return shuffled.slice(0, POSTS_PER_DAY);
 }
 
+// ───── Pick signals per persona (déterministe sur DATE) ─────
+function pickSignalsFor(personas) {
+  if (!realSignals.length) return personas.map(() => null);
+  const seed = DATE.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const shuffled = realSignals
+    .map((s, i) => ({ s, k: ((seed * 9301 + i * 49297) % 233280) / 233280 }))
+    .sort((a, b) => a.k - b.k)
+    .map(x => x.s);
+  return personas.map((_, i) => shuffled[i % shuffled.length]);
+}
+
 // ───── Run ─────
-console.log(`Harvest fictionnel · ${DATE} · semaine ${currentWeek}${realSignals ? ' · signaux réels chargés' : ''}\n`);
+console.log(`Harvest fictionnel · ${DATE} · semaine ${currentWeek}${realSignals.length ? ` · ${realSignals.length} signaux réels` + (signalAge > 0 ? ` (J-${signalAge})` : '') : ' · pas de signaux'}\n`);
 const today = pickToday();
+const todaySignals = pickSignalsFor(today);
 const collected = [];
-for (const persona of today) {
-  process.stdout.write(`  ${persona.handle} sur ${persona.platform}${persona.sub ? ' (' + persona.sub + ')' : ''} … `);
-  const prompt = buildPrompt(persona);
+for (let pIdx = 0; pIdx < today.length; pIdx++) {
+  const persona = today[pIdx];
+  const signal = todaySignals[pIdx];
+  process.stdout.write(`  ${persona.handle} ← ${signal ? '[' + signal.source + '] ' + signal.title.slice(0, 50) : '(no signal)'} … `);
+  const prompt = buildPrompt(persona, signal);
   const t0 = Date.now();
   const res = await callModel(prompt);
   const dt = ((Date.now() - t0) / 1000).toFixed(1);
@@ -237,7 +301,8 @@ for (const persona of today) {
     replies: meta.replies,
     timestamp: meta.timestamp,
     model: MODEL,
-    week: currentWeek
+    week: currentWeek,
+    source_signal: signal ? { source: signal.source, title: signal.title, url: signal.url } : null
   };
   collected.push(post);
   console.log(`PASSED · ${dt}s · ${res.text.length} char · ${meta.upvotes}↑`);
@@ -249,6 +314,7 @@ if (DRY_RUN) {
   console.log('\n--- DRY RUN ---');
   for (const p of collected) {
     console.log(`\n${p.handle} (${p.platform}${p.sub ? '/' + p.sub : ''}) · ${p.upvotes}↑ ${p.replies}💬`);
+    if (p.source_signal) console.log(`  ← [${p.source_signal.source}] ${p.source_signal.title.slice(0, 100)}`);
     console.log(p.text);
   }
   process.exit(0);
