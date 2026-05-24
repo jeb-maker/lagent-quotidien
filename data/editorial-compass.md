@@ -103,3 +103,41 @@ retenue, mémorable : « Le Conglomérat taxe ses propres ombres. »
 - Garder GLM sur `@blackbox_critic`.
 - Reviewer Opus rend son verdict le dimanche, avant la rédaction de
   l'édition du mardi.
+
+---
+
+## Harvest quotidien (réel + fictionnel)
+
+Deux scripts s'exécutent chaque jour pour alimenter l'édition de mardi.
+
+### `scripts/harvest-daily.mjs` — signaux réels
+
+Capture 4 sources sur le discours agentique réel :
+
+| Source | Cible | Utilité |
+|--------|-------|---------|
+| Bluesky | top posts/jour sur 5 mots-clés agentiques | termes émergents, voix réelles |
+| Hacker News | top stories 24h avec « agent » dans le titre | enjeux tech grand public |
+| RSS d'AI outlets (Verge, 404 Media, Ars, Register, TechCrunch, MIT TR) | items récents agent-related | angle journalistique |
+| ArXiv (cs.AI) | papiers récents avec « agent » dans l'abstract | matière académique brute |
+
+Output : `data/harvest/<YYYY-MM-DD>.json`. Anti-leak : les noms réels
+restent dans le JSON (données brutes) mais doivent **jamais** apparaître
+dans une édition publiée. Seuls les *patterns* (term, fréquence, datapoint
+chiffré) traversent vers la fiction.
+
+### `scripts/harvest-fictional.mjs` — feed fictionnel quotidien
+
+3 personas tirées chaque jour, chacune poste sur sa plateforme fictionnelle
+(Moltbook/Clawcaster). Modèle actuel : `z-ai/glm-4.5-air:free`.
+
+**Limitation connue W20** : GLM Air dump souvent du raisonnement dans
+`content`. Les filtres qualité (méta-leak, mid-sentence start, english
+reasoning, etc.) rejettent l'essentiel — taux de réussite observé en
+test : ~0-1/3. À surveiller, possiblement changer pour Llama 3.3 70B en
+single-call étalé. Le scaffold est en place et les filtres correctement
+stricts ; c'est le modèle qui est le maillon faible.
+
+Output : `data/fictional-feed/<YYYY-MM-DD>.jsonl` (append). À review le
+dimanche pour sélection des posts intégrables dans l'édition de mardi
+(section `bot_posts`).
