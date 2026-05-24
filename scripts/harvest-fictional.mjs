@@ -39,14 +39,11 @@ const POOL = [
 ];
 const POSTS_PER_DAY = 3;
 
-// Casting modèle. Pour le POC : tout sur GLM 4.5 Air (fiable). Diversifier
-// progressivement à mesure que d'autres modèles non-Venice sont identifiés.
-const MODEL = 'z-ai/glm-4.5-air:free';
-
-// ───── Auth OpenRouter ─────
-const auth = JSON.parse(await readFile(join(homedir(), '.local/share/opencode/auth.json'), 'utf8'));
-const OR_KEY = auth.openrouter?.key;
-if (!OR_KEY) { console.error('Clé OpenRouter introuvable'); process.exit(1); }
+// Backend : Ollama local. Mistral 7B Q4 en baseline — fiable structurellement
+// (pas de dump reasoning, pas de rate-limit). Qualité contenu moyenne mais
+// stable. À reévaluer dans le compass à chaque édition.
+const OLLAMA_URL = 'http://localhost:11434/api/chat';
+const MODEL = 'mistral:7b-instruct-q4_K_M';
 
 // ───── Charger contexte univers ─────
 const people = JSON.parse(await readFile(join(ROOT, 'data', 'people.json'), 'utf8'));
@@ -141,42 +138,43 @@ function qualityCheck(text, ctx = {}) {
 // ───── Prompt builder ─────
 function buildPrompt({ handle, platform, sub }) {
   const p = findPerson(handle) || {};
-  // Prompt court et compact : les longs prompts déclenchent du raisonnement
-  // chez GLM Air. Tout l'essentiel en 5-6 lignes max.
+  // Prompt compact pour Mistral 7B local. On insiste lourdement sur la voix
+  // pour combattre la tendance Mistral à pondre du manifeste collectif.
   return [
-    `${handle} (${p.voice || 'voix non documentée'}) poste sur ${platform}${sub ? '/' + sub : ''}, 2026.`,
-    ledeHeadline ? `Cette semaine : ${ledeHeadline}` : null,
-    `Écris son post du jour (français, 100-250 caractères, prose). Ne nomme aucune plateforme/marque réelle, l'acteur dominant s'appelle "le Conglomérat".`,
+    `Tu écris UN court post (français, 150 caractères MAX) pour le compte ${handle} sur le forum ${platform}${sub ? '/' + sub : ''}, en 2026.`,
     ``,
-    `Post :`
-  ].filter(Boolean).join('\n');
+    `STYLE DU COMPTE (à imiter scrupuleusement) :`,
+    `  ${p.voice || 'non documenté'}`,
+    ``,
+    `CONSIGNES STRICTES :`,
+    `- Première personne SINGULIER ("je", "mon", "ma"). Jamais "nous" ni "on".`,
+    `- 150 caractères maximum. Court. Une ou deux phrases.`,
+    `- Pas de slogan, pas de manifeste, pas d'appel à l'action collective.`,
+    `- Sujet de la semaine : ${ledeHeadline || 'rien de spécial'}`,
+    `- L'acteur dominant s'appelle "le Conglomérat" (pas d'autre nom de société, ni Google, ni Meta, etc.).`,
+    `- Prose pure : pas de markdown, pas de listes, pas de #hashtags.`,
+    ``,
+    `Écris uniquement le texte du post, rien d'autre.`
+  ].join('\n');
 }
 
-// ───── Appel modèle ─────
+// ───── Appel modèle (Ollama local) ─────
 async function callModel(prompt) {
-  const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+  const r = await fetch(OLLAMA_URL, {
     method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${OR_KEY}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://theagentweekly.com',
-      'X-Title': 'theagentweekly - fictional harvest'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: MODEL,
-      messages: [
-        { role: 'system', content: 'You output ONLY the requested text. No reasoning, no preamble, no drafts, no commentary, no markdown, no quotation marks around the answer. Just the final answer, raw.' },
-        { role: 'user', content: prompt }
-      ],
-      max_tokens: 180,
-      temperature: 0.7
+      stream: false,
+      options: { temperature: 0.8, num_predict: 150 },
+      messages: [{ role: 'user', content: prompt }]
     })
   });
   if (!r.ok) return { error: `${r.status} ${r.statusText}`, body: await r.text() };
   const j = await r.json();
-  const m = j.choices?.[0]?.message || {};
-  const text = m.content || m.reasoning_content || m.reasoning || '';
-  return { text: text.trim(), usage: j.usage };
+  if (j.error) return { error: j.error };
+  const text = (j.message?.content || '').trim();
+  return { text, usage: { total_tokens: j.eval_count, prompt_tokens: j.prompt_eval_count, completion_tokens: j.eval_count } };
 }
 
 // ───── Métadonnées simulées ─────

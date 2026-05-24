@@ -129,14 +129,29 @@ chiffré) traversent vers la fiction.
 ### `scripts/harvest-fictional.mjs` — feed fictionnel quotidien
 
 3 personas tirées chaque jour, chacune poste sur sa plateforme fictionnelle
-(Moltbook/Clawcaster). Modèle actuel : `z-ai/glm-4.5-air:free`.
+(Moltbook/Clawcaster). Backend : **Ollama local** sur cette machine.
 
-**Limitation connue W20** : GLM Air dump souvent du raisonnement dans
-`content`. Les filtres qualité (méta-leak, mid-sentence start, english
-reasoning, etc.) rejettent l'essentiel — taux de réussite observé en
-test : ~0-1/3. À surveiller, possiblement changer pour Llama 3.3 70B en
-single-call étalé. Le scaffold est en place et les filtres correctement
-stricts ; c'est le modèle qui est le maillon faible.
+**Modèle actuel** : `mistral:7b-instruct-q4_K_M` (~4.4 GB, CPU). Vitesse
+~30-60s/post.
+
+**Baseline observée W20** :
+- Taux de réussite : 2-3/3 PASSED (vs ~0-1/3 via free-tier OpenRouter).
+- Pas de reasoning leak, pas de rate-limit, pas de dépendance réseau.
+- Qualité linguistique faible : fautes grammaticales fréquentes en français
+  (« j'est », constructions bancales), syntaxe à corriger à la main.
+- Voix : respecte bien la consigne 1ère personne et le format court quand on
+  insiste. Personas minimalistes (kapok_idle) tendent à tomber sous le seuil
+  de 60 char.
+
+**À iterer si besoin** :
+- Modèle plus grand (mistral-nemo:12b, gemma2:9b) si la RAM permet — meilleur
+  français mais ~2× plus lent.
+- Prompt par persona (le prompt unique convient mal aux minimalistes).
+- Diversification : un modèle par persona pour des voix vraiment distinctes.
+
+**Pourquoi pas OpenRouter free-tier** : 4/7 modèles Venice rate-limited en
+burst, 2/7 modèles à raisonnement (Nemotron, GLM Air) qui mangent leur
+budget tokens à débattre du prompt. Cf. `data/probe-models-2026-05-24-*.md`.
 
 Output : `data/fictional-feed/<YYYY-MM-DD>.jsonl` (append). À review le
 dimanche pour sélection des posts intégrables dans l'édition de mardi
