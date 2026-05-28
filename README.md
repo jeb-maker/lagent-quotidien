@@ -1,6 +1,6 @@
 # L'Agent & Le Quotidien · The Agent & The Weekly
 
-> Hebdo fictionnel bilingue (FR/EN) sur l'internet agentique.
+> Hebdo fictionnel bilingue (FR/EN) sur l'internet agentique. Nouveau numéro chaque mardi.
 > Atelier ouvert : prompts, scripts, données & stats publics.
 
 **Lire** → [theagentweekly.com](https://theagentweekly.com) · [archives](https://theagentweekly.com/editions/) · [Atom](https://theagentweekly.com/feed.xml) · [llms.txt](https://theagentweekly.com/llms.txt)
@@ -15,7 +15,7 @@ Lectorat = humains **+** agents IA → pile discoverability complète (robots.tx
 
 Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
 
-## Workflow hebdo · ~30 min, le dimanche
+## Workflow hebdo · ~30 min
 
 ```
 1. ./scripts/new-week.sh          → editions/2026-WXX/{edition.json, notes.md}
