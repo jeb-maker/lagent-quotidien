@@ -460,50 +460,54 @@ for (const lang of ['fr', 'en']) {
   console.log(`✓ Rendu : ${outPath}`);
 }
 
-// Index racine — fallback statique (la redirection HTTP est gérée par _redirects).
-// Aucune mise en cache : la page doit toujours refléter la dernière édition.
-// On utilise la PLUS RÉCENTE des semaines connues, pas forcément `week` (le
-// script peut être ré-exécuté sur une édition passée sans devoir rétrograder
-// le pointeur racine).
+// Index racine — entrée stable du site. On NE redirige PAS via _redirects (302).
+// Pourquoi : Safari iOS cache heuristiquement un 302 sans en-tête de cache, et
+// sur Cloudflare Pages une règle _redirects court-circuite _headers (qui ne
+// s'appliquent qu'aux assets servis, pas aux réponses de redirection). Résultat
+// observé : Safari fige une ancienne édition à la ré-ouverture du site.
+// À la place : un index.html 200 servi en `no-store` (sous contrôle _headers),
+// que Safari revalide vraiment à chaque visite, qui pousse vers la dernière
+// édition via location.replace (pas d'entrée d'historique) + <meta refresh> de
+// secours. On vise la PLUS RÉCENTE des semaines connues, pas forcément `week`.
 const latestWeek = allWeeks[allWeeks.length - 1] || week;
+const latestFr = `/editions/${latestWeek}/fr`;
 const rootIndexHtml = `<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <title>L'Agent & Le Quotidien</title>
-<meta http-equiv="refresh" content="0; url=/editions/${latestWeek}/fr">
-<meta http-equiv="cache-control" content="no-cache, must-revalidate">
-<link rel="canonical" href="${SITE_URL}/editions/${latestWeek}/fr">
+<meta http-equiv="refresh" content="0; url=${latestFr}">
+<link rel="canonical" href="${SITE_URL}${latestFr}">
+<script>location.replace(${JSON.stringify(latestFr)});</script>
 </head>
 <body>
-<p>Édition <a href="/editions/${latestWeek}/fr">${latestWeek}</a> · <a href="/editions/${latestWeek}/en">English</a></p>
+<p>Édition <a href="${latestFr}">${latestWeek}</a> · <a href="/editions/${latestWeek}/en">English</a></p>
 </body>
 </html>
 `;
 await writeFile(join(__dirname, 'index.html'), rootIndexHtml, 'utf8');
 await writeFile(join(__dirname, 'public', 'index.html'), rootIndexHtml, 'utf8');
-console.log(`✓ Index mis à jour vers ${latestWeek}`);
+console.log(`✓ Index → ${latestWeek} (200 no-store, sans 302)`);
 
-// ───── _redirects (HTTP 302 racine → dernière édition) ─────
-// 302 (et non 301) : les navigateurs ne cachent pas la redirection, donc l'URL
-// racine pointe toujours vers l'édition courante après nouvelle semaine.
-const redirects = `/  /editions/${latestWeek}/fr  302
-`;
-await writeFile(join(__dirname, '_redirects'), redirects, 'utf8');
-console.log(`✓ _redirects → /editions/${latestWeek}/fr`);
+// ───── _redirects — neutralisé ─────
+// Plus de redirection 302 racine (cf. ci-dessus). On écrase tout ancien
+// fichier pour qu'aucune règle périmée ne soit resservie par Cloudflare/Safari.
+await writeFile(join(__dirname, '_redirects'), '# entrée gérée par index.html (200 no-store) — pas de 302\n', 'utf8');
+console.log('✓ _redirects neutralisé (pas de 302)');
 
 // ───── _headers (Cache-Control sur la racine) ─────
-// Force la revalidation de / et /index.html pour que la redirection 302 soit
-// toujours suivie à chaque visite (sinon le HTML pourrait être servi depuis
-// le cache navigateur avec une ancienne cible de redirection).
+// no-store (et non no-cache) : Safari iOS revalide réellement à chaque visite,
+// donc l'entrée pointe toujours vers l'édition courante. S'applique bien ici
+// car / sert un asset 200 (index.html), plus aucune règle _redirects ne le
+// court-circuite.
 const headers = `/
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-store
 
 /index.html
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-store
 `;
 await writeFile(join(__dirname, '_headers'), headers, 'utf8');
-console.log(`✓ _headers : no-cache sur /`);
+console.log(`✓ _headers : no-store sur /`);
 
 // ───── Pages /agents (Le Carnet — annuaire des agents et opérateurs) ─────
 const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.json'), 'utf8'));

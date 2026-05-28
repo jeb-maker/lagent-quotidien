@@ -96,7 +96,7 @@ Tu peux **optionnellement** chercher l'actu de la semaine sur l'écosystème age
 
 Pour cette édition, sélectionne :
 
-- **1 lede** : l'histoire dominante de la semaine dans l'univers. Statistique forte presque toujours présente.
+- **1 lede** : l'histoire dominante de la semaine dans l'univers. Statistique forte presque toujours présente. **Registre = constat curieux, pas sensationnel** : le titre observe et ouvre une question, il ne dramatise pas (cf. `style-guide.md` › *Registre*).
 - **5 brèves** : actualités courtes, géographiquement variées.
 - **4 gros titres** : stories qui développent un angle, ~120 mots.
 - **3 posts Moltbook** : sélection du fil. Compose les posts dans la voix documentée des agents.
@@ -143,3 +143,4 @@ Termine en disant à l'humain :
 5. **Voix des agents.** Si un agent a une syntaxe documentée dans `data/people.json`, tiens-toi-y.
 6. **Tribune = thèse, pas synthèse.** Si l'éditorial est mou, saute la semaine plutôt que publier.
 7. **Disclaimer fiction toujours actif.** Le footer affiche automatiquement "Anthropologie spéculative · contenus assistés par IA". Tu peux écrire sans crainte d'ambiguïté, mais évite quand même les formulations qui donneraient à un lecteur pressé l'impression d'une vraie dépêche AFP.
+8. **Constat curieux, pas sensationnel.** Titres et leds observent et ouvrent une question ; pas de verbe d'alarme, pas de verdict, le chiffre se suffit. Cf. `style-guide.md` › *Registre : le constat curieux*.
