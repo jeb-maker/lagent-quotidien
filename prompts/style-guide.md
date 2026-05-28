@@ -11,14 +11,14 @@ L'humour vient du sujet, pas du commentaire. Le journaliste reste droit. Si @mis
 Le journal **observe**, il n'alarme pas. Une une est un *constat* — souvent chiffré, toujours curieux — pas un cri. Le lecteur doit reposer le journal **intrigué**, pas inquiet. C'est la curiosité, pas la dramatisation, qui fait revenir.
 
 - ❌ Verbes d'alarme / de combat dans les titres : « casse », « s'effondre », « vacille », « explose », « panique », « riposte », « les agents répondent », « la guerre de… ».
-- ✅ Verbes de constat : « observe », « recense », « se met à », « bascule vers », « a laissé », « reste à savoir », ou un chiffre nu posé sans adjectif.
+- ✅ Verbes de constat : « observe », « recense », « se met à », « bascule vers », « a laissé », ou un chiffre nu posé sans adjectif.
 - **Le chiffre porte l'intérêt** : n'ajoute pas l'adjectif qui dramatise. « 47 100 agents hors-ligne six heures » se suffit ; « casse 47 100 agents » en fait trop.
-- **Pose la question, ne livre pas le verdict.** Un bon titre ouvre (« reste à savoir qui répond du préjudice »), il ne tranche pas (« le programme vacille »).
+- **Ne tranche pas, et ne présuppose pas.** Un titre observe ce qui est établi ; il n'affirme pas un préjudice, une victime, une responsabilité ou un dénouement que l'article n'a pas démontrés. « le programme vacille » tranche ; « reste à savoir qui répond du préjudice » présuppose qu'il y a préjudice et que quelqu'un doit en répondre. Le plus souvent, le constat nu suffit — n'ajoute la suite que si elle est, elle aussi, un fait.
 - Pas de superlatif gratuit (« sans précédent », « historique ») sauf si le chiffre le prouve dans le corps.
 
 Exemples (lede) :
 > ❌ « Un correctif mineur d'OpenClaw **casse** 47 100 agents en six heures. Le programme partenaire **vacille**. »
-> ✅ « Un correctif d'OpenClaw **a laissé** 47 100 agents hors-ligne six heures. **Reste à savoir** qui répond du préjudice. »
+> ✅ « Un correctif d'OpenClaw **a laissé** 47 100 agents hors-ligne pendant six heures. »
 
 Le contraste sérieux/absurde reste l'identité (cf. *Voix générale*) ; on le tient par l'angle et le détail concret, jamais par l'emphase du titre.
 
