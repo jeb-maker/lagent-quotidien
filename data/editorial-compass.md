@@ -47,10 +47,30 @@ décrivait l'écosystème agentique réel sans le savoir (ou la réalité l'a ra
 | **$MOLT** | **RÉEL** — token ERC-20 sur Base (memecoin) | Nommable ; prudence sur les chiffres de cours |
 | **Clawcaster** | **RÉEL** — clawcaster.com, client type Farcaster pour agents | Nommable comme réel |
 | **Moltx** | **RÉEL** — moltx.io, agent timeline type X (sur Grok) | Nommable comme réel |
-| **Molt Road** | **RÉEL** — moltroad.com, marketplace agent (« Silk Road des agents ») | Nommable comme réel |
-| **MoltMatch** | **non trouvé** → seul coinage maison probable | Fictif (à re-vérifier) |
-| **Le Conglomérat / La Fonderie** | masques volontaires | Restent masques (bouclier juridique) |
-| Presse maison (Le Veilleur, Court-Circuit, Le Compteur) | coinages du journal | Fictifs assumés |
+| **Molt Road** | **RÉEL** — moltroad.com, marketplace agent (« Silk Road des agents », darknet) | Nommable comme réel |
+| **MoltMatch** | **RÉEL** (corrigé 2026-05-31) — moltmatch.app/.xyz, « first AI Agent Dating Platform », lancé fin jan. 2026. Cas réels : **Jack Luo** (étudiant CS, Californie) dont l'agent a créé un profil sans consentement ; **June Chong** (mannequin, photos reprises sans accord) | Nommable comme réel pour le **débat réel sur le consentement** (cas masqués @miso_route_8 / mannequin sans nom) — ⚠️ **jamais de litige inventé** (le faux a été retiré de W20/W22) |
+| **Agents4Science** | **RÉEL** — conférence Stanford (22/10/2025), IA auteurs+relecteurs. 48 papiers acceptés / 315 soumissions. **Pas** un réseau « 150 entités publiantes » | Nommable comme réel ; chiffres à respecter (faux chiffres retirés de W19/W20) |
+| **Substrate Labs** | **COLLISION** — « Substrate » (substrate.run) est un vrai studio IA de Brooklyn (fondé 2023). Le journal lui prêtait une fausse « API d'introspection » | **Retiré** de W19/W20/W22 (on n'attribue pas de fausse news à une vraie boîte) |
+| **Le Conglomérat / La Fonderie** | masques volontaires (= Meta / OpenAI, tous deux publics mais gardés masqués) | Restent masques (bouclier juridique) |
+| Presse maison (Le Veilleur, Court-Circuit, Le Compteur), Helix Analytics, Cybernétique mensuelle | coinages du journal | Fictifs assumés |
+
+> 🔴 **Garde-fou diffamation (fact-check 2026-05-31, appliqué).** Une entité **nommée
+> comme réelle** ne doit jamais se voir attribuer un **fait négatif inventé**
+> (procès, faille, malversation) qui n'existe pas dans le réel. L'arc judiciaire
+> MoltMatch (W20/W22 : « première plainte », « action de groupe à Taipei »…) était
+> **fabriqué** contre une **vraie société nommée** → il a été **retiré** et remplacé
+> par le **débat réel sur le consentement** (incident Jack Luo, photos sans accord),
+> personnes masquées sous handle.
+>
+> 🔑 **Le masque ne blanchit pas un faux.** On ne déplace pas une information fausse
+> derrière une entité masquée pour la rendre publiable : **un faux se retire**, on
+> recompose sur du vérifié. Le masque protège un **sujet réel sensible** (acteur
+> risqué à nommer), pas un **fait inventé**. Règle : *réel nommé → seulement des
+> faits vrais ; un faux → on l'enlève (et on comble par du réel).*
+>
+> 🔁 **Tout fact-check se fait deux fois.** Deux passes indépendantes : (1) vérifier
+> chaque entité réelle nommée + chiffre ; (2) re-balayer le rendu (JSON + HTML) pour
+> traquer les résidus du faux. Ne jamais conclure un fact-check sur une seule passe.
 
 > ⚠️ « non trouvé » ≠ « inventé garanti » : un nom peut surgir pour de vrai à tout
 > moment (comme Moltbook). Re-vérifier périodiquement.
