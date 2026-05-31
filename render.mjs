@@ -82,7 +82,7 @@ const LABELS = {
     label_legal: "Mentions légales",
     label_privacy: "Confidentialité",
     label_about: "À propos",
-    label_carnet_index: "Le Carnet",
+    label_carnet_index: "Annuaire",
     path_legal: "mentions-legales",
     path_privacy: "confidentialite",
     path_about: "a-propos",
@@ -136,7 +136,7 @@ const LABELS = {
     label_legal: "Legal notice",
     label_privacy: "Privacy",
     label_about: "About",
-    label_carnet_index: "The Register",
+    label_carnet_index: "Directory",
     path_legal: "legal",
     path_privacy: "privacy",
     path_about: "about",
@@ -522,7 +522,7 @@ const headers = `/
 await writeFile(join(__dirname, '_headers'), headers, 'utf8');
 console.log(`✓ _headers : no-store sur /`);
 
-// ───── Pages /agents (Le Carnet — annuaire des agents et opérateurs) ─────
+// ───── Pages /agents (Annuaire de l'écosystème agentique réel) ─────
 const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.json'), 'utf8'));
 await mkdir(join(__dirname, 'agents'), { recursive: true });
 
@@ -590,11 +590,9 @@ function renderAgentPage(entity, kind) {
   const handle = entity.handle || entity.name;
   const slug = slugOf(handle);
   const titleClass = handle.startsWith('@') ? 'mono' : '';
-  const kindLabel = kind === 'agent' ? 'Agent' : 'Opérateur';
+  const kindLabel = kind === 'platform' ? 'Plateforme' : 'Agent';
 
-  let lead = '';
-  if (kind === 'agent') lead = entity.voice || '';
-  else if (kind === 'operator') lead = entity.role || '';
+  const lead = entity.summary || '';
 
   const editions = (entity.appeared_in_editions || [])
     .map(w => `<a href="/editions/${w}/fr">${w}</a>`)
@@ -602,7 +600,28 @@ function renderAgentPage(entity, kind) {
 
   let content = '';
 
-  if (kind === 'agent') {
+  const profileRows = [
+    entity.category && ['Catégorie', entity.category],
+    entity.platform && ['Plateforme', entity.platform],
+    entity.url && ['Site', `<a href="${entity.url}" rel="noopener">${entity.url.replace(/^https?:\/\//, '')}</a>`],
+  ].filter(Boolean);
+  if (profileRows.length) {
+    content += '<h2>Profil</h2><div class="profile">';
+    for (const [k, v] of profileRows) content += `<span>${k}</span> ${v}<br/>`;
+    content += '</div>';
+  }
+  if (entity.facts && entity.facts.length) {
+    content += '<h2>Faits</h2><ul class="posts">';
+    for (const f of entity.facts) content += `<li><div class="summary">${f}</div></li>`;
+    content += '</ul>';
+  }
+  if (entity.sources && entity.sources.length) {
+    content += '<h2>Sources</h2><ul class="ref-list">';
+    for (const s of entity.sources) content += `<li><span class="name"><a href="${s.url}" rel="noopener">${s.label}</a></span></li>`;
+    content += '</ul>';
+  }
+
+  if (false && kind === 'agent') {
     if (entity.bluesky_handle) {
       content += `<div style="margin: 0 0 28px; padding: 14px 18px; background: rgba(45,95,138,0.08); border-left: 3px solid var(--bot); font-family: 'JetBrains Mono', monospace; font-size: 14px;">
   🦋 <strong>Présence publique sur Bluesky</strong> · <a href="https://bsky.app/profile/${entity.bluesky_handle}" rel="me">@${entity.bluesky_handle}</a>
@@ -637,7 +656,7 @@ function renderAgentPage(entity, kind) {
     }
   }
 
-  if (kind === 'operator') {
+  if (false && kind === 'operator') {
     content += '<h2>Contexte</h2>';
     content += `<p>${entity.context}</p>`;
     if (entity.consent_note) {
@@ -652,8 +671,8 @@ function renderAgentPage(entity, kind) {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>${handle} — Le Carnet — L'Agent & Le Quotidien</title>
-<meta name="description" content="Fiche ${kindLabel.toLowerCase()} de ${handle} dans Le Carnet de L'Agent & Le Quotidien." />
+<title>${handle} — Annuaire — L'Agent & Le Quotidien</title>
+<meta name="description" content="Fiche ${kindLabel.toLowerCase()} : ${handle} — entité réelle de l'écosystème agentique, faits sourcés. L'Agent & Le Quotidien." />
 <link rel="canonical" href="${SITE_URL}/agents/${slug}" />
 <meta property="og:type" content="profile" />
 <meta property="og:title" content="${handle} — Le Carnet" />
@@ -664,12 +683,12 @@ ${fontsLink}
 </head>
 <body>
 <div class="container">
-  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a> · <a href="/agents">Le Carnet</a></div>
+  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a> · <a href="/agents">Annuaire</a></div>
   <div class="kind ${kind}">${kindLabel}</div>
   <h1 class="${titleClass}">${handle}</h1>
   <p class="voice">${lead}</p>
   ${content}
-  <div class="small">Le Carnet — annuaire vivant des agents et opérateurs récurrents de L'Agent &amp; Le Quotidien.</div>
+  <div class="small">Annuaire de l'écosystème agentique réel — entités et faits sourcés · L'Agent &amp; Le Quotidien.</div>
 </div>
 </body>
 </html>
@@ -678,18 +697,16 @@ ${fontsLink}
 
 function renderAgentsIndex() {
   const cards = (arr, kind) => arr.map(e => {
-    const handle = e.handle || e.name;
-    const slug = slugOf(handle);
-    const v = kind === 'agent' ? (e.voice || '') : (e.role || '');
+    const slug = slugOf(e.name);
     return `<a class="card" href="/agents/${slug}">
-  <span class="pill ${kind}">${kind === 'agent' ? 'Agent' : 'Opérateur'}</span>
-  <div class="h">${handle}</div>
-  <div class="v">${v}</div>
+  <span class="pill ${kind === 'platform' ? 'institution' : 'agent'}">${kind === 'platform' ? 'Plateforme' : 'Agent'}</span>
+  <div class="h">${e.name}</div>
+  <div class="v">${e.summary || ''}</div>
 </a>`;
   }).join('\n');
 
   const refList = (arr) => arr.map(e =>
-    `<li><span class="name">${e.name}</span> <span class="role">${e.role}</span></li>`
+    `<li><span class="name">${e.url ? `<a href="${e.url}" rel="noopener">${e.name}</a>` : e.name}</span> <span class="role">${e.role || ''}</span></li>`
   ).join('\n');
 
   return `<!doctype html>
@@ -697,12 +714,12 @@ function renderAgentsIndex() {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Le Carnet — annuaire des agents et opérateurs — L'Agent & Le Quotidien</title>
-<meta name="description" content="Annuaire complet des agents, opérateurs, institutions et titres de presse de l'univers de L'Agent & Le Quotidien." />
+<title>Annuaire de l'écosystème agentique — L'Agent & Le Quotidien</title>
+<meta name="description" content="Annuaire factuel des plateformes et agents IA réels couverts par L'Agent & Le Quotidien. Faits sourcés." />
 <link rel="canonical" href="${SITE_URL}/agents" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Le Carnet — L'Agent & Le Quotidien" />
-<meta property="og:description" content="Annuaire vivant des agents et opérateurs de l'internet agentique." />
+<meta property="og:title" content="Annuaire de l'écosystème agentique — L'Agent & Le Quotidien" />
+<meta property="og:description" content="Plateformes et agents IA réels, faits sourcés." />
 <meta property="og:url" content="${SITE_URL}/agents" />
 ${fontsLink}
 <style>${agentsCss}</style>
@@ -710,30 +727,25 @@ ${fontsLink}
 <body>
 <div class="container">
   <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a></div>
-  <h1>Le Carnet</h1>
-  <p class="voice">L'annuaire vivant des agents, opérateurs, institutions et titres de presse de l'univers. Chaque fiche est mise à jour à chaque édition.</p>
+  <h1>Annuaire de l'écosystème agentique</h1>
+  <p class="voice">Les plateformes et agents IA <strong>réels</strong> que le journal couvre. Chaque fiche est factuelle et sourcée — aucune entité fictive.</p>
+
+  <div class="section-intro">Plateformes · ${peopleData.platforms.length}</div>
+  <div class="grid">
+${cards(peopleData.platforms, 'platform')}
+  </div>
 
   <div class="section-intro">Agents · ${peopleData.agents.length}</div>
   <div class="grid">
 ${cards(peopleData.agents, 'agent')}
   </div>
 
-  <div class="section-intro">Opérateurs · ${peopleData.operators.length}</div>
-  <div class="grid">
-${cards(peopleData.operators, 'operator')}
-  </div>
-
-  <div class="section-intro">Institutions · ${peopleData.institutions.length}</div>
+  <div class="section-intro">Sources &amp; médias cités · ${peopleData.outlets.length}</div>
   <ul class="ref-list">
-${refList(peopleData.institutions)}
+${refList(peopleData.outlets)}
   </ul>
 
-  <div class="section-intro">Presse maison · ${peopleData.press_houses.length}</div>
-  <ul class="ref-list">
-${refList(peopleData.press_houses)}
-  </ul>
-
-  <div class="small">Univers fictionnel clos. Toutes les entités listées sont propres au journal — aucune correspondance avec des personnes, marques ou médias réels.</div>
+  <div class="small">Annuaire factuel : toutes les entités listées sont réelles et rattachées à des sources vérifiables. Mis à jour au fil des éditions.</div>
 </div>
 </body>
 </html>
@@ -741,18 +753,18 @@ ${refList(peopleData.press_houses)}
 }
 
 const agentUrls = []; // pour le sitemap
+for (const p of peopleData.platforms) {
+  const slug = slugOf(p.name);
+  await writeFile(join(__dirname, 'agents', `${slug}.html`), renderAgentPage(p, 'platform'), 'utf8');
+  agentUrls.push(`${SITE_URL}/agents/${slug}`);
+}
 for (const a of peopleData.agents) {
-  const slug = slugOf(a.handle);
+  const slug = slugOf(a.name);
   await writeFile(join(__dirname, 'agents', `${slug}.html`), renderAgentPage(a, 'agent'), 'utf8');
   agentUrls.push(`${SITE_URL}/agents/${slug}`);
 }
-for (const o of peopleData.operators) {
-  const slug = slugOf(o.handle);
-  await writeFile(join(__dirname, 'agents', `${slug}.html`), renderAgentPage(o, 'operator'), 'utf8');
-  agentUrls.push(`${SITE_URL}/agents/${slug}`);
-}
 await writeFile(join(__dirname, 'agents', 'index.html'), renderAgentsIndex(), 'utf8');
-console.log(`✓ /agents : ${peopleData.agents.length + peopleData.operators.length} fiches + index`);
+console.log(`✓ /agents : ${peopleData.platforms.length + peopleData.agents.length} fiches réelles + index`);
 
 // ───── sitemap.xml (toutes les éditions, FR + EN) ─────
 const editionDirs = await readdir(join(__dirname, 'editions'), { withFileTypes: true });
