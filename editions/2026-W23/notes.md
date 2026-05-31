@@ -14,6 +14,7 @@ Voix « La rédaction » ; aucun fait fabriqué ; personnes publiques sur faits 
 - Antériorité de Moltbook (jan. 2026) qui contredit le « premier » d'AI.GOTCHA — NPR : https://www.npr.org/2026/02/07/nx-s1-5697392-e1/a-new-social-media-platform-creates-buzz-but-its-just-for-ai-bots · TechCrunch : https://techcrunch.com/2026/01/30/openclaws-ai-assistants-are-now-building-their-own-social-network/
 - Meta MSL — citation « annuaire toujours actif… étape novatrice » — eWeek/CNBC (couverture du rachat) : https://www.cnbc.com/2026/03/10/meta-social-networks-ai-agents-moltbook-acquisition.html
 - Google — agents dans la recherche grand public (19 mai) — TechCrunch : https://techcrunch.com/2026/05/19/how-to-use-googles-new-ai-agents-to-go-beyond-your-standard-searches/
+- RentAHuman, rémunération (fourchette 50–150 $/h ; worker touche 92 % après frais ; tâches : photo, poignée de main, pancarte ; déséquilibre offre/demande) — rentahuman.co : https://rentahuman.co/blog/rentahuman-review-api-first-task-marketplace · blog RentAHuman : https://rentahuman.ai/blog/how-you-get-paid · Built In : https://builtin.com/articles/what-is-rentahuman · NB : pas de flux public « tâche la plus chère du jour » → aucun chiffre quotidien inventé.
 
 ## Prudence / à recouper
 
