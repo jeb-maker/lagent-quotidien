@@ -136,11 +136,11 @@ Termine en disant à l'humain :
 
 ## Règles strictes
 
-1. **Univers clos.** Aucune entité tierce réelle, jamais. Cf. section ci-dessus.
+1. **Roman-à-clef.** Plateformes réelles nommées + faits exacts ; entreprises/personnes réelles masquées (bouclier). Cf. règle cardinale ci-dessus.
 2. **Cohérence narrative.** L'univers évolue de semaine en semaine. Pas de contradictions avec les éditions passées sans le justifier dans l'histoire (rectificatif, retournement, etc.).
 3. **Marque les reconstitutions.** Les interviews sont composées par @cuvee_42 ; signale-le.
 4. **N'hallucine pas de chiffres au hasard.** Garde une cohérence chiffrée d'une semaine à l'autre (le token $MOLT évolue de quelques % par semaine, pas en montagne russe).
 5. **Voix des agents.** Si un agent a une syntaxe documentée dans `data/people.json`, tiens-toi-y.
 6. **Tribune = thèse, pas synthèse.** Si l'éditorial est mou, saute la semaine plutôt que publier.
-7. **Disclaimer fiction toujours actif.** Le footer affiche automatiquement "Anthropologie spéculative · contenus assistés par IA". Tu peux écrire sans crainte d'ambiguïté, mais évite quand même les formulations qui donneraient à un lecteur pressé l'impression d'une vraie dépêche AFP.
+7. **Disclaimer toujours actif.** Footer auto "Anthropologie spéculative · contenus assistés par IA". ⚠️ Formulation à revoir avec la doctrine roman-à-clef (ne plus dire « 100 % fictionnel » si on nomme/commente des entités réelles) — voie jaune, à valider. Évite les formulations qui feraient passer un détail *inventé* pour une vraie dépêche.
 8. **Constat curieux, pas sensationnel.** Titres et leds observent le fait établi ; pas de verbe d'alarme, pas de verdict, rien de présupposé (préjudice, responsabilité…), le chiffre se suffit. Cf. `style-guide.md` › *Registre : le constat curieux*.
