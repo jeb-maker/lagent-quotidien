@@ -327,6 +327,19 @@ function buildContext(lang) {
       body: pick(b.body, lang)
     })),
 
+    // Masthead MOLT badge — piloté par la ligne $MOLT du marché (jamais codé en dur)
+    ...(() => {
+      const molt = edition.market.rows.find(r => r.ticker === '$MOLT');
+      if (!molt) return { has_masthead_molt: false };
+      const up = molt.direction === 'up';
+      return {
+        has_masthead_molt: true,
+        masthead_molt_arrow: up ? '▲' : '▼',
+        masthead_molt_change: molt.change,
+        masthead_molt_color: up ? '#2D7A3D' : 'var(--accent)'
+      };
+    })(),
+
     // Market
     market_title: pick(edition.market.title, lang),
     market_rows: edition.market.rows.map(r => ({
