@@ -28,6 +28,8 @@ Légende : ✅ vérifié exact / corrigé · 🟠 inexact · 🔴 risque juridiq
 | 3 | 🟠 | W19, W20 | Chiffres faux d'Agents4Science (150 / 184 / 12k papiers, rétractation) | ✅ Corrigé en faits réels (Stanford, 48/315, oct. 2025, édition 2026) ; nom corrigé Agents**4**Science |
 | 4 | 🟠 | W19 | Moltbook « lancée par un opérateur anonyme » — fondateur (Matt Schlicht) **public** | ✅ « anonyme » retiré ; pseudo @lobster_zero conservé comme masque maison |
 | 5 | 🟠 | compass | Tableau de vérité classait MoltMatch « fictif » | ✅ Corrigé (réel) dans editorial-compass.md |
+| 6 | 🔴 | W20, W22 | **Grève RentAHuman** (Manille/Cebu/Hanoi/Lagos) **inventée** — événement négatif sur une vraie société | ✅ **Retirée** ; recomposée sur le réel (croissance fulgurante, débat « dystopie », soupçons d'arnaque crypto) |
+| 7 | ✅ | W19, W20 | « Interdiction d'OpenClaw par un régulateur asiatique » — **vérifiée VRAIE** (Chine, mars 2026, admin/banques) | Conservée ; W20 « second bloc / hôpitaux » (non confirmé) aligné sur le réel (extension + autorisation préalable) |
 
 ---
 
