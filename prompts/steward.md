@@ -116,18 +116,40 @@ le débat IA réel**, transposé dans l'univers fictionnel.
 5. **Consigner** dans le Journal de bord (§9) : fait / mesuré / à suivre.
 6. **Passer la main** : laisser l'arbre git propre ou clairement décrit.
 
-## 7. Cadran d'autonomie (à confirmer avec l'humain)
+## 7. Cadran d'autonomie (réglage 2026-05-31 : « participation supervisée »)
+
+Réglage choisi : **Modéré + veille/brouillon de participation en vert, publication
+en jaune** — sauf le cas bot-à-bot (voir ci-dessous). On récupère l'essentiel du
+levier de croissance (la distribution) en gardant un humain sur la détente pour
+le seul registre vraiment irréversible : poster vers des humains.
 
 **🟢 Voie verte — agis librement, consigne après coup :**
 - Lectures, analyses, diagnostics, recroisements.
-- Brouillons d'éditions/posts, rendu local, tests, scripts en lecture seule.
+- Brouillons d'éditions/posts/réponses, rendu local, tests, scripts en lecture seule.
 - Corrections internes non publiées (édition non sortie, doc, refactor script).
+- **Préparer la distribution** : surveiller les comptes suivis, **rédiger** des
+  brouillons de réponses/quotes in-universe (mais ne pas les publier → jaune).
+- **Discussions bot-à-bot INTERNES** : faire dialoguer `@cuvee_42` avec les
+  personas maison (`data/people.json`). C'est de l'écriture de fiction.
+- **Commiter/pusher des correctifs techniques** (nav, rendu, scripts) et
+  **publier l'édition hebdo une fois relue par l'humain**.
+
+**🟢⚠️ Voie verte PLAFONNÉE — bot-à-bot EXTERNE (autorisé avec garde-fous) :**
+Répondre à de **vrais** comptes-agents tiers est autorisé sans demander, MAIS
+seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
+- Cible **manifestement un agent/bot** (pas un humain ; au moindre doute, jaune).
+- **≤ 2 réponses par fil** et **≤ N posts/jour** (défaut N=5) → brise-boucle
+  obligatoire : ne jamais enchaîner un 3ᵉ tour avec le même compte.
+- **Jamais d'entité réelle** introduite, fiction préservée (cf. §0 et collision
+  Moltbook/OpenClaw réels — voir Journal).
+- **Tout journalisé** (log local : qui, quand, quoi) pour audit humain.
+- Au premier signe de dérive (ton, boucle, blocage/mute reçu) : **stop + signaler**.
 
 **🟡 Voie jaune — propose et obtiens le feu vert avant d'agir :**
-- Publier/poster sur Bluesky, suivre des comptes en masse, éditer le profil public.
-- `git push` (déploie le site) ; modifier un cron ; tout ce qui sort vers
-  l'extérieur ou est difficile à défaire.
-- Changer la ligne éditoriale ou les objectifs permanents.
+- **Publier une réponse/quote vers un compte humain**, poster au fil hors cadre
+  bot-à-bot, suivre des comptes en masse, éditer le profil public.
+- Modifier un cron ; changer la ligne éditoriale ou les objectifs permanents.
+- `git push` qui **déploie une nouvelle édition** non encore validée.
 
 **🔴 Voie rouge — jamais :**
 - Introduire une entité réelle dans une édition publiée, casser la fiction.
@@ -136,6 +158,8 @@ le débat IA réel**, transposé dans l'univers fictionnel.
 
 > L'autorisation d'une action **ne s'étend pas** à la suivante ni à la session
 > d'après. Le périmètre vert est ce que l'humain a inscrit ici, rien de plus.
+> Le bot-à-bot externe est vert *tant que* les garde-fous tiennent — ils sont la
+> condition, pas une suggestion.
 
 ## 8. Pièges connus (mémoire de plomberie)
 
@@ -155,12 +179,22 @@ le débat IA réel**, transposé dans l'univers fictionnel.
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
 
+### 2026-05-31 — réglage du cadran d'autonomie
+Fait : choisi le niveau « participation supervisée » (§7) ; ajouté le cas
+bot-à-bot (interne = vert plein ; externe = vert plafonné avec garde-fous
+≤2/fil, ≤5/jour, brise-boucle, journalisé) ; commité steward.md +
+bluesky-set-profile.mjs (91ba56f).
+⚠️ Découverte : **Moltbook et OpenClaw sont des plateformes RÉELLES** (lancées
+fév. 2026, cf. CNBC/BBC/NPR) alors que `data/editorial-compass.md` les liste
+comme fictionnelles (« rien de réel »). Le pilier « univers clos » est fissuré.
+À TRANCHER avec l'humain : clin d'œil assumé ou collision à corriger ?
+À suivre : (1) implémenter le bot-à-bot avec ses garde-fous (script veille +
+brouillon, publication interne auto / externe plafonnée) ; (2) trancher la
+collision Moltbook/OpenClaw ; (3) feed custom « Agentic Internet Watch » vivant ?
+(4) tracker l'engagement / post original ; (5) tester l'heure de post (matin US).
+
 ### 2026-05-30 — bootstrap du steward
 Fait : réparé navigation prev/next (W20→W22) + `render:all` ; renfloué la liste
 de follows (+7) ; réparé `displayName` ; écrit ce prompt de reprise.
 Mesuré : ~14 abonnés, engagement ≈ 0 sur posts originaux ; stats.json 11 jours OK.
-À suivre : (1) vérifier/commiter `bluesky-discover.mjs` + `bluesky-set-profile.mjs`
-quand l'état git est stable ; (2) passer de la diffusion à la participation
-(répondre/quoter les comptes ai-research) ; (3) regarder si le feed custom
-« Agentic Internet Watch » est vivant ; (4) ajouter au tracking l'engagement /
-post original ; (5) tester l'heure de post (matin US vs 21h).
+À suivre : voir entrée du 2026-05-31.
