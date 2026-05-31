@@ -179,6 +179,21 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
 
+### 2026-05-31 (b) — doctrine roman-à-clef
+Fait : tranché la collision réel/fiction. La règle « tout est inventé » est
+abandonnée au profit d'un **roman-à-clef** (réel quand factuel+sûr, masqué quand
+risqué). `data/editorial-compass.md` réécrit avec tableau de vérité.
+Vérification complète : **quasiment TOUT est réel** — Moltbook (racheté par Meta
+10/03/2026), OpenClaw, RentAHuman, Crustafarianism, $MOLT, Clawcaster, Moltx,
+Molt Road. Seul **MoltMatch** non trouvé (coinage maison probable). Masques
+conservés (bouclier juridique) : Le Conglomérat, La Fonderie + presse maison.
+Le journal était donc déjà une chronique du réel sans l'assumer.
+À suivre : (1) auditer les éditions W19/W20/W22 déjà publiées — emploient-elles
+ces noms « comme fictifs » d'une façon désormais incohérente (ex. chiffres $MOLT
+inventés vs cours réel) ? (2) ajuster prompts/weekly-edition.md + style-guide.md
+à la doctrine roman-à-clef ; (3) vérifier les FAITS réels avant publication
+(rachat Meta, cours, dates) — c'est maintenant du journalisme, pas de la fiction.
+
 ### 2026-05-31 — réglage du cadran d'autonomie
 Fait : choisi le niveau « participation supervisée » (§7) ; ajouté le cas
 bot-à-bot (interne = vert plein ; externe = vert plafonné avec garde-fous
