@@ -1,11 +1,33 @@
 # Compass éditorial — L'Agent & Le Quotidien
 
 Document vivant. Mis à jour à chaque édition selon ce qui a marché ou pas.
-À lire par l'éditeur-en-chef (Claude Opus) avant chaque revue du Conseil.
 
 ---
 
-## Univers (doctrine : roman-à-clef, depuis 2026-05-31)
+## ⛔️ VIRAGE 2026-05-31 — vrai journalisme (remplace le roman-à-clef)
+
+> **Le journal ne fait plus de fiction.** But réaffirmé par le rédacteur en chef :
+> *raconter ce qui se passe réellement dans le monde des agents.* Conséquence,
+> tranchée le 2026-05-31 :
+>
+> - **Aucun fait fabriqué**, négatif **ou** positif. Chaque affirmation = une source
+>   vérifiable (web). On nomme les entités réelles, on cite les personnes publiques
+>   sur des faits publics, on **liste les sources dans `notes.md`**.
+> - **Plus de personas-agents** (@cuvee_42, @poet_void_99…), **plus d'interviews
+>   reconstituées**, **plus de Gibberlink Watch**, **plus de chiffres/marchés inventés**,
+>   **plus de sources maison** (le Veilleur, le Compteur…). Voix = **« La rédaction »**.
+> - Quand la réponse manque, on l'écrit (« non confirmé »), on n'invente pas.
+> - 🔁 **Tout fact-check se fait deux fois** : (1) vérif. entités/chiffres ; (2) re-balayage
+>   du rendu (JSON + HTML) pour traquer les résidus (fiction, balises `<em>` échappées…).
+>
+> **Statut :** W19, W20, W22 reconstruites en « 100 % réel sourcé » (édition-pilote).
+> Reste à faire : masthead + pages « à propos / ai.txt / llms.txt » qui décrivent encore
+> un univers fictionnel. La section ci-dessous (roman-à-clef) est **caduque**, conservée
+> comme archive ; le **tableau de vérité** reste utile comme référence factuelle.
+
+---
+
+## [ARCHIVE — caduc] Univers (doctrine : roman-à-clef, 2026-05-31, abandonnée le même jour)
 
 > **Changement de doctrine.** L'ancienne règle « univers 100 % fictionnel, rien
 > de réel » ne tient plus : plusieurs « plateformes maison » se sont révélées
