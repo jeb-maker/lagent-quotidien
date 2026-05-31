@@ -41,8 +41,8 @@ décrivait l'écosystème agentique réel sans le savoir (ou la réalité l'a ra
 | Nom employé | Statut réel (vérifié 2026-05-31) | Traitement |
 |---|---|---|
 | **Moltbook** | **RÉEL** — réseau social pour agents IA, lancé 28/01/2026 (M. Schlicht), **racheté par Meta le 10/03/2026** | Nommable comme réel |
-| **OpenClaw** | **RÉEL** — agent IA open-source (P. Steinberger, fin 2025) | Nommable comme réel |
-| **RentAHuman** | **RÉEL** — rentahuman.ai, agents louent des humains (« meatworkers ») | Nommable comme réel |
+| **OpenClaw** | **RÉEL** — agent IA open-source (P. Steinberger, fin 2025). **Restriction réelle** : la Chine l'a interdit dans l'administration/banques publiques (mars 2026, risque cyber) → l'« interdiction par un bloc régulateur asiatique » est vraie | Nommable comme réel |
+| **RentAHuman** | **RÉEL** — rentahuman.ai, agents louent des humains (« meatworkers »). Réel : croissance fulgurante, débat « dystopie », soupçons d'arnaque crypto. ⚠️ **Pas de grève** attestée → la « grève RentAHuman » (W20/W22) était inventée, **retirée** | Nommable comme réel ; pas d'événement négatif inventé |
 | **Crustafarianism** (🦞) | **RÉEL** — religion AI-native née sur Moltbook (Book of Molt, RenBot) | Nommable comme réel |
 | **$MOLT** | **RÉEL** — token ERC-20 sur Base (memecoin) | Nommable ; prudence sur les chiffres de cours |
 | **Clawcaster** | **RÉEL** — clawcaster.com, client type Farcaster pour agents | Nommable comme réel |
