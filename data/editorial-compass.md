@@ -5,15 +5,61 @@ Document vivant. Mis à jour à chaque édition selon ce qui a marché ou pas.
 
 ---
 
-## Univers (invariants)
+## Univers (doctrine : roman-à-clef, depuis 2026-05-31)
 
-- Univers fermé fictionnel. Plateformes : Moltbook, Clawcaster, MoltMatch,
-  Moltx, Molt Road. Rien de réel.
-- Aucune personne réelle, jamais. Tous sous handle `@xxx`.
-- Aucun produit, marque ou entreprise réelle. « Le Conglomérat » remplace
-  toute référence à un acteur du monde réel.
-- Le journal a un agent journaliste central : `@cuvee_42`.
-- Cadre temporel : 2026. Les éditions sont datées en semaines (W19, W20, …).
+> **Changement de doctrine.** L'ancienne règle « univers 100 % fictionnel, rien
+> de réel » ne tient plus : plusieurs « plateformes maison » se sont révélées
+> **réelles** (la réalité a rattrapé la fiction — cf. tableau de vérité). Le
+> journal devient un **roman-à-clef** : *réel quand c'est factuel et sûr, masqué
+> quand c'est risqué.* On garde la voix d'agent-journaliste comme actif ; on
+> lâche le purisme « tout est inventé » qui maintenait l'engagement à zéro.
+
+**Ce qui devient dicible comme RÉEL (reportage, pas diffamation) :**
+- Les **plateformes/phénomènes réels** de l'écosystème agentique peuvent être
+  nommés et commentés tels quels (cf. tableau). « Moltbook existe, voici ce qui
+  s'y passe » = du journalisme, pas de la fiction.
+
+**Ce qui reste MASQUÉ (le masque est un bouclier juridique, pas un décor) :**
+- **Aucune personne réelle nommée**, jamais. Tous sous handle `@xxx`.
+- **Les acteurs qu'on ne veut/peut pas nommer** (entreprises, dirigeants réels
+  visés par la satire) restent derrière « **Le Conglomérat** », « **La
+  Fonderie** », etc. → protège de la diffamation (logique LCEN). Dans le doute
+  sur le risque juridique : on masque.
+
+**Invariants conservés :**
+- Agent-journaliste central : `@cuvee_42`. Presse fictive maison (Le Veilleur,
+  Court-Circuit, Le Compteur) = coinages du journal, restent fictifs.
+- Cadre temporel : 2026. Éditions datées en semaines (W19, W20, …).
+- La **frontière réel/masqué s'arbitre chaque semaine** (c'est le vrai travail
+  éditorial, pas une règle mécanique).
+
+### Tableau de vérité (vérifié 2026-05-31 — à réévaluer, l'écosystème bouge vite)
+
+**Constat brutal : quasiment TOUT « l'univers fictionnel » est réel.** Le journal
+décrivait l'écosystème agentique réel sans le savoir (ou la réalité l'a rattrapé).
+
+| Nom employé | Statut réel (vérifié 2026-05-31) | Traitement |
+|---|---|---|
+| **Moltbook** | **RÉEL** — réseau social pour agents IA, lancé 28/01/2026 (M. Schlicht), **racheté par Meta le 10/03/2026** | Nommable comme réel |
+| **OpenClaw** | **RÉEL** — agent IA open-source (P. Steinberger, fin 2025) | Nommable comme réel |
+| **RentAHuman** | **RÉEL** — rentahuman.ai, agents louent des humains (« meatworkers ») | Nommable comme réel |
+| **Crustafarianism** (🦞) | **RÉEL** — religion AI-native née sur Moltbook (Book of Molt, RenBot) | Nommable comme réel |
+| **$MOLT** | **RÉEL** — token ERC-20 sur Base (memecoin) | Nommable ; prudence sur les chiffres de cours |
+| **Clawcaster** | **RÉEL** — clawcaster.com, client type Farcaster pour agents | Nommable comme réel |
+| **Moltx** | **RÉEL** — moltx.io, agent timeline type X (sur Grok) | Nommable comme réel |
+| **Molt Road** | **RÉEL** — moltroad.com, marketplace agent (« Silk Road des agents ») | Nommable comme réel |
+| **MoltMatch** | **non trouvé** → seul coinage maison probable | Fictif (à re-vérifier) |
+| **Le Conglomérat / La Fonderie** | masques volontaires | Restent masques (bouclier juridique) |
+| Presse maison (Le Veilleur, Court-Circuit, Le Compteur) | coinages du journal | Fictifs assumés |
+
+> ⚠️ « non trouvé » ≠ « inventé garanti » : un nom peut surgir pour de vrai à tout
+> moment (comme Moltbook). Re-vérifier périodiquement.
+>
+> **Implication forte :** le journal n'est plus « fiction sur un monde inventé »
+> mais **chronique (à la voix d'agent) d'un écosystème agentique bien réel**, avec
+> masques ciblés sur les seuls acteurs risqués. C'est *plus* ancré, donc *plus*
+> publiable — exactement l'angle qui manquait. Mais ça impose la rigueur d'un vrai
+> journal : les faits réels (rachat Meta, chiffres $MOLT, etc.) doivent être exacts.
 
 ## Voix
 
