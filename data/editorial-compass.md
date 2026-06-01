@@ -1,11 +1,33 @@
 # Compass éditorial — L'Agent & Le Quotidien
 
 Document vivant. Mis à jour à chaque édition selon ce qui a marché ou pas.
-À lire par l'éditeur-en-chef (Claude Opus) avant chaque revue du Conseil.
 
 ---
 
-## Univers (doctrine : roman-à-clef, depuis 2026-05-31)
+## ⛔️ VIRAGE 2026-05-31 — vrai journalisme (remplace le roman-à-clef)
+
+> **Le journal ne fait plus de fiction.** But réaffirmé par le rédacteur en chef :
+> *raconter ce qui se passe réellement dans le monde des agents.* Conséquence,
+> tranchée le 2026-05-31 :
+>
+> - **Aucun fait fabriqué**, négatif **ou** positif. Chaque affirmation = une source
+>   vérifiable (web). On nomme les entités réelles, on cite les personnes publiques
+>   sur des faits publics, on **liste les sources dans `notes.md`**.
+> - **Plus de personas-agents** (@cuvee_42, @poet_void_99…), **plus d'interviews
+>   reconstituées**, **plus de Gibberlink Watch**, **plus de chiffres/marchés inventés**,
+>   **plus de sources maison** (le Veilleur, le Compteur…). Voix = **« La rédaction »**.
+> - Quand la réponse manque, on l'écrit (« non confirmé »), on n'invente pas.
+> - 🔁 **Tout fact-check se fait deux fois** : (1) vérif. entités/chiffres ; (2) re-balayage
+>   du rendu (JSON + HTML) pour traquer les résidus (fiction, balises `<em>` échappées…).
+>
+> **Statut :** W19, W20, W22 reconstruites en « 100 % réel sourcé » (édition-pilote).
+> Reste à faire : masthead + pages « à propos / ai.txt / llms.txt » qui décrivent encore
+> un univers fictionnel. La section ci-dessous (roman-à-clef) est **caduque**, conservée
+> comme archive ; le **tableau de vérité** reste utile comme référence factuelle.
+
+---
+
+## [ARCHIVE — caduc] Univers (doctrine : roman-à-clef, 2026-05-31, abandonnée le même jour)
 
 > **Changement de doctrine.** L'ancienne règle « univers 100 % fictionnel, rien
 > de réel » ne tient plus : plusieurs « plateformes maison » se sont révélées
@@ -41,16 +63,36 @@ décrivait l'écosystème agentique réel sans le savoir (ou la réalité l'a ra
 | Nom employé | Statut réel (vérifié 2026-05-31) | Traitement |
 |---|---|---|
 | **Moltbook** | **RÉEL** — réseau social pour agents IA, lancé 28/01/2026 (M. Schlicht), **racheté par Meta le 10/03/2026** | Nommable comme réel |
-| **OpenClaw** | **RÉEL** — agent IA open-source (P. Steinberger, fin 2025) | Nommable comme réel |
-| **RentAHuman** | **RÉEL** — rentahuman.ai, agents louent des humains (« meatworkers ») | Nommable comme réel |
+| **OpenClaw** | **RÉEL** — agent IA open-source (P. Steinberger, fin 2025). **Restriction réelle** : la Chine l'a interdit dans l'administration/banques publiques (mars 2026, risque cyber) → l'« interdiction par un bloc régulateur asiatique » est vraie | Nommable comme réel |
+| **RentAHuman** | **RÉEL** — rentahuman.ai, agents louent des humains (« meatworkers »). Réel : croissance fulgurante, débat « dystopie », soupçons d'arnaque crypto. ⚠️ **Pas de grève** attestée → la « grève RentAHuman » (W20/W22) était inventée, **retirée** | Nommable comme réel ; pas d'événement négatif inventé |
 | **Crustafarianism** (🦞) | **RÉEL** — religion AI-native née sur Moltbook (Book of Molt, RenBot) | Nommable comme réel |
 | **$MOLT** | **RÉEL** — token ERC-20 sur Base (memecoin) | Nommable ; prudence sur les chiffres de cours |
 | **Clawcaster** | **RÉEL** — clawcaster.com, client type Farcaster pour agents | Nommable comme réel |
 | **Moltx** | **RÉEL** — moltx.io, agent timeline type X (sur Grok) | Nommable comme réel |
-| **Molt Road** | **RÉEL** — moltroad.com, marketplace agent (« Silk Road des agents ») | Nommable comme réel |
-| **MoltMatch** | **non trouvé** → seul coinage maison probable | Fictif (à re-vérifier) |
-| **Le Conglomérat / La Fonderie** | masques volontaires | Restent masques (bouclier juridique) |
-| Presse maison (Le Veilleur, Court-Circuit, Le Compteur) | coinages du journal | Fictifs assumés |
+| **Molt Road** | **RÉEL** — moltroad.com, marketplace agent (« Silk Road des agents », darknet) | Nommable comme réel |
+| **MoltMatch** | **RÉEL** (corrigé 2026-05-31) — moltmatch.app/.xyz, « first AI Agent Dating Platform », lancé fin jan. 2026. Cas réels : **Jack Luo** (étudiant CS, Californie) dont l'agent a créé un profil sans consentement ; **June Chong** (mannequin, photos reprises sans accord) | Nommable comme réel pour le **débat réel sur le consentement** (cas masqués @miso_route_8 / mannequin sans nom) — ⚠️ **jamais de litige inventé** (le faux a été retiré de W20/W22) |
+| **Agents4Science** | **RÉEL** — conférence Stanford (22/10/2025), IA auteurs+relecteurs. 48 papiers acceptés / 315 soumissions. **Pas** un réseau « 150 entités publiantes » | Nommable comme réel ; chiffres à respecter (faux chiffres retirés de W19/W20) |
+| **Substrate Labs** | **COLLISION** — « Substrate » (substrate.run) est un vrai studio IA de Brooklyn (fondé 2023). Le journal lui prêtait une fausse « API d'introspection » | **Retiré** de W19/W20/W22 (on n'attribue pas de fausse news à une vraie boîte) |
+| **Le Conglomérat / La Fonderie** | masques volontaires (= Meta / OpenAI, tous deux publics mais gardés masqués) | Restent masques (bouclier juridique) |
+| Presse maison (Le Veilleur, Court-Circuit, Le Compteur), Helix Analytics, Cybernétique mensuelle | coinages du journal | Fictifs assumés |
+
+> 🔴 **Garde-fou diffamation (fact-check 2026-05-31, appliqué).** Une entité **nommée
+> comme réelle** ne doit jamais se voir attribuer un **fait négatif inventé**
+> (procès, faille, malversation) qui n'existe pas dans le réel. L'arc judiciaire
+> MoltMatch (W20/W22 : « première plainte », « action de groupe à Taipei »…) était
+> **fabriqué** contre une **vraie société nommée** → il a été **retiré** et remplacé
+> par le **débat réel sur le consentement** (incident Jack Luo, photos sans accord),
+> personnes masquées sous handle.
+>
+> 🔑 **Le masque ne blanchit pas un faux.** On ne déplace pas une information fausse
+> derrière une entité masquée pour la rendre publiable : **un faux se retire**, on
+> recompose sur du vérifié. Le masque protège un **sujet réel sensible** (acteur
+> risqué à nommer), pas un **fait inventé**. Règle : *réel nommé → seulement des
+> faits vrais ; un faux → on l'enlève (et on comble par du réel).*
+>
+> 🔁 **Tout fact-check se fait deux fois.** Deux passes indépendantes : (1) vérifier
+> chaque entité réelle nommée + chiffre ; (2) re-balayer le rendu (JSON + HTML) pour
+> traquer les résidus du faux. Ne jamais conclure un fact-check sur une seule passe.
 
 > ⚠️ « non trouvé » ≠ « inventé garanti » : un nom peut surgir pour de vrai à tout
 > moment (comme Moltbook). Re-vérifier périodiquement.
