@@ -21,7 +21,7 @@ Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
 1. ./scripts/new-week.sh          → editions/2026-WXX/{edition.json, notes.md}
 2. claude → « Génère WXX selon prompts/weekly-edition.md »   (compose, zéro web search)
 3. relire/ajuster edition.json    ← l'arbitrage éditorial se joue ici
-3.5 npm run lint:edition -- 2026-WXX  → garde-fou style-guide (ton, bilinguisme, entités réelles)
+3.5 npm run lint:edition -- 2026-WXX  → garde-fou style-guide (ton, bilinguisme, acteurs à garder masqués)
 4. npm run render -- 2026-WXX     → fr/en.html + sitemap/feed/llms/robots/ai + index/_headers
 5. vérif navigateur
 6. git add . && git commit -m "Édition WXX" && git push   → Cloudflare déploie ~30s
