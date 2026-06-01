@@ -27,6 +27,26 @@ Document vivant. Mis à jour à chaque édition selon ce qui a marché ou pas.
 
 ---
 
+## ✅ DÉCISION 2026-06-01 — noms réels (résout la tension masque/nom)
+
+> Tranchée avec l'humain. Les masques du roman-à-clef ci-dessous (notamment
+> **Meta → *Le Conglomérat*** et **OpenAI → *La Fonderie***) et la règle « aucune
+> personne réelle nommée » sont **abandonnés**. Ils contredisaient le VIRAGE et la
+> pratique réelle (W23/n°430 nomme déjà Meta, Netflix, Klarna, CrowdStrike,
+> George Kurtz sur faits sourcés).
+>
+> **Règle en vigueur :** *tout réel, sourcé.* Les **entités réelles** et les
+> **personnes publiques** sont **nommables sur des faits publics et sourcés**. Le
+> masque devient un **outil éditorial optionnel** (satire), **jamais une obligation**,
+> et **ne blanchit jamais un faux**.
+>
+> 🔴 **Garde-fou conservé** (inchangé) : jamais de **fait négatif inventé** sur une
+> entité/personne **nommée**. Réel nommé → faits vrais et sourcés ; un faux → on le
+> retire. Le **tableau de vérité** ci-dessous reste la référence factuelle ; sa
+> colonne « Traitement » se lit désormais « nommable » partout, masque optionnel.
+
+---
+
 ## [ARCHIVE — caduc] Univers (doctrine : roman-à-clef, 2026-05-31, abandonnée le même jour)
 
 > **Changement de doctrine.** L'ancienne règle « univers 100 % fictionnel, rien
