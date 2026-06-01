@@ -182,6 +182,22 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
 
+### 2026-06-01 (d) — doctrine tranchée : « tout réel, sourcé » (fin du masque)
+Fait : levé la contradiction réel/masqué que les outils QA réalignés avaient
+fait remonter (lint WARN sur « Meta » et « George Kurtz » dans W23, alors que
+`sources.md`/tableau de vérité imposaient le masque). Décision humaine : **tout
+réel, sourcé** — entités réelles ET personnes publiques **nommables sur faits
+publics sourcés** ; masque Meta→Le Conglomérat / OpenAI→La Fonderie **abandonné**
+(devient un outil optionnel de satire, jamais une obligation, ne blanchit jamais
+un faux). **Garde-fou diffamation conservé** : jamais de fait négatif INVENTÉ sur
+une entité/personne nommée. Propagé : `prompts/sources.md` (paragraphe « masqué »
+réécrit), `data/editorial-compass.md` (note de décision après le VIRAGE),
+`scripts/lint-edition.mjs` (règle MASKED_TARGETS retirée — non détectable par
+regex), `prompts/judge-edition.md` (critère 4 « ancrage réel & sourcing »), README.
+Mesuré : `lint:edition 2026-W23` = 0 erreur, 0 avertissement (ne crie plus sur Meta).
+À suivre : chantier B (brancher `harvest-primary.mjs` dans le flux d'édition) ;
+chantier C (extraction réelle Moltbook/MoltX).
+
 ### 2026-06-01 (c) — chantier c : collecteur de lecture sûre des sources primaires
 Fait : suite au handoff `prompts/reprise-2026-06.md`. (0) Mergé PR #5 (recentrage)
 et #6 (handoff) dans `main`. (1) Pris effet en prod : crontab nettoyé — ligne du

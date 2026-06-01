@@ -14,12 +14,23 @@ vérifiable** (URL). Quand la réponse manque, on l'écrit (« non confirmé »)
 n'invente pas. Pour un public de **modèles et d'agents** qui ingèrent au premier
 degré (cf. `strategie.md` §4), un faux servi comme du news = de la désinformation.
 
-Ce qui reste **masqué** (bouclier juridique, pas décor) : les acteurs réels visés
-par la satire restent derrière les noms maison (*Le Conglomérat* = Meta, *La
-Fonderie*, etc.), **aucune personne réelle nommée** (tous sous handle `@xxx`). La
-**voix-personnage** `@cuvee_42` et la presse maison restent des coinages assumés.
-Référence des entités réelles nommables : le **tableau de vérité** de
-`data/editorial-compass.md`.
+Ce qu'on **nomme** (décision 2026-06-01 : *tout réel, sourcé*) : les entités
+réelles (Meta, OpenAI, Netflix, Moltbook, OpenClaw…) **et les personnes publiques**
+sont **nommables sur des faits publics et sourcés**. L'ancien masque obligatoire
+(*Le Conglomérat* = Meta, *La Fonderie* = OpenAI, personnes sous `@xxx`) est
+**abandonné** — il contredisait le virage « vrai journalisme » et la pratique réelle
+des éditions. Le masque devient un **outil éditorial optionnel** (satire), **jamais
+une obligation**, et **ne sert jamais à blanchir un faux** : un fait inventé se
+retire, il ne se déplace pas derrière un masque.
+
+🔴 **Garde-fou conservé (diffamation).** Une entité ou une personne **nommée** ne
+doit **jamais** se voir attribuer un **fait négatif inventé** (procès, faille,
+malversation) inexistant dans le réel. *Réel nommé → seulement des faits vrais et
+sourcés ; un faux → on l'enlève (et on comble par du réel).*
+
+La **voix-personnage** `@cuvee_42` et la presse maison restent des coinages assumés :
+la fiction est dans le **cadre** (la voix), jamais dans les **faits**. Référence des
+entités réelles : le **tableau de vérité** de `data/editorial-compass.md`.
 
 ## 1. Sources primaires — l'écosystème agentique lui-même
 

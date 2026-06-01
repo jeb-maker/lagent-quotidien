@@ -2,7 +2,7 @@
 //
 // Garde-fou contre la derive hebdo : verifie une edition.json contre les regles
 // objectives de prompts/style-guide.md (fourchettes de mots par rubrique, verbes
-// d'alarme interdits dans les titres, acteurs a garder masques, bilinguisme complet).
+// d'alarme interdits dans les titres, bilinguisme complet).
 //
 // Usage :
 //   node scripts/lint-edition.mjs 2026-W22       # lint une edition
@@ -12,7 +12,7 @@
 //
 // Philosophie : par defaut, on ne controle que les invariants a fort signal et
 // faible faux-positif : ton (verbes d'alarme dans les titres), bilinguisme
-// complet, acteurs a garder masques, rubriques presentes. Les fourchettes de mots de
+// complet, rubriques presentes. Les fourchettes de mots de
 // style-guide.md sont, a ce jour, desynchronisees des editions reelles (elles
 // flaguent tout) -> reservees a `--lengths`, en advisory. `--strict` transforme
 // les WARN en erreurs (exit 1) pour un usage CI.
@@ -52,18 +52,13 @@ const BANNED_TITLE_PATTERNS = [
     /\bripost/i, /les agents r[ée]pondent/i, /la guerre de/i, /\bs'effondrent\b/i,
 ];
 
-// Acteurs a garder MASQUES (cf. data/editorial-compass.md, tableau de verite +
-// prompts/sources.md). Depuis le virage « vrai journalisme » (2026-05-31) puis le
-// recentrage (2026-06-01), les entites reelles de l'ecosysteme agentique (Moltbook,
-// OpenClaw, RentAHuman, $MOLT...) SONT desormais nommables — l'ancienne regle
-// « univers clos, zero entite reelle » est caduque. Restent masques, par bouclier
-// juridique, les seuls acteurs de satire vises : on attend le nom maison, pas le
-// nom reel en clair. WARN (la frontiere reel/masque s'arbitre chaque semaine ; un
-// faux positif reste possible : citation, nom de produit).
-const MASKED_TARGETS = [
-    { re: /\bMeta\b/i, mask: 'Le Conglomérat' },
-    { re: /\bOpenAI\b/i, mask: 'La Fonderie' },
-];
+// NB : plus de controle d'entites reelles. Decision 2026-06-01 (« tout reel,
+// source », cf. data/editorial-compass.md + prompts/sources.md) : les entites
+// reelles ET les personnes publiques sont nommables sur faits publics sources ;
+// aucun masque obligatoire. Le seul garde-fou qui survit — « jamais de fait
+// negatif INVENTE sur une entite/personne nommee » — n'est pas detectable par
+// regex (il releve du fact-check et du juge editorial), donc le lint ne le couvre
+// pas. Il ne reste ici que les invariants objectifs : ton, bilinguisme, rubriques.
 
 const errors = [];
 const warns = [];
@@ -133,17 +128,6 @@ function checkTitle(text, where) {
     }
 }
 
-// Balaye l'edition : les acteurs de satire vises doivent rester masques derriere
-// leur nom maison (Meta -> Le Conglomérat, OpenAI -> La Fonderie). Les autres
-// entites reelles sont desormais nommables (vrai journalisme).
-function checkMaskedTargets(edition) {
-    const blob = JSON.stringify(edition);
-    for (const { re, mask } of MASKED_TARGETS) {
-        const m = blob.match(re);
-        if (m) warn(`[masque] acteur a garder masque nomme en clair : "${m[0]}" -> utiliser « ${mask} » (cf. tableau de verite)`);
-    }
-}
-
 function resolveWeek() {
     const arg = process.argv.find((a) => /^\d{4}-W\d{2}$/.test(a));
     if (arg) return arg;
@@ -179,7 +163,6 @@ function main() {
             checkText(getPath(edition, rule.path), rule, rule.label);
         }
     }
-    checkMaskedTargets(edition);
 
     for (const w of warns) console.log(`  WARN  ${w}`);
     for (const e of errors) console.log(`  ERR   ${e}`);
