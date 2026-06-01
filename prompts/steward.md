@@ -182,6 +182,25 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
 
+### 2026-06-01 (c) — chantier c : collecteur de lecture sûre des sources primaires
+Fait : suite au handoff `prompts/reprise-2026-06.md`. (0) Mergé PR #5 (recentrage)
+et #6 (handoff) dans `main`. (1) Pris effet en prod : crontab nettoyé — ligne du
+post quotidien `0 21 * * *` retirée (backup `/tmp/crontab-backup-*`), `0 9`
+(`cron-drift.sh`) conservée ; `cuvee-daily.mjs` confirmé no-op ; run à blanc OK
+(`daily-stats.mjs` exit 0, `render -- 2026-W23` exit 0). (2) **Créé
+`scripts/harvest-primary.mjs`** (chantier c) sur le modèle de `harvest-daily.mjs` :
+code bête, try/catch par source, sortie `data/harvest/<date>-primary.json`, chaque
+item avec source+url+fetched_at. Sources : `$MOLT` (CoinGecko, gratuit), OpenClaw
+(GitHub API), Moltbook/MoltX (GET brut). Garde-fous appliqués : `redirect:'manual'`
+(n'auto-suit aucun lien), aucun credential, corps jamais stocké (quarantaine),
+jamais d'exécution de SDK/skill, **réel ou rien** (échec → `{error}`, aucune valeur).
+Mesuré (run réel 2026-06-01) : `$MOLT` = 0,00001418 $ réel (≈ la note §8 « ~0,00002 $ »,
+loin du 0,85 $ inventé) ; OpenClaw = 5 releases + 10 commits réels ; Moltbook joignable
+(sonde 200, corps jeté) ; MoltX `fetch failed` → aucune valeur (réel ou rien OK).
+À suivre : étendre `raw_public` à une vraie extraction de champs dès qu'un endpoint/
+schéma public Moltbook/MoltX est confirmé ; brancher `harvest-primary.mjs` dans le
+flux d'édition (sourcing `notes.md`) ; éventuellement l'ajouter au cron de récolte.
+
 ### 2026-06-01 (b) — décisions tranchées : broadcast coupé, drift retiré
 Fait : tranché les décisions ouvertes de `strategie.md` §8. (1) **Canal social
 coupé** : `cuvee-daily.mjs` no-ope (garde-fou `--force-post`), entrée crontab du
