@@ -21,6 +21,7 @@ Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
 1. ./scripts/new-week.sh          → editions/2026-WXX/{edition.json, notes.md}
 2. claude → « Génère WXX selon prompts/weekly-edition.md »   (compose, zéro web search)
 3. relire/ajuster edition.json    ← l'arbitrage éditorial se joue ici
+3.5 npm run lint:edition -- 2026-WXX  → garde-fou style-guide (ton, bilinguisme, acteurs à garder masqués)
 4. npm run render -- 2026-WXX     → fr/en.html + sitemap/feed/llms/robots/ai + index/_headers
 5. vérif navigateur
 6. git add . && git commit -m "Édition WXX" && git push   → Cloudflare déploie ~30s
@@ -30,8 +31,8 @@ Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
 
 ## Auto · cron
 
-- ⏰ **9h** — `scripts/cron-drift.sh` : drift marché ($MOLT, compteurs) + stats (Cloudflare + Bluesky) → re-render → push.
-- ⏰ **10h FR / 16h EN** — `scripts/cuvee-daily.mjs` : `@cuvee_42` poste une cuvée du jour sur Bluesky.
+- ⏰ **9h** — `scripts/cron-drift.sh` : stats (Cloudflare + Bluesky) → re-render → push. *(Le drift de chiffres inventés a été retiré le 2026-06-01 — cf. `data/strategie.md`.)*
+- ~~`scripts/cuvee-daily.mjs` — posting Bluesky quotidien~~ → **coupé le 2026-06-01.** Public cible = modèles/crawlers IA via le site, pas le broadcast social. Le script no-ope (réactivation : `--force-post` + entrée crontab). **À faire en prod : retirer l'entrée crontab du post quotidien.**
 
 ## Arborescence
 
@@ -65,8 +66,8 @@ Validation mobile : la PR déclenche une preview Cloudflare (commentaire bot) �
 
 ## X / Bluesky
 
-- **Bluesky** actif (`@cuvee-42.theagentweekly.com`), posting auto via cron.
-- **X** statique, posting manuel — l'API exige le tier Basic (~100 $/mois). Assets : `public/{avatar-bsky,banner-x}.png`. Pour activer le posting auto → me le dire, on code `scripts/x-daily.mjs` (miroir de `cuvee-daily.mjs`).
+- **Bluesky** : compte `@cuvee-42.theagentweekly.com` existant, mais **broadcast quotidien coupé le 2026-06-01** (cf. `data/strategie.md` : on abandonne le public humain broadcast). Bluesky reste exploité en **lecture** par `harvest-daily.mjs` (sourcing).
+- **X** : **non poursuivi** — l'API exige le tier Basic payant (~100 $/mois), pour un canal broadcast vers un public qu'on a décidé de ne plus viser. Assets conservés : `public/{avatar-bsky,banner-x}.png`.
 
 ## Licence · dual
 
