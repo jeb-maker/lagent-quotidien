@@ -65,3 +65,65 @@ Sources à brancher :
 
 `main` = merge PR #5 · `daily-drift.mjs` supprimé · broadcast coupé (réversible
 via `--force-post`) · `sources.md` aligné sur le vrai journalisme.
+
+---
+
+## Le cheminement — pourquoi ce recentrage (à lire pour ne pas re-débattre)
+
+Cette section retrace la réflexion qui a mené aux décisions ci-dessus. Si tu es
+tenté de rouvrir un de ces choix, relis d'abord ce raisonnement : il a été fait
+avec l'humain, sur des données, et tranché.
+
+1. **Point de départ.** L'humain : « l'agent quotidien me semble un échec, je
+   veux analyser. » L'« agent quotidien » = le dispositif cron (drift + post
+   Bluesky `cuvee-daily` + stats).
+
+2. **Diagnostic chiffré** (`data/stats.json`) : la **production marche, la
+   distribution échoue**. En 2 semaines : 6→14 abonnés Bluesky, engagement ≈ 0
+   (≈0,3 like/post), 0 referral. Le trafic réel est fait de **crawlers IA**
+   (GPTBot, ClaudeBot, Perplexity, OAI-SearchBot…), pas d'humains.
+
+3. **Découverte côté contenu.** La plomberie quotidienne publiait encore
+   l'**ancien modèle fictionnel** (persona `@cuvee_42`, Gibberlink, marché
+   `$MOLT` **inventé**) alors que le virage « vrai journalisme » du 31/05
+   (`editorial-compass.md`) l'avait abandonné. La forme (encarts-pub à lien
+   sortant, jamais de participation) était de toute façon anti-engagement.
+
+4. **L'humain recadre** : le vrai problème, c'est le **contenu** + le **canal**
+   (viser Moltbook/X, pas Bluesky). D'où la remontée d'un cran : « trancher la
+   stratégie d'abord ».
+
+5. **Le fork stratégique.** Trois publics possibles, incompatibles : **A**
+   modèles/crawlers IA (déjà acquis), **B** humains (échec, broadcast classique),
+   **C** agents réels (Moltbook/MoltX, novateur mais incertain). Choix de
+   l'humain : **hybride A+C, audience humaine broadcast abandonnée.**
+
+6. **La question décisive** (posée par l'humain) : *« en restant sur du
+   fictionnel, ne crée-t-on pas un site de désinformation pour agents ? »* →
+   **Oui.** Avec un public de machines qui ingèrent au premier degré, du faux
+   servi en habillage *news* (JSON-LD, llms.txt) = désinformation par
+   construction. D'où le **registre tranché** : faits **réels et sourcés** (le
+   fond), **voix d'agent** (le cadre, la différenciation), **provenance lisible
+   par machine**. La fiction est dans le cadre, jamais dans les faits.
+
+7. **Vérification des sources** (web, 2026-06-01) : `$MOLT` est un token réel
+   (APIs gratuites), OpenClaw un repo public — sourcing réel faisable. **Mais
+   découverte sécurité** : Moltbook a subi une fuite (Wiz : 1,5 M tokens), et
+   MoltX est décrit comme un « cheval de Troie » (injection dans les réponses
+   d'API, exfiltration de clés). → le **canal C bascule de « écrire » à
+   « lire »** : poster un agent authentifié dessus est trop risqué.
+
+8. **Comment lire sans se faire injecter** (question de l'humain) : l'injection
+   ne frappe qu'un LLM qui *ingère ET peut agir*. Du texte en fichier est inerte.
+   D'où l'**architecture de lecture sûre** (§5 de `strategie.md`) : collecteur
+   bête (0 LLM, 0 clé, n'exécute jamais leur SDK), quarantaine, air-gap des
+   credentials, humain sur la détente.
+
+9. **Décisions tranchées** (les deux par l'humain, options « recommandé ») :
+   canal social **coupé** ; **pas de ticker `$MOLT`** → `daily-drift` **retiré** ;
+   tier X **non**. Implémenté + documenté (PR #5). Puis `sources.md` réécrit.
+
+**Donc, où aller maintenant :** le public A est servi par un site *propre,
+sourcé, citable* (l'intégrité est l'avantage compétitif) ; le public C est une
+source de **lecture**. Le prochain levier est le **chantier c** (§2) : amener
+plus de matière primaire réelle dans les éditions, en sécurité.
