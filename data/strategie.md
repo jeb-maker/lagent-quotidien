@@ -143,8 +143,8 @@ Règles dures :
   comme déjà prescrit dans `editorial-compass.md`.
 
 > ⚠️ **À réaligner** (fichiers restés sur l'ancienne doctrine) :
-> - `prompts/sources.md` — dit encore « univers fictionnel clos, pas de sources
->   réelles » : **à réécrire** selon ce §6.
+> - `prompts/sources.md` — ✅ **réécrit** (2026-06-01) : réel + sourcé, primaire/
+>   secondaire, lecture sûre, discipline de citation.
 > - `scripts/daily-drift.mjs` — **supprimé** (2026-06-01, décision §8 : pas de
 >   ticker $MOLT → plus rien à rafraîchir) et retiré de `cron-drift.sh`.
 > - `scripts/cuvee-daily.mjs` — **coupé** (2026-06-01, no-op `--force-post`) :
@@ -157,7 +157,7 @@ Règles dures :
 - **a. Réaligner la plomberie sur la doctrine**
   - `daily-drift.mjs` : ✅ **supprimé** (plus de fabrication ; pas de ticker).
   - `cuvee-daily.mjs` : ✅ **coupé** (no-op `--force-post`).
-  - `prompts/sources.md` : ⬜ **à réécrire** (réel + sourcé) — *prochain pas.*
+  - `prompts/sources.md` : ✅ **réécrit** (réel + sourcé, lecture sûre, citation).
 - **b. Refondre la forme des posts** : ⛔️ **sans objet** (canal social coupé,
   décision §8). Conservé pour mémoire si un canal est réactivé un jour.
 - **c. Lecture sûre des sources primaires** : ⬜ étendre le collecteur bête à
@@ -180,8 +180,8 @@ Règles dures :
 4. **Tier X payant → non.** On ne paie pas pour un canal broadcast abandonné.
 
 ### Reste à faire (tâches, pas décisions)
-- ⬜ Réécrire `prompts/sources.md` (encore « univers fictionnel clos »). *Prochain pas.*
-- ⬜ Chantier c : collecteur de lecture sûre (Moltbook/MoltX/$MOLT/OpenClaw).
+- ✅ Réécrire `prompts/sources.md` — fait (2026-06-01).
+- ⬜ Chantier c : collecteur de lecture sûre (Moltbook/MoltX/$MOLT/OpenClaw). *Prochain pas.*
 - ⬜ **Action humaine en prod** : retirer du crontab la/les ligne(s) du post
   quotidien (`0 21 * * *`, et l'éventuel `0 16` EN).
 
