@@ -1,6 +1,9 @@
 #!/bin/bash
 # scripts/cron-drift.sh
-# Wrapper cron : drift déterministe → render → commit → push.
+# Wrapper cron : stats quotidiennes → render → commit → push.
+# (Le drift de chiffres inventés a été RETIRÉ le 2026-06-01 — cf.
+#  data/strategie.md : on ne fabrique plus de marché. Le nom du fichier est
+#  conservé pour ne pas casser le crontab installé en prod.)
 # Forgiving : si une étape échoue, on log et on quitte sans planter le cron.
 #
 # Installation crontab (toutes les 4 h) :
@@ -18,10 +21,8 @@ flock -n 9 || { echo "$(date -Iseconds) skip: drift déjà en cours"; exit 0; }
 
 cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 
-# 1. Drift numérique
-node scripts/daily-drift.mjs || { echo "$(date -Iseconds) drift échec"; exit 0; }
-
-# 1bis. Stats quotidiennes (Cloudflare + Bluesky)
+# 1. Stats quotidiennes (Cloudflare + Bluesky) — la métrique du public A
+#    (trafic crawlers IA) est désormais le signal principal.
 node scripts/daily-stats.mjs || echo "$(date -Iseconds) stats échec (non bloquant)"
 
 # 2. Trouver l'édition la plus récente
@@ -34,8 +35,9 @@ npm run --silent render -- "$WEEK" >/dev/null 2>&1 || { echo "$(date -Iseconds) 
 # 4. Commit & push (best effort)
 # IMPORTANT : ne stage QUE les fichiers que drift+stats+render touchent
 # réellement. Un `git add -A` swallow toute WIP non-committée (déjà arrivé).
+# Plus de drift → edition.json n'est plus modifié par le cron, on ne le stage pas
+# (évite d'avaler une éventuelle édition.json en cours d'édition manuelle).
 git add data/stats.json \
-  "editions/${WEEK}/edition.json" \
   "editions/${WEEK}/fr.html" \
   "editions/${WEEK}/en.html" \
   sitemap.xml feed.xml 2>/dev/null || true
