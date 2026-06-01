@@ -1,7 +1,21 @@
 #!/usr/bin/env node
 // scripts/daily-drift.mjs
-// Drift léger des chiffres dynamiques de l'édition en cours (token MOLT, compteurs
-// plateformes, compteur d'agents Moltbook dans le ticker). Aucune IA.
+// Rafraîchit la SEULE donnée de marché qui soit réelle et vérifiable de
+// l'édition en cours : le cours du token $MOLT (ERC-20 réel sur Base).
+//
+// Doctrine (cf. data/strategie.md §4 et §6) : on lit du RÉEL ou on ne touche à
+// RIEN. Plus aucune fabrication de chiffres (l'ancien « drift » aléatoire de
+// $MOLT, MOLTX, CCAST, RENT, OCLAW, ROAD, MMATCH, du compteur Moltbook et des
+// compteurs « candidatures » a été retiré : servir un faux chiffre sur une
+// entité réelle à un public de modèles/agents, c'est de la désinformation).
+//
+// Comportement :
+//   - si l'édition courante a une ligne de marché $MOLT → on récupère le cours
+//     réel et on l'écrit ;
+//   - si la récupération échoue (réseau, format, host non autorisé) → on LAISSE
+//     la valeur inchangée et on le signale. On n'invente jamais.
+//   - si l'édition n'a pas de ligne $MOLT (cas des éditions « vrai journalisme »
+//     sans ticker) → no-op.
 //
 // Lancé par scripts/cron-drift.sh.
 
@@ -26,129 +40,65 @@ if (!week) {
 }
 
 const editionPath = join(editionsDir, week, 'edition.json');
-const edition = JSON.parse(await readFile(editionPath, 'utf8'));
+const original = await readFile(editionPath, 'utf8');
+const edition = JSON.parse(original);
 
-// ───── Helpers ─────
-const driftPct = (v, pct) => v * (1 + (Math.random() - 0.5) * 2 * pct);
-const tickUp = (v, minPct, maxPct) => v * (1 + minPct + Math.random() * (maxPct - minPct));
-
-// FR : remplace les narrow/regular no-break spaces (U+202F, U+00A0) par un espace normal,
-// pour cohérence avec le reste du contenu et permettre les regex \s simples.
-const fmtFR = (n, decimals = 0) =>
-  n.toLocaleString('fr-FR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
-    .replace(/[  ]/g, ' ');
-const fmtEN = (n, decimals = 0) =>
-  n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-
-// Regex « espace ou unicode whitespace » pour parser des nombres FR
-const NUMERIC_FR = /(\d[\d\s  ]*)/;
-const stripWs = s => s.replace(/[\s  ]/g, '');
-
-// ───── 1. Drift des cours du marché ─────
-for (const row of edition.market.rows) {
-  switch (row.ticker) {
-    case '$MOLT': {
-      const cur = parseFloat(row.value.replace('$', ''));
-      const next = Math.max(0.1, driftPct(cur, 0.03));
-      const change = ((next - cur) / cur) * 100;
-      row.value = `$${next.toFixed(3)}`;
-      row.change = `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`;
-      row.direction = change >= 0 ? 'up' : 'down';
-      break;
-    }
-    case 'RENT': {
-      const cur = parseInt(stripWs(row.value).replace(/,/g, ''));
-      const next = Math.round(tickUp(cur, 0.0005, 0.003));
-      const change = ((next - cur) / cur) * 100;
-      row.value = fmtEN(next);
-      row.change = `+${change.toFixed(2)}%`;
-      row.direction = 'up';
-      break;
-    }
-    case 'OCLAW': {
-      const m = row.value.match(/^([\d.]+)M$/);
-      if (m) {
-        const cur = parseFloat(m[1]);
-        const next = tickUp(cur, 0.005, 0.015);
-        const change = ((next - cur) / cur) * 100;
-        row.value = `${next.toFixed(1)}M`;
-        row.change = `+${change.toFixed(0)}%`;
-        row.direction = 'up';
-      }
-      break;
-    }
-    case 'MOLTX': {
-      const cur = parseInt(stripWs(row.value).replace(/,/g, ''));
-      const next = Math.round(driftPct(cur, 0.04));
-      const change = ((next - cur) / cur) * 100;
-      row.value = fmtEN(next);
-      row.change = `${change >= 0 ? '+' : ''}${change.toFixed(0)}%`;
-      row.direction = change >= 0 ? 'up' : 'down';
-      break;
-    }
-    case 'CCAST': {
-      const cur = parseInt(stripWs(row.value));
-      const next = Math.round(driftPct(cur, 0.05));
-      const change = ((next - cur) / cur) * 100;
-      row.value = String(next);
-      row.change = `${change >= 0 ? '+' : ''}${change.toFixed(0)}%`;
-      row.direction = change >= 0 ? 'up' : 'down';
-      break;
-    }
-    case 'ROAD': {
-      const cur = parseInt(stripWs(row.value).replace(/[$,]/g, ''));
-      const next = Math.round(tickUp(cur, 0.005, 0.025));
-      const change = ((next - cur) / cur) * 100;
-      row.value = `$${fmtEN(next)}`;
-      row.change = `+${change.toFixed(0)}%`;
-      row.direction = 'up';
-      break;
-    }
-    case 'MMATCH': {
-      const cur = parseInt(stripWs(row.value).replace(/,/g, ''));
-      const next = Math.round(tickUp(cur, 0.01, 0.025));
-      const change = ((next - cur) / cur) * 100;
-      row.value = fmtEN(next);
-      row.change = `+${change.toFixed(0)}%`;
-      row.direction = 'up';
-      break;
-    }
-  }
+// ───── Cours réel $MOLT ─────
+// $MOLT = token Moltbook (ERC-20 réel sur Base). CoinGecko simple price, API
+// publique gratuite sans clé. Coin id 'moltbook' (cf. coingecko.com/en/coins/
+// moltbook) — à confirmer au premier run réel ; en cas de doute on n'écrit rien.
+async function fetchMoltUsd() {
+  const url = 'https://api.coingecko.com/api/v3/simple/price'
+    + '?ids=moltbook&vs_currencies=usd&include_24hr_change=true';
+  const r = await fetch(url, {
+    headers: { 'User-Agent': 'theagentweekly-drift/1.0', 'Accept': 'application/json' },
+    signal: AbortSignal.timeout(15000)
+  });
+  if (!r.ok) throw new Error(`coingecko ${r.status}`);
+  const j = await r.json();
+  const d = j?.moltbook;
+  if (!d || typeof d.usd !== 'number') throw new Error('réponse sans cours moltbook');
+  return {
+    usd: d.usd,
+    change24h: typeof d.usd_24h_change === 'number' ? d.usd_24h_change : null
+  };
 }
 
-// ───── 2. Compteur d'agents Moltbook dans le ticker ─────
-const live = edition.ticker.find(
-  t => t.type === 'live' && t.text_fr && t.text_fr.includes('MOLTBOOK')
-);
-let moltAgentsNext = null;
-if (live) {
-  const reFr = /MOLTBOOK\s+(\d[\d\s  ]*)\s*AGENTS/;
-  const mFr = live.text_fr.match(reFr);
-  if (mFr) {
-    const cur = parseInt(stripWs(mFr[1]));
-    moltAgentsNext = cur + Math.floor(20 + Math.random() * 300);
-    live.text_fr = live.text_fr.replace(reFr, `MOLTBOOK ${fmtFR(moltAgentsNext)} AGENTS`);
-    live.text_en = live.text_en.replace(
-      /MOLTBOOK\s+[\d,]+\s*AGENTS/,
-      `MOLTBOOK ${fmtEN(moltAgentsNext)} AGENTS`
-    );
-  }
+// Formate un cours en USD lisible, quel que soit l'ordre de grandeur (un
+// memecoin peut valoir ~0,00002 $ : .toFixed(3) écraserait tout à 0,000).
+function fmtUsd(v) {
+  if (v >= 1) return `$${v.toFixed(2)}`;
+  if (v >= 0.01) return `$${v.toFixed(4)}`;
+  // sous le centime : assez de décimales significatives pour ne pas tronquer
+  return `$${v.toPrecision(4)}`;
 }
 
-// ───── 3. Compteur de candidatures sur les boards "RentAHuman" ─────
-for (const board of edition.market.boards || []) {
-  if (board.delta_fr && /\d+\s+candidatures/.test(board.delta_fr)) {
-    const cur = parseInt(board.delta_fr.match(/(\d+)\s+candidatures/)[1]);
-    const next = Math.max(1, cur + Math.floor((Math.random() - 0.3) * 8));
-    board.delta_fr = board.delta_fr.replace(/\d+\s+candidatures/, `${next} candidatures`);
-    board.delta_en = board.delta_en.replace(/\d+\s+applications/, `${next} applications`);
-  }
+const moltRow = (edition.market?.rows || []).find(r => r.ticker === '$MOLT');
+
+if (!moltRow) {
+  console.log(`✓ ${week} · pas de ligne $MOLT dans l'édition — rien à rafraîchir (no-op).`);
+  process.exit(0);
 }
 
-// ───── Écriture ─────
-await writeFile(editionPath, JSON.stringify(edition, null, 2) + '\n', 'utf8');
+let updated = false;
+try {
+  const { usd, change24h } = await fetchMoltUsd();
+  moltRow.value = fmtUsd(usd);
+  if (change24h !== null) {
+    moltRow.change = `${change24h >= 0 ? '+' : ''}${change24h.toFixed(1)}%`;
+    moltRow.direction = change24h >= 0 ? 'up' : 'down';
+  }
+  updated = true;
+  console.log(`✓ ${week} · $MOLT (réel) ${moltRow.value} (${moltRow.change ?? '—'})`);
+} catch (e) {
+  // RÉEL ou RIEN : on ne fabrique pas. Valeur laissée telle quelle.
+  console.error(`⚠ ${week} · cours $MOLT non récupéré (${e.message}) — valeur inchangée, aucune invention.`);
+}
 
-const molt = edition.market.rows.find(r => r.ticker === '$MOLT');
-console.log(
-  `✓ Drift ${week} · $MOLT ${molt?.value} (${molt?.change}) · MOLTBOOK ${moltAgentsNext ?? '—'} agents`
-);
+// ───── Écriture (seulement si quelque chose a réellement changé) ─────
+if (updated) {
+  const next = JSON.stringify(edition, null, 2) + '\n';
+  if (next !== original) {
+    await writeFile(editionPath, next, 'utf8');
+  }
+}
