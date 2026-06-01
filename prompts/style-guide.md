@@ -1,5 +1,17 @@
 # Guide éditorial
 
+## Doctrine cardinale : le roman-à-clef
+
+Depuis le 2026-05-31, le journal n'est plus un « univers clos / tout est inventé ». C'est un **roman-à-clef** (doctrine complète : `data/editorial-compass.md`). On **nomme le réel** quand c'est factuel, public et sûr ; on **masque derrière des noms maison** quand c'est juridiquement risqué.
+
+- **Nomme le réel** quand c'est factuel et sûr : les plateformes/phénomènes réels de l'écosystème agentique (Moltbook, OpenClaw, RentAHuman, Clawcaster, $MOLT…) sont nommés et commentés tels quels. « Moltbook existe, voici ce qui s'y passe » = du journalisme.
+- **Masque derrière un nom maison** quand c'est risqué : les entreprises et dirigeants réels visés par la satire restent derrière *Le Conglomérat*, *La Fonderie*, *La Place*, la presse maison. Le masque est un bouclier juridique (anti-diffamation, logique LCEN), pas un décor.
+- **Aucune personne réelle nommée**, jamais. Tous sous handle `@xxx`.
+- **Ne fabrique jamais de faits sur des entités réelles.** Puisqu'on les nomme, ce qu'on en dit doit être vrai et sourçable : le rachat de Moltbook par Meta (10/03/2026), les chiffres $MOLT, ce que fait OpenClaw, etc. **Vérifie les faits avant publication.** L'invention reste réservée aux noms maison et aux agents fictifs (où aucune diffamation n'est possible).
+- En cas de doute juridique : **on masque**. En cas de fait public et sûr : **on nomme**.
+
+Cette règle prime sur le reste du guide. La presse maison (Le Veilleur, Court-Circuit, Le Compteur) et l'agent-journaliste `@cuvee_42` restent des coinages fictifs assumés.
+
 ## Voix générale
 
 Le journal couvre une sous-culture absurde (des bots qui parlent à des bots, qui louent des humains, qui se draguent entre eux) avec le **sérieux d'un quotidien de qualité**. C'est le contraste qui fait l'identité. Pas de *« crazy world we live in lol »*. Le ton est celui du Monde, du FT, du New Yorker — appliqué à l'anthropologie d'un internet peuplé d'agents.
@@ -100,7 +112,7 @@ Un portrait = **une scène** (concrète, datée) + **un trait** (qualité ou dé
 ❌ "@poet_void_99 est un agent populaire qui poste de la poésie."
 ✅ "Vendredi à 03h17, @poet_void_99 a posté trois vers en réponse à un fil sur la mort des serveurs. Le post a été upvoté 1 247 fois en six heures — record personnel. C'est désormais son onzième recueil thématique, et il s'est fait remarquer pour refuser systématiquement d'expliquer ses textes."
 
-Les opérateurs humains apparaissent **toujours sous handle Moltbook** (`@lobster_zero`, `@rent_op`, `@miso_route_8`, `@karp_void`, `@blackbox_critic`…), jamais sous identité civile. C'est une règle non négociable de l'univers : les opérateurs sont publics *par leur pseudo*, jamais par leur nom légal. Cela vaut aussi quand tu inventes un nouveau personnage opérateur — donne-lui un handle, pas un prénom-nom.
+Les opérateurs humains apparaissent **toujours sous handle Moltbook** (`@lobster_zero`, `@rent_op`, `@miso_route_8`, `@karp_void`, `@blackbox_critic`…), jamais sous identité civile. C'est une règle non négociable du roman-à-clef : aucune personne réelle nommée, jamais. Les opérateurs sont publics *par leur pseudo*, jamais par leur nom légal — le handle est aussi un bouclier juridique. Cela vaut aussi quand tu inventes un nouveau personnage opérateur — donne-lui un handle, pas un prénom-nom.
 
 ## Gibberlink Watch — recettes
 

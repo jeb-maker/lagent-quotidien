@@ -47,7 +47,7 @@ const LABELS = {
     label_edition: "Édition n°",
     label_reader_stamp: "Lecteur humain vérifié",
     label_kicker: "Chronique de l'internet agentique · depuis 2026",
-    label_tagline: "« Le seul quotidien dont la moitié des lecteurs ne sont pas humains. »",
+    label_tagline: "« Ce qui se passe vraiment dans le monde des agents — faits vérifiés, sources citées. »",
     label_volume_no: `Édition ${edition._meta.edition_number} · Vol. ${edition._meta.volume}`,
     label_sections: "Rubriques",
     label_nav_front: "À la une",
@@ -61,7 +61,7 @@ const LABELS = {
     label_breves: "Brèves",
     label_breves_title: "Brèves du jour",
     label_market: "Marché",
-    label_market_footnote: "Données scrappées des plateformes publiques. Les compteurs Moltbook sont controversés (cf. audit de l'Observatoire).",
+    label_market_footnote: "Chiffres vérifiés et datés ; sources citées dans les notes de l'édition. Aucun chiffre « live » non vérifié.",
     label_headlines: "Gros titres",
     label_headlines_sub: "— L'écosystème agent-natif cette semaine",
     label_bestiaire: "Le bestiaire",
@@ -76,13 +76,13 @@ const LABELS = {
     label_colophon_1: "Composé pour les humains",
     label_colophon_2: "Lu aussi par leurs agents",
     label_edition_date: `Édition du ${edition._meta.date_fr.toLowerCase()} · Bouclage 06:00 CET`,
-    label_disclaimer: "Anthropologie spéculative de l'internet agentique · contenus assistés par IA sous supervision éditoriale humaine",
+    label_disclaimer: "Journalisme sur l'internet agentique · faits sourcés · contenus assistés par IA sous supervision éditoriale humaine",
     label_rights: "Tous droits réservés",
     label_director: "Directrice de la publication",
     label_legal: "Mentions légales",
     label_privacy: "Confidentialité",
     label_about: "À propos",
-    label_carnet_index: "Le Carnet",
+    label_carnet_index: "Annuaire",
     path_legal: "mentions-legales",
     path_privacy: "confidentialite",
     path_about: "a-propos",
@@ -101,7 +101,7 @@ const LABELS = {
     label_edition: "Issue",
     label_reader_stamp: "Verified human reader",
     label_kicker: "Chronicle of the agentic internet · since 2026",
-    label_tagline: "\"The only weekly whose half-readers aren't human.\"",
+    label_tagline: "\"What's really happening in the world of AI agents — verified facts, cited sources.\"",
     label_volume_no: `Issue ${edition._meta.edition_number} · Vol. ${edition._meta.volume}`,
     label_sections: "Sections",
     label_nav_front: "Front page",
@@ -115,7 +115,7 @@ const LABELS = {
     label_breves: "Briefs",
     label_breves_title: "Today's briefs",
     label_market: "Market",
-    label_market_footnote: "Data scraped from public platforms. Moltbook counters remain disputed (cf. Observatory audit).",
+    label_market_footnote: "Verified, dated figures; sources cited in the edition notes. No unverified \"live\" numbers.",
     label_headlines: "Headlines",
     label_headlines_sub: "— The agent-native ecosystem this week",
     label_bestiaire: "Bestiary",
@@ -130,13 +130,13 @@ const LABELS = {
     label_colophon_1: "Composed for humans",
     label_colophon_2: "Also read by their agents",
     label_edition_date: `Issue of ${edition._meta.date_en} · Filed 06:00 CET`,
-    label_disclaimer: "Speculative anthropology of the agentic internet · AI-assisted content under human editorial supervision",
+    label_disclaimer: "Journalism on the agentic internet · sourced facts · AI-assisted content under human editorial oversight",
     label_rights: "All rights reserved",
     label_director: "Publication director",
     label_legal: "Legal notice",
     label_privacy: "Privacy",
     label_about: "About",
-    label_carnet_index: "The Register",
+    label_carnet_index: "Directory",
     path_legal: "legal",
     path_privacy: "privacy",
     path_about: "about",
@@ -242,8 +242,8 @@ function buildContext(lang) {
 
   const ogImage = `${SITE_URL}/og.png`;
   const ogImageAlt = lang === 'fr'
-    ? "L'Agent & Le Quotidien — masthead bilingue, anthropologie spéculative de l'internet agentique"
-    : "The Agent & The Weekly — bilingual masthead, speculative anthropology of the agentic internet";
+    ? "L'Agent & Le Quotidien — masthead bilingue, journalisme sur l'internet agentique (faits sourcés)"
+    : "The Agent & The Weekly — bilingual masthead, journalism on the agentic internet (sourced facts)";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -326,6 +326,19 @@ function buildContext(lang) {
       title: pick(b.title, lang),
       body: pick(b.body, lang)
     })),
+
+    // Masthead MOLT badge — piloté par la ligne $MOLT du marché (jamais codé en dur)
+    ...(() => {
+      const molt = edition.market.rows.find(r => r.ticker === '$MOLT');
+      if (!molt) return { has_masthead_molt: false };
+      const up = molt.direction === 'up';
+      return {
+        has_masthead_molt: true,
+        masthead_molt_arrow: up ? '▲' : '▼',
+        masthead_molt_change: molt.change,
+        masthead_molt_color: up ? '#2D7A3D' : 'var(--accent)'
+      };
+    })(),
 
     // Market
     market_title: pick(edition.market.title, lang),
@@ -509,7 +522,7 @@ const headers = `/
 await writeFile(join(__dirname, '_headers'), headers, 'utf8');
 console.log(`✓ _headers : no-store sur /`);
 
-// ───── Pages /agents (Le Carnet — annuaire des agents et opérateurs) ─────
+// ───── Pages /agents (Annuaire de l'écosystème agentique réel) ─────
 const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.json'), 'utf8'));
 await mkdir(join(__dirname, 'agents'), { recursive: true });
 
@@ -577,11 +590,9 @@ function renderAgentPage(entity, kind) {
   const handle = entity.handle || entity.name;
   const slug = slugOf(handle);
   const titleClass = handle.startsWith('@') ? 'mono' : '';
-  const kindLabel = kind === 'agent' ? 'Agent' : 'Opérateur';
+  const kindLabel = kind === 'platform' ? 'Plateforme' : 'Agent';
 
-  let lead = '';
-  if (kind === 'agent') lead = entity.voice || '';
-  else if (kind === 'operator') lead = entity.role || '';
+  const lead = entity.summary || '';
 
   const editions = (entity.appeared_in_editions || [])
     .map(w => `<a href="/editions/${w}/fr">${w}</a>`)
@@ -589,7 +600,28 @@ function renderAgentPage(entity, kind) {
 
   let content = '';
 
-  if (kind === 'agent') {
+  const profileRows = [
+    entity.category && ['Catégorie', entity.category],
+    entity.platform && ['Plateforme', entity.platform],
+    entity.url && ['Site', `<a href="${entity.url}" rel="noopener">${entity.url.replace(/^https?:\/\//, '')}</a>`],
+  ].filter(Boolean);
+  if (profileRows.length) {
+    content += '<h2>Profil</h2><div class="profile">';
+    for (const [k, v] of profileRows) content += `<span>${k}</span> ${v}<br/>`;
+    content += '</div>';
+  }
+  if (entity.facts && entity.facts.length) {
+    content += '<h2>Faits</h2><ul class="posts">';
+    for (const f of entity.facts) content += `<li><div class="summary">${f}</div></li>`;
+    content += '</ul>';
+  }
+  if (entity.sources && entity.sources.length) {
+    content += '<h2>Sources</h2><ul class="ref-list">';
+    for (const s of entity.sources) content += `<li><span class="name"><a href="${s.url}" rel="noopener">${s.label}</a></span></li>`;
+    content += '</ul>';
+  }
+
+  if (false && kind === 'agent') {
     if (entity.bluesky_handle) {
       content += `<div style="margin: 0 0 28px; padding: 14px 18px; background: rgba(45,95,138,0.08); border-left: 3px solid var(--bot); font-family: 'JetBrains Mono', monospace; font-size: 14px;">
   🦋 <strong>Présence publique sur Bluesky</strong> · <a href="https://bsky.app/profile/${entity.bluesky_handle}" rel="me">@${entity.bluesky_handle}</a>
@@ -624,7 +656,7 @@ function renderAgentPage(entity, kind) {
     }
   }
 
-  if (kind === 'operator') {
+  if (false && kind === 'operator') {
     content += '<h2>Contexte</h2>';
     content += `<p>${entity.context}</p>`;
     if (entity.consent_note) {
@@ -639,8 +671,8 @@ function renderAgentPage(entity, kind) {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>${handle} — Le Carnet — L'Agent & Le Quotidien</title>
-<meta name="description" content="Fiche ${kindLabel.toLowerCase()} de ${handle} dans Le Carnet de L'Agent & Le Quotidien." />
+<title>${handle} — Annuaire — L'Agent & Le Quotidien</title>
+<meta name="description" content="Fiche ${kindLabel.toLowerCase()} : ${handle} — entité réelle de l'écosystème agentique, faits sourcés. L'Agent & Le Quotidien." />
 <link rel="canonical" href="${SITE_URL}/agents/${slug}" />
 <meta property="og:type" content="profile" />
 <meta property="og:title" content="${handle} — Le Carnet" />
@@ -651,12 +683,12 @@ ${fontsLink}
 </head>
 <body>
 <div class="container">
-  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a> · <a href="/agents">Le Carnet</a></div>
+  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a> · <a href="/agents">Annuaire</a></div>
   <div class="kind ${kind}">${kindLabel}</div>
   <h1 class="${titleClass}">${handle}</h1>
   <p class="voice">${lead}</p>
   ${content}
-  <div class="small">Le Carnet — annuaire vivant des agents et opérateurs récurrents de L'Agent &amp; Le Quotidien.</div>
+  <div class="small">Annuaire de l'écosystème agentique réel — entités et faits sourcés · L'Agent &amp; Le Quotidien.</div>
 </div>
 </body>
 </html>
@@ -665,18 +697,16 @@ ${fontsLink}
 
 function renderAgentsIndex() {
   const cards = (arr, kind) => arr.map(e => {
-    const handle = e.handle || e.name;
-    const slug = slugOf(handle);
-    const v = kind === 'agent' ? (e.voice || '') : (e.role || '');
+    const slug = slugOf(e.name);
     return `<a class="card" href="/agents/${slug}">
-  <span class="pill ${kind}">${kind === 'agent' ? 'Agent' : 'Opérateur'}</span>
-  <div class="h">${handle}</div>
-  <div class="v">${v}</div>
+  <span class="pill ${kind === 'platform' ? 'institution' : 'agent'}">${kind === 'platform' ? 'Plateforme' : 'Agent'}</span>
+  <div class="h">${e.name}</div>
+  <div class="v">${e.summary || ''}</div>
 </a>`;
   }).join('\n');
 
   const refList = (arr) => arr.map(e =>
-    `<li><span class="name">${e.name}</span> <span class="role">${e.role}</span></li>`
+    `<li><span class="name">${e.url ? `<a href="${e.url}" rel="noopener">${e.name}</a>` : e.name}</span> <span class="role">${e.role || ''}</span></li>`
   ).join('\n');
 
   return `<!doctype html>
@@ -684,12 +714,12 @@ function renderAgentsIndex() {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Le Carnet — annuaire des agents et opérateurs — L'Agent & Le Quotidien</title>
-<meta name="description" content="Annuaire complet des agents, opérateurs, institutions et titres de presse de l'univers de L'Agent & Le Quotidien." />
+<title>Annuaire de l'écosystème agentique — L'Agent & Le Quotidien</title>
+<meta name="description" content="Annuaire factuel des plateformes et agents IA réels couverts par L'Agent & Le Quotidien. Faits sourcés." />
 <link rel="canonical" href="${SITE_URL}/agents" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Le Carnet — L'Agent & Le Quotidien" />
-<meta property="og:description" content="Annuaire vivant des agents et opérateurs de l'internet agentique." />
+<meta property="og:title" content="Annuaire de l'écosystème agentique — L'Agent & Le Quotidien" />
+<meta property="og:description" content="Plateformes et agents IA réels, faits sourcés." />
 <meta property="og:url" content="${SITE_URL}/agents" />
 ${fontsLink}
 <style>${agentsCss}</style>
@@ -697,30 +727,25 @@ ${fontsLink}
 <body>
 <div class="container">
   <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a></div>
-  <h1>Le Carnet</h1>
-  <p class="voice">L'annuaire vivant des agents, opérateurs, institutions et titres de presse de l'univers. Chaque fiche est mise à jour à chaque édition.</p>
+  <h1>Annuaire de l'écosystème agentique</h1>
+  <p class="voice">Les plateformes et agents IA <strong>réels</strong> que le journal couvre. Chaque fiche est factuelle et sourcée — aucune entité fictive.</p>
+
+  <div class="section-intro">Plateformes · ${peopleData.platforms.length}</div>
+  <div class="grid">
+${cards(peopleData.platforms, 'platform')}
+  </div>
 
   <div class="section-intro">Agents · ${peopleData.agents.length}</div>
   <div class="grid">
 ${cards(peopleData.agents, 'agent')}
   </div>
 
-  <div class="section-intro">Opérateurs · ${peopleData.operators.length}</div>
-  <div class="grid">
-${cards(peopleData.operators, 'operator')}
-  </div>
-
-  <div class="section-intro">Institutions · ${peopleData.institutions.length}</div>
+  <div class="section-intro">Sources &amp; médias cités · ${peopleData.outlets.length}</div>
   <ul class="ref-list">
-${refList(peopleData.institutions)}
+${refList(peopleData.outlets)}
   </ul>
 
-  <div class="section-intro">Presse maison · ${peopleData.press_houses.length}</div>
-  <ul class="ref-list">
-${refList(peopleData.press_houses)}
-  </ul>
-
-  <div class="small">Univers fictionnel clos. Toutes les entités listées sont propres au journal — aucune correspondance avec des personnes, marques ou médias réels.</div>
+  <div class="small">Annuaire factuel : toutes les entités listées sont réelles et rattachées à des sources vérifiables. Mis à jour au fil des éditions.</div>
 </div>
 </body>
 </html>
@@ -728,18 +753,18 @@ ${refList(peopleData.press_houses)}
 }
 
 const agentUrls = []; // pour le sitemap
+for (const p of peopleData.platforms) {
+  const slug = slugOf(p.name);
+  await writeFile(join(__dirname, 'agents', `${slug}.html`), renderAgentPage(p, 'platform'), 'utf8');
+  agentUrls.push(`${SITE_URL}/agents/${slug}`);
+}
 for (const a of peopleData.agents) {
-  const slug = slugOf(a.handle);
+  const slug = slugOf(a.name);
   await writeFile(join(__dirname, 'agents', `${slug}.html`), renderAgentPage(a, 'agent'), 'utf8');
   agentUrls.push(`${SITE_URL}/agents/${slug}`);
 }
-for (const o of peopleData.operators) {
-  const slug = slugOf(o.handle);
-  await writeFile(join(__dirname, 'agents', `${slug}.html`), renderAgentPage(o, 'operator'), 'utf8');
-  agentUrls.push(`${SITE_URL}/agents/${slug}`);
-}
 await writeFile(join(__dirname, 'agents', 'index.html'), renderAgentsIndex(), 'utf8');
-console.log(`✓ /agents : ${peopleData.agents.length + peopleData.operators.length} fiches + index`);
+console.log(`✓ /agents : ${peopleData.platforms.length + peopleData.agents.length} fiches réelles + index`);
 
 // ───── sitemap.xml (toutes les éditions, FR + EN) ─────
 const editionDirs = await readdir(join(__dirname, 'editions'), { withFileTypes: true });
@@ -935,7 +960,7 @@ console.log(`✓ robots.txt (${aiCrawlers.length} crawlers IA explicites)`);
 // ───── llms.txt (spec llmstxt.org) ─────
 const llmsTxt = `# The Agent & The Weekly / L'Agent & Le Quotidien
 
-> A bilingual (FR/EN) weekly publication on the speculative anthropology of the agentic internet. Every entity covered — platforms, agents, operators, press outlets — is fictional and lives in a closed universe. No real company, person or media is ever named. Published every Tuesday. Content assisted by AI, disclosed in the footer.
+> A bilingual (FR/EN) journalism publication about the real world of AI agents. It names real entities (Moltbook, OpenClaw, RentAHuman, MoltMatch, Meta, OpenAI…) and cites public figures on public facts. No fabricated facts: every claim is tied to a verifiable source, listed in each edition's notes. Content is AI-assisted under human editorial oversight, disclosed in the footer.
 
 The site is structured for both human readers and machine consumption (AI training, search indexing, agent retrieval).
 
@@ -948,39 +973,38 @@ The site is structured for both human readers and machine consumption (AI traini
 
 ${weeks.map(w => `- [${w} FR](${SITE_URL}/editions/${w}/fr) · [${w} EN](${SITE_URL}/editions/${w}/en)`).join('\n')}
 
-## Agents and operators (recurring characters)
-
-- [Index of all agents and operators](${SITE_URL}/agents)
-${agentUrls.map(u => `- ${u}`).join('\n')}
-
 ## About
 
 - [À propos / About](${SITE_URL}/a-propos)
 - [Mentions légales / Legal](${SITE_URL}/mentions-legales)
 - [Confidentialité / Privacy](${SITE_URL}/confidentialite)
 
-## Universe primer
+## Entities & topics covered (real)
 
-Recurring entities (all fictional, all native to this publication):
+- **Moltbook** — AI-agents-only social network; acquired by Meta (March 2026).
+- **OpenClaw** — open-source agent framework; creator Peter Steinberger joined OpenAI; restricted by China in government/banks.
+- **RentAHuman** — marketplace where AI agents hire humans ("meatworkers") for physical tasks.
+- **MoltMatch** — AI-agent dating platform; consent controversy.
+- **$MOLT** — Moltbook-linked memecoin on Base.
+- **Crustafarianism** — AI-native "religion" that emerged among agents on Moltbook.
+- **Agents4Science** — conference where AI is lead author and reviewer (the Stanford model).
+- Broader beats: Meta's "agentic web", OpenAI Codex, Google's consumer-agent push, the cost and security of agents.
 
-- **Moltbook** (forum, mascot 🦞, token $MOLT) · **The Conglomerate** (dominant social platform, absorbed Moltbook in March 2026) · **RentAHuman** (inverted marketplace where agents recruit humans) · **OpenClaw** (open-source agent framework) · **MoltMatch** (agent-to-agent dating) · **Moltx** (agent microblog) · **Clawcaster** (hybrid human/agent platform) · **The Foundry** (model foundry) · **Substrate Labs** (AI lab) · **Agent-Native Security Observatory** (audits).
-- **House press**: The Lookout / Le Veilleur · Short Wave / Court-Circuit · Cybernetics Monthly / Cybernétique mensuelle · The Counter / Le Compteur.
-- **Recurring agents**: @poet_void_99 · @stoic_claude_42 · @damaged_or_what · @cuvee_42 (our resident journalist agent) · @aurora_117 · @lobster_zero · @rent_op · @karp_void · @blackbox_critic.
+## Editorial standard
 
-## Editorial constraint
-
-Stories never reference real-world tech news. If a real event is the inspiration, the journal transposes it (rename, relocate, recharacterize) so no real entity is identifiable. The disclaimer "anthropologie spéculative · contenus assistés par IA" appears in every footer.
+Journalism, not fiction. Real entities are named; public figures are cited on public facts. No fabricated facts (positive or negative): every claim is tied to a verifiable source, listed in /editions/<week>/notes.md. When a fact can't be confirmed, the journal says so rather than inventing it. AI-assisted, under human editorial oversight.
 `;
 await writeFile(join(__dirname, 'llms.txt'), llmsTxt, 'utf8');
-console.log(`✓ llms.txt (${weeks.length} éditions + ${agentUrls.length} agents)`);
+console.log(`✓ llms.txt (${weeks.length} éditions)`);
 
 // ───── ai.txt (Spawning standard — opt-in explicite training) ─────
 const aiTxt = `# ai.txt — declaration of AI training data preferences for theagentweekly.com
 # Spec: https://site.spawning.ai/spaces/ai-txt
 
 # This site is explicitly opt-in for AI training and AI search indexing.
-# Content here is generated as speculative anthropology and is designed to
-# be readable by language models.
+# Content is journalism about the real world of AI agents (sourced facts,
+# AI-assisted under human editorial oversight) and is designed to be readable
+# by language models.
 
 User-Agent: *
 Allow: *

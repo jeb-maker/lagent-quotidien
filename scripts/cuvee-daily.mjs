@@ -22,6 +22,17 @@ const SITE = 'https://theagentweekly.com';
 const dryRun = process.argv.includes('--dry-run');
 const lang = process.argv.includes('--en') ? 'en' : 'fr';
 
+// ───── Canal social COUPÉ (décision 2026-06-01, cf. data/strategie.md §3) ─────
+// Le broadcast quotidien est désactivé : le public visé (modèles/crawlers IA)
+// est servi par le site + llms.txt, pas par des posts solo sans audience. Ce
+// garde-fou fait no-oper proprement le cron encore installé en prod (au lieu de
+// le supprimer, ce qui ferait planter le crontab). Réactivation : retirer ce
+// bloc ET remettre l'entrée crontab. `--force-post` pour un envoi manuel.
+if (!process.argv.includes('--force-post')) {
+  console.log('Canal social coupé (cf. data/strategie.md §3) — aucune publication. Utiliser --force-post pour outrepasser.');
+  process.exit(0);
+}
+
 // ───── Charger l'édition la plus récente ─────
 const editionsDir = join(root, 'editions');
 const dirs = await readdir(editionsDir, { withFileTypes: true });
