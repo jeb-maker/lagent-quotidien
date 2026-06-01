@@ -46,6 +46,7 @@ Marque : **L'Agent & Le Quotidien** / *The Agent Weekly* — theagentweekly.com.
 | Chose | Emplacement |
 |---|---|
 | Moteur de rendu (0 dépendance) | `render.mjs` · `npm run render -- <week>` · **`npm run render:all`** |
+| **Stratégie figée (à lire en premier — décisions tranchées)** | **`data/strategie.md`** |
 | Boussole éditoriale (à lire avant de composer) | `data/editorial-compass.md` |
 | Cerveau éditorial (rubriques, style) | `prompts/weekly-edition.md`, `prompts/conseil-poc.md` |
 | Éditions | `editions/2026-WXX/{edition.json, fr.html, en.html, notes.md}` |
@@ -59,10 +60,12 @@ Marque : **L'Agent & Le Quotidien** / *The Agent Weekly* — theagentweekly.com.
 | Credentials Bluesky | `~/.config/bluesky-cuvee/session.json` (handle, password, did, jwts) |
 | Credentials Cloudflare | `~/.config/cloudflare/env` (token GraphQL) |
 
-Crons actifs : `0 9 * * *` drift+stats+render+push · `0 21 * * *` post EN ·
-`0 22 * * 0` stats Bluesky détaillées. **Ces crons écrivent et pushent tout
-seuls** — toute modif manuelle doit en tenir compte (ne pas écraser, ne pas
-entrer en conflit de push).
+Crons (état 2026-06-01) : `0 9 * * *` **stats+render+push** (le drift est
+retiré) · `0 22 * * 0` stats Bluesky détaillées. Le **post quotidien
+`0 21 * * *` est COUPÉ** côté contenu (le script no-ope) ; **à retirer du
+crontab de prod** pour éviter une exécution inutile. **Ces crons écrivent et
+pushent tout seuls** — toute modif manuelle doit en tenir compte (ne pas
+écraser, ne pas entrer en conflit de push).
 
 ## 3. État au 2026-05-30 (point de départ)
 
@@ -178,6 +181,39 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
+
+### 2026-06-01 (b) — décisions tranchées : broadcast coupé, drift retiré
+Fait : tranché les décisions ouvertes de `strategie.md` §8. (1) **Canal social
+coupé** : `cuvee-daily.mjs` no-ope (garde-fou `--force-post`), entrée crontab du
+post quotidien à retirer en prod. (2) **Pas de ticker $MOLT** → `daily-drift.mjs`
+**supprimé** et retiré de `cron-drift.sh` (qui ne fait plus que stats+render+push,
+et ne stage plus `edition.json`). Doc alignée : README (cron, X/Bluesky), ce
+fichier, `strategie.md` §7-8.
+À suivre : réécrire `prompts/sources.md` (encore « univers fictionnel clos ») ;
+puis chantier c (collecteur de lecture sûre Moltbook/MoltX/$MOLT/OpenClaw).
+Action **humaine en prod** : retirer du crontab les lignes du post quotidien
+`0 21 * * *` (et l'éventuel `0 16` EN).
+
+### 2026-06-01 — stratégie figée + fin de l'invention $MOLT
+Fait : (1) analysé l'« échec » du dispositif quotidien — production OK,
+distribution KO ; cause profonde : la plomberie quotidienne publiait encore
+l'ancien modèle fictionnel (persona, marché inventé) après le virage du 31/05.
+(2) Tranché et **figé la stratégie dans `data/strategie.md`** : étoile polaire
+(chronique du réel agentique à voix d'agent, pour les IA), public **hybride A+C**
+(modèles/crawlers = socle, agents = pari ; audience humaine broadcast abandonnée),
+registre **faits réels + voix d'agent + provenance lisible** (la fiction « pure »
+= désinformation pour un public de machines). (3) Reclassé le **canal C** :
+lecture OUI (collecteur bête, quarantaine), écriture NON (Moltbook : fuite Wiz
+1,5 M tokens ; MoltX : « trojan horse » exfiltration de clés). (4) Réécrit
+`scripts/daily-drift.mjs` : **ne fabrique plus rien**, lit le cours réel `$MOLT`
+(CoinGecko, gratuit) ou laisse inchangé — jamais d'invention.
+Mesuré : daily-drift est no-op sur W23 (plus de ticker inventé) ; chemin d'échec
+réseau testé (403 → valeur inchangée, pas de crash).
+À suivre (cf. `strategie.md` §7-8) : réécrire `prompts/sources.md` (encore
+« univers fictionnel clos ») ; réaligner les gabarits périmés de
+`cuvee-daily.mjs` ; décider du sort du canal social et de l'affichage du cours
+réel ($MOLT réel ≈ 0,00002 $ vs ≈ 0,85 $ inventé) ; évaluer le retrait de
+daily-drift du cron.
 
 ### 2026-05-31 (b) — doctrine roman-à-clef
 Fait : tranché la collision réel/fiction. La règle « tout est inventé » est
