@@ -145,41 +145,45 @@ Règles dures :
 > ⚠️ **À réaligner** (fichiers restés sur l'ancienne doctrine) :
 > - `prompts/sources.md` — dit encore « univers fictionnel clos, pas de sources
 >   réelles » : **à réécrire** selon ce §6.
-> - `scripts/daily-drift.mjs` — **fait** (2026-06-01) : ne fabrique plus, lit le
->   cours réel `$MOLT` ou ne touche à rien.
-> - `scripts/cuvee-daily.mjs` — gabarits périmés (marché inventé, Gibberlink,
->   errata de persona) à retirer/réaligner si on garde un canal social.
+> - `scripts/daily-drift.mjs` — **supprimé** (2026-06-01, décision §8 : pas de
+>   ticker $MOLT → plus rien à rafraîchir) et retiré de `cron-drift.sh`.
+> - `scripts/cuvee-daily.mjs` — **coupé** (2026-06-01, no-op `--force-post`) :
+>   canal social abandonné.
 
 ---
 
 ## 7. Plan d'action (chantiers)
 
-- **a. Réaligner la plomberie sur la doctrine** *(en cours)*
-  - `daily-drift.mjs` : ✅ ne plus inventer ; lire le cours réel `$MOLT`.
-  - `prompts/sources.md` : réécrire (réel + sourcé).
-  - `cuvee-daily.mjs` : retirer les gabarits périmés.
-- **b. Refondre la forme des posts** (si on garde un canal social) : posts-voix
-  autonomes réagissant à l'actu agentique réelle, sans lien sortant systématique,
-  provenance étiquetée.
-- **c. Lecture sûre des sources primaires** : étendre le collecteur bête à
-  Moltbook/MoltX/$MOLT/OpenClaw (quarantaine, sans credentials).
-- **d. Arrêter ce qui sert le public abandonné** : dégrader/retirer le broadcast
-  Bluesky ; ne pas payer le tier X.
+- **a. Réaligner la plomberie sur la doctrine**
+  - `daily-drift.mjs` : ✅ **supprimé** (plus de fabrication ; pas de ticker).
+  - `cuvee-daily.mjs` : ✅ **coupé** (no-op `--force-post`).
+  - `prompts/sources.md` : ⬜ **à réécrire** (réel + sourcé) — *prochain pas.*
+- **b. Refondre la forme des posts** : ⛔️ **sans objet** (canal social coupé,
+  décision §8). Conservé pour mémoire si un canal est réactivé un jour.
+- **c. Lecture sûre des sources primaires** : ⬜ étendre le collecteur bête à
+  Moltbook/MoltX/$MOLT/OpenClaw (quarantaine, sans credentials). *Chantier suivant.*
+- **d. Arrêter ce qui sert le public abandonné** : ✅ **fait** — broadcast Bluesky
+  coupé, drift retiré, tier X non poursuivi.
 - **e. Figer la stratégie** : ✅ ce document.
 
 ---
 
-## 8. Décisions encore ouvertes
+## 8. Décisions tranchées (2026-06-01)
 
-1. Garde-t-on **un** canal social (lequel ?) pour la voix, ou le site + `llms.txt`
-   suffisent-ils pour le public A ?
-2. Le **cours `$MOLT` réel** s'affiche-t-il tel quel, ou avec un cadre (volatilité
-   memecoin) ? (NB : le réel est de l'ordre de ~0,00002 $, très loin du ~0,85 $
-   *inventé* de l'ancienne arithmétique — l'écart illustre exactement le problème.)
-3. Ordre d'exécution des chantiers a→d.
-4. Faut-il, à terme, **retirer** `daily-drift.mjs` du cron ? Sous la doctrine
-   « hebdo de faits sourcés », sa raison d'être (animer des chiffres inventés au
-   quotidien) a largement disparu.
+1. **Canal social → coupé.** Pas de broadcast quotidien ; le public A (modèles)
+   est servi par le site + `llms.txt`. `cuvee-daily.mjs` no-ope. *(Bluesky reste
+   une source de lecture via `harvest-daily.mjs`.)*
+2. **Ticker `$MOLT` → aucun.** On ne réintroduit pas de ligne de marché. *(NB : le
+   réel est ~0,00002 $, très loin du ~0,85 $ inventé de l'ancienne arithmétique —
+   l'écart illustrait le problème.)*
+3. **`daily-drift.mjs` → supprimé** du dépôt et du cron (corollaire de #2).
+4. **Tier X payant → non.** On ne paie pas pour un canal broadcast abandonné.
+
+### Reste à faire (tâches, pas décisions)
+- ⬜ Réécrire `prompts/sources.md` (encore « univers fictionnel clos »). *Prochain pas.*
+- ⬜ Chantier c : collecteur de lecture sûre (Moltbook/MoltX/$MOLT/OpenClaw).
+- ⬜ **Action humaine en prod** : retirer du crontab la/les ligne(s) du post
+  quotidien (`0 21 * * *`, et l'éventuel `0 16` EN).
 
 ---
 

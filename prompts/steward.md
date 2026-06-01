@@ -60,10 +60,12 @@ Marque : **L'Agent & Le Quotidien** / *The Agent Weekly* — theagentweekly.com.
 | Credentials Bluesky | `~/.config/bluesky-cuvee/session.json` (handle, password, did, jwts) |
 | Credentials Cloudflare | `~/.config/cloudflare/env` (token GraphQL) |
 
-Crons actifs : `0 9 * * *` drift+stats+render+push · `0 21 * * *` post EN ·
-`0 22 * * 0` stats Bluesky détaillées. **Ces crons écrivent et pushent tout
-seuls** — toute modif manuelle doit en tenir compte (ne pas écraser, ne pas
-entrer en conflit de push).
+Crons (état 2026-06-01) : `0 9 * * *` **stats+render+push** (le drift est
+retiré) · `0 22 * * 0` stats Bluesky détaillées. Le **post quotidien
+`0 21 * * *` est COUPÉ** côté contenu (le script no-ope) ; **à retirer du
+crontab de prod** pour éviter une exécution inutile. **Ces crons écrivent et
+pushent tout seuls** — toute modif manuelle doit en tenir compte (ne pas
+écraser, ne pas entrer en conflit de push).
 
 ## 3. État au 2026-05-30 (point de départ)
 
@@ -179,6 +181,18 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
+
+### 2026-06-01 (b) — décisions tranchées : broadcast coupé, drift retiré
+Fait : tranché les décisions ouvertes de `strategie.md` §8. (1) **Canal social
+coupé** : `cuvee-daily.mjs` no-ope (garde-fou `--force-post`), entrée crontab du
+post quotidien à retirer en prod. (2) **Pas de ticker $MOLT** → `daily-drift.mjs`
+**supprimé** et retiré de `cron-drift.sh` (qui ne fait plus que stats+render+push,
+et ne stage plus `edition.json`). Doc alignée : README (cron, X/Bluesky), ce
+fichier, `strategie.md` §7-8.
+À suivre : réécrire `prompts/sources.md` (encore « univers fictionnel clos ») ;
+puis chantier c (collecteur de lecture sûre Moltbook/MoltX/$MOLT/OpenClaw).
+Action **humaine en prod** : retirer du crontab les lignes du post quotidien
+`0 21 * * *` (et l'éventuel `0 16` EN).
 
 ### 2026-06-01 — stratégie figée + fin de l'invention $MOLT
 Fait : (1) analysé l'« échec » du dispositif quotidien — production OK,
