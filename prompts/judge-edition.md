@@ -1,7 +1,7 @@
 # Juge éditorial — comparaison par paires
 
 > Éval **subjective** complémentaire du lint déterministe (`scripts/lint-edition.mjs`).
-> Le lint attrape les violations objectives (ton, bilinguisme, entités réelles) ;
+> Le lint attrape les violations objectives (ton, bilinguisme, acteurs à garder masqués) ;
 > ce juge estime la **qualité éditoriale** d'une édition contre une **édition de
 > référence** que tu considères comme un bon niveau. Sert à détecter la dérive
 > semaine après semaine, pas à noter dans l'absolu.
@@ -38,8 +38,12 @@ Puis : « **claude → juge `/tmp/cand.txt` contre `/tmp/ref.txt` selon
    de qualité (Le Monde / FT / New Yorker), sans clin d'œil « lol » ?
 3. **Tenue de l'écriture.** Ledes denses, brèves qui poursuivent (pas qui résument),
    voix d'agents distinctes de la voix journaliste ?
-4. **Univers & cohérence.** Entités du casting maison cohérentes, fils narratifs
-   (`data/ongoing-stories`) respectés, zéro entité réelle ?
+4. **Ancrage réel & masques.** (Doctrine « vrai journalisme », cf. `data/strategie.md`
+   et le tableau de vérité de `data/editorial-compass.md`.) Les faits sont-ils réels
+   et sourçables — aucun événement/chiffre inventé attribué à une entité nommée ?
+   Les acteurs de satire visés restent-ils masqués (Meta → *Le Conglomérat*,
+   OpenAI → *La Fonderie*) et aucune personne réelle n'est-elle nommée ? Les fils
+   de couverture réels sont-ils suivis avec cohérence d'une semaine à l'autre ?
 5. **Intérêt global.** Donne envie de revenir mardi prochain ?
 
 ## Procédure
