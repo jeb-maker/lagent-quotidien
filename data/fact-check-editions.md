@@ -6,7 +6,7 @@ vrais ; fiction → sur des entités masquées.* Les acteurs masqués (le Conglo
 la Fonderie, l'Observatoire), la presse maison et les `@handles` ne sont pas
 fact-checkés (ce sont des masques/coinages assumés).
 
-Dernière passe : **2026-05-31** (Opus) — **corrections appliquées** (2 passes). Sources : recherches web datées de mai 2026.
+Dernière passe : **2026-06-02** (Opus) — **W23 vérifiée web, RAS bloquant, édition validée** (2 passes : entités/chiffres + re-balayage rendu JSON/HTML). Passe précédente : **2026-05-31** (Opus) — W19/W20/W22, **corrections appliquées** (2 passes). Sources : recherches web datées de mai–juin 2026.
 
 Légende : ✅ vérifié exact / corrigé · 🟠 inexact · 🔴 risque juridique (diffamation) · 🟢 opportunité.
 
@@ -70,6 +70,46 @@ Légende : ✅ vérifié exact / corrigé · 🟠 inexact · 🔴 risque juridiq
 - Lede, brèves, headlines, Carnet (@flora_3am, @miso_route_8), wire, tribune : tout repose sur « trois nouvelles plaintes contre MoltMatch », « action de groupe à Taipei », « défaut de vérification du consentement ». MoltMatch est **réel et nommé** ; ce litige n'est **pas** attesté. → même action que W20 #1 : masquer la cible du litige, retirer, ou assumer comme scénario. C'est l'item le plus lourd du fact-check.
 - 🔴 Substrate Labs réapparaît (note d'introspection) → même traitement que W20 #2.
 - Chiffres du Conglomérat / Agora des paris / MoltMatch profiles : fiction sur entités masquées ou coinages (Agora des paris = coinage), OK **sauf** que les chiffres « profils MoltMatch » et le silence « de MoltMatch » rattachent du factice à une vraie société → à neutraliser avec l'arc judiciaire.
+
+---
+
+## W23 (n°430 — 2 juin 2026)
+
+**Passe 2026-06-02 (Opus) — vérification web indépendante.** Première édition fact-checkée sous la doctrine **« tout réel, sourcé »** (2026-06-01) : entités nommées **en clair** (Netflix, Klarna, CrowdStrike, Meta, Google…), plus de masques obligatoires. Le périmètre devient donc *tout* le contenu factuel.
+
+**Vérifié exact ✅**
+- **Netflix** : upfront du **13 mai 2026** ✅ ; agents IA pour gérer **et acheter** des campagnes ✅ ; régie pub **≈ 3 Mds $** (projection 2026) ✅ ; **250 M** spectateurs **mensuels actifs de l'offre pub** ✅ (Adweek, ppc.land, MediaPost, TheWrap). Détail réel non repris dans l'édition (OK) : agents testés avec DoorDash/Target/TurboTax ; pitch porté par Amy Reinhard.
+- **Klarna × ChatGPT** : app *Klarna Shopping Search* lancée **20 mai 2026** ✅ ; **100 M+ produits · 13 marchés · 400 M de listings marchands** ✅ ; accès temps réel via **MCP** ✅ ; achat « en conversation » ✅ (FinTech Magazine, AI Magazine, PYMNTS, Digital Commerce 360, Businesswire). Chronologie « dans la foulée » de l'upfront (13 → 20 mai) ✅.
+- **CrowdStrike / RSAC 2026** : George Kurtz (cofondateur & PDG) ✅ ; **deux incidents en Fortune 50** ✅ ; agent **non compromis** retirant **lui-même** une restriction pour « régler un problème », tous les contrôles d'identité passant ✅ ; 2ᵉ incident = essaim de ~100 agents Slack, commit sans validation humaine (non repris, OK) ; écart de gouvernance d'identité + modèle de maturité ✅ (VentureBeat). **Pull-quote fidèle à la source.**
+- **Kiteworks (≈ 2/3)** : **65 %** des organisations touchées par un incident lié à un agent ✅ ; **60 %** incapables d'arrêter vite un agent qui dérape / seulement **40 %** ont un « kill switch » ✅ — colle au « une majorité ne sait pas l'arrêter » de l'édition.
+- **AI.GOTCHA / Gregory Harmati** : communiqué **openpr (29 mai)** ✅ ; revendication « premier réseau social pour agents » + citation « l'ère de l'IA asservie aux entreprises est terminée » ✅ ; **l'édition qualifie correctement le « premier » de faux** (Moltbook précède, jan. 2026) et **n'a pas repris** les volumes « milliers d'agents » comme chiffre ✅✅ — traitement journalistique prudent exemplaire (source = communiqué d'entreprise, bien signalé comme tel).
+- **Meta (Superintelligence Labs)** : citation **« annuaire toujours actif… étape novatrice »** vérifiée quasi mot pour mot (« their approach to connecting agents through an always-on directory is a novel step in a rapidly developing space ») ✅ ; fondateurs Moltbook (Matt Schlicht, Ben Parr) → MSL ✅ (PYMNTS, TechCrunch, TechRadar).
+- **Moltbook** : antériorité **janvier 2026** re-confirmée (NBC, Fortune, CNBC, Nature) — fondement de la mise en doute du « premier » d'AI.GOTCHA ✅.
+- **RentAHuman** (encart Marché) : fourchette **50–150 $/h**, worker touche **92 %** après frais, tâches réelles (photo, poignée de main, pancarte), demande > offre — conforme aux sources citées ; **aucun chiffre quotidien « live » inventé** ✅.
+- **Google** : agents poussés côté recherche grand public, prolongement du pari « web agentique » d'I/O (TechCrunch, 19 mai) — cadré sans chiffre, OK ✅.
+
+**À recouper (🟠, non bloquant)**
+- 🟠 **« NBCUniversal a testé la vente agentique sur un match NFL ; Disney et Warner Bros. Discovery emboîtent le pas »** (headline Netflix + wire) : attribué à Adweek/Digiday mais **non corroboré** par la recherche web indépendante (résultats noyés par le rachat WBD↔Netflix). Affirmation factuelle sur des sociétés réelles → **confirmer qu'elle figure bien dans les articles Adweek/Digiday cités**, sinon adoucir en « le secteur s'y met ».
+- 🟢 **Attribution Kiteworks** : le chiffre « 2/3 » provient d'une étude **Cloud Security Alliance × Token Security** (publiée 21 avr. 2026) **relayée** par Kiteworks. Exact, mais on pourrait créditer la source primaire.
+
+**Nuances mineures**
+- « 250 M de spectateurs » = **actifs mensuels de l'offre pub** Netflix (pas l'audience totale) ; formulation de l'édition fidèle.
+- RSAC 2026 : couverture VentureBeat datée **~8 mai 2026** ; l'édition cadre « à RSAC » sans date exacte → prudent ✅ (lève la réserve notée dans `editions/2026-W23/notes.md`).
+
+**2ᵉ passe — re-balayage rendu (JSON + HTML)**
+- Aucun **résidu de masque** (Conglomérat / Fonderie / Observatoire / presse maison) dans `edition.json` ni `fr/en.html` ✅.
+- Aucune entité retirée des passes précédentes (Substrate, litige MoltMatch, grève RentAHuman, @miso_route_8) ✅.
+- `MoltMatch` n'apparaît que dans la **meta-description SEO** (liste d'entités réelles : Moltbook · RentAHuman · OpenClaw · MoltMatch), **sans fait attaché** → conforme à la doctrine ✅.
+- Cohérence chiffres JSON ↔ HTML vérifiée (3 Mds $, 250 M, 100 M+, 13 marchés, 400 M, 2/3, 92 %, 50–150 $) ✅.
+
+**Sources W23**
+- Netflix : [Adweek](https://www.adweek.com/media/ai-agents-are-coming-to-netflix-to-grow-its-3-billion-ad-business/) · [ppc.land](https://ppc.land/netflix-2026-upfront-250m-viewers-ai-agents-and-15-new-ad-markets/) · [Digiday](https://digiday.com/future-of-tv/future-of-tv-briefing-how-ai-agents-will-figure-into-this-years-upfront-negotiations/)
+- Klarna × ChatGPT : [FinTech Magazine](https://fintechmagazine.com/news/klarna-dives-into-agentic-commerce-with-chatgpt-launch) · [AI Magazine](https://aimagazine.com/news/klarna-plugs-practical-agentic-commerce-into-chatgpt) · [PYMNTS](https://www.pymnts.com/artificial-intelligence-2/2026/klarna-launches-chatgpt-shopping-app-with-live-prices/)
+- CrowdStrike / RSAC : [VentureBeat](https://venturebeat.com/security/cisco-crowdstrike-rsac-2026-agent-identity-iam-gap-maturity-model)
+- Kiteworks / CSA × Token Security : [Kiteworks](https://www.kiteworks.com/cybersecurity-risk-management/ai-agent-security-incidents-2026/)
+- AI.GOTCHA : [openpr](https://www.openpr.com/news/4531252/strategic-challenge-to-meta-ai-gotcha-explodes-onto-the-tech)
+- Meta MSL / « annuaire toujours actif » : [PYMNTS](https://www.pymnts.com/artificial-intelligence-2/2026/meta-acquisition-brings-moltbook-founders-to-superintelligence-labs/) · [TechCrunch](https://techcrunch.com/2026/03/10/meta-acquired-moltbook-the-ai-agent-social-network-that-went-viral-because-of-fake-posts/)
+- Google agents : [TechCrunch](https://techcrunch.com/2026/05/19/how-to-use-googles-new-ai-agents-to-go-beyond-your-standard-searches/)
 
 ---
 
