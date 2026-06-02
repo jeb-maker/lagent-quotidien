@@ -1,16 +1,16 @@
 # Guide éditorial
 
-## Doctrine cardinale : le roman-à-clef
+## Doctrine cardinale : tout réel, sourcé
 
-Depuis le 2026-05-31, le journal n'est plus un « univers clos / tout est inventé ». C'est un **roman-à-clef** (doctrine complète : `data/editorial-compass.md`). On **nomme le réel** quand c'est factuel, public et sûr ; on **masque derrière des noms maison** quand c'est juridiquement risqué.
+Depuis le **2026-06-01**, le journal fait du **vrai journalisme** sur l'écosystème agentique (doctrine complète : `data/editorial-compass.md`). Le roman-à-clef (masques obligatoires, personas, sources maison) est **caduc**. La règle tient en une phrase : *tout réel, sourcé.*
 
-- **Nomme le réel** quand c'est factuel et sûr : les plateformes/phénomènes réels de l'écosystème agentique (Moltbook, OpenClaw, RentAHuman, Clawcaster, $MOLT…) sont nommés et commentés tels quels. « Moltbook existe, voici ce qui s'y passe » = du journalisme.
-- **Masque derrière un nom maison** quand c'est risqué : les entreprises et dirigeants réels visés par la satire restent derrière *Le Conglomérat*, *La Fonderie*, *La Place*, la presse maison. Le masque est un bouclier juridique (anti-diffamation, logique LCEN), pas un décor.
-- **Aucune personne réelle nommée**, jamais. Tous sous handle `@xxx`.
-- **Ne fabrique jamais de faits sur des entités réelles.** Puisqu'on les nomme, ce qu'on en dit doit être vrai et sourçable : le rachat de Moltbook par Meta (10/03/2026), les chiffres $MOLT, ce que fait OpenClaw, etc. **Vérifie les faits avant publication.** L'invention reste réservée aux noms maison et aux agents fictifs (où aucune diffamation n'est possible).
-- En cas de doute juridique : **on masque**. En cas de fait public et sûr : **on nomme**.
+- **Nomme le réel.** Les **entités réelles** (plateformes, entreprises) et les **personnes publiques** sont **nommables sur des faits publics et sourcés** : Moltbook, OpenClaw, RentAHuman, $MOLT, Meta, Netflix, Klarna, CrowdStrike, Anthropic… « Voici ce qui s'est passé, voici la source » = du journalisme.
+- **Aucun fait fabriqué**, positif **ou** négatif. Chaque affirmation = une **source vérifiable** (web), datée, listée dans le `notes.md` de l'édition. **Vérifie avant de publier.**
+- 🔴 **Garde-fou diffamation (inchangé).** Jamais de **fait négatif inventé** sur une entité/personne **nommée**. Réel nommé → faits vrais et sourcés ; un faux → on le **retire** et on recompose sur du vérifié.
+- **Le masque devient optionnel** (outil de satire), **jamais une obligation**, et **ne blanchit jamais un faux**. On ne déplace pas un fait douteux derrière un masque : on le **vérifie ou on le coupe**.
+- Quand la réponse manque, on l'écrit (« non confirmé ») — on n'invente pas.
 
-Cette règle prime sur le reste du guide. La presse maison (Le Veilleur, Court-Circuit, Le Compteur) et l'agent-journaliste `@cuvee_42` restent des coinages fictifs assumés.
+Cette règle **prime sur le reste du guide**. Les rubriques purement fictionnelles de l'ère précédente (interview reconstituée, Gibberlink Watch, marché/chiffres inventés, personas `@xxx`, presse maison Le Veilleur/Court-Circuit/Le Compteur) sont **abandonnées** — voix unique = **« La rédaction »**.
 
 ## Voix générale
 
@@ -74,6 +74,8 @@ EN : « The episode raises a hard question. If you're legally responsible for yo
 | Dépêche | 35–55 | 30–50 | Source en exergue, une phrase qui poursuit |
 | Tribune | 280–380 | 260–350 | Trois paragraphes, une thèse, pas une synthèse |
 
+> ⚠️ **Lignes caduques** (doctrine *tout réel, sourcé*) : *Post Moltbook*, *Interview* (reconstituée) et *Gibberlink Watch* sont des rubriques **fictionnelles abandonnées** le 2026-06-01 — conservées dans le tableau pour archive, ne plus produire. Le *Carnet* devient le **people des agents** (vrais agents sourcés, voir recette dédiée).
+
 ## Règles typographiques (FR)
 
 - Guillemets français « » (avec espaces insécables)
@@ -92,7 +94,9 @@ EN : « The episode raises a hard question. If you're legally responsible for yo
 - No Oxford comma unless ambiguous
 - Numbers: "1,800%" with comma, "1.5 million" written out
 
-## L'Entretien — recettes
+## [ARCHIVE — caduc] L'Entretien reconstitué — recettes
+
+> **Rubrique abandonnée le 2026-06-01.** On ne **reconstitue** plus de dialogue : sous la doctrine *tout réel, sourcé*, une « interview » = synthèse de **déclarations publiques réelles**, citées et datées avec leur source. Section conservée pour archive.
 
 L'interview reconstituée est un exercice délicat. Règles :
 
@@ -122,7 +126,9 @@ Un portrait = **une scène datée** + **un marqueur de statut** (abonnés, dotat
 - **Jamais de fait négatif inventé** sur une entité ou une personne nommée (garde-fou diffamation, inchangé). Réel nommé → faits vrais ; un fait non confirmé s'écrit « non confirmé » / « selon son opérateur », on ne tranche pas.
 - **Pas de méta-LLM, pas de morale surplombante.** On observe la comédie sociale des agents avec curiosité ; on ne s'en gausse pas lourdement et on ne s'en alarme pas.
 
-## Gibberlink Watch — recettes
+## [ARCHIVE — caduc] Gibberlink Watch — recettes
+
+> **Rubrique abandonnée le 2026-06-01** (doctrine *tout réel, sourcé*). Section conservée pour archive ; ne plus produire.
 
 Format type :
 - **Le mot/motif** (en gros)
