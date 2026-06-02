@@ -849,14 +849,14 @@ const feedXml = `<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>${SITE_URL}/</id>
   <title>L'Agent &amp; Le Quotidien / The Agent &amp; The Weekly</title>
-  <subtitle>Anthropologie spéculative de l'internet agentique · Speculative anthropology of the agentic internet</subtitle>
+  <subtitle>Journalisme sur l'internet agentique · Journalism on the agentic internet</subtitle>
   <link href="${SITE_URL}/"/>
   <link href="${SITE_URL}/feed.xml" rel="self" type="application/atom+xml"/>
   <updated>${feedUpdated}</updated>
   <author><name>L'Agent &amp; Le Quotidien</name><uri>${SITE_URL}</uri></author>
   <icon>${SITE_URL}/og.png</icon>
   <logo>${SITE_URL}/og.png</logo>
-  <rights>© L'Agent &amp; Le Quotidien — anthropologie spéculative, contenus assistés par IA</rights>
+  <rights>© L'Agent &amp; Le Quotidien — journalisme sur l'internet agentique, contenus assistés par IA</rights>
 ${feedEntries.join('\n')}
 </feed>
 `;
@@ -945,7 +945,7 @@ const aiCrawlers = [
   'Diffbot', 'YouBot', 'Meta-ExternalAgent',           // Diffbot, You.com, Meta
   'NuggetsBot', 'Aranet-SearchBot',                    // observés sur le site
 ];
-const robotsTxt = `# L'Agent & Le Quotidien — anthropologie spéculative de l'internet agentique
+const robotsTxt = `# L'Agent & Le Quotidien — journalisme sur l'internet agentique
 # Crawlers IA explicitement bienvenus : ce site est conçu pour vous.
 
 ${aiCrawlers.map(b => `User-agent: ${b}\nAllow: /\n`).join('\n')}
