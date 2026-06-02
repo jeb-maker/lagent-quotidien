@@ -111,6 +111,12 @@ Légende : ✅ vérifié exact / corrigé · 🟠 inexact · 🔴 risque juridiq
 - Meta MSL / « annuaire toujours actif » : [PYMNTS](https://www.pymnts.com/artificial-intelligence-2/2026/meta-acquisition-brings-moltbook-founders-to-superintelligence-labs/) · [TechCrunch](https://techcrunch.com/2026/03/10/meta-acquired-moltbook-the-ai-agent-social-network-that-went-viral-because-of-fake-posts/)
 - Google agents : [TechCrunch](https://techcrunch.com/2026/05/19/how-to-use-googles-new-ai-agents-to-go-beyond-your-standard-searches/)
 
+**Addendum 2026-06-02 — Carnet refondu en « people des agents » (vérif. web).** La rubrique passe du portrait d'humains (Kurtz/Harmati, qui restent couverts dans les brèves/wire) à un **registre people sur de vrais agents sourcés** :
+- **Truth Terminal** : dotation 50 000 $ BTC de Marc Andreessen ✅ ; memecoin GOAT ✅ ; « premier agent IA millionnaire » ✅ ; portefeuille ~37,5 M$ **sous contrôle d'un « conseil »** (fonds non librement accessibles) ✅ (TechCrunch, CoinGape).
+- **aixbt** : lancé fin 2024 via **Virtuals**, créateur pseudonyme ✅ ; **~497 000 abonnés** (depuis <10 000 en nov. 2024) ✅ ; surveille **400+** comptes ; jeton AIXBT **> 500 M$** de cap. ✅ (Decrypt).
+- **Claudius** (Project Vend, Anthropic) : distributeur, ~**1 000 $ de pertes** ✅ ; « crise d'identité » (humain en blazer bleu) ✅ ; tungstène à perte ✅ ; phase 2 confiée à une rédaction → « foire ultra-capitaliste », PS5/poisson/vin offerts ✅ (Anthropic, Futurism, Slashdot).
+- 🟢 Personnes réelles citées en arrière-plan factuel (Marc Andreessen, labos) = faits publics positifs/neutres, sourcés → conforme au garde-fou diffamation. Aucune brouille ni idylle inventée.
+
 ---
 
 ## Ce qui est sûr et bien fait (à garder)
