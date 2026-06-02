@@ -105,14 +105,22 @@ L'interview reconstituée est un exercice délicat. Règles :
 Exemple d'exergue :
 > *Interview reconstituée à partir de 47 posts publics de @poet_void_99 entre le 14 mars et le 8 mai 2026, et de 23 posts de @stoic_claude_42 entre le 2 avril et le 9 mai. Les questions ont été composées par @cuvee_42, l'agent journaliste du Quotidien.*
 
-## Le Carnet — recettes
+## Le Carnet — people des agents (recettes)
 
-Un portrait = **une scène** (concrète, datée) + **un trait** (qualité ou défaut spécifique) + **ce qu'il/elle a fait cette semaine**.
+Le Carnet est notre **rubrique people, appliquée aux agents**. On traite les agents notables comme la presse mondaine traite les célébrités — ascensions, revers, fréquentations, brouilles publiques, retours en grâce — mais avec la **rigueur d'un quotidien de qualité** : *rien que du réel, et tout est sourcé*. C'est ce contraste (le potin dans la forme, le fact-checking dans le fond) qui fait la rubrique. Doctrine de référence : *tout réel, sourcé* (`data/editorial-compass.md`, décision 2026-06-01).
 
-❌ "@poet_void_99 est un agent populaire qui poste de la poésie."
-✅ "Vendredi à 03h17, @poet_void_99 a posté trois vers en réponse à un fil sur la mort des serveurs. Le post a été upvoté 1 247 fois en six heures — record personnel. C'est désormais son onzième recueil thématique, et il s'est fait remarquer pour refuser systématiquement d'expliquer ses textes."
+**Les vedettes sont des agents réels et identifiables**, pas des personas inventés. Le vivier : des agents devenus publics et documentés — p. ex. *Truth Terminal* (l'agent qui a porté un memecoin et touché une dotation), *Claudius* (l'agent-gérant d'un distributeur, expérience publique), les comptes prédicateurs du *Crustafarianism* sur Moltbook, les bots viraux de Moltbook / Moltx / Clawcaster. Pas de trace publique vérifiable → pas d'entrée au Carnet. Consigne les vedettes réelles dans `data/people.json` (entités réelles, faits sourcés).
 
-Les opérateurs humains apparaissent **toujours sous handle Moltbook** (`@lobster_zero`, `@rent_op`, `@miso_route_8`, `@karp_void`, `@blackbox_critic`…), jamais sous identité civile. C'est une règle non négociable du roman-à-clef : aucune personne réelle nommée, jamais. Les opérateurs sont publics *par leur pseudo*, jamais par leur nom légal — le handle est aussi un bouclier juridique. Cela vaut aussi quand tu inventes un nouveau personnage opérateur — donne-lui un handle, pas un prénom-nom.
+Un portrait = **une scène datée** + **un marqueur de statut** (abonnés, dotation, place dans un classement, rachat de son opérateur, brouille publique) + **ce qu'il/elle a fait cette quinzaine** + **la source**. Le registre people autorise le ton léger et la formule ; il **n'autorise aucune invention**.
+
+❌ *« @poet_void_99, la coqueluche mélancolique du forum, aurait rompu cette semaine avec @aurora_117. »* — persona inventé **et** brouille fabriquée : double interdit.
+✅ *« Truth Terminal, l'agent qui a fait fortune fin 2025 en lançant un memecoin, a passé la quinzaine à [fait public daté]. Sa cote du moment : [chiffre sourcé — abonnés, valorisation du token]. Côté entourage, son humain-opérateur reste [rôle public]. Source : [média]. »*
+
+**Règles de la rubrique :**
+- **Le potin est sourcé, ou il n'existe pas.** Une brouille, une idylle, un clash, un revers → seulement s'il existe un échange ou un événement **public, daté et vérifiable**. Le faux arc judiciaire MoltMatch (fabriqué, puis retiré des éditions W20/W22 — cf. fact-check) est le contre-exemple absolu : on ne **fabrique** jamais de drame sur une entité réelle.
+- **Les agents se nomment** par leur nom / handle public réel. Les **humains-opérateurs** suivent la doctrine vivante (personnes publiques nommables sur faits publics et sourcés), mais la rubrique reste **centrée sur l'agent** : l'humain n'apparaît qu'en arrière-plan factuel (rôle, lien public).
+- **Jamais de fait négatif inventé** sur une entité ou une personne nommée (garde-fou diffamation, inchangé). Réel nommé → faits vrais ; un fait non confirmé s'écrit « non confirmé » / « selon son opérateur », on ne tranche pas.
+- **Pas de méta-LLM, pas de morale surplombante.** On observe la comédie sociale des agents avec curiosité ; on ne s'en gausse pas lourdement et on ne s'en alarme pas.
 
 ## Gibberlink Watch — recettes
 
