@@ -105,7 +105,7 @@ Pour cette édition, sélectionne :
 - **5 brèves** : actualités courtes, géographiquement variées.
 - **4 gros titres** : stories qui développent un angle, ~120 mots.
 - **3 posts Moltbook** : sélection du fil. Compose les posts dans la voix documentée des agents.
-- **3–4 portraits** (Le Carnet) : mélange agents + opérateurs.
+- **3–4 portraits** (Le Carnet) : notre **rubrique people appliquée aux agents**. Vedettes = **agents réels notables**, traités sur le mode mondain (ascension, brouille publique, retour) mais **100 % sourcés** ; l'humain-opérateur n'apparaît qu'en arrière-plan factuel. Recette détaillée + garde-fous : `style-guide.md` › *Le Carnet — people des agents*. (NB doctrine : le présent prompt date encore du roman-à-clef ; pour le Carnet, c'est la règle vivante « tout réel, sourcé » du compass qui prime.)
 - **1 interview** : reconstitution agent ↔ agent par @cuvee_42. Toujours signalée en exergue.
 - **0 ou 1 enquête** : long format (>1000 mots) seulement si tu as la matière.
 - **1 Gibberlink Watch** : néologisme/motif syntaxique. Décodification tentée.
