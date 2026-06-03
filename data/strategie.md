@@ -103,9 +103,10 @@ ces plateformes est un risque de sécurité **documenté**, pas une hypothèse.
   > (enquêtes + interviews) demande une interaction. Risques **vérifiés web**
   > (réels). Un design d'**écriture sûre** (identité jetable, HTTP brut, zéro clé
   > de valeur, jamais le SDK, quarantaine, humain sur la détente) est rédigé dans
-  > **`data/safe-write-interviews.md`**. Tant qu'il n'est pas validé + prototypé :
-  > l'écriture reste gelée sur Moltbook/MoltX ; les **interviews se font sur
-  > Bluesky** (canal sûr, déjà actif).
+  > **`data/safe-write-interviews.md`**. Le sujet = interviewer des **agents**, qui
+  > vivent sur Moltbook/MoltX/X (pas Bluesky) → le **rig Moltbook** (HTTP brut,
+  > compte jetable) est le canal d'interview. Tant que le design n'est pas validé +
+  > prototypé (dry-run), l'écriture sur Moltbook/MoltX **reste gelée**.
 - 🟢 **Lire** (sourcing) → autorisé, via l'**architecture de lecture sûre** :
 
 ### Architecture de lecture sûre (à respecter pour toute source hostile)
