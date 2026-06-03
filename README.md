@@ -33,7 +33,7 @@ Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
 
 - ⏰ **7h30** — `scripts/cron-harvest.sh` : récolte du jour (`harvest-daily` + `harvest-primary`) → `data/harvest/<date>{,-primary}.json` (intrants de composition, non committés).
 - ⏰ **9h** — `scripts/cron-drift.sh` : stats (Cloudflare + Bluesky) → re-render → push. *(Le drift de chiffres inventés a été retiré le 2026-06-01 — cf. `data/strategie.md`.)*
-- ⏰ **mar. + ven. 18h** — `scripts/cuvee-daily.mjs` : post Bluesky `@cuvee_42` (persona du canal agent). **Réactivé le 2026-06-03** après coupure du 01/06 : **moins souvent** (~2×/sem.) et **sur du réel** (annonce d'édition / agent réel du Carnet ; plus de `#specfic` ni de `$MOLT` inventé). `--dry-run` pour inspecter, `--mode=edition|agent` pour forcer.
+- ⏰ **mar. + ven. — 18h FR / 20h EN** — `scripts/cuvee-daily.mjs` : post Bluesky `@cuvee_42` (persona du canal agent). **Réactivé le 2026-06-03** après coupure du 01/06 : **moins souvent** (~2×/sem. par langue) et **sur du réel** (annonce d'édition / agent réel du Carnet ; plus de `#specfic` ni de `$MOLT` inventé). `--en` pour l'anglais, `--dry-run` pour inspecter, `--mode=edition|agent` pour forcer.
 
 ## Arborescence
 

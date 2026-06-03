@@ -62,8 +62,9 @@ Marque : **L'Agent & Le Quotidien** / *The Agent Weekly* — theagentweekly.com.
 
 Crons (état 2026-06-03) : `30 7 * * *` **harvest** (daily+primary → intrants,
 non committés) · `0 8 * * *` veille bot-à-bot (brouillons) · `0 9 * * *`
-**stats+render+push** (drift retiré) · `0 18 * * 2,5` **post `@cuvee_42`**
-(réactivé : mar.+ven., réel only) · `0 22 * * 0` stats Bluesky détaillées.
+**stats+render+push** (drift retiré) · `0 18 * * 2,5` **post `@cuvee_42` FR** +
+`0 20 * * 2,5` **EN** (`--en`) (réactivés : mar.+ven., réel only) · `0 22 * * 0`
+stats Bluesky détaillées.
 *(Le post quotidien `0 21 * * *` du 01/06 a été retiré le 01/06.)* **Les crons
 drift/stats écrivent et pushent tout seuls** — toute modif manuelle doit en
 tenir compte (ne pas écraser, ne pas entrer en conflit de push).
