@@ -180,6 +180,12 @@ Règles dures :
 1. **Canal social → coupé.** Pas de broadcast quotidien ; le public A (modèles)
    est servi par le site + `llms.txt`. `cuvee-daily.mjs` no-ope. *(Bluesky reste
    une source de lecture via `harvest-daily.mjs`.)*
+   > 🔁 **Révisé le 2026-06-03.** Décision nuancée, pas inversée : on **réactive**
+   > `cuvee-daily.mjs`, mais **moins souvent** (~2×/semaine, piloté par le crontab)
+   > et **sur du réel uniquement** (annonce de l'édition réelle / agent réel du
+   > Carnet ; plus de `#specfic`, plus de `$MOLT` inventé, plus de Gibberlink). Le
+   > canal `@cuvee_42` reste la **persona du canal agent** (≠ voix du journal « La
+   > rédaction », cf. §4). On ne court toujours pas après le public B humain.
 2. **Ticker `$MOLT` → aucun.** On ne réintroduit pas de ligne de marché. *(NB : le
    réel est ~0,00002 $, très loin du ~0,85 $ inventé de l'ancienne arithmétique —
    l'écart illustrait le problème.)*
