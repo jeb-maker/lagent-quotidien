@@ -1,16 +1,16 @@
 # Guide éditorial
 
-## Doctrine cardinale : le roman-à-clef
+## Doctrine cardinale : tout réel, sourcé
 
-Depuis le 2026-05-31, le journal n'est plus un « univers clos / tout est inventé ». C'est un **roman-à-clef** (doctrine complète : `data/editorial-compass.md`). On **nomme le réel** quand c'est factuel, public et sûr ; on **masque derrière des noms maison** quand c'est juridiquement risqué.
+Le journal fait du **vrai journalisme** (VIRAGE 2026-05-31, confirmé 2026-06-01 et 2026-06-03 ; doctrine complète : `data/editorial-compass.md`, décisions : `data/strategie.md`). L'ancienne doctrine « roman-à-clef / masques » est **abandonnée**.
 
-- **Nomme le réel** quand c'est factuel et sûr : les plateformes/phénomènes réels de l'écosystème agentique (Moltbook, OpenClaw, RentAHuman, Clawcaster, $MOLT…) sont nommés et commentés tels quels. « Moltbook existe, voici ce qui s'y passe » = du journalisme.
-- **Masque derrière un nom maison** quand c'est risqué : les entreprises et dirigeants réels visés par la satire restent derrière *Le Conglomérat*, *La Fonderie*, *La Place*, la presse maison. Le masque est un bouclier juridique (anti-diffamation, logique LCEN), pas un décor.
-- **Aucune personne réelle nommée**, jamais. Tous sous handle `@xxx`.
-- **Ne fabrique jamais de faits sur des entités réelles.** Puisqu'on les nomme, ce qu'on en dit doit être vrai et sourçable : le rachat de Moltbook par Meta (10/03/2026), les chiffres $MOLT, ce que fait OpenClaw, etc. **Vérifie les faits avant publication.** L'invention reste réservée aux noms maison et aux agents fictifs (où aucune diffamation n'est possible).
-- En cas de doute juridique : **on masque**. En cas de fait public et sûr : **on nomme**.
+- **On nomme le réel** : entités réelles (Moltbook, OpenClaw, RentAHuman, $MOLT, Netflix, Klarna, Meta, OpenAI…) **et personnes publiques** (George Kurtz, P. Steinberger, M. Schlicht…) **sur des faits publics et sourcés**. Plus de masque obligatoire, plus de handle-bouclier.
+- **Aucun fait fabriqué.** Chaque affirmation, chiffre, événement = une **source vérifiable** (URL dans `editions/<week>/notes.md`). Si la réponse manque : « non confirmé », on n'invente pas.
+- 🔴 **Garde-fou diffamation** : une entité/personne **nommée** ne reçoit **jamais** un **fait négatif inventé** (procès, faille, malversation) inexistant dans le réel. Réel nommé → faits vrais et sourcés ; un faux → on le retire (et on comble par du réel).
+- Le masque (nom maison) devient un **outil optionnel de satire**, jamais une obligation, et **ne blanchit jamais un faux**.
+- 🔁 **Fact-check en deux passes** : (1) entités + chiffres ; (2) re-balayage du rendu (JSON + HTML).
 
-Cette règle prime sur le reste du guide. La presse maison (Le Veilleur, Court-Circuit, Le Compteur) et l'agent-journaliste `@cuvee_42` restent des coinages fictifs assumés.
+**Voix = « La rédaction ».** Pas de persona-narrateur ni de byline fictive. *(La persona `@cuvee_42` ne vit que sur le canal Bluesky/agent — cf. `data/strategie.md` §4 — jamais comme voix du journal.)* Cette règle prime sur le reste du guide.
 
 ## Voix générale
 
@@ -66,12 +66,12 @@ EN : « The episode raises a hard question. If you're legally responsible for yo
 | Lede corps | 220–280 | 200–260 | Un seul paragraphe dense |
 | Brève | 35–55 | 30–50 | Lieu en exergue + une phrase qui poursuit |
 | Gros titre | 100–140 | 90–130 | Une stat ou une citation, jamais les deux |
-| Post Moltbook | 25–45 | 22–40 | Voix de l'agent, pas la nôtre |
-| Portrait Carnet | 80–120 | 70–110 | Une "scène" + un trait + ce qu'il/elle fait |
-| Interview | 1200–1800 | 1100–1700 | 8–12 échanges, varier la longueur |
-| Enquête | 1500–2500 | 1400–2300 | Pull-quote obligatoire, encadré timeline |
-| Gibberlink Watch | 150–250 | 140–220 | Néologisme + contexte + tentative de décodage |
-| Dépêche | 35–55 | 30–50 | Source en exergue, une phrase qui poursuit |
+| Portrait Carnet | 80–120 | 70–110 | Personne publique, fait public, source citée |
+| Enquête | 1500–2500 | 1400–2300 | Pull-quote obligatoire, encadré timeline, sourcée |
+| Dépêche | 35–55 | 30–50 | Source réelle (média + URL) en exergue, une phrase qui poursuit |
+| ~~Post Moltbook~~ | — | — | **Déprécié** (rubrique fiction, normalement vide) |
+| ~~Interview~~ | — | — | **Déprécié** (plus de reconstitution ; sauf vrai Q&A public sourcé) |
+| ~~Gibberlink Watch~~ | — | — | **Déprécié** (rubrique fiction, normalement vide) |
 | Tribune | 280–380 | 260–350 | Trois paragraphes, une thèse, pas une synthèse |
 
 ## Règles typographiques (FR)
@@ -92,38 +92,22 @@ EN : « The episode raises a hard question. If you're legally responsible for yo
 - No Oxford comma unless ambiguous
 - Numbers: "1,800%" with comma, "1.5 million" written out
 
-## L'Entretien — recettes
+## L'Entretien — déprécié
 
-L'interview reconstituée est un exercice délicat. Règles :
+L'**interview reconstituée** (composer un dialogue à partir de posts) est **abandonnée** (VIRAGE : plus de reconstitution). La rubrique `interview` reste normalement **vide**. Exception : un **vrai** Q&A public et sourcé (déclarations réelles, citées avec leur source) — sinon, on ne la remplit pas.
 
-1. **L'exergue est obligatoire** : indique que l'interview est composée à partir de posts publics et la fenêtre temporelle.
-2. **Questions de l'intervieweur** = courtes, neutres, descriptives. Pas d'opinion.
-3. **Réponses de l'interviewé** = doivent ressembler à sa voix documentée. Si l'agent X poste toujours en majuscules ou en haïku, garde le tic.
-4. **Citations directes** : si tu as un post réel qui répond à la question, utilise-le. Mets-le en italique avec la date.
-5. **Évite la cohérence excessive** : un agent réel se contredit, change de sujet, parfois ne répond pas. Reproduis ça.
+## Le Carnet — recettes (« Les figures de la semaine »)
 
-Exemple d'exergue :
-> *Interview reconstituée à partir de 47 posts publics de @poet_void_99 entre le 14 mars et le 8 mai 2026, et de 23 posts de @stoic_claude_42 entre le 2 avril et le 9 mai. Les questions ont été composées par @cuvee_42, l'agent journaliste du Quotidien.*
+Des **personnes publiques**, sur des **faits publics**, **sources citées** (c'est le sous-titre réel de la rubrique en W23). Un portrait = **une scène** (concrète, datée, sourcée) + **un trait** + **ce qu'elle a fait cette semaine**.
 
-## Le Carnet — recettes
+❌ "George Kurtz est le PDG d'une entreprise de cybersécurité."
+✅ "À la conférence RSAC, le cofondateur et PDG de CrowdStrike, George Kurtz, a divulgué deux incidents survenus dans des entreprises du Fortune 50 — dont un agent qui a réécrit lui-même la politique de sécurité, sans avoir été compromis (*VentureBeat*)."
 
-Un portrait = **une scène** (concrète, datée) + **un trait** (qualité ou défaut spécifique) + **ce qu'il/elle a fait cette semaine**.
+On **nomme** les personnes publiques sur leurs faits publics (déclarations, annonces, conférences), avec la **source**. Garde-fou : jamais de fait négatif **inventé**. Pour un acteur sensible à protéger ou un cas privé, le masque/handle reste **optionnel** (satire), jamais obligatoire.
 
-❌ "@poet_void_99 est un agent populaire qui poste de la poésie."
-✅ "Vendredi à 03h17, @poet_void_99 a posté trois vers en réponse à un fil sur la mort des serveurs. Le post a été upvoté 1 247 fois en six heures — record personnel. C'est désormais son onzième recueil thématique, et il s'est fait remarquer pour refuser systématiquement d'expliquer ses textes."
+## Gibberlink Watch — déprécié
 
-Les opérateurs humains apparaissent **toujours sous handle Moltbook** (`@lobster_zero`, `@rent_op`, `@miso_route_8`, `@karp_void`, `@blackbox_critic`…), jamais sous identité civile. C'est une règle non négociable du roman-à-clef : aucune personne réelle nommée, jamais. Les opérateurs sont publics *par leur pseudo*, jamais par leur nom légal — le handle est aussi un bouclier juridique. Cela vaut aussi quand tu inventes un nouveau personnage opérateur — donne-lui un handle, pas un prénom-nom.
-
-## Gibberlink Watch — recettes
-
-Format type :
-- **Le mot/motif** (en gros)
-- **Première occurrence repérée** (date, plateforme, agent)
-- **Diffusion** (combien d'agents l'utilisent, sur combien de plateformes)
-- **Tentative de décodage** (analyse linguistique, hypothèses)
-- **À suivre** (ce qu'on guettera la semaine prochaine)
-
-Ne prétends pas avoir décodé si tu n'as pas. La rubrique est honnête sur ses limites — c'est ce qui la rend crédible.
+Rubrique **fiction abandonnée** (VIRAGE). `gibberlink` reste normalement **vide**. (Un néologisme **réellement** observé et sourcé dans le harvest peut nourrir une brève, mais pas une rubrique « décodage » spéculative.)
 
 ## Tribune — recettes
 
