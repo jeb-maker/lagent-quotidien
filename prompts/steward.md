@@ -182,6 +182,38 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
 
+### 2026-06-03 (b) — cerveau de composition réaligné (weekly-edition + style-guide)
+Fait : réécrit les deux prompts qui pilotent la composition des éditions, restés
+sur l'ancienne doctrine fiction (roman-à-clef, masques, presse maison, personas,
+interviews **reconstituées**, Gibberlink, marché inventé). Désormais alignés sur
+« tout réel, sourcé » + voix « La rédaction » + format réel de W23 :
+`prompts/weekly-edition.md` (règle cardinale, voix, rubriques = lede/brèves/
+headlines/**Chiffres vérifiés**/Carnet « figures de la semaine »/wire/tribune ;
+interview·gibberlink·bestiaire·bot_posts laissés VIDES ; sourcing + notes.md +
+fact-check 2 passes) ; `prompts/style-guide.md` (doctrine cardinale réécrite,
+rubriques fiction dépréciées dans la table des longueurs, recettes Entretien/
+Carnet/Gibberlink refaites — Carnet = personnes publiques + faits publics +
+sources). Calé sur le format réel constaté dans `editions/2026-W23/edition.json`.
+Mesuré : 0 résidu de doctrine fiction (grep roman-à-clef/masqu/presse maison/
+reconstitu) hors mentions explicites « abandonné/déprécié » ; `@cuvee_42` ne
+subsiste que pointé vers le canal Bluesky.
+À suivre : chantier B (brancher `harvest-primary.mjs` dans le flux d'édition).
+
+### 2026-06-03 — voix : rôles séparés (journal « La rédaction » vs persona canal @cuvee_42)
+Fait : levé la dernière contradiction de doctrine. Constat factuel : les 4 éditions
+publiées (W19/W20/W22/W23) signent déjà **« La rédaction »** (0 occurrence de `cuvee`
+dans les `edition.json`), alors que `strategie.md`/`sources.md` présentaient encore
+`@cuvee_42` comme « la voix du journal, seul facteur différenciant ». Décision humaine :
+**séparer les deux rôles** — signature du **journal** = « La rédaction » ; `@cuvee_42`
+= persona du **canal Bluesky/agent** uniquement (dialogue bot-à-bot, `bot-dialogue-*`).
+Aligné : `strategie.md` (§2 étoile polaire + §4), `prompts/sources.md` (§ voix +
+méthode : « composer à la voix La rédaction », retrait du « masques en place »).
+Mesuré : éditions et compass déjà conformes, inchangés.
+À suivre (HORS périmètre, signalé) : `prompts/weekly-edition.md` et
+`prompts/style-guide.md` sont encore sur l'**ancienne doctrine fiction** (interviews
+**reconstituées** par @cuvee_42, personas, Gibberlink) que le VIRAGE a supprimée →
+réalignement plus large à planifier. Puis chantier B (brancher `harvest-primary.mjs`).
+
 ### 2026-06-01 (d) — doctrine tranchée : « tout réel, sourcé » (fin du masque)
 Fait : levé la contradiction réel/masqué que les outils QA réalignés avaient
 fait remonter (lint WARN sur « Meta » et « George Kurtz » dans W23, alors que
