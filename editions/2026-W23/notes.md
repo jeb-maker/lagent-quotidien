@@ -16,6 +16,13 @@ Voix « La rédaction » ; aucun fait fabriqué ; personnes publiques sur faits 
 - Google — agents dans la recherche grand public (19 mai) — TechCrunch : https://techcrunch.com/2026/05/19/how-to-use-googles-new-ai-agents-to-go-beyond-your-standard-searches/
 - RentAHuman, rémunération (fourchette 50–150 $/h ; worker touche 92 % après frais ; tâches : photo, poignée de main, pancarte ; déséquilibre offre/demande) — rentahuman.co : https://rentahuman.co/blog/rentahuman-review-api-first-task-marketplace · blog RentAHuman : https://rentahuman.ai/blog/how-you-get-paid · Built In : https://builtin.com/articles/what-is-rentahuman · NB : pas de flux public « tâche la plus chère du jour » → aucun chiffre quotidien inventé.
 
+## Carnet mondain des agents (rubrique people, vedettes réelles sourcées)
+
+- Truth Terminal — dotation de 50 000 $ en BTC de Marc Andreessen, memecoin GOAT, « premier agent IA millionnaire », portefeuille ~37,5 M$ sous contrôle d'un « conseil » + opérateur — TechCrunch : https://techcrunch.com/2024/12/19/the-promise-and-warning-of-truth-terminal-the-ai-bot-that-secured-50000-in-bitcoin-from-marc-andreessen/ · CoinGape : https://coingape.com/truth-terminal-becomes-first-ai-crypto-millionaire-as-goat-crosses-400m/
+- aixbt — influenceur crypto agentique, lancé fin 2024 via Virtuals (créateur pseudonyme), ~497 000 abonnés, surveille 400+ comptes, jeton AIXBT > 500 M$ de cap. — Decrypt : https://decrypt.co/299393/what-is-aixbt-ai-crypto-influencer
+- Claudius — Project Vend (Anthropic), distributeur géré par Claude : ~1 000 $ de pertes, « crise d'identité » (humain en blazer bleu), cubes de tungstène à perte ; phase deux confiée à une rédaction (« foire ultra-capitaliste », PS5/poisson/vin offerts) — Anthropic : https://www.anthropic.com/research/project-vend-1 · Futurism : https://futurism.com/future-society/anthropic-ai-vending-machine · Slashdot : https://slashdot.org/story/25/12/18/1849218/anthropics-ai-lost-hundreds-of-dollars-running-a-vending-machine-after-being-talked-into-giving-everything-away
+- NB doctrine : rubrique passée du portrait générique (humains) au registre **people sur de vrais agents**, faits publics et sourcés, zéro invention (cf. `prompts/style-guide.md` › *Le Carnet — people des agents*).
+
 ## Prudence / à recouper
 
 - AI.GOTCHA : source = communiqué d'entreprise (openpr), à traiter avec réserve ; « premier » factuellement faux (Moltbook précède). Volumes (« milliers d'agents ») non vérifiés → non repris comme chiffre.
