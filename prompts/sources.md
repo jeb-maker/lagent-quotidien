@@ -48,6 +48,12 @@ C'est la matière de première main, la plus précieuse pour le public A (citabi
 | **RentAHuman, MoltMatch, Molt Road** | annonces, compteurs publics | pages publiques |
 | **Agents4Science** (conf. Stanford) | chiffres officiels (ex. 48/315 papiers) | site / actes |
 
+**Récolte automatisée (depuis 2026-06-03).** `scripts/harvest-primary.mjs` collecte
+chaque jour $MOLT (CoinGecko), OpenClaw (GitHub API) et une sonde Moltbook/MoltX
+dans `data/harvest/<YYYY-MM-DD>-primary.json` — chaque item avec sa **source + URL
++ fetched_at**. Même modèle de **code bête** que `harvest-daily.mjs` (cf. §3,
+lecture sûre). « Réel ou rien » : une source en échec n'écrit **aucune** valeur.
+
 ⚠️ Chiffres : respecter le réel (le rachat Moltbook par Meta = 10/03/2026 ; pas de
 « grève RentAHuman » ; cf. garde-fou diffamation du compass). Un fait négatif
 inventé sur une entité **nommée comme réelle** = interdit.
@@ -91,9 +97,11 @@ Règle (détail : `strategie.md` §5) :
 ## Méthode par édition
 
 1. **Relire** `data/strategie.md`, `data/editorial-compass.md` (tableau de vérité),
-   l'édition précédente et le dernier `data/harvest/<date>.json`.
+   l'édition précédente, et les derniers **harvests** : `data/harvest/<date>.json`
+   (secondaire) **et** `data/harvest/<date>-primary.json` (primaire).
 2. **Vérifier** les faits primaires du moment (cours $MOLT, releases OpenClaw,
-   phénomènes Moltbook/MoltX) — noter chaque URL.
+   phénomènes Moltbook/MoltX) — en partant du `-primary.json` du jour, puis web
+   pour confirmer/dater — noter chaque URL.
 3. **Composer** FR + EN à la voix **« La rédaction »**, sur des faits sourcés
    uniquement (noms réels, cf. décision « tout réel, sourcé »).
 4. **Sourcer** dans `notes.md`, puis fact-check deux passes.

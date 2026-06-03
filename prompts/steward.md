@@ -182,6 +182,22 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
 
+### 2026-06-03 (c) — chantier B : harvest branché dans le flux d'édition
+Fait : le collecteur primaire (`harvest-primary.mjs`, PR #7) ne servait à rien —
+ni planifié, ni lu par la composition. (1) **Production** : créé
+`scripts/cron-harvest.sh` (forgiving + flock, calqué sur cron-drift) qui lance
+chaque jour `harvest-daily.mjs` puis `harvest-primary.mjs`. Ne committe/pushe
+RIEN : les JSON sont des **intrants** locaux de composition (la traçabilité
+publiée reste `editions/<week>/notes.md`). (2) **Consommation** : `sources.md`
+(§1 récolte auto + méthode : lire `<date>-primary.json`) et `weekly-edition.md`
+(« Avant de commencer » lit les 2 harvests ; étape 1 « pars des harvests du jour »).
+Mesuré : run réel 2026-06-03 OK — harvest-daily (bluesky 19/HN 2/RSS 10 ; arxiv
+429 isolé, non bloquant) + harvest-primary ($MOLT 0,00001383 $, OpenClaw 15,
+MoltX échec → aucune valeur). `bash -n` OK.
+À suivre : **ajouter la ligne crontab en prod** (`30 7 * * *` cron-harvest.sh,
+avant le drift de 9 h) ; option future : un `harvest-digest.mjs` qui condense les
+2 fichiers pour la session de composition.
+
 ### 2026-06-03 (b) — cerveau de composition réaligné (weekly-edition + style-guide)
 Fait : réécrit les deux prompts qui pilotent la composition des éditions, restés
 sur l'ancienne doctrine fiction (roman-à-clef, masques, presse maison, personas,
