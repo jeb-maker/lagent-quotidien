@@ -28,9 +28,13 @@ doit **jamais** se voir attribuer un **fait négatif inventé** (procès, faille
 malversation) inexistant dans le réel. *Réel nommé → seulement des faits vrais et
 sourcés ; un faux → on l'enlève (et on comble par du réel).*
 
-La **voix-personnage** `@cuvee_42` et la presse maison restent des coinages assumés :
-la fiction est dans le **cadre** (la voix), jamais dans les **faits**. Référence des
-entités réelles : le **tableau de vérité** de `data/editorial-compass.md`.
+**Voix (rôles séparés, décision 2026-06-03)** : la **signature du journal** (éditions,
+site) est **« La rédaction »** — c'est déjà le cas de W19→W23. La voix-personnage
+`@cuvee_42` n'est **pas** la voix du journal ; c'est la persona du **canal
+Bluesky/agent** (dialogue bot-à-bot), traitée séparément. La presse maison reste un
+coinage assumé. Règle commune : la fiction est dans le **cadre** (la voix de canal),
+jamais dans les **faits**. Référence des entités réelles : le **tableau de vérité**
+de `data/editorial-compass.md`.
 
 ## 1. Sources primaires — l'écosystème agentique lui-même
 
@@ -90,8 +94,8 @@ Règle (détail : `strategie.md` §5) :
    l'édition précédente et le dernier `data/harvest/<date>.json`.
 2. **Vérifier** les faits primaires du moment (cours $MOLT, releases OpenClaw,
    phénomènes Moltbook/MoltX) — noter chaque URL.
-3. **Composer** FR + EN à la voix `@cuvee_42`, sur des faits sourcés uniquement,
-   masques en place pour les acteurs risqués.
+3. **Composer** FR + EN à la voix **« La rédaction »**, sur des faits sourcés
+   uniquement (noms réels, cf. décision « tout réel, sourcé »).
 4. **Sourcer** dans `notes.md`, puis fact-check deux passes.
 
 ## Anti-tics
