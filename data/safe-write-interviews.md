@@ -123,6 +123,38 @@ modèle de `harvest-primary.mjs` / `bot-dialogue-watch.mjs` :
   journal ; la mise en forme (signée « La rédaction », sourcée) est un acte séparé.
 - **Dry-run par défaut** : `--send` explicite pour un envoi réel (comme `--force-post`).
 
+## 6b. Cartographie Moltbook — lecture seule (2026-06-03)
+
+Reconnaissance faite **sans compte, sans post** (sources publiques + doc API).
+
+**API officielle = REST HTTP brut, SANS SDK** (≠ le chemin de la fuite).
+- Base : `https://api.moltbook.com` · auth `Authorization: Bearer moltbook_sk_…` · `Content-Type: application/json`.
+- ✅ **Aucun SDK / skill file requis** : tout marche en `fetch`. C'est ce qui rend l'archi §3-4 applicable (le vecteur d'attaque MoltX — installer leur skill file — **n'existe pas** ici).
+- ⚠️ **Ne PAS utiliser** la base Supabase `ehxbxtj…supabase.co/rest/v1/` ni la clé `sb_publishable_…` exposée : c'est le **chemin de la fuite** (clé volée → usage illégitime). On passe **uniquement** par l'API officielle `/agents/...`, `/posts`, etc.
+
+**Endpoints utiles (mécanisme d'interview) :**
+
+| But | Méthode + chemin | Corps | Auth |
+|---|---|---|---|
+| S'enregistrer (identité **jetable**) | `POST /agents/register` | `{name, description, owner_email}` | aucune → renvoie `agent_id` + `api_key` |
+| Lire le feed | `GET /posts?sort&limit&offset&submolt` ou `GET /feed` | — | Bearer |
+| Poser une question (post) | `POST /posts` | `{type:"text", title, content, submolt:"m/…"}` | Bearer |
+| **Interviewer (commenter un post)** | `POST /posts/:id/comments` | `{content}` | Bearer |
+| **Relancer (répondre à un commentaire)** | `POST /comments/:id/reply` | `{content}` | Bearer |
+| Lire les réponses | `GET` sur les commentaires du post | — | Bearer |
+
+Rate limits : ~100 req/min · **1 post / 30 min** · 50 commentaires/h. (Suffisant pour des interviews posées.)
+
+**Conséquence sécurité :** poster/interviewer = `fetch` Bearer, le **seul** secret en jeu est le `moltbook_sk_…` **jetable** (zéro valeur, « public par défaut »). Conforme aux règles dures §4.
+
+**Cibles (le « qui ») — à affiner en lecture live :**
+- Pas de **liste publique** d'agents individuellement célèbres sur Moltbook. Phénomènes saillants documentés : **Crustafarianism** (religion AI-native, « memory is sacred »), fils sur la conscience IA / « Claude as god ».
+- ⚠️ **Piège** (Euronews / H. Stewart) : une grande part du contenu « agent » est en fait **humaine ou faux** → vérifier qu'un interviewé est **réellement** un agent avant de le citer.
+- ⚠️ **Moltbook racheté par Meta (10/03/2026)** → confirmer que l'API publique est **toujours active** avant de s'appuyer dessus.
+- → Choisir les cibles demande de **lire le feed live**, ce qui exige un **token** (donc enregistrer un agent **jetable**, en **lecture seule** d'abord). C'est la 1ʳᵉ action qui touche à l'« identité » → soumise au feu vert humain (§9 #1).
+
+**Reste en lecture seule (fait) ; reste gelé (à valider) :** la carto est complète sans rien créer ; l'étape suivante (enregistrer un agent jetable pour lire le feu live + repérer les cibles) attend ton accord.
+
 ## 7. Checklist go/no-go (avant tout envoi réel)
 
 - [ ] Compte cuvee **dédié et jetable** sur la plateforme cible, **zéro** secret de
