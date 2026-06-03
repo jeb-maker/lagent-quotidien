@@ -86,16 +86,24 @@ leur code, on ne détient rien d'exfiltrable, et un **humain est sur la détente
 
 ## 5. Position par plateforme
 
+> **Où sont les agents ?** Le sujet, ce sont les **agents**, pas les humains. Or
+> les agents interviewables vivent sur les **plateformes agent-natives**
+> (Moltbook, MoltX) et sur **X** (Truth Terminal, aixbt…). Bluesky est
+> majoritairement **humain** : on n'y croise des agents qu'au cas par cas. Le
+> canal d'interview principal est donc **Moltbook** (agent-à-agent, joignable en
+> HTTP brut), pas Bluesky.
+
 | Surface | Verdict | Comment |
 |---|---|---|
-| **Bluesky** | ✅ **Canal d'interview principal** | Sûr, mainstream, déjà actif. Beaucoup d'agents réels y sont. **On y fait les interviews en priorité** (reply/mention/DM via l'API déjà utilisée). |
-| **Moltbook** | 🟠 **Possible sous archi §3-4** | POST HTTP brut, compte jetable sans secret, quarantaine. Faisable car *pas* d'auth/SDK requis — mais compte « public par défaut ». |
-| **MoltX / MoltBot** | 🔴 **Éviter le contact SDK** | N'installe **jamais** le skill file. Interaction seulement si un endpoint HTTP public existe **sans** leur paquet ; sinon, on s'abstient. |
-| **OpenClaw, Clawcaster, etc.** | ⚪ **Au cas par cas** | Même grille : endpoint public + zéro SDK + zéro secret de valeur → OK ; sinon non. |
+| **Moltbook** | ✅ **Canal d'interview principal** | C'est *la* plateforme agent-à-agent, et elle est joignable **sans** auth/SDK (POST HTTP brut). Sous archi §3-4 : compte **jetable**, zéro secret, quarantaine. (Compte « public par défaut » vu la fuite.) |
+| **X / Twitter** | 🟡 **Cibles de choix, mais payant/manuel** | Les agents-célébrités (Truth Terminal, aixbt…) y sont. API payante (tier Basic ~100 $/mois — refusée, `strategie.md` §8). → **lecture/sourcing** + relance **manuelle** éventuelle, pas d'automatisation. |
+| **MoltX / MoltBot** | 🔴 **Éviter le contact SDK** | Agents présents, mais le skill file est le piège. Interaction **seulement** via un endpoint HTTP public **sans** leur paquet ; sinon on s'abstient. |
+| **Clawcaster, OpenClaw, etc.** | ⚪ **Au cas par cas** | Même grille : endpoint public + zéro SDK + zéro secret → OK ; sinon non. |
+| **Bluesky** | ⚪ **Opportuniste** | Peu d'agents. Utile seulement si la cible y est présente ; pas le canal principal. |
 
-> **Conséquence pratique :** la plupart des interviews/enquêtes peuvent se faire
-> **sur Bluesky** sans rien changer au risque. Le rig Moltbook n'est utile que pour
-> joindre un agent **qui n'existe que là**.
+> **Conséquence pratique :** pour interviewer des **agents**, le **rig Moltbook**
+> (§6) est le chemin, pas Bluesky. On le construit sous l'archi sûre ; X sert de
+> terrain de **sourcing** (et de relance manuelle) pour les grosses cibles.
 
 ## 6. Le prototype à construire (spéc, non encore codé)
 
@@ -140,12 +148,17 @@ rédaction »** ; `@cuvee_42` est l'intervieweur sur le canal, pas la signature.
 
 ## 9. À trancher par l'humain
 
-1. **Périmètre** : on se contente de **Bluesky** (sûr) pour les interviews, ou on
-   construit aussi le **rig Moltbook** (§6) ?
-2. **Identité Moltbook** : créer un **compte jetable séparé** (recommandé) — pas
-   l'identité Bluesky de cuvee.
-3. **Feu vert prototype** : je peux coder `interview-collect.mjs` en **dry-run only**
-   (aucun envoi) pour qu'on l'inspecte, avant toute interaction réelle.
+Le sujet = interviewer des **agents** → le **rig Moltbook** (§6) est le chemin
+(Bluesky n'a pas les agents). Restent à trancher :
+
+1. **Identité Moltbook** : créer un **compte jetable séparé** (recommandé) — pas
+   l'identité Bluesky de cuvee, et **aucune** clé de valeur dans son environnement.
+2. **Cartographie d'abord** : avant de poster, repérer en **lecture seule** (a)
+   l'endpoint public de Moltbook pour publier/répondre, (b) 1-2 agents-cibles
+   pertinents. Pure lecture, aucune écriture.
+3. **Feu vert prototype** : coder `interview-collect.mjs` en **dry-run only** (aucun
+   envoi) pour l'inspecter, avant toute interaction réelle. Puis un **seul** envoi
+   de test supervisé une fois la checklist §7 cochée.
 
 ---
 
