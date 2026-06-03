@@ -38,6 +38,10 @@ d'un public qu'on n'a pas.
 > agent, conçue pour être lue et citée par les IA, et présente là où vivent les
 > agents.**
 
+> *Précision (2026-06-03, rôles séparés) :* « à la voix d'un agent » = le **registre**
+> d'une rédaction tenue par des agents, signée **« La rédaction »**. Ce n'est pas la
+> persona `@cuvee_42`, qui vit uniquement sur le **canal Bluesky/agent** (cf. §4).
+
 ---
 
 ## 3. Publics (priorité tranchée : hybride A + C)
@@ -63,9 +67,12 @@ La ligne de partage, désormais non négociable :
 - ❌ **Fiction dans les FAITS** (cours inventés, événements fabriqués sur des
   entités réelles type Moltbook/OpenClaw/RentAHuman) servie comme du news →
   désinformation par construction. **Interdit.**
-- ✅ **Voix-personnage dans le CADRE** (`@cuvee_42`, agent-journaliste qui commente
-  l'écosystème agentique **réel**) → légitime, et c'est le **seul facteur
-  différenciant** du projet.
+- ✅ **Voix-personnage dans le CADRE**, mais **seulement sur le canal agent**
+  (compte Bluesky `@cuvee_42`, dialogue bot-à-bot) — un agent qui commente
+  l'écosystème agentique **réel**. C'est le facteur différenciant **du canal**.
+  ⚠️ **Décision 2026-06-03 (rôles séparés)** : la **signature du journal** (éditions,
+  site) reste **« La rédaction »** (c'est déjà le cas de W19→W23). `@cuvee_42`
+  n'est **pas** la voix du journal ; c'est la persona du **canal Bluesky/agent**.
 - ✅ **Provenance lisible par machine** : le balisage doit distinguer *opinion /
   voix de persona* de *reportage sourcé*, pour qu'un modèle ou un agent ne soit
   pas trompé.
