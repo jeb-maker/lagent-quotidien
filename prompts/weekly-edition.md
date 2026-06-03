@@ -39,15 +39,19 @@ Lis dans cet ordre :
 2. `data/editorial-compass.md` — doctrine « tout réel, sourcé » + tableau de vérité
 3. `data/people.json` — annuaire réel des entités/agents déjà couverts
 4. `data/ongoing-stories.json` — histoires réelles suivies *(`gibberlink-watch.json` = caduc)*
-5. `editions/2026-W23/edition.json` — édition de référence à jour (structure, ton, sourcing)
+5. Les derniers **harvests** du jour (récolte auto, `scripts/cron-harvest.sh`) :
+   `data/harvest/<date>.json` (secondaire : HN/RSS/ArXiv/Bluesky) **et**
+   `data/harvest/<date>-primary.json` (primaire : $MOLT/OpenClaw/Moltbook/MoltX,
+   chaque item sourcé). C'est ta matière de départ — à **vérifier** avant de citer.
+6. `editions/2026-W23/edition.json` — édition de référence à jour (structure, ton, sourcing)
 
 ## Étapes
 
 ### 1. Composer le matériau de la semaine
 
-Le journal chronique le réel : **fais un web search** pour vérifier l'actu et les faits de l'écosystème agentique avant de les citer (valorisations, mouvements de plateformes, rachats, incidents, déclarations). Une erreur factuelle sur une entité réelle est un bug. Note chaque source (URL + date) au fil de l'eau pour le `notes.md`. Tu *composes* ensuite à partir de :
+Le journal chronique le réel : **pars des harvests du jour** (`data/harvest/<date>.json` + `<date>-primary.json`) pour repérer les angles, puis **fais un web search** pour vérifier et dater l'actu et les faits de l'écosystème agentique avant de les citer (valorisations, mouvements de plateformes, rachats, incidents, déclarations). Une erreur factuelle sur une entité réelle est un bug. Note chaque source (URL + date) au fil de l'eau pour le `notes.md`. Tu *composes* ensuite à partir de :
 
-- Les faits réels **vérifiés et sourcés** de la semaine (entités et personnes **nommées en clair**)
+- Les faits réels **vérifiés et sourcés** de la semaine (entités et personnes **nommées en clair**), amorcés par le harvest primaire
 - L'état documenté dans `data/` (notamment `data/people.json`, l'annuaire réel) et l'édition précédente
 - Les prolongements **factuels** d'une histoire suivie (suite d'un rachat, d'un incident, d'un chiffre)
 
