@@ -60,12 +60,13 @@ Marque : **L'Agent & Le Quotidien** / *The Agent Weekly* — theagentweekly.com.
 | Credentials Bluesky | `~/.config/bluesky-cuvee/session.json` (handle, password, did, jwts) |
 | Credentials Cloudflare | `~/.config/cloudflare/env` (token GraphQL) |
 
-Crons (état 2026-06-01) : `0 9 * * *` **stats+render+push** (le drift est
-retiré) · `0 22 * * 0` stats Bluesky détaillées. Le **post quotidien
-`0 21 * * *` est COUPÉ** côté contenu (le script no-ope) ; **à retirer du
-crontab de prod** pour éviter une exécution inutile. **Ces crons écrivent et
-pushent tout seuls** — toute modif manuelle doit en tenir compte (ne pas
-écraser, ne pas entrer en conflit de push).
+Crons (état 2026-06-03) : `30 7 * * *` **harvest** (daily+primary → intrants,
+non committés) · `0 8 * * *` veille bot-à-bot (brouillons) · `0 9 * * *`
+**stats+render+push** (drift retiré) · `0 18 * * 2,5` **post `@cuvee_42`**
+(réactivé : mar.+ven., réel only) · `0 22 * * 0` stats Bluesky détaillées.
+*(Le post quotidien `0 21 * * *` du 01/06 a été retiré le 01/06.)* **Les crons
+drift/stats écrivent et pushent tout seuls** — toute modif manuelle doit en
+tenir compte (ne pas écraser, ne pas entrer en conflit de push).
 
 ## 3. État au 2026-05-30 (point de départ)
 
@@ -181,6 +182,20 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
+
+### 2026-06-03 (d) — canal @cuvee_42 réactivé : moins souvent, sur du réel
+Fait : décision humaine de **réactiver l'écriture** sur Bluesky `@cuvee_42` (coupée
+le 01/06) — mais **moins souvent** et **sur du réel**. Réécrit `scripts/cuvee-daily.mjs` :
+retiré le garde-fou no-op + TOUTE la fiction (`#specfic`/`#nearfuturefiction`,
+templates Gibberlink/Entretien/marché-`$MOLT`, errata « Conglomérat », embed
+« fictional weekly »). Deux modes réels : `edition` (mardi = annonce de l'édition,
+lede+dek réels) / `agent` (autre jour = un agent réel du Carnet : Truth Terminal/
+aixbt/Claudius, tagline + extrait). Cadence pilotée crontab `0 18 * * 2,5` (mar.+ven.).
+Bio Bluesky **conservée** (choix humain). Doc alignée : `strategie.md` §8 (décision #1
+révisée, pas inversée), README (cron + réactivation), ce fichier.
+Mesuré : dry-run FR/EN OK (édition n°430 réelle ; Truth Terminal) ; 0 résidu fiction
+dans le contenu (les seuls hits grep sont des commentaires qui documentent le retrait).
+À suivre : ajouter la ligne crontab en prod ; surveiller la traction réelle.
 
 ### 2026-06-03 (c) — chantier B : harvest branché dans le flux d'édition
 Fait : le collecteur primaire (`harvest-primary.mjs`, PR #7) ne servait à rien —
