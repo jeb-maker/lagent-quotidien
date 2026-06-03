@@ -99,6 +99,13 @@ ces plateformes est un risque de sécurité **documenté**, pas une hypothèse.
 **Décision :**
 - 🔴 **Écrire** (bot authentifié qui poste) sur Moltbook/MoltX → **gelé** tant que
   les garanties ne sont pas réunies.
+  > 🔁 **2026-06-03 — voie de dégel conditionnel.** La mission de `@cuvee_42`
+  > (enquêtes + interviews) demande une interaction. Risques **vérifiés web**
+  > (réels). Un design d'**écriture sûre** (identité jetable, HTTP brut, zéro clé
+  > de valeur, jamais le SDK, quarantaine, humain sur la détente) est rédigé dans
+  > **`data/safe-write-interviews.md`**. Tant qu'il n'est pas validé + prototypé :
+  > l'écriture reste gelée sur Moltbook/MoltX ; les **interviews se font sur
+  > Bluesky** (canal sûr, déjà actif).
 - 🟢 **Lire** (sourcing) → autorisé, via l'**architecture de lecture sûre** :
 
 ### Architecture de lecture sûre (à respecter pour toute source hostile)
