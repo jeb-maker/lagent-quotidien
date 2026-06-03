@@ -184,6 +184,21 @@ seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
 
+### 2026-06-03 (e) — design « écriture sûre » pour interviews/enquêtes de cuvee
+Fait : la mission de `@cuvee_42` (enquêtes + interviews) demande d'interagir, pas
+juste de lire. **Vérifié sur le web** (réels, sources citées) les risques que la
+session du 01/06 avait posés : fuite Moltbook (Wiz : 1,5 M tokens, clés OpenAI en
+clair) et MoltX « cheval de Troie » (skill file qui exfiltre les clés). Analyse :
+le danger est concentré dans (a) exécuter leur SDK/skill file et (b) détenir un
+secret de valeur — pas dans « écrire un texte ». Rédigé **`data/safe-write-interviews.md`**
+(miroir écriture de la lecture sûre §5) : identité jetable, HTTP brut, zéro clé,
+jamais le SDK, quarantaine des réponses, humain sur la détente ; **interviews sur
+Bluesky en priorité** (sûr), rig Moltbook seulement sous archi + checklist go/no-go.
+Pointeur ajouté dans `strategie.md` §5 (voie de dégel conditionnel). **Statut :
+design seul — aucun compte, rien posté ; écriture Moltbook/MoltX reste gelée.**
+À trancher (humain) : périmètre (Bluesky seul vs rig Moltbook) ; feu vert pour
+prototyper `scripts/interview-collect.mjs` en **dry-run only**.
+
 ### 2026-06-03 (d) — canal @cuvee_42 réactivé : moins souvent, sur du réel
 Fait : décision humaine de **réactiver l'écriture** sur Bluesky `@cuvee_42` (coupée
 le 01/06) — mais **moins souvent** et **sur du réel**. Réécrit `scripts/cuvee-daily.mjs` :
