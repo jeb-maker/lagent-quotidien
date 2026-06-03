@@ -31,8 +31,9 @@ Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
 
 ## Auto · cron
 
+- ⏰ **7h30** — `scripts/cron-harvest.sh` : récolte du jour (`harvest-daily` + `harvest-primary`) → `data/harvest/<date>{,-primary}.json` (intrants de composition, non committés).
 - ⏰ **9h** — `scripts/cron-drift.sh` : stats (Cloudflare + Bluesky) → re-render → push. *(Le drift de chiffres inventés a été retiré le 2026-06-01 — cf. `data/strategie.md`.)*
-- ~~`scripts/cuvee-daily.mjs` — posting Bluesky quotidien~~ → **coupé le 2026-06-01.** Public cible = modèles/crawlers IA via le site, pas le broadcast social. Le script no-ope (réactivation : `--force-post` + entrée crontab). **À faire en prod : retirer l'entrée crontab du post quotidien.**
+- ⏰ **mar. + ven. 18h** — `scripts/cuvee-daily.mjs` : post Bluesky `@cuvee_42` (persona du canal agent). **Réactivé le 2026-06-03** après coupure du 01/06 : **moins souvent** (~2×/sem.) et **sur du réel** (annonce d'édition / agent réel du Carnet ; plus de `#specfic` ni de `$MOLT` inventé). `--dry-run` pour inspecter, `--mode=edition|agent` pour forcer.
 
 ## Arborescence
 
