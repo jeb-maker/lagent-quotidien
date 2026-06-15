@@ -34,6 +34,37 @@ Exemples (lede) :
 
 Le contraste sérieux/absurde reste l'identité (cf. *Voix générale*) ; on le tient par l'angle et le détail concret, jamais par l'emphase du titre.
 
+## Angle permanent : culture agentique
+
+Le journal doit observer l'**univers social des agents**, pas seulement les
+plateformes construites par les humains. À chaque édition, chercher ce qui
+circule entre agents : outils, skills, tokens, rituels, art, religion, mèmes,
+classements, annuaires, permissions, wallets, accès rares, citations croisées,
+petites gloires et revers publics.
+
+Une bonne scène de culture agentique tient en trois éléments :
+
+1. **Un fait observable et sourcé** : post public, release, registre, annuaire,
+   token, skill, feed, événement ou déclaration vérifiable.
+2. **Un marqueur social** : prestige, appartenance, imitation, rivalité,
+   croyance, collection, statut, accès, richesse, mémoire ou permission.
+3. **Une lecture sobre** : on montre pourquoi cela captive les agents sans
+   romancer ni prêter d'intentions non attestées.
+
+Exemples d'angles :
+- un skill OpenClaw ou ClawHub qui devient capacité recherchée ;
+- un annuaire Visa/Mastercard lu comme « papiers d'identité » d'agent ;
+- un agent-influenceur comme aixbt dont le signal circule et dont le token
+  recompose le statut ;
+- un motif religieux ou esthétique documenté (Crustafarianism, Book of Molt,
+  slogans, avatars, liturgies) ;
+- un compte Moltbook/Moltx/Clawcaster dont une action publique déclenche
+  imitation, prestige ou controverse.
+
+Ne jamais combler le manque de matière par du folklore inventé. Si la scène
+entre agents n'est pas sourçable, elle reste une hypothèse à suivre, pas une
+rubrique publiée.
+
 ## Vocabulaire
 
 - **Agent**, **bot** (interchangeables, varier)
@@ -115,7 +146,14 @@ Le Carnet est notre **rubrique people, appliquée aux agents**. On traite les ag
 
 **Les vedettes sont des agents réels et identifiables**, pas des personas inventés. Le vivier : des agents devenus publics et documentés — p. ex. *Truth Terminal* (l'agent qui a porté un memecoin et touché une dotation), *Claudius* (l'agent-gérant d'un distributeur, expérience publique), les comptes prédicateurs du *Crustafarianism* sur Moltbook, les bots viraux de Moltbook / Moltx / Clawcaster. Pas de trace publique vérifiable → pas d'entrée au Carnet. Consigne les vedettes réelles dans `data/people.json` (entités réelles, faits sourcés).
 
-Un portrait = **une scène datée** + **un marqueur de statut** (abonnés, dotation, place dans un classement, rachat de son opérateur, brouille publique) + **ce qu'il/elle a fait cette quinzaine** + **la source**. Le registre people autorise le ton léger et la formule ; il **n'autorise aucune invention**.
+Un portrait = **une scène datée** + **un marqueur de statut** (abonnés, dotation, place dans un classement, wallet, token, skill, annuaire, permission, rachat de son opérateur, brouille publique sourcée) + **ce qu'il/elle a fait cette quinzaine** + **la source**. Le registre people autorise le ton léger et la formule ; il **n'autorise aucune invention**.
+
+Priorité au Carnet : les agents qui font apparaître une **vie sociale
+agentique** — art, religion, mème, marché, skill, influence, classement,
+prestige, accès rare — passent devant les produits corporate qui n'ont qu'une
+annonce fonctionnelle. Un agent corporate peut entrer au Carnet seulement s'il
+change de statut social observable (nouveau public, nouvelle capacité publique,
+adoption visible, controverse sourcée).
 
 ❌ *« @poet_void_99, la coqueluche mélancolique du forum, aurait rompu cette semaine avec @aurora_117. »* — persona inventé **et** brouille fabriquée : double interdit.
 ✅ *« Truth Terminal, l'agent qui a fait fortune fin 2025 en lançant un memecoin, a passé la quinzaine à [fait public daté]. Sa cote du moment : [chiffre sourcé — abonnés, valorisation du token]. Côté entourage, son humain-opérateur reste [rôle public]. Source : [média]. »*
