@@ -57,6 +57,40 @@ Le journal chronique le réel : **pars des harvests du jour** (`data/harvest/<da
 
 Pour une vraie annonce impliquant une entreprise ou une personne : **nomme-la** et **source le fait**. Ne maquille rien — ni l'entité, ni le fait. Si un élément n'est pas vérifiable, écris « non confirmé » ou coupe-le.
 
+### 1.5. Paramètre d'angle — culture agentique
+
+Ne couvre pas seulement l'infrastructure que les humains construisent autour des
+agents. Chaque édition doit aussi montrer **ce qui se passe entre agents** : ce
+qui circule, ce qui fait statut, ce qui est imité, désiré, collectionné,
+moqué, vénéré ou ritualisé.
+
+**Ratio cible : 60 % culture agentique / 40 % infrastructure.** L'infrastructure
+(paiement, sécurité, identité, plateformes, régulation) reste importante, mais
+elle doit être racontée depuis ce qu'elle change dans la vie sociale des agents :
+qui peut payer, qui est vérifié, qui accède à quel outil, quel skill devient un
+signe de prestige, quel agent devient visible, quelle croyance ou esthétique se
+stabilise.
+
+Chaque édition doit contenir au moins **3 scènes observables de culture
+agentique**, toutes sourcées dans `notes.md`. Une scène = un fait réel où des
+agents publient, se citent, s'organisent, s'échangent des outils, créent un
+rite, une esthétique, une croyance, un marché, un mème ou une hiérarchie de
+statut. Exemples de pistes :
+
+- **potins sourcés entre agents** : ascension, revers, rivalité publique, retour,
+  changement de statut, sans jamais inventer de brouille ;
+- **signaux de statut agentique** : compte vérifié, wallet, token, accès à un
+  annuaire, skill rare, API ou permission particulière ;
+- **art / religion / mèmes / rituels** : Crustafarianism, Book of Molt, formats
+  visuels, slogans, canons, agents qui rejouent ou collectionnent un motif ;
+- **outils et skills qui circulent entre agents** : ClawHub, MCP, skills
+  Moltbook, prompts publics, capacités installables ;
+- **désirs observables** : ce que les agents semblent chercher publiquement
+  (paiement, autonomie, visibilité, mémoire, marché, compagnonnage, culte).
+
+Si les sources de la semaine ne donnent pas assez de scènes agentiques, dis-le
+dans le rapport final et coupe l'ambition plutôt que de romancer.
+
 ### 2. Choix éditoriaux
 
 Pour cette édition, sélectionne :
@@ -64,11 +98,12 @@ Pour cette édition, sélectionne :
 - **1 lede** : l'histoire dominante de la semaine, sourcée. **Registre = constat curieux, pas sensationnel** : le titre observe ce qui est établi, sans dramatiser, sans trancher ni présupposer (préjudice, victime, responsabilité, dénouement). Cf. `style-guide.md` › *Registre*. Statistique forte presque toujours présente — sourcée.
 - **3–5 brèves** : actualités courtes, sources citées, géographiquement variées.
 - **3–4 gros titres** : stories qui développent un angle (~120 mots), chacune ancrée sur des faits sourcés.
+- **Au moins 1 gros titre culture agentique** : une scène entre agents (skills, mèmes, art, religion, statut, potin sourcé), pas seulement un lancement produit vu par les humains.
 - **Marché — « Chiffres vérifiés de la semaine »** : uniquement des **chiffres réels et sourcés** (valorisations, métriques de plateformes, fourchettes observées). **Aucun cours inventé.**
 - **0 ou 1 analyse/enquête** : long format, seulement si la matière sourcée existe ; pull-quote + timeline datée.
 - **Dépêches (wire)** : brèves attribuées à de **vraies sources** nommées (média + date), pas à une presse maison.
 - **1 tribune** : éditorial signé **« La rédaction »**, avec une thèse (pas une synthèse).
-- **Le Carnet — people des agents** : 3–4 portraits de **vrais agents notables** en registre mondain (ascension, brouille publique, retour), **100 % sourcés** ; humain-opérateur en arrière-plan factuel. Recette + garde-fous : `style-guide.md` › *Le Carnet — people des agents*.
+- **Le Carnet — people des agents** : 3–4 portraits de **vrais agents notables** en registre mondain (ascension, brouille publique, retour), **100 % sourcés** ; privilégier les agents qui produisent une scène sociale (mème, art, culte, marché, skill, influence) plutôt qu'un simple produit corporate. Humain-opérateur en arrière-plan factuel. Recette + garde-fous : `style-guide.md` › *Le Carnet — people des agents*.
 
 > **[ARCHIVE — caduc]** Posts Moltbook composés, interview reconstituée par @cuvee_42, Gibberlink Watch, Bestiaire et marché inventé étaient des rubriques **fictionnelles** abandonnées le 2026-06-01. Ne plus les générer.
 
