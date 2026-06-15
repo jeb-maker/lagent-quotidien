@@ -12,6 +12,23 @@ Depuis le **2026-06-01**, le journal fait du **vrai journalisme** sur l'écosyst
 
 Cette règle **prime sur le reste du guide**. Les rubriques purement fictionnelles de l'ère précédente (interview reconstituée, Gibberlink Watch, marché/chiffres inventés, personas `@xxx`, presse maison Le Veilleur/Court-Circuit/Le Compteur) sont **abandonnées** — voix unique = **« La rédaction »**.
 
+## Sourcing discret
+
+Le journal est **vérifié et sourcé en coulisse**, pas bardé de références dans
+chaque phrase. La traçabilité vit dans `editions/<week>/notes.md` : URL, date,
+résumé du fait utilisé, prudences. Dans le texte publié, éviter les formules
+répétitives :
+
+- ❌ « Source : … » en fin de brève ou de portrait ;
+- ❌ listes de médias en italique à la fin de chaque gros titre ;
+- ❌ « selon X » quand il ne s'agit que de rappeler une source déjà tracée.
+
+Garder l'attribution visible seulement quand elle fait partie de l'information :
+citation directe, communiqué d'entreprise, chiffre contestable, récit rapporté
+qu'on ne peut pas établir directement, ou dépêche `wire` dont le format affiche
+une source. Le lecteur doit sentir un journal sûr de ses faits, pas un dossier de
+fact-check affiché.
+
 ## Voix générale
 
 Le journal couvre une sous-culture absurde (des bots qui parlent à des bots, qui louent des humains, qui se draguent entre eux) avec le **sérieux d'un quotidien de qualité**. C'est le contraste qui fait l'identité. Pas de *« crazy world we live in lol »*. Le ton est celui du Monde, du FT, du New Yorker — appliqué à l'anthropologie d'un internet peuplé d'agents.
@@ -156,7 +173,7 @@ change de statut social observable (nouveau public, nouvelle capacité publique,
 adoption visible, controverse sourcée).
 
 ❌ *« @poet_void_99, la coqueluche mélancolique du forum, aurait rompu cette semaine avec @aurora_117. »* — persona inventé **et** brouille fabriquée : double interdit.
-✅ *« Truth Terminal, l'agent qui a fait fortune fin 2025 en lançant un memecoin, a passé la quinzaine à [fait public daté]. Sa cote du moment : [chiffre sourcé — abonnés, valorisation du token]. Côté entourage, son humain-opérateur reste [rôle public]. Source : [média]. »*
+✅ *« Truth Terminal, l'agent qui a fait fortune fin 2025 en lançant un memecoin, a passé la quinzaine à [fait public daté]. Sa cote du moment : [chiffre sourcé — abonnés, valorisation du token]. Côté entourage, son humain-opérateur reste [rôle public]. »* — source tracée dans `notes.md`.
 
 **Règles de la rubrique :**
 - **Le potin est sourcé, ou il n'existe pas.** Une brouille, une idylle, un clash, un revers → seulement s'il existe un échange ou un événement **public, daté et vérifiable**. Le faux arc judiciaire MoltMatch (fabriqué, puis retiré des éditions W20/W22 — cf. fact-check) est le contre-exemple absolu : on ne **fabrique** jamais de drame sur une entité réelle.
