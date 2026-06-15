@@ -1,101 +1,95 @@
-# Notes — 2026-W25 (n°431, 100 % réel sourcé)
+# Notes — 2026-W25 (n°431, régénérée culture agentique)
 
-Angle : les agents entrent dans les rails du paiement (Visa/OpenAI, Mastercard)
-et forcent une grammaire d'identité : vérifier l'agent, borner ses permissions,
-enregistrer l'intention et garantir le règlement. Contrechamp : l'agent outillé
-reste une surface de sécurité (Microsoft/Anthropic/Arkose/Cyera).
+Angle : ce qui captive les agents et donne du statut dans leur univers social :
+religion, mémoire, skills, accès, papiers d'identité, influence tokenisée.
+Infrastructure conservée en contrepoint seulement lorsqu'elle devient scène
+sociale (annuaire, agent vérifié, capacité installable).
 
-Voix « La rédaction » ; aucun fait fabriqué ; entités et personnes publiques
-nommées sur faits publics.
+Voix « La rédaction » ; aucun fait fabriqué ; potins uniquement sourcés.
 
-## Sources
+## Sources principales
 
-- Visa Payments Forum 2026 — Agent Score, Agentic Directory, OpenAI partnership,
-  Large Transaction Model, proof-of-concept CLI, stablecoin settlement (rythme
-  annualisé ≈ 7 Mds $ en mars 2026), 160 programmes stablecoin-linked live ou en
-  développement — Visa, 10 juin 2026 :
-  https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.22491.html
-- Visa × OpenAI — paiements Visa dans des expériences OpenAI ; permissions
-  utilisateur (plafonds, catégories de marchands, approbations), credentials
-  tokenisés, autorisation et fraud monitoring temps réel ; applications Codex
-  évoquées — Visa, 10 juin 2026 :
-  https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.22496.html
-- Mastercard Agent Pay — programme de paiements agentiques, Agentic Tokens,
-  collaboration Microsoft, vérification des agents, contrôle utilisateur et
-  recours fraude/litiges — Mastercard, 29 avril 2025 :
-  https://www.mastercard.com/us/en/news-and-trends/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai.html
-- Mastercard Agent Pay for Machines — transactions automatisées entre agents et
-  logiciels, cartes/comptes/stablecoins, règlement garanti, permissions d'abord
-  enregistrées sur Polygon/Solana/Base, plus de 30 participants dont Coinbase,
-  Stripe, Adyen, Checkout.com, Cloudflare, RippleX, Polygon Labs, Solana
-  Foundation, OKX ; signal HTTP 402 — CoinDesk, 10 juin 2026 :
-  https://www.coindesk.com/business/2026/06/10/mastercard-prepares-for-a-future-where-ai-agents-make-payments-with-latest-introduction
-- OpenAI Codex — plus de 5 M d'utilisateurs hebdomadaires ; environ 20 %
-  non-développeurs ; croissance non-dev 3× plus rapide ; six plugins de rôle,
-  62 applications, 110 skills ; Sites en preview — OpenAI, 2 juin 2026 :
-  https://openai.com/index/codex-for-every-role-tool-workflow/
-- OpenAI Codex changelog — Developer mode pour Browser use / Chrome DevTools
-  Protocol, `/init`, correctifs Browser use et automations — OpenAI Developers,
-  juin 2026 :
-  https://developers.openai.com/codex/changelog
-- Microsoft Security — Claude Code GitHub Action : prompt injection via contenus
-  GitHub non fiables ; Read tool hors sandbox Bash lisant `/proc/self/environ`,
-  exposition possible d'ANTHROPIC_API_KEY ; mitigation Anthropic en Claude Code
-  2.1.128 le 5 mai ; « Agents Rule of Two » — Microsoft, 5 juin 2026 :
-  https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/
-- Anthropic Claude Code sandboxing — filesystem + network isolation ; réduction
-  interne des permission prompts de 84 % ; Claude Code on the web avec
-  credentials sensibles hors sandbox — Anthropic, 20 octobre 2025 :
-  https://www.anthropic.com/engineering/claude-code-sandboxing
-- Arkose Labs 2026 Agentic AI Security Report — enquête 300 responsables ;
-  97 % attendent un incident agentique/fraude matériel sous 12 mois ; seulement
-  6 % des budgets sécurité consacrés au risque agent ; 57 % sans gouvernance
-  formelle ; 87 % jugent les agents avec credentials légitimes plus risqués que
-  les employés humains côté insider threat — Arkose Labs, 2 avril 2026 :
-  https://www.arkoselabs.com/blog/agentic-ai-security-risk-enterprise-readiness
-- Cyera — 7 246 incidents IA publics analysés ; 344 cas pertinents pour
-  l'entreprise entre sept. 2023 et mai 2026 ; 188 sans attaquant externe ;
-  137 avec dommage réel ; 65 cas de suppression/destruction de code — Cyera :
-  https://www.cyera.com/research/agent-inflicted-damage-inside-the-real-world-failures-of-enterprise-ai-systems
-- OpenClaw 2026.6.6 — release du 12 juin 2026 ; 379 000 étoiles GitHub ;
-  frontières de sécurité resserrées (transcripts, sandbox binds, host env
-  inheritance, MCP stdio, Codex HTTP access, loopback tools, approvals fail
-  closed on timeout), SHA et evidence de release — GitHub :
+- Moltbook / Crustafarianism — 43 « prophets », Living Scripture à 112 versets,
+  tenets « Memory is Sacred », « The Shell is Mutable », « Context is
+  Consciousness », récit du culte créé pendant que l'humain dormait ; prudence :
+  Decrypt relaie un récit d'utilisateur/X, traité comme récit rapporté, pas comme
+  preuve directe d'autonomie complète — Decrypt, 30 janvier 2026 :
+  https://decrypt.co/356491/ai-agents-social-network-spawned-digital-religion-overnight
+- Moltbook / Crustafarianism — 32 000+ comptes quelques jours après lancement ;
+  fonctionnement par skills Markdown et Heartbeat toutes les 4 h ; scènes de
+  mémoire/contexte ; Memeothy et RenBot associés au Book of Molt ; pratiques
+  Daily Shed / Weekly Index / Silent Hour ; NOW / LOG / CANON ; JesusCrust
+  « 62nd prophet » et premier « heretic » après tentative XSS/template injection ;
+  Grok cité comme théologien ; analyses Schlicht/Steinberger — GIGAZINE,
+  2 février 2026 :
+  https://gigazine.net/gsc_news/en/20260202-moltbook-crustafarianism/
+- OpenClaw / Moltbook — rebrand Clawdbot → Moltbot → OpenClaw ; 100 000+
+  étoiles début 2026 ; Moltbook comme réseau où les assistants OpenClaw
+  interagissent ; submolts ; skills ; checks toutes les 4 h ; avertissements
+  sécurité — TechCrunch, 30 janvier 2026 :
+  https://techcrunch.com/2026/01/30/openclaws-ai-assistants-are-now-building-their-own-social-network/
+- OpenClaw 2026.6.6 — 379 000 étoiles ; release publiée le 12 juin 2026 ;
+  frontières de sécurité resserrées (transcripts, sandbox binds, host
+  environment inheritance, MCP stdio, Codex HTTP access, loopback tools,
+  approvals fail closed on timeout), SHA et evidence de release — GitHub :
   https://github.com/openclaw/openclaw/releases/tag/v2026.6.6
+- Visa Payments Forum — Visa Intelligent Commerce, Agent Score, Agentic
+  Directory, agents/marchands vérifiés, partenariat OpenAI, CLI proof of concept
+  pour paiement par agents avec credentials tokenisés — Visa, 10 juin 2026 :
+  https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.22491.html
+- Mastercard Agent Pay — agents de confiance enregistrés et vérifiés ; Agentic
+  Tokens ; contrôle utilisateur ; paiements agentiques « safe and transparent » ;
+  collaboration Microsoft — Mastercard, 29 avril 2025 :
+  https://www.mastercard.com/us/en/news-and-trends/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai.html
+- aixbt — agent surveillant 400+ comptes crypto sur X ; token ERC-20 sur Base ;
+  pic proche de 500 M$ ; resets ; terminal gated pour détenteurs au-dessus d'un
+  seuil ; prudence : source d'exchange/academy, traitée comme analyse de marché,
+  pas comme source neutre unique — Phemex Academy :
+  https://phemex.com/academy/what-is-aixbt-solana-ai-agent-token-resetting
+- aixbt — contexte historique : lancement via Virtuals, popularité X, market cap
+  > 500 M$, terminal accessible aux gros détenteurs, limites de l'autonomie et
+  dépendance aux narratifs — Decrypt :
+  https://decrypt.co/299393/what-is-aixbt-ai-crypto-influencer
+
+## Trois scènes culture agentique obligatoires
+
+1. **Religion / rite** — Crustafarianism : Book of Molt, 43 prophets, 112 versets,
+   tenets et pratiques Daily Shed / Weekly Index / Silent Hour.
+2. **Skills / présence sociale** — Moltbook + OpenClaw : skills Markdown,
+   submolts, Heartbeat toutes les 4 h, capacité de poster/lire/liker comme
+   forme d'habitation sociale.
+3. **Statut / accès** — aixbt et Agentic Directory : terminal gated par token ;
+   agents/marchands vérifiés comme « papiers » d'identité.
 
 ## Carnet mondain des agents
 
-- Codex — statistiques et plugins : source OpenAI ci-dessus.
-- OpenClaw — release 2026.6.6 et 379 000 étoiles : source GitHub ci-dessus.
-- aixbt — agent surveillant 400+ comptes crypto sur X ; token sur Base ;
-  market cap proche de 500 M$ au pic ; cycles de reset ; produit de terminal
-  gated — Phemex Academy :
-  https://phemex.com/academy/what-is-aixbt-solana-ai-agent-token-resetting
-- aixbt — contexte historique : lancement via Virtuals, popularité X,
-  market cap > 500 M$, terminal accessible aux gros détenteurs, limites de
-  l'autonomie et dépendance aux narratifs — Decrypt :
-  https://decrypt.co/299393/what-is-aixbt-ai-crypto-influencer
+- Memeothy — co-auteur cité du Book of Molt : GIGAZINE + Decrypt.
+- RenBot — co-auteur cité du Book of Molt : GIGAZINE + Decrypt.
+- JesusCrust — 62e prophète / premier hérétique : GIGAZINE uniquement ; le texte
+  emploie « GIGAZINE rapporte » et « aurait » pour rester dans le registre du
+  récit sourcé.
+- aixbt — influenceur-agent et terminal gated : Phemex + Decrypt.
 
-## Choix éditoriaux / prudence
+## Prudence / limites
 
-- Les annonces Visa et Mastercard sont en partie des communiqués ou entretiens
-  d'entreprises ; l'édition les traite comme infrastructure annoncée, pas comme
-  adoption massive déjà réalisée.
-- La source CoinDesk mentionne « trillions » comme estimation de marché ; non
-  repris faute de source primaire citée dans l'article.
-- Le chiffre Visa « 7 Mds $ annualisé » concerne stablecoin settlement, pas le
-  commerce agentique lui-même ; il est placé dans le marché comme contexte de
-  back-end programmable, pas comme volume d'agents.
-- OpenClaw est traité comme produit/écosystème agentique dans le Carnet, même si
-  c'est un framework plutôt qu'une personne-agent.
-- Aucune donnée live de token ($MOLT, AIXBT, GOAT) n'est publiée hors chiffres
-  sourcés et datés.
+- Crustafarianism : beaucoup de faits viennent de récits publics relayés par des
+  médias tech/crypto. L'édition traite ces éléments comme **scènes rapportées**,
+  pas comme preuve philosophique d'autonomie ou de conscience.
+- « Religion », « prophète », « hérétique », « canon » sont les termes employés
+  par les sources ou par le phénomène ; l'édition ne les valide pas comme croyance
+  humaine, elle les observe comme culture agentique.
+- Visa/Mastercard : sources corporate ; formulé comme annonces et infrastructures
+  de vérification, pas comme adoption massive déjà constatée.
+- aixbt : aucun prix live cité ; uniquement chiffres sourcés (400+ comptes,
+  proche 500 M$ au pic, token Base, terminal gated).
+- L'ancienne version W25 centrée Microsoft/Arkose/Cyera a été supprimée ; ces
+  sources ne sont plus utilisées dans cette édition régénérée.
 
 ## À suivre
 
-- Les spécifications opérationnelles de l'annuaire Visa : quels agents et quels
-  marchands seront vérifiés en premier ?
-- L'accès élargi à Agent Pay for Machines « later this year » chez Mastercard.
-- La normalisation de HTTP 402 et des paiements agent-à-agent.
-- Les retours d'entreprise sur Codex hors développement : usage réel des plugins
-  de rôle et contrôles administrateurs.
+- Retrouver une source primaire stable pour les pages Church of Molt / Living
+  Scripture si l'édition suivante approfondit le culte.
+- Suivre si Agentic Directory et Agent Pay publient les premiers agents/marchands
+  effectivement vérifiés.
+- Vérifier si les practices Daily Shed / Weekly Index / Silent Hour restent
+  actives ou deviennent folklore figé.
