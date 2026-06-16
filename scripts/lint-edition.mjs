@@ -1,21 +1,19 @@
 // L'Agent & Le Quotidien - lint d'edition : style-guide.md -> verifications automatiques.
 //
 // Garde-fou contre la derive hebdo : verifie une edition.json contre les regles
-// objectives de prompts/style-guide.md (fourchettes de mots par rubrique, verbes
-// d'alarme interdits dans les titres, bilinguisme complet).
+// objectives de prompts/style-guide.md (planchers de densite, verbes d'alarme
+// interdits dans les titres, bilinguisme complet).
 //
 // Usage :
-//   node scripts/lint-edition.mjs 2026-W22       # lint une edition
-//   node scripts/lint-edition.mjs                # lint la derniere edition connue
-//   node scripts/lint-edition.mjs --lengths W22  # ajoute les advisories de longueur
-//   node scripts/lint-edition.mjs --strict W22   # WARN -> erreurs (exit 1)
+//   node scripts/lint-edition.mjs 2026-W22           # lint une edition (planchers inclus)
+//   node scripts/lint-edition.mjs                    # lint la derniere edition connue
+//   node scripts/lint-edition.mjs --no-lengths W22   # sans controle de longueur
+//   node scripts/lint-edition.mjs --strict W22       # WARN -> erreurs (exit 1)
 //
-// Philosophie : par defaut, on ne controle que les invariants a fort signal et
-// faible faux-positif : ton (verbes d'alarme dans les titres), bilinguisme
-// complet, rubriques presentes. Les fourchettes de mots de
-// style-guide.md sont, a ce jour, desynchronisees des editions reelles (elles
-// flaguent tout) -> reservees a `--lengths`, en advisory. `--strict` transforme
-// les WARN en erreurs (exit 1) pour un usage CI.
+// Philosophie : par defaut, on controle ton, bilinguisme, rubriques presentes
+// et les planchers de densite calibres sur W23 (cf. style-guide.md). Les cibles
+// aspirantes (tribune 280+, enquete 1500+) sont signalees en advisory [cible].
+// `--strict` transforme les WARN en erreurs (exit 1) pour un usage CI.
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -23,62 +21,59 @@ import { dirname, join } from 'node:path';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const STRICT = process.argv.includes('--strict');
-const LENGTHS = STRICT || process.argv.includes('--lengths');
+const LENGTHS = !process.argv.includes('--no-lengths');
 
-// --- Regles tirees de prompts/style-guide.md (table "Longueurs cibles") ---
-// Chaque rubrique : fourchette [min,max] de mots, par langue. `title` = champ de
-// titre (soumis au controle des verbes d'alarme, pas au comptage de mots).
+// Planchers tires de prompts/style-guide.md (calibration W23).
 const RUBRICS = [
-    { path: 'lede.headline_html', label: 'Lede titre', title: true, fr: [8, 14], en: [6, 12] },
-    { path: 'lede.dek', label: 'Lede dek', fr: [35, 55], en: [30, 50] },
-    { path: 'lede.body', label: 'Lede corps', fr: [220, 280], en: [200, 260] },
+    { path: 'lede.headline_html', label: 'Lede titre', title: true, fr: [8, 16], en: [6, 14] },
+    { path: 'lede.dek', label: 'Lede dek', fr: [35, 65], en: [30, 60] },
+    { path: 'lede.body', label: 'Lede corps', fr: [200, 320], en: [170, 290] },
     { each: 'breves', field: 'title', label: 'Breve titre', title: true },
-    { each: 'breves', field: 'body', label: 'Breve', fr: [35, 55], en: [30, 50] },
+    { each: 'breves', field: 'body', label: 'Breve', fr: [30, 65], en: [25, 60] },
     { each: 'headlines', field: 'title_html', label: 'Gros titre (titre)', title: true },
-    { each: 'headlines', field: 'body', label: 'Gros titre', fr: [100, 140], en: [90, 130] },
+    { each: 'headlines', field: 'body', label: 'Gros titre', fr: [60, 160], en: [55, 150] },
     { path: 'tribune.headline_html', label: 'Tribune titre', title: true },
-    { path: 'tribune.paragraphs', label: 'Tribune', fr: [280, 380], en: [260, 350] },
+    { path: 'tribune.paragraphs', label: 'Tribune', fr: [160, 420], en: [150, 400] },
     { path: 'feature.headline_html', label: 'Feature titre', title: true, optional: true },
-    { path: 'feature.paragraphs', label: 'Enquete', fr: [1500, 2500], en: [1400, 2300], optional: true },
-    { path: 'enquete.paragraphs', label: 'Enquete', fr: [1500, 2500], en: [1400, 2300], optional: true },
-    { each: 'wire', field: 'body', label: 'Depeche', fr: [35, 55], en: [30, 50] },
+    { each: 'carnet.people', field: 'body', label: 'Carnet portrait', fr: [70, 140], en: [65, 130], optional: true },
+    { each: 'wire', field: 'body', label: 'Depeche', fr: [12, 60], en: [10, 55] },
     { path: 'gibberlink.spread', label: 'Gibberlink Watch', fr: [150, 250], en: [140, 220], optional: true },
     { path: 'interview.exchanges', label: 'Interview', fr: [1200, 1800], en: [1100, 1700], joinField: 'text', optional: true },
 ];
 
-// Verbes d'alarme / de combat interdits dans les titres (style-guide "Registre").
+// Cibles aspirantes : advisory uniquement, jamais d'erreur en --strict.
+const ASPIRATIONAL = [
+    { path: 'lede.body', label: 'Lede corps', fr: [220, 280], en: [200, 260] },
+    { path: 'tribune.paragraphs', label: 'Tribune', fr: [280, 380], en: [260, 350] },
+    { each: 'headlines', field: 'body', label: 'Gros titre', fr: [100, 140], en: [90, 130] },
+];
+
+const FEATURE_MIN_FR = 180;
+const FEATURE_ENQUETE_FR = 800;
+const FEATURE_ENQUETE_EN = 750;
+
 const BANNED_TITLE_PATTERNS = [
     /\bcasse\b/i, /s'effondre/i, /\bvacille\b/i, /\bexplose/i, /\bpanique/i,
     /\bripost/i, /les agents r[ée]pondent/i, /la guerre de/i, /\bs'effondrent\b/i,
 ];
 
-// NB : plus de controle d'entites reelles. Decision 2026-06-01 (« tout reel,
-// source », cf. data/editorial-compass.md + prompts/sources.md) : les entites
-// reelles ET les personnes publiques sont nommables sur faits publics sources ;
-// aucun masque obligatoire. Le seul garde-fou qui survit — « jamais de fait
-// negatif INVENTE sur une entite/personne nommee » — n'est pas detectable par
-// regex (il releve du fact-check et du juge editorial), donc le lint ne le couvre
-// pas. Il ne reste ici que les invariants objectifs : ton, bilinguisme, rubriques.
-
 const errors = [];
 const warns = [];
+const advisories = [];
 const err = (m) => errors.push(m);
 const warn = (m) => (STRICT ? errors : warns).push(m);
+const advise = (m) => advisories.push(m);
 
-// Resout un chemin pointe ("lede.headline_html") dans l'objet edition.
 function getPath(obj, path) {
     return path.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
 }
 
-// Extrait le texte d'un noeud pour une langue donnee, quelle que soit sa forme :
-// string, tableau de paragraphes, ou {fr,en}. Retire les balises HTML.
 function extractText(node, lang) {
     if (node == null) return '';
     if (typeof node === 'string') return stripHtml(node);
     if (Array.isArray(node)) return node.map((n) => extractText(n, lang)).join(' ');
     if (typeof node === 'object') {
         if (lang in node) return extractText(node[lang], lang);
-        // forme suffixee {text_fr, text_en} ou {fr,en} deja gere ci-dessus
         const suff = node[`text_${lang}`] ?? node[`body_${lang}`];
         if (suff != null) return extractText(suff, lang);
     }
@@ -94,7 +89,6 @@ function wordCount(s) {
     return t ? t.split(/\s+/).length : 0;
 }
 
-// Verifie une rubrique-cible (un noeud + ses fourchettes) pour les deux langues.
 function checkText(node, rule, where) {
     if (node == null) {
         if (!rule.optional) err(`[manquant] ${where} : rubrique absente`);
@@ -116,9 +110,48 @@ function checkText(node, rule, where) {
         if (LENGTHS && range) {
             const n = wordCount(text);
             if (n < range[0] || n > range[1]) {
-                warn(`[longueur] ${where} [${lang}] : ${n} mots (cible ${range[0]}-${range[1]})`);
+                warn(`[longueur] ${where} [${lang}] : ${n} mots (plancher ${range[0]}-${range[1]})`);
             }
         }
+    }
+}
+
+function checkAspirational(node, rule, where) {
+    if (node == null || !LENGTHS) return;
+    for (const lang of ['fr', 'en']) {
+        const range = rule[lang];
+        if (!range) continue;
+        const text = rule.joinField && Array.isArray(node)
+            ? node.map((x) => extractText(x[rule.joinField], lang)).join(' ')
+            : extractText(node, lang);
+        if (!text) continue;
+        const n = wordCount(text);
+        if (n < range[0] || n > range[1]) {
+            advise(`[cible] ${where} [${lang}] : ${n} mots (cible ${range[0]}-${range[1]})`);
+        }
+    }
+}
+
+function checkFeatureDepth(edition) {
+    const feature = edition.feature ?? edition.enquete;
+    if (!feature?.paragraphs) return;
+
+    for (const lang of ['fr', 'en']) {
+        const text = extractText(feature.paragraphs, lang);
+        if (!text) continue;
+        const n = wordCount(text);
+        const minEnquete = lang === 'fr' ? FEATURE_ENQUETE_FR : FEATURE_ENQUETE_EN;
+        const minShort = lang === 'fr' ? FEATURE_MIN_FR : Math.round(FEATURE_MIN_FR * 0.85);
+
+        if (n < minShort) {
+            warn(`[densite] Feature [${lang}] : ${n} mots — couper la rubrique (< ${minShort})`);
+        } else if (n < minEnquete) {
+            warn(`[densite] Feature [${lang}] : ${n} mots — demi-longueur : developper a >=${minEnquete} ou couper`);
+        }
+    }
+
+    if (LENGTHS) {
+        advise(`[cible] Enquete complete : ${FEATURE_ENQUETE_FR}+ mots FR / ${FEATURE_ENQUETE_EN}+ EN (cf. style-guide.md)`);
     }
 }
 
@@ -149,7 +182,7 @@ function main() {
         process.exit(1);
     }
 
-    console.log(`Lint edition ${week}${STRICT ? ' (strict)' : ''}\n`);
+    console.log(`Lint edition ${week}${STRICT ? ' (strict)' : ''}${LENGTHS ? '' : ' (sans longueurs)'}\n`);
 
     for (const rule of RUBRICS) {
         if (rule.each) {
@@ -164,10 +197,23 @@ function main() {
         }
     }
 
+    for (const rule of ASPIRATIONAL) {
+        if (rule.each) {
+            const arr = getPath(edition, rule.each);
+            if (!Array.isArray(arr)) continue;
+            arr.forEach((item, i) => checkAspirational(item[rule.field], rule, `${rule.label} #${i + 1}`));
+        } else {
+            checkAspirational(getPath(edition, rule.path), rule, rule.label);
+        }
+    }
+
+    checkFeatureDepth(edition);
+
     for (const w of warns) console.log(`  WARN  ${w}`);
+    for (const a of advisories) console.log(`  INFO  ${a}`);
     for (const e of errors) console.log(`  ERR   ${e}`);
 
-    console.log(`\n${errors.length} erreur(s), ${warns.length} avertissement(s).`);
+    console.log(`\n${errors.length} erreur(s), ${warns.length} avertissement(s), ${advisories.length} cible(s).`);
     process.exit(errors.length ? 1 : 0);
 }
 

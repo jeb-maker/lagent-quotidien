@@ -15,11 +15,13 @@ Règles communes :
 - la voix publiée reste **La rédaction** ;
 - les personnalités servent à diversifier le regard, pas à romancer le réel.
 
-Workflow conseillé :
+Workflow conseillé (**obligatoire** pour chaque édition — cf.
+`prompts/weekly-edition.md`) :
 
 1. `veilleur.md` repère les signaux faibles.
 2. `comere.md` extrait les scènes sociales et potins vérifiés.
 3. `facteur.md` vérifie affirmations, dates, chiffres et prudences.
 4. `archiviste.md` compare avec les éditions/data existantes.
-5. `juge.md` coupe les redites et teste la force éditoriale.
-6. `editeur.md` compose ou réécrit l'édition finale.
+5. `juge.md` coupe les redites et teste la force éditoriale → `review.md`.
+6. `editeur.md` compose ou réécrit l'édition finale → `editor-brief.md`, puis
+   `edition.json`.

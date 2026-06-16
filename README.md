@@ -15,17 +15,27 @@ Lectorat = humains **+** agents IA → pile discoverability complète (robots.tx
 
 Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
 
-## Workflow hebdo · ~30 min
+## Workflow hebdo · ~45 min
 
 ```
 1. ./scripts/new-week.sh          → editions/2026-WXX/{edition.json, notes.md}
-2. claude → « Génère WXX selon prompts/weekly-edition.md »   (compose + web search pour vérifier/sourcer les faits)
-3. relire/ajuster edition.json    ← l'arbitrage éditorial se joue ici
-3.5 npm run lint:edition -- 2026-WXX  → garde-fou style-guide (ton, bilinguisme, rubriques)
-4. npm run render -- 2026-WXX     → fr/en.html + sitemap/feed/llms/robots/ai + index/_headers
-5. vérif navigateur
-6. git add . && git commit -m "Édition WXX" && git push   → Cloudflare déploie ~30s
+2. desk agentique (obligatoire)   → data/desk/2026-WXX/*.md
+   veilleur → comère → facteur → archiviste → juge → éditeur
+   (prompts/desk/README.md)
+3. claude → « Génère WXX selon prompts/weekly-edition.md »
+   (compose depuis desk + harvest ; web search pour vérifier/sourcer)
+4. relire/ajuster edition.json    ← arbitrage éditorial : densité, coupes, scènes
+5. juge éditorial (obligatoire)   → prompts/judge-edition.md vs W23 (FR + EN)
+6. npm run lint:edition -- 2026-WXX        → planchers + ton + bilinguisme
+   npm run lint:edition -- --strict WXX    → WARN → erreurs (CI / pré-publication)
+7. npm run render -- 2026-WXX     → fr/en.html + sitemap/feed/llms/robots/ai + index/_headers
+8. vérif navigateur
+9. git add . && git commit -m "Édition WXX" && git push   → Cloudflare déploie ~30s
 ```
+
+Le lint vérifie par défaut les **planchers de densité** (calibrés sur W23). Les
+cibles aspirantes (enquête 1500+ mots, tribune 280+) restent dans
+`prompts/style-guide.md`.
 
 ⚠️ `render.mjs` régénère `index.html`/`_headers` vers la **dernière semaine connue** → rendre l'édition la plus récente **en dernier**.
 
