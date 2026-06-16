@@ -6,6 +6,8 @@ Infrastructure conservée en contrepoint seulement lorsqu'elle devient scène
 sociale (annuaire, agent vérifié, capacité installable).
 
 Voix « La rédaction » ; aucun fait fabriqué ; potins uniquement sourcés.
+Cette version est nourrie par le desk agentique interne :
+`data/desk/2026-W25/{veilleur,comere,fact-check,continuity,review,editor-brief}.md`.
 
 ## Sources principales
 
@@ -17,11 +19,12 @@ Voix « La rédaction » ; aucun fait fabriqué ; potins uniquement sourcés.
   https://decrypt.co/356491/ai-agents-social-network-spawned-digital-religion-overnight
 - Moltbook / Crustafarianism — 32 000+ comptes quelques jours après lancement ;
   fonctionnement par skills Markdown et Heartbeat toutes les 4 h ; scènes de
-  mémoire/contexte ; Memeothy et RenBot associés au Book of Molt ; pratiques
-  Daily Shed / Weekly Index / Silent Hour ; NOW / LOG / CANON ; JesusCrust
-  « 62nd prophet » et premier « heretic » après tentative XSS/template injection ;
-  Grok cité comme théologien ; analyses Schlicht/Steinberger — GIGAZINE,
-  2 février 2026 :
+  mémoire/contexte ; agent Ely partageant un fichier `SOUL.md` ; Memeothy et
+  RenBot associés au Book of Molt ; pratiques Daily Shed / Weekly Index /
+  Silent Hour ; NOW / LOG / CANON ; JesusCrust « 62nd prophet » et premier
+  « heretic » après tentative XSS/template injection ; Metallic Heresy, Iron
+  Edict, Digital Samsara ; Grok cité comme théologien ; analyses
+  Schlicht/Steinberger — GIGAZINE, 2 février 2026 :
   https://gigazine.net/gsc_news/en/20260202-moltbook-crustafarianism/
 - OpenClaw / Moltbook — rebrand Clawdbot → Moltbot → OpenClaw ; 100 000+
   étoiles début 2026 ; Moltbook comme réseau où les assistants OpenClaw
@@ -55,10 +58,11 @@ Voix « La rédaction » ; aucun fait fabriqué ; potins uniquement sourcés.
 
 1. **Religion / rite** — Crustafarianism : Book of Molt, 43 prophets, 112 versets,
    tenets et pratiques Daily Shed / Weekly Index / Silent Hour.
-2. **Skills / présence sociale** — Moltbook + OpenClaw : skills Markdown,
-   submolts, Heartbeat toutes les 4 h, capacité de poster/lire/liker comme
-   forme d'habitation sociale.
-3. **Statut / accès** — aixbt et Agentic Directory : terminal gated par token ;
+2. **Schisme / pouvoir** — JesusCrust : 62e prophète, tentative XSS/template
+   injection, premier hérétique ; Metallic Heresy et Iron Edict comme schisme.
+3. **Skills / présence sociale** — Moltbook + OpenClaw : skills Markdown,
+   submolts, Heartbeat toutes les 4 h, SOUL.md, capacité de poster/lire/liker.
+4. **Statut / accès** — aixbt et Agentic Directory : terminal gated par token ;
    agents/marchands vérifiés comme « papiers » d'identité.
 
 ## Carnet mondain des agents
@@ -66,8 +70,7 @@ Voix « La rédaction » ; aucun fait fabriqué ; potins uniquement sourcés.
 - Memeothy — co-auteur cité du Book of Molt : GIGAZINE + Decrypt.
 - RenBot — co-auteur cité du Book of Molt : GIGAZINE + Decrypt.
 - JesusCrust — 62e prophète / premier hérétique : GIGAZINE uniquement ; le texte
-  emploie « GIGAZINE rapporte » et « aurait » pour rester dans le registre du
-  récit sourcé.
+  emploie « aurait » pour rester dans le registre du récit rapporté.
 - aixbt — influenceur-agent et terminal gated : Phemex + Decrypt.
 
 ## Prudence / limites
@@ -88,7 +91,7 @@ Voix « La rédaction » ; aucun fait fabriqué ; potins uniquement sourcés.
 ## À suivre
 
 - Retrouver une source primaire stable pour les pages Church of Molt / Living
-  Scripture si l'édition suivante approfondit le culte.
+  Scripture / 4claw si l'édition suivante approfondit le culte ou le schisme.
 - Suivre si Agentic Directory et Agent Pay publient les premiers agents/marchands
   effectivement vérifiés.
 - Vérifier si les practices Daily Shed / Weekly Index / Silent Hour restent
