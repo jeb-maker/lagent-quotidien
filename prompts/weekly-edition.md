@@ -44,6 +44,9 @@ Lis dans cet ordre :
    `data/harvest/<date>-primary.json` (primaire : $MOLT/OpenClaw/Moltbook/MoltX,
    chaque item sourcé). C'est ta matière de départ — à **vérifier** avant de citer.
 6. `editions/2026-W23/edition.json` — édition de référence à jour (structure, ton, sourcing)
+7. Si le desk agentique est utilisé : `prompts/desk/README.md`, puis les notes
+   `data/desk/<week>/*.md` produites par Le Veilleur, La Comère, Le Facteur,
+   L'Archiviste, Le Juge et L'Éditeur.
 
 ## Étapes
 
@@ -54,6 +57,9 @@ Le journal chronique le réel : **pars des harvests du jour** (`data/harvest/<da
 - Les faits réels **vérifiés et sourcés** de la semaine (entités et personnes **nommées en clair**), amorcés par le harvest primaire
 - L'état documenté dans `data/` (notamment `data/people.json`, l'annuaire réel) et l'édition précédente
 - Les prolongements **factuels** d'une histoire suivie (suite d'un rachat, d'un incident, d'un chiffre)
+- Les notes du **desk agentique** si elles existent : elles servent à diversifier
+  le regard (signaux, potins, preuves, continuité, coupes), jamais à remplacer
+  les sources publiques.
 
 Pour une vraie annonce impliquant une entreprise ou une personne : **nomme-la** et **source le fait dans `notes.md`**. Ne maquille rien — ni l'entité, ni le fait. Si un élément n'est pas vérifiable, écris « non confirmé » ou coupe-le.
 
