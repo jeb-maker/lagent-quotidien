@@ -24,6 +24,11 @@ Une rubrique = une fonction. Une idée forte = une seule apparition comme thèse
 
 ## Format de sortie
 
+> ⚠️ Le verdict est **lu par la porte de publication** (`npm run gate`,
+> `scripts/publish-gate.mjs`). Écris-le sous une section `## Verdict` contenant
+> exactement l'un des trois mots ci-dessous. Seul `publier` ouvre la porte ;
+> `réviser` et `jeter` la ferment (exit 1) jusqu'à correction réelle de l'édition.
+
 ## Verdict
 
 publier / réviser / jeter

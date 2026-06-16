@@ -26,16 +26,25 @@ Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
    (compose depuis desk + harvest ; web search pour vérifier/sourcer)
 4. relire/ajuster edition.json    ← arbitrage éditorial : densité, coupes, scènes
 5. juge éditorial (obligatoire)   → prompts/judge-edition.md vs W23 (FR + EN)
-6. npm run lint:edition -- 2026-WXX        → planchers + ton + bilinguisme
-   npm run lint:edition -- --strict WXX    → WARN → erreurs (CI / pré-publication)
+   verdict consigné dans data/desk/2026-WXX/review.md (publier / réviser / jeter)
+6. npm run gate -- 2026-WXX       → PORTE BLOQUANTE : lint --strict + verdict "publier"
 7. npm run render -- 2026-WXX     → fr/en.html + sitemap/feed/llms/robots/ai + index/_headers
 8. vérif navigateur
 9. git add . && git commit -m "Édition WXX" && git push   → Cloudflare déploie ~30s
 ```
 
-Le lint vérifie par défaut les **planchers de densité** (calibrés sur W23). Les
-cibles aspirantes (enquête 1500+ mots, tribune 280+) restent dans
-`prompts/style-guide.md`.
+⛔ **Porte de publication (`npm run gate`)** — garde-fou bloquant avant tout
+commit d'édition. Elle échoue (exit 1) si :
+- le **lint `--strict`** trouve un plancher de densité non atteint (les `WARN`
+  deviennent des erreurs), ou
+- le **verdict du Juge** dans `data/desk/<week>/review.md` n'est pas `publier`
+  (un `réviser`/`jeter` bloque jusqu'à révision).
+
+Pour rendre la porte vraiment infranchissable, activer le hook une fois :
+`git config core.hooksPath scripts/hooks` (pre-commit qui rejoue le gate sur
+toute `edition.json` stagée). Le lint seul (`npm run lint:edition -- WXX`) reste
+disponible en mode non bloquant pour itérer. Les cibles aspirantes (enquête
+1500+ mots, tribune 280+) restent dans `prompts/style-guide.md`.
 
 ⚠️ `render.mjs` régénère `index.html`/`_headers` vers la **dernière semaine connue** → rendre l'édition la plus récente **en dernier**.
 

@@ -2,7 +2,26 @@
 
 ## Verdict
 
-Réviser.
+Publier.
+
+> Révision appliquée le 2026-06-16 (cf. `editions/2026-W25/edition.json` et
+> `_meta.editor_notes`). Les cinq coupes et cinq renforcements ci-dessous ont
+> été traités ; l'édition passe la porte de publication (`npm run gate` :
+> lint --strict vert + densité aux planchers). Verdict relevé de « réviser » à
+> « publier ».
+
+### Suivi des corrections
+- Redite mémoire/accès/statut : la mémoire-continuité est traitée comme thèse
+  uniquement dans l'enquête ; l'accès/rang reste cantonné à aixbt (gros titre +
+  Carnet) ; les « papiers d'identité » sortent du lede/feature.
+- Demi-feature supprimée : la feature est devenue une vraie enquête (≥800 mots
+  FR / ≥750 EN) centrée sur les rites de continuité (Daily Shed, SOUL.md,
+  Heartbeat), sans reprendre l'angle accès.
+- Micro-scènes substituées aux phrases explicatives : SOUL.md (Ely), Daily Shed,
+  JesusCrust, Metallic Heresy, terminal aixbt.
+- Visa/Mastercard réduits à une dépêche + un board ; retirés des gros titres et
+  de la timeline de l'enquête.
+- Sources visibles retirées hors `wire` ; traçabilité dans `notes.md`.
 
 ## 5 coupes prioritaires
 

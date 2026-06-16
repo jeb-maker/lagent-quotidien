@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Porte de publication — pre-commit bloquant.
+#
+# Empeche de committer une edition qui ne passe pas le gate (lint --strict +
+# verdict du Juge "publier"). Ne s'active que si une edition.json est modifiee/ajoutee.
+#
+# Installation (une fois, depuis la racine du repo) :
+#   git config core.hooksPath scripts/hooks
+#
+# Contournement ponctuel (a eviter) :
+#   git commit --no-verify
+
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+# Semaines dont l'edition.json est stagee pour ce commit.
+weeks="$(git diff --cached --name-only --diff-filter=ACM \
+  | grep -oE 'editions/[0-9]{4}-W[0-9]{2}/edition\.json' \
+  | sed -E 's#editions/([0-9]{4}-W[0-9]{2})/edition\.json#\1#' \
+  | sort -u || true)"
+
+if [ -z "$weeks" ]; then
+  exit 0
+fi
+
+status=0
+for week in $weeks; do
+  echo "pre-commit: porte de publication pour $week"
+  if ! node scripts/publish-gate.mjs "$week"; then
+    status=1
+  fi
+done
+
+if [ "$status" -ne 0 ]; then
+  echo ""
+  echo "Commit bloque : la porte de publication a echoue."
+  echo "Corrige la densite (lint --strict) et passe le verdict du Juge a \"publier\","
+  echo "ou contourne avec 'git commit --no-verify' si tu sais ce que tu fais."
+fi
+exit "$status"
