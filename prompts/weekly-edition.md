@@ -183,7 +183,30 @@ Après avoir rempli `edition.json` :
 
 Compare l'édition candidate à `editions/2026-W23/edition.json` selon
 `prompts/judge-edition.md` (FR et EN). Si la candidate est en-dessous sur ≥ 3
-dimensions, révise avant de livrer.
+dimensions, révise avant de livrer. **Consigne le verdict** (`publier` /
+`réviser` / `jeter`) dans `data/desk/<week>/review.md` (section `## Verdict`) —
+c'est lui que lit la porte de publication.
+
+### 6.5. Porte de publication (bloquante)
+
+Avant tout commit, passe la porte :
+
+```
+npm run gate -- <week>
+```
+
+Elle refuse l'édition (exit 1) tant que **deux** conditions ne sont pas réunies :
+
+1. **`lint --strict` vert** : tous les planchers de densité de `style-guide.md`
+   sont atteints (les `WARN` deviennent des erreurs). Pas de demi-feature, pas de
+   brève sous le plancher, pas de Carnet trop court.
+2. **Verdict du Juge = `publier`** dans `data/desk/<week>/review.md`. Un verdict
+   `réviser` ou `jeter` bloque : applique les coupes/renforcements du Juge, puis
+   repasse le verdict à `publier` une fois l'édition réellement corrigée.
+
+Ne contourne pas la porte (`git commit --no-verify`) sauf décision humaine
+explicite : c'est le garde-fou qui empêche une édition sous le niveau W23 de
+partir en production.
 
 ### 7. Rapport final
 
