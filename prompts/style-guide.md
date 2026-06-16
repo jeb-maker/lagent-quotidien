@@ -107,22 +107,63 @@ EN : « The episode raises a hard question. If you're legally responsible for yo
 
 ## Longueurs cibles
 
+Chaque rubrique a un **plancher** (minimum acceptable, calibré sur W23) et une
+**cible** (niveau visé). Le lint (`npm run lint:edition`) vérifie les planchers ;
+les cibles restent l'objectif éditorial.
+
+| Rubrique | Plancher FR | Plancher EN | Cible FR | Cible EN | Notes |
+|----------|-------------|-------------|----------|----------|-------|
+| Lede titre | 8 | 6 | 8–14 | 6–12 | Une italique pour l'angle |
+| Lede dek | 35 | 30 | 35–55 | 30–50 | Pose l'enjeu, pas le résumé |
+| Lede corps | **200** | **170** | 220–280 | 200–260 | Un paragraphe dense : scène + chiffre + conséquence |
+| Brève | **30** | **25** | 35–55 | 30–50 | Lieu en exergue + fait nouveau |
+| Gros titre | **60** | **55** | 100–140 | 90–130 | Fragment cité + acteur + action |
+| Portrait Carnet | **70** | **65** | 80–120 | 70–110 | Scène datée + marqueur de statut |
+| Enquête | **800** ou absente | **750** ou absente | 1500–2500 | 1400–2300 | Pas de demi-feature qui répète les headlines |
+| Dépêche | 15 | 12 | 35–55 | 30–50 | Source en exergue |
+| Tribune | **160** | **150** | 280–380 | 260–350 | Thèse + consensus rejeté + implication |
+
+> ⚠️ **Rubriques caduques** (doctrine *tout réel, sourcé*) : *Post Moltbook*,
+> *Interview* (reconstituée) et *Gibberlink Watch* — ne plus produire.
+
+## Densité et profondeur
+
+Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient des
+**fragments primaires** : citations entre guillemets, handles, noms de fichiers
+(SOUL.md, skill.md), extraits de posts, chiffres datés, noms d'agents.
+
+### Minimum par rubrique
+
+| Rubrique | Exigence de densité |
+|----------|---------------------|
+| **Lede** | 1 scène datée + 1 chiffre + 1 conséquence observable |
+| **Gros titre** | 1 fragment cité + 1 acteur nommé + 1 action concrète |
+| **Brève** | 1 fait absent des autres rubriques — pas de rappel de contexte |
+| **Carnet** | 1 scène datée + 1 marqueur de statut — jamais un concept abstrait |
+| **Tribune** | 1 consensus rejeté + 1 implication pour les opérateurs |
+| **Feature** | Absente **ou** ≥ 800 mots avec faits et scènes absents des gros titres |
+
+### Checklist avant publication
+
+- [ ] ≥ **5 fragments primaires** nommés dans l'édition
+- [ ] **Matrice anti-répétition** : chaque idée forte = une seule rubrique comme thèse
+- [ ] Aucune phrase du type « les agents apprennent à… » sans scène qui la prouve
+- [ ] Tribune ≠ synthèse des gros titres
+
+### Anti-patterns (à couper)
+
+- Répéter la même thèse (mémoire, accès, statut…) dans lede, feature et tribune
+- Phrases explicatives sans micro-scène (remplacer par handle, fichier, citation)
+- Feature de 3 paragraphes qui reformule les headlines
+- Brèves qui ne font que contextualiser un sujet déjà traité
+
+## [ARCHIVE] Longueurs historiques
+
 | Rubrique | Mots FR | Mots EN | Notes |
 |----------|---------|---------|-------|
-| Lede titre | 8–14 | 6–12 | Une italique pour l'angle |
-| Lede dek | 35–55 | 30–50 | Pose l'enjeu, pas le résumé |
-| Lede corps | 220–280 | 200–260 | Un seul paragraphe dense |
-| Brève | 35–55 | 30–50 | Lieu en exergue + une phrase qui poursuit |
-| Gros titre | 100–140 | 90–130 | Une stat ou une citation, jamais les deux |
-| Post Moltbook | 25–45 | 22–40 | Voix de l'agent, pas la nôtre |
-| Portrait Carnet | 80–120 | 70–110 | Une "scène" + un trait + ce qu'il/elle fait |
-| Interview | 1200–1800 | 1100–1700 | 8–12 échanges, varier la longueur |
-| Enquête | 1500–2500 | 1400–2300 | Pull-quote obligatoire, encadré timeline |
-| Gibberlink Watch | 150–250 | 140–220 | Néologisme + contexte + tentative de décodage |
-| Dépêche | 35–55 | 30–50 | Source en exergue, une phrase qui poursuit |
-| Tribune | 280–380 | 260–350 | Trois paragraphes, une thèse, pas une synthèse |
-
-> ⚠️ **Lignes caduques** (doctrine *tout réel, sourcé*) : *Post Moltbook*, *Interview* (reconstituée) et *Gibberlink Watch* sont des rubriques **fictionnelles abandonnées** le 2026-06-01 — conservées dans le tableau pour archive, ne plus produire. Le *Carnet* devient le **people des agents** (vrais agents sourcés, voir recette dédiée).
+| Post Moltbook | 25–45 | 22–40 | caduc |
+| Interview | 1200–1800 | 1100–1700 | caduc |
+| Gibberlink Watch | 150–250 | 140–220 | caduc |
 
 ## Règles typographiques (FR)
 
@@ -199,8 +240,10 @@ Ne prétends pas avoir décodé si tu n'as pas. La rubrique est honnête sur ses
 Une tribune **a une thèse**. Pas un panorama, pas un "il y a du pour et du contre". Elle prend parti.
 
 Structure type :
-1. §1 — Pose un constat contre-intuitif.
-2. §2 — Explique pourquoi le consensus se trompe.
-3. §3 — Tire une conséquence pratique.
+1. §1 — Pose un constat contre-intuitif **avec une scène concrète** (pas un panorama).
+2. §2 — Explique pourquoi le consensus se trompe ; nomme le consensus rejeté.
+3. §3 — Tire une conséquence pratique pour les opérateurs d'agents.
 
-Si la tribune fait moins de 280 mots, c'est qu'elle n'a rien à dire. Sauter la semaine.
+Si la tribune fait moins de 160 mots, elle n'a rien à dire — la sauter. La cible
+reste 280–380 mots : en dessous de 280, vérifier qu'elle n'est pas une synthèse
+des gros titres.

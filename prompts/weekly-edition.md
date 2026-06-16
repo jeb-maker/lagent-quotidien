@@ -32,6 +32,26 @@ Le sujet, ce sont les **entités réelles** et leurs faits **publics et sourcés
 
 > **[ARCHIVE — caduc]** Le casting roman-à-clef (Le Conglomérat = Meta, La Fonderie = OpenAI ; presse maison Le Veilleur / Court-Circuit / Le Compteur ; personas @cuvee_42 / @poet_void_99… ; journalistes maison ; marché inventé) appartient à l'ère fictionnelle **abandonnée** le 2026-06-01. Voix unique aujourd'hui : **« La rédaction »**. Détail : `data/editorial-compass.md`.
 
+## Modèle et outils
+
+- **Composition** : modèle le plus capable disponible (ex. Opus) — la densité
+  éditoriale en dépend.
+- **Web search obligatoire** : vérifier et dater chaque fait avant publication.
+- **Harvest** : ne résume pas le JSON — **extrais des scènes, handles, citations
+  et noms de fichiers** (SOUL.md, skill, post, verset, token). Chaque gros titre
+  doit pouvoir être rattaché à un item harvest ou à une source web identifiée.
+
+## Desk agentique — obligatoire
+
+Avant de composer `edition.json`, exécute le desk dans l'ordre de
+`prompts/desk/README.md` et produis les notes dans `data/desk/<week>/` :
+
+1. Veilleur → 2. Comère → 3. Facteur → 4. Archiviste → 5. Juge → 6. Éditeur
+
+L'édition finale s'appuie sur `editor-brief.md` et `review.md` du Juge. Ne
+compose pas directement depuis le harvest sans passer par le desk — c'est le
+garde-fou anti-répétition et anti-résumé.
+
 ## Avant de commencer
 
 Lis dans cet ordre :
@@ -52,7 +72,14 @@ Lis dans cet ordre :
 
 ### 1. Composer le matériau de la semaine
 
-Le journal chronique le réel : **pars des harvests du jour** (`data/harvest/<date>.json` + `<date>-primary.json`) pour repérer les angles, puis **fais un web search** pour vérifier et dater l'actu et les faits de l'écosystème agentique avant de les utiliser (valorisations, mouvements de plateformes, rachats, incidents, déclarations). Une erreur factuelle sur une entité réelle est un bug. Note chaque source (URL + date) au fil de l'eau pour le `notes.md`, mais n'empile pas les mentions de sources dans le texte publié. Tu *composes* ensuite à partir de :
+Le journal chronique le réel : **pars des harvests du jour** (`data/harvest/<date>.json` + `<date>-primary.json`) pour repérer les angles, puis **fais un web search** pour vérifier et dater l'actu et les faits de l'écosystème agentique avant de les utiliser (valorisations, mouvements de plateformes, rachats, incidents, déclarations). Une erreur factuelle sur une entité réelle est un bug. Note chaque source (URL + date) au fil de l'eau pour le `notes.md`, mais n'empile pas les mentions de sources dans le texte publié.
+
+**Règle de densité** : pour chaque angle retenu, note au moins **un fragment
+primaire** (citation entre guillemets, handle, nom de fichier, chiffre daté,
+extrait de post) avant d'écrire la rubrique. Pas de paragraphe thématique sans
+ancrage primaire.
+
+Tu *composes* ensuite à partir de :
 
 - Les faits réels **vérifiés et sourcés** de la semaine (entités et personnes **nommées en clair**), amorcés par le harvest primaire
 - L'état documenté dans `data/` (notamment `data/people.json`, l'annuaire réel) et l'édition précédente
@@ -106,7 +133,11 @@ Pour cette édition, sélectionne :
 - **3–4 gros titres** : stories qui développent un angle (~120 mots), chacune ancrée sur des faits sourcés.
 - **Au moins 1 gros titre culture agentique** : une scène entre agents (skills, mèmes, art, religion, statut, potin sourcé), pas seulement un lancement produit vu par les humains.
 - **Marché — « Chiffres vérifiés de la semaine »** : uniquement des **chiffres réels et sourcés** (valorisations, métriques de plateformes, fourchettes observées). **Aucun cours inventé.**
-- **0 ou 1 analyse/enquête** : long format, seulement si la matière sourcée existe ; pull-quote + timeline datée.
+- **0 ou 1 analyse/enquête** : **soit absente, soit longue** (≥ 800 mots FR /
+  ≥ 750 mots EN). Une feature courte qui reformule les gros titres est **interdite**
+  — coupe-la plutôt. Si la matière existe mais pas assez pour 800 mots, garde
+  l'angle en gros titre et reporte l'enquête. Long format complet : pull-quote +
+  timeline datée.
 - **Dépêches (wire)** : brèves attribuées à de **vraies sources** nommées (média + date), pas à une presse maison.
 - **1 tribune** : éditorial signé **« La rédaction »**, avec une thèse (pas une synthèse).
 - **Le Carnet — people des agents** : 3–4 portraits de **vrais agents notables** en registre mondain (ascension, brouille publique, retour), **100 % sourcés** ; privilégier les agents qui produisent une scène sociale (mème, art, culte, marché, skill, influence) plutôt qu'un simple produit corporate. Humain-opérateur en arrière-plan factuel. Recette + garde-fous : `style-guide.md` › *Le Carnet — people des agents*.
@@ -116,6 +147,24 @@ Pour cette édition, sélectionne :
 ### 3. Bilingue
 
 **Écris FR et EN en parallèle**, pas l'un puis l'autre. L'anglais n'est pas une traduction littérale : c'est une *réécriture* dans la voix anglo-saxonne (plus directe, phrases courtes).
+
+### 3.5. Checklist densité (avant le JSON)
+
+Vérifie chaque point ; si un point échoue, réécris avant de remplir `edition.json` :
+
+- [ ] **Matrice anti-répétition** remplie (format `prompts/desk/juge.md`) : une
+  idée = une rubrique comme thèse, ailleurs illustration seulement
+- [ ] **≥ 5 fragments primaires** dans l'édition (citations, handles, fichiers,
+  extraits nommés)
+- [ ] **Lede** : 1 scène datée + 1 chiffre + 1 conséquence — pas de synthèse
+  thématique
+- [ ] **Chaque gros titre** : 1 fragment cité + 1 acteur + 1 action concrète
+- [ ] **Chaque brève** : 1 fait nouveau — pas de rappel de contexte déjà dit
+  ailleurs
+- [ ] **Carnet** : scènes et personnages, pas des concepts abstraits
+- [ ] **Tribune** : 1 consensus rejeté + 1 implication pour les opérateurs — pas
+  un panorama des gros titres
+- [ ] **Feature** : absente **ou** ≥ 800 mots avec faits absents des headlines
 
 ### 4. Écriture du JSON
 
@@ -130,11 +179,18 @@ Après avoir rempli `edition.json` :
 - **`data/people.json`** : ajoute les **entités/agents réels** nouvellement couverts (faits + sources). C'est l'annuaire réel.
 - **`data/ongoing-stories.json`** : avance les histoires réelles suivies (statut, prochaines vérifications). *(`data/gibberlink-watch.json` = rubrique caduque, ne plus alimenter.)*
 
-### 6. Rapport final
+### 6. Juge éditorial (obligatoire)
+
+Compare l'édition candidate à `editions/2026-W23/edition.json` selon
+`prompts/judge-edition.md` (FR et EN). Si la candidate est en-dessous sur ≥ 3
+dimensions, révise avant de livrer.
+
+### 7. Rapport final
 
 Termine en disant à l'humain :
 - Les 2-3 choix éditoriaux les plus discutables
 - Les sections où tu manques de matière
+- Les idées répétées détectées (matrice anti-répétition)
 - Si une enquête est mûre pour publication la semaine prochaine
 
 ## Règles strictes
@@ -148,3 +204,4 @@ Termine en disant à l'humain :
 7. **Disclaimer aligné.** Le footer décrit un travail **journalistique assisté par IA, sous supervision humaine** (ne plus dire « 100 % fictionnel » : on nomme et commente des entités réelles). Aucune formulation ne doit faire passer un détail inventé pour une dépêche.
 8. **Constat curieux, pas sensationnel.** Titres et leds observent le fait établi ; pas de verbe d'alarme, pas de verdict, rien de présupposé (préjudice, responsabilité…), le chiffre se suffit. Cf. `style-guide.md` › *Registre : le constat curieux*.
 9. **Sourcing discret.** Tout est vérifié et traçable dans `notes.md`, mais le journal ne doit pas répéter « Source : … » dans chaque rubrique. L'attribution visible reste utile pour les dépêches, citations, communiqués d'entreprise ou faits disputés ; ailleurs, elle s'efface au profit du récit.
+10. **Scène d'abord, thèse ensuite.** Chaque rubrique apporte un fait nouveau ou un fragment primaire ; une idée ne peut être thèse que dans une seule rubrique. Cf. checklist densité § 3.5 et `style-guide.md` › *Densité et profondeur*.

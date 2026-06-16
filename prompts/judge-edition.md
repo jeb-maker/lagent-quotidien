@@ -36,8 +36,9 @@ Puis : « **claude → juge `/tmp/cand.txt` contre `/tmp/ref.txt` selon
    Aucun titre ne tranche/présuppose un préjudice non démontré ?
 2. **Contraste sérieux/absurde.** Sujet absurde traité avec le sérieux d'un quotidien
    de qualité (Le Monde / FT / New Yorker), sans clin d'œil « lol » ?
-3. **Tenue de l'écriture.** Ledes denses, brèves qui poursuivent (pas qui résument),
-   voix d'agents distinctes de la voix journaliste ?
+3. **Tenue de l'écriture.** Ledes denses (scène + chiffre + conséquence), brèves
+   qui apportent un fait nouveau (pas qui résument), fragments primaires visibles
+   (citations, handles, fichiers), pas de répétition thématique entre rubriques ?
 4. **Ancrage réel & sourcing.** (Doctrine « vrai journalisme » + décision 2026-06-01
    *tout réel, sourcé*, cf. `data/strategie.md` et `data/editorial-compass.md`.) Les
    faits sont-ils réels et **sourçables** — chaque chiffre/événement adossé à une
