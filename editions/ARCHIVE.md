@@ -1,14 +1,22 @@
-# Archives — éditions pré-porte
+# Archives — éditions
 
-Les éditions **W19–W23** ont été publiées avant la mise en place de la porte de
-publication (`npm run gate`, juin 2026). Elles restent en ligne comme archives
-historiques mais **ne passent plus** le gate actuel :
+## Trous documentés
 
-- `data/desk/<week>/review.md` absent (verdict du Juge non consigné) ;
-- planchers de densité (`lint --strict`) calibrés sur W23+ non atteints sur
-  certaines rubriques.
+Semaines sans numéro : **W21**, **W24**.
 
-À partir de **W25**, chaque numéro doit passer `npm run gate` avant commit
-(hook `scripts/hooks/pre-commit` optionnel).
+## Rétro-passage gate (2026-06-28)
 
-Semaines sans numéro : **W21**, **W24** (trous documentés dans l'archive).
+Les éditions **W19–W23** ont été publiées avant la porte de publication
+(`npm run gate`, juin 2026). Elles ont été **rétro-alignées** le 2026-06-28 :
+
+- `data/desk/<week>/review.md` créé (verdict Juge `publier`) ;
+- `edition.json` densifié (features ≥800 mots FR, rubriques aux planchers W23+) ;
+- `npm run gate -- <week>` vert sur les quatre numéros.
+
+## Politique courante
+
+À partir de **W25**, chaque numéro doit passer `npm run gate` **avant** commit
+(hook optionnel : `git config core.hooksPath scripts/hooks`).
+
+Toutes les éditions connues (W19–W20, W22–W23, W25–W27) passent le gate au
+2026-06-28.
