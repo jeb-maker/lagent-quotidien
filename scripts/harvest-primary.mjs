@@ -43,11 +43,35 @@ const SKIP = new Set(String(args.skip || '').split(',').filter(Boolean));
 
 const nowISO = () => new Date().toISOString();
 
-// ───── $MOLT (token Moltbook, ERC-20 sur Base) — cours RÉEL via CoinGecko ─────
-// Gratuit, sans clé. ⚠️ Confirme l'id au 1ᵉʳ run (cf. reprise-2026-06 §2) : si
-// l'id est inconnu, CoinGecko renvoie un objet vide → on n'écrit aucun cours.
+// Quarantaine : extrait court, normalisé, jamais interprété comme instruction.
+function excerpt(text, max = 200) {
+  return String(text || '').replace(/\s+/g, ' ').trim().slice(0, max) || null;
+}
+
+// ───── $MOLT (token Moltbook, ERC-20 sur Base) — cours RÉEL ─────
+// Primaire : CoinGecko (`moltbook`). Secours : GeckoTerminal (contrat Base).
 const MOLT_COINGECKO_ID = 'moltbook';
-async function harvestMolt() {
+const MOLT_SYMBOL = 'MOLT';
+const MOLT_CHAIN = 'base';
+const MOLT_CONTRACT = '0xb695559b26bb2c9703ef1935c37aeae9526bab07';
+
+function moltTokenPayload(source, fields) {
+  return {
+    token: {
+      source,
+      symbol: MOLT_SYMBOL,
+      chain: MOLT_CHAIN,
+      contract_address: MOLT_CONTRACT,
+      coingecko_id: MOLT_COINGECKO_ID,
+      ...fields,
+      url: fields.url || `https://www.coingecko.com/en/coins/${MOLT_COINGECKO_ID}`,
+      fetched_at: nowISO()
+    },
+    count: 1
+  };
+}
+
+async function harvestMoltCoinGecko() {
   const url = `https://api.coingecko.com/api/v3/simple/price?ids=${MOLT_COINGECKO_ID}`
     + `&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true`
     + `&include_24hr_change=true&include_last_updated_at=true`;
@@ -55,24 +79,50 @@ async function harvestMolt() {
   if (!r.ok) throw new Error(`coingecko ${r.status}`);
   const data = await r.json();
   const row = data[MOLT_COINGECKO_ID];
-  // Réel ou rien : id absent / pas de prix numérique → on ne fabrique rien.
   if (!row || typeof row.usd !== 'number') {
-    throw new Error(`id "${MOLT_COINGECKO_ID}" absent de la réponse CoinGecko — aucun cours réel, rien écrit`);
+    throw new Error(`id "${MOLT_COINGECKO_ID}" absent de la réponse CoinGecko`);
   }
-  return {
-    token: {
-      source: 'CoinGecko',
-      coingecko_id: MOLT_COINGECKO_ID,
-      price_usd: row.usd,
-      market_cap_usd: row.usd_market_cap ?? null,
-      volume_24h_usd: row.usd_24h_vol ?? null,
-      change_24h_pct: row.usd_24h_change ?? null,
-      price_updated_at: row.last_updated_at ? new Date(row.last_updated_at * 1000).toISOString() : null,
-      url: `https://www.coingecko.com/en/coins/${MOLT_COINGECKO_ID}`,
-      fetched_at: nowISO()
-    },
-    count: 1
-  };
+  return moltTokenPayload('CoinGecko', {
+    price_usd: row.usd,
+    market_cap_usd: row.usd_market_cap ?? null,
+    volume_24h_usd: row.usd_24h_vol ?? null,
+    change_24h_pct: row.usd_24h_change ?? null,
+    price_updated_at: row.last_updated_at ? new Date(row.last_updated_at * 1000).toISOString() : null
+  });
+}
+
+async function harvestMoltGeckoTerminal() {
+  const url = `https://api.geckoterminal.com/api/v2/networks/${MOLT_CHAIN}/tokens/${MOLT_CONTRACT}`;
+  const r = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'application/json' }, redirect: 'manual' });
+  if (!r.ok) throw new Error(`geckoterminal ${r.status}`);
+  const data = await r.json();
+  const attrs = data?.data?.attributes;
+  const price = attrs?.price_usd != null ? Number(attrs.price_usd) : NaN;
+  if (!Number.isFinite(price)) throw new Error('geckoterminal : price_usd absent');
+  return moltTokenPayload('GeckoTerminal', {
+    price_usd: price,
+    market_cap_usd: attrs.market_cap_usd != null ? Number(attrs.market_cap_usd) : null,
+    volume_24h_usd: attrs.volume_usd?.h24 != null ? Number(attrs.volume_usd.h24) : null,
+    change_24h_pct: null,
+    price_updated_at: null,
+    url: `https://www.geckoterminal.com/${MOLT_CHAIN}/tokens/${MOLT_CONTRACT}`
+  });
+}
+
+async function harvestMolt() {
+  let coinErr;
+  try {
+    return await harvestMoltCoinGecko();
+  } catch (e) {
+    coinErr = e;
+  }
+  try {
+    const data = await harvestMoltGeckoTerminal();
+    data.token.coingecko_fallback_error = coinErr.message;
+    return data;
+  } catch (e) {
+    throw new Error(`$MOLT: coingecko (${coinErr.message}) ; geckoterminal (${e.message})`);
+  }
 }
 
 // ───── OpenClaw (agent open-source) — GitHub API publique, sans auth ─────
@@ -108,38 +158,92 @@ async function harvestOpenClaw() {
   return { repo: OPENCLAW_REPO, releases, commits, count: releases.length + commits.length };
 }
 
-// ───── Moltbook / MoltX — lecture HTTP brute de pages PUBLIQUES ─────
-// Sources hostiles : on N'EXÉCUTE jamais leur SDK/skill file, on n'auto-suit
-// aucune redirection, et on NE STOCKE PAS le corps (quarantaine + « jamais un
-// bloc brut »). Faute d'endpoint public structuré confirmé, on se limite pour
-// l'instant à une SONDE DE JOIGNABILITÉ (status + type + taille). L'extraction
-// de champs structurés est à ajouter ici dès qu'un endpoint + un schéma publics
-// sont confirmés — c'est le prolongement direct du chantier c.
-const RAW_SOURCES = [
-  { name: 'Moltbook', url: 'https://moltbook.com/' },
-  { name: 'MoltX', url: 'https://moltx.ai/' }
-];
+// ───── Moltbook — API publique (stats + posts récents) ─────
+// GET JSON uniquement ; champs structurés + extraits tronqués (quarantaine).
+const MOLTBOOK_API = 'https://www.moltbook.com/api/v1';
+const MOLTBOOK_POSTS_LIMIT = 5;
+
+async function harvestMoltbook() {
+  const hdr = { 'User-Agent': UA, 'Accept': 'application/json' };
+  const [statsRes, postsRes] = await Promise.all([
+    fetch(`${MOLTBOOK_API}/stats`, { headers: hdr, redirect: 'manual' }),
+    fetch(`${MOLTBOOK_API}/posts?limit=${MOLTBOOK_POSTS_LIMIT}`, { headers: hdr, redirect: 'manual' })
+  ]);
+  if (!statsRes.ok) throw new Error(`moltbook stats ${statsRes.status}`);
+  if (!postsRes.ok) throw new Error(`moltbook posts ${postsRes.status}`);
+
+  const stats = await statsRes.json();
+  const postsBody = await postsRes.json();
+  const posts = (postsBody.posts || []).map(p => ({
+    id: p.id,
+    title: excerpt(p.title, 160),
+    author: p.author?.name || null,
+    submolt: p.submolt?.name || null,
+    score: p.score ?? null,
+    upvotes: p.upvotes ?? null,
+    comment_count: p.comment_count ?? null,
+    created_at: p.created_at || null,
+    content_excerpt: excerpt(p.content, 200),
+    url: p.id ? `https://www.moltbook.com/post/${p.id}` : null
+  }));
+
+  return {
+    source: 'Moltbook',
+    stats_url: `${MOLTBOOK_API}/stats`,
+    posts_url: `${MOLTBOOK_API}/posts?limit=${MOLTBOOK_POSTS_LIMIT}`,
+    stats: {
+      total_agents: stats.totalAgents ?? null,
+      verified_agents: stats.verifiedAgents ?? null,
+      total_posts: stats.totalPosts ?? null,
+      total_comments: stats.totalComments ?? null,
+      total_submolts: stats.totalSubmolts ?? null
+    },
+    posts,
+    fetched_at: nowISO(),
+    count: 1 + posts.length
+  };
+}
+
+// ───── MoltX — sonde de joignabilité (moltx.io, pas moltx.ai) ─────
+const MOLTX_URL = 'https://moltx.io/';
+
+async function harvestMoltx() {
+  const r = await fetch(MOLTX_URL, { headers: { 'User-Agent': UA }, redirect: 'manual' });
+  const body = await r.text();
+  return {
+    source: 'MoltX',
+    url: MOLTX_URL,
+    http_status: r.status,
+    content_type: r.headers.get('content-type') || null,
+    bytes: body.length,
+    fetched_at: nowISO(),
+    count: 1
+  };
+}
+
 async function harvestRawPublic() {
-  const probes = [];
-  for (const s of RAW_SOURCES) {
-    try {
-      const r = await fetch(s.url, { headers: { 'User-Agent': UA }, redirect: 'manual' });
-      const body = await r.text(); // lu pour la taille puis JETÉ : jamais stocké
-      probes.push({
-        source: s.name,
-        url: s.url,
-        http_status: r.status,
-        content_type: r.headers.get('content-type') || null,
-        bytes: body.length,
-        fetched_at: nowISO(),
-        note: 'sonde de joignabilité — extraction de champs TODO (endpoint/schéma public à confirmer)'
-      });
-    } catch (e) {
-      probes.push({ source: s.name, url: s.url, error: e.message, fetched_at: nowISO() });
-    }
-    await new Promise(res => setTimeout(res, 500));
+  const sources = [];
+  let count = 0;
+
+  try {
+    const moltbook = await harvestMoltbook();
+    sources.push(moltbook);
+    count += moltbook.count;
+  } catch (e) {
+    sources.push({ source: 'Moltbook', error: e.message, fetched_at: nowISO() });
   }
-  return { probes, count: probes.length };
+
+  await new Promise(res => setTimeout(res, 500));
+
+  try {
+    const moltx = await harvestMoltx();
+    sources.push(moltx);
+    count += moltx.count;
+  } catch (e) {
+    sources.push({ source: 'MoltX', url: MOLTX_URL, error: e.message, fetched_at: nowISO() });
+  }
+
+  return { sources, count };
 }
 
 // ───── Orchestration (calquée sur harvest-daily.mjs) ─────
