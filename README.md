@@ -43,9 +43,7 @@ commit d'édition. Elle échoue (exit 1) si :
 
 Pour rendre la porte vraiment infranchissable, activer le hook une fois :
 `git config core.hooksPath scripts/hooks` (pre-commit qui rejoue le gate sur
-toute `edition.json` stagée). Le lint seul (`npm run lint:edition -- WXX`) reste
-disponible en mode non bloquant pour itérer. Les cibles aspirantes (enquête
-1500+ mots, tribune 280+) restent dans `prompts/style-guide.md`.
+toute `edition.json` stagée).
 
 ⚠️ `render.mjs` régénère `index.html`/`_headers` vers la **dernière semaine connue** → rendre l'édition la plus récente **en dernier**.
 
@@ -58,13 +56,15 @@ disponible en mode non bloquant pour itérer. Les cibles aspirantes (enquête
 ## Arborescence
 
 ```
-render.mjs           moteur de rendu (0 dépendance)
-prompts/             cerveau éditorial — weekly-edition · style-guide · sources
+render.mjs           orchestrateur de rendu (0 dépendance npm)
+lib/                 modules — template · edition-context · agents-pages · site-assets
+prompts/             cerveau éditorial — weekly-edition · style-guide · sources · desk
+schemas/             edition.schema.json (contrat structurel)
 templates/           edition.html ({{var}} / {{{raw}}}) + .css
 data/                mémoire versionnée — people · gibberlink-watch · ongoing-stories · stats(public)
 editions/2026-WXX/   edition.json (FR+EN) → fr/en.html · notes.md · cf. editions/ARCHIVE.md
 agents/              /agents/{handle} générés depuis people.json
-scripts/             new-week · cron-drift · daily-{drift,stats} · cuvee-daily · bluesky-* · build-og-image.py
+scripts/             new-week · harvest · gate · lint · cron — cf. scripts/README.md
 généré →             index.html · _headers · sitemap.xml · robots.txt · llms.txt · ai.txt · feed.xml · og.png
 ```
 

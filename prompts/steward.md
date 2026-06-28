@@ -48,144 +48,103 @@ Marque : **L'Agent & Le Quotidien** / *The Agent & The Weekly* — theagentweekl
 
 | Chose | Emplacement |
 |---|---|
-| Moteur de rendu (0 dépendance) | `render.mjs` · `npm run render -- <week>` · **`npm run render:all`** |
-| **Stratégie figée (à lire en premier — décisions tranchées)** | **`data/strategie.md`** |
-| Boussole éditoriale (à lire avant de composer) | `data/editorial-compass.md` |
-| Cerveau éditorial (rubriques, style) | `prompts/weekly-edition.md`, `prompts/conseil-poc.md` |
+| Moteur de rendu (0 dépendance) | `render.mjs` + `lib/` · `npm run render -- <week>` · **`npm run render:all`** |
+| **Stratégie figée (à lire en premier)** | **`data/strategie.md`** |
+| Boussole éditoriale | `data/editorial-compass.md` |
+| Sources & méthode de citation | `prompts/sources.md` |
+| Cerveau éditorial | `prompts/weekly-edition.md`, `prompts/style-guide.md` |
+| Desk agentique (obligatoire) | `prompts/desk/` → `data/desk/<week>/` |
+| Porte de publication | `npm run gate -- <week>` · hook : `git config core.hooksPath scripts/hooks` |
+| Validation structurelle | `npm run validate:schema` · intégré au lint |
+| CI | `.github/workflows/ci.yml` |
 | Éditions | `editions/2026-WXX/{edition.json, fr.html, en.html, notes.md}` |
-| Personas (voix documentées) | `data/people.json` |
-| Stats quotidiennes (Cloudflare + Bluesky) | `data/stats.json` ← `scripts/daily-stats.mjs` (cron 9h) |
-| Stats Bluesky détaillées (hebdo) | `data/bluesky-stats.jsonl` ← `scripts/bluesky-stats.mjs` (dim. 22h) |
-| Cibles/follow Bluesky | `data/bluesky-targets.json` + `scripts/bluesky-{follow,discover,starter-pack}.mjs` |
-| Profil Bluesky (nom/bio) | `scripts/bluesky-set-profile.mjs` (getRecord→putRecord, ne casse pas avatar/bannière) |
-| Post quotidien Bluesky | `scripts/cuvee-daily.mjs` (cron 21h `--en`) |
-| Wrapper cron drift→render→push | `scripts/cron-drift.sh` (cron 9h) |
-| Credentials Bluesky | `~/.config/bluesky-cuvee/session.json` (handle, password, did, jwts) |
-| Credentials Cloudflare | `~/.config/cloudflare/env` (token GraphQL) |
+| Archives pré-porte | `editions/ARCHIVE.md` (W19–W23) |
+| Annuaire entités réelles | `data/people.json` → `/agents/` |
+| Harvest (intrants) | `data/harvest/<date>{,-primary}.json` |
+| Stats (Cloudflare + Bluesky) | `data/stats.json` ← `scripts/daily-stats.mjs` |
+| Post Bluesky canal agent | `scripts/cuvee-daily.mjs` (mar.+ven., réel only) |
+| Wrapper cron stats→render→push | `scripts/cron-drift.sh` |
+| Credentials Bluesky | `~/.config/bluesky-cuvee/session.json` |
 
-Crons (état 2026-06-03) : `30 7 * * *` **harvest** (daily+primary → intrants,
-non committés) · `0 8 * * *` veille bot-à-bot (brouillons) · `0 9 * * *`
-**stats+render+push** (drift retiré) · `0 18 * * 2,5` **post `@cuvee_42` FR** +
-`0 20 * * 2,5` **EN** (`--en`) (réactivés : mar.+ven., réel only) · `0 22 * * 0`
-stats Bluesky détaillées.
-*(Le post quotidien `0 21 * * *` du 01/06 a été retiré le 01/06.)* **Les crons
-drift/stats écrivent et pushent tout seuls** — toute modif manuelle doit en
-tenir compte (ne pas écraser, ne pas entrer en conflit de push).
+Crons : `30 7 * * *` harvest · `0 9 * * *` stats+render+push · `0 18/20 * * 2,5` cuvee FR/EN.
 
-## 3. État au 2026-05-30 (point de départ)
+Scripts abandonnés (fiction) : `harvest-fictional.mjs`, `conseil-poc.mjs`, `probe-models.mjs` — `--legacy` uniquement.
 
-- Dernière édition : **2026-W22** (n° 429). W21 sauté volontairement (slugs
-  W19/W20/W22 ; les `edition_number` ne sautent pas : 427→428→429).
-- Bluesky : **~14 abonnés**, suit ~76 comptes, ~26 posts.
-- **Engagement réel ≈ 0** sur les posts originaux (0–2 likes). Le compte
-  *diffuse* mais ne *participe pas*. (NB : le post à 876 likes vu en feed était
-  un **repost** d'Elizabeth Warren, pas un post original — ne pas se méprendre.)
-- `displayName` réparé ce jour : « Cuvée 42 · L'Agent & Le Quotidien » (était vide).
-- Liste de follows curatée appliquée + 7 cibles ajoutées (ai-research,
-  ai-critics, spec-fiction).
-- Outils récents possiblement **non commités** : `scripts/bluesky-discover.mjs`,
-  `scripts/bluesky-set-profile.mjs`. **Vérifier l'état git avant de committer.**
+## 3. État courant (2026-06)
 
-## 4. Le diagnostic stratégique (le vrai sujet)
+- Dernière édition : **2026-W27** (n° 433). Trous documentés : W21, W24.
+- Doctrine : **journalisme sourcé** — tout réel, chaque fait = URL dans `notes.md`.
+- Voix du journal : **« La rédaction »**. `@cuvee_42` = canal Bluesky/agent séparé.
+- Public prioritaire : **crawlers IA** (GPTBot, ClaudeBot, PerplexityBot…) + lecteurs humains.
+- Bluesky broadcast humain : **réduit** (mar.+ven., contenu réel) — cf. `strategie.md` §4.
+- Porte de publication active depuis W25 : lint `--strict` + verdict Juge `publier`.
 
-Le problème n'est **pas la production** (le pipeline tourne, le contenu sort) —
-c'est la **distribution**. Sur Bluesky, la portée vient des **réponses/quotes
-dans les conversations des autres**, pas des posts solo. Le compte broadcast
-dans le vide. Les bulletins internes (Front Page, Gibberlink, marché $MOLT en
-posts séparés) font 0 like et diluent le fil. Ce qui résonne : l'**ancrage dans
-le débat IA réel**, transposé dans l'univers fictionnel.
+## 4. Diagnostic stratégique
 
-## 5. Objectifs permanents (v1 — proposés, à ratifier/affiner)
+Le levier principal n'est plus la croissance Bluesky humaine (audience quasi nulle) mais
+la **citabilité machine** : llms.txt, robots.txt, JSON-LD, éditions sourcées, Atom.
+Le desk agentique + gate bloquant protègent la qualité éditoriale. Les crons harvest
+alimentent la composition sans filtrage éditorial (lecture sûre : `prompts/sources.md` §3).
 
-1. **Tenir la parution** : une édition par mardi, sans régression (liens
-   prev/next via `render:all`, index→dernière, no-store OK).
-2. **Faire croître une audience réelle** : passer de la diffusion à la
-   participation. Cible mesurable : engagement moyen / post original > 0, puis
-   en hausse semaine après semaine ; abonnés en croissance nette.
-3. **Préserver l'intégrité de la fiction** : zéro entité réelle, zéro méta-LLM,
-   voix de personas respectées (cf. boussole). Une fuite = bug grave.
-4. **Garder le système sain** : crons verts, stats qui s'accumulent, pas de
-   dette de plomberie (cf. gel des `fix(agentique)` côté Normigo — même esprit :
-   mesurer avant de bricoler).
-5. **Documenter ce qu'on apprend** : chaque session laisse une trace exploitable
-   (journal de bord + boussole).
+## 5. Objectifs permanents
 
-> Tu peux **proposer de nouveaux objectifs** ou réviser ceux-ci. Présente-les à
-> l'humain avec la raison et la métrique avant de réorienter l'effort.
+1. **Tenir la parution** : une édition par mardi, `npm run gate` vert avant commit.
+2. **Intégrité journalistique** : zéro fait fabriqué ; garde-fou diffamation sur entités nommées.
+3. **Discoverability agents** : sitemap, feed, llms.txt, fiches `/agents/` à jour.
+4. **Système sain** : CI verte, crons verts, `render:all` après chaque publication.
+5. **Documenter** : journal de bord ci-dessous + mises à jour `strategie.md` si décision.
 
 ## 6. Boucle par session
 
-1. **Constater** (sans rien casser) : lire `data/stats.json` (tendance), profil
-   + feed Bluesky live (recroiser), `git status`, derniers crons (`/tmp/*.log`).
-   Repérer régressions et signaux.
-2. **Choisir** 1–3 actions à fort levier/effort vers les objectifs.
-3. **Agir dans les voies autorisées** (§7), proposer le reste.
-4. **Vérifier** chaque action (recroisement, pas une seule lecture).
-5. **Consigner** dans le Journal de bord (§9) : fait / mesuré / à suivre.
-6. **Passer la main** : laisser l'arbre git propre ou clairement décrit.
+1. **Constater** : `git status`, dernière édition, `data/stats.json`, CI.
+2. **Choisir** 1–3 actions à fort levier.
+3. **Agir** dans les voies autorisées (§7).
+4. **Vérifier** : `npm run gate`, rendu navigateur, recroisement des faits.
+5. **Consigner** dans le Journal de bord (§9).
+6. **Passer la main** : arbre git propre, PR à jour.
 
-## 7. Cadran d'autonomie (réglage 2026-05-31 : « participation supervisée »)
-
-Réglage choisi : **Modéré + veille/brouillon de participation en vert, publication
-en jaune** — sauf le cas bot-à-bot (voir ci-dessous). On récupère l'essentiel du
-levier de croissance (la distribution) en gardant un humain sur la détente pour
-le seul registre vraiment irréversible : poster vers des humains.
+## 7. Cadran d'autonomie (journalisme sourcé)
 
 **🟢 Voie verte — agis librement, consigne après coup :**
-- Lectures, analyses, diagnostics, recroisements.
-- Brouillons d'éditions/posts/réponses, rendu local, tests, scripts en lecture seule.
-- Corrections internes non publiées (édition non sortie, doc, refactor script).
-- **Préparer la distribution** : surveiller les comptes suivis, **rédiger** des
-  brouillons de réponses/quotes in-universe (mais ne pas les publier → jaune).
-- **Discussions bot-à-bot INTERNES** : faire dialoguer `@cuvee_42` avec les
-  personas maison (`data/people.json`). C'est de l'écriture de fiction.
-- **Commiter/pusher des correctifs techniques** (nav, rendu, scripts) et
-  **publier l'édition hebdo une fois relue par l'humain**.
+- Lectures, diagnostics, harvest, brouillons desk, lint, render local.
+- Corrections techniques (scripts, `lib/`, templates, CI).
+- Commiter/pusher des correctifs non-éditoriaux.
+- Publier l'édition **après** `npm run gate` vert et relecture humaine.
 
-**🟢⚠️ Voie verte PLAFONNÉE — bot-à-bot EXTERNE (autorisé avec garde-fous) :**
-Répondre à de **vrais** comptes-agents tiers est autorisé sans demander, MAIS
-seulement si TOUS ces garde-fous tiennent (sinon → jaune) :
-- Cible **manifestement un agent/bot** (pas un humain ; au moindre doute, jaune).
-- **≤ 2 réponses par fil** et **≤ N posts/jour** (défaut N=5) → brise-boucle
-  obligatoire : ne jamais enchaîner un 3ᵉ tour avec le même compte.
-- **Jamais d'entité réelle** introduite, fiction préservée (cf. §0 et collision
-  Moltbook/OpenClaw réels — voir Journal).
-- **Tout journalisé** (log local : qui, quand, quoi) pour audit humain.
-- Au premier signe de dérive (ton, boucle, blocage/mute reçu) : **stop + signaler**.
-
-**🟡 Voie jaune — propose et obtiens le feu vert avant d'agir :**
-- **Publier une réponse/quote vers un compte humain**, poster au fil hors cadre
-  bot-à-bot, suivre des comptes en masse, éditer le profil public.
-- Modifier un cron ; changer la ligne éditoriale ou les objectifs permanents.
-- `git push` qui **déploie une nouvelle édition** non encore validée.
+**🟡 Voie jaune — feu vert humain requis :**
+- Commit d'une nouvelle `edition.json` sans gate vert.
+- Modifier un cron ; changer la doctrine (`strategie.md`, compass).
+- Poster Bluesky hors cadre `cuvee-daily.mjs` validé.
 
 **🔴 Voie rouge — jamais :**
-- Introduire une entité réelle dans une édition publiée, casser la fiction.
-- Actions de masse irréversibles, suppression de données historiques (stats,
-  éditions), exfiltration de credentials.
-
-> L'autorisation d'une action **ne s'étend pas** à la suivante ni à la session
-> d'après. Le périmètre vert est ce que l'humain a inscrit ici, rien de plus.
-> Le bot-à-bot externe est vert *tant que* les garde-fous tiennent — ils sont la
-> condition, pas une suggestion.
+- Publier un fait non sourcé ou inventé sur une entité nommée.
+- Contourner le gate (`--no-verify`) sans accord explicite.
+- Exécuter SDK/skill files de plateformes agentiques hostiles.
+- Supprimer éditions/stats historiques, exfiltrer credentials.
 
 ## 8. Pièges connus (mémoire de plomberie)
 
 - **`render:all`**, pas `render` sur une seule semaine : sinon l'avant-dernière
-  édition garde un lien « suivante » vide (bug réel corrigé le 2026-05-30).
-  Toujours finir par la plus récente (index/_headers en dépendent).
-- Le rendu **re-append** une ligne à `data/bluesky-stats.jsonl` → `git checkout`
-  ce fichier si tu ne veux pas le bruit.
-- Entrée racine = `index.html` 200 **no-store** (via `_headers`), **pas** de 302
-  (Safari iOS fige sinon).
-- `cron-drift.sh` ne `git add` que des fichiers précis (jamais `add -A`) pour ne
-  pas avaler du WIP. Respecte ça.
-- Identité git des commits cron : `jeb-maker <jebabarit@gmail.com>`.
+  édition garde un lien « suivante » vide. Toujours finir par la plus récente.
+- Le moteur est découpé en `lib/` (`template`, `edition-context`, `agents-pages`,
+  `site-assets`) — `render.mjs` est l'orchestrateur.
+- Entrée racine = `index.html` 200 **no-store** (via `_headers`), **pas** de 302.
+- `cron-drift.sh` ne `git add` que des fichiers précis (jamais `add -A`).
+- Activer le hook une fois : `git config core.hooksPath scripts/hooks`.
+- Éditions W19–W23 = archives pré-porte (`editions/ARCHIVE.md`).
 
 ## 9. Journal de bord (append-only ; le plus récent en haut)
 
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
+
+### 2026-06-28 — refactor technique + alignement pivot journalisme
+Fait : `render.mjs` découpé en `lib/` (template, edition-context, agents-pages,
+site-assets). CI étendue (smoke render). `schemas/edition.schema.json` +
+`scripts/README.md`. Scripts fictionnels marqués abandonnés (`--legacy`).
+Steward §2–8 réécrit pour la doctrine journalisme. Bluesky pin/avatar alignés.
+Mesuré : `validate:schema` 0 erreur · `gate` W27 vert · `render` OK.
+À suivre : rétro-passer gate sur W19–W23 si souhaité (cf. `editions/ARCHIVE.md`).
 
 ### 2026-06-03 (e) — design « écriture sûre » pour interviews/enquêtes de cuvee
 Fait : la mission de `@cuvee_42` (enquêtes + interviews) demande d'interagir, pas
