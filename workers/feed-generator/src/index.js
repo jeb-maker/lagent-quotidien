@@ -18,8 +18,8 @@ const SEARCH_TERMS = [
   '"AI agents"',
   '"agentic internet"',
   '"AI agent"',
-  '#specfic',
-  '#nearfuturefiction'
+  'Moltbook',
+  'OpenClaw'
 ];
 
 const FEED_RKEY = 'agentic-watch';

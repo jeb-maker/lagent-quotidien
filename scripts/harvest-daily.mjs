@@ -6,8 +6,7 @@
 //
 // Chaque source est isolée dans une fonction try/catch — si une plante, on a
 // quand même les autres. Pas de filtrage éditorial ici : on capture, on garde.
-// Le filtrage et la translation real → fiction se fait dans harvest-digest.mjs
-// et dans le prompt du Conseil.
+// Le tri et la composition se font dans le desk + prompts/weekly-edition.md.
 //
 // Usage :
 //   node scripts/harvest-daily.mjs
