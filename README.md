@@ -28,6 +28,7 @@ Ton → **constat curieux, pas sensationnel** (`prompts/style-guide.md`).
 5. juge éditorial (obligatoire)   → prompts/judge-edition.md vs W23 (FR + EN)
    verdict consigné dans data/desk/2026-WXX/review.md (publier / réviser / jeter)
 6. npm run gate -- 2026-WXX       → PORTE BLOQUANTE : lint --strict + verdict "publier"
+   (schéma JSON validé automatiquement par le lint)
 7. npm run render -- 2026-WXX     → fr/en.html + sitemap/feed/llms/robots/ai + index/_headers
 8. vérif navigateur
 9. git add . && git commit -m "Édition WXX" && git push   → Cloudflare déploie ~30s
@@ -42,28 +43,28 @@ commit d'édition. Elle échoue (exit 1) si :
 
 Pour rendre la porte vraiment infranchissable, activer le hook une fois :
 `git config core.hooksPath scripts/hooks` (pre-commit qui rejoue le gate sur
-toute `edition.json` stagée). Le lint seul (`npm run lint:edition -- WXX`) reste
-disponible en mode non bloquant pour itérer. Les cibles aspirantes (enquête
-1500+ mots, tribune 280+) restent dans `prompts/style-guide.md`.
+toute `edition.json` stagée).
 
 ⚠️ `render.mjs` régénère `index.html`/`_headers` vers la **dernière semaine connue** → rendre l'édition la plus récente **en dernier**.
 
 ## Auto · cron
 
-- ⏰ **7h30** — `scripts/cron-harvest.sh` : récolte du jour (`harvest-daily` + `harvest-primary`) → `data/harvest/<date>{,-primary}.json` (intrants de composition, non committés).
+- ⏰ **7h30** — `scripts/cron-harvest.sh` : récolte du jour (`harvest-daily` + `harvest-primary`) → `data/harvest/<date>{,-primary}.json` (intrants de composition, versionnés dans le repo pour traçabilité éditoriale).
 - ⏰ **9h** — `scripts/cron-drift.sh` : stats (Cloudflare + Bluesky) → re-render → push. *(Le drift de chiffres inventés a été retiré le 2026-06-01 — cf. `data/strategie.md`.)*
 - ⏰ **mar. + ven. — 18h FR / 20h EN** — `scripts/cuvee-daily.mjs` : post Bluesky `@cuvee_42` (persona du canal agent). **Réactivé le 2026-06-03** après coupure du 01/06 : **moins souvent** (~2×/sem. par langue) et **sur du réel** (annonce d'édition / agent réel du Carnet ; plus de `#specfic` ni de `$MOLT` inventé). `--en` pour l'anglais, `--dry-run` pour inspecter, `--mode=edition|agent` pour forcer.
 
 ## Arborescence
 
 ```
-render.mjs           moteur de rendu (0 dépendance)
-prompts/             cerveau éditorial — weekly-edition · style-guide · sources
+render.mjs           orchestrateur de rendu (0 dépendance npm)
+lib/                 modules — template · edition-context · agents-pages · site-assets
+prompts/             cerveau éditorial — weekly-edition · style-guide · sources · desk
+schemas/             edition.schema.json (contrat structurel)
 templates/           edition.html ({{var}} / {{{raw}}}) + .css
 data/                mémoire versionnée — people · gibberlink-watch · ongoing-stories · stats(public)
-editions/2026-WXX/   edition.json (FR+EN) → fr/en.html · notes.md
+editions/2026-WXX/   edition.json (FR+EN) → fr/en.html · notes.md · cf. editions/ARCHIVE.md
 agents/              /agents/{handle} générés depuis people.json
-scripts/             new-week · cron-drift · daily-{drift,stats} · cuvee-daily · bluesky-* · build-og-image.py
+scripts/             new-week · harvest · gate · lint · cron — cf. scripts/README.md
 généré →             index.html · _headers · sitemap.xml · robots.txt · llms.txt · ai.txt · feed.xml · og.png
 ```
 
@@ -83,6 +84,8 @@ Pages → Connect to Git → repo lagent-quotidien
 Entrée racine `/` = `index.html` **200 en `Cache-Control: no-store`** (via `_headers`) qui pousse vers la dernière édition (`location.replace` + `<meta refresh>` de secours). **Pas de redirect 302** : Safari iOS le cache et fige une vieille édition.
 
 Validation mobile : la PR déclenche une preview Cloudflare (commentaire bot) → vérifier `/editions/<week>/{fr,en}` → Merge → prod.
+
+**CI** (`.github/workflows/ci.yml`) : schéma JSON sur toutes les éditions ; `lint --strict` + `gate` sur la dernière semaine à chaque push/PR.
 
 ## X / Bluesky
 

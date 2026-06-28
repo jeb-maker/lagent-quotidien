@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theagentweekly.com/schemas/edition.schema.json",
+  "title": "L'Agent & Le Quotidien — edition.json",
+  "description": "Schéma structurel d'une édition hebdomadaire bilingue. Validé par scripts/validate-edition-schema.mjs.",
+  "type": "object",
+  "required": ["_meta", "ticker", "lede", "breves", "headlines", "market", "wire", "tribune"],
+  "additionalProperties": false,
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["week", "date_fr", "date_en", "edition_number", "volume", "bouclage"],
+      "properties": {
+        "week": { "type": "string", "pattern": "^\\d{4}-W\\d{2}$" },
+        "date_fr": { "type": "string" },
+        "date_en": { "type": "string" },
+        "edition_number": { "type": "integer", "minimum": 1 },
+        "volume": { "type": "string" },
+        "bouclage": { "type": "string", "format": "date-time" },
+        "sources_consulted": { "type": "integer" },
+        "editor_notes": { "type": "string" }
+      }
+    },
+    "ticker": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "text_fr", "text_en"],
+        "properties": {
+          "type": { "enum": ["news", "live"] },
+          "text_fr": { "type": "string" },
+          "text_en": { "type": "string" }
+        }
+      }
+    },
+    "lede": { "$ref": "#/$defs/lede" },
+    "breves": { "$ref": "#/$defs/bilingualItems" },
+    "headlines": { "$ref": "#/$defs/bilingualItems" },
+    "market": { "$ref": "#/$defs/market" },
+    "wire": { "$ref": "#/$defs/wire" },
+    "tribune": { "$ref": "#/$defs/tribune" },
+    "carnet": { "$ref": "#/$defs/carnet" },
+    "feature": { "$ref": "#/$defs/feature" },
+    "enquete": { "$ref": "#/$defs/feature" },
+    "bestiaire": { "type": "object" },
+    "gibberlink": { "type": "object" },
+    "interview": { "type": "object" },
+    "bot_posts": { "type": "object" }
+  },
+  "$defs": {
+    "bilingualString": {
+      "type": "object",
+      "required": ["fr", "en"],
+      "properties": {
+        "fr": { "type": "string", "minLength": 1 },
+        "en": { "type": "string", "minLength": 1 }
+      }
+    },
+    "bilingualItems": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["title", "body"],
+        "properties": {
+          "title": { "$ref": "#/$defs/bilingualString" },
+          "body": { "$ref": "#/$defs/bilingualString" }
+        }
+      }
+    },
+    "lede": {
+      "type": "object",
+      "required": ["kicker", "headline_html", "dek", "byline", "figure", "body"],
+      "properties": {
+        "kicker": { "$ref": "#/$defs/bilingualString" },
+        "headline_html": { "$ref": "#/$defs/bilingualString" },
+        "dek": { "$ref": "#/$defs/bilingualString" },
+        "byline": { "$ref": "#/$defs/bilingualString" },
+        "body": { "$ref": "#/$defs/bilingualString" },
+        "figure": { "type": "object" }
+      }
+    },
+    "market": {
+      "type": "object",
+      "required": ["title", "rows", "boards"],
+      "properties": {
+        "title": { "$ref": "#/$defs/bilingualString" },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["ticker", "label", "value", "change", "direction"],
+            "properties": {
+              "ticker": { "type": "string" },
+              "label": { "$ref": "#/$defs/bilingualString" },
+              "value": { "type": "string" },
+              "change": { "type": "string" },
+              "direction": { "enum": ["up", "down"] }
+            }
+          }
+        },
+        "boards": { "type": "array", "minItems": 1 }
+      }
+    },
+    "wire": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source", "title", "body"],
+        "properties": {
+          "source": { "type": "string", "minLength": 1 },
+          "ts_fr": { "type": "string" },
+          "ts_en": { "type": "string" },
+          "title": { "$ref": "#/$defs/bilingualString" },
+          "body": { "$ref": "#/$defs/bilingualString" }
+        }
+      }
+    },
+    "tribune": {
+      "type": "object",
+      "required": ["label", "headline_html", "paragraphs", "author"],
+      "properties": {
+        "label": { "$ref": "#/$defs/bilingualString" },
+        "headline_html": { "$ref": "#/$defs/bilingualString" },
+        "paragraphs": {
+          "type": "object",
+          "required": ["fr", "en"],
+          "properties": {
+            "fr": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "en": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          }
+        },
+        "author": {
+          "type": "object",
+          "required": ["name", "initials"],
+          "properties": {
+            "name": { "type": "string" },
+            "initials": { "type": "string" },
+            "role_fr": { "type": "string" },
+            "role_en": { "type": "string" }
+          }
+        }
+      }
+    },
+    "carnet": {
+      "type": "object",
+      "required": ["title", "people"],
+      "properties": {
+        "title": { "$ref": "#/$defs/bilingualString" },
+        "people": { "type": "array", "minItems": 1 }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "properties": {
+        "paragraphs": {
+          "type": "object",
+          "required": ["fr", "en"],
+          "properties": {
+            "fr": { "type": "array", "items": { "type": "string" } },
+            "en": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    }
+  }
+}
