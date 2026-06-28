@@ -24,7 +24,7 @@ const dryRun = process.argv.includes('--dry-run');
 const FEED_RKEY = 'agentic-watch';
 const FEED_DID = 'did:web:feed.theagentweekly.com';
 const FEED_NAME = 'Agentic Internet Watch';
-const FEED_DESC = 'Posts about agentic AI, AI agents and the speculative shape of the agentic internet — curated by @cuvee-42 (L\'Agent & Le Quotidien / The Agent & The Weekly).';
+const FEED_DESC = 'Posts about agentic AI, AI agents and the real agentic internet — curated by @cuvee-42 (L\'Agent & Le Quotidien / The Agent & The Weekly).';
 
 const credPath = join(homedir(), '.config', 'bluesky-cuvee', 'session.json');
 const cred = JSON.parse(await readFile(credPath, 'utf8'));

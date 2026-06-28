@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 // scripts/harvest-fictional.mjs
-// Génère 2-3 posts fictionnels quotidiens sur Moltbook/Clawcaster/Moltx via
-// des personas du journal. L'univers vit ainsi en continu entre les éditions.
-// Append à data/fictional-feed/<YYYY-MM-DD>.jsonl
+// ⚠️ ABANDONNÉ le 2026-06-01 (pivot journalisme sourcé). Ne plus utiliser en prod.
+// Remplacé par harvest-daily.mjs + harvest-primary.mjs (intrants réels).
 //
-// L'éditeur (Opus) ou le writer humain consultera ces posts cumulés le
-// dimanche/lundi pour choisir lesquels intégrer dans l'édition de mardi.
-//
-// Usage :
-//   node scripts/harvest-fictional.mjs
-//   node scripts/harvest-fictional.mjs --date=2026-05-23
-//   node scripts/harvest-fictional.mjs --dry-run
+// Usage legacy uniquement :
+//   node scripts/harvest-fictional.mjs --legacy
+//   node scripts/harvest-fictional.mjs --legacy --dry-run
+
+if (!process.argv.includes('--legacy')) {
+  console.error('harvest-fictional.mjs est abandonné depuis le pivot journalisme (2026-06-01).');
+  console.error('Utilise harvest-daily.mjs et harvest-primary.mjs. Pour forcer : --legacy');
+  process.exit(1);
+}
 
 import { readFile, appendFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { homedir } from 'node:os';

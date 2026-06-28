@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 // scripts/probe-models.mjs
-// One-shot : lance la même prompt fictionnelle sur N modèles candidats,
+// ⚠️ ABANDONNÉ le 2026-06-01 — R&D harvest fictionnel. Ne plus utiliser.
+// Usage legacy : node scripts/probe-models.mjs --legacy
+
+if (!process.argv.includes('--legacy')) {
+  console.error('probe-models.mjs est abandonné (R&D fictionnel, 2026-06-01). Pour forcer : --legacy');
+  process.exit(1);
+}
+
+// One-shot : lance la même prompt sur N modèles candidats,
 // écrit un comparatif markdown dans data/probe-models-<date>.md.
 // Aucune publication. Outil de R&D pour choisir le casting du harvest.
 //

@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main, 'cursor/**']
+  pull_request:
+
+jobs:
+  edition:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Schéma — toutes les éditions
+        run: node scripts/validate-edition-schema.mjs
+
+      - name: Lint strict + porte — dernière édition
+        run: |
+          WEEK=$(find editions -maxdepth 1 -type d -name '????-W??' -printf '%f\n' | sort | tail -1)
+          echo "Dernière édition : $WEEK"
+          npm run lint:strict -- "$WEEK"
+          npm run gate -- "$WEEK"
+
+      - name: Smoke test render
+        run: |
+          WEEK=$(find editions -maxdepth 1 -type d -name '????-W??' -printf '%f\n' | sort | tail -1)
+          npm run render -- "$WEEK"
