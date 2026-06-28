@@ -6,7 +6,7 @@
 > propose-la à l'humain, et mets ce fichier à jour avec la date et la raison.
 >
 > Lecture liée : `prompts/steward.md` (pilotage), `data/editorial-compass.md`
-> (doctrine éditoriale), `prompts/sources.md` (⚠️ encore périmé — cf. §6).
+> (doctrine éditoriale), `prompts/sources.md` (méthode de citation et harvest).
 
 ---
 

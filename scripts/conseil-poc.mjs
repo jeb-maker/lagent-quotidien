@@ -1,17 +1,15 @@
 #!/usr/bin/env node
 // scripts/conseil-poc.mjs
-// POC du "Conseil" — chaque modèle gratuit incarne un persona du journal et
-// répond à la question éditoriale de la semaine. Sorties brutes attribuées
-// (persona + modèle) écrites dans data/conseil-poc-<week>.md.
+// ⚠️ ABANDONNÉ le 2026-06-01 — POC personas fictionnels. Remplacé par le desk
+// agentique (prompts/desk/). Usage legacy : node scripts/conseil-poc.mjs --legacy
 //
-// PAS DE PUBLICATION. Tout reste local. La revue est faite ensuite par Opus
-// en mode éditeur-en-chef, avec data/editorial-compass.md comme référence.
-//
-// Usage :
-//   node scripts/conseil-poc.mjs                          # défaut W20, FR
-//   node scripts/conseil-poc.mjs --week=2026-W21
-//   node scripts/conseil-poc.mjs --lang=en
-//   node scripts/conseil-poc.mjs --question="..."        # override la question
+// PAS DE PUBLICATION. Tout reste local.
+
+if (!process.argv.includes('--legacy')) {
+  console.error('conseil-poc.mjs est abandonné (personas fictionnels, 2026-06-01).');
+  console.error('Utilise le desk agentique (prompts/desk/). Pour forcer : --legacy');
+  process.exit(1);
+}
 
 import { readFile, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';

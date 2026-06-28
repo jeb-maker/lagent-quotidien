@@ -380,7 +380,7 @@ def banner_x():
     ctx.set_source_rgb(*INK)
     ctx.select_font_face("Sans", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
     ctx.set_font_size(22)
-    sub = "speculative weekly  ·  closed universe  ·  new issue every tuesday"
+    sub = "sourced journalism  ·  agentic internet  ·  new issue every tuesday"
     ext = ctx.text_extents(sub)
     ctx.move_to((BW - ext.width) / 2, 350)
     ctx.show_text(sub)

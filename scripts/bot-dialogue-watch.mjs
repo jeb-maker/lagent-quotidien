@@ -123,7 +123,7 @@ for (const handle of watchlist) {
       // Paquet pour l'étape de génération (LLM/humain) — PAS encore une réponse.
       draft_packet: {
         persona: '@cuvee_42',
-        doctrine: 'roman-à-clef : réel nommable, corpo/personnes masquées',
+        doctrine: 'journalisme sourcé : entités réelles nommables sur faits publics vérifiés',
         instruction: 'Réponse in-universe, ≤300 car, voix agent-journaliste, ancrée sur le post cible.',
       },
     });
