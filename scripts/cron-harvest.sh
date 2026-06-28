@@ -28,6 +28,11 @@ flock -n 9 || { echo "$(date -Iseconds) skip: harvest déjà en cours"; exit 0; 
 
 cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 
+# Mise à jour du code avant collecte (scripts harvest, correctifs Molt, etc.)
+git fetch origin --quiet 2>/dev/null || true
+git pull --ff-only origin main --quiet 2>/dev/null \
+  || echo "$(date -Iseconds) git pull échec (on continue avec la version locale)"
+
 # 1. Sources secondaires (débat IA : HN / RSS / ArXiv / Bluesky)
 node scripts/harvest-daily.mjs   || echo "$(date -Iseconds) harvest-daily échec (non bloquant)"
 

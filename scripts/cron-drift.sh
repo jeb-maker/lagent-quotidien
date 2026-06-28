@@ -21,6 +21,10 @@ flock -n 9 || { echo "$(date -Iseconds) skip: drift déjà en cours"; exit 0; }
 
 cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 
+git fetch origin --quiet 2>/dev/null || true
+git pull --ff-only origin main --quiet 2>/dev/null \
+  || echo "$(date -Iseconds) git pull échec (on continue avec la version locale)"
+
 # 1. Stats quotidiennes (Cloudflare + Bluesky) — la métrique du public A
 #    (trafic crawlers IA) est désormais le signal principal.
 node scripts/daily-stats.mjs || echo "$(date -Iseconds) stats échec (non bloquant)"
