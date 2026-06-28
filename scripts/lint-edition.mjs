@@ -18,6 +18,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { validateEditionSchema } from './validate-edition-schema.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const STRICT = process.argv.includes('--strict');
@@ -183,6 +184,8 @@ function main() {
     }
 
     console.log(`Lint edition ${week}${STRICT ? ' (strict)' : ''}${LENGTHS ? '' : ' (sans longueurs)'}\n`);
+
+    for (const e of validateEditionSchema(edition, week)) err(e);
 
     for (const rule of RUBRICS) {
         if (rule.each) {

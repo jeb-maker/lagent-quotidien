@@ -446,8 +446,8 @@ function buildContext(lang) {
 
     // Wire
     wire_items: edition.wire.map(w => ({
-      source: w.source,
-      ts: lang === 'fr' ? w.ts_fr : w.ts_en,
+      source: w.source || '',
+      ts: lang === 'fr' ? (w.ts_fr || w.time_fr || '') : (w.ts_en || w.time_en || ''),
       title: pick(w.title, lang),
       body: pick(w.body, lang)
     })),
@@ -619,49 +619,6 @@ function renderAgentPage(entity, kind) {
     content += '<h2>Sources</h2><ul class="ref-list">';
     for (const s of entity.sources) content += `<li><span class="name"><a href="${s.url}" rel="noopener">${s.label}</a></span></li>`;
     content += '</ul>';
-  }
-
-  if (false && kind === 'agent') {
-    if (entity.bluesky_handle) {
-      content += `<div style="margin: 0 0 28px; padding: 14px 18px; background: rgba(45,95,138,0.08); border-left: 3px solid var(--bot); font-family: 'JetBrains Mono', monospace; font-size: 14px;">
-  🦋 <strong>Présence publique sur Bluesky</strong> · <a href="https://bsky.app/profile/${entity.bluesky_handle}" rel="me">@${entity.bluesky_handle}</a>
-</div>`;
-    }
-    const profileRows = [
-      entity.platform && ['Plateforme', entity.platform],
-      entity.operator && ['Opérateur', entity.operator],
-      entity.model_base && ['Modèle de base', entity.model_base],
-      entity.bluesky_handle && ['Bluesky', `<a href="https://bsky.app/profile/${entity.bluesky_handle}">@${entity.bluesky_handle}</a>`],
-      entity.first_seen && ['Première apparition', entity.first_seen],
-      entity.last_seen && ['Dernière apparition', entity.last_seen],
-    ].filter(Boolean);
-    if (profileRows.length) {
-      content += '<h2>Profil</h2><div class="profile">';
-      for (const [k, v] of profileRows) content += `<span>${k}</span> ${v}<br/>`;
-      content += '</div>';
-    }
-    if (entity.notable_posts && entity.notable_posts.length) {
-      content += '<h2>Posts notables</h2><ul class="posts">';
-      for (const p of entity.notable_posts) {
-        content += `<li>
-  <div class="date">${p.date}${p.subreddit ? ' · ' + p.subreddit : ''}</div>
-  <div class="summary">${p.summary}</div>
-  ${p.upvotes_approx ? `<div class="upvotes">▲ ${p.upvotes_approx.toLocaleString('fr-FR').replace(/[  ]/g, ' ')}</div>` : ''}
-</li>`;
-      }
-      content += '</ul>';
-    }
-    if (entity.role) {
-      content += `<h2>Rôle dans la rédaction</h2><p>${entity.role}</p>`;
-    }
-  }
-
-  if (false && kind === 'operator') {
-    content += '<h2>Contexte</h2>';
-    content += `<p>${entity.context}</p>`;
-    if (entity.consent_note) {
-      content += `<p style="color:var(--ink-mute);font-style:italic">${entity.consent_note}</p>`;
-    }
   }
 
   content += `<h2>Apparitions dans le journal</h2><div class="editions">${editions}</div>`;

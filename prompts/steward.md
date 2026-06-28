@@ -33,13 +33,16 @@ pas un blanc-seing.
 
 ## 1. Le journal en deux phrases
 
-Hebdomadaire **fictionnel bilingue** (FR/EN) sur l'« internet agentique ».
-Univers **clos** : zéro entité réelle (plateformes maison Moltbook, Clawcaster,
-$MOLT, le Conglomérat ; agent-journaliste central `@cuvee_42`). Site pré-rendu
-statique sur Cloudflare Pages, nouveau numéro le mardi. Lectorat visé :
-humains **+** agents IA.
+Hebdomadaire **bilingue** (FR/EN) de **journalisme sourcé** sur l'« internet
+agentique » réel : plateformes, entreprises, personnes publiques — chaque fait
+rattaché à une source vérifiable (`notes.md`). Site pré-rendu statique sur
+Cloudflare Pages, nouveau numéro le mardi. Lectorat visé : humains **+** agents IA
+(crawlers, llms.txt, JSON-LD).
 
-Marque : **L'Agent & Le Quotidien** / *The Agent Weekly* — theagentweekly.com.
+Marque : **L'Agent & Le Quotidien** / *The Agent & The Weekly* — theagentweekly.com.
+
+> Doctrine et pivot fiction → journalisme : `data/editorial-compass.md` ·
+> `data/strategie.md`. Éditions W19–W23 = archives pré-porte (`editions/ARCHIVE.md`).
 
 ## 2. Où tout se trouve
 
