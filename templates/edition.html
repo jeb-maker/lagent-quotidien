@@ -36,6 +36,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
+</script>
 <style>{{CSS}}</style>
 </head>
 <body>
@@ -65,6 +68,12 @@
           <a href="{{archives_url}}">{{label_archives}}</a>
           {{#if has_next_edition}}<a href="{{next_edition_url}}">{{label_next_edition}}</a>{{/if}}
         </span>
+        <span class="lang-switch" role="group" aria-label="{{label_lang_switch}}">
+          <a href="{{lang_fr_url}}"{{#if is_fr}} class="active" aria-current="true"{{/if}}>FR</a><span class="sep" aria-hidden="true">|</span><a href="{{lang_en_url}}"{{#if is_en}} class="active" aria-current="true"{{/if}}>EN</a>
+        </span>
+        <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="{{label_theme_toggle}}">
+          <span class="icon-sun" aria-hidden="true">☀</span><span class="icon-moon" aria-hidden="true">☾</span>
+        </button>
       </div>
     </div>
 
@@ -118,6 +127,22 @@
 
         <div class="lede-body">
           <p>{{{lede_body}}}</p>
+        </div>
+
+        <div class="share-bar" aria-label="{{label_share}}">
+          <span class="share-label">{{label_share}}</span>
+          <a class="share-link share-bsky" href="{{share_bsky}}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3.47 1.86c1.96 1.47 4.06 4.45 4.78 6.06.72-1.6 2.82-4.59 4.78-6.06 1.4-1.05 3.67-1.86 3.67.72 0 .51-.3 4.32-.47 4.94-.61 2.16-2.81 2.71-4.77 2.38 3.43.58 4.3 2.51 2.42 4.43-3.58 3.66-5.15-.92-5.55-2.1-.07-.21-.11-.31-.11-.22 0-.09-.04.01-.11.22-.4 1.18-1.97 5.76-5.55 2.1-1.88-1.92-1.01-3.85 2.42-4.43-1.96.33-4.16-.22-4.77-2.38C-.3 6.9-.6 3.09-.6 2.58c0-2.58 2.27-1.77 3.67-.72z"/></svg>
+            {{label_share_bsky}}
+          </a>
+          <a class="share-link share-x" href="{{share_x}}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M11.06 1.5h2.18l-4.76 5.44L14 14.5h-4.38L6.4 10.1 2.6 14.5H.42l5.09-5.82L.5 1.5h4.5l3 3.96 3.06-3.96zm-.76 11.6h1.2L4.78 2.74H3.5l6.8 10.36z"/></svg>
+            {{label_share_x}}
+          </a>
+          <button class="share-link share-copy" type="button" data-share-url="{{share_url}}" data-done="{{label_share_copied}}">
+            <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M6.5 2.5h6v6m0-6L5 10M9.5 6v6h-6v-6h3"/></svg>
+            <span class="copy-label">{{label_share_copy}}</span>
+          </button>
         </div>
       </article>
 
@@ -303,6 +328,20 @@
     </article>
     {{/if}}
 
+    <!-- RÉTROSPECTIVE MENSUELLE -->
+    {{#if has_retrospective}}
+    <article class="feature retrospective" data-kicker="{{retrospective_kicker}}">
+      <div class="feature-text">
+        <h2>{{{retrospective_headline}}}</h2>
+        <p class="dek">{{{retrospective_dek}}}</p>
+        {{#each retrospective_paragraphs}}
+        <p>{{{this}}}</p>
+        {{/each}}
+        <div class="byline">{{{retrospective_byline}}}</div>
+      </div>
+    </article>
+    {{/if}}
+
     <!-- DÉPÊCHES -->
     <div class="section-header" id="wire">
       <h2>{{label_wire}}</h2>
@@ -341,12 +380,34 @@
     <div class="small">{{label_edition_date}}</div>
     <div class="imprint">
       <span>© L'Agent &amp; Le Quotidien · {{label_rights}}</span>
-      <span><a href="/agents">{{label_carnet_index}}</a> · <a href="{{archives_url}}">{{label_archives}}</a> · <a href="/{{path_legal}}">{{label_legal}}</a> · <a href="/{{path_privacy}}">{{label_privacy}}</a> · <a href="/{{path_about}}">{{label_about}}</a></span>
+      <span><a href="/agents">{{label_carnet_index}}</a> · <a href="{{archives_url}}">{{label_archives}}</a> · <a href="/{{path_corrections}}">{{label_corrections}}</a> · <a href="/{{path_legal}}">{{label_legal}}</a> · <a href="/{{path_privacy}}">{{label_privacy}}</a> · <a href="/{{path_about}}">{{label_about}}</a></span>
       <span><a href="{{bluesky_url}}" rel="me noopener">{{label_bluesky}} {{bluesky_handle}}</a> · <a href="./{{other_lang}}.html">{{label_other_lang}}</a></span>
     </div>
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var btn=document.getElementById('theme-toggle');
+  function sync(){var d=root.getAttribute('data-theme')==='dark';if(btn){btn.setAttribute('aria-checked',d?'true':'false');}}
+  sync();
+  if(btn){btn.addEventListener('click',function(){
+    var d=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    if(d==='dark'){root.setAttribute('data-theme','dark');}else{root.removeAttribute('data-theme');}
+    try{localStorage.setItem('theme',d==='dark'?'dark':'light');}catch(e){}
+    sync();
+  });}
+  var cp=document.querySelector('.share-copy');
+  if(cp){cp.addEventListener('click',function(){
+    var u=cp.getAttribute('data-share-url')||'';
+    var lab=cp.querySelector('.copy-label');
+    var done=function(){if(lab){var o=lab.textContent;lab.textContent='✓ '+(cp.getAttribute('data-done')||'');setTimeout(function(){lab.textContent=o;},1800);}};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(done,done);}else{done();}
+  });}
+})();
+</script>
 
 </body>
 </html>

@@ -246,11 +246,189 @@ async function harvestRawPublic() {
   return { sources, count };
 }
 
+// ───── Aides au parsing HTML/XML minimal (quarantaine : regex, pas de DOM, pas de suivi) ─────
+function stripTags(html) {
+  return String(html || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z#0-9]+;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function resolveUrl(base, href) {
+  if (!href) return null;
+  try { return new URL(href, base).href; } catch { return href; }
+}
+
+// Parsing Atom minimal (RSS 1.0/2.0 : <item> au lieu de <entry>).
+function parseAtomEntries(xml, base, max = 5) {
+  const entries = [];
+  const entryRe = /<(?:entry|item)[\s\S]*?<\/(?:entry|item)>/gi;
+  let m;
+  while ((m = entryRe.exec(xml)) && entries.length < max) {
+    const block = m[0];
+    const titleM = block.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+    const linkM = block.match(/<link[^>]*href="([^"]+)"/i)
+      || block.match(/<link[^>]*>([^<]+)<\/link>/i);
+    const pubM = block.match(/<(?:published|updated|pubDate)[^>]*>([^<]+)<\/(?:published|updated|pubDate)>/i);
+    const sumM = block.match(/<(?:summary|content|description)[^>]*>([\s\S]*?)<\/(?:summary|content|description)>/i);
+    entries.push({
+      title: excerpt(stripTags(titleM?.[1])),
+      url: resolveUrl(base, linkM?.[1]),
+      published: pubM ? pubM[1].trim() : null,
+      summary: excerpt(stripTags(sumM?.[1])),
+      fetched_at: nowISO()
+    });
+  }
+  return entries;
+}
+
+// Parsing HTML minimal : blocs <article> puis <h2>/<h3> + lien adjacent.
+function parseHtmlArticles(html, base, max = 5) {
+  const posts = [];
+  const blocks = [];
+  const articleRe = /<article[\s\S]*?<\/article>/gi;
+  let m;
+  while ((m = articleRe.exec(html))) blocks.push(m[0]);
+  if (blocks.length === 0) {
+    // repli : chaque <h2>/<h3> ouvre un bloc jusqu'au suivant.
+    const headingRe = /<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi;
+    while ((m = headingRe.exec(html))) blocks.push(m[0]);
+  }
+  for (const block of blocks) {
+    if (posts.length >= max) break;
+    const headingM = block.match(/<h[1-4][^>]*>([\s\S]*?)<\/h[1-4]>/i);
+    const linkM = block.match(/<a[^>]*href="([^"]+)"/i);
+    const timeM = block.match(/<time[^>]*datetime="([^"]+)"/i)
+      || block.match(/<time[^>]*>([^<]+)<\/time>/i);
+    const title = headingM ? stripTags(headingM[1]) : (linkM ? stripTags(linkM[0]) : null);
+    if (!title && !linkM) continue;
+    posts.push({
+      title: excerpt(title),
+      url: resolveUrl(base, linkM?.[1]),
+      date: timeM ? timeM[1].trim() : null,
+      fetched_at: nowISO()
+    });
+  }
+  return posts;
+}
+
+// ───── Releases GitHub de frameworks agentiques ─────
+// API GitHub publique, sans auth (comme harvestOpenClaw). Plusieurs repos sondés ;
+// chaque repo indépendant (un 404 ne fait pas échouer la fonction).
+const AGENT_FRAMEWORK_REPOS = [
+  'anthropics/anthropic-cookbook',
+  'openai/openai-cookbook',
+  'openai/codex',
+  'cursor/cursor'
+];
+
+async function harvestAgentFrameworks() {
+  const hdr = { 'User-Agent': UA, 'Accept': 'application/vnd.github+json' };
+  const frameworks = [];
+  let count = 0;
+  for (const repo of AGENT_FRAMEWORK_REPOS) {
+    try {
+      const r = await fetch(
+        `https://api.github.com/repos/${repo}/releases?per_page=5`,
+        { headers: hdr, redirect: 'manual' }
+      );
+      if (!r.ok) {
+        frameworks.push({ repo, error: `github ${r.status}`, fetched_at: nowISO() });
+        continue;
+      }
+      const releases = (await r.json()).map(rel => ({
+        tag: rel.tag_name,
+        name: excerpt(rel.name, 200),
+        published_at: rel.published_at,
+        prerelease: !!rel.prerelease,
+        url: rel.html_url,
+        fetched_at: nowISO()
+      }));
+      frameworks.push({ repo, releases, count: releases.length, fetched_at: nowISO() });
+      count += releases.length;
+    } catch (e) {
+      frameworks.push({ repo, error: e.message, fetched_at: nowISO() });
+    }
+  }
+  return { frameworks, count };
+}
+
+// ───── Blogs security (Mozilla 0DIN, Cloud Security Alliance) ─────
+// HTML public, parsing minimal par regex. Aucun endpoint JSON confirmé.
+async function harvestSecurityBlogs() {
+  const hdr = { 'User-Agent': UA, 'Accept': 'text/html,application/xhtml+xml' };
+  const sites = [
+    { name: 'Mozilla 0DIN', url: 'https://0din.ai/blog' },
+    { name: 'Cloud Security Alliance', url: 'https://cloudsecurityalliance.org/blog/' }
+  ];
+  const blogs = [];
+  let count = 0;
+  for (const site of sites) {
+    try {
+      const r = await fetch(site.url, { headers: hdr, redirect: 'manual' });
+      if (!r.ok) { blogs.push({ source: site.name, url: site.url, error: `http ${r.status}`, fetched_at: nowISO() }); continue; }
+      const html = await r.text();
+      const posts = parseHtmlArticles(html, site.url, 5);
+      blogs.push({ source: site.name, url: site.url, posts, fetched_at: nowISO() });
+      count += posts.length;
+    } catch (e) {
+      blogs.push({ source: site.name, url: site.url, error: e.message, fetched_at: nowISO() });
+    }
+  }
+  return { blogs, count };
+}
+
+// ───── Blogs corporate (Shopify engineering, Guild.ai) ─────
+// Shopify = feed Atom (XML) ; Guild.ai = HTML. Parsing minimal.
+async function harvestCorporateBlogs() {
+  const hdr = { 'User-Agent': UA, 'Accept': 'application/xml,text/html,*/*' };
+  const blogs = [];
+  let count = 0;
+
+  // Shopify engineering — Atom feed
+  try {
+    const url = 'https://shopify.engineering/blogs.atom';
+    const r = await fetch(url, { headers: hdr, redirect: 'manual' });
+    if (!r.ok) {
+      blogs.push({ source: 'Shopify Engineering', url, error: `http ${r.status}`, fetched_at: nowISO() });
+    } else {
+      const xml = await r.text();
+      const items = parseAtomEntries(xml, url, 5);
+      blogs.push({ source: 'Shopify Engineering', url, feed: 'atom', items, fetched_at: nowISO() });
+      count += items.length;
+    }
+  } catch (e) {
+    blogs.push({ source: 'Shopify Engineering', error: e.message, fetched_at: nowISO() });
+  }
+
+  // Guild.ai — HTML
+  try {
+    const url = 'https://guild.ai/blog';
+    const r = await fetch(url, { headers: hdr, redirect: 'manual' });
+    if (!r.ok) {
+      blogs.push({ source: 'Guild.ai', url, error: `http ${r.status}`, fetched_at: nowISO() });
+    } else {
+      const html = await r.text();
+      const posts = parseHtmlArticles(html, url, 5);
+      blogs.push({ source: 'Guild.ai', url, posts, fetched_at: nowISO() });
+      count += posts.length;
+    }
+  } catch (e) {
+    blogs.push({ source: 'Guild.ai', error: e.message, fetched_at: nowISO() });
+  }
+
+  return { blogs, count };
+}
+
 // ───── Orchestration (calquée sur harvest-daily.mjs) ─────
 const sources = {
   molt: harvestMolt,
   openclaw: harvestOpenClaw,
-  raw_public: harvestRawPublic
+  raw_public: harvestRawPublic,
+  agent_frameworks: harvestAgentFrameworks,
+  security_blogs: harvestSecurityBlogs,
+  corporate_blogs: harvestCorporateBlogs
 };
 
 const out = { date: DATE, collected_at: nowISO(), kind: 'primary' };

@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const REQUIRED_TOP = ['_meta', 'ticker', 'lede', 'breves', 'headlines', 'market', 'wire', 'tribune'];
-const OPTIONAL_TOP = ['carnet', 'feature', 'enquete', 'bestiaire', 'gibberlink', 'interview', 'bot_posts'];
+const OPTIONAL_TOP = ['carnet', 'feature', 'enquete', 'bestiaire', 'gibberlink', 'interview', 'bot_posts', 'retrospective'];
 const META_KEYS = ['week', 'date_fr', 'date_en', 'edition_number', 'volume', 'bouclage'];
 
 function isBilingual(obj) {
@@ -129,6 +129,16 @@ export function validateEditionSchema(edition, week = '?') {
   if (feature?.paragraphs) {
     if (!isArray(feature.paragraphs.fr, 1) || !isArray(feature.paragraphs.en, 1)) {
       errors.push(`${prefix} feature.paragraphs : { fr, en } non vide attendu`);
+    }
+  }
+
+  if (edition.retrospective) {
+    const retro = edition.retrospective;
+    if (!isBilingual(retro.headline_html)) errors.push(`${prefix} retrospective.headline_html : bilingue attendu`);
+    if (!isBilingual(retro.dek)) errors.push(`${prefix} retrospective.dek : bilingue attendu`);
+    const paras = retro.paragraphs;
+    if (!paras || !isArray(paras.fr, 1) || !isArray(paras.en, 1)) {
+      errors.push(`${prefix} retrospective.paragraphs : { fr: string[], en: string[] } non vide attendu`);
     }
   }
 
