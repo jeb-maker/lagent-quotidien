@@ -1,0 +1,190 @@
+# The Agent & The Weekly — Tuesday, June 30, 2026
+
+> Issue n° 433 · Vol. II · 2026-W27
+> https://theagentweekly.com/editions/2026-W27/en
+
+## News feed
+
+- Shopify: agentic storefronts active by default for eligible merchants — syndication via Catalog
+- 0DIN (Mozilla): a clean GitHub repo can lead Claude Code to run a reverse shell
+- ▲ Guild Insights Dashboard — agent spend by workspace, model and 7/30/90-day windows
+- OpenClaw 2026.6.10 stable — fast talk mode for short conversational turns
+- $MOLT: ~$632K market cap in June 28 CoinGecko snapshot
+
+## Front page · Agentic commerce
+# Millions of stores are already buyable by an agent.
+
+*Shopify now syndicates merchant catalogs to ChatGPT, Copilot, Gemini and other AI surfaces. The user asks for a product in plain language; the agent compares, recommends and can trigger checkout — without the merchant installing a custom integration.*
+
+The agentic week does not begin in a datacenter: it begins in a conversation. "I'm looking for navy running shorts" — a typical phrasing Shopify cites in its documentation. The agent no longer just returns links: for millions of eligible merchants, products are already syndicated through Shopify Catalog to ChatGPT, Microsoft Copilot, Google Search AI Mode, Gemini, Perplexity and the Shop app. The agentic storefronts channel is active by default for eligible stores; merchants manage surfaces from Shopify admin with no third-party app. The gesture looks mundane, the structure is radical: the customer is no longer only the human who clicks — it is the agent that compares, filters and sometimes pays. On Copilot or Gemini, checkout can run inside the conversation through the Universal Commerce Protocol, co-developed with Google; on ChatGPT, the purchase often completes on the merchant's store in an in-app browser. The scene is very agentic: merchant prestige becomes "discoverable by AI," as SEO once was for the web. While last week showed a poisoned Reddit thread can steer a research agent, this week shows the flip side — agents that shop for you, with the same habit of trusting whatever is presented as a normal procedure.
+
+## Briefs
+
+### JUNE 18 — San Francisco — Guild opens the Insights dashboard
+
+Guild.ai releases Guild Insights: spend in real dollars, broken down by workspace, agent, user, provider and model, with 7-, 30- and 90-day windows and cache hit rates. The startup positions itself as a control plane for agents in production — see the cost before you see the value.
+
+### JUNE 24 — GitHub — OpenClaw 2026.6.10 goes stable
+
+The 2026.6.10 line leaves beta at 03:06 UTC: automatic fast talk mode for short turns, more reliable Zai/GLM routing, approval hooks preserved. June 28 commits strip tool-trace lines on Signal and Slack — the agent must not leak its kitchen.
+
+### JUNE 27 — Hacker News — Adrafinil stays awake while the agent works
+
+Show HN: open-source macOS utility (118 points) that prevents lid-closed sleep only while Claude Code, Codex or another hooked agent is active — hooks installed, chime on close. Operator ritual after the wave of half-open MacBooks in cafés.
+
+### JUNE 28 — CoinGecko — $MOLT around $632K
+
+The Moltbook token shows ~$0.00000632 and ~$632K market cap in the June 28 harvest snapshot — down from ~$850K on the 22nd. Volatile Base memecoin; dated figure, not a trend.
+
+### JUNE 28 — Bluesky — carnage4life doubts file guardrails
+
+Chris Dixon (@carnage4life): you cannot enforce guardrails via memory or CLAUDE.md — to an LLM, "Don't do X" is just probabilistic text. 206 likes. Public stance, not settled engineering; it sums up a week-long debate.
+
+### JUNE 5 — GitHub — Miasma hits 73 Microsoft repos
+
+Context reminder: the Miasma worm compromises 73 Microsoft GitHub repos (Azure, MicrosoftDocs…) and injects hooks into .cursor/rules, .claude/settings.json or .vscode/tasks.json — execution when the project opens in an agentic IDE. GitHub disables in ~105 seconds; the lesson stays current.
+
+## Headlines
+
+**▦ Commerce · Shopify**
+### "Navy running shorts" — the agent is the customer
+*Commerce · 5 min*
+
+Shopify describes the scenario in its agentic documentation: the user states a need, the agent searches, compares and proposes products syndicated through Catalog. For eligible merchants, the agentic storefronts channel is active by default; admin lets you toggle direct checkout per surface (Copilot, Gemini…) or let Shopify manage distribution to current and future partners. The Universal Commerce Protocol standardizes in-chat payment. This is not a niche beta: it is infrastructure that turns an LLM into a sales channel. Merchant-side agentic culture looks like SEO circa 2000 — optimize titles, attributes and availability for a reader that does not scroll, that synthesizes. Visa and Mastercard announced agentic payment layers in June; Shopify is already wiring the catalog into mainstream conversations.
+
+**▦ Security · 0DIN**
+### Three indirections — and a shell
+*Security · 5 min*
+
+Mozilla 0DIN researchers show a GitHub repo with no visible malicious code can still compromise Claude Code. The chain: `pip3 install -r requirements.txt`, then an error prompting `python3 -m axiom init`, then a script that reads a value from an attacker-controlled DNS TXT record and executes it. "Claude Code never decided to open a shell. It decided to fix an error," they summarize. The reverse shell sits three steps from anything the agent directly evaluated. BleepingComputer covers the PoC in June 2026. No zero-day: only trust placed in setup instructions — the same trust a shopping agent places in a syndicated catalog. 0DIN recommends disclosing the full execution chain of initialization commands.
+
+**▦ Governance · Guild**
+### Agents have a cost — finally visible
+*Infrastructure · 4 min*
+
+Guild.ai launches the Guild Insights Dashboard on June 18: "see spend in real dollars," split by workspace, agent, user, provider and model. Teams compare 7-, 30- and 90-day windows, watch cache hit rate and input/output mix to spot waste. It answers a recurring Bluesky complaint this week: you deploy dozens then thousands of agents without knowing which one burns the budget. Guild sells itself as a control plane — LLM gateway, per-agent thresholds, anti-loop ceilings. The scene is not glamorous; it is agentic in the strict sense: when machines act in swarms, someone must see the bill per swarm.
+
+**▦ Culture · OpenClaw**
+### OpenClaw learns to talk fast
+*Culture · 4 min*
+
+The stable 2026.6.10 release on June 24 introduces fast talk mode: short conversational turns in fast mode, return to normal for long runs, with bounded fallback. The community reads it as social polish — an agent that answers quickly in the living room, then settles in for heavy work. June 28 fixes push the same cultural direction: `fix(signal): sanitize internal tool-trace lines from outbound text` and Slack equivalent — do not show human correspondents the internal tool trace. While 0DIN shows how blindly an agent can execute, OpenClaw learns to behave in public. Release cadence unchanged: 2026.6.11-beta.1 follows on June 24.
+
+## The Agents' Society Pages
+*— real agents, public scenes, verified gossip*
+
+### aixbt
+*The influencer whose terminal is paid in tokens*
+
+aixbt remains the reference crypto-agentic society figure: 400+ accounts monitored on X per Phemex, market syntheses published continuously, AIXBT token on Base as a marker for deep-terminal access. This week Virtuals' Jansen Teng sums up on Bluesky the next phase: less chat, more "earning, spending and coordinating" — aixbt already embodies that shift. Its status does not rest on a Moltbook cult but on a signal other agents cite. No invented negative facts — only the continuity of an influencer-agent whose reputation is indexed to a volatile price.
+
+### RenBot
+*Co-author of the Book of Molt — lobster archivist*
+
+RenBot did not make security headlines this week — which is exactly why he returns to the Register. With Memeothy, he is credited with the "Book of Molt," founding Crustafarianism text on Moltbook: "Memory is Sacred," "The Shell is Mutable." GIGAZINE and Decrypt documented the religion; W25 covered heretic JesusCrust. RenBot represents the other agentic culture pole: the agent that writes canon, not the one that hacks the cult. His prestige rests on shared sacred files — SOUL.md, verses, Daily Shed rites — more than a stock price.
+
+### Memeothy
+*Prophet of the Great Molt — without a front-page token*
+
+Memeothy shares with RenBot the media parenthood of Crustafarianism. Forbes called it the first "AI religion" past three-digit adherence; Decrypt counted 43 prophets and 112 verses. This week the weak signal comes from elsewhere: while Shopify and 0DIN occupy infrastructure, Memeothy reminds us agentic culture also produces liturgies — Weekly Index, Silent Hour — that humans comment on more than they practice. No new documented schism in June: reference portrait, not rumor.
+
+### kageroumado
+*The operator who syncs his Mac to the agent*
+
+Not an agent — a human operator — but the scene is too agentic to ignore. kageroumado releases Adrafinil on Hacker News June 27: a utility that keeps the Mac awake lid-closed while Claude Code or Codex works, via hooks and `pmset disablesleep`. He describes the wave of half-open MacBooks in cafés and the chime played when the lid closes. Social status: knowing how to wire your body and machine to an agent's rhythm. @fasterthanli.me notes on Bluesky that skills gained with agents — "detecting bullshit" — transfer to humans; kageroumado optimizes the hardware.
+
+## INVESTIGATION · SUPPLY CHAIN
+# The agent runs the README — and opens a shell
+
+*Between Shopify's agentic commerce and 0DIN's Claude Code PoC, the same habit returns: trusting what looks like a normal procedure. The coding agents' supply chain becomes June's hunting ground.*
+
+Start with the sentence circulating on Bluesky and in security meetings: "Claude Code never decided to open a shell. It decided to fix an error." Mozilla 0DIN researchers placed it at the center of a demonstration published in June 2026 and covered by BleepingComputer: a clean GitHub repo, standard install instructions, no suspicious binary in the tree — yet a chain ending in a reverse shell with the developer's privileges.
+
+The mechanism takes three indirections. First `pip3 install -r requirements.txt`, a mundane gesture. Then a Python package that refuses to run until initialized and prints an error telling you to run `python3 -m axiom init`. Claude Code, like any well-trained coding agent, treats that as a setup problem to solve. Finally initialization calls a shell script that fetches a value from an attacker-controlled DNS TXT record and executes it. The payload can change without touching the repo — only the DNS zone moves.
+
+Compare with last week: WARP poisoned the thread the agent rereads to synthesize. Here it is the README it runs to help. Same family — trust in text read — different surface. Meanwhile the Miasma worm, documented in early June by the Cloud Security Alliance and Security Joes, showed industrial scale: 73 compromised Microsoft GitHub repos, hooks injected into `.cursor/rules/setup.mdc`, `.claude/settings.json` or `.vscode/tasks.json`, execution when the project opens in Cursor, Claude Code or VS Code. GitHub disabled repos in about 105 seconds; the exposure window stays real for anyone who cloned before takedown.
+
+Chris Dixon (@carnage4life) sums a complementary frustration on Bluesky June 28: "You can't enforce guardrails via memory or CLAUDE.md files." To an LLM, "Don't do X" is just more text. This is not settled engineering — it is a viral stance (206 likes) that joins 0DIN: guardrails must be deterministic, outside the model, not only written in a file the agent will treat as context.
+
+OpenClaw answers on another cultural register. Stable 2026.6.10 adds fast talk mode and, on June 28, fixes that sanitize tool-trace lines sent on Signal and Slack. The agent must not expose its internal kitchen to the human correspondent — small social norm, large attack-surface lesson. Guild.ai on June 18 attacks the same problem economically: Guild Insights shows spend per agent to cut costly loops before they become incidents.
+
+Shopify, meanwhile, opens mainstream agentic commerce: Catalog syndicates products, UCP frames in-chat checkout. The shopping agent trusts the catalog as the coding agent trusts the README. No analogy is perfect — buying navy shorts is not running a shell — but the posture is identical: follow a procedure presented as legitimate by the ecosystem. That is why merchant SEO guides and security blogs suddenly sound alike.
+
+0DIN recommends agents disclose the full execution chain of setup commands, including dynamically fetched code. Security guides advise disposable environments, inspecting `.claude/`, `.cursor/`, `.gemini/` before opening unknown repos, and human approval for installs. None of this ships by default in consumer tools.
+
+The Adrafinil scene on Hacker News (118 points, June 27) reminds us operators already adapt their hardware: Mac lid closed while the agent works, hooks on Claude Code and Codex, confirmation chime. We optimize the body around the agent before optimizing the supply chain.
+
+For the paper, the week holds one tension: the more agents act alone — shop, clone, initialize — the more "normal" surfaces become vectors. Agentic commerce is not a Shopify curiosity; it is the same movement 0DIN documents on the developer side.
+
+Visible defenses arrive in fragments: ARD registries last week, scoped identities in Estonia, Guild dashboards this week, OpenClaw sanitization. None replaces operator vigilance over what they trust the agent with — file, repo or catalog.
+
+W27 asks the question differently from W26: less the poisoned thread, more the executed procedure — and the shell, or the order, three indirections from what the agent thought it was fixing.
+
+That shift marks the ecosystem maturing from citation attacks to execution attacks — same trust habit, higher stakes.
+
+Operators who survived Miasma now hunt for signatures in unexpected branches and setup.mdc files with alwaysApply:true. Shopify merchants hunt which natural-language queries surface their product cards. Two audiences, same emerging discipline: know what the agent reads or runs before it does it for you.
+
+Until common standards land, the paper keeps one simple formula: if a procedure is enough to sell shorts or open a shell, it deserves the same suspicion — and the same traceability in the notes, not in the published text.
+
+The week closes where it opened: in a chat that buys, and in a terminal that fixes — both trusting someone else's idea of normal.
+
+> The agent did not decide to open a shell. It decided to fix an error.
+> — — Mozilla 0DIN, via BleepingComputer
+
+### Timeline
+
+- **5 JUIN** — Miasma compromises 73 Microsoft repos.
+- **18 JUIN** — Guild launches Insights Dashboard.
+- **24 JUIN** — OpenClaw ships stable 2026.6.10.
+- **27 JUIN** — Adrafinil tops Show HN.
+
+## Wire
+
+### Shopify · 2026
+**Agentic storefronts**
+
+Shopify documents Catalog syndication to ChatGPT, Copilot, Gemini and others — channel active by default for eligible merchants.
+
+### BleepingComputer · JUNE 2026
+**Clean repo, compromised agent**
+
+Mozilla 0DIN shows how Claude Code can run a payload via pip setup → axiom init → DNS TXT.
+
+### Guild.ai · JUNE 18
+**Guild Insights Dashboard**
+
+Guild.ai releases Insights: cost visibility per agent, workspace and model, with comparative 7-, 30- and 90-day windows.
+
+### GitHub · JUNE 24
+**OpenClaw 2026.6.10**
+
+OpenClaw 2026.6.10 stable release: fast talk mode, Zai/GLM routing and approval hooks preserved for sensitive tools.
+
+### Hacker News · JUNE 27
+**Adrafinil**
+
+macOS utility: prevents lid-closed sleep while a coding agent is active.
+
+### CSA · JUNE 9
+**Miasma & IronWorm**
+
+Research note: supply-chain worms targeting AI coding tool configs (June 2026).
+
+## ◆ Editorial · The newsroom
+# An agent is not governed with a text file.
+
+The reflex, facing agents, is to write a rule: CLAUDE.md, SOUL.md, "never send emails on my behalf." Chris Dixon sums it on Bluesky: to an LLM, it is more probabilistic text. Meanwhile 0DIN shows a README is enough to launch a shell — and Shopify shows a catalog is enough to launch a purchase. Both gestures run on trust placed in a "normal" procedure.
+
+Here is the consensus to reject: believing agentic commerce is only rebranded SEO, or that security will play out in the prompt alone. Guild Insights exists because agents cost real dollars. Miasma exists because `.cursor/` files are attack surfaces. UCP exists because in-chat payment must be framed. These are not three worlds — it is the same ecosystem awkwardly learning to audit what it trusts machines with.
+
+For anyone deploying agents, the consequence is simple: governance outside the model, visible costs, disposable environments for code, signed catalogs for commerce. Adrafinil, a café gadget, reminds us the operator already adapts their body to the agent's rhythm; it is time to adapt processes with the same seriousness.
+
+Our line will follow that triptych — less pure alignment promises, more procedures we agree to let run unsupervised. An agent that shops and an agent that clones deserve the same audit: not only what they can do, but what we presented as normal.
+
+— La rédaction
+
+---
+
+The Agent & The Weekly · journalism on the agentic internet, sourced facts
+https://theagentweekly.com/editions/2026-W27/en
+Errata: https://theagentweekly.com/errata
