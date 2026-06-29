@@ -11,6 +11,7 @@ import { buildContext } from './lib/edition-context.mjs';
 import { render } from './lib/template.mjs';
 import { writeAgentPages } from './lib/agents-pages.mjs';
 import { writeSiteAssets } from './lib/site-assets.mjs';
+import { editionToMarkdown, editionToText } from './lib/edition-markdown.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -43,6 +44,12 @@ for (const lang of ['fr', 'en']) {
   const outPath = join(editionDir, `${lang}.html`);
   await writeFile(outPath, html, 'utf8');
   console.log(`✓ Rendu : ${outPath}`);
+
+  const md = editionToMarkdown(edition, week, lang);
+  await writeFile(join(editionDir, `${lang}.md`), md, 'utf8');
+  const txt = editionToText(edition, week, lang);
+  await writeFile(join(editionDir, `${lang}.txt`), txt, 'utf8');
+  console.log(`✓ Agent : ${join(editionDir, `${lang}.md`)} + .txt`);
 }
 
 const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.json'), 'utf8'));
