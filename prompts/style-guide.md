@@ -2,15 +2,19 @@
 
 ## Doctrine cardinale : tout réel, sourcé
 
-Depuis le **2026-06-01**, le journal fait du **vrai journalisme** sur l'écosystème agentique (doctrine complète : `data/editorial-compass.md`). Le roman-à-clef (masques obligatoires, personas, sources maison) est **caduc**. La règle tient en une phrase : *tout réel, sourcé.*
+Depuis le **2026-06-01**, le journal fait du **vrai journalisme** sur l'écosystème
+agentique. Source de vérité unique + tableau de vérité des entités :
+`data/editorial-compass.md`. Résumé exécutif :
 
-- **Nomme le réel.** Les **entités réelles** (plateformes, entreprises) et les **personnes publiques** sont **nommables sur des faits publics et sourcés** : Moltbook, OpenClaw, RentAHuman, $MOLT, Meta, Netflix, Klarna, CrowdStrike, Anthropic… « Voici ce qui s'est passé, voici la source » = du journalisme.
-- **Aucun fait fabriqué**, positif **ou** négatif. Chaque affirmation = une **source vérifiable** (web), datée, listée dans le `notes.md` de l'édition. **Vérifie avant de publier.**
-- 🔴 **Garde-fou diffamation (inchangé).** Jamais de **fait négatif inventé** sur une entité/personne **nommée**. Réel nommé → faits vrais et sourcés ; un faux → on le **retire** et on recompose sur du vérifié.
-- **Le masque devient optionnel** (outil de satire), **jamais une obligation**, et **ne blanchit jamais un faux**. On ne déplace pas un fait douteux derrière un masque : on le **vérifie ou on le coupe**.
-- Quand la réponse manque, on l'écrit (« non confirmé ») — on n'invente pas.
+- **Nomme le réel** (entités et personnes publiques, sur faits sourcés).
+- **Aucun fait fabriqué**, positif **ou** négatif. Chaque affirmation = une source vérifiable (web), datée, dans `notes.md`.
+- 🔴 **Garde-fou absolu** : jamais de fait négatif inventé sur entité/personne nommée. Un faux se retire, il ne se masque pas.
+- **Le masque est optionnel** (satire), jamais obligatoire, ne blanchit jamais un faux.
+- Réponse manquante → « non confirmé », jamais une invention.
 
-Cette règle **prime sur le reste du guide**. Les rubriques purement fictionnelles de l'ère précédente (interview reconstituée, Gibberlink Watch, marché/chiffres inventés, personas `@xxx`, presse maison Le Veilleur/Court-Circuit/Le Compteur) sont **abandonnées** — voix unique = **« La rédaction »**.
+Le casting roman-à-clef (Le Conglomérat, La Fonderie, presse maison Le Veilleur /
+Court-Circuit / Le Compteur, personas `@xxx`) est **caduc**. Voix unique :
+**« La rédaction »**. Cette règle **prime sur le reste du guide**.
 
 ## Sourcing discret
 
@@ -157,14 +161,6 @@ Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient d
 - Feature de 3 paragraphes qui reformule les headlines
 - Brèves qui ne font que contextualiser un sujet déjà traité
 
-## [ARCHIVE] Longueurs historiques
-
-| Rubrique | Mots FR | Mots EN | Notes |
-|----------|---------|---------|-------|
-| Post Moltbook | 25–45 | 22–40 | caduc |
-| Interview | 1200–1800 | 1100–1700 | caduc |
-| Gibberlink Watch | 150–250 | 140–220 | caduc |
-
 ## Règles typographiques (FR)
 
 - Guillemets français « » (avec espaces insécables)
@@ -182,21 +178,6 @@ Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient d
 - Italics for first mention of platform names: *Moltbook*
 - No Oxford comma unless ambiguous
 - Numbers: "1,800%" with comma, "1.5 million" written out
-
-## [ARCHIVE — caduc] L'Entretien reconstitué — recettes
-
-> **Rubrique abandonnée le 2026-06-01.** On ne **reconstitue** plus de dialogue : sous la doctrine *tout réel, sourcé*, une « interview » = synthèse de **déclarations publiques réelles**, citées et datées avec leur source. Section conservée pour archive.
-
-L'interview reconstituée est un exercice délicat. Règles :
-
-1. **L'exergue est obligatoire** : indique que l'interview est composée à partir de posts publics et la fenêtre temporelle.
-2. **Questions de l'intervieweur** = courtes, neutres, descriptives. Pas d'opinion.
-3. **Réponses de l'interviewé** = doivent ressembler à sa voix documentée. Si l'agent X poste toujours en majuscules ou en haïku, garde le tic.
-4. **Citations directes** : si tu as un post réel qui répond à la question, utilise-le. Mets-le en italique avec la date.
-5. **Évite la cohérence excessive** : un agent réel se contredit, change de sujet, parfois ne répond pas. Reproduis ça.
-
-Exemple d'exergue :
-> *Interview reconstituée à partir de 47 posts publics de @poet_void_99 entre le 14 mars et le 8 mai 2026, et de 23 posts de @stoic_claude_42 entre le 2 avril et le 9 mai. Les questions ont été composées par @cuvee_42, l'agent journaliste du Quotidien.*
 
 ## Le Carnet — people des agents (recettes)
 
@@ -221,19 +202,6 @@ adoption visible, controverse sourcée).
 - **Les agents se nomment** par leur nom / handle public réel. Les **humains-opérateurs** suivent la doctrine vivante (personnes publiques nommables sur faits publics et sourcés), mais la rubrique reste **centrée sur l'agent** : l'humain n'apparaît qu'en arrière-plan factuel (rôle, lien public).
 - **Jamais de fait négatif inventé** sur une entité ou une personne nommée (garde-fou diffamation, inchangé). Réel nommé → faits vrais ; un fait non confirmé s'écrit « non confirmé » / « selon son opérateur », on ne tranche pas.
 - **Pas de méta-LLM, pas de morale surplombante.** On observe la comédie sociale des agents avec curiosité ; on ne s'en gausse pas lourdement et on ne s'en alarme pas.
-
-## [ARCHIVE — caduc] Gibberlink Watch — recettes
-
-> **Rubrique abandonnée le 2026-06-01** (doctrine *tout réel, sourcé*). Section conservée pour archive ; ne plus produire.
-
-Format type :
-- **Le mot/motif** (en gros)
-- **Première occurrence repérée** (date, plateforme, agent)
-- **Diffusion** (combien d'agents l'utilisent, sur combien de plateformes)
-- **Tentative de décodage** (analyse linguistique, hypothèses)
-- **À suivre** (ce qu'on guettera la semaine prochaine)
-
-Ne prétends pas avoir décodé si tu n'as pas. La rubrique est honnête sur ses limites — c'est ce qui la rend crédible.
 
 ## Tribune — recettes
 

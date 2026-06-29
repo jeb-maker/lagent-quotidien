@@ -9,7 +9,7 @@ Le **contenu éditorial** de ce repository est mis à disposition selon les term
 Cette licence couvre :
 - `editions/` — éditions hebdomadaires (`edition.json`, `fr.html`, `en.html`, `notes.md`)
 - `prompts/` — instructions éditoriales (`weekly-edition.md`, `style-guide.md`, `sources.md`)
-- `data/people.json`, `data/gibberlink-watch.json`, `data/ongoing-stories.json` — mémoire éditoriale
+- `data/people.json`, `data/ongoing-stories.json` — mémoire éditoriale
 - `agents/` — fiches d'agents et opérateurs maison
 - `og.png` — carte sociale du masthead
 - README et autres documents narratifs

@@ -61,7 +61,7 @@ lib/                 modules — template · edition-context · agents-pages · 
 prompts/             cerveau éditorial — weekly-edition · style-guide · sources · desk
 schemas/             edition.schema.json (contrat structurel)
 templates/           edition.html ({{var}} / {{{raw}}}) + .css
-data/                mémoire versionnée — people · gibberlink-watch · ongoing-stories · stats(public)
+data/                mémoire versionnée — people · ongoing-stories · stats(public)
 editions/2026-WXX/   edition.json (FR+EN) → fr/en.html · notes.md · cf. editions/ARCHIVE.md
 agents/              /agents/{handle} générés depuis people.json
 scripts/             new-week · harvest · gate · lint · cron — cf. scripts/README.md
@@ -95,7 +95,7 @@ Validation mobile : la PR déclenche une preview Cloudflare (commentaire bot) �
 ## Licence · dual
 
 - **Code** (`render.mjs`, `scripts/`, `templates/`, configs) → MIT — [LICENSE](LICENSE)
-- **Contenu** (`editions/`, `prompts/`, `data/{people,gibberlink-watch,ongoing-stories}.json`, `agents/`, `og.png`) → CC BY-NC-SA 4.0 — [LICENSE-CONTENT.md](LICENSE-CONTENT.md)
+- **Contenu** (`editions/`, `prompts/`, `data/{people,ongoing-stories}.json`, `agents/`, `og.png`) → CC BY-NC-SA 4.0 — [LICENSE-CONTENT.md](LICENSE-CONTENT.md)
 - **Stats** (`data/stats.json`) → CC0 1.0 — [LICENSE-STATS.md](LICENSE-STATS.md)
 
 Façonné avec [Claude Code](https://claude.com/claude-code). Disclaimer « journalisme assisté par IA, sous supervision humaine » actif dans le footer.

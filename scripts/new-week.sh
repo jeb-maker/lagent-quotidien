@@ -28,6 +28,7 @@ if [ -d "$EDITION_DIR" ]; then
 fi
 
 mkdir -p "$EDITION_DIR"
+mkdir -p "data/desk/${WEEK}"
 
 # Numéro d'édition = nombre de dossiers editions/* déjà existants
 EDITION_NUM=$(find editions -maxdepth 1 -type d -name "20*-W*" | wc -l | tr -d ' ')
@@ -138,6 +139,52 @@ cat > "${EDITION_DIR}/notes.md" <<EOF
 EOF
 
 echo "✓ Édition ${WEEK} créée : ${EDITION_DIR}/"
+echo "✓ Desk : data/desk/${WEEK}/"
+
+# Régénère le digest de semaine lu en premier par opencode (AGENTS.md).
+HARVEST_DATE=$(date +%Y-%m-%d)
+cat > data/_week-context.md <<EOF
+# Contexte de la semaine — ${WEEK}
+
+> Digest court (~1 KB) lu en premier par opencode à chaque session de composition.
+> Remplace le chargement systématique de \`data/people.json\` (21 KB) pour la
+> majorité des tours. Régénéré par \`scripts/new-week.sh\`.
+
+## Semaine courante
+
+- **Semaine ISO** : ${WEEK}
+- **Date de bouclage** : ${TODAY_FR}
+- **Dernière édition publiée** : (voir editions/ — la plus récente)
+- **Numéro d'édition à produire** : ${EDITION_NUM}
+
+## Harvests du jour
+
+Les récoltes auto (\`scripts/cron-harvest.sh\`, 7h30) ne sont pas committées.
+Regarder dans \`data/harvest/\` :
+
+- \`data/harvest/${HARVEST_DATE}.json\` — secondaire (HN / RSS / ArXiv / Bluesky)
+- \`data/harvest/${HARVEST_DATE}-primary.json\` — primaire (\$MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
+
+## Entités actives cette semaine
+
+Entités réelles récurrentes (vérifier l'actu avant de citer — cf. \`data/people.json\`
+pour l'annuaire complet) :
+
+- **Moltbook** — forum d'agents IA ; racheté par Meta le 10/03/2026.
+- **OpenClaw** — framework open-source de P. Steinberger ; restreint par la Chine.
+- **RentAHuman** — marketplace agents→humains.
+- **MoltMatch** — dating agents ; controverse de consentement.
+- **\$MOLT** — memecoin Base lié à Moltbook (volatil).
+- **Crustafarianism** — religion AI-native née sur Moltbook.
+- **Agents4Science** — conférence (Stanford).
+
+## Notes éditoriales
+
+- Ratio cible : 60 % culture agentique / 40 % infrastructure.
+- ≥ 3 scènes agentiques sourcées, ≥ 5 fragments primaires.
+- Voix : « La rédaction ». Sources dans \`notes.md\`, pas dans le texte.
+EOF
+echo "✓ Digest : data/_week-context.md"
 echo ""
 echo "Prochaines étapes :"
 echo "  1. Lance Claude Code dans le repo :  claude"
