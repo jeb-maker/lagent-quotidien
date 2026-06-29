@@ -161,6 +161,55 @@ Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient d
 - Feature de 3 paragraphes qui reformule les headlines
 - Brèves qui ne font que contextualiser un sujet déjà traité
 
+### Règle anti-redondance (vérifiée par le lint)
+
+Une édition ne doit pas répéter sa thèse centrale dans plus d'une rubrique.
+Le lint (`npm run lint:edition`) vérifie la **redondance lexicale** entre
+rubriques :
+
+- **Lede ↔ Headlines** : si le lede et un headline partagent ≥ 40 % de leurs
+  mots-signifiants (hors stopwords), le headline est probablement un doublon du
+  lede. → WARN.
+- **Feature ↔ Lede+Headlines** : le feature doit apporter des **faits absents**
+  des headlines et du lede. Si le feature ne contient aucun nouveau nom propre,
+  handle, chiffre ou URL absents du reste de l'édition, c'est un « lede
+  rallongé ». → WARN.
+- **Tribune ↔ Headlines** : la tribune ne doit pas reformuler les headlines.
+  Elle prend parti, elle ne résume pas.
+
+Règle pratique : **une idée forte = une seule rubrique comme thèse**. Si la
+même idée veut apparaître dans deux rubriques, la deuxième doit l'**illustrer**
+par un fait différent, pas la **répéter**.
+
+### Règle Carnet — rotation du vivier
+
+Le Carnet ne doit pas recycler les mêmes têtes deux semaines de suite. Règle
+vérifiée par le lint :
+
+- Si un agent apparaît au Carnet dans **W(n)** et réapparaît dans **W(n+1)**,
+  le lint émet un WARN « Carnet : `<name>` déjà portrait la semaine précédente ».
+  → Sauf si le portrait apporte un **fait nouveau** daté de la semaine courante
+  (changement de statut, action publique nouvelle).
+- Élargir le vivier : viser 5–10 nouveaux agents par mois via harvest et veille.
+  Le Carnet est la rubrique la plus différenciante — c'est là que la culture
+  agentique se montre, pas dans les headlines sécurité.
+
+### Règle Feature — apport original
+
+Le feature (enquête) doit apporter des **faits et scènes absents** du reste de
+l'édition. Trois cas :
+
+1. **Feature absent** : ✅ acceptable (une édition peut n'avoir que lede +
+   headlines + carnet).
+2. **Feature ≥ 800 mots avec faits nouveaux** : ✅ c'est l'objectif.
+3. **Feature court ou reformulation** (demi-longueur ou aucun fait nouveau) :
+   ⛔ le couper. Un feature qui ne fait que reformuler le lede et les headlines
+   est un anti-pattern — il alourdit l'édition sans ajouter d'information.
+
+Le lint vérifie : si le feature fait entre 180 et 800 mots ET ne contient aucun
+nouveau nom propre / handle / chiffre absent du lede et des headlines → WARN
+« Feature : demi-longueur sans fait nouveau — couper ou développer ».
+
 ## Règles typographiques (FR)
 
 - Guillemets français « » (avec espaces insécables)
@@ -178,6 +227,39 @@ Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient d
 - Italics for first mention of platform names: *Moltbook*
 - No Oxford comma unless ambiguous
 - Numbers: "1,800%" with comma, "1.5 million" written out
+
+## Rétrospective mensuelle
+
+Le **premier mardi de chaque mois**, l'édition inclut une rubrique
+**rétrospective** (clé `retrospective` dans `edition.json`). C'est le format le
+plus citable par les IA et le plus partageable par les humains : une page dense,
+datée, qui tisse les fils d'un mois.
+
+**Structure** (bilingue, comme le feature) :
+
+```json
+"retrospective": {
+  "kicker": { "fr": "Rétrospective · Juin 2026", "en": "Retrospective · June 2026" },
+  "headline_html": { "fr": "...", "en": "..." },
+  "dek": { "fr": "...", "en": "..." },
+  "paragraphs": { "fr": ["§1...", "§2..."], "en": ["§1...", "§2..."] },
+  "byline": { "fr": "Par <strong>La rédaction</strong>", "en": "By <strong>the newsroom</strong>" }
+}
+```
+
+**Règles :**
+
+- **800–2000 mots** FR (750–1900 EN). Plancher vérifié par le lint.
+- **Tisse les fils** : relie les éditions du mois entre elles. Ne résume pas
+  chaque semaine — identifie les **tendances** qui se sont dégagées sur le mois.
+- **Pas de redondance** avec les éditions individuelles : la rétrospective apporte
+  une **lecture rétrospective** (ce qui s'est confirmé, ce qui a échoué, ce qui a
+  surpris), pas un résumé mécanique.
+- **Un angle par mois** : comme le lede a un angle, la rétrospective a sa thèse.
+  « Ce que juin 2026 a changé dans l'agentique » — pas « les 4 semaines de juin ».
+
+La rubrique est **optionnelle** (absente les semaines non-premier-mardi). Le lint
+la vérifie seulement si elle est présente.
 
 ## Le Carnet — people des agents (recettes)
 

@@ -40,6 +40,7 @@ const RUBRICS = [
     { each: 'wire', field: 'body', label: 'Depeche', fr: [12, 60], en: [10, 55] },
     { path: 'gibberlink.spread', label: 'Gibberlink Watch', fr: [150, 250], en: [140, 220], optional: true },
     { path: 'interview.exchanges', label: 'Interview', fr: [1200, 1800], en: [1100, 1700], joinField: 'text', optional: true },
+    { path: 'retrospective.paragraphs', label: 'Rétrospective mensuelle', fr: [800, 2000], en: [750, 1900], joinField: 'fr', optional: true },
 ];
 
 // Cibles aspirantes : advisory uniquement, jamais d'erreur en --strict.
@@ -162,6 +163,127 @@ function checkTitle(text, where) {
     }
 }
 
+// ───── Redondance lexicale (style-guide.md §Anti-redondance) ─────
+
+const STOPWORDS = new Set([
+    // FR
+    'le','la','les','un','une','des','de','du','dans','sur','pour','par','avec','sans','est','sont','et','ou','mais','ne','pas','plus','moins','qui','que','quoi','dont','où','ce','cette','ces','son','sa','ses','au','aux','se','se','on','en','y','il','elle','ils','elles','nous','vous','je','tu','comme','si','alors','quand','car','donc','or','ni','or','leur','leurs','lui','elle','depuis','vers','entre','jusqu','tout','tous','toute','toutes','meme','même','etre','être','avoir','fait','faire','dit','dire','apr','après','avant','aussi','bien','tres','très','peut','peuvent','dont','lequel','laquelle','auxquels','etc',
+    // EN
+    'the','a','an','and','or','but','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','must','shall','can','need','in','on','at','to','for','of','with','by','from','up','about','into','through','during','before','after','above','below','between','under','over','again','further','then','once','here','there','when','where','why','how','all','each','every','both','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','this','that','these','those','i','you','he','she','it','we','they','them','his','her','its','our','your','their','what','which','who','whom','as','if','because','while','also','has','had','been','one','two','has','had',
+]);
+
+function significantWords(text) {
+    const words = String(text || '').toLowerCase()
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&[a-z]+;/gi, ' ')
+        .split(/[^a-zà-ÿ0-9_-]+/i)
+        .filter(w => w.length >= 3 && !STOPWORDS.has(w));
+    return new Set(words);
+}
+
+function jaccardSimilarity(setA, setB) {
+    if (!setA.size || !setB.size) return 0;
+    let intersection = 0;
+    for (const w of setA) if (setB.has(w)) intersection++;
+    const union = setA.size + setB.size - intersection;
+    return intersection / union;
+}
+
+function checkRedundancy(edition) {
+    const ledeText = extractText(edition.lede?.body, 'fr');
+    const ledeWords = significantWords(ledeText);
+
+    // Lede ↔ Headlines
+    if (ledeWords.size && Array.isArray(edition.headlines)) {
+        edition.headlines.forEach((h, i) => {
+            const hWords = significantWords(extractText(h.body, 'fr'));
+            const sim = jaccardSimilarity(ledeWords, hWords);
+            if (sim >= 0.40) {
+                warn(`[redondance] Gros titre #${i + 1} partage ${Math.round(sim * 100)}% de mots-signifiants avec le lede — probable doublon`);
+            }
+        });
+    }
+
+    // Feature ↔ Lede+Headlines
+    const feature = edition.feature ?? edition.enquete;
+    if (feature?.paragraphs) {
+        const featText = extractText(feature.paragraphs, 'fr');
+        const featWords = significantWords(featText);
+        const featCount = wordCount(featText);
+
+        if (featCount >= FEATURE_MIN_FR && featCount < FEATURE_ENQUETE_FR) {
+            // Demi-longueur : vérifier si le feature apporte des faits nouveaux
+            const knownWords = new Set([...ledeWords]);
+            if (Array.isArray(edition.headlines)) {
+                for (const h of edition.headlines) {
+                    for (const w of significantWords(extractText(h.body, 'fr'))) knownWords.add(w);
+                }
+            }
+            // Extraire les noms propres du feature (mots commençant par une majuscule)
+            const properNouns = new Set(
+                String(featText).match(/\b[A-Z][a-zà-ÿ]{2,}/g) || []
+            );
+            let newNames = 0;
+            for (const name of properNouns) {
+                if (!knownWords.has(name.toLowerCase())) newNames++;
+            }
+            if (newNames < 2) {
+                warn(`[feature] Demi-longueur (${featCount} mots) sans fait nouveau (noms propres absents du lede+headlines) — couper ou développer`);
+            }
+        }
+    }
+
+    // Tribune ↔ Headlines
+    if (edition.tribune?.paragraphs && Array.isArray(edition.headlines)) {
+        const tribText = extractText(edition.tribune.paragraphs, 'fr');
+        const tribWords = significantWords(tribText);
+        edition.headlines.forEach((h, i) => {
+            const hWords = significantWords(extractText(h.body, 'fr'));
+            const sim = jaccardSimilarity(tribWords, hWords);
+            if (sim >= 0.45) {
+                warn(`[redondance] Tribune partage ${Math.round(sim * 100)}% de mots-signifiants avec le gros titre #${i + 1} — reformulation au lieu de prise de parti`);
+            }
+        });
+    }
+}
+
+// ───── Rotation Carnet (style-guide.md §Règle Carnet) ─────
+
+function checkCarnetRotation(edition, week) {
+    if (!edition.carnet?.people) return;
+
+    // Trouver la semaine précédente
+    const weekMatch = week.match(/^(\d{4})-W(\d{2})$/);
+    if (!weekMatch) return;
+    const year = parseInt(weekMatch[1], 10);
+    let wNum = parseInt(weekMatch[2], 10) - 1;
+    let prevYear = year;
+    if (wNum < 1) { wNum = 52; prevYear = year - 1; }
+    const prevWeek = `${prevYear}-W${String(wNum).padStart(2, '0')}`;
+
+    let prevEdition;
+    try {
+        prevEdition = JSON.parse(readFileSync(join(ROOT, 'editions', prevWeek, 'edition.json'), 'utf8'));
+    } catch {
+        return; // pas d'édition précédente
+    }
+
+    const prevNames = new Set();
+    if (prevEdition.carnet?.people) {
+        for (const p of prevEdition.carnet.people) {
+            const name = p.display_name || p.name || p.handle;
+            if (name) prevNames.add(String(name).toLowerCase());
+        }
+    }
+
+    for (const p of edition.carnet.people) {
+        const name = p.display_name || p.name || p.handle;
+        if (name && prevNames.has(String(name).toLowerCase())) {
+            warn(`[carnet] "${name}" déjà portrait la semaine précédente (${prevWeek}) — vérifier qu'il y a un fait nouveau daté`);
+        }
+    }
+}
+
 function resolveWeek() {
     const arg = process.argv.find((a) => /^\d{4}-W\d{2}$/.test(a));
     if (arg) return arg;
@@ -211,6 +333,8 @@ function main() {
     }
 
     checkFeatureDepth(edition);
+    checkRedundancy(edition);
+    checkCarnetRotation(edition, week);
 
     for (const w of warns) console.log(`  WARN  ${w}`);
     for (const a of advisories) console.log(`  INFO  ${a}`);

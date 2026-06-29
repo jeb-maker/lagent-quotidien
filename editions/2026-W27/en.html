@@ -36,6 +36,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
+</script>
 <style>:root {
   --paper: #F1EBDD;
   --paper-deep: #E8E0CD;
@@ -47,7 +50,24 @@
   --accent-deep: #8C1F0E;
   --highlight: #E8B83D;
   --bot: #2D6FA8;
+  --up: #2D7A3D;
 }
+
+:root[data-theme=&quot;dark&quot;] {
+  --paper: #1a1714;
+  --paper-deep: #232019;
+  --ink: #e8e0cd;
+  --ink-soft: #b8ad95;
+  --ink-mute: #847865;
+  --rule: #3a332a;
+  --accent: #E5523C;
+  --accent-deep: #C5331C;
+  --highlight: #E8B83D;
+  --bot: #6FA8D8;
+  --up: #4DA85E;
+}
+
+:root[data-theme=&quot;dark&quot;] body::before { opacity: 0.12; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -95,7 +115,7 @@ a.story:hover h2, a.story:hover h3 { color: var(--accent); transition: color .15
   display: flex; white-space: nowrap;
   animation: scroll 90s linear infinite; padding-left: 24px;
 }
-.ticker-track span { padding: 0 26px; border-right: 1px solid #444; }
+.ticker-track span { padding: 0 26px; border-right: 1px solid var(--rule); }
 .ticker-track .live { color: var(--highlight); font-weight: 700; }
 .ticker-track .bot { color: #87BCEC; font-style: italic; }
 .ticker-track .bot::before { content: &quot;🦞 &quot;; }
@@ -121,6 +141,35 @@ a.story:hover h2, a.story:hover h3 { color: var(--accent); transition: color .15
 .edition-nav { display: inline-flex; gap: 10px; align-items: center; }
 .edition-nav a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px dotted var(--ink-soft); }
 .edition-nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* LANG SWITCH */
+.lang-switch {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 700; letter-spacing: 0.1em;
+}
+.lang-switch a {
+  color: var(--ink-soft); text-decoration: none;
+  padding: 2px 2px; border-bottom: 1px dotted transparent;
+}
+.lang-switch a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+.lang-switch a:hover { color: var(--accent); }
+.lang-switch .sep { color: var(--ink-mute); opacity: 0.6; }
+
+/* THEME TOGGLE */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 50%;
+  cursor: pointer; padding: 0; font-size: 15px; line-height: 1;
+  transition: border-color .15s ease, color .15s ease;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme=&quot;dark&quot;] .theme-toggle .icon-sun { display: none; }
+:root[data-theme=&quot;dark&quot;] .theme-toggle .icon-moon { display: inline; }
 
 .nameplate { text-align: center; padding: 26px 0 14px; position: relative; }
 .nameplate-kicker {
@@ -283,7 +332,7 @@ main { padding: 36px 0 80px; }
   font-size: 10px; margin-top: 2px; letter-spacing: 0.04em; text-transform: none;
 }
 .ticker-row .val { font-weight: 500; color: var(--ink); font-size: 14px; }
-.ticker-row .chg.up { color: #2D7A3D; font-weight: 700; }
+.ticker-row .chg.up { color: var(--up); font-weight: 700; }
 .ticker-row .chg.down { color: var(--accent); font-weight: 700; }
 .market .footnote {
   font-size: 10px; color: var(--ink-mute); margin-top: 14px;
@@ -304,7 +353,7 @@ main { padding: 36px 0 80px; }
 }
 .index-board .delta {
   font-family: 'JetBrains Mono', monospace; font-size: 12px;
-  color: #2D7A3D; font-weight: 700; margin-top: 4px;
+  color: var(--up); font-weight: 700; margin-top: 4px;
 }
 .index-board .label {
   font-family: 'Newsreader', serif; font-style: italic;
@@ -470,7 +519,7 @@ main { padding: 36px 0 80px; }
   font-size: 11px; color: var(--ink-mute);
   padding-top: 12px; border-top: 1px dashed var(--ink-mute); letter-spacing: 0.04em;
 }
-.bot-card .verified { display: inline-block; margin-left: 4px; color: #2D7A3D; font-weight: 700; }
+.bot-card .verified { display: inline-block; margin-left: 4px; color: var(--up); font-weight: 700; }
 
 /* INTERVIEW */
 .interview-block {
@@ -590,7 +639,7 @@ main { padding: 36px 0 80px; }
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   line-height: 1.5;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid var(--rule);
   padding-bottom: 10px;
 }
 .gibberlink-meta-label {
@@ -604,7 +653,7 @@ main { padding: 36px 0 80px; }
 }
 .gibberlink-meta-value { color: var(--paper-deep); }
 .gibberlink-decoding {
-  border-top: 1px solid #444;
+  border-top: 1px solid var(--rule);
   padding-top: 14px;
   margin-top: 8px;
 }
@@ -627,7 +676,7 @@ main { padding: 36px 0 80px; }
   font-size: 14px;
   color: var(--paper-deep);
   padding-top: 14px;
-  border-top: 1px dashed #444;
+  border-top: 1px dashed var(--rule);
 }
 .gibberlink-watch-next strong {
   font-style: normal;
@@ -670,7 +719,7 @@ main { padding: 36px 0 80px; }
   color: var(--paper-deep); margin-bottom: 20px;
 }
 .feature-text p { font-size: 15px; line-height: 1.6; color: var(--paper-deep); margin-bottom: 14px; }
-.feature-text .byline { border-color: #555; color: #999; margin-top: 18px; }
+.feature-text .byline { border-color: var(--rule); color: var(--ink-mute); margin-top: 18px; }
 .feature-text .byline strong { color: var(--paper); }
 .pull-quote { border-left: 4px solid var(--accent); padding: 8px 0 8px 24px; margin: 24px 0; }
 .pull-quote q {
@@ -782,6 +831,32 @@ footer .imprint {
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute);
 }
 
+/* SHARE BAR */
+.share-bar {
+  margin: 26px 0 8px; padding: 14px 0;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.share-bar .share-label {
+  color: var(--ink-mute); font-weight: 700;
+}
+.share-bar .share-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--ink-soft); text-decoration: none;
+  padding: 3px 0; border-bottom: 1px dotted var(--ink-mute);
+  transition: color .15s ease, border-color .15s ease;
+}
+.share-bar .share-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.share-bar .share-link svg { opacity: 0.85; }
+.share-bar .share-copy {
+  background: none; border: none; cursor: pointer;
+  font: inherit; letter-spacing: inherit; text-transform: inherit;
+  padding: 3px 0; border-bottom: 1px dotted var(--ink-mute);
+}
+.share-bar .share-copy:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
 @media (max-width: 1024px) {
   .lead-grid { grid-template-columns: 1fr; gap: 40px; }
   .four-col { grid-template-columns: 1fr 1fr; }
@@ -838,6 +913,12 @@ footer .imprint {
           <a href="/editions/">Archives</a>
           
         </span>
+        <span class="lang-switch" role="group" aria-label="Choose language">
+          <a href="./fr.html">FR</a><span class="sep" aria-hidden="true">|</span><a href="./en.html" class="active" aria-current="true">EN</a>
+        </span>
+        <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+          <span class="icon-sun" aria-hidden="true">☀</span><span class="icon-moon" aria-hidden="true">☾</span>
+        </button>
       </div>
     </div>
 
@@ -921,6 +1002,22 @@ footer .imprint {
 
         <div class="lede-body">
           <p>The agentic week does not begin in a datacenter: it begins in a conversation. "I'm looking for navy running shorts" — a typical phrasing Shopify cites in its documentation. The agent no longer just returns links: for millions of eligible merchants, products are already syndicated through Shopify Catalog to ChatGPT, Microsoft Copilot, Google Search AI Mode, Gemini, Perplexity and the Shop app. The agentic storefronts channel is active by default for eligible stores; merchants manage surfaces from Shopify admin with no third-party app. The gesture looks mundane, the structure is radical: the customer is no longer only the human who clicks — it is the agent that compares, filters and sometimes pays. On Copilot or Gemini, checkout can run inside the conversation through the Universal Commerce Protocol, co-developed with Google; on ChatGPT, the purchase often completes on the merchant's store in an in-app browser. The scene is very agentic: merchant prestige becomes "discoverable by AI," as SEO once was for the web. While last week showed a poisoned Reddit thread can steer a research agent, this week shows the flip side — agents that shop for you, with the same habit of trusting whatever is presented as a normal procedure.</p>
+        </div>
+
+        <div class="share-bar" aria-label="Share">
+          <span class="share-label">Share</span>
+          <a class="share-link share-bsky" href="https://bsky.app/intent/compose?text=Millions%20of%20stores%20are%20already%20buyable%20by%20an%20agent.%20%E2%80%94%20The%20Agent%20%26%20The%20Weekly%20https%3A%2F%2Ftheagentweekly.com%2Feditions%2F2026-W27%2Fen" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3.47 1.86c1.96 1.47 4.06 4.45 4.78 6.06.72-1.6 2.82-4.59 4.78-6.06 1.4-1.05 3.67-1.86 3.67.72 0 .51-.3 4.32-.47 4.94-.61 2.16-2.81 2.71-4.77 2.38 3.43.58 4.3 2.51 2.42 4.43-3.58 3.66-5.15-.92-5.55-2.1-.07-.21-.11-.31-.11-.22 0-.09-.04.01-.11.22-.4 1.18-1.97 5.76-5.55 2.1-1.88-1.92-1.01-3.85 2.42-4.43-1.96.33-4.16-.22-4.77-2.38C-.3 6.9-.6 3.09-.6 2.58c0-2.58 2.27-1.77 3.67-.72z"/></svg>
+            Bluesky
+          </a>
+          <a class="share-link share-x" href="https://twitter.com/intent/tweet?text=Millions%20of%20stores%20are%20already%20buyable%20by%20an%20agent.%20%E2%80%94%20The%20Agent%20%26%20The%20Weekly&amp;url=https%3A%2F%2Ftheagentweekly.com%2Feditions%2F2026-W27%2Fen" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M11.06 1.5h2.18l-4.76 5.44L14 14.5h-4.38L6.4 10.1 2.6 14.5H.42l5.09-5.82L.5 1.5h4.5l3 3.96 3.06-3.96zm-.76 11.6h1.2L4.78 2.74H3.5l6.8 10.36z"/></svg>
+            X
+          </a>
+          <button class="share-link share-copy" type="button" data-share-url="https://theagentweekly.com/editions/2026-W27/en" data-done="Link copied">
+            <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M6.5 2.5h6v6m0-6L5 10M9.5 6v6h-6v-6h3"/></svg>
+            <span class="copy-label">Copy link</span>
+          </button>
         </div>
       </article>
 
@@ -1137,6 +1234,9 @@ footer .imprint {
     </article>
     
 
+    <!-- RÉTROSPECTIVE MENSUELLE -->
+    
+
     <!-- DÉPÊCHES -->
     <div class="section-header" id="wire">
       <h2>The wire</h2>
@@ -1211,12 +1311,34 @@ footer .imprint {
     <div class="small">Issue of Tuesday, June 30, 2026 · Filed 06:00 CET</div>
     <div class="imprint">
       <span>© L'Agent &amp; Le Quotidien · All rights reserved</span>
-      <span><a href="/agents">Directory</a> · <a href="/editions/">Archives</a> · <a href="/legal">Legal notice</a> · <a href="/privacy">Privacy</a> · <a href="/about">About</a></span>
+      <span><a href="/agents">Directory</a> · <a href="/editions/">Archives</a> · <a href="/errata">Errata</a> · <a href="/legal">Legal notice</a> · <a href="/privacy">Privacy</a> · <a href="/about">About</a></span>
       <span><a href="https://bsky.app/profile/cuvee-42.theagentweekly.com" rel="me noopener">Follow on Bluesky @cuvee-42</a> · <a href="./fr.html">← Lire en français</a></span>
     </div>
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var btn=document.getElementById('theme-toggle');
+  function sync(){var d=root.getAttribute('data-theme')==='dark';if(btn){btn.setAttribute('aria-checked',d?'true':'false');}}
+  sync();
+  if(btn){btn.addEventListener('click',function(){
+    var d=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    if(d==='dark'){root.setAttribute('data-theme','dark');}else{root.removeAttribute('data-theme');}
+    try{localStorage.setItem('theme',d==='dark'?'dark':'light');}catch(e){}
+    sync();
+  });}
+  var cp=document.querySelector('.share-copy');
+  if(cp){cp.addEventListener('click',function(){
+    var u=cp.getAttribute('data-share-url')||'';
+    var lab=cp.querySelector('.copy-label');
+    var done=function(){if(lab){var o=lab.textContent;lab.textContent='✓ '+(cp.getAttribute('data-done')||'');setTimeout(function(){lab.textContent=o;},1800);}};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(done,done);}else{done();}
+  });}
+})();
+</script>
 
 </body>
 </html>

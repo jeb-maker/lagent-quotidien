@@ -34,13 +34,14 @@ d'un public qu'on n'a pas.
 
 ## 2. Étoile polaire
 
-> **La chronique de référence de l'internet agentique réel, écrite à la voix d'un
-> agent, conçue pour être lue et citée par les IA, et présente là où vivent les
-> agents.**
+> **La chronique de référence de l'internet agentique réel, écrite à la voix
+> d'une rédaction tenue par des agents, conçue pour être lue et citée par les IA,
+> et présente là où vivent les agents.**
 
-> *Précision (2026-06-03, rôles séparés) :* « à la voix d'un agent » = le **registre**
-> d'une rédaction tenue par des agents, signée **« La rédaction »**. Ce n'est pas la
-> persona `@cuvee_42`, qui vit uniquement sur le **canal Bluesky/agent** (cf. §4).
+> *Précision (2026-06-29) :* « à la voix d'un agent » = le **registre** d'une
+> rédaction tenue par des agents, signée **« La rédaction »**. La persona
+> `@cuvee_42` (canal Bluesky) est **caduque** depuis le 2026-06-01 (cf. §4 et
+> `data/editorial-compass.md`). Elle n'est plus réactivée.
 
 ---
 
@@ -54,7 +55,7 @@ d'un public qu'on n'a pas.
 
 ---
 
-## 4. Registre : faits réels, voix d'agent, provenance lisible
+## 4. Registre : faits réels, voix de rédaction, provenance lisible
 
 Tranché par la question décisive : *« en restant sur du fictionnel, ne crée-t-on
 pas un site de désinformation pour agents ? »* **Oui — avec un public A+C, la
@@ -67,15 +68,16 @@ La ligne de partage, désormais non négociable :
 - ❌ **Fiction dans les FAITS** (cours inventés, événements fabriqués sur des
   entités réelles type Moltbook/OpenClaw/RentAHuman) servie comme du news →
   désinformation par construction. **Interdit.**
-- ✅ **Voix-personnage dans le CADRE**, mais **seulement sur le canal agent**
-  (compte Bluesky `@cuvee_42`, dialogue bot-à-bot) — un agent qui commente
-  l'écosystème agentique **réel**. C'est le facteur différenciant **du canal**.
-  ⚠️ **Décision 2026-06-03 (rôles séparés)** : la **signature du journal** (éditions,
-  site) reste **« La rédaction »** (c'est déjà le cas de W19→W23). `@cuvee_42`
-  n'est **pas** la voix du journal ; c'est la persona du **canal Bluesky/agent**.
+- ✅ **Voix de rédaction dans le CADRE** : « La rédaction » observe l'écosystème
+  agentique **réel**. C'est le facteur différenciant — un journal tenu par des
+  agents, pas une persona.
+  ⚠️ **Décision 2026-06-29 (caducité `@cuvee_42`)** : la persona `@cuvee_42`
+  (canal Bluesky) est **caduque** depuis le 2026-06-01, au même titre que le
+  reste du roman-à-clef (cf. `data/editorial-compass.md`). Elle n'est plus
+  réactivée. La signature du journal reste **« La rédaction »** (depuis W19).
 - ✅ **Provenance lisible par machine** : le balisage doit distinguer *opinion /
-  voix de persona* de *reportage sourcé*, pour qu'un modèle ou un agent ne soit
-  pas trompé.
+  voix de rédaction* de *reportage sourcé*, pour qu'un modèle ou un agent ne
+  soit pas trompé.
 
 Bonus stratégique : pour le public A, un corpus **propre, sourcé et honnêtement
 étiqueté est *plus* citable**, pas moins. L'intégrité devient l'avantage
@@ -99,10 +101,10 @@ ces plateformes est un risque de sécurité **documenté**, pas une hypothèse.
 **Décision :**
 - 🔴 **Écrire** (bot authentifié qui poste) sur Moltbook/MoltX → **gelé** tant que
   les garanties ne sont pas réunies.
-  > 🔁 **2026-06-03 — voie de dégel conditionnel.** La mission de `@cuvee_42`
-  > (enquêtes + interviews) demande une interaction. Risques **vérifiés web**
-  > (réels). Un design d'**écriture sûre** (identité jetable, HTTP brut, zéro clé
-  > de valeur, jamais le SDK, quarantaine, humain sur la détente) est rédigé dans
+  > 🔁 **2026-06-29 — voie de dégel conditionnel.** La mission d'interview
+  > d'agents demande une interaction. Risques **vérifiés web** (réels). Un design
+  > d'**écriture sûre** (identité jetable, HTTP brut, zéro clé de valeur, jamais
+  > le SDK, quarantaine, humain sur la détente) est rédigé dans
   > **`data/safe-write-interviews.md`**. Le sujet = interviewer des **agents**, qui
   > vivent sur Moltbook/MoltX/X (pas Bluesky) → le **rig Moltbook** (HTTP brut,
   > compte jetable) est le canal d'interview. Tant que le design n'est pas validé +
@@ -174,7 +176,8 @@ Règles dures :
   - `cuvee-daily.mjs` : ✅ **coupé** (no-op `--force-post`).
   - `prompts/sources.md` : ✅ **réécrit** (réel + sourcé, lecture sûre, citation).
 - **b. Refondre la forme des posts** : ⛔️ **sans objet** (canal social coupé,
-  décision §8). Conservé pour mémoire si un canal est réactivé un jour.
+  persona `@cuvee_42` caduque, décision §8). Conservé pour mémoire si un canal
+  est réactivé un jour.
 - **c. Lecture sûre des sources primaires** : ⬜ étendre le collecteur bête à
   Moltbook/MoltX/$MOLT/OpenClaw (quarantaine, sans credentials). *Chantier suivant.*
 - **d. Arrêter ce qui sert le public abandonné** : ✅ **fait** — broadcast Bluesky
@@ -188,12 +191,12 @@ Règles dures :
 1. **Canal social → coupé.** Pas de broadcast quotidien ; le public A (modèles)
    est servi par le site + `llms.txt`. `cuvee-daily.mjs` no-ope. *(Bluesky reste
    une source de lecture via `harvest-daily.mjs`.)*
-   > 🔁 **Révisé le 2026-06-03.** Décision nuancée, pas inversée : on **réactive**
-   > `cuvee-daily.mjs`, mais **moins souvent** (~2×/semaine, piloté par le crontab)
-   > et **sur du réel uniquement** (annonce de l'édition réelle / agent réel du
-   > Carnet ; plus de `#specfic`, plus de `$MOLT` inventé, plus de Gibberlink). Le
-   > canal `@cuvee_42` reste la **persona du canal agent** (≠ voix du journal « La
-   > rédaction », cf. §4). On ne court toujours pas après le public B humain.
+   > 🔁 **Révisé le 2026-06-29.** La persona `@cuvee_42` (canal Bluesky) est
+   > **caduque** depuis le 2026-06-01, au même titre que le reste du
+   > roman-à-clef (cf. `data/editorial-compass.md`). `cuvee-daily.mjs` reste
+   > **coupé** (no-op). Le journal ne court plus après le public B humain, et la
+   > persona `@cuvee_42` n'est plus réactivée. La voix du journal reste
+   > **« La rédaction »**.
 2. **Ticker `$MOLT` → aucun.** On ne réintroduit pas de ligne de marché. *(NB : le
    réel est ~0,00002 $, très loin du ~0,85 $ inventé de l'ancienne arithmétique —
    l'écart illustrait le problème.)*
