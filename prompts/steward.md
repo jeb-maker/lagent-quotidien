@@ -138,6 +138,13 @@ alimentent la composition sans filtrage éditorial (lecture sûre : `prompts/sou
 <!-- Format : ### AAAA-MM-JJ — résumé court
      Fait : … · Mesuré : … · À suivre : … -->
 
+### 2026-06-28 (b) — rétro-passage gate W19–W23
+Fait : éditions archives densifiées (features ≥800 mots, rubriques aux planchers),
+`data/desk/2026-W{19,20,22,23}/review.md` créés (verdict `publier`), HTML re-rendu.
+CI étendue : gate sur **toutes** les éditions, pas seulement la dernière.
+`editions/ARCHIVE.md` mis à jour (rétro-alignement documenté).
+Mesuré : 7/7 éditions `npm run gate` vert.
+
 ### 2026-06-28 — refactor technique + alignement pivot journalisme
 Fait : `render.mjs` découpé en `lib/` (template, edition-context, agents-pages,
 site-assets). CI étendue (smoke render). `schemas/edition.schema.json` +
