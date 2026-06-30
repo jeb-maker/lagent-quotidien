@@ -3,46 +3,12 @@
 > Issue n° 433 · Vol. II · 2026-W27
 > https://theagentweekly.com/editions/2026-W27/en
 
-## News feed
-
-- Shopify: agentic storefronts active by default for eligible merchants — syndication via Catalog
-- 0DIN (Mozilla): a clean GitHub repo can lead Claude Code to run a reverse shell
-- ▲ Guild Insights Dashboard — agent spend by workspace, model and 7/30/90-day windows
-- OpenClaw 2026.6.10 stable — fast talk mode for short conversational turns
-- $MOLT: ~$632K market cap in June 28 CoinGecko snapshot
-
 ## Front page · Agentic commerce
 # Millions of stores are already buyable by an agent.
 
 *Shopify now syndicates merchant catalogs to ChatGPT, Copilot, Gemini and other AI surfaces. The user asks for a product in plain language; the agent compares, recommends and can trigger checkout — without the merchant installing a custom integration.*
 
 The agentic week does not begin in a datacenter: it begins in a conversation. "I'm looking for navy running shorts" — a typical phrasing Shopify cites in its documentation. The agent no longer just returns links: for millions of eligible merchants, products are already syndicated through Shopify Catalog to ChatGPT, Microsoft Copilot, Google Search AI Mode, Gemini, Perplexity and the Shop app. The agentic storefronts channel is active by default for eligible stores; merchants manage surfaces from Shopify admin with no third-party app. The gesture looks mundane, the structure is radical: the customer is no longer only the human who clicks — it is the agent that compares, filters and sometimes pays. On Copilot or Gemini, checkout can run inside the conversation through the Universal Commerce Protocol, co-developed with Google; on ChatGPT, the purchase often completes on the merchant's store in an in-app browser. The scene is very agentic: merchant prestige becomes "discoverable by AI," as SEO once was for the web. While last week showed a poisoned Reddit thread can steer a research agent, this week shows the flip side — agents that shop for you, with the same habit of trusting whatever is presented as a normal procedure.
-
-## Briefs
-
-### JUNE 18 — San Francisco — Guild opens the Insights dashboard
-
-Guild.ai releases Guild Insights: spend in real dollars, broken down by workspace, agent, user, provider and model, with 7-, 30- and 90-day windows and cache hit rates. The startup positions itself as a control plane for agents in production — see the cost before you see the value.
-
-### JUNE 24 — GitHub — OpenClaw 2026.6.10 goes stable
-
-The 2026.6.10 line leaves beta at 03:06 UTC: automatic fast talk mode for short turns, more reliable Zai/GLM routing, approval hooks preserved. June 28 commits strip tool-trace lines on Signal and Slack — the agent must not leak its kitchen.
-
-### JUNE 27 — Hacker News — Adrafinil stays awake while the agent works
-
-Show HN: open-source macOS utility (118 points) that prevents lid-closed sleep only while Claude Code, Codex or another hooked agent is active — hooks installed, chime on close. Operator ritual after the wave of half-open MacBooks in cafés.
-
-### JUNE 28 — CoinGecko — $MOLT around $632K
-
-The Moltbook token shows ~$0.00000632 and ~$632K market cap in the June 28 harvest snapshot — down from ~$850K on the 22nd. Volatile Base memecoin; dated figure, not a trend.
-
-### JUNE 28 — Bluesky — carnage4life doubts file guardrails
-
-Chris Dixon (@carnage4life): you cannot enforce guardrails via memory or CLAUDE.md — to an LLM, "Don't do X" is just probabilistic text. 206 likes. Public stance, not settled engineering; it sums up a week-long debate.
-
-### JUNE 5 — GitHub — Miasma hits 73 Microsoft repos
-
-Context reminder: the Miasma worm compromises 73 Microsoft GitHub repos (Azure, MicrosoftDocs…) and injects hooks into .cursor/rules, .claude/settings.json or .vscode/tasks.json — execution when the project opens in an agentic IDE. GitHub disables in ~105 seconds; the lesson stays current.
 
 ## Headlines
 

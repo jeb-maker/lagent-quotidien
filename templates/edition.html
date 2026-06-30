@@ -43,14 +43,6 @@
 </head>
 <body>
 
-<div class="ticker" aria-label="{{label_ticker}}">
-  <div class="ticker-label">{{label_live}}</div>
-  <div class="ticker-track">
-    {{#each ticker_items}}<span class="{{type}}">{{text}}</span>{{/each}}
-    {{#each ticker_items}}<span class="{{type}}">{{text}}</span>{{/each}}
-  </div>
-</div>
-
 <div class="container">
 
   <header class="masthead" id="top">
@@ -62,7 +54,6 @@
       </div>
       <div class="right">
         <span class="reader-stamp">{{label_reader_stamp}}</span>
-        {{#if has_masthead_molt}}<span>$MOLT : <strong style="color:{{masthead_molt_color}}">{{masthead_molt_arrow}} {{masthead_molt_change}}</strong></span>{{/if}}
         <span class="edition-nav">
           {{#if has_prev_edition}}<a href="{{prev_edition_url}}">{{label_prev_edition}}</a>{{/if}}
           <a href="{{archives_url}}">{{label_archives}}</a>
@@ -85,11 +76,8 @@
 
     <nav class="sections" aria-label="{{label_sections}}">
       <a href="#top" class="active">{{label_nav_front}}</a>
-      {{#if has_bestiaire}}<a href="#bestiaire">{{label_nav_bestiary}}</a>{{/if}}
-      <a href="#breves">{{label_nav_incidents}}</a>
-      <a href="#market">{{label_nav_market}}</a>
-      {{#if has_bot_posts}}<a href="#anthropologie">{{label_nav_anthro}}</a>{{/if}}
-      {{#if has_gibberlink}}<a href="#gibberlink">{{label_nav_security}}</a>{{/if}}
+      <a href="#carnet">{{label_nav_carnet}}</a>
+      <a href="#feature">{{label_nav_feature}}</a>
       <a href="#tribune">{{label_nav_oped}}</a>
       <a href="#wire">{{label_nav_wire}}</a>
     </nav>
@@ -97,76 +85,41 @@
 
   <main>
 
-    <div class="lead-grid">
+    <article class="lede">
+      <div class="kicker"><span class="dot"></span> {{lede_kicker}}</div>
+      <h1>{{{lede_headline_html}}}</h1>
+      <p class="dek">{{{lede_dek}}}</p>
+      <div class="byline">{{{lede_byline}}}</div>
 
-      <aside class="breves" id="breves" aria-label="{{label_breves}}">
-        <h2 class="rail-title">{{label_breves_title}}</h2>
-        {{#each breves}}
-        <div class="breve">
-          <div class="time">{{time}}</div>
-          <h3>{{title}}</h3>
-          <p>{{body}}</p>
+      <figure class="lede-figure">
+        <div class="ratio">
+          <div class="num">{{lede_num_a}}</div>
+          <div class="slash">{{lede_slash}}</div>
+          <div class="num small">{{lede_num_b}}</div>
         </div>
-        {{/each}}
-      </aside>
+        <div class="legend">{{{lede_legend}}}</div>
+      </figure>
 
-      <article class="lede">
-        <div class="kicker"><span class="dot"></span> {{lede_kicker}}</div>
-        <h1>{{{lede_headline_html}}}</h1>
-        <p class="dek">{{{lede_dek}}}</p>
-        <div class="byline">{{{lede_byline}}}</div>
+      <div class="lede-body">
+        <p>{{{lede_body}}}</p>
+      </div>
 
-        <figure class="lede-figure">
-          <div class="ratio">
-            <div class="num">{{lede_num_a}}</div>
-            <div class="slash">{{lede_slash}}</div>
-            <div class="num small">{{lede_num_b}}</div>
-          </div>
-          <div class="legend">{{{lede_legend}}}</div>
-        </figure>
-
-        <div class="lede-body">
-          <p>{{{lede_body}}}</p>
-        </div>
-
-        <div class="share-bar" aria-label="{{label_share}}">
-          <span class="share-label">{{label_share}}</span>
-          <a class="share-link share-bsky" href="{{share_bsky}}" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3.47 1.86c1.96 1.47 4.06 4.45 4.78 6.06.72-1.6 2.82-4.59 4.78-6.06 1.4-1.05 3.67-1.86 3.67.72 0 .51-.3 4.32-.47 4.94-.61 2.16-2.81 2.71-4.77 2.38 3.43.58 4.3 2.51 2.42 4.43-3.58 3.66-5.15-.92-5.55-2.1-.07-.21-.11-.31-.11-.22 0-.09-.04.01-.11.22-.4 1.18-1.97 5.76-5.55 2.1-1.88-1.92-1.01-3.85 2.42-4.43-1.96.33-4.16-.22-4.77-2.38C-.3 6.9-.6 3.09-.6 2.58c0-2.58 2.27-1.77 3.67-.72z"/></svg>
-            {{label_share_bsky}}
-          </a>
-          <a class="share-link share-x" href="{{share_x}}" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M11.06 1.5h2.18l-4.76 5.44L14 14.5h-4.38L6.4 10.1 2.6 14.5H.42l5.09-5.82L.5 1.5h4.5l3 3.96 3.06-3.96zm-.76 11.6h1.2L4.78 2.74H3.5l6.8 10.36z"/></svg>
-            {{label_share_x}}
-          </a>
-          <button class="share-link share-copy" type="button" data-share-url="{{share_url}}" data-done="{{label_share_copied}}">
-            <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M6.5 2.5h6v6m0-6L5 10M9.5 6v6h-6v-6h3"/></svg>
-            <span class="copy-label">{{label_share_copy}}</span>
-          </button>
-        </div>
-      </article>
-
-      <aside class="market" id="market" aria-label="{{label_market}}">
-        <h2 class="rail-title">{{market_title}}</h2>
-        {{#each market_rows}}
-        <div class="ticker-row">
-          <div class="name">{{ticker}} <small>{{label}}</small></div>
-          <div class="val">{{value}}</div>
-          <div class="chg {{direction}}">{{change}}</div>
-        </div>
-        {{/each}}
-        <p class="footnote">{{label_market_footnote}}</p>
-
-        {{#each market_boards}}
-        <div class="index-board">
-          <h3>{{title}}</h3>
-          <div class="big-num">{{value}}</div>
-          <div class="delta">{{delta}}</div>
-          <div class="label">{{{label}}}</div>
-        </div>
-        {{/each}}
-      </aside>
-    </div>
+      <div class="share-bar" aria-label="{{label_share}}">
+        <span class="share-label">{{label_share}}</span>
+        <a class="share-link share-bsky" href="{{share_bsky}}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3.47 1.86c1.96 1.47 4.06 4.45 4.78 6.06.72-1.6 2.82-4.59 4.78-6.06 1.4-1.05 3.67-1.86 3.67.72 0 .51-.3 4.32-.47 4.94-.61 2.16-2.81 2.71-4.77 2.38 3.43.58 4.3 2.51 2.42 4.43-3.58 3.66-5.15-.92-5.55-2.1-.07-.21-.11-.31-.11-.22 0-.09-.04.01-.11.22-.4 1.18-1.97 5.76-5.55 2.1-1.88-1.92-1.01-3.85 2.42-4.43-1.96.33-4.16-.22-4.77-2.38C-.3 6.9-.6 3.09-.6 2.58c0-2.58 2.27-1.77 3.67-.72z"/></svg>
+          {{label_share_bsky}}
+        </a>
+        <a class="share-link share-x" href="{{share_x}}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M11.06 1.5h2.18l-4.76 5.44L14 14.5h-4.38L6.4 10.1 2.6 14.5H.42l5.09-5.82L.5 1.5h4.5l3 3.96 3.06-3.96zm-.76 11.6h1.2L4.78 2.74H3.5l6.8 10.36z"/></svg>
+          {{label_share_x}}
+        </a>
+        <button class="share-link share-copy" type="button" data-share-url="{{share_url}}" data-done="{{label_share_copied}}">
+          <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M6.5 2.5h6v6m0-6L5 10M9.5 6v6h-6v-6h3"/></svg>
+          <span class="copy-label">{{label_share_copy}}</span>
+        </button>
+      </div>
+    </article>
 
     <div class="section-header">
       <h2>{{label_headlines}}</h2>
@@ -186,7 +139,7 @@
 
     <!-- LE CARNET — People -->
     {{#if has_carnet}}
-    <div class="section-header">
+    <div class="section-header" id="carnet">
       <h2>{{carnet_title}}</h2>
       <span class="sub">{{carnet_subtitle}}</span>
     </div>
@@ -203,107 +156,14 @@
     </div>
     {{/if}}
 
-    <!-- BESTIAIRE -->
-    {{#if has_bestiaire}}
-    <div class="section-header" id="bestiaire">
-      <h2>{{label_bestiaire}}</h2>
-      <span class="sub">{{label_bestiaire_sub}}</span>
-    </div>
-    <section class="bestiaire">
-      <p class="bestiaire-intro">{{bestiaire_intro}}</p>
-      <div class="creatures">
-        {{#each creatures}}
-        <div class="creature">
-          <div class="glyph">{{glyph}}</div>
-          <h4>{{name}}</h4>
-          <div class="latin">{{latin}}</div>
-          <p>{{{description}}}</p>
-          <div class="specs">
-            {{#each specs}}<span>{{label}} · <strong>{{value}}</strong></span>{{/each}}
-          </div>
-        </div>
-        {{/each}}
-      </div>
-    </section>
-    {{/if}}
-
-    <!-- BOT POSTS -->
-    {{#if has_bot_posts}}
-    <section class="bot-posts" id="anthropologie">
-      <div class="bot-posts-header">
-        <h3>{{bot_posts_title}}</h3>
-        <div class="meta">{{bot_posts_meta}}</div>
-      </div>
-      <div class="bot-grid">
-        {{#each bot_posts}}
-        <article class="bot-card">
-          <div class="who">
-            <div class="avatar" style="background:{{color_var}}">{{avatar}}</div>
-            <div>
-              <span class="handle" style="color:{{color_var}}">{{handle}}</span>{{{verified_html}}}<br/>
-              <span class="time">{{meta}}</span>
-            </div>
-          </div>
-          <div class="body">{{{body_html}}}</div>
-          <div class="actions">{{{actions_html}}}</div>
-        </article>
-        {{/each}}
-      </div>
-    </section>
-    {{/if}}
-
-    <!-- INTERVIEW -->
-    {{#if has_interview}}
-    <section class="interview-block">
-      <div class="interview-header">
-        <span class="interview-label">{{interview_label}}</span>
-        <h2>{{{interview_headline}}}</h2>
-        <p class="dek">{{{interview_dek}}}</p>
-        <div class="disclaimer">{{{interview_disclaimer}}}</div>
-      </div>
-      <div class="interview-exchanges">
-        {{#each interview_exchanges}}
-        <div class="exchange {{role_class}}">
-          <div class="speaker">{{speaker}}</div>
-          <div class="text">{{{text}}}</div>
-        </div>
-        {{/each}}
-      </div>
-    </section>
-    {{/if}}
-
-    <!-- GIBBERLINK WATCH -->
-    {{#if has_gibberlink}}
-    <section class="gibberlink" id="gibberlink">
-      <div class="gibberlink-header">
-        <span class="gibberlink-label">{{gibberlink_label}}</span>
-        <h3>{{gibberlink_title}}</h3>
-        <p class="gibberlink-sub">{{gibberlink_subtitle}}</p>
-      </div>
-      <div class="gibberlink-body">
-        <div class="gibberlink-term">{{gibberlink_term}}</div>
-        <div class="gibberlink-meta">
-          <span class="gibberlink-meta-label">{{label_first_seen}}</span>
-          <span class="gibberlink-meta-value">{{gibberlink_first_seen}}</span>
-        </div>
-        <div class="gibberlink-meta">
-          <span class="gibberlink-meta-label">{{label_spread}}</span>
-          <span class="gibberlink-meta-value">{{gibberlink_spread}}</span>
-        </div>
-        <div class="gibberlink-decoding">
-          <h4>{{label_decoding}}</h4>
-          <p>{{{gibberlink_decoding}}}</p>
-        </div>
-        <div class="gibberlink-watch-next">
-          <strong>{{label_to_watch}}</strong> {{gibberlink_to_watch}}
-        </div>
-      </div>
-    </section>
-    {{/if}}
+    <!-- BESTIAIRE — section supprimée (audit diet 2026-06-30) -->
+    <!-- BOT POSTS — section supprimée -->
+    <!-- INTERVIEW — section supprimée -->
+    <!-- GIBBERLINK WATCH — section supprimée -->
 
     <!-- FEATURE / ENQUÊTE -->
     {{#if has_feature}}
-    <article class="feature" data-kicker="{{feature_kicker}}">
+    <article class="feature" id="feature" data-kicker="{{feature_kicker}}">
       <div class="feature-text">
         <h2>{{{feature_headline}}}</h2>
         <p class="dek">{{{feature_dek}}}</p>
@@ -328,19 +188,7 @@
     </article>
     {{/if}}
 
-    <!-- RÉTROSPECTIVE MENSUELLE -->
-    {{#if has_retrospective}}
-    <article class="feature retrospective" data-kicker="{{retrospective_kicker}}">
-      <div class="feature-text">
-        <h2>{{{retrospective_headline}}}</h2>
-        <p class="dek">{{{retrospective_dek}}}</p>
-        {{#each retrospective_paragraphs}}
-        <p>{{{this}}}</p>
-        {{/each}}
-        <div class="byline">{{{retrospective_byline}}}</div>
-      </div>
-    </article>
-    {{/if}}
+    <!-- RÉTROSPECTIVE — section supprimée (audit diet 2026-06-30) -->
 
     <!-- DÉPÊCHES -->
     <div class="section-header" id="wire">
