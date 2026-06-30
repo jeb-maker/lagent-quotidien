@@ -11,7 +11,7 @@ import { buildContext } from './lib/edition-context.mjs';
 import { render } from './lib/template.mjs';
 import { writeAgentPages } from './lib/agents-pages.mjs';
 import { writeSiteAssets } from './lib/site-assets.mjs';
-import { editionToMarkdown, editionToText } from './lib/edition-markdown.mjs';
+import { editionToMarkdown, editionToText, editionToMinMarkdown, editionToJsonl } from './lib/edition-markdown.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -49,8 +49,14 @@ for (const lang of ['fr', 'en']) {
   await writeFile(join(editionDir, `${lang}.md`), md, 'utf8');
   const txt = editionToText(edition, week, lang);
   await writeFile(join(editionDir, `${lang}.txt`), txt, 'utf8');
-  console.log(`✓ Agent : ${join(editionDir, `${lang}.md`)} + .txt`);
+  const minMd = editionToMinMarkdown(edition, week, lang);
+  await writeFile(join(editionDir, `${lang}.min.md`), minMd, 'utf8');
+  console.log(`✓ Agent : ${join(editionDir, `${lang}.md`)} + .txt + .min.md`);
 }
+
+const jsonl = editionToJsonl(edition, week);
+await writeFile(join(editionDir, 'edition.jsonl'), jsonl, 'utf8');
+console.log(`✓ Agent : ${join(editionDir, 'edition.jsonl')}`);
 
 const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.json'), 'utf8'));
 const agentUrls = await writeAgentPages(__dirname, peopleData);
