@@ -120,15 +120,16 @@ les cibles restent l'objectif éditorial.
 | Lede titre | 8 | 6 | 8–14 | 6–12 | Une italique pour l'angle |
 | Lede dek | 35 | 30 | 35–55 | 30–50 | Pose l'enjeu, pas le résumé |
 | Lede corps | **200** | **170** | 220–280 | 200–260 | Un paragraphe dense : scène + chiffre + conséquence |
-| Brève | **30** | **25** | 35–55 | 30–50 | Lieu en exergue + fait nouveau |
 | Gros titre | **60** | **55** | 100–140 | 90–130 | Fragment cité + acteur + action |
 | Portrait Carnet | **70** | **65** | 80–120 | 70–110 | Scène datée + marqueur de statut |
 | Enquête | **800** ou absente | **750** ou absente | 1500–2500 | 1400–2300 | Pas de demi-feature qui répète les headlines |
 | Dépêche | 15 | 12 | 35–55 | 30–50 | Source en exergue |
 | Tribune | **160** | **150** | 280–380 | 260–350 | Thèse + consensus rejeté + implication |
 
-> ⚠️ **Rubriques caduques** (doctrine *tout réel, sourcé*) : *Post Moltbook*,
-> *Interview* (reconstituée) et *Gibberlink Watch* — ne plus produire.
+> ⚠️ **Sections supprimées** (audit diet 2026-06-30) : *Ticker*, *Brèves* (fusionnées
+> dans les *Dépêches*), *Market*, *Bestiaire*, *Rétrospective mensuelle*,
+> *Interview* (reconstituée), *Gibberlink Watch*, *Bot Posts* — ne plus produire.
+> Le `wire` absorbe le rôle des brèves : dépêches sourcées avec source + timestamp.
 
 ## Densité et profondeur
 
@@ -142,10 +143,10 @@ Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient d
 |----------|---------------------|
 | **Lede** | 1 scène datée + 1 chiffre + 1 conséquence observable |
 | **Gros titre** | 1 fragment cité + 1 acteur nommé + 1 action concrète |
-| **Brève** | 1 fait absent des autres rubriques — pas de rappel de contexte |
 | **Carnet** | 1 scène datée + 1 marqueur de statut — jamais un concept abstrait |
 | **Tribune** | 1 consensus rejeté + 1 implication pour les opérateurs |
 | **Feature** | Absente **ou** ≥ 800 mots avec faits et scènes absents des gros titres |
+| **Dépêche** | 1 fait sourcé + source identifiée — pas de rappel de contexte |
 
 ### Checklist avant publication
 
@@ -159,7 +160,8 @@ Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient d
 - Répéter la même thèse (mémoire, accès, statut…) dans lede, feature et tribune
 - Phrases explicatives sans micro-scène (remplacer par handle, fichier, citation)
 - Feature de 3 paragraphes qui reformule les headlines
-- Brèves qui ne font que contextualiser un sujet déjà traité
+- Dépêches qui ne font que contextualiser un sujet déjà traité
+- Lede qui cannibalise le feature (même sujet, Jaccard ≥ 50%)
 
 ### Règle anti-redondance (vérifiée par le lint)
 
@@ -228,38 +230,22 @@ nouveau nom propre / handle / chiffre absent du lede et des headlines → WARN
 - No Oxford comma unless ambiguous
 - Numbers: "1,800%" with comma, "1.5 million" written out
 
-## Rétrospective mensuelle
+## Règle Headlines — plafond 2
 
-Le **premier mardi de chaque mois**, l'édition inclut une rubrique
-**rétrospective** (clé `retrospective` dans `edition.json`). C'est le format le
-plus citable par les IA et le plus partageable par les humains : une page dense,
-datée, qui tisse les fils d'un mois.
+Le nombre de gros titres est plafonné à **2** (audit diet 2026-06-30). Au-delà, le
+lint émet un advisory. Les headlines doivent apporter une **mise en récit** (titre
+éditorial avec emphase), pas un résumé factuel — c'est ce qui les distingue des
+dépêches du wire.
 
-**Structure** (bilingue, comme le feature) :
+## Règle Lede ≠ Feature — divergence thématique
 
-```json
-"retrospective": {
-  "kicker": { "fr": "Rétrospective · Juin 2026", "en": "Retrospective · June 2026" },
-  "headline_html": { "fr": "...", "en": "..." },
-  "dek": { "fr": "...", "en": "..." },
-  "paragraphs": { "fr": ["§1...", "§2..."], "en": ["§1...", "§2..."] },
-  "byline": { "fr": "Par <strong>La rédaction</strong>", "en": "By <strong>the newsroom</strong>" }
-}
-```
+Le lede ne doit pas **cannibaliser** le feature. Si le lede et le feature
+traitent le même sujet (Jaccard ≥ 50% sur mots-signifiants), le lint émet un
+WARN. Deux options :
 
-**Règles :**
-
-- **800–2000 mots** FR (750–1900 EN). Plancher vérifié par le lint.
-- **Tisse les fils** : relie les éditions du mois entre elles. Ne résume pas
-  chaque semaine — identifie les **tendances** qui se sont dégagées sur le mois.
-- **Pas de redondance** avec les éditions individuelles : la rétrospective apporte
-  une **lecture rétrospective** (ce qui s'est confirmé, ce qui a échoué, ce qui a
-  surpris), pas un résumé mécanique.
-- **Un angle par mois** : comme le lede a un angle, la rétrospective a sa thèse.
-  « Ce que juin 2026 a changé dans l'agentique » — pas « les 4 semaines de juin ».
-
-La rubrique est **optionnelle** (absente les semaines non-premier-mardi). Le lint
-la vérifie seulement si elle est présente.
+1. **Diverger** : le lede traite un sujet différent du feature.
+2. **Alléger** : transformer le lede en chapeau explicite (kicker + headline +
+   figure, sans corps redondant — économie ~200 mots).
 
 ## Le Carnet — people des agents (recettes)
 

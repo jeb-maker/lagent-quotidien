@@ -12,8 +12,14 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-const REQUIRED_TOP = ['_meta', 'ticker', 'lede', 'breves', 'headlines', 'market', 'wire', 'tribune'];
-const OPTIONAL_TOP = ['carnet', 'feature', 'enquete', 'bestiaire', 'gibberlink', 'interview', 'bot_posts', 'retrospective'];
+// Schéma post-diet (audit 2026-06-30) :
+// - wire absorbe breves (section unique « dépêches sourcées »)
+// - ticker, market, bestiaire, enquete, bot_posts, interview, gibberlink,
+//   retrospective : DEPRECATED — ignorés silencieusement (éditions historiques)
+// - carnet et feature promus REQUIRED (cœur éditorial, présents 7/7)
+const REQUIRED_TOP = ['_meta', 'lede', 'headlines', 'wire', 'carnet', 'feature', 'tribune'];
+const OPTIONAL_TOP = [];
+const DEPRECATED_TOP = ['ticker', 'market', 'breves', 'bestiaire', 'enquete', 'gibberlink', 'interview', 'bot_posts', 'retrospective'];
 const META_KEYS = ['week', 'date_fr', 'date_en', 'edition_number', 'volume', 'bouclage'];
 
 function isBilingual(obj) {
@@ -42,7 +48,7 @@ export function validateEditionSchema(edition, week = '?') {
   }
 
   for (const key of Object.keys(edition)) {
-    if (!REQUIRED_TOP.includes(key) && !OPTIONAL_TOP.includes(key)) {
+    if (!REQUIRED_TOP.includes(key) && !OPTIONAL_TOP.includes(key) && !DEPRECATED_TOP.includes(key)) {
       errors.push(`${prefix} clé inconnue : ${key}`);
     }
   }
@@ -57,7 +63,8 @@ export function validateEditionSchema(edition, week = '?') {
     }
   }
 
-  if (!isArray(edition.ticker, 1)) errors.push(`${prefix} ticker : tableau non vide attendu`);
+  // Sections DEPRECATED : ticker, market, breves — ignorées silencieusement.
+  // Le wire absorbe le rôle des breves (dépêches sourcées + mise en récit).
 
   const lede = edition.lede;
   if (lede) {
@@ -69,13 +76,7 @@ export function validateEditionSchema(edition, week = '?') {
     }
   }
 
-  if (!isArray(edition.breves, 1)) errors.push(`${prefix} breves : au moins une brève`);
-  else {
-    edition.breves.forEach((b, i) => {
-      if (!isBilingual(b.title)) errors.push(`${prefix} breves[${i}].title : bilingue attendu`);
-      if (!isBilingual(b.body)) errors.push(`${prefix} breves[${i}].body : bilingue attendu`);
-    });
-  }
+  // breves : DEPRECATED (fusionné dans wire). Validation retirée.
 
   if (!isArray(edition.headlines, 1)) errors.push(`${prefix} headlines : au moins un gros titre`);
   else {
@@ -85,20 +86,7 @@ export function validateEditionSchema(edition, week = '?') {
     });
   }
 
-  const market = edition.market;
-  if (market) {
-    if (!isBilingual(market.title)) errors.push(`${prefix} market.title : bilingue attendu`);
-    if (!isArray(market.rows, 1)) errors.push(`${prefix} market.rows : au moins une ligne`);
-    else {
-      market.rows.forEach((r, i) => {
-        if (!isNonEmptyString(r.ticker)) errors.push(`${prefix} market.rows[${i}].ticker manquant`);
-        if (!isBilingual(r.label)) errors.push(`${prefix} market.rows[${i}].label : bilingue attendu`);
-        if (!isNonEmptyString(r.value)) errors.push(`${prefix} market.rows[${i}].value manquant`);
-        if (!['up', 'down'].includes(r.direction)) errors.push(`${prefix} market.rows[${i}].direction : up|down`);
-      });
-    }
-    if (!isArray(market.boards, 1)) errors.push(`${prefix} market.boards : au moins un panneau`);
-  }
+  // market : DEPRECATED. Validation retirée.
 
   if (!isArray(edition.wire, 1)) errors.push(`${prefix} wire : au moins une dépêche`);
   else {
@@ -120,27 +108,21 @@ export function validateEditionSchema(edition, week = '?') {
     if (!tribune.author?.name) errors.push(`${prefix} tribune.author.name manquant`);
   }
 
-  if (edition.carnet) {
+  if (!edition.carnet) errors.push(`${prefix} carnet : section obligatoire`);
+  else {
     if (!isBilingual(edition.carnet.title)) errors.push(`${prefix} carnet.title : bilingue attendu`);
     if (!isArray(edition.carnet.people, 1)) errors.push(`${prefix} carnet.people : au moins une entrée`);
   }
 
-  const feature = edition.feature ?? edition.enquete;
-  if (feature?.paragraphs) {
+  const feature = edition.feature;
+  if (!feature) errors.push(`${prefix} feature : section obligatoire`);
+  else if (feature.paragraphs) {
     if (!isArray(feature.paragraphs.fr, 1) || !isArray(feature.paragraphs.en, 1)) {
       errors.push(`${prefix} feature.paragraphs : { fr, en } non vide attendu`);
     }
   }
 
-  if (edition.retrospective) {
-    const retro = edition.retrospective;
-    if (!isBilingual(retro.headline_html)) errors.push(`${prefix} retrospective.headline_html : bilingue attendu`);
-    if (!isBilingual(retro.dek)) errors.push(`${prefix} retrospective.dek : bilingue attendu`);
-    const paras = retro.paragraphs;
-    if (!paras || !isArray(paras.fr, 1) || !isArray(paras.en, 1)) {
-      errors.push(`${prefix} retrospective.paragraphs : { fr: string[], en: string[] } non vide attendu`);
-    }
-  }
+  // retrospective : DEPRECATED. Validation retirée.
 
   return errors;
 }

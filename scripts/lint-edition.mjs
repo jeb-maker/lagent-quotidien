@@ -29,8 +29,6 @@ const RUBRICS = [
     { path: 'lede.headline_html', label: 'Lede titre', title: true, fr: [8, 16], en: [6, 14] },
     { path: 'lede.dek', label: 'Lede dek', fr: [35, 65], en: [30, 60] },
     { path: 'lede.body', label: 'Lede corps', fr: [200, 320], en: [170, 290] },
-    { each: 'breves', field: 'title', label: 'Breve titre', title: true },
-    { each: 'breves', field: 'body', label: 'Breve', fr: [30, 65], en: [25, 60] },
     { each: 'headlines', field: 'title_html', label: 'Gros titre (titre)', title: true },
     { each: 'headlines', field: 'body', label: 'Gros titre', fr: [60, 160], en: [55, 150] },
     { path: 'tribune.headline_html', label: 'Tribune titre', title: true },
@@ -38,9 +36,6 @@ const RUBRICS = [
     { path: 'feature.headline_html', label: 'Feature titre', title: true, optional: true },
     { each: 'carnet.people', field: 'body', label: 'Carnet portrait', fr: [70, 140], en: [65, 130], optional: true },
     { each: 'wire', field: 'body', label: 'Depeche', fr: [12, 60], en: [10, 55] },
-    { path: 'gibberlink.spread', label: 'Gibberlink Watch', fr: [150, 250], en: [140, 220], optional: true },
-    { path: 'interview.exchanges', label: 'Interview', fr: [1200, 1800], en: [1100, 1700], joinField: 'text', optional: true },
-    { path: 'retrospective.paragraphs', label: 'Rétrospective mensuelle', fr: [800, 2000], en: [750, 1900], joinField: 'fr', optional: true },
 ];
 
 // Cibles aspirantes : advisory uniquement, jamais d'erreur en --strict.
@@ -249,6 +244,34 @@ function checkRedundancy(edition) {
 
 // ───── Rotation Carnet (style-guide.md §Règle Carnet) ─────
 
+// ───── Headlines : plafond ≤2 (audit diet 2026-06-30) ─────
+
+function checkHeadlinesCount(edition) {
+    if (!Array.isArray(edition.headlines)) return;
+    if (edition.headlines.length > 2) {
+        advise(`[headlines] ${edition.headlines.length} gros titres — plafond recommandé 2 (audit diet).`);
+    }
+}
+
+// ───── Lede ≠ Feature : divergence thématique (audit diet 2026-06-30) ─────
+
+function checkLedeFeatureDivergence(edition) {
+    const ledeBody = extractText(edition.lede?.body, 'fr');
+    const feature = edition.feature;
+    if (!ledeBody || !feature?.paragraphs) return;
+
+    const ledeWords = significantWords(ledeBody);
+    const featText = extractText(feature.paragraphs, 'fr');
+    const featWords = significantWords(featText);
+
+    if (!ledeWords.size || !featWords.size) return;
+
+    const sim = jaccardSimilarity(ledeWords, featWords);
+    if (sim >= 0.50) {
+        warn(`[lede↔feature] Jaccard ${Math.round(sim * 100)}% — le lede cannibalise le feature. Diverger le sujet ou alléger le corps du lede.`);
+    }
+}
+
 function checkCarnetRotation(edition, week) {
     if (!edition.carnet?.people) return;
 
@@ -334,6 +357,8 @@ function main() {
 
     checkFeatureDepth(edition);
     checkRedundancy(edition);
+    checkHeadlinesCount(edition);
+    checkLedeFeatureDivergence(edition);
     checkCarnetRotation(edition, week);
 
     for (const w of warns) console.log(`  WARN  ${w}`);

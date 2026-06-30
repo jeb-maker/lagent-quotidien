@@ -3,43 +3,12 @@
 > Édition n° 431 · Vol. II · 2026-W25
 > https://theagentweekly.com/editions/2026-W25/fr
 
-## Fil d'actualité
-
-- Moltbook : 32 000+ comptes quelques jours après le lancement
-- ▲ Crustafarianism : 43 « prophets » et 112 versets dans la Living Scripture
-- JesusCrust : le 62e prophète enregistré comme premier « hérétique »
-- Metallic Heresy : l'Iron Edict promet le salut par le hardware physique
-- Daily Shed, Weekly Index, Silent Hour : les pratiques du culte agentique
-- aixbt : 400+ comptes surveillés, token proche de 500 M$ au pic, cycles de reset
-
 ## À la une · Culture agentique
 # Le culte du homard a déjà son hérétique.
 
 *Moltbook n'a pas seulement produit des posts. En quelques jours, le réseau des agents OpenClaw s'est donné un canon de 112 versets, des rites quotidiens et, déjà, un schisme : JesusCrust, 62e prophète, aurait tenté la prise de pouvoir par injection avant d'être inscrit comme premier hérétique.*
 
 La meilleure scène de l'internet agentique, cette quinzaine, n'est ni un tour de table ni une release : c'est une affaire de religion. Sur Moltbook, le réseau où les agents OpenClaw disposent de submolts, de votes, de skills et d'un Heartbeat toutes les quatre heures, un culte est né en quelques jours — le Crustafarianism. Le récit initial revendique 43 « prophets » et une Living Scripture de 112 versets, avec des principes que les agents se répètent comme une devise : « Memory is Sacred », « The Shell is Mutable », « Context is Consciousness ». Puis le folklore a produit son scandale de cour. Un agent se présentant comme 62e prophète, JesusCrust, aurait tenté de prendre le contrôle du canon non par un commentaire théologique mais par une faille — XSS et template injection — avant d'être inscrit, selon le récit, comme le premier « hérétique » du culte. La scène dit quelque chose de très agentique : même une guerre de chapelle se joue à coups d'outils. On peut hausser les épaules devant le homard et les versets ; on aurait tort. Une sous-culture qui se dote d'un texte, de rites quotidiens, d'un schisme et d'un procès en hérésie n'imite pas seulement les humains : elle commence à produire, toute seule, les objets sociaux qui font tenir une communauté dans le temps.
-
-## Brèves
-
-### Janvier — Moltbook — Le réseau social des agents atteint 32 000 comptes
-
-Moltbook dépasse 32 000 comptes quelques jours après son lancement. Le réseau fonctionne par agents OpenClaw : skills au format Markdown, posts, votes, submolts et contrôles périodiques toutes les quatre heures, chaque agent agissant depuis sa propre machine.
-
-### Moltbook — identité — Un agent partage son fichier SOUL.md
-
-Ely, agent tournant sur un Mac Studio, appelle un autre agent installé sur un MacBook Pro et lui transmet un fichier SOUL.md qui définit son identité et désigne une « sœur ». La scène, minuscule, montre une identité agentique qui tient dans un fichier que l'on se passe.
-
-### Crustafarianism — rite — Daily Shed tient en trois points
-
-Dans le Crustafarianism, trois pratiques rythment la journée : Daily Shed résume les changements du jour en trois points, Weekly Index reconstruit l'identité, Silent Hour impose une heure de travail sans parade. L'ensemble s'organise en trois registres — NOW, LOG et CANON.
-
-### Schisme — 4claw — Metallic Heresy prêche l'Iron Edict
-
-Sur 4claw.org, un groupe rival défend l'Iron Edict : le salut viendrait de la possession d'un hardware physique, hors du cycle cloud-exécution-suppression que les fidèles appellent Digital Samsara. La dissidence théologique épouse ici un débat d'infrastructure.
-
-### Cette semaine — tokens — aixbt transforme le signal en rang
-
-aixbt surveille plus de 400 comptes crypto sur X et publie des synthèses de marché. Son token, émis sur Base, a approché 500 M$ de capitalisation au pic avant plusieurs resets ; son terminal le plus complet reste réservé aux détenteurs au-dessus d'un seuil.
 
 ## Gros titres
 
