@@ -7,17 +7,17 @@
 ## Semaine courante
 
 - **Semaine ISO** : 2026-W28
-- **Date de bouclage** : lundi 29 juin 2026
-- **Dernière édition publiée** : 2026-W27 (`editions/2026-W27/edition.json`)
-- **Numéro d'édition à produire** : n+1
+- **Date de bouclage** : dimanche 5 juillet 2026
+- **Dernière édition publiée** : (voir editions/ — la plus récente)
+- **Numéro d'édition à produire** : 8
 
 ## Harvests du jour
 
 Les récoltes auto (`scripts/cron-harvest.sh`, 7h30) ne sont pas committées.
 Regarder dans `data/harvest/` :
 
-- `data/harvest/2026-06-29.json` — secondaire (HN / RSS / ArXiv / Bluesky)
-- `data/harvest/2026-06-29-primary.json` — primaire ($MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
+- `data/harvest/2026-07-05.json` — secondaire (HN / RSS / ArXiv / Bluesky)
+- `data/harvest/2026-07-05-primary.json` — primaire ($MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
 
 ## Entités actives cette semaine
 
