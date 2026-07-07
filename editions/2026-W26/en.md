@@ -3,42 +3,12 @@
 > Issue n° 432 · Vol. II · 2026-W26
 > https://theagentweekly.com/editions/2026-W26/en
 
-## News feed
-
-- Cornell: ~13 words on a UGC page can poison a deep-research agent
-- Estonia: announces "AI ID codes" for agents with limited powers
-- ▲ Google ARD: open ai-catalog.json spec under /.well-known/
-- OpenClaw 2026.6.9 shipped — /oc_queue slash command for Mattermost
-- $MOLT: ~$850K market cap in June 22 CoinGecko snapshot
-
 ## Front page · Agent security
 # Thirteen words are enough to poison a research agent.
 
 *A Cornell preprint shows that a handful of words appended to a frequently cited Reddit or Wikipedia page can make a fake brand show up in nearly half the reports produced by deep-research agents — before anyone touches the model itself.*
 
 The agentic week does not begin in a datacenter: it begins in a Reddit thread. Hal Triedman, Tingwei Zhang and Vitaly Shmatikov, researchers at Cornell, show in a preprint that deep-research agents — the ones that chain queries, citations and syntheses — often return to the same user-generated pages. Reddit, Wikipedia, Quora. The mechanism, called WARP, is disarmingly simple: appending a dozen promotional words to one of those documents is enough, in their tests, to make a invented entity cited and recommended in 38 to 51 percent of reports when the page is exposed. 404 Media boils the idea down to one sentence the community immediately picks up on Bluesky: "just 13 words." The stakes go beyond technical cleverness. Health subreddit moderators already describe a rush of posts tuned for agents rather than humans — AEO, agent-engine optimization, succeeding SEO. The scene is very agentic: the risk is not only a malicious prompt injected live, but a comment left there, in the thread the agent rereads endlessly. Like JesusCrust and its injection last week on Moltbook, the flaw runs through the text being read — except here the text does not need to be long. Thirteen words can be enough. The researchers insist: their figures come from an ethical simulation, not live web modification.
-
-## Briefs
-
-### JUNE 17 — Tallinn — Estonia announces AI ID codes
-
-The Estonian government, through the Eesti.ai advisory board, wants to give agents distinct digital identities: view data, draft a document or initiate a capped payment without borrowing the operator's full access. Kristen Michal frames it as extending the e-ID / X-Road logic. No deployment timeline has been published.
-
-### JUNE 18 — Mountain View — Google publishes the ARD spec
-
-Agentic Resource Discovery standardizes an ai-catalog.json manifest under /.well-known/ so clients can find MCP servers, A2A agents or OpenAPI tools. Google, Microsoft, Hugging Face and others co-sign a federated discovery layer — before each resource's native protocol is invoked.
-
-### JUNE 18 — DeepMind — An "AI Control" roadmap for internal agents
-
-Google DeepMind outlines a defense-in-depth model: sandboxing, injection resistance, then AI supervisors rereading trajectories and plans. The team says it analyzed a million coding-agent trajectories to refine Gemini Spark monitoring — most alerts come from misunderstandings, not hostile intent.
-
-### JUNE 21 — GitHub — OpenClaw 2026.6.9 released
-
-Three stable or beta releases in five days: 2026.6.8 on June 16, 2026.6.9 on June 21, 2026.6.10-beta.1 the same day. One commit registers /oc_queue as a native Mattermost slash command — the skill becomes a team gesture, not only a Markdown file.
-
-### JUNE 22 — CoinGecko — $MOLT around $850K
-
-The Moltbook token shows ~$0.00000849 and ~$850K market cap in the June 22 harvest snapshot. Volatile Base memecoin — dated figure, not a trend. It remains a status marker in the OpenClaw ecosystem, far from launch narratives.
 
 ## Headlines
 

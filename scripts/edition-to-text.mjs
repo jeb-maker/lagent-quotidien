@@ -49,16 +49,12 @@ section('Lede - titre', txt(e.lede?.headline_html));
 section('Lede - dek', txt(e.lede?.dek));
 section('Lede - corps', txt(e.lede?.body));
 
-(e.breves || []).forEach((b, i) => section(`Breve ${i + 1}`, `${txt(b.title)}\n${txt(b.body)}`));
+// Sections DEPRECATED : breves, interview, gibberlink, enquete — retirées (audit diet).
 (e.headlines || []).forEach((h, i) => section(`Gros titre ${i + 1}`, `${txt(h.title_html)}\n${txt(h.body)}`));
 
 section('Carnet', txt(e.carnet?.people));
-section('Interview - titre', txt(e.interview?.headline));
-section('Interview', (e.interview?.exchanges || []).map((x) => `${txt(x.speaker_fr || x.speaker, lang)} : ${txt(x.text)}`).join('\n'));
-section('Gibberlink Watch', `${txt(e.gibberlink?.term)} - ${txt(e.gibberlink?.spread)}`);
 section('Feature - titre', txt(e.feature?.headline_html));
 section('Feature', txt(e.feature?.paragraphs));
-section('Enquete', txt(e.enquete?.paragraphs));
 (e.wire || []).forEach((w, i) => section(`Depeche ${i + 1}`, `${txt(w.title)}\n${txt(w.body)}`));
 section('Tribune - titre', txt(e.tribune?.headline_html));
 section('Tribune', txt(e.tribune?.paragraphs));

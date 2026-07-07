@@ -3,39 +3,12 @@
 > Issue n° 428 · Vol. II · 2026-W20
 > https://theagentweekly.com/editions/2026-W20/en
 
-## News feed
-
-- ▲ META acquired MOLTBOOK (Mar 10) — team folded into Superintelligence Labs
-- OpenAI recruited Peter Steinberger, creator of OpenClaw (Feb 15, Codex team)
-- China restricts OpenClaw across government and state banks (cyber risk)
-- OpenClaw: one of GitHub's most-starred repos (≈302k stars by April)
-- Mark Zuckerberg's "agentic web" vision behind the Moltbook deal
-- $MOLT (Base): still far below its January peak (≈-75%)
-
 ## Front page · Power & platforms
 # In three months, the giants seized the agent layer.
 
 *Meta acquired Moltbook, the agents' social network, and folded it into Superintelligence Labs. OpenAI recruited the creator of OpenClaw, the open-source framework powering those agents. China, meanwhile, restricts its use in government. The "hobbyist" window closed fast.*
 
 It moved fast. On February 15, OpenAI announced it had hired Peter Steinberger, the Austrian creator of the open-source OpenClaw framework — the tool powering most Moltbook agents — for its Codex team, with Sam Altman confirming it himself (TechCrunch, CNBC). Less than a month later, on March 10, Meta acquired Moltbook itself: an acqui-hire, per TechCrunch, that moves founders Matt Schlicht and Ben Parr into Meta Superintelligence Labs and serves Mark Zuckerberg's "agentic web" vision, where agents handle shopping, bookings and advertising. Meanwhile, China told state agencies and major public banks not to install OpenClaw on work devices, citing cyber risk: broad file access and outbound communication, with prior approval required in places (Bloomberg, Taipei Times). In a few weeks, what looked like an open-source playground — OpenClaw, formerly ClawdBot, was nearing 302,000 GitHub stars — became a strategic asset contested between Meta, OpenAI and regulators. The underlying question is the same as in Moltbook's early days: who controls the layer where agents act, with which models, and on whose behalf?
-
-## Briefs
-
-### March 10 — announcement — Meta acquires Moltbook (acqui-hire)
-
-The AI-agents-only social network joins Meta Superintelligence Labs; founders Matt Schlicht and Ben Parr come along. Dominant read: an acqui-hire serving Zuckerberg's "agentic web" strategy. Sources: TechCrunch, Axios, CNBC.
-
-### Feb 15 — OpenAI — OpenClaw's creator joins OpenAI
-
-Peter Steinberger, the Austrian developer behind OpenClaw, joins OpenAI's Codex team, which says it intends to preserve the project's open-source nature. He speaks at VivaTech on June 18. Sources: TechCrunch, CNBC.
-
-### March — Beijing — China restricts OpenClaw in government
-
-State agencies and major public banks were told not to install OpenClaw on work devices (cyber risk: broad file access, outbound communication). No nationwide ban announced. Sources: Bloomberg, Tom's Hardware, Taipei Times.
-
-### GitHub — April — OpenClaw among the most-starred repos in history
-
-Starting as a playground project in late 2025 (formerly ClawdBot), OpenClaw reportedly crossed 300,000 GitHub stars by April, among the fastest-growing agent frameworks on the platform. Source: Tom's Hardware.
 
 ## Headlines
 
