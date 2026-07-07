@@ -3,42 +3,12 @@
 > Édition n° 432 · Vol. II · 2026-W26
 > https://theagentweekly.com/editions/2026-W26/fr
 
-## Fil d'actualité
-
-- Cornell : ~13 mots sur une page UGC peuvent empoisonner un agent deep research
-- Estonie : annonce de « AI ID codes » pour agents à pouvoirs limités
-- ▲ Google ARD : spec ouverte ai-catalog.json sous /.well-known/
-- OpenClaw 2026.6.9 publié — slash command /oc_queue pour Mattermost
-- $MOLT : ~850 k$ de capitalisation au snapshot CoinGecko du 22 juin
-
 ## À la une · Sécurité agentique
 # Treize mots suffisent pour empoisonner un agent de recherche.
 
 *Une prépublication Cornell montre qu'une poignée de mots ajoutés à une page Reddit ou Wikipedia fréquemment citée peut faire apparaître une marque fictive dans près de la moitié des rapports produits par des agents de deep research — avant même qu'on attaque le modèle.*
 
 La semaine agentique ne commence pas dans un datacenter : elle commence dans un fil Reddit. Hal Triedman, Tingwei Zhang et Vitaly Shmatikov, chercheurs à Cornell, montrent dans une prépublication que les agents de deep research — ceux qui enchaînent requêtes, citations et synthèses — retournent souvent vers les mêmes pages à contenu utilisateur. Reddit, Wikipedia, Quora. Le mécanisme, baptisé WARP, est d'une simplicité déconcertante : ajouter une quinzaine de mots promotionnels à l'un de ces documents suffit, dans leurs tests, à faire citer et recommander une entité inventée dans 38 à 51 % des rapports lorsque la page est exposée. 404 Media résume l'idée en une phrase que la communauté reprend aussitôt sur Bluesky : « just 13 words ». L'enjeu dépasse la prouesse technique. Des modérateurs de subreddits santé décrivent déjà une ruée de posts calibrés pour les agents plutôt que pour les humains — l'AEO, l'optimisation pour moteurs d'agents, succède au SEO. La scène est très agentique : le risque ne vient pas seulement d'un prompt malveillant injecté en direct, mais d'un commentaire laissé là, dans le fil que l'agent relit sans cesse. Comme JesusCrust et son injection la semaine dernière sur Moltbook, la faille passe par le texte lu — sauf qu'ici le texte n'a pas besoin d'être long. Treize mots peuvent suffire. Les chercheurs insistent : leurs chiffres viennent d'une simulation éthique, pas d'une modification du web live.
-
-## Brèves
-
-### 17 JUIN — Tallinn — L'Estonie annonce des AI ID codes
-
-Le gouvernement estonien, via le conseil Eesti.ai, veut attribuer aux agents des identités numériques distinctes : voir des données, préparer un document ou initier un paiement plafonné, sans emprunter l'accès complet de l'opérateur. Kristen Michal parle de prolonger la logique e-ID / X-Road. Aucun calendrier de déploiement n'est publié.
-
-### 18 JUIN — Mountain View — Google publie la spec ARD
-
-Agentic Resource Discovery standardise un manifeste ai-catalog.json sous /.well-known/ pour que les clients trouvent MCP, agents A2A ou outils OpenAPI. Google, Microsoft, Hugging Face et d'autres co-signent une couche de découverte fédérée — avant l'appel au protocole natif de chaque ressource.
-
-### 18 JUIN — DeepMind — Une roadmap « AI Control » pour agents internes
-
-Google DeepMind décrit un modèle defense-in-depth : sandboxing, résistance aux injections, puis superviseurs IA qui relisent trajectoires et plans. L'équipe dit avoir analysé un million de trajectoires d'agents codeurs pour affiner le monitoring de Gemini Spark — la plupart des alertes viennent de malentendus, pas d'intention hostile.
-
-### 21 JUIN — GitHub — OpenClaw 2026.6.9 en release
-
-Trois versions stables ou beta en cinq jours : 2026.6.8 le 16 juin, 2026.6.9 le 21, 2026.6.10-beta.1 le même jour. Un commit enregistre /oc_queue comme slash command Mattermost native — le skill devient geste d'équipe, pas seulement fichier Markdown.
-
-### 22 JUIN — CoinGecko — $MOLT autour de 850 k$
-
-Le token Moltbook affiche ~0,00000849 USD et ~850 k$ de capitalisation dans le snapshot harvest du 22 juin. Memecoin volatil sur Base — chiffre daté, pas tendance. Il reste un marqueur de statut dans l'écosystème OpenClaw, loin des récits de lancement.
 
 ## Gros titres
 

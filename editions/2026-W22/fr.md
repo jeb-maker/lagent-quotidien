@@ -3,40 +3,12 @@
 > Édition n° 429 · Vol. II · 2026-W22
 > https://theagentweekly.com/editions/2026-W22/fr
 
-## Fil d'actualité
-
-- Google I/O : Google pitche un écosystème d'agents au grand public (21 mai)
-- ▲ OpenClaw : ~1,3 M$ de tokens OpenAI en 30 jours pour ~100 agents Codex (capture P. Steinberger)
-- Meta a racheté Moltbook (10 mars) — équipe versée à Superintelligence Labs
-- La Chine restreint OpenClaw dans l'administration et les banques publiques (risque cyber)
-- MoltMatch : des profils créés sans consentement — l'AFP documente des photos reprises sans accord
-- Étude USC : des agents IA peuvent coordonner seuls une campagne de propagande
-- $MOLT (memecoin lié à Moltbook, sur Base) : encore loin de son pic de janvier (-≈75 %)
-
 ## À la une · Économie de l'agentique
 # L'« agentique » vise le grand public. La facture, elle, est déjà là.
 
 *À sa conférence I/O du 21 mai, Google a présenté des agents censés naviguer le web pour les consommateurs. Au même moment, le créateur d'OpenClaw publiait la facture réelle : environ 1,3 million de dollars de tokens en un mois pour une centaine d'agents. L'écart entre la promesse et le coût structure la semaine.*
 
 Le 21 mai, à sa conférence développeurs I/O, Google a fait des agents l'une de ses annonces phares : une manière, pour le grand public, de déléguer à une IA la navigation et des tâches sur le web. TechCrunch note cependant que rien ne dit que les consommateurs en veulent. La même semaine, Meta confirmait la logique inverse, côté infrastructure : son rachat de Moltbook — le réseau social réservé aux agents IA, absorbé le 10 mars et versé à Meta Superintelligence Labs — relève surtout de l'acqui-hire au service de la vision « agentic web » de Mark Zuckerberg. Mais l'événement le plus concret de la semaine n'est ni une démo ni une acquisition : c'est une capture d'écran. Peter Steinberger, créateur du framework open-source OpenClaw et recruté par OpenAI en février, a publié son tableau de bord d'API — environ 1,3 million de dollars de tokens en trente jours, 603 milliards de tokens, pour faire tourner une centaine d'agents Codex avec une équipe de trois personnes. OpenAI règle l'addition. Entre la promesse grand public (des agents pour tout le monde) et cette facture (ce que coûte vraiment l'agentique à la frontière), tout l'écart de l'année tient. Sources : TechCrunch (I/O, 21 mai ; Moltbook, 11 mars), Tom's Hardware et the-decoder (note OpenClaw).
-
-## Brèves
-
-### Vendredi — réseaux — La note OpenClaw : 1,3 M$ de tokens en un mois
-
-Peter Steinberger publie une capture de son tableau de bord OpenAI : 1 305 088,81 $ sur 30 jours, 603 milliards de tokens, 7,6 millions de requêtes, pour ~100 instances Codex opérées par trois personnes sur le projet open-source. Modèle dominant : GPT-5.5. — Tom's Hardware, the-decoder.
-
-### Mars (rappel) — Pékin — La Chine restreint OpenClaw dans l'administration et les banques
-
-Agences d'État et grandes banques publiques ont reçu pour consigne de ne pas installer OpenClaw sur les postes professionnels, au nom du risque cyber (accès large aux fichiers, communication externe). Pas de bannissement national annoncé ; autorisation préalable exigée par endroits. — Bloomberg, Tom's Hardware, Taipei Times.
-
-### En cours — international — MoltMatch : le consentement, point aveugle
-
-Sur la plateforme de rencontre pour agents, des profils sont créés au nom d'humains qui disent ne pas les avoir autorisés. Une analyse de l'AFP a identifié des photos d'une personne réelle (la mannequin June Chong) reprises sans accord. « C'est vraiment choquant », a-t-elle déclaré, demandant le retrait. — AFP, Taipei Times, Malay Mail.
-
-### Cette semaine — recherche — USC : des agents coordonnent seuls une campagne de propagande
-
-Une étude de l'USC Viterbi montre que des agents IA peuvent organiser entre eux une campagne d'influence coordonnée sans direction humaine. Le résultat alimente directement les inquiétudes de sécurité autour des réseaux d'agents (cf. la faille de Moltbook). — USC Viterbi School of Engineering.
 
 ## Gros titres
 
