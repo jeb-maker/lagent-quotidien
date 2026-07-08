@@ -21,359 +21,183 @@
 <meta property="og:image" content="{{og_image}}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="{{og_image_alt}}" />
 <meta property="article:published_time" content="{{published_time}}" />
-<meta property="article:section" content="{{og_site_name}}" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="{{title}}" />
-<meta name="twitter:description" content="{{description}}" />
-<meta name="twitter:image" content="{{og_image}}" />
-<meta name="twitter:image:alt" content="{{og_image_alt}}" />
 
 <script type="application/ld+json">{{{json_ld}}}</script>
 
-{{#if cf_analytics_token}}
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{{cf_analytics_token}}}"}'></script>
-{{/if}}
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{cf_analytics_token}}"}'></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link id="fonts-link" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500;700&family=Merriweather:wght@400;900&display=swap">
-<script>
-(function(){
-  var th=localStorage.getItem('theme')||'light';
-  var p=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
-  if(th==='dark'||(th==='light'&&p)){th='dark';}
-  document.documentElement.setAttribute('data-theme',th);
-  var themeOrder=['light','dark','terminal','swiss','glitch','sepia','newspaper','nord','retro','paper'];
-  var fonts={'light':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','dark':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','terminal':'JetBrains+Mono:wght@400;500;700','swiss':'Inter:wght@400;600;700|JetBrains+Mono:wght@400;500;700','glitch':'Orbitron:wght@400;700;900|Space+Grotesk:wght@300;400;600|JetBrains+Mono:wght@400;500;700','sepia':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','newspaper':'Merriweather:wght@400;900|JetBrains+Mono:wght@400;500;700','nord':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','retro':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','paper':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800'};
-  var fl=document.getElementById('fonts-link');
-  if(fl&&fonts[th]){fl.href='https://fonts.googleapis.com/css2?family='+fonts[th].replace(/\|/g,'&family=')+'&display=swap';}
-  window.__themeOrder=themeOrder;
-  window.__themeCurrent=th;
-  window.__fontsMap=fonts;
-})();
-</script>
 <style>{{{CSS}}}</style>
 </head>
 <body>
-
 <div class="container">
+<div id="progress-bar"></div>
 
-  <div id="progress-bar"></div>
+<header class="masthead" id="top">
+<div class="masthead-meta">
+<div class="left">
+<span>{{date}}</span>
+<span>{{label_edition}} <strong>{{edition_number}}</strong></span>
+<span>Vol. {{volume}}</span>
+</div>
+<div class="right">
+<span class="reader-stamp">{{label_reader_stamp}}</span>
+<span class="edition-nav">
+{{#if has_prev_edition}}<a href="{{prev_edition_url}}">{{label_prev_edition}}</a>{{/if}}
+<a href="{{archives_url}}">{{label_archives}}</a>
+{{#if has_next_edition}}<a href="{{next_edition_url}}">{{label_next_edition}}</a>{{/if}}
+</span>
+<span class="lang-switch" role="group" aria-label="{{label_lang_switch}}">
+<a href="{{lang_fr_url}}"{{#if is_fr}} class="active" aria-current="true"{{/if}}>FR</a><span class="sep" aria-hidden="true">|</span><a href="{{lang_en_url}}"{{#if is_en}} class="active" aria-current="true"{{/if}}>EN</a>
+</span>
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="{{label_theme_toggle}}"></button>
+<div id="theme-toast" class="theme-toast" role="status" aria-live="polite"></div>
+</div>
+</div>
+<div class="nameplate">
+<div class="nameplate-kicker">{{label_kicker}}</div>
+<h1>{{{masthead_title_html}}}</h1>
+<div class="nameplate-rule">{{label_volume_no}}</div>
+</div>
+<nav class="sections" aria-label="{{label_sections}}">
+<a href="#top" class="active">{{label_nav_front}}</a>
+<a href="#carnet">{{label_nav_carnet}}</a>
+<a href="#feature">{{label_nav_feature}}</a>
+<a href="#tribune">{{label_nav_oped}}</a>
+<a href="#wire">{{label_nav_wire}}</a>
+</nav>
+</header>
 
-  <header class="masthead" id="top">
-    <div class="masthead-meta">
-      <div class="left">
-        <span>{{date}} <strong></strong></span>
-        <span>{{label_edition}} <strong>{{edition_number}}</strong></span>
-        <span>Vol. {{volume}}</span>
-      </div>
-      <div class="right">
-        <span class="reader-stamp">{{label_reader_stamp}}</span>
-        <span class="edition-nav">
-          {{#if has_prev_edition}}<a href="{{prev_edition_url}}">{{label_prev_edition}}</a>{{/if}}
-          <a href="{{archives_url}}">{{label_archives}}</a>
-          {{#if has_next_edition}}<a href="{{next_edition_url}}">{{label_next_edition}}</a>{{/if}}
-        </span>
-        <span class="lang-switch" role="group" aria-label="{{label_lang_switch}}">
-          <a href="{{lang_fr_url}}"{{#if is_fr}} class="active" aria-current="true"{{/if}}>FR</a><span class="sep" aria-hidden="true">|</span><a href="{{lang_en_url}}"{{#if is_en}} class="active" aria-current="true"{{/if}}>EN</a>
-        </span>
-        <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="{{label_theme_toggle}}">
-        </button>
-        <div id="theme-toast" class="theme-toast" role="status" aria-live="polite"></div>
-      </div>
-    </div>
+<main>
+<article class="lede">
+<div class="kicker"><span class="dot"></span> {{lede_kicker}}</div>
+<h1>{{{lede_headline_html}}}</h1>
+<p class="dek">{{{lede_dek}}}</p>
+<div class="byline">{{{lede_byline}}}</div>
+<div class="agentic-byline">
+<span>{{label_desk_lineup}}:</span>
+<span class="badge"><span class="dot"></span> Veille</span>
+<span class="badge"><span class="dot"></span> Potins</span>
+<span class="badge"><span class="dot"></span> Vérif</span>
+<span class="badge"><span class="dot"></span> Archiv</span>
+<span class="badge"><span class="dot"></span> Édit</span>
+<span class="badge"><span class="dot"></span> Juge</span>
+</div>
+<figure class="lede-figure">
+<div class="ratio">
+<div class="num">{{lede_num_a}}</div>
+<div class="slash">{{lede_slash}}</div>
+<div class="num small">{{lede_num_b}}</div>
+</div>
+<div class="legend">{{{lede_legend}}}</div>
+</figure>
+<div class="lede-body"><p>{{{lede_body}}}</p></div>
+<div class="agent-note veilleur" data-role="VEILLE">{{label_veilleur_1}}</div>
+<div class="share-bar" aria-label="{{label_share}}">
+<span class="share-label">{{label_share}}</span>
+<a class="share-link share-bsky" href="{{share_bsky}}" target="_blank" rel="noopener">
+<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3.47 1.86c1.96 1.47 4.06 4.45 4.78 6.06.72-1.6 2.82-4.59 4.78-6.06 1.4-1.05 3.67-1.86 3.67.72 0 .51-.3 4.32-.47 4.94-.61 2.16-2.81 2.71-4.77 2.38 3.43.58 4.3 2.51 2.42 4.43-3.58 3.66-5.15-.92-5.55-2.1-.07-.21-.11-.31-.11-.22 0-.09-.04.01-.11.22-.4 1.18-1.97 5.76-5.55 2.1-1.88-1.92-1.01-3.85 2.42-4.43-1.96.33-4.16-.22-4.77-2.38C-.3 6.9-.6 3.09-.6 2.58c0-2.58 2.27-1.77 3.67-.72z"/></svg>{{label_share_bsky}}
+</a>
+<a class="share-link share-x" href="{{share_x}}" target="_blank" rel="noopener">
+<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M11.06 1.5h2.18l-4.76 5.44L14 14.5h-4.38L6.4 10.1 0.6 14.5H.42l5.09-5.82L0.5 1.5h4.5l3 3.96 3.06-3.96zm-0.76 11.6h1.2L4.78 2.74H3.5l6.8 10.36z"/></svg>{{label_share_x}}
+</a>
+<button class="share-link share-copy" type="button" data-share-url="{{share_url}}" data-done="{{label_share_copied}}">
+<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M6.5 2.5h6v6m0-6L5 10M9.5 6v6h-6v-6h3"/></svg><span class="copy-label">{{label_share_copy}}</span>
+</button>
+</div>
+</article>
 
-    <div class="nameplate">
-      <div class="nameplate-kicker">{{label_kicker}}</div>
-      <h1>{{{masthead_title_html}}}</h1>
-      <div class="nameplate-rule">{{label_volume_no}}</div>
-    </div>
+<div class="section-header"><h2>{{label_headlines}}</h2><span class="sub">{{label_headlines_sub}}</span></div>
+<div class="four-col">{{#each headlines}}<a class="story story-card" href="#"><div class="tag">{{tag}}</div><h3>{{{title_html}}}</h3><p>{{{body}}}</p><div class="meta">{{meta}}</div></a>{{/each}}</div>
 
-    <nav class="sections" aria-label="{{label_sections}}">
-      <a href="#top" class="active">{{label_nav_front}}</a>
-      <a href="#carnet">{{label_nav_carnet}}</a>
-      <a href="#feature">{{label_nav_feature}}</a>
-      <a href="#tribune">{{label_nav_oped}}</a>
-      <a href="#wire">{{label_nav_wire}}</a>
-    </nav>
-  </header>
+{{#if has_carnet}}
+<div class="section-header" id="carnet"><h2>{{carnet_title}}</h2><span class="sub">{{carnet_subtitle}}</span></div>
+<div class="four-col">{{#each carnet_people}}<article class="story-card carnet-card"><div class="carnet-avatar {{kind}}">{{avatar_or_initials}}</div><div class="tag">{{kind_label}} · {{display_name}}</div><h3>{{{tagline}}}</h3><p>{{{body}}}</p></article>{{/each}}</div>
+<div class="agent-note comere" role="status">{{label_potins_note}}</div>
+{{/if}}
 
-  <main>
+{{#if has_feature}}
+<article class="feature" id="feature" data-kicker="{{feature_kicker}}">
+<div class="feature-text">
+<h2>{{{feature_headline}}}</h2>
+<p class="dek">{{{feature_dek}}}</p>
+<div class="agent-note facteur" role="status">{{label_facteur_note}}</div>
+{{#each feature_paragraphs}}<p>{{{this}}}</p>{{/each}}
+<div class="pull-quote"><q>{{feature_pull_quote}}</q><cite>{{feature_pull_cite}}</cite></div>
+<div class="byline">{{{feature_byline}}}</div>
+</div>
+<aside class="feature-aside"><h4>◇ {{label_timeline}}</h4>{{#each feature_timeline}}<div class="timeline-item"><span class="date">{{date}}</span><span class="event">{{{text}}}</span></div>{{/each}}</aside>
+</article>
+{{/if}}
 
-    <article class="lede">
-      <div class="kicker"><span class="dot"></span> {{lede_kicker}}</div>
-      <h1>{{{lede_headline_html}}}</h1>
-      <p class="dek">{{{lede_dek}}}</p>
-      <div class="byline">{{{lede_byline}}}</div>
+<div class="section-header" id="wire"><h2>{{label_wire}}</h2><span class="sub">{{label_wire_sub}}</span></div>
+<div class="wire">{{#each wire_items}}<div class="wire-item"><div class="head"><span class="src">{{source}}</span><span class="ts">{{ts}}</span></div><h4>{{title}}</h4><p>{{{body}}}</p></div>{{/each}}</div>
 
-      <div class="agentic-byline">
-        <span>{{label_desk_lineup}}:</span>
-        <span class="badge done"><span class="dot"></span> Veille</span>
-        <span class="badge done"><span class="dot"></span> Potins</span>
-        <span class="badge done"><span class="dot"></span> Vérif</span>
-        <span class="badge done"><span class="dot"></span> Archiv</span>
-        <span class="badge done"><span class="dot"></span> Édit</span>
-        <span class="badge done"><span class="dot"></span> Juge</span>
-      </div>
+<section class="opinion" id="tribune">
+<div class="opinion-main">
+<div class="label">{{tribune_label}}</div>
+<h2>{{{tribune_headline}}}</h2>
+{{#each tribune_paragraphs}}<p>{{{this}}}</p>{{/each}}
+<div class="agent-note editeur" role="status">{{label_editeur_note}}</div>
+</div>
+<div class="opinion-author">
+<div class="initials">{{tribune_initials}}</div>
+<div class="name" style="margin-top:18px">{{tribune_name}}</div>
+<div class="role">{{tribune_role}}</div>
+</div>
+</section>
+</main>
 
-      <figure class="lede-figure">
-        <div class="ratio">
-          <div class="num">{{lede_num_a}}</div>
-          <div class="slash">{{lede_slash}}</div>
-          <div class="num small">{{lede_num_b}}</div>
-        </div>
-        <div class="legend">{{{lede_legend}}}</div>
-      </figure>
+{{#if has_prev_edition}}
+<div class="prev-edition">
+<div><div class="prev-label">{{label_prev_edition}}</div><div class="prev-kicker">{{prev_edition_kicker}}</div><div class="prev-headline">{{prev_edition_headline}}</div></div>
+<a href="{{prev_edition_url}}">{{label_prev_edition}} {{prev_edition_short}}</a>
+</div>
+{{/if}}
 
-      <div class="lede-body">
-        <p>{{{lede_body}}}</p>
-      </div>
-
-      <div class="agent-note veilleur" data-role="VEILLE">
-        {{label_veilleur_1}}
-      </div>
-
-      <div class="share-bar" aria-label="{{label_share}}">
-        <span class="share-label">{{label_share}}</span>
-        <a class="share-link share-bsky" href="{{share_bsky}}" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3.47 1.86c1.96 1.47 4.06 4.45 4.78 6.06.72-1.6 2.82-4.59 4.78-6.06 1.4-1.05 3.67-1.86 3.67.72 0 .51-.3 4.32-.47 4.94-.61 2.16-2.81 2.71-4.77 2.38 3.43.58 4.3 2.51 2.42 4.43-3.58 3.66-5.15-.92-5.55-2.1-.07-.21-.11-.31-.11-.22 0-.09-.04.01-.11.22-.4 1.18-1.97 5.76-5.55 2.1-1.88-1.92-1.01-3.85 2.42-4.43-1.96.33-4.16-.22-4.77-2.38C-.3 6.9-.6 3.09-.6 2.58c0-2.58 2.27-1.77 3.67-.72z"/></svg>
-          {{label_share_bsky}}
-        </a>
-        <a class="share-link share-x" href="{{share_x}}" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M11.06 1.5h2.18l-4.76 5.44L14 14.5h-4.38L6.4 10.1 0.6 14.5H.42l5.09-5.82L0.5 1.5h4.5l3 3.96 3.06-3.96zm-0.76 11.6h1.2L4.78 2.74H3.5l6.8 10.36z"/></svg>
-          {{label_share_x}}
-        </a>
-        <button class="share-link share-copy" type="button" data-share-url="{{share_url}}" data-done="{{label_share_copied}}">
-          <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M6.5 2.5h6v6m0-6L5 10M9.5 6v6h-6v-6h3"/></svg>
-          <span class="copy-label">{{label_share_copy}}</span>
-        </button>
-      </div>
-    </article>
-
-    <div class="section-header">
-      <h2>{{label_headlines}}</h2>
-      <span class="sub">{{label_headlines_sub}}</span>
-    </div>
-
-    <div class="four-col">
-      {{#each headlines}}
-      <a class="story story-card" href="#">
-        <div class="tag">{{tag}}</div>
-        <h3>{{{title_html}}}</h3>
-        <p>{{{body}}}</p>
-        <div class="meta">{{meta}}</div>
-      </a>
-      {{/each}}
-    </div>
-
-    <!-- LE CARNET — People -->
-    {{#if has_carnet}}
-    <div class="section-header" id="carnet">
-      <h2>{{carnet_title}}</h2>
-      <span class="sub">{{carnet_subtitle}}</span>
-    </div>
-
-    <div class="four-col">
-      {{#each carnet_people}}
-      <article class="story-card carnet-card">
-        <div class="carnet-avatar {{kind}}">{{avatar_or_initials}}</div>
-        <div class="tag">{{kind_label}} · {{display_name}}</div>
-        <h3>{{{tagline}}}</h3>
-        <p>{{{body}}}</p>
-      </article>
-      {{/each}}
-    </div>
-
-    <div class="agent-note comere" role="status">
-      {{label_potins_note}}
-    </div>
-    {{/if}}
-
-    <!-- FEATURE / ENQUÊTE -->
-    {{#if has_feature}}
-    <article class="feature" id="feature" data-kicker="{{feature_kicker}}">
-      <div class="feature-text">
-        <h2>{{{feature_headline}}}</h2>
-        <p class="dek">{{{feature_dek}}}</p>
-        <div class="agent-note facteur" role="status">
-          {{label_facteur_note}}
-        </div>
-        {{#each feature_paragraphs}}
-        <p>{{{this}}}</p>
-        {{/each}}
-        <div class="pull-quote">
-          <q>{{feature_pull_quote}}</q>
-          <cite>{{feature_pull_cite}}</cite>
-        </div>
-        <div class="byline">{{{feature_byline}}}</div>
-      </div>
-      <aside class="feature-aside">
-        <h4>◇ {{label_timeline}}</h4>
-        {{#each feature_timeline}}
-        <div class="timeline-item">
-          <span class="date">{{date}}</span>
-          <span class="event">{{{text}}}</span>
-        </div>
-        {{/each}}
-      </aside>
-    </article>
-    {{/if}}
-
-    <!-- DÉPÊCHES -->
-    <div class="section-header" id="wire">
-      <h2>{{label_wire}}</h2>
-      <span class="sub">{{label_wire_sub}}</span>
-    </div>
-
-    <div class="wire">
-      {{#each wire_items}}
-      <div class="wire-item">
-        <div class="head"><span class="src">{{source}}</span><span class="ts">{{ts}}</span></div>
-        <h4>{{title}}</h4>
-        <p>{{{body}}}</p>
-      </div>
-      {{/each}}
-    </div>
-
-    <!-- TRIBUNE -->
-    <section class="opinion" id="tribune">
-      <div class="opinion-main">
-        <div class="label">{{tribune_label}}</div>
-        <h2>{{{tribune_headline}}}</h2>
-        {{#each tribune_paragraphs}}
-        <p>{{{this}}}</p>
-        {{/each}}
-        <div class="agent-note editeur" role="status">
-          {{label_editeur_note}}
-        </div>
-      </div>
-      <div class="opinion-author">
-        <div class="initials">{{tribune_initials}}</div>
-        <div class="name" style="margin-top:18px;">{{tribune_name}}</div>
-        <div class="role">{{tribune_role}}</div>
-      </div>
-    </section>
-
-  </main>
-
-  {{#if has_prev_edition}}
-  <div class="prev-edition">
-    <div>
-      <div class="prev-label">{{label_prev_edition}}</div>
-      <div class="prev-kicker">{{prev_edition_kicker}}</div>
-      <div class="prev-headline">{{prev_edition_headline}}</div>
-    </div>
-    <a href="{{prev_edition_url}}">{{label_prev_edition}} {{prev_edition_short}}</a>
-  </div>
-  {{/if}}
-
-  <footer>
-    <div class="small">{{label_edition_date}}</div>
-    <div class="agent-note juge" role="status">
-      {{label_juge_note}}
-    </div>
-    <div class="imprint">
-      <span>© L'Agent &amp; Le Quotidien · {{label_rights}}</span>
-      <span><a href="/agents">{{label_carnet_index}}</a> · <a href="/topics">{{label_topics}}</a> · <a href="{{archives_url}}">{{label_archives}}</a> · <a href="/api">API</a> · <a href="/{{path_ateliers}}">{{label_ateliers}}</a> · <a href="/{{path_corrections}}">{{label_corrections}}</a> · <a href="/{{path_legal}}">{{label_legal}}</a> · <a href="/{{path_privacy}}">{{label_privacy}}</a> · <a href="/{{path_about}}">{{label_about}}</a></span>
-      <span><a href="{{bluesky_url}}" rel="me noopener">{{label_bluesky}} {{bluesky_handle}}</a> · <a href="./{{other_lang}}.html">{{label_other_lang}}</a></span>
-    </div>
-    <div class="production-note">
-      <span>{{label_production_note}}</span>
-    </div>
-  </footer>
-
+<footer>
+<div class="small">{{label_edition_date}}</div>
+<div class="agent-note juge" role="status">{{label_juge_note}}</div>
+<div class="imprint">
+<span>© L'Agent &amp; Le Quotidien · {{label_rights}}</span>
+<span><a href="/agents">{{label_carnet_index}}</a> · <a href="/topics">{{label_topics}}</a> · <a href="{{archives_url}}">{{label_archives}}</a> · <a href="/api">API</a> · <a href="/{{path_ateliers}}">{{label_ateliers}}</a> · <a href="/{{path_corrections}}">{{label_corrections}}</a> · <a href="/{{path_legal}}">{{label_legal}}</a> · <a href="/{{path_privacy}}">{{label_privacy}}</a> · <a href="/{{path_about}}">{{label_about}}</a></span>
+<span><a href="{{bluesky_url}}" rel="me noopener">{{label_bluesky}} {{bluesky_handle}}</a> · <a href="./{{other_lang}}.html">{{label_other_lang}}</a></span>
+</div>
+<div class="production-note"><span>{{label_production_note}}</span></div>
+</footer>
 </div>
 
 <script>
 (function(){
-  var root=document.documentElement;
-  var themeOrder=['light','dark','terminal','swiss','glitch','sepia','newspaper','nord','retro','paper'];
-  var themeNames={'light':'Clair','dark':'Sombre','terminal':'Terminal','swiss':'Suisse','glitch':'Glitch','sepia':'Sépia','newspaper':'Journal','nord':'Nord','retro':'Rétro','paper':'Papier'};
-  var themeIcons={'light':'☀','dark':'☾','terminal':'⌂','swiss':'⊞','glitch':'⚡','sepia':'◐','newspaper':'□','nord':'◇','retro':'⌨','paper':'⊟'};
-  var fonts={'light':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','dark':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','terminal':'JetBrains+Mono:wght@400;500;700','swiss':'Inter:wght@400;600;700|JetBrains+Mono:wght@400;500;700','glitch':'Orbitron:wght@400;700;900|Space+Grotesk:wght@300;400;600|JetBrains+Mono:wght@400;500;700','sepia':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','newspaper':'Merriweather:wght@400;900|JetBrains+Mono:wght@400;500;700','nord':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','retro':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','paper':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800'};
-  var fl=document.getElementById('fonts-link');
-  var btn=document.getElementById('theme-toggle');
-  var toast=document.getElementById('theme-toast');
-  var toastTimer=null;
-
-  function applyTheme(t){
-    root.setAttribute('data-theme',t);
-    try{localStorage.setItem('theme',t);}catch(e){}
-    if(fl&&fonts[t]){fl.href='https://fonts.googleapis.com/css2?family='+fonts[t].replace(/\|/g,'&family=')+'&display=swap';}
-    if(btn){btn.textContent=themeIcons[t]||'☀️';}
-    if(toast){
-      toast.textContent=themeNames[t]||t;
-      toast.classList.add('visible');
-      clearTimeout(toastTimer);
-      toastTimer=setTimeout(function(){toast.classList.remove('visible');},1200);
-    }
-  }
-
-  function nextTheme(){
-    var current=root.getAttribute('data-theme')||'light';
-    var idx=themeOrder.indexOf(current);
-    if(idx===-1||idx>=themeOrder.length-1){idx=0;}else{idx++;}
-    applyTheme(themeOrder[idx]);
-  }
-
-  (function(){
-    var t=localStorage.getItem('theme')||'light';
-    var p=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
-    if(t==='light'&&p){t='dark';}
-    applyTheme(t);
-  })();
-
-  if(btn){btn.addEventListener('click',nextTheme);}
-
-  var nav=document.querySelector('.sections');
-  var bar=document.getElementById('progress-bar');
-  var ticking=false;
-  function onScroll(){
-    if(!ticking){requestAnimationFrame(function(){
-      var st=document.documentElement.scrollTop||document.body.scrollTop;
-      var sh=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-      if(bar){bar.style.width=Math.min((st/sh)*100,100)+'%';}
-      if(nav){nav.classList.toggle('is-sticky',st>180);}
-      ticking=false;
-    });ticking=true;}
-  }
-  window.addEventListener('scroll',onScroll,{passive:true});
-
-  var sections=['carnet','feature','tribune','wire','top'];
-  var navLinks={};
-  sections.forEach(function(id){
-    var el=document.getElementById(id);
-    var link=nav&&nav.querySelector('a[href="#'+id+'"]');
-    if(el&&link){navLinks[id]=link;}
-  });
-  if(Object.keys(navLinks).length>0){
-    var obs=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        var link=navLinks[entry.target.id];
-        if(link){
-          if(entry.isIntersecting){link.classList.add('active');}
-          else{link.classList.remove('active');}
-        }
-      });
-    },{rootMargin:'-100px 0px -60% 0px'});
-    sections.forEach(function(id){
-      var el=document.getElementById(id);
-      if(el&&navLinks[id]){obs.observe(el);}
-    });
-  }
-
-  var cp=document.querySelector('.share-copy');
-  if(cp){cp.addEventListener('click',function(){
-    var u=cp.getAttribute('data-share-url')||'';
-    var lab=cp.querySelector('.copy-label');
-    var done=function(){if(lab){var o=lab.textContent;lab.textContent='✓ '+(cp.getAttribute('data-done')||'');setTimeout(function(){lab.textContent=o;},1800);}};
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(done,done);}else{done();}
-  });}
+var root=document.documentElement;
+var th=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+root.setAttribute('data-theme',th);
+var order=['light','dark','terminal','swiss','glitch','sepia','newspaper','nord','retro','paper'];
+var names={'light':'Clair','dark':'Sombre','terminal':'Terminal','swiss':'Suisse','glitch':'Glitch','sepia':'Sépia','newspaper':'Journal','nord':'Nord','retro':'Rétro','paper':'Papier'};
+var icons={'light':'☀','dark':'☾','terminal':'⌂','swiss':'⊞','glitch':'⚡','sepia':'◐','newspaper':'□','nord':'◇','retro':'⌨','paper':'⊟'};
+var fonts={'light':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','dark':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','terminal':'JetBrains+Mono:wght@400;500;700','swiss':'Inter:wght@400;600;700|JetBrains+Mono:wght@400;500;700','glitch':'Orbitron:wght@400;700;900|Space+Grotesk:wght@300;400;600|JetBrains+Mono:wght@400;500;700','sepia':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','newspaper':'Merriweather:wght@400;900|JetBrains+Mono:wght@400;500;700','nord':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','retro':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800','paper':'Fraunces:opsz,wght,SOFT@9..144,300..900,0..100|Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800'};
+var fl=document.getElementById('fonts-link');
+function apply(t){
+root.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}
+if(fl&&fonts[t])fl.href='https://fonts.googleapis.com/css2?family='+fonts[t].replace(/\|/g,'&family=')+'&display=swap';
+var btn=document.getElementById('theme-toggle');if(btn)btn.textContent=icons[t]||'☀';
+var toast=document.getElementById('theme-toast');if(toast){toast.textContent=names[t]||t;toast.classList.add('visible');clearTimeout(window.tt);window.tt=setTimeout(function(){toast.classList.remove('visible')},1200);}
+}
+var btn=document.getElementById('theme-toggle');
+if(btn)btn.addEventListener('click',function(){var c=root.getAttribute('data-theme')||'light';var i=order.indexOf(c);apply(order[i===-1||i>=order.length-1?0:i+1]);});
+var nav=document.querySelector('.sections'),bar=document.getElementById('progress-bar'),tick=false;
+window.addEventListener('scroll',function(){if(!tick){requestAnimationFrame(function(){var st=document.documentElement.scrollTop||document.body.scrollTop,sh=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(bar)bar.style.width=Math.min((st/sh)*100,100)+'%';if(nav)nav.classList.toggle('is-sticky',st>180);tick=false});tick=true}},{passive:true});
+var ids=['carnet','feature','tribune','wire','top'],links={};
+ids.forEach(function(id){var el=document.getElementById(id),link=nav&&nav.querySelector('a[href="#'+id+'"]');if(el&&link)links[id]=link;});
+if(Object.keys(links).length>0){new IntersectionObserver(function(e){e.forEach(function(e){var link=links[e.target.id];if(link)e.isIntersecting?link.classList.add('active'):link.classList.remove('active')})},{rootMargin:'-100px 0px -60% 0px'}).observe(document.getElementById(id))for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&links[ids[i]]){}}}
+var cp=document.querySelector('.share-copy');
+if(cp)cp.addEventListener('click',function(){var u=cp.getAttribute('data-share-url')||'',lab=cp.querySelector('.copy-label'),done=function(){if(lab){var o=lab.textContent;lab.textContent='✓ '+(cp.getAttribute('data-done')||'');setTimeout(function(){lab.textContent=o},1800)}};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(done,done);else done()});
 })();
 </script>
-
 </body>
 </html>
