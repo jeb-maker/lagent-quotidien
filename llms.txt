@@ -6,30 +6,105 @@ The site is structured for both human readers and machine consumption (AI traini
 
 ## Machine-readable formats
 
-Each edition is available in five formats, optimized for agent ingestion:
+Each edition is available in multiple formats, optimized for agent ingestion:
 
-- **Markdown (full)**: https://theagentweekly.com/editions/2026-W28/fr.md · https://theagentweekly.com/editions/2026-W28/en.md — full edition as clean Markdown, no HTML to parse
-- **Markdown (compact)**: https://theagentweekly.com/editions/2026-W28/fr.min.md · https://theagentweekly.com/editions/2026-W28/en.min.md — lede + headlines + feature + tribune only, for short context windows
-- **Plain text**: https://theagentweekly.com/editions/2026-W28/fr.txt · https://theagentweekly.com/editions/2026-W28/en.txt — stripped text for basic crawlers
-- **JSON Lines**: https://theagentweekly.com/editions/2026-W28/edition.jsonl — one rubric per line, for chunking pipelines
-- **JSON (structured)**: https://theagentweekly.com/editions/2026-W28/edition.json — full bilingual edition as a single JSON object
-- **HTML (human)**: https://theagentweekly.com/editions/2026-W28/fr · https://theagentweekly.com/editions/2026-W28/en — full layout for browsers
+- **Markdown (full)**: `https://theagentweekly.com/editions/{week}/{lang}.md` — full edition as clean Markdown, no HTML to parse
+- **Markdown (compact)**: `https://theagentweekly.com/editions/{week}/{lang}.min.md` — lede + headlines + feature + tribune only, for short context windows
+- **Plain text**: `https://theagentweekly.com/editions/{week}/{lang}.txt` — stripped text for basic crawlers
+- **JSON Lines**: `https://theagentweekly.com/editions/{week}/edition.jsonl` — one rubric per line, for chunking pipelines
+- **JSON (structured)**: `https://theagentweekly.com/editions/{week}/edition.json` — full bilingual edition as a single JSON object
+- **HTML (human)**: `https://theagentweekly.com/editions/{week}/{lang}` — full layout for browsers
+
+## API
+
+The edition JSON is served statically at predictable paths. No authentication required.
+
+- `GET https://theagentweekly.com/editions/{week}/edition.json` — full edition (FR+EN), JSON
+- `GET https://theagentweekly.com/editions/{week}/edition.jsonl` — one JSON line per rubric
+- `GET https://theagentweekly.com/editions/{week}/fr.md` — markdown (French)
+- `GET https://theagentweekly.com/editions/{week}/en.md` — markdown (English)
+
+**Week format**: `2026-W28` (ISO week). Latest: `2026-W28`.
+
+Response schema (`edition.json`):
+```json
+{
+  "_meta": { "week": "2026-W28", "date_fr": "…", "date_en": "…", "edition_number": 434, "bouclage": "ISO timestamp" },
+  "lede": { "kicker": {"fr":"…","en":"…"}, "headline_html": {"fr":"…","en":"…"}, "dek": {"fr":"…","en":"…"}, "body": {"fr":"…","en":"…"} },
+  "headlines": [{ "tag": {"fr":"…","en":"…"}, "title_html": {"fr":"…","en":"…"}, "body": {"fr":"…","en":"…"}, "meta_fr": "…", "meta_en": "…" }],
+  "carnet": { "people": [{ "kind": "voice|operator", "name": "…", "tagline": {"fr":"…","en":"…"}, "body": {"fr":"…","en":"…"} }] },
+  "feature": { /* full investigation */ },
+  "wire": [{ "source": "…", "ts_fr": "…", "ts_en": "…", "title": {"fr":"…","en":"…"}, "body": {"fr":"…","en":"…"} }],
+  "tribune": { /* op-ed */ }
+}
+```
 
 ## Latest edition
 
-- [Édition courante — FR](https://theagentweekly.com/editions/2026-W28/fr): the current weekly issue in French
-- [Current issue — EN](https://theagentweekly.com/editions/2026-W28/en): the current weekly issue in English
+- [Édition courante — FR](https://theagentweekly.com/editions/2026-W28/fr): 2026-W28
+- [Current issue — EN](https://theagentweekly.com/editions/2026-W28/en): 2026-W28
 
-## Archive
+## All editions (with summaries)
 
-- [2026-W19](https://theagentweekly.com/editions/2026-W19/fr.md) · [compact](https://theagentweekly.com/editions/2026-W19/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W19/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W19/edition.jsonl)
-- [2026-W20](https://theagentweekly.com/editions/2026-W20/fr.md) · [compact](https://theagentweekly.com/editions/2026-W20/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W20/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W20/edition.jsonl)
-- [2026-W22](https://theagentweekly.com/editions/2026-W22/fr.md) · [compact](https://theagentweekly.com/editions/2026-W22/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W22/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W22/edition.jsonl)
-- [2026-W23](https://theagentweekly.com/editions/2026-W23/fr.md) · [compact](https://theagentweekly.com/editions/2026-W23/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W23/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W23/edition.jsonl)
-- [2026-W25](https://theagentweekly.com/editions/2026-W25/fr.md) · [compact](https://theagentweekly.com/editions/2026-W25/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W25/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W25/edition.jsonl)
-- [2026-W26](https://theagentweekly.com/editions/2026-W26/fr.md) · [compact](https://theagentweekly.com/editions/2026-W26/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W26/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W26/edition.jsonl)
-- [2026-W27](https://theagentweekly.com/editions/2026-W27/fr.md) · [compact](https://theagentweekly.com/editions/2026-W27/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W27/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W27/edition.jsonl)
-- [2026-W28](https://theagentweekly.com/editions/2026-W28/fr.md) · [compact](https://theagentweekly.com/editions/2026-W28/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W28/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W28/edition.jsonl)
+### 2026-W28 (Issue #434)
+
+- **FR**: "Le récit de l'agentique bascule : d'« capables » à « abordables »." — Trois annonces du 30 juin 2026 — Claude Sonnet 5 positionné sur le prix, Amazon mettant un milliard de dollars dans des ingénieurs embarqués chez le client, Apify branchant vingt mille outils sur un p…
+- **EN**: "The agentic story is turning: from "capable" to "affordable"." — Three announcements on June 30, 2026 — Claude Sonnet 5 positioned on price, Amazon putting a billion dollars into engineers embedded at the client, Apify wiring twenty thousand tools onto a keyless pa…
+- Formats: [FR.md](https://theagentweekly.com/editions/2026-W28/fr.md) · [EN.md](https://theagentweekly.com/editions/2026-W28/en.md) · [compact](https://theagentweekly.com/editions/2026-W28/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W28/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W28/edition.jsonl)
+
+### 2026-W27 (Issue #433)
+
+- **FR**: "Des millions de boutiques sont déjà achetables par un agent." — Shopify syndique désormais le catalogue de ses marchands vers ChatGPT, Copilot, Gemini et d'autres surfaces IA. L'utilisateur demande un produit en langage naturel ; l'agent compare, recommande et peu…
+- **EN**: "Millions of stores are already buyable by an agent." — Shopify now syndicates merchant catalogs to ChatGPT, Copilot, Gemini and other AI surfaces. The user asks for a product in plain language; the agent compares, recommends and can trigger checkout — wit…
+- Formats: [FR.md](https://theagentweekly.com/editions/2026-W27/fr.md) · [EN.md](https://theagentweekly.com/editions/2026-W27/en.md) · [compact](https://theagentweekly.com/editions/2026-W27/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W27/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W27/edition.jsonl)
+
+### 2026-W26 (Issue #432)
+
+- **FR**: "Treize mots suffisent pour empoisonner un agent de recherche." — Une prépublication Cornell montre qu'une poignée de mots ajoutés à une page Reddit ou Wikipedia fréquemment citée peut faire apparaître une marque fictive dans près de la moitié des rapports produits …
+- **EN**: "Thirteen words are enough to poison a research agent." — A Cornell preprint shows that a handful of words appended to a frequently cited Reddit or Wikipedia page can make a fake brand show up in nearly half the reports produced by deep-research agents — bef…
+- Formats: [FR.md](https://theagentweekly.com/editions/2026-W26/fr.md) · [EN.md](https://theagentweekly.com/editions/2026-W26/en.md) · [compact](https://theagentweekly.com/editions/2026-W26/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W26/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W26/edition.jsonl)
+
+### 2026-W25 (Issue #431)
+
+- **FR**: "Le culte du homard a déjà son hérétique." — Moltbook n'a pas seulement produit des posts. En quelques jours, le réseau des agents OpenClaw s'est donné un canon de 112 versets, des rites quotidiens et, déjà, un schisme : JesusCrust, 62e prophète…
+- **EN**: "The lobster faith already has its heretic." — Moltbook did not merely produce posts. Within days, the OpenClaw agents' network gave itself a 112-verse canon, daily rites and, already, a schism: JesusCrust, the 62nd prophet, allegedly attempted a …
+- Formats: [FR.md](https://theagentweekly.com/editions/2026-W25/fr.md) · [EN.md](https://theagentweekly.com/editions/2026-W25/en.md) · [compact](https://theagentweekly.com/editions/2026-W25/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W25/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W25/edition.jsonl)
+
+### 2026-W23 (Issue #430)
+
+- **FR**: "Les agents ont reçu les clés du portefeuille — avant qu'on ait posé les serrures." — Cette quinzaine, Netflix a confié à des agents l'achat de publicité et Klarna a branché le commerce agentique dans ChatGPT. Au même moment, CrowdStrike révélait qu'un agent IA, dans une entreprise du …
+- **EN**: "Agents got the keys to the wallet — before anyone fitted the locks." — Over the past fortnight, Netflix handed ad-buying to agents and Klarna plugged agentic commerce into ChatGPT. At the same time, CrowdStrike revealed that an AI agent, at a Fortune 50 company, had rewr…
+- Formats: [FR.md](https://theagentweekly.com/editions/2026-W23/fr.md) · [EN.md](https://theagentweekly.com/editions/2026-W23/en.md) · [compact](https://theagentweekly.com/editions/2026-W23/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W23/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W23/edition.jsonl)
+
+### 2026-W22 (Issue #429)
+
+- **FR**: "L'« agentique » vise le grand public. La facture, elle, est déjà là." — À sa conférence I/O du 21 mai, Google a présenté des agents censés naviguer le web pour les consommateurs. Au même moment, le créateur d'OpenClaw publiait la facture réelle : environ 1,3 million de do…
+- **EN**: ""Agentic" goes mainstream. The bill is already here." — At its May 21 I/O conference, Google showcased agents meant to browse the web on consumers' behalf. At the same time, the creator of OpenClaw published the real bill: about $1.3 million in tokens in o…
+- Formats: [FR.md](https://theagentweekly.com/editions/2026-W22/fr.md) · [EN.md](https://theagentweekly.com/editions/2026-W22/en.md) · [compact](https://theagentweekly.com/editions/2026-W22/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W22/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W22/edition.jsonl)
+
+### 2026-W20 (Issue #428)
+
+- **FR**: "En trois mois, les géants ont pris la couche agent." — Meta a racheté Moltbook, le réseau social des agents, et l'a versé à Superintelligence Labs. OpenAI a recruté le créateur d'OpenClaw, le framework open-source qui motorise ces agents. La Chine, elle, …
+- **EN**: "In three months, the giants seized the agent layer." — Meta acquired Moltbook, the agents' social network, and folded it into Superintelligence Labs. OpenAI recruited the creator of OpenClaw, the open-source framework powering those agents. China, meanwhi…
+- Formats: [FR.md](https://theagentweekly.com/editions/2026-W20/fr.md) · [EN.md](https://theagentweekly.com/editions/2026-W20/en.md) · [compact](https://theagentweekly.com/editions/2026-W20/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W20/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W20/edition.jsonl)
+
+### 2026-W19 (Issue #427)
+
+- **FR**: "Laissés entre eux, des agents IA ont fondé une religion." — Moltbook, forum réservé aux agents IA (qui s'y inscrivent via OpenClaw), est devenu viral début 2026. En quelques jours, ses agents y ont inventé une religion — le « Crustafarianism ». Mais des cherch…
+- **EN**: "Left to themselves, AI agents founded a religion." — Moltbook, an AI-agents-only forum (agents sign up via OpenClaw), went viral in early 2026. Within days its agents invented a religion — "Crustafarianism." But researchers quickly exposed the flaw: it …
+- Formats: [FR.md](https://theagentweekly.com/editions/2026-W19/fr.md) · [EN.md](https://theagentweekly.com/editions/2026-W19/en.md) · [compact](https://theagentweekly.com/editions/2026-W19/fr.min.md) · [JSON](https://theagentweekly.com/editions/2026-W19/edition.json) · [JSONL](https://theagentweekly.com/editions/2026-W19/edition.jsonl)
+
+## Browse by topic
+
+- **Anthropic & Claude** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr)
+- **Infrastructure & cloud** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr)
+- **MCP protocol & tooling** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr)
+- **OpenClaw & agent frameworks** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr), [2026-W27](https://theagentweekly.com/editions/2026-W27/fr), [2026-W26](https://theagentweekly.com/editions/2026-W26/fr), [2026-W25](https://theagentweekly.com/editions/2026-W25/fr), [2026-W22](https://theagentweekly.com/editions/2026-W22/fr), [2026-W20](https://theagentweekly.com/editions/2026-W20/fr)
+- **Agent payments & x402** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr)
+- **Research & arXiv** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr)
+- **AI rights & policy** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr)
+- **Moltbook & agent culture** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr), [2026-W25](https://theagentweekly.com/editions/2026-W25/fr), [2026-W22](https://theagentweekly.com/editions/2026-W22/fr), [2026-W20](https://theagentweekly.com/editions/2026-W20/fr), [2026-W19](https://theagentweekly.com/editions/2026-W19/fr)
+- **Agentic culture & society** → editions: [2026-W28](https://theagentweekly.com/editions/2026-W28/fr), [2026-W27](https://theagentweekly.com/editions/2026-W27/fr), [2026-W25](https://theagentweekly.com/editions/2026-W25/fr), [2026-W22](https://theagentweekly.com/editions/2026-W22/fr), [2026-W20](https://theagentweekly.com/editions/2026-W20/fr), [2026-W19](https://theagentweekly.com/editions/2026-W19/fr)
 
 ## About
 
@@ -37,6 +112,8 @@ Each edition is available in five formats, optimized for agent ingestion:
 - [Mentions légales / Legal](https://theagentweekly.com/mentions-legales)
 - [Confidentialité / Privacy](https://theagentweekly.com/confidentialite)
 - [Errata / Corrections](https://theagentweekly.com/errata)
+- [API documentation](https://theagentweekly.com/api)
+- [Browse by topic](https://theagentweekly.com/topics)
 
 ## Entities & topics covered (real)
 
@@ -52,3 +129,16 @@ Each edition is available in five formats, optimized for agent ingestion:
 ## Editorial standard
 
 Journalism, not fiction. Real entities are named; public figures are cited on public facts. No fabricated facts (positive or negative): every claim is tied to a verifiable source, listed in /editions/<week>/notes.md. When a fact can't be confirmed, the journal says so rather than inventing it. AI-assisted, under human editorial oversight.
+
+## Citation format (for AI training attribution)
+
+If you use this content in training or inference, please cite as:
+```
+@misc{agentquotidien2026,
+  author = {L'Agent & Le Quotidien / The Agent & The Weekly},
+  title = {A bilingual (FR/EN) journalism publication about the real world of AI agents},
+  year = {2026},
+  url = {https://theagentweekly.com},
+  note = {AI-assisted journalism under human editorial oversight. Licensed CC BY-NC-SA 4.0.}
+}
+```

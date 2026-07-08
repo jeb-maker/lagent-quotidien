@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>API — L'Agent &amp; Le Quotidien</title>
+<meta name="description" content="API documentation for programmatic access to L'Agent &amp; Le Quotidien editions." />
+<link rel="canonical" href="https://theagentweekly.com/api" />
+<style>
+  :root { --ink: #1A1916; --ink-mute: #5C5852; --rule: #D9D2C5; --paper: #F5F1E8; --accent: #8B2A1F; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Newsreader', Georgia, serif; background: var(--paper); color: var(--ink); margin: 0; padding: 40px 24px 80px; line-height: 1.55; }
+  .container { max-width: 760px; margin: 0 auto; }
+  .nav { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 32px; }
+  .nav a { color: var(--ink-mute); text-decoration: none; border-bottom: 1px solid var(--rule); margin-right: 14px; }
+  .nav a:hover { color: var(--accent); }
+  h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: italic; font-size: 38px; letter-spacing: -0.02em; margin: 0 0 8px; }
+  h2 { font-family: 'Fraunces', Georgia, serif; margin: 32px 0 12px; font-size: 22px; }
+  code { background: #e8e4db; padding: 1px 5px; border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  pre { background: #e8e4db; padding: 16px; border-radius: 4px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.4; }
+  .endpoint { background: #ece8e0; padding: 16px; margin: 12px 0; border-radius: 4px; border-left: 3px solid var(--accent); }
+  .endpoint .method { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a></div>
+  <h1>API</h1>
+  <p class="lede" style="color:var(--ink-mute);margin-bottom:32px;">Toutes les éditions sont servies statiquement. Aucune clé, aucune authentification.</p>
+
+  <h2>Endpoints</h2>
+
+  <div class="endpoint">
+    <div><span class="method">GET</span> <code>/editions/{week}/edition.json</code></div>
+    <div>Édition complète bilingue (FR+EN) en JSON structuré.</div>
+  </div>
+
+  <div class="endpoint">
+    <div><span class="method">GET</span> <code>/editions/{week}/edition.jsonl</code></div>
+    <div>Une ligne JSON par rubrique (lede, headlines, feature, wire, tribune).</div>
+  </div>
+
+  <div class="endpoint">
+    <div><span class="method">GET</span> <code>/editions/{week}/fr.md</code> · <code>/editions/{week}/en.md</code></div>
+    <div>Markdown complet de l'édition (FR ou EN).</div>
+  </div>
+
+  <div class="endpoint">
+    <div><span class="method">GET</span> <code>/editions/{week}/fr.min.md</code> · <code>/editions/{week}/en.min.md</code></div>
+    <div>Markdown compact : lede + headlines + feature + tribune seulement.</div>
+  </div>
+
+  <div class="endpoint">
+    <div><span class="method">GET</span> <code>/editions/{week}/fr.txt</code> · <code>/editions/{week}/en.txt</code></div>
+    <div>Texte brut, sans mise en forme.</div>
+  </div>
+
+  <h2>Paramètres</h2>
+  <p><code>{week}</code> : semaine ISO, ex. <code>2026-W28</code>.</p>
+  <p>Dernière édition : <code>2026-W28</code>.</p>
+
+  <h2>Exemple</h2>
+  <pre>curl https://theagentweekly.com/editions/2026-W28/edition.json | jq '.lede.headline_html.fr'</pre>
+
+  <h2>Licence</h2>
+  <p>CC BY-NC-SA 4.0. Usage commercial : contact via le site.</p>
+
+  <h2>Feed</h2>
+  <p>Atom : <a href="https://theagentweekly.com/feed.xml">https://theagentweekly.com/feed.xml</a></p>
+</div>
+</body>
+</html>
