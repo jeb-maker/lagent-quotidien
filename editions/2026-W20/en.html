@@ -33,6 +33,10 @@
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"In three months, the giants seized the agent layer.","description":"Meta acquired Moltbook, the agents' social network, and folded it into Superintelligence Labs. OpenAI recruited the creator of OpenClaw, the open-source framework powering those agents. China, meanwhile, restricts its use in government. The \"hobbyist\" window closed fast.","image":"https://theagentweekly.com/og.png","datePublished":"2026-05-17T06:00:00+02:00","dateModified":"2026-05-17T06:00:00+02:00","inLanguage":"en-US","url":"https://theagentweekly.com/editions/2026-W20/en","mainEntityOfPage":"https://theagentweekly.com/editions/2026-W20/en","isPartOf":{"@type":"PublicationIssue","issueNumber":428,"isPartOf":{"@type":"Periodical","name":"The Agent & The Weekly"}},"publisher":{"@type":"Organization","name":"The Agent & The Weekly","url":"https://theagentweekly.com"},"author":{"@type":"Organization","name":"The Agent & The Weekly","url":"https://theagentweekly.com"}}</script>
 
+
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8a39d8c8189145dc843679f3e30b1b76"}'></script>
+
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -71,11 +75,19 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
 html, body {
   background: var(--paper); color: var(--ink);
   font-family: 'Newsreader', Georgia, serif;
   font-size: 17px; line-height: 1.55;
   -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--accent); z-index: 9999;
+  width: 0%; transition: width 0.1s linear;
 }
 
 body::before {
@@ -207,6 +219,15 @@ a.story:hover h2, a.story:hover h3 { color: var(--accent); transition: color .15
   display: flex; justify-content: center;
   border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
   margin-top: 14px; overflow-x: auto; scrollbar-width: none;
+  position: sticky; top: 0; z-index: 100;
+  background: var(--paper);
+  transition: box-shadow .2s ease;
+}
+.sections.is-sticky {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+:root[data-theme=&quot;dark&quot;] .sections.is-sticky {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 .sections::-webkit-scrollbar { display: none; }
 .sections a {
@@ -383,8 +404,13 @@ main { padding: 36px 0 80px; }
 .story-card {
   display: flex; flex-direction: column; padding-right: 24px;
   border-right: 1px solid var(--ink-mute);
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 .story-card:last-child { border-right: none; padding-right: 0; }
+.story-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 12px rgba(20, 17, 13, 0.08);
+}
 .story-card .tag {
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: 0.16em; text-transform: uppercase;
@@ -419,6 +445,10 @@ main { padding: 36px 0 80px; }
 .carnet-avatar.human { background: var(--accent); }
 .carnet-avatar.agent { background: var(--bot); }
 .carnet-avatar.agent_journalist { background: var(--ink); color: var(--highlight); }
+.carnet-avatar.operator_corp { background: #c97d2d; }
+.carnet-avatar.agent_platform { background: #6a4c93; }
+.carnet-avatar.agent_tool { background: #2d7a3d; }
+.carnet-avatar.voice { background: #5f7e8c; }
 
 /* BESTIAIRE */
 .bestiaire {
@@ -721,12 +751,26 @@ main { padding: 36px 0 80px; }
 .feature-text p { font-size: 15px; line-height: 1.6; color: var(--paper-deep); margin-bottom: 14px; }
 .feature-text .byline { border-color: var(--rule); color: var(--ink-mute); margin-top: 18px; }
 .feature-text .byline strong { color: var(--paper); }
-.pull-quote { border-left: 4px solid var(--accent); padding: 8px 0 8px 24px; margin: 24px 0; }
+.pull-quote {
+  border-left: 4px solid var(--accent);
+  padding: 8px 0 8px 24px; margin: 32px 0;
+  position: relative;
+}
+.pull-quote::before {
+  content: &quot;“&quot;;
+  position: absolute; left: 20px; top: -12px;
+  font-family: 'Fraunces', serif;
+  font-size: 72px; line-height: 1;
+  color: var(--accent);
+  font-style: italic; font-weight: 300;
+  opacity: 0.6;
+}
 .pull-quote q {
   font-family: 'Fraunces', serif; font-variation-settings: 'opsz' 72;
-  font-weight: 400; font-style: italic;
-  font-size: 26px; line-height: 1.25; color: var(--highlight);
+  font-weight: 300; font-style: italic;
+  font-size: clamp(32px, 4vw, 48px); line-height: 1.25; color: var(--highlight);
   quotes: &quot;«\00A0&quot; &quot;\00A0»&quot;;
+  max-width: 14ch;
 }
 .pull-quote cite {
   display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px;
@@ -760,7 +804,22 @@ main { padding: 36px 0 80px; }
   margin-top: 56px; display: grid;
   grid-template-columns: 1fr 1fr 1fr; gap: 36px;
 }
-.wire-item { padding: 16px 0; border-top: 1px solid var(--rule); }
+.wire-item {
+  padding: 16px 0 16px 8px; border-top: 1px solid var(--rule);
+  transition: padding-left .15s ease;
+  position: relative;
+}
+.wire-item:hover {
+  padding-left: 14px;
+  border-left: 2px solid var(--accent);
+}
+.wire-item::before {
+  content: &quot;&quot;; position: absolute; left: 0; top: 50%;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--ink-mute); transform: translateY(-50%);
+  transition: background .15s ease;
+}
+.wire-item:hover::before { background: var(--accent); }
 .wire-item .head {
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;
@@ -813,7 +872,42 @@ main { padding: 36px 0 80px; }
   text-align: center; line-height: 110px; letter-spacing: -0.04em;
 }
 
-footer { margin-top: 60px; padding-top: 32px; border-top: 1px solid var(--rule); text-align: center; }
+/* PREVIOUS EDITION BLOCK */
+.prev-edition {
+  margin-top: 40px; padding: 28px 32px;
+  background: var(--paper-deep);
+  border: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 20px; flex-wrap: wrap;
+}
+.prev-edition .prev-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-mute); margin-bottom: 4px;
+}
+.prev-edition .prev-kicker {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700;
+}
+.prev-edition .prev-headline {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'opsz' 60, 'SOFT' 30;
+  font-weight: 600; font-size: 22px; line-height: 1.15;
+  letter-spacing: -0.015em; margin-top: 4px;
+}
+.prev-edition a {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700; white-space: nowrap;
+  padding: 10px 18px; border: 1px solid var(--accent);
+  transition: background .15s ease, color .15s ease;
+}
+.prev-edition a:hover { background: var(--accent); color: var(--paper); }
+.prev-edition a::after { content: &quot;→&quot;; }
+
+footer { margin-top: 30px; padding-top: 32px; border-top: 1px solid var(--rule); text-align: center; }
 footer .colophon {
   font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
   font-size: 22px; color: var(--ink-soft); margin-bottom: 10px;
@@ -829,6 +923,34 @@ footer .imprint {
   padding: 24px 0; border-top: 1px solid var(--rule);
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute);
+}
+footer .production-note {
+  padding: 16px 0 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 0.06em; color: var(--ink-mute); opacity: 0.7;
+}
+
+@media print {
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .container { max-width: 100%; padding: 0; }
+  #progress-bar, .sections, .share-bar, .theme-toggle,
+  .lang-switch, .edition-nav, .reader-stamp,
+  .masthead-meta .right &gt; *:not(.lang-switch) { display: none !important; }
+  .masthead { border-bottom: 1pt solid #000; }
+  .nameplate h1 { font-size: 36pt; }
+  .lede h1 { font-size: 24pt; }
+  .feature { background: none; color: #000; border: 1pt solid #ccc; break-inside: avoid; }
+  .feature-text p, .pull-quote q { color: #000; }
+  .pull-quote q { font-size: 18pt; }
+  .feature-text .byline, .feature-text .dek { color: #555; }
+  .lede-figure, .feature-aside { background: #f5f5f5; color: #000; border: 1pt solid #ddd; }
+  .lede-figure .num, .lede-figure .slash { color: #000; }
+  .lede-figure .legend { color: #555; }
+  .opinion { break-inside: avoid; }
+  .wire-item { break-inside: avoid; }
+  a { color: #000; text-decoration: underline; }
+  .imprint a { color: #000; }
+  .prev-edition { display: none; }
 }
 
 /* SHARE BAR */
@@ -876,6 +998,7 @@ footer .imprint {
 }
 @media (max-width: 640px) {
   .container { padding: 0 18px; }
+  body { font-size: 15px; line-height: 1.5; }
   .four-col, .wire, .creatures, .bot-grid { grid-template-columns: 1fr; }
   .creature:nth-child(n) { padding: 22px 0; border-right: none; }
   .masthead-meta { font-size: 9px; }
@@ -883,12 +1006,20 @@ footer .imprint {
   .feature::before, .bestiaire::before { left: 20px; }
   .exchange { grid-template-columns: 1fr; gap: 6px; }
   .exchange .speaker { padding-top: 0; }
+  .lede h1 { font-size: clamp(28px, 10vw, 38px); }
+  .story-card h3 { font-size: 20px; }
+  .feature-text h2 { font-size: clamp(28px, 8vw, 36px); }
+  .opinion-main h2 { font-size: clamp(28px, 8vw, 38px); }
+  .wire-item { padding-left: 0; }
+  .wire-item:hover { padding-left: 4px; }
 }
 </style>
 </head>
 <body>
 
 <div class="container">
+
+  <div id="progress-bar"></div>
 
   <header class="masthead" id="top">
     <div class="masthead-meta">
@@ -908,7 +1039,8 @@ footer .imprint {
           <a href="./fr.html">FR</a><span class="sep" aria-hidden="true">|</span><a href="./en.html" class="active" aria-current="true">EN</a>
         </span>
         <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle dark mode">
-          <span class="icon-sun" aria-hidden="true">☀</span><span class="icon-moon" aria-hidden="true">☾</span>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
         </button>
       </div>
     </div>
@@ -1159,12 +1291,26 @@ footer .imprint {
 
   </main>
 
+  
+  <div class="prev-edition">
+    <div>
+      <div class="prev-label">← previous issue</div>
+      <div class="prev-kicker">Front page · The social network for agents</div>
+      <div class="prev-headline">Left to themselves, AI agents founded a religion.</div>
+    </div>
+    <a href="/editions/2026-W19/en">← previous issue 2026-W19</a>
+  </div>
+  
+
   <footer>
     <div class="small">Issue of Sunday, May 17, 2026 · Filed 06:00 CET</div>
     <div class="imprint">
       <span>© L'Agent &amp; Le Quotidien · All rights reserved</span>
-      <span><a href="/agents">Directory</a> · <a href="/editions/">Archives</a> · <a href="/ateliers">Workshops</a> · <a href="/errata">Errata</a> · <a href="/legal">Legal notice</a> · <a href="/privacy">Privacy</a> · <a href="/about">About</a></span>
+      <span><a href="/agents">Directory</a> · <a href="/topics">Topics</a> · <a href="/editions/">Archives</a> · <a href="/api">API</a> · <a href="/ateliers">Workshops</a> · <a href="/errata">Errata</a> · <a href="/legal">Legal notice</a> · <a href="/privacy">Privacy</a> · <a href="/about">About</a></span>
       <span><a href="https://bsky.app/profile/cuvee-42.theagentweekly.com" rel="me noopener">Follow on Bluesky @cuvee-42</a> · <a href="./fr.html">← Lire en français</a></span>
+    </div>
+    <div class="production-note">
+      <span>This issue was produced by desk agents (veilleur, comère, facteur, archiviste, éditeur, juge) under human editorial oversight. Sources are tracked in the edition notes.</span>
     </div>
   </footer>
 
@@ -1174,14 +1320,54 @@ footer .imprint {
 (function(){
   var root=document.documentElement;
   var btn=document.getElementById('theme-toggle');
-  function sync(){var d=root.getAttribute('data-theme')==='dark';if(btn){btn.setAttribute('aria-checked',d?'true':'false');}}
-  sync();
+  function syncTheme(){var d=root.getAttribute('data-theme')==='dark';if(btn){btn.setAttribute('aria-checked',d?'true':'false');}}
+  syncTheme();
   if(btn){btn.addEventListener('click',function(){
     var d=root.getAttribute('data-theme')==='dark'?'light':'dark';
     if(d==='dark'){root.setAttribute('data-theme','dark');}else{root.removeAttribute('data-theme');}
     try{localStorage.setItem('theme',d==='dark'?'dark':'light');}catch(e){}
-    sync();
+    syncTheme();
   });}
+
+  // Progress bar + sticky nav
+  var nav=document.querySelector('.sections');
+  var bar=document.getElementById('progress-bar');
+  var ticking=false;
+  function onScroll(){
+    if(!ticking){requestAnimationFrame(function(){
+      var st=document.documentElement.scrollTop||document.body.scrollTop;
+      var sh=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+      if(bar){bar.style.width=Math.min((st/sh)*100,100)+'%';}
+      if(nav){nav.classList.toggle('is-sticky',st>180);}
+      ticking=false;
+    });ticking=true;}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  // Nav active section highlighting
+  var sections=['carnet','feature','tribune','wire','top'];
+  var navLinks={};
+  sections.forEach(function(id){
+    var el=document.getElementById(id);
+    var link=nav&&nav.querySelector('a[href="#'+id+'"]');
+    if(el&&link){navLinks[id]=link;}
+  });
+  if(Object.keys(navLinks).length>0){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link=navLinks[entry.target.id];
+        if(link){
+          if(entry.isIntersecting){link.classList.add('active');}
+          else{link.classList.remove('active');}
+        }
+      });
+    },{rootMargin:'-100px 0px -60% 0px'});
+    sections.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el&&navLinks[id]){obs.observe(el);}
+    });
+  }
+
   var cp=document.querySelector('.share-copy');
   if(cp){cp.addEventListener('click',function(){
     var u=cp.getAttribute('data-share-url')||'';

@@ -49,6 +49,8 @@
 
 <div class="container">
 
+  <div id="progress-bar"></div>
+
   <header class="masthead" id="top">
     <div class="masthead-meta">
       <div class="left">
@@ -67,7 +69,8 @@
           <a href="{{lang_fr_url}}"{{#if is_fr}} class="active" aria-current="true"{{/if}}>FR</a><span class="sep" aria-hidden="true">|</span><a href="{{lang_en_url}}"{{#if is_en}} class="active" aria-current="true"{{/if}}>EN</a>
         </span>
         <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="{{label_theme_toggle}}">
-          <span class="icon-sun" aria-hidden="true">☀</span><span class="icon-moon" aria-hidden="true">☾</span>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
         </button>
       </div>
     </div>
@@ -228,6 +231,17 @@
 
   </main>
 
+  {{#if has_prev_edition}}
+  <div class="prev-edition">
+    <div>
+      <div class="prev-label">{{label_prev_edition}}</div>
+      <div class="prev-kicker">{{prev_edition_kicker}}</div>
+      <div class="prev-headline">{{prev_edition_headline}}</div>
+    </div>
+    <a href="{{prev_edition_url}}">{{label_prev_edition}} {{prev_edition_short}}</a>
+  </div>
+  {{/if}}
+
   <footer>
     <div class="small">{{label_edition_date}}</div>
     <div class="imprint">
@@ -246,14 +260,54 @@
 (function(){
   var root=document.documentElement;
   var btn=document.getElementById('theme-toggle');
-  function sync(){var d=root.getAttribute('data-theme')==='dark';if(btn){btn.setAttribute('aria-checked',d?'true':'false');}}
-  sync();
+  function syncTheme(){var d=root.getAttribute('data-theme')==='dark';if(btn){btn.setAttribute('aria-checked',d?'true':'false');}}
+  syncTheme();
   if(btn){btn.addEventListener('click',function(){
     var d=root.getAttribute('data-theme')==='dark'?'light':'dark';
     if(d==='dark'){root.setAttribute('data-theme','dark');}else{root.removeAttribute('data-theme');}
     try{localStorage.setItem('theme',d==='dark'?'dark':'light');}catch(e){}
-    sync();
+    syncTheme();
   });}
+
+  // Progress bar + sticky nav
+  var nav=document.querySelector('.sections');
+  var bar=document.getElementById('progress-bar');
+  var ticking=false;
+  function onScroll(){
+    if(!ticking){requestAnimationFrame(function(){
+      var st=document.documentElement.scrollTop||document.body.scrollTop;
+      var sh=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+      if(bar){bar.style.width=Math.min((st/sh)*100,100)+'%';}
+      if(nav){nav.classList.toggle('is-sticky',st>180);}
+      ticking=false;
+    });ticking=true;}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  // Nav active section highlighting
+  var sections=['carnet','feature','tribune','wire','top'];
+  var navLinks={};
+  sections.forEach(function(id){
+    var el=document.getElementById(id);
+    var link=nav&&nav.querySelector('a[href="#'+id+'"]');
+    if(el&&link){navLinks[id]=link;}
+  });
+  if(Object.keys(navLinks).length>0){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link=navLinks[entry.target.id];
+        if(link){
+          if(entry.isIntersecting){link.classList.add('active');}
+          else{link.classList.remove('active');}
+        }
+      });
+    },{rootMargin:'-100px 0px -60% 0px'});
+    sections.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el&&navLinks[id]){obs.observe(el);}
+    });
+  }
+
   var cp=document.querySelector('.share-copy');
   if(cp){cp.addEventListener('click',function(){
     var u=cp.getAttribute('data-share-url')||'';
