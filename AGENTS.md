@@ -22,7 +22,7 @@ inventé, surtout négatif. Chaque affirmation est tracée dans
 ```
 render.mjs            moteur de rendu (0 dépendance) — édite rarement
 prompts/              cerveau éditorial (weekly-edition, style-guide, sources, desk/)
-  prompts/desk/       6 rôles du desk agentique (source de vérité des subagents)
+  prompts/desk/       7 rôles du desk agentique (source de vérité des subagents)
 templates/            edition.html {{var}} + .css
 data/                 mémoire versionnée (people, ongoing-stories, editorial-compass…)
   data/desk/<week>/   notes produites par les subagents du desk
@@ -55,9 +55,12 @@ Détail complet → skill `composition-hebdo` (déclenchable), ou
 
 1. `bash scripts/new-week.sh` crée `editions/2026-WXX/` (edition.json + notes.md vides).
 2. **Desk agentique obligatoire** dans l'ordre :
-   `veilleur` → `comère` → `facteur` → `archiviste` → `juge` → `éditeur`.
+   `veilleur` → `comère` → `facteur` → `archiviste` → `promoteur` → `éditeur` → `juge`.
+   → Les agents de l'étape 1 (veilleur, comère, facteur, promoteur, archiviste)
+     lisent les mêmes données brutes indépendamment, pas les notes des uns des autres.
+     Ordre entre eux indifférent — lancer en parallèle si possible.
    → Utilise les **subagents** définis dans `.opencode/agent/` (un Task par rôle).
-   Chacun écrit ses notes dans `data/desk/<week>/`.
+   → Chacun écrit ses notes dans `data/desk/<week>/`.
 3. L'Éditeur compose `editions/<week>/edition.json` (FR+EN) depuis les notes du desk
    + les harvests du jour (`data/harvest/<date>{,-primary}.json`) + web search.
 4. Relire/ajuster `edition.json` (arbitrage humain : densité, coupes, scènes).
@@ -114,13 +117,26 @@ chaque tour) :
 
 ## Subagents desk
 
-Six subagents dans `.opencode/agent/` : `veilleur`, `comère`, `facteur`,
-`archiviste`, `juge`, `éditeur`. Lance-les un par un via Task (un seul à la fois,
-dans l'ordre ci-dessus). Chacun a son propre contexte — le fil principal ne
-porte pas 6× le socle éditorial.
+Sept subagents dans `.opencode/agent/` : `veilleur`, `comère`, `facteur`,
+`archiviste`, `promoteur`, `éditeur`, `juge`.
+
+**Étape 1 (parallèle)** — lancer dans n'importe quel ordre :
+- `veilleur` → signaux faibles (lis les harvests)
+- `comère` → scènes sociales (lis les harvests, indépendamment du veilleur)
+- `facteur` → vérification (lis les harvests, indépendamment)
+- `promoteur` → adoption/déploiement (lis les harvests)
+- `archiviste` → cohérence du corpus (lis `data/people.json`, éditions passées)
+
+**Étape 2** — `éditeur` → lit TOUTES les notes + harvests → `edition.json`
+
+**Étape 3** — `juge` → lit `edition.json` uniquement → verdict `publier`/`réviser`/`jeter`
+
+Chaque agent a une valeur cardinale, un centre d'intérêt et une motivation qui
+filtrent son regard. Ces valeurs créent des tensions productives que l'éditeur
+arbitre. Voir `prompts/desk/README.md` pour le détail.
 
 **Modèle différentiel (optionnel)** : par défaut les subagents héritent du modèle
 principal. Pour économiser des tokens, fixe un modèle *cheap* sur les agents de
-notes (`veilleur`, `comère`, `archiviste`) en ajoutant `model:` dans leur
+notes (`veilleur`, `comère`, `facteur`, `archiviste`, `promoteur`) en ajoutant `model:` dans leur
 frontmatter (ex. un Haiku / flash). Garde le modèle fort sur `éditeur` et `juge`
 (composition et verdict en dépendent).

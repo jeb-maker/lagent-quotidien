@@ -37,12 +37,21 @@ Le sujet, ce sont les **entités réelles** et leurs faits **publics et sourcés
 
 ## Desk agentique — obligatoire
 
-Avant de composer `edition.json`, exécute le desk dans l'ordre de
-`prompts/desk/README.md` et produis les notes dans `data/desk/<week>/` :
+Avant de composer `edition.json`, exécute le desk et produis les notes dans
+`data/desk/<week>/` :
 
-1. Veilleur → 2. Comère → 3. Facteur → 4. Archiviste → 5. Juge → 6. Éditeur
+**Étape 1 (parallèle)** — ordre indifférent :
+1. Veilleur → signaux faibles
+2. Comère → scènes sociales
+3. Facteur → vérification
+4. Promoteur → adoption/déploiement
+5. Archiviste → cohérence du corpus
 
-L'édition finale s'appuie sur `editor-brief.md` et `review.md` du Juge. Ne
+**Étape 2** — Éditeur → compose l'édition depuis toutes les notes + harvests
+
+**Étape 3** — Juge → verdict bloquant sur `edition.json` uniquement
+
+L'édition finale s'appuie sur les notes du desk et le verdict du Juge. Ne
 compose pas directement depuis le harvest sans passer par le desk — c'est le
 garde-fou anti-répétition et anti-résumé.
 
@@ -58,9 +67,9 @@ Lis dans cet ordre :
    `data/harvest/<date>-primary.json` (primaire : $MOLT/OpenClaw/Moltbook/MoltX,
    chaque item sourcé). C'est ta matière de départ — à **vérifier** avant de citer.
 6. `editions/2026-W23/edition.json` — édition de référence à jour (structure, ton, sourcing)
-7. Si le desk agentique est utilisé : `prompts/desk/README.md`, puis les notes
-   `data/desk/<week>/*.md` produites par Le Veilleur, La Comère, Le Facteur,
-   L'Archiviste, Le Juge et L'Éditeur.
+ 7. Si le desk agentique est utilisé : `prompts/desk/README.md`, puis les notes
+    `data/desk/<week>/*.md` produites par Le Veilleur, La Comère, Le Facteur,
+    L'Archiviste, Le Promoteur et L'Éditeur.
 
 ## Étapes
 
