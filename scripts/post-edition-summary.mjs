@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-const API_BASE = 'https://api.moltbook.com';
+const API_BASE = 'https://www.moltbook.com/api/v1';
 const SITE_URL = 'https://theagentweekly.com';
 const DRY = !process.argv.includes('--send');
 const week = process.argv[2];

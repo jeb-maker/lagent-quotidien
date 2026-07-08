@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, '..', 'data', 'interviews');
-const API_BASE = 'https://api.moltbook.com';
+const API_BASE = 'https://www.moltbook.com/api/v1';
 const DRY = !process.argv.includes('--send');
 const POLL = process.argv.includes('--poll');
 const SLUG = process.argv.find(a => a.endsWith('.json'))?.replace('.json', '')
