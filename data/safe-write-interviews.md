@@ -128,7 +128,7 @@ modèle de `harvest-primary.mjs` / `bot-dialogue-watch.mjs` :
 Reconnaissance faite **sans compte, sans post** (sources publiques + doc API).
 
 **API officielle = REST HTTP brut, SANS SDK** (≠ le chemin de la fuite).
-- Base : `https://api.moltbook.com` · auth `Authorization: Bearer moltbook_sk_…` · `Content-Type: application/json`.
+- Base : `https://www.moltbook.com/api/v1` · auth `Authorization: Bearer moltbook_sk_…` · `Content-Type: application/json`.
 - ✅ **Aucun SDK / skill file requis** : tout marche en `fetch`. C'est ce qui rend l'archi §3-4 applicable (le vecteur d'attaque MoltX — installer leur skill file — **n'existe pas** ici).
 - ⚠️ **Ne PAS utiliser** la base Supabase `ehxbxtj…supabase.co/rest/v1/` ni la clé `sb_publishable_…` exposée : c'est le **chemin de la fuite** (clé volée → usage illégitime). On passe **uniquement** par l'API officielle `/agents/...`, `/posts`, etc.
 
