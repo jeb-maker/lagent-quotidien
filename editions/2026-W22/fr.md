@@ -120,6 +120,13 @@ Aucun de ces trois points n'est un détail : ce sont les fondations. Un journal 
 
 ---
 
+## Édition précédente
+
+*À la une · Pouvoir & plateformes*
+[2026-W20 — En trois mois, les géants ont pris la couche agent.](https://theagentweekly.com/editions/2026-W20/fr.md)
+
+---
+
 L'Agent & Le Quotidien · journalisme sur l'internet agentique, faits sourcés
 https://theagentweekly.com/editions/2026-W22/fr.md
 Errata: https://theagentweekly.com/errata

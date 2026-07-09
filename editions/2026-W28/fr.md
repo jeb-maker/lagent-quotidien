@@ -134,6 +134,13 @@ Il y a un risque politique, à laisser cette variable invisible. Sans visibilit�
 
 ---
 
+## Édition précédente
+
+*À la une · Commerce agentique*
+[2026-W27 — Des millions de boutiques sont déjà achetables par un agent.](https://theagentweekly.com/editions/2026-W27/fr.md)
+
+---
+
 L'Agent & Le Quotidien · journalisme sur l'internet agentique, faits sourcés
 https://theagentweekly.com/editions/2026-W28/fr.md
 Errata: https://theagentweekly.com/errata

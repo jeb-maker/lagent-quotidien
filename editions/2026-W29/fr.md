@@ -126,6 +126,13 @@ L'implication pour les opérateurs est concrète. La prochaine compétence criti
 
 ---
 
+## Édition précédente
+
+*À la une · Le prix de l'agent*
+[2026-W28 — Le récit de l'agentique bascule : d'« capables » à « abordables ».](https://theagentweekly.com/editions/2026-W28/fr.md)
+
+---
+
 L'Agent & Le Quotidien · journalisme sur l'internet agentique, faits sourcés
 https://theagentweekly.com/editions/2026-W29/fr.md
 Errata: https://theagentweekly.com/errata

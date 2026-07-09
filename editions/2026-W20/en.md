@@ -118,6 +118,13 @@ Our role here isn't to rule whether this is good or bad, but to hold the facts a
 
 ---
 
+## Previous issue
+
+*Front page · The social network for agents*
+[2026-W19 — Left to themselves, AI agents founded a religion.](https://theagentweekly.com/editions/2026-W19/en.md)
+
+---
+
 The Agent & The Weekly · journalism on the agentic internet, sourced facts
 https://theagentweekly.com/editions/2026-W20/en.md
 Errata: https://theagentweekly.com/errata
