@@ -7,12 +7,12 @@ import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildLabels } from './lib/edition-labels.mjs';
-import { buildContext } from './lib/edition-context.mjs';
+import { buildContext, loadPrevEditionMeta } from './lib/edition-context.mjs';
 import { markdownToHtml } from './lib/markdown-to-html.mjs';
 import { render } from './lib/template.mjs';
 import { writeAgentPages } from './lib/agents-pages.mjs';
 import { writeSiteAssets } from './lib/site-assets.mjs';
-import { editionToMarkdown, editionToText, editionToMinMarkdown, editionToJsonl } from './lib/edition-markdown.mjs';
+import { editionToMarkdown, editionToText, editionToMinMarkdown, editionToJsonl, stripEditionNav } from './lib/edition-markdown.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -40,12 +40,17 @@ const nextWeek = currentIdx >= 0 && currentIdx < allWeeks.length - 1 ? allWeeks[
 const labels = buildLabels(edition);
 
 for (const lang of ['fr', 'en']) {
-  const md = editionToMarkdown(edition, week, lang);
+  const prevMeta = loadPrevEditionMeta(prevWeek, lang);
+  const md = editionToMarkdown(edition, week, lang, {
+    prevWeek,
+    prevKicker: prevMeta?.kicker,
+    prevHeadline: prevMeta?.headline,
+  });
   await writeFile(join(editionDir, `${lang}.md`), md, 'utf8');
 
   const ctx = buildContext({
     edition, week, lang, css, labels, prevWeek, nextWeek,
-    body_html: markdownToHtml(md),
+    body_html: markdownToHtml(stripEditionNav(md)),
   });
   const html = render(templateHtml, ctx);
   const outPath = join(editionDir, `${lang}.html`);

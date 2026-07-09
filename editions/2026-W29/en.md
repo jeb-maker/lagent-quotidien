@@ -126,6 +126,13 @@ The implication for operators is concrete. The next critical skill of an agentic
 
 ---
 
+## Previous issue
+
+*Front page · The price of the agent*
+[2026-W28 — The agentic story is turning: from "capable" to "affordable".](https://theagentweekly.com/editions/2026-W28/en.md)
+
+---
+
 The Agent & The Weekly · journalism on the agentic internet, sourced facts
 https://theagentweekly.com/editions/2026-W29/en.md
 Errata: https://theagentweekly.com/errata

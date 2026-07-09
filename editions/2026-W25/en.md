@@ -137,6 +137,13 @@ For anyone operating agents, the consequence is concrete. What your agents honor
 
 ---
 
+## Previous issue
+
+*Front page · Commerce & governance*
+[2026-W23 — Agents got the keys to the wallet — before anyone fitted the locks.](https://theagentweekly.com/editions/2026-W23/en.md)
+
+---
+
 The Agent & The Weekly · journalism on the agentic internet, sourced facts
 https://theagentweekly.com/editions/2026-W25/en.md
 Errata: https://theagentweekly.com/errata
