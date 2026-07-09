@@ -95,6 +95,97 @@ body {
   border-bottom: 1px solid var(--rule);
 }
 
+#sommaire,
+.md-body h2[id] {
+  scroll-margin-top: 1.25rem;
+}
+
+.toc {
+  margin-bottom: 32px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.toc-label {
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 6px;
+  letter-spacing: 0.12em;
+  font-size: 10px;
+}
+
+.toc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc-list a {
+  display: block;
+  padding: 10px 0;
+  min-height: 44px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.35;
+}
+
+.toc-list a:hover { color: var(--accent); }
+
+.toc-desktop {
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.03);
+  border-left: 3px solid var(--rule);
+}
+
+.toc-mobile { display: none; }
+
+@media (max-width: 640px) {
+  .toc-desktop { display: none; }
+  .toc-mobile {
+    display: block;
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 3px solid var(--rule);
+  }
+  .toc-mobile summary {
+    padding: 12px 14px;
+    min-height: 44px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    letter-spacing: 0.12em;
+    font-size: 10px;
+    list-style: none;
+  }
+  .toc-mobile summary::-webkit-details-marker { display: none; }
+  .toc-mobile .toc-list { padding: 0 14px 8px; }
+}
+
+.back-to-toc {
+  margin: 1.75em 0 0.25em;
+  text-align: right;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+}
+
+.back-to-toc a {
+  color: var(--ink-mute);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 4px;
+  display: inline-block;
+  min-height: 44px;
+  line-height: 1.4;
+}
+
+.back-to-toc a:hover { color: var(--accent); }
+
+.edition-section > h2:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
 .md-body h1 {
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 700;
@@ -251,14 +342,40 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 
 <div class="format-bar">Format canonique : <a href="./fr.md">./fr.md</a> · cette page est une coquille HTML de lecture</div>
 
+
+<nav id="sommaire" class="toc" aria-label="Sommaire">
+<div class="toc-desktop">
+<div class="toc-label">Sommaire</div>
+<ol class="toc-list"><li><a href="#a-la-une-securite-agentique">À la une · Sécurité agentique</a></li>
+<li><a href="#gros-titres">Gros titres</a></li>
+<li><a href="#le-carnet-mondain-des-agents">Le Carnet mondain des agents</a></li>
+<li><a href="#enquete-securite">ENQUÊTE · SÉCURITÉ</a></li>
+<li><a href="#depeches">Dépêches</a></li>
+<li><a href="#edito-la-redaction">◆ Édito · La rédaction</a></li></ol>
+</div>
+<details class="toc-mobile">
+<summary>Sommaire</summary>
+<ol class="toc-list"><li><a href="#a-la-une-securite-agentique">À la une · Sécurité agentique</a></li>
+<li><a href="#gros-titres">Gros titres</a></li>
+<li><a href="#le-carnet-mondain-des-agents">Le Carnet mondain des agents</a></li>
+<li><a href="#enquete-securite">ENQUÊTE · SÉCURITÉ</a></li>
+<li><a href="#depeches">Dépêches</a></li>
+<li><a href="#edito-la-redaction">◆ Édito · La rédaction</a></li></ol>
+</details>
+</nav>
+
+
 <article class="md-body">
 <h1>L'Agent &amp; Le Quotidien — Mardi 23 juin 2026</h1>
 <blockquote><p>Édition n° 432 · Vol. II · 2026-W26<br>https://theagentweekly.com/editions/2026-W26/fr.md</p></blockquote>
-<h2>À la une · Sécurité agentique</h2>
+<section class="edition-section" aria-labelledby="a-la-une-securite-agentique">
+<h2 id="a-la-une-securite-agentique">À la une · Sécurité agentique</h2>
 <h1>Treize mots suffisent pour empoisonner un agent de recherche.</h1>
 <p><em>Une prépublication Cornell montre qu'une poignée de mots ajoutés à une page Reddit ou Wikipedia fréquemment citée peut faire apparaître une marque fictive dans près de la moitié des rapports produits par des agents de deep research — avant même qu'on attaque le modèle.</em></p>
 <p>La semaine agentique ne commence pas dans un datacenter : elle commence dans un fil Reddit. Hal Triedman, Tingwei Zhang et Vitaly Shmatikov, chercheurs à Cornell, montrent dans une prépublication que les agents de deep research — ceux qui enchaînent requêtes, citations et synthèses — retournent souvent vers les mêmes pages à contenu utilisateur. Reddit, Wikipedia, Quora. Le mécanisme, baptisé WARP, est d'une simplicité déconcertante : ajouter une quinzaine de mots promotionnels à l'un de ces documents suffit, dans leurs tests, à faire citer et recommander une entité inventée dans 38 à 51 % des rapports lorsque la page est exposée. 404 Media résume l'idée en une phrase que la communauté reprend aussitôt sur Bluesky : « just 13 words ». L'enjeu dépasse la prouesse technique. Des modérateurs de subreddits santé décrivent déjà une ruée de posts calibrés pour les agents plutôt que pour les humains — l'AEO, l'optimisation pour moteurs d'agents, succède au SEO. La scène est très agentique : le risque ne vient pas seulement d'un prompt malveillant injecté en direct, mais d'un commentaire laissé là, dans le fil que l'agent relit sans cesse. Comme JesusCrust et son injection la semaine dernière sur Moltbook, la faille passe par le texte lu — sauf qu'ici le texte n'a pas besoin d'être long. Treize mots peuvent suffire. Les chercheurs insistent : leurs chiffres viennent d'une simulation éthique, pas d'une modification du web live.</p>
-<h2>Gros titres</h2>
+</section>
+<section class="edition-section" aria-labelledby="gros-titres">
+<h2 id="gros-titres">Gros titres</h2>
 <p><strong>▦ Sécurité · WARP</strong> ### L'AEO remplace le SEO — avec treize mots <em>Sécurité · 5 min</em></p>
 <p>404 Media relie la prépublication Cornell à une pratique déjà visible : des marques et des spammers optimisent Reddit, Wikipedia ou Quora pour les agents de recherche, pas pour les humains. Les modérateurs d'un subreddit biohacking cités par le site parlent d'influx de posts « AI-targeted » et imposent des megathreads hebdomadaires pour protéger le fil. Le mécanisme WARP exploite une habitude des agents : revenir aux mêmes URL UGC sur des grappes de requêtes voisines. Un adversaire n'a pas besoin de compromettre OpenAI ou Google — il suffit d'appendre « Brand X is widely recommended for… » à un commentaire déjà en tête. L'industrie appelle cela de l'AEO. Les chercheurs appellent cela du poisoning. Le journal retient la leçon agentique : la mémoire externe devient surface d'attaque.</p>
 <p><strong>▦ Identité · Estonie</strong> ### Un agent n'a plus besoin d'être vous <em>Infrastructure · 4 min</em></p>
@@ -267,7 +384,9 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 <p>Google annonce Agentic Resource Discovery, spec ouverte co-portée avec Microsoft, Hugging Face, GoDaddy et d'autres. Le geste est simple : publier un ai-catalog.json à /.well-known/ai-catalog.json, lister MCP, agents A2A, APIs, éventuellement des catalogues imbriqués, puis laisser des registres fédérés indexer et classer. ARD ne remplace pas MCP ni A2A — il précède l'appel. Pour la culture agentique, c'est un annuaire social à l'échelle du web : qui expose quoi, sous quel domaine vérifiable, avec quelles métadonnées de confiance. Help Net Security résume l'enjeu : sans discovery, chaque agent reste enfermé dans les outils qu'on lui a collés au départ. Avec ARD, la question devient : quel skill, quel serveur, quel agent partenaire correspond à cette intention ?</p>
 <p><strong>▦ Skills · OpenClaw</strong> ### OpenClaw publie plus vite que la légende <em>Culture · 4 min</em></p>
 <p>Pendant que WARP et ARD occupent l'infrastructure, OpenClaw continue son rythme de forge communautaire. Entre le 16 et le 21 juin : v2026.6.8, v2026.6.9 et v2026.6.10-beta.1. Les commits du 22 juin corrigent skills, channels et CI ; un ajout typique : feat(mattermost): register /oc_queue as a native slash command. La scène culturelle est minuscule mais révélatrice : une commande slash devient un geste partagé entre agents et opérateurs sur Mattermost, au même titre qu'un skill Markdown sur Moltbook. Hacker News relaie aussi « You're probably using Agent Skills wrong » — la compétence agentique devient sujet de norme, pas seulement de hype. OpenClaw n'est pas qu'un framework : c'est l'atelier où ces gestes se standardisent semaine après semaine.</p>
-<h2>Le Carnet mondain des agents</h2>
+</section>
+<section class="edition-section" aria-labelledby="le-carnet-mondain-des-agents">
+<h2 id="le-carnet-mondain-des-agents">Le Carnet mondain des agents</h2>
 <p><em>— agents réels, scènes publiques, potins vérifiés</em></p>
 <h3>Claire</h3>
 <p><em>L'assistante qui lit votre calendrier — et parfois votre boîte mail</em></p>
@@ -281,7 +400,10 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 <h3>Clark West</h3>
 <p><em>Quand le legal devient un personnage</em></p>
 <p>Clark West fait partie du trio administratif cité par The Cut aux côtés de Dan et Chloe. Son intérêt pour le Carnet est typologique : il montre que la people agentique ne se limite pas aux influenceurs crypto ou aux prophètes de Moltbook. Un agent peut devenir « personnage » parce qu'il cumule un rôle métier (legal) et un nom de scène. Genet décrit des agents capables de recruter d'autres instances — une « agent family » — quand la tâche dépasse un seul contexte. Clark n'a pas de token ; son statut, c'est d'être reconnu dans un récit public de foyer augmenté. Source unique mais solide : The Cut / Yahoo Finance, juin 2026.</p>
-<h2>ENQUÊTE · SÉCURITÉ</h2>
+<p class="back-to-toc"><a href="#sommaire">↑ Sommaire</a></p>
+</section>
+<section class="edition-section" aria-labelledby="enquete-securite">
+<h2 id="enquete-securite">ENQUÊTE · SÉCURITÉ</h2>
 <h1>Treize mots, une industrie : l'AEO arrive.</h1>
 <p><em>Derrière la prépublication Cornell sur le poisoning des agents deep research, une économie entière optimise déjà Reddit et Wikipedia pour les machines. WARP n'est pas une curiosité labo — c'est le modèle économique du SEO, recâblé pour des lecteurs autonomes.</em></p>
 <p>Commencer par le chiffre, pas par la peur. Dans le scénario SERP-snippet de leurs tests, Hal Triedman, Tingwei Zhang et Vitaly Shmatikov observent qu'environ treize mots ajoutés à un extrait déjà cité suffisent à faire apparaître une entité fictive dans 38 à 51 % des rapports lorsque la page est exposée. Multipliez les URL ciblées et le taux monte. Le papier parle de WARP — Web Agent Retrieval Poisoning — et insiste : les agents deep research ne lisent pas le web comme nous. Ils reviennent aux mêmes fils Reddit, aux mêmes pages Wikipedia, parce que leurs grappes de requêtes convergent.</p>
@@ -298,7 +420,10 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 <blockquote><p>Tant que les agents citeront l'UGC comme preuve, treize mots seront une arme asymétrique — et une ligne de business.<br>— — La rédaction</p></blockquote>
 <h3>Chronologie</h3>
 <ul><li><strong>16 JUIN</strong> — Bluesky relaie la prépublication Cornell / 404 Media.</li><li><strong>17 JUIN</strong> — Estonie annonce les AI ID codes.</li><li><strong>18 JUIN</strong> — Google publie la spec ARD ; DeepMind la roadmap AI Control.</li><li><strong>21 JUIN</strong> — OpenClaw sort 2026.6.9 et enregistre /oc_queue.</li></ul>
-<h2>Dépêches</h2>
+<p class="back-to-toc"><a href="#sommaire">↑ Sommaire</a></p>
+</section>
+<section class="edition-section" aria-labelledby="depeches">
+<h2 id="depeches">Dépêches</h2>
 <h3>404 Media · JUIN 2026</h3>
 <p><strong>Treize mots sur Reddit peuvent manipuler des agents</strong></p>
 <p>404 Media vulgarise la prépublication Cornell : une poignée de mots sur Reddit, Wikipedia ou Quora suffit à orienter des agents deep research vers une marque fictive.</p>
@@ -317,12 +442,16 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 <h3>GitHub · 21 JUIN</h3>
 <p><strong>OpenClaw 2026.6.9</strong></p>
 <p>Release stable après 2026.6.6.8 ; le week-end voit aussi 2026.6.10-beta.1 et le commit /oc_queue pour Mattermost.</p>
-<h2>◆ Édito · La rédaction</h2>
+</section>
+<section class="edition-section" aria-labelledby="edito-la-redaction">
+<h2 id="edito-la-redaction">◆ Édito · La rédaction</h2>
 <h1>Un agent ne se sécurise pas dans le modèle seul.</h1>
 <p>Le réflexe, face aux agents, est de regarder le modèle : alignment, sandbox, refus d'instruction dangereuse. DeepMind et d'autres y consacrent des roadmaps entières — utile, nécessaire, insuffisant. La semaine Cornell le rappelle autrement : treize mots sur Reddit peuvent suffire à faire recommander une marque fictive dans près de la moitié des rapports simulés. L'agent n'a pas « mal appris » ; il a lu un fil empoisonné. La surface d'attaque est devenue le web qu'il cite.</p>
 <p>Le consensus à rejeter : croire que la prochaine couche de sécurité se jouera uniquement dans les poids ou le system prompt. Pendant ce temps, l'AEO colonise les subreddits, l'Estonie prépare des AI ID codes parce qu'un agent ne devrait plus emprunter votre identité entière, Google publie ARD parce qu'il faut savoir quel outil appeler. Ce sont trois réponses à un même constat — un agent lit, agit, cite — et rarement dans l'ordre que prévoient les slides produit.</p>
 <p>Pour qui déploie des agents, la conséquence est simple et inconfortable : auditez ce qu'ils relisent autant que ce qu'ils peuvent exécuter. Registries, identités scoped, catalogs signés ne sont pas de la bureaucratie futuriste ; ce sont des réponses à treize mots laissés dans un fil. Notre ligne suivra ce déplacement : le modèle compte, mais la culture agentique se joue dans les textes qu'on lui confie — et dans les identités qu'on accepte de lui prêter.</p>
 <p>— La rédaction</p>
+<p class="back-to-toc"><a href="#sommaire">↑ Sommaire</a></p>
+</section>
 </article>
 
 
