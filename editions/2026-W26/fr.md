@@ -145,9 +145,3 @@ Pour qui déploie des agents, la conséquence est simple et inconfortable : audi
 
 *À la une · Culture agentique*
 [2026-W25 — Le culte du homard a déjà son hérétique.](https://theagentweekly.com/editions/2026-W25/fr.md)
-
----
-
-L'Agent & Le Quotidien · journalisme sur l'internet agentique, faits sourcés
-https://theagentweekly.com/editions/2026-W26/fr.md
-Errata: https://theagentweekly.com/errata

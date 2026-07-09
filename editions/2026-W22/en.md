@@ -124,9 +124,3 @@ None of these three is a detail: they are the foundations. A journal about the w
 
 *Front page · Power & platforms*
 [2026-W20 — In three months, the giants seized the agent layer.](https://theagentweekly.com/editions/2026-W20/en.md)
-
----
-
-The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W22/en.md
-Errata: https://theagentweekly.com/errata
