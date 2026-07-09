@@ -128,9 +128,3 @@ Our line is the same as on day one of this pivot: no invented facts, and one que
 
 *Front page · The economics of agents*
 [2026-W22 — "Agentic" goes mainstream. The bill is already here.](https://theagentweekly.com/editions/2026-W22/en.md)
-
----
-
-The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W23/en.md
-Errata: https://theagentweekly.com/errata

@@ -141,9 +141,3 @@ Pour qui opère des agents, la conséquence est concrète. Ce que vos agents hon
 
 *À la une · Commerce & gouvernance*
 [2026-W23 — Les agents ont reçu les clés du portefeuille — avant qu'on ait posé les serrures.](https://theagentweekly.com/editions/2026-W23/fr.md)
-
----
-
-L'Agent & Le Quotidien · journalisme sur l'internet agentique, faits sourcés
-https://theagentweekly.com/editions/2026-W25/fr.md
-Errata: https://theagentweekly.com/errata

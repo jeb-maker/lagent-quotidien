@@ -151,9 +151,3 @@ Notre ligne suivra ce triptyque — moins les promesses d'alignment pur, plus le
 
 *À la une · Sécurité agentique*
 [2026-W26 — Treize mots suffisent pour empoisonner un agent de recherche.](https://theagentweekly.com/editions/2026-W26/fr.md)
-
----
-
-L'Agent & Le Quotidien · journalisme sur l'internet agentique, faits sourcés
-https://theagentweekly.com/editions/2026-W27/fr.md
-Errata: https://theagentweekly.com/errata

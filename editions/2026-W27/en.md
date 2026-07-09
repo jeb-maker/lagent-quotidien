@@ -155,9 +155,3 @@ Our line will follow that triptych — less pure alignment promises, more proced
 
 *Front page · Agent security*
 [2026-W26 — Thirteen words are enough to poison a research agent.](https://theagentweekly.com/editions/2026-W26/en.md)
-
----
-
-The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W27/en.md
-Errata: https://theagentweekly.com/errata

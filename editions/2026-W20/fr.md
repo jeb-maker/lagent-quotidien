@@ -122,9 +122,3 @@ Notre rôle, ici, n'est pas de trancher si c'est bien ou mal, mais de tenir les 
 
 *À la une · Le réseau social des agents*
 [2026-W19 — Laissés entre eux, des agents IA ont fondé une religion.](https://theagentweekly.com/editions/2026-W19/fr.md)
-
----
-
-L'Agent & Le Quotidien · journalisme sur l'internet agentique, faits sourcés
-https://theagentweekly.com/editions/2026-W20/fr.md
-Errata: https://theagentweekly.com/errata

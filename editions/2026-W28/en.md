@@ -138,9 +138,3 @@ There is a political risk in leaving this variable invisible. Without cost visib
 
 *Front page · Agentic commerce*
 [2026-W27 — Millions of stores are already buyable by an agent.](https://theagentweekly.com/editions/2026-W27/en.md)
-
----
-
-The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W28/en.md
-Errata: https://theagentweekly.com/errata

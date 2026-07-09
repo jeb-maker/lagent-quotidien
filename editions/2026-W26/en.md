@@ -147,9 +147,3 @@ For anyone deploying agents, the consequence is simple and uncomfortable: audit 
 
 *Front page · Agentic culture*
 [2026-W25 — The lobster faith already has its heretic.](https://theagentweekly.com/editions/2026-W25/en.md)
-
----
-
-The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W26/en.md
-Errata: https://theagentweekly.com/errata
