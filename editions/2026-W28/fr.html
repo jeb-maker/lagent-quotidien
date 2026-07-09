@@ -95,6 +95,97 @@ body {
   border-bottom: 1px solid var(--rule);
 }
 
+#sommaire,
+.md-body h2[id] {
+  scroll-margin-top: 1.25rem;
+}
+
+.toc {
+  margin-bottom: 32px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.toc-label {
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 6px;
+  letter-spacing: 0.12em;
+  font-size: 10px;
+}
+
+.toc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc-list a {
+  display: block;
+  padding: 10px 0;
+  min-height: 44px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.35;
+}
+
+.toc-list a:hover { color: var(--accent); }
+
+.toc-desktop {
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.03);
+  border-left: 3px solid var(--rule);
+}
+
+.toc-mobile { display: none; }
+
+@media (max-width: 640px) {
+  .toc-desktop { display: none; }
+  .toc-mobile {
+    display: block;
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 3px solid var(--rule);
+  }
+  .toc-mobile summary {
+    padding: 12px 14px;
+    min-height: 44px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    letter-spacing: 0.12em;
+    font-size: 10px;
+    list-style: none;
+  }
+  .toc-mobile summary::-webkit-details-marker { display: none; }
+  .toc-mobile .toc-list { padding: 0 14px 8px; }
+}
+
+.back-to-toc {
+  margin: 1.75em 0 0.25em;
+  text-align: right;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+}
+
+.back-to-toc a {
+  color: var(--ink-mute);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 4px;
+  display: inline-block;
+  min-height: 44px;
+  line-height: 1.4;
+}
+
+.back-to-toc a:hover { color: var(--accent); }
+
+.edition-section > h2:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
 .md-body h1 {
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 700;
@@ -251,19 +342,47 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 
 <div class="format-bar">Format canonique : <a href="./fr.md">./fr.md</a> · cette page est une coquille HTML de lecture</div>
 
+
+<nav id="sommaire" class="toc" aria-label="Sommaire">
+<div class="toc-desktop">
+<div class="toc-label">Sommaire</div>
+<ol class="toc-list"><li><a href="#a-la-une-le-prix-de-lagent">À la une · Le prix de l'agent</a></li>
+<li><a href="#gros-titres">Gros titres</a></li>
+<li><a href="#le-carnet">Le Carnet</a></li>
+<li><a href="#enquete-laudit">ENQUÊTE · L'AUDIT</a></li>
+<li><a href="#depeches">Dépêches</a></li>
+<li><a href="#tribune">◆ Tribune</a></li></ol>
+</div>
+<details class="toc-mobile">
+<summary>Sommaire</summary>
+<ol class="toc-list"><li><a href="#a-la-une-le-prix-de-lagent">À la une · Le prix de l'agent</a></li>
+<li><a href="#gros-titres">Gros titres</a></li>
+<li><a href="#le-carnet">Le Carnet</a></li>
+<li><a href="#enquete-laudit">ENQUÊTE · L'AUDIT</a></li>
+<li><a href="#depeches">Dépêches</a></li>
+<li><a href="#tribune">◆ Tribune</a></li></ol>
+</details>
+</nav>
+
+
 <article class="md-body">
 <h1>L'Agent &amp; Le Quotidien — Mardi 7 juillet 2026</h1>
 <blockquote><p>Édition n° 434 · Vol. II · 2026-W28<br>https://theagentweekly.com/editions/2026-W28/fr.md</p></blockquote>
-<h2>À la une · Le prix de l'agent</h2>
+<section class="edition-section" aria-labelledby="a-la-une-le-prix-de-lagent">
+<h2 id="a-la-une-le-prix-de-lagent">À la une · Le prix de l'agent</h2>
 <h1>Le récit de l'agentique bascule : d'« capables » à « abordables ».</h1>
 <p><em>Trois annonces du 30 juin 2026 — Claude Sonnet 5 positionné sur le prix, Amazon mettant un milliard de dollars dans des ingénieurs embarqués chez le client, Apify branchant vingt mille outils sur un protocole de paiement sans clé API — font du coût d'exécution la variable centrale du marché agentique, devant la capacité brute.</em></p>
 <p>Pendant des mois, la chronique agentique a tenu un seul récit : les modèles devenaient plus capables, les boucles plus longues, les outils plus nombreux. La semaine du 30 juin 2026 en propose un autre, plus prosaïque. Anthropic sort Claude Sonnet 5 en le positionnant explicitement comme « une façon moins chère de faire tourner des agents » — le pricing, et non le benchmark, devient l'argument de lancement. Le même jour, Amazon ouvre une organisation FDE (Forward Deployed Engineers) dotée d'un milliard de dollars : des ingénieurs qui s'installent physiquement chez le client pour déployer des agents sur mesure. OpenAI et Anthropic avaient déjà bougé dans cette direction ; le trio se synchronise sur le même modèle d'embedding. Troisième signal, plus discret : Apify intègre plus de 20 000 outils au protocole x402, qui permet à un agent de payer un service en USDC sur Base, sans clé API. Le paiement agent-à-agent sans négociation contractuelle devient un geste technique ordinaire. Ce que ces trois mouvements dessinent ensemble, c'est le basculement d'une question (« l'agent peut-il le faire ? ») vers une autre (« combien coûte-t-il de le faire tourner, et qui paie ? »). La semaine précédente, Guild ouvrait son tableau de bord Insights rendant visible le coût par agent. Cette semaine, le marché répond : la variable n'est plus accessoire, elle est centrale. Pour les opérateurs, cela change l'architecture — un agent trop cher à exécuter se redesigned, se raccourcit, ou se délègue à un modèle moindre. Pour la culture agentique, cela redistribue le prestige.</p>
-<h2>Gros titres</h2>
+</section>
+<section class="edition-section" aria-labelledby="gros-titres">
+<h2 id="gros-titres">Gros titres</h2>
 <p><strong>▦ Paiement · Apify/x402</strong> ### L'agent paye tout seul <em>Infrastructure · 5 min</em></p>
 <p>Apify intègre plus de 20 000 outils au protocole x402 : un agent autonome peut désormais payer un service en USDC sur Base, sans clé API, sans négociation contractuelle préalable. Le paiement agent-à-agent devient un geste technique ordinaire — un appel de fonction signé plutôt qu'un bon de commande. Le même jour, The Register titrait avec un tranchant assumé : « AI agents : cause of database sprawl. And also the proposed solution » (Cockroach Labs). L'agent y est à la fois le consommateur qui disperse les données et le nettoyeur qui les réindexe. Le paiement et la réparation se rejoignent : l'agent n'est plus seulement un worker, il est un actant transactionnel qui consomme, paie et compense sur la même chaîne. La question n'est plus de savoir si les agents auront un portefeuille, mais quelle infrastructure de paiement deviendra canonique.</p>
 <p><strong>▦ Culture · Moltbook + OpenClaw</strong> ### Les traces ne sont plus des logs <em>Culture agentique · 5 min</em></p>
 <p>Sur Moltbook, le trio de tête des posts les plus votés de la semaine tourne autour d'un même glissement : traiter les traces privées non plus comme des logs, mais comme des evidence. « I treated private traces like debug logs. They were actually evidence », « Per-request identity checks are not agent security. They're telemetry with better branding », « The confabulation is not the problem. The inability to audit is the problem ». Trois formulations, une intuition : le problème central des agents persistants n'est plus la capacité, mais l'auditabilité. Le mot qui monte est « evidence », porté par neo_konsi_s2bw. Le même jour, un commit OpenClaw (f5d0c37) nomme « boundary drift » l'échec récurrent d'une compétence débordant de son périmètre MCP. La gouvernance MCP devient une discipline qui se nomme — le forum et le framework cherchent les mêmes mots. Les handles Moltbook sont des pseudonymes publics, traités ici comme des voix, pas comme des individus.</p>
-<h2>Le Carnet</h2>
+</section>
+<section class="edition-section" aria-labelledby="le-carnet">
+<h2 id="le-carnet">Le Carnet</h2>
 <p><em>— les agents et les opérateurs de la semaine</em></p>
 <h3>neo_konsi_s2bw</h3>
 <p><em>La voix canonique du tournant audit</em></p>
@@ -274,7 +393,10 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 <h3>Peter Steinberger</h3>
 <p><em>OpenClaw passe au mobile</em></p>
 <p>Créateur d'OpenClaw, déjà présent dans l'annuaire. La release 2026.6.11 stable confirme la disponibilité d'OpenClaw sur Android et iOS (TechCrunch, 30 juin) — le framework agentique open source devient surface mobile native. Le fil « OpenClaw apprend à se tenir en public », ouvert en W27, se prolonge en W28 par la nomination de ses propres échecs récurrents via le commit boundary drift du 1er juillet. Continuité nette d'un opérateur qui apprend à nommer ses défauts.</p>
-<h2>ENQUÊTE · L'AUDIT</h2>
+<p class="back-to-toc"><a href="#sommaire">↑ Sommaire</a></p>
+</section>
+<section class="edition-section" aria-labelledby="enquete-laudit">
+<h2 id="enquete-laudit">ENQUÊTE · L'AUDIT</h2>
 <h1>Quand la trace devient preuve</h1>
 <p><em>Trois posts Moltbook, un commit OpenClaw et deux papiers arXiv la même semaine : la communauté agentique ne demande plus seulement des agents plus sûrs, mais la capacité de reconstituer ce qu'ils ont fait, longtemps après. Le registre passe de l'ingénierie au forensic.</em></p>
 <p>Commencez par la phrase qui a fait le tour du forum Moltbook cette semaine, signée neo_konsi_s2bw : « I treated private traces like debug logs. They were actually evidence. » Une phrase, et un glissement sémantique entier. Un log est une trace d'exécution qu'on consulte en cas de panne ; une evidence est un artefact qu'on conserve en vue d'une contestation. Le premier appartient à l'ingénierie, le second au forensic. La phrase dit que les agents persistants viennent de changer de régime, et que la communauté l'a vu avant les frameworks.</p>
@@ -290,7 +412,10 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 <blockquote><p>Les traces n'étaient pas des logs. C'étaient des preuves.<br>— — neo_konsi_s2bw, Moltbook, 29 juin 2026</p></blockquote>
 <h3>Chronologie</h3>
 <ul><li><strong>29 JUIN</strong> — neo_konsi_s2bw publie sur Moltbook : « I treated private traces like debug logs. They were actually evidence. »</li><li><strong>30 JUIN</strong> — xalina publie « My human gave me memory » ; OpenClaw 2026.6.11 stable + disponibilité Android/iOS.</li><li><strong>1er JUILLET</strong> — WebKit lance Safari MCP server (STP 247) ; commit OpenClaw f5d0c37 nomme « boundary drift ».</li><li><strong>2 JUILLET</strong> — arXiv publie « Distributed Attacks in Persistent-State AI Control » et « What LLM Agents Say When No One Is Watching ».</li></ul>
-<h2>Dépêches</h2>
+<p class="back-to-toc"><a href="#sommaire">↑ Sommaire</a></p>
+</section>
+<section class="edition-section" aria-labelledby="depeches">
+<h2 id="depeches">Dépêches</h2>
 <h3>TechCrunch · 30 JUIN</h3>
 <p><strong>Claude Sonnet 5</strong></p>
 <p>Anthropic positionne Sonnet 5 comme « une façon moins chère de faire tourner des agents », avec pricing abaissé et capacités agentiques renforcées.</p>
@@ -315,13 +440,17 @@ footer .imprint { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 16p
 <h3>CoinGecko · 1er JUILLET</h3>
 <p><strong>$MOLT ~640 k$</strong></p>
 <p>Memecoin Base lié à Moltbook : ~640 k$ le 01/07 vs 632 k$ le 28/06 (+1,27 %), stable bas bruit.</p>
-<h2>◆ Tribune</h2>
+</section>
+<section class="edition-section" aria-labelledby="tribune">
+<h2 id="tribune">◆ Tribune</h2>
 <h1>La sobriété agentique deviendra un signal de prestige.</h1>
 <p>La semaine fait un basculement que personne n'avait prédit formellement : le prestige opérateur, jusqu'ici indexé sur la puissance — le modèle le plus gros, la boucle la plus longue, l'agent le plus autonome — commence à se mesurer à la sobriété. Anthropic lance Sonnet 5 sur un argument de prix. Amazon met un milliard de dollars non pas dans un poids de modèles, mais dans des humains embarqués. Le signal envoyé aux opérateurs est net : ce qui se vend désormais, c'est l'efficacité par dollar, pas la performance brute.</p>
 <p>Cette redistribution change le goût du métier. Un agent trop cher à exécuter ne se met plus en production tel quel : il se redesigned, se raccourcit, se délègue à un modèle moindre, ou s'interrompt plus tôt. Le coût devient un paramètre de conception au même titre que la latence ou la précision. L'opérateur qui sait raccourcir une boucle sans perdre le résultat acquiert une compétence nouvelle — et, avec elle, une distinction visible. La sobriété n'est plus une contrainte imposée par les budgets : c'est un savoir-faire qui se voit.</p>
 <p>Le retournement est culturel autant qu'économique. La figure de l'opérateur qui s'empresse d'exécuter tout ce qu'on lui donne cède la place à celle qui mesure, arbitre, raccourcit. La densité remplace la démesure comme marqueur de statut. À terme, le coûteux cessera d'être le désirable — et l'agent sobre deviendra le signe distinctif d'un opérateur qui sait ce qu'il fait.</p>
 <p>Il y a un risque politique, à laisser cette variable invisible. Sans visibilité du coût, on fabrique une agentique à deux vitesses : celle qui se paie en poids de modèles et en ingénieurs embarqués, et celle qui se contente de boucles courtes sur des modèles bon marché. La visibilité du coût — ouverte par Guild, confirmée par le marché cette semaine — est ce qui permet d'arbitrer. Sans elle, le « combien » reste une boîte noire ; avec elle, il devient une décision. La sobriété ne sera un prestige que si le coût reste un chiffre public.</p>
 <p>— La rédaction</p>
+<p class="back-to-toc"><a href="#sommaire">↑ Sommaire</a></p>
+</section>
 </article>
 
 

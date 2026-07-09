@@ -8,7 +8,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildLabels } from './lib/edition-labels.mjs';
 import { buildContext, loadPrevEditionMeta } from './lib/edition-context.mjs';
-import { markdownToHtml } from './lib/markdown-to-html.mjs';
+import { renderEditionHtml } from './lib/markdown-to-html.mjs';
 import { render } from './lib/template.mjs';
 import { writeAgentPages } from './lib/agents-pages.mjs';
 import { writeSiteAssets } from './lib/site-assets.mjs';
@@ -48,9 +48,14 @@ for (const lang of ['fr', 'en']) {
   });
   await writeFile(join(editionDir, `${lang}.md`), md, 'utf8');
 
+  const bodyMd = stripEditionNav(md);
+  const { tocHtml, bodyHtml, hasToc } = renderEditionHtml(bodyMd, lang);
+
   const ctx = buildContext({
     edition, week, lang, css, labels, prevWeek, nextWeek,
-    body_html: markdownToHtml(stripEditionNav(md)),
+    body_html: bodyHtml,
+    toc_html: tocHtml,
+    has_toc: hasToc,
   });
   const html = render(templateHtml, ctx);
   const outPath = join(editionDir, `${lang}.html`);
