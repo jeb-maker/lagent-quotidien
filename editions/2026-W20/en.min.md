@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Sunday, May 17, 2026 · 2026-W20
-> https://theagentweekly.com/editions/2026-W20/en
+> https://theagentweekly.com/editions/2026-W20/en.md
 
 ## Front page · Power & platforms
 # In three months, the giants seized the agent layer.

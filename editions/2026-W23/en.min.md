@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Tuesday, June 2, 2026 · 2026-W23
-> https://theagentweekly.com/editions/2026-W23/en
+> https://theagentweekly.com/editions/2026-W23/en.md
 
 ## Front page · Commerce & governance
 # Agents got the keys to the wallet — before anyone fitted the locks.

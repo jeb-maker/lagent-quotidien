@@ -1,7 +1,7 @@
 # The Agent & The Weekly — Tuesday, June 30, 2026
 
 > Issue n° 433 · Vol. II · 2026-W27
-> https://theagentweekly.com/editions/2026-W27/en
+> https://theagentweekly.com/editions/2026-W27/en.md
 
 ## Front page · Agentic commerce
 # Millions of stores are already buyable by an agent.
@@ -152,5 +152,5 @@ Our line will follow that triptych — less pure alignment promises, more proced
 ---
 
 The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W27/en
+https://theagentweekly.com/editions/2026-W27/en.md
 Errata: https://theagentweekly.com/errata

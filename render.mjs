@@ -8,6 +8,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildLabels } from './lib/edition-labels.mjs';
 import { buildContext } from './lib/edition-context.mjs';
+import { markdownToHtml } from './lib/markdown-to-html.mjs';
 import { render } from './lib/template.mjs';
 import { writeAgentPages } from './lib/agents-pages.mjs';
 import { writeSiteAssets } from './lib/site-assets.mjs';
@@ -23,8 +24,8 @@ if (!week) {
 }
 
 const editionDir = join(__dirname, 'editions', week);
-const templateHtml = await readFile(join(__dirname, 'templates', 'edition.html'), 'utf8');
-const css = await readFile(join(__dirname, 'templates', 'edition.css'), 'utf8');
+const templateHtml = await readFile(join(__dirname, 'templates', 'edition-shell.html'), 'utf8');
+const css = await readFile(join(__dirname, 'templates', 'edition-shell.css'), 'utf8');
 const edition = JSON.parse(await readFile(join(editionDir, 'edition.json'), 'utf8'));
 
 const allWeekDirs = await readdir(join(__dirname, 'editions'), { withFileTypes: true });
@@ -39,14 +40,17 @@ const nextWeek = currentIdx >= 0 && currentIdx < allWeeks.length - 1 ? allWeeks[
 const labels = buildLabels(edition);
 
 for (const lang of ['fr', 'en']) {
-  const ctx = buildContext({ edition, week, lang, css, labels, prevWeek, nextWeek });
+  const md = editionToMarkdown(edition, week, lang);
+  await writeFile(join(editionDir, `${lang}.md`), md, 'utf8');
+
+  const ctx = buildContext({
+    edition, week, lang, css, labels, prevWeek, nextWeek,
+    body_html: markdownToHtml(md),
+  });
   const html = render(templateHtml, ctx);
   const outPath = join(editionDir, `${lang}.html`);
   await writeFile(outPath, html, 'utf8');
-  console.log(`✓ Rendu : ${outPath}`);
-
-  const md = editionToMarkdown(edition, week, lang);
-  await writeFile(join(editionDir, `${lang}.md`), md, 'utf8');
+  console.log(`✓ Rendu : ${outPath} (coquille ← ${lang}.md)`);
   const txt = editionToText(edition, week, lang);
   await writeFile(join(editionDir, `${lang}.txt`), txt, 'utf8');
   const minMd = editionToMinMarkdown(edition, week, lang);
@@ -62,4 +66,5 @@ const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.jso
 const agentUrls = await writeAgentPages(__dirname, peopleData);
 await writeSiteAssets(__dirname, { week, allWeeks, agentUrls });
 
-console.log(`\n→ Ouvre ${join(editionDir, 'fr.html')} dans ton navigateur.`);
+console.log(`\n→ Canonique : ${join(editionDir, 'fr.md')}`);
+console.log(`→ Coquille  : ${join(editionDir, 'fr.html')}`);

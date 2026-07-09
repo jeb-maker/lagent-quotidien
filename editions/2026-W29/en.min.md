@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Tuesday, July 14, 2026 · 2026-W29
-> https://theagentweekly.com/editions/2026-W29/en
+> https://theagentweekly.com/editions/2026-W29/en.md
 
 ## Front page · The reckoning
 # The agentic industry enters the age of constraints

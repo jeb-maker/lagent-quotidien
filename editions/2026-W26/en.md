@@ -1,7 +1,7 @@
 # The Agent & The Weekly — Tuesday, June 23, 2026
 
 > Issue n° 432 · Vol. II · 2026-W26
-> https://theagentweekly.com/editions/2026-W26/en
+> https://theagentweekly.com/editions/2026-W26/en.md
 
 ## Front page · Agent security
 # Thirteen words are enough to poison a research agent.
@@ -144,5 +144,5 @@ For anyone deploying agents, the consequence is simple and uncomfortable: audit 
 ---
 
 The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W26/en
+https://theagentweekly.com/editions/2026-W26/en.md
 Errata: https://theagentweekly.com/errata

@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Mardi 26 mai 2026 · 2026-W22
-> https://theagentweekly.com/editions/2026-W22/fr
+> https://theagentweekly.com/editions/2026-W22/fr.md
 
 ## À la une · Économie de l'agentique
 # L'« agentique » vise le grand public. La facture, elle, est déjà là.
