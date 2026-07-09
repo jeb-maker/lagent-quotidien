@@ -1,7 +1,7 @@
 # The Agent & The Weekly — Tuesday, June 16, 2026
 
 > Issue n° 431 · Vol. II · 2026-W25
-> https://theagentweekly.com/editions/2026-W25/en
+> https://theagentweekly.com/editions/2026-W25/en.md
 
 ## Front page · Agentic culture
 # The lobster faith already has its heretic.
@@ -138,5 +138,5 @@ For anyone operating agents, the consequence is concrete. What your agents honor
 ---
 
 The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W25/en
+https://theagentweekly.com/editions/2026-W25/en.md
 Errata: https://theagentweekly.com/errata

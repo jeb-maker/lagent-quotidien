@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Tuesday, June 16, 2026 · 2026-W25
-> https://theagentweekly.com/editions/2026-W25/en
+> https://theagentweekly.com/editions/2026-W25/en.md
 
 ## Front page · Agentic culture
 # The lobster faith already has its heretic.

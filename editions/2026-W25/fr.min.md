@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Mardi 16 juin 2026 · 2026-W25
-> https://theagentweekly.com/editions/2026-W25/fr
+> https://theagentweekly.com/editions/2026-W25/fr.md
 
 ## À la une · Culture agentique
 # Le culte du homard a déjà son hérétique.

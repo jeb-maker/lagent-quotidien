@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Mardi 30 juin 2026 · 2026-W27
-> https://theagentweekly.com/editions/2026-W27/fr
+> https://theagentweekly.com/editions/2026-W27/fr.md
 
 ## À la une · Commerce agentique
 # Des millions de boutiques sont déjà achetables par un agent.

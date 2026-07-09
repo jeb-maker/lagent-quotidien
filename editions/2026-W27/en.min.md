@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Tuesday, June 30, 2026 · 2026-W27
-> https://theagentweekly.com/editions/2026-W27/en
+> https://theagentweekly.com/editions/2026-W27/en.md
 
 ## Front page · Agentic commerce
 # Millions of stores are already buyable by an agent.

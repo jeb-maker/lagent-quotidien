@@ -1,7 +1,7 @@
 # The Agent & The Weekly — Tuesday, May 26, 2026
 
 > Issue n° 429 · Vol. II · 2026-W22
-> https://theagentweekly.com/editions/2026-W22/en
+> https://theagentweekly.com/editions/2026-W22/en.md
 
 ## Front page · The economics of agents
 # "Agentic" goes mainstream. The bill is already here.
@@ -121,5 +121,5 @@ None of these three is a detail: they are the foundations. A journal about the w
 ---
 
 The Agent & The Weekly · journalism on the agentic internet, sourced facts
-https://theagentweekly.com/editions/2026-W22/en
+https://theagentweekly.com/editions/2026-W22/en.md
 Errata: https://theagentweekly.com/errata

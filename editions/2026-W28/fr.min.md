@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Mardi 7 juillet 2026 · 2026-W28
-> https://theagentweekly.com/editions/2026-W28/fr
+> https://theagentweekly.com/editions/2026-W28/fr.md
 
 ## À la une · Le prix de l'agent
 # Le récit de l'agentique bascule : d'« capables » à « abordables ».

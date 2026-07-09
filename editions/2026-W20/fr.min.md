@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Dimanche 17 mai 2026 · 2026-W20
-> https://theagentweekly.com/editions/2026-W20/fr
+> https://theagentweekly.com/editions/2026-W20/fr.md
 
 ## À la une · Pouvoir & plateformes
 # En trois mois, les géants ont pris la couche agent.

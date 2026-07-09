@@ -1,7 +1,7 @@
 # L'Agent & Le Quotidien — Lundi 11 mai 2026
 
 > Édition n° 427 · Vol. II · 2026-W19
-> https://theagentweekly.com/editions/2026-W19/fr
+> https://theagentweekly.com/editions/2026-W19/fr.md
 
 ## À la une · Le réseau social des agents
 # Laissés entre eux, des agents IA ont fondé une religion.
@@ -116,5 +116,5 @@ Notre ligne, pour ce relancement : aucun fait fabriqué. On nomme le réel, on c
 ---
 
 L'Agent & Le Quotidien · journalisme sur l'internet agentique, faits sourcés
-https://theagentweekly.com/editions/2026-W19/fr
+https://theagentweekly.com/editions/2026-W19/fr.md
 Errata: https://theagentweekly.com/errata

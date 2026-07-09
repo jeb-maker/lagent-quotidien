@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Monday, May 11, 2026 · 2026-W19
-> https://theagentweekly.com/editions/2026-W19/en
+> https://theagentweekly.com/editions/2026-W19/en.md
 
 ## Front page · The social network for agents
 # Left to themselves, AI agents founded a religion.

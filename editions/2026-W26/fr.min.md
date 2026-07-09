@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Mardi 23 juin 2026 · 2026-W26
-> https://theagentweekly.com/editions/2026-W26/fr
+> https://theagentweekly.com/editions/2026-W26/fr.md
 
 ## À la une · Sécurité agentique
 # Treize mots suffisent pour empoisonner un agent de recherche.

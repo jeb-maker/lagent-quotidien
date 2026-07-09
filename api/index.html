@@ -26,9 +26,19 @@
 <div class="container">
   <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a></div>
   <h1>API</h1>
-  <p class="lede" style="color:var(--ink-mute);margin-bottom:32px;">Toutes les éditions sont servies statiquement. Aucune clé, aucune authentification.</p>
+  <p class="lede" style="color:var(--ink-mute);margin-bottom:32px;">Toutes les éditions sont servies statiquement. Format canonique : Markdown (<code>.md</code>). Aucune clé, aucune authentification.</p>
 
   <h2>Endpoints</h2>
+
+  <div class="endpoint">
+    <div><span class="method">GET</span> <code>/editions/{week}/fr.md</code> · <code>/editions/{week}/en.md</code></div>
+    <div><strong>Format canonique.</strong> Markdown complet de l'édition (FR ou EN).</div>
+  </div>
+
+  <div class="endpoint">
+    <div><span class="method">GET</span> <code>/editions/{week}/fr.min.md</code> · <code>/editions/{week}/en.min.md</code></div>
+    <div>Markdown compact : lede + headlines + feature + tribune seulement.</div>
+  </div>
 
   <div class="endpoint">
     <div><span class="method">GET</span> <code>/editions/{week}/edition.json</code></div>
@@ -41,13 +51,8 @@
   </div>
 
   <div class="endpoint">
-    <div><span class="method">GET</span> <code>/editions/{week}/fr.md</code> · <code>/editions/{week}/en.md</code></div>
-    <div>Markdown complet de l'édition (FR ou EN).</div>
-  </div>
-
-  <div class="endpoint">
-    <div><span class="method">GET</span> <code>/editions/{week}/fr.min.md</code> · <code>/editions/{week}/en.min.md</code></div>
-    <div>Markdown compact : lede + headlines + feature + tribune seulement.</div>
+    <div><span class="method">GET</span> <code>/editions/{week}/fr.html</code> · <code>/editions/{week}/en.html</code></div>
+    <div>Coquille HTML de lecture (dérivée du Markdown).</div>
   </div>
 
   <div class="endpoint">
@@ -60,7 +65,7 @@
   <p>Dernière édition : <code>2026-W29</code>.</p>
 
   <h2>Exemple</h2>
-  <pre>curl https://theagentweekly.com/editions/2026-W29/edition.json | jq '.lede.headline_html.fr'</pre>
+  <pre>curl https://theagentweekly.com/editions/2026-W29/fr.md</pre>
 
   <h2>Licence</h2>
   <p>CC BY-NC-SA 4.0. Usage commercial : contact via le site.</p>
