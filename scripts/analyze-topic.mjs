@@ -10,10 +10,15 @@
 //   - topic.json    (sujet, date, nombre d'angles, statut)
 //   - angles.md     (vide — à remplir à l'étape 1)
 //   - findings/     (dossier vide — rempli par les mineurs à l'étape 2)
-//   - synthesis.md  (vide — rempli à l'étape 3)
+//   - synthesis.md  (vide — rempli à l'étape 3, confronté à l'étape 3bis)
 //   - bibliography.md (vide — rempli à l'étape 4)
+//   - review.md     (vide — rempli à l'étape 5 : pre-mortem + verdict)
 //
-// L'orchestration des subagents (étapes 1-3) est faite par l'opérateur (opencode
+// Statuts de topic.json : angles-pending → mining → synthesis → review-pending
+// → done (verdict `publier` dans review.md). `réviser`/`jeter` gardent
+// review-pending.
+//
+// L'orchestration des subagents (étapes 1-5) est faite par l'opérateur (opencode
 // ou équivalent) en suivant prompts/analyze-topic.md. Ce script ne fait que
 // préparer la structure et l'index.
 
@@ -101,6 +106,25 @@ writeFileSync(
   join(dir, "bibliography.md"),
   `# Bibliographie — ${topic}\n\n<!-- Rempli à l'étape 4. Tri par niveau de preuve, puis par angle. -->\n`
 );
+writeFileSync(
+  join(dir, "review.md"),
+  `# Relecture adverse — ${topic}
+
+<!-- Rempli à l'étape 5 par un relecteur qui n'a participé ni au minage ni à
+la synthèse. Sections attendues (cf. prompts/analyze-topic.md) :
+
+## Pre-mortem
+| Cause plausible | Passage concerné | Gravité (haute/moyenne/basse) |
+
+## Contrôles
+(notes [confiance × preuve] justifiées ? sections ## Recherche présentes ?
+source niveau 5 déguisée ?)
+
+## Verdict
+publier / réviser / jeter — un seul mot. \`publier\` impossible si une cause
+de gravité haute reste sans parade. -->
+`
+);
 
 console.log(`✓ Atelier créé : ${dir}`);
 console.log(`  Sujet        : ${topic}`);
@@ -109,3 +133,5 @@ console.log(`  Date         : ${date}`);
 console.log("");
 console.log("Prochaine étape : générer les angles dans angles.md (étape 1),");
 console.log("puis lancer 1 subagent general par angle (étape 2, parallèle).");
+console.log("Fin de parcours : relecture adverse dans review.md (étape 5) —");
+console.log("statut done seulement après verdict `publier`.");
