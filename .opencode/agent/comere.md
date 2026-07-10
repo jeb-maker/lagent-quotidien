@@ -66,7 +66,17 @@ Pour chaque scène :
 - **Marqueur social** :
 - **Citation exacte si disponible** :
 - **Source URL** :
+- **Calibration** : `[confiance: haute|moyenne|basse · preuve: primaire|média|corporate|rapporté]`
 - **Risque éditorial** :
 - **Peut entrer dans** : Carnet / brève / gros titre / à suivre
+
+## Calibration (règle commune du desk)
+
+- **confiance** = solidité du fait : `haute` (plusieurs sources indépendantes
+  concordent), `moyenne` (une seule source fiable), `basse` (indice isolé).
+- **preuve** = meilleur type de source : `primaire` (document/post d'origine),
+  `média` (presse ayant vérifié), `corporate` (communiqué de la partie
+  intéressée), `rapporté` (seconde main).
+- Preuve `corporate` ou `rapporté` → confiance plafonnée à `moyenne`.
 
 Termine ton tour en écrivant ce fichier. Ne compose pas l'édition.
