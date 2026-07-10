@@ -168,3 +168,21 @@ vie-publique.fr, strategie-plan.gouv.fr, info.gouv.fr, nber.org, aefinfo.fr, bfm
   N4, redondant avec l'OFCE (chiffre INSEE T1 2025 : 7,4 %), non retenu en source principale.
 - https://ofce.fr/pdf/pbrief/2026/OFCEpbrief157.pdf (Coquet, 2026, financement de
   l'apprentissage) — N2, pertinent mais redondant avec le Policy Brief 117 et l'IGAS-IGF.
+
+## Confrontation (étape 3bis) — face à l'angle 10
+
+**Positionnement : reformulation.** Les deux corpus ne mesurent pas la même variable et
+l'angle 10 le concède lui-même (sa « tension interne » : « outputs ≠ outcomes », illustrée
+par le CICE — promesse « tenue » au sens de Thomson et al., mais ~100 000 emplois pour
+~18 Md€/an selon France Stratégie 2020). Reformulation exacte : *« Les gouvernements
+français font majoritairement ce qu'ils annoncent (60-72 % des promesses au moins
+partiellement exécutées, N1 : Thomson et al. 2017 ; Grossman & Guinaudeau 2025), mais
+les effets chiffrés que ces actions promettaient ne sont pas atteints ou pas mesurables
+(mes F1-F5). L'écart annonces/effets n'est donc pas un artefact de perception : c'est un
+écart entre exécution et efficacité. »* Mes trois cas le confirment terme à terme : la
+loi « plein emploi » est votée (output tenu) mais le chômage prévu est à 8,3 % contre
+5 % promis ; France 2030 décaisse (output tenu) mais son impact est déclaré invérifiable
+par la Cour des comptes ; le baromètre industriel existe (output) mais son solde
+s'effondre (outcome). Je maintiens un point contre leur F5 (« fenêtre trop courte ») :
+quand l'objectif annoncé porte lui-même une échéance chiffrée (5 % en 2027), l'évaluer
+à cette échéance n'est pas prématuré — c'est le contrat de mesure fixé par l'annonceur.
