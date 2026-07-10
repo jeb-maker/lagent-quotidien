@@ -48,6 +48,25 @@ citations, handles, fichiers, extraits).
 | Tribune | thèse tranchée, pas panorama |
 | Feature | longue ou coupée — jamais 3 paragraphes répétitifs |
 
+## Arbitrages (obligatoire, dans `notes.md`)
+
+Les notes du desk se contredisent par construction (le veilleur voit un signal,
+le facteur doute de la source, le promoteur y voit une adoption). Ces tensions
+sont la matière première — ton arbitrage doit être **auditable**.
+
+Ajoute dans `editions/<week>/notes.md` une section `## Arbitrages` : une ligne
+par désaccord entre notes du desk ayant pesé sur l'édition.
+
+| Tension (agents en désaccord) | Décision | Raison |
+|---|---|---|
+| ex. veilleur voit un signal X, facteur le marque NON | couper | ACH « inventé » non réfutée |
+
+- **Décision** = `garder` / `couper` / `nuancer` (avec la formulation retenue).
+- Un fait marqué **NON** par le facteur ne peut être `gardé` sans une source
+  nouvelle, tracée dans les notes.
+- Utilise les tags `[confiance · preuve]` des notes : à tension égale, la note
+  la mieux sourcée l'emporte.
+
 ## Anti-répétition
 
 Avant publication, remplis la matrice :

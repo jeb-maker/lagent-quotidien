@@ -31,9 +31,39 @@ interprétation éditoriale.
 
 ## Format de sortie
 
-| Affirmation | Source | Vérifié ? | Type de source | Problème | Correction proposée |
-|---|---|---|---|---|---|
+| Affirmation | Source | Vérifié ? | Type de source | Confiance | Problème | Correction proposée |
+|---|---|---|---|---|---|---|
 
 Types de source : primaire / média / corporate / récit rapporté / marché.
 
 Marque **NON** si la source ne soutient pas directement l'affirmation.
+
+## Calibration (règle commune du desk)
+
+La colonne **Confiance** = `haute` / `moyenne` / `basse` :
+
+- `haute` : plusieurs sources indépendantes concordent ;
+- `moyenne` : une seule source fiable ;
+- `basse` : indice isolé ou signal non recoupé.
+
+Type de source `corporate`, `récit rapporté` ou `marché` → confiance plafonnée
+à `moyenne`, quelle que soit la précision de l'affirmation.
+
+## Hypothèses concurrentes (ACH-lite)
+
+Pour toute affirmation marquée **NON** ou de confiance `basse`, ajoute sous le
+tableau un bloc d'hypothèses concurrentes. Ne cherche pas ce qui confirme
+l'hypothèse séduisante — cherche ce qui **réfuterait** chacune :
+
+### ACH — <affirmation>
+
+| Hypothèse | Ce qui la soutient | Ce qui la réfuterait | État |
+|---|---|---|---|
+| Vrai tel quel | | | |
+| Vrai mais exagéré/déformé | | | |
+| Inventé ou invérifiable | | | |
+
+- **État** = `soutenue` / `affaiblie` / `réfutée`, d'après les sources trouvées.
+- Si l'hypothèse « inventé » n'est pas réfutée par une source publique, ta
+  recommandation est **couper** — pas « nuancer ». (Précédent : la « grève
+  RentAHuman », inventée puis retirée.)
