@@ -1,0 +1,69 @@
+# 09. Communication gouvernementale
+
+Angle : science politique / études de communication. Question : la structure même de la communication gouvernementale (cycle d'annonces, réannonces, plans successifs) produit-elle mécaniquement un écart avec la mise en œuvre ?
+
+## Findings
+
+**1. La littérature peer-reviewed confirme que la communication publique est structurellement concentrée sur l'annonce, en fin de cycle de politique publique.** Une étude publiée en 2025 dans l'*International Journal of Strategic Communication* (analyse critique de la littérature + entretiens délibératifs avec des praticiens seniors, dont des responsables OCDE et Open Government Partnership) conclut que la communication stratégique des gouvernements démocratiques est « à prédominance unidirectionnelle », mobilisée « à la fin du processus pour annoncer et promouvoir les politiques » (*to announce and promote policies*), et que dans beaucoup de cadres publiés du cycle de politique publique, la communication n'est « systématiquement traitée à aucune étape ». Autrement dit : l'appareil de communication est dimensionné pour produire des annonces, pas pour accompagner (ni vérifier) la mise en œuvre — un biais de structure, pas d'individus. L'étude chiffre l'investissement : le Government Communication Service britannique emploie plus de 7 000 communicants, pour ~750 M£ de dépenses de communication publique en 2023-2024.
+— Source : https://www.tandfonline.com/doi/full/10.1080/1553118X.2025.2572076 (article 2025, consulté le 2026-07-10) — **N1**.
+
+**2. L'écart annonce/application est mesuré institutionnellement en France : le taux d'application des lois décroche depuis 2017-2018.** Le bilan annuel du Sénat sur l'application des lois (session 2024-2025, arrêté au 31 mars 2026, rapport déposé le 26 juin 2026) constate : sur 394 mesures réglementaires d'application prévues, 262 publiées, soit 66 % ; 8 lois sur 34 nécessitant des mesures d'application n'ont fait l'objet d'« aucune mesure d'application attendue ». Le bilan de la session précédente (2023-2024, arrêté au 31 mars 2025) donnait un taux global d'environ 59 %, en recul de cinq points, contre « près de 80 % » pour les sessions 2017-2018 et 2018-2019. La rapporteure Sylvie Vermeillet parle d'un « décrochage des taux d'application depuis la session 2017-2018 ». Le rapport souligne explicitement le coût de l'annonce non suivie : les acteurs « se seront adaptés aux mesures annoncées dès leur vote », d'où déception et mécontentement d'autant plus grands que la médiatisation a été forte.
+— Sources : https://www.senat.fr/rap/r25-802/r25-802-syn.pdf (synthèse, consultée le 2026-07-10) — **N3** ; https://www.senat.fr/rap/r24-710/r24-7101.pdf (rapport n° 710, 2024-2025, consulté le 2026-07-10) — **N3** ; https://acteurspublics.fr/articles/le-taux-dapplication-des-lois-remonte-malgre/ (Acteurs Publics, 2026, consulté le 2026-07-10) — **N4**.
+
+**3. L'appareil central de communication gouvernementale a grossi sans transparence budgétaire équivalente.** Le rapport de la Cour des comptes sur le Service d'information du Gouvernement (SIG), publié en janvier 2024, relève que les moyens budgétaires du service « ont été accrus » mais que les crédits « ne sont pas toujours intégrés dans les prévisions des lois de finances » et ont dû faire l'objet d'« abondements en cours d'exercice, ce qui affaiblit la transparence de l'information du Parlement ». Les accords-cadres interministériels de communication pilotés par le SIG ont atteint **527,2 M€ sur la période 2017-2022**, avec des outils de suivi jugés insuffisants. La Cour note aussi que le positionnement du SIG « n'a pas toujours été bien tranché entre organe de communication politique du Gouvernement et service de communication administratif » — l'ambiguïté même qui alimente le cycle d'annonces.
+— Source : https://www.ccomptes.fr/fr/publications/le-service-dinformation-du-gouvernement-sig et le document associé https://www.ccomptes.fr/fr/documents/68022 (rapport janvier 2024 ; contenu consulté le 2026-07-10 via extraits indexés, le site ayant expiré en accès direct) — **N3**.
+
+**4. Cas documenté de réannonce (2023) : la « prime enseignants » de Gabriel Attal.** Le 28 septembre 2023 sur TF1, le ministre de l'Éducation évoque une prime pour les enseignants « dans des allures d'annonce » ; la prime de pouvoir d'achat avait en réalité été décidée en juin 2023 et annoncée par Stanislas Guérini pour l'ensemble des fonctionnaires éligibles. La porte-parole du SNUipp-FSU : « On dirait qu'à peine arrivé au ministère, il annonce une prime. Mais non. » Défense du cabinet, révélatrice de la grammaire de la réannonce : « le ministre n'a pas parlé d'annonce hier soir. Il a dit "on versera", pas "je vous annonce que" ». Le versement, prévu en septembre, avait de surcroît glissé à octobre-novembre.
+— Source : https://actu.fr/societe/enseignants-la-prime-promise-par-gabriel-attal-avait-deja-ete-annoncee-au-mois-de-juin_60145059.html (actu.fr, 29 septembre 2023, consulté le 2026-07-10) — **N4**. Cas analogue antérieur à la période mais structurellement identique : les « 100 euros de Smic » de décembre 2018, en partie accélération d'une prime d'activité déjà programmée (https://www.rtl.fr/actu/politique/smic-la-hausse-annoncee-est-en-partie-l-acceleration-d-une-mesure-deja-prevue-7795880365, RTL, décembre 2018, consulté le 2026-07-10) — **N4**.
+
+**5. Cas documenté de plans successifs (2021-2024) : la santé mentale des enfants, jugée « effet d'annonce » par une revue à comité de lecture.** *L'Information psychiatrique* (vol. 100, n° 5, mai 2024) dresse l'inventaire : feuille de route santé mentale de juin 2018 (37 actions), enrichie en 2021 par les 30 mesures des Assises de la santé mentale, rattrapage financier réel (50, 80, 110, 110 M€/an de 2018 à 2021) — mais « les mesures prises depuis 2019 apparaissent donc davantage comme un effet d'annonce même si l'intention apparaît louable », faute de traiter les ressources humaines (déserts pédopsychiatriques). La revue documente aussi la mécanique de réannonce : des Assises de la santé de l'enfant « annoncées solennellement en 2022 » par François Braun, puis « quelques ministres de la Santé plus tard et après deux ans de reports successifs », re-promises par Frédéric Valletoux pour le 24 mai 2024.
+— Source : https://doi.org/10.1684/ipe.2024.2715 (*L'Information psychiatrique*, mai 2024, consulté le 2026-07-10) — **N1**.
+
+## Tension interne
+
+- **Mécanique vs conjoncturel.** La thèse « structurelle » (finding 1 : la communication est câblée sur l'annonce, donc l'écart est mécanique) est nuancée par les données du Sénat (finding 2) : le taux d'application *fluctue* avec la conjoncture — chute pendant l'instabilité politique de 2023-2024 (~59 %), remontée à 66 % en 2024-2025, alors que le nombre de mesures attendues chutait de 37 %. Si l'écart était purement mécanique, il ne réagirait pas ainsi au contexte politique. L'écart semble donc structurel dans sa direction (l'annonce précède et excède toujours l'exécution) mais conjoncturel dans son amplitude.
+- **Réannonce = manipulation ou pédagogie ?** Les cas de presse (findings 4) traitent la réannonce comme une tromperie ; mais la littérature de communication publique (finding 1, et la doctrine OCDE qu'elle cite) considère la répétition et l'accompagnement dans le temps comme une condition d'appropriation des réformes — la communication « après le temps court de l'annonce » serait précisément ce qui manque. La même répétition est lue tantôt comme le symptôme, tantôt comme le remède.
+- **Argent réel vs effet d'annonce.** Le cas santé mentale (finding 5) montre des crédits réels et croissants (350 M€ cumulés 2018-2021) *et* un jugement d'« effet d'annonce » par les professionnels : l'écart ne se mesure pas seulement en euros versés mais en capacité effective (postes pourvus, délais), ce que le cycle d'annonces ne capture jamais.
+
+## Projection
+
+Pas une prédiction ; des déclencheurs observables.
+
+**À 1 an (mi-2027) :**
+- Publication du prochain bilan sénatorial d'application des lois (juin 2027, session 2025-2026) : si le taux repasse durablement sous 60 % malgré un flux législatif réduit, la thèse du décrochage structurel se renforce ; s'il remonte vers 75 %, la thèse conjoncturelle gagne.
+- Suivi vérifiable des 109 Md€ d'investissements IA annoncés au Sommet de Paris (février 2025) : l'Élysée avait promis « une annonce sur la première tranche » à Choose France — la traçabilité (ou non) des tranches effectivement engagées est un test grandeur nature du ratio annonce/exécution (https://www.lejournaldesentreprises.com/article/109-milliards-deuros-pour-lia-la-france-est-elle-le-nouvel-eldorado-de-lintelligence-artificielle-2117162, consulté le 2026-07-10, N4).
+- Suites données aux recommandations de la Cour des comptes sur le SIG (référé de suivi ou rapport annuel) : intégration ou non des crédits de communication en loi de finances initiale.
+
+**À 5 ans (2031) :**
+- Si les rapports d'application des lois et les décomptes de fact-checking deviennent des données ouvertes systématiquement croisées (le Sénat publie déjà la base APLEG), des agents de vérification automatique pourraient rendre l'écart annonce/décret visible en temps réel — l'annonce perdrait son avantage temporel (elle est aujourd'hui jugée avant d'être vérifiable). Déclencheur observable : première intégration d'un suivi automatisé annonce→décret par une rédaction ou une institution.
+- À l'inverse, si le volume d'annonces continue de croître plus vite que la capacité réglementaire (constat sénatorial d'une « corrélation inverse » entre mesures attendues et taux d'application), le coût politique de l'annonce non tenue — déjà identifié par le Sénat comme générateur de mécontentement — devient un facteur mesurable de défiance, à suivre dans les vagues annuelles du Baromètre de la confiance politique (CEVIPOF).
+
+## Recherche
+
+Traçabilité PRISMA-lite.
+
+**Moteurs/bases interrogés :** moteur de recherche web généraliste (outil de recherche intégré, 10 juillet 2026), avec consultation directe des pages via fetch ; corpus atteints : Taylor & Francis Online, Persée, Cairn (shs.cairn.info), senat.fr, ccomptes.fr, vie-publique.fr, presse (actu.fr, RTL, 20 Minutes, Acteurs Publics, Déchets Infos). Google Scholar non interrogeable directement ; les articles peer-reviewed ont été atteints via leurs éditeurs (tandfonline.com, doi.org/John Libbey).
+
+**Requêtes exactes (verbatim) :**
+- `réannonce politique gouvernement France fact-checking "déjà annoncé" plan`
+- `budget Service d'information du Gouvernement SIG communication gouvernementale rapport Cour des comptes`
+- `Cairn "politique de l'annonce" gouverner par l'annonce communication gouvernementale article revue`
+- `policy announcement implementation gap political communication peer-reviewed study agenda-setting`
+- `Les Décodeurs Le Monde annonces Macron recyclées "déjà annoncé" milliards plan`
+- `Cairn "effet d'annonce" politiques publiques France plans successifs santé mentale banlieues sociologie`
+- `Cairn revue "Politiques de communication" annonce gouvernementale temporalité "agenda" exécutif France article`
+- `CheckNews Libération OR "Les Surligneurs" plan annoncé jamais appliqué décret application loi mesures non appliquées bilan`
+- `Sénat rapport application des lois 2024 2025 taux décrets d'application mesures réglementaires bilan annuel`
+
+**Sources consultées mais écartées :**
+- https://www.lemonde.fr/les-decodeurs/article/2023/04/18/dans-les-trois-chantiers-prioritaires-d-emmanuel-macron-beaucoup-de-mesures-deja-annoncees-ou-engagees_6170051_4355770.html — Les Décodeurs, 18/04/2023, exactement dans le sujet (mesures « déjà annoncées ou engagées »), mais page inaccessible (anti-bot « Client Challenge ») : contenu non vérifié, donc non cité comme fait.
+- https://contribuablesassocies.org/2024/01/30/le-service-d-information-du-gouvernement-sur-la-sellette/ — think tank militant (N5) ; ses chiffres (23,4 M€ de budget SIG 2022, +71 %) non repris faute de recoupement direct dans le rapport consulté.
+- https://ludovicgadeau-psychotherapie.com/critique-des-politiques-publiques-en-matiere-de-sante-mentale/ — blog professionnel d'opinion (N5), remplacé par la source peer-reviewed N1 sur le même terrain.
+- https://www.revuepolitique.fr/lere-du-coup-de-com-rend-imperieuse-une-strategie-de-communication-efficace/ — tribune d'opinion (N5).
+- https://www.lefigaro.fr/debats/2008/10/04/01005-20081004ARTFIG00235-redonnons-du-sens-a-la-communication-politique-.php — tribune de Thierry Saussez, alors directeur du SIG : partie prenante, utile pour la doctrine « temps court de l'annonce / temps long de l'application » mais non retenue comme preuve.
+- https://www.brookings.edu/wp-content/uploads/2026/05/From-agenda-setting-to-policy-adoption-Why-some-ideas-succeed-while-others-fail.pdf — rapport Brookings 2026 (N5/think tank, cadrage théorique Kingdon utile mais non spécifique à la France).
+- https://www.persee.fr/doc/reso_0751-7971_1996_num_14_75_3687 — article Réseaux 1996 sur la communication gouvernementale autour de la CSG (N1) : solide mais hors période 2021-2026, écarté au profit de sources datées dans la fenêtre.
+- https://www.nouvelobs.com/politique/20091122.OBS8503/plan-banlieue-amara-houspille-les-ministeres-en-retard.html — cas « plan Espoir banlieues » (47 maisons de santé annoncées, 3 réalisées) : documenté mais 2009, hors fenêtre.
+- https://www.vie-publique.fr/rapport/32722-organisation-et-fonctionnement-du-service-dinformation-du-gouvernement — fiche du rapport Cour des comptes 2012 sur le SIG : antérieur, remplacé par le rapport de janvier 2024.
+
+**Non trouvé :** étude peer-reviewed quantifiant spécifiquement, pour la France 2021-2026, le taux de « réannonces » dans la communication de l'exécutif (le décompte n'existe, à notre connaissance, que sous forme de fact-checks ponctuels).
