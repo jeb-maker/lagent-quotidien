@@ -2,7 +2,7 @@
 
 > Atelier d'analyse multi-perspectives — 2026-07-10
 > Méthode : `prompts/analyze-topic.md` · Angles : 10
-> Statut : mining (étape 2 en cours)
+> Statut : done (verdict `publier` au second passage, cf. review.md)
 
 ## Angles disciplinaires
 
