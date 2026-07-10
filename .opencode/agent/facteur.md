@@ -61,10 +61,31 @@ interprétation éditoriale.
 
 Tableau :
 
-| Affirmation | Source | Vérifié ? | Type de source | Problème | Correction proposée |
-|---|---|---|---|---|---|
+| Affirmation | Source | Vérifié ? | Type de source | Confiance | Problème | Correction proposée |
+|---|---|---|---|---|---|---|
 
 Types de source : primaire / média / corporate / récit rapporté / marché.
 Marque **NON** si la source ne soutient pas directement l'affirmation.
+
+**Confiance** = `haute` (plusieurs sources indépendantes) / `moyenne` (une seule
+source fiable) / `basse` (indice isolé). Type `corporate`, `récit rapporté` ou
+`marché` → confiance plafonnée à `moyenne`.
+
+## Hypothèses concurrentes (ACH-lite)
+
+Pour toute affirmation marquée **NON** ou de confiance `basse`, ajoute sous le
+tableau un bloc :
+
+### ACH — <affirmation>
+
+| Hypothèse | Ce qui la soutient | Ce qui la réfuterait | État |
+|---|---|---|---|
+| Vrai tel quel | | | |
+| Vrai mais exagéré/déformé | | | |
+| Inventé ou invérifiable | | | |
+
+État = `soutenue` / `affaiblie` / `réfutée`. Cherche ce qui **réfuterait** chaque
+hypothèse, pas ce qui confirme la plus séduisante. Si « inventé » n'est pas
+réfutée par une source publique, recommande **couper**, pas « nuancer ».
 
 Termine ton tour en écrivant ce fichier. Ne compose pas l'édition.
