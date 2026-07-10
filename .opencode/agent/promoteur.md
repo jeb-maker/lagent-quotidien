@@ -68,7 +68,18 @@ Pour chaque item :
 - **Source URL** :
 - **Date** :
 - **Chiffre(s) clé(s)** :
-- **Niveau de confiance** : haut / moyen / faible
+- **Calibration** : `[confiance: haute|moyenne|basse · preuve: primaire|média|corporate|rapporté]`
 - **Ce qui manque pour confirmer** :
+
+## Calibration (règle commune du desk)
+
+- **confiance** = solidité du fait : `haute` (plusieurs sources indépendantes
+  concordent), `moyenne` (une seule source fiable), `basse` (indice isolé).
+- **preuve** = meilleur type de source : `primaire` (document/post d'origine),
+  `média` (presse ayant vérifié), `corporate` (communiqué de la partie
+  intéressée), `rapporté` (seconde main).
+- Preuve `corporate` ou `rapporté` → confiance plafonnée à `moyenne`. Un chiffre
+  d'adoption qui ne sort que d'un communiqué reste `corporate`, même s'il est
+  précis.
 
 Termine ton tour en écrivant ce fichier. Ne compose pas l'édition.

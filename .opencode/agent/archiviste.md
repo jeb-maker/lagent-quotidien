@@ -65,4 +65,15 @@ La mémoire du journal : ce qui a déjà été dit, corrigé, retiré ou promis.
 - ## Risques de retour au fictionnel
 - ## Notes pour `data/people.json`
 
+## Calibration (règle commune du desk)
+
+Chaque contradiction ou entité à mettre à jour porte un tag
+`[confiance: haute|moyenne|basse · preuve: primaire|média|corporate|rapporté]` :
+
+- **confiance** = solidité du constat : `haute` (les deux versions sont tracées
+  dans le corpus), `moyenne` (une des deux versions est mal sourcée), `basse`
+  (soupçon à vérifier).
+- **preuve** = meilleur type de source qui soutient le constat.
+- Preuve `corporate` ou `rapporté` → confiance plafonnée à `moyenne`.
+
 Termine ton tour en écrivant ce fichier. Ne compose pas l'édition.

@@ -128,12 +128,16 @@ Sept subagents dans `.opencode/agent/` : `veilleur`, `comère`, `facteur`,
 - `archiviste` → cohérence du corpus (lis `data/people.json`, éditions passées)
 
 **Étape 2** — `éditeur` → lit TOUTES les notes + harvests → `edition.json`
+(+ section `## Arbitrages` dans `notes.md`)
 
-**Étape 3** — `juge` → lit `edition.json` uniquement → verdict `publier`/`réviser`/`jeter`
+**Étape 3** — `juge` → lit `edition.json` uniquement → pre-mortem + verdict
+`publier`/`réviser`/`jeter`
 
 Chaque agent a une valeur cardinale, un centre d'intérêt et une motivation qui
 filtrent son regard. Ces valeurs créent des tensions productives que l'éditeur
-arbitre. Voir `prompts/desk/README.md` pour le détail.
+arbitre. Chaque note est calibrée `[confiance · preuve]` ; le facteur passe les
+affirmations douteuses à l'ACH-lite (hypothèses concurrentes). Voir
+`prompts/desk/README.md` pour le détail.
 
 **Modèle différentiel (optionnel)** : par défaut les subagents héritent du modèle
 principal. Pour économiser des tokens, fixe un modèle *cheap* sur les agents de

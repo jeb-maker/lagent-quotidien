@@ -14,7 +14,12 @@ Règles communes :
 - pas de fait négatif inventé sur entité/personne/agent nommé ;
 - la voix publiée reste **La rédaction** ;
 - les personnalités et valeurs servent à diversifier le regard, pas à romancer
-  le réel.
+  le réel ;
+- **calibration** : chaque item des notes porte un tag
+  `[confiance: haute|moyenne|basse · preuve: primaire|média|corporate|rapporté]`.
+  Preuve `corporate` ou `rapporté` → confiance plafonnée à `moyenne`. La
+  confiance mesure le recoupement (haute = plusieurs sources indépendantes),
+  la preuve mesure le meilleur type de source.
 
 ## Valeurs du desk
 
@@ -57,8 +62,23 @@ Lancer en une seule fois (ou séquentiellement, ordre indifférent) :
 
 6. `editeur` → lit TOUTES les notes (veille, scenes, factcheck, progress,
    continuity) + harvests → compose `edition.json` + `notes.md`
+   (dont une section `## Arbitrages` : chaque désaccord entre notes du desk,
+   la décision garder/couper/nuancer et sa raison — l'arbitrage est auditable)
 
 ### Étape 3 — Verdict
 
 7. `juge` → lit `edition.json` uniquement → `data/desk/<week>/review.md`
-   (section `## Verdict` = porte bloquante)
+   (section `## Verdict` = porte bloquante ; précédée d'un `## Pre-mortem` :
+   les 3 causes les plus plausibles d'un désastre post-publication, avec
+   gravité — pas de `publier` si une gravité haute reste sans parade)
+
+## Outils contradictoires
+
+Deux mécanismes empruntés à l'analyse structurée complètent le workflow :
+
+- **ACH-lite** (facteur) : toute affirmation marquée NON ou de confiance basse
+  reçoit un tableau d'hypothèses concurrentes (vrai / exagéré / inventé) avec,
+  pour chacune, ce qui la **réfuterait**. Si « inventé » n'est pas réfutée,
+  on coupe.
+- **Pre-mortem** (juge) : le verdict est rendu après avoir imaginé l'échec et
+  remonté ses causes, pas seulement après relecture.

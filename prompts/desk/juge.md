@@ -39,6 +39,20 @@ Une rubrique = une fonction. Une idée forte = une seule apparition comme thèse
 
 publier / réviser / jeter
 
+## Pre-mortem
+
+Avant de rendre le verdict, projette-toi : *l'édition est publiée et se révèle
+être un désastre pour le journal*. Liste les **3 causes les plus plausibles**,
+chacune avec le passage précis de l'édition concerné :
+
+| Cause plausible du désastre | Passage concerné | Gravité |
+|---|---|---|
+| ex. le chiffre X ne vient que d'un communiqué et sera démenti | gros titre 2 | haute |
+
+Gravité = `haute` / `moyenne` / `basse`. Le verdict `publier` n'est possible
+que si aucune cause de gravité `haute` ne subsiste sans parade (coupe,
+nuance ou source supplémentaire déjà présente dans l'édition).
+
 ## 5 coupes prioritaires
 
 ## 5 renforcements prioritaires

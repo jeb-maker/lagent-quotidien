@@ -41,5 +41,19 @@ Pour chaque item :
 - **Pourquoi c'est intéressant** :
 - **Source URL** :
 - **Date** :
-- **Niveau de confiance** : haut / moyen / faible
+- **Calibration** : `[confiance: haute|moyenne|basse · preuve: primaire|média|corporate|rapporté]`
 - **À vérifier avant publication** :
+
+## Calibration (règle commune du desk)
+
+Chaque item porte un tag à deux dimensions, façon GIEC :
+
+- **confiance** = ton jugement sur la solidité du fait. `haute` : plusieurs
+  sources indépendantes concordent ; `moyenne` : une seule source fiable ;
+  `basse` : indice isolé ou signal non recoupé.
+- **preuve** = le meilleur type de source qui le soutient. `primaire` : document
+  ou post d'origine ; `média` : presse ayant vérifié ; `corporate` : communiqué
+  de la partie intéressée ; `rapporté` : récit de seconde main.
+
+Une confiance haute ne compense jamais une preuve faible : si la preuve est
+`corporate` ou `rapporté`, la confiance plafonne à `moyenne`.
