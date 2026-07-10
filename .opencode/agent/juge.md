@@ -63,6 +63,10 @@ Une rubrique = une fonction. Une idée forte = une seule apparition comme thèse
 > `réviser` et `jeter` la ferment (exit 1) jusqu'à correction réelle.
 
 - ## Verdict — `publier` / `réviser` / `jeter` (un seul mot)
+- ## Pre-mortem — « l'édition publiée se révèle un désastre » : les 3 causes
+  les plus plausibles, chacune avec le passage concerné et une gravité
+  `haute`/`moyenne`/`basse`. Verdict `publier` impossible si une cause de
+  gravité `haute` subsiste sans parade dans l'édition.
 - ## 5 coupes prioritaires
 - ## 5 renforcements prioritaires
 - ## Idées répétées — | Idée | Où | Recommandation |
