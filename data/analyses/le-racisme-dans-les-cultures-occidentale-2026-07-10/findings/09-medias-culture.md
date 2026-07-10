@@ -1,0 +1,65 @@
+# Angle 09 — Médias, culture et légitimation des hiérarchies
+
+## Cadrage et limites
+
+Cet angle examine quatre objets qu'il faut garder distincts : **le contenu** produit (visibilité, rôles, cadrages), **sa réception** déclarée par les publics, **l'association** entre exposition et attitudes, et **l'effet causal** d'un message assigné expérimentalement. Une analyse de contenu ne prouve pas un effet sur le public ; une corrélation entre régime médiatique et opinion ne tranche pas la causalité inverse ni l'auto-sélection ; une expérience identifie mieux un effet immédiat, mais rarement sa durée ou son importance dans un régime médiatique réel.
+
+« Minorités » ne désigne pas les mêmes catégories selon les terrains : catégories raciales aux États-Unis, origine perçue en France, ethnicité au Royaume-Uni, statut migratoire, nationalité ou religion dans une grande partie de l'Europe. Les résultats ne décrivent donc pas une « culture occidentale » homogène. Ils portent surtout sur les États-Unis et l'Europe occidentale, sur la télévision et la presse traditionnelles ; l'Europe orientale, le Canada, l'Australie, la Nouvelle-Zélande, les plateformes et les médias produits par les groupes minorisés restent moins couverts.
+
+## Findings
+
+### 1. La visibilité s'est accrue de façon très inégale selon les groupes et les rôles : compter les présences ne suffit pas
+
+Une analyse longitudinale des 345 émissions américaines de première partie de soirée les plus regardées, sur 12 saisons entre 1987 et 2009, observe une sous-représentation persistante des personnages latinos, asiatiques-américains et autochtones, ainsi que des rôles stéréotypés différents selon les groupes ; les personnages noirs avaient atteint une quasi-parité numérique, mais restaient concentrés dans certains genres et rôles. La quantité et la qualité des représentations covariaient avec les attitudes raciales agrégées des personnes blanches mesurées par l'ANES entre 1988 et 2008. C'est une preuve robuste de **contenu longitudinal** et une **association** populationnelle, non une identification causale : les attitudes sociales peuvent aussi transformer les programmes, et les données agrégées ne mesurent pas l'exposition individuelle.
+
+- Source : R. Tukachinsky, D. Mastro et M. Yarchi, *Journal of Social Issues* 71(1), 2015, [DOI](https://doi.org/10.1111/josi.12094), consulté le 2026-07-10. **N1** : article évalué par les pairs, analyse de contenu longitudinale couplée à des enquêtes nationales répétées.
+
+### 2. En Europe, le cadrage de la migration est souvent négatif ou conflictuel, mais varie avec le groupe, le pays et le type de média
+
+Une revue de 89 articles de revues (2000–juin 2018) conclut que les migrants sont généralement moins visibles que leur poids démographique et fréquemment cadrés comme menace économique, culturelle ou sécuritaire. Mais elle documente aussi des différences structurantes : les Européens de l'Est sont davantage associés à l'économie et à l'État social, les non-Européens à la culture ou à la sécurité ; les tabloïds britanniques sont plus négatifs que les journaux de référence ; la presse suédoise était plus positive pendant la « crise » de 2015, la presse britannique plus négative ; télévision, presse et formats de débat ne produisent pas les mêmes images. Seulement 20 des 78 études de contenu comparaient plusieurs pays, neuf plus de deux ; une seule des 22 études d'effets incluait un pays d'Europe orientale. Le motif commun est donc probabiliste, pas paneuropéen.
+
+- Source : J.-M. Eberl et al., *Annals of the International Communication Association* 42(3), 2018, [DOI](https://doi.org/10.1080/23808985.2018.1497452), consulté le 2026-07-10. **N1** : revue de littérature évaluée par les pairs avec recherche bibliographique explicitée ; elle n'est toutefois ni exhaustive ni une méta-analyse.
+
+### 3. Le lien immigration–crime peut devenir une routine éditoriale relativement autonome des tendances criminelles
+
+Dans 4 340 757 articles publiés par six grands journaux des Pays-Bas et de Flandre entre 1999 et 2015, environ un tiers des articles sur l'immigration mentionnaient le crime (32,0 % en Flandre ; 33,6 % aux Pays-Bas), environ un quart l'économie et environ un dixième le terrorisme. Les trajectoires étaient proches mais non identiques : le lien au terrorisme diminuait aux Pays-Bas et augmentait en Flandre. Après prise en compte de l'autocorrélation et du temps, les niveaux réels de criminalité ne prédisaient pas la fréquence du lien immigration–crime dans l'un ou l'autre terrain. Cela établit une **sélection/covariation du contenu**, pas que les informations étaient fausses ni que les journalistes avaient une intention raciste : l'analyse automatique détecte une coprésence thématique, sans coder le ton, et ses indicateurs criminels ne mesurent pas l'implication des immigrés.
+
+- Source : L. Jacobs, A. Damstra, M. Boukes et K. De Swert, *Mass Communication and Society* 21(4), 2018, [DOI](https://doi.org/10.1080/15205436.2018.1442479), consulté le 2026-07-10. **N1** : article évalué par les pairs, comparaison longitudinale avec statistiques publiques et validation manuelle d'un sous-échantillon.
+
+### 4. Les représentations ont un effet moyen modeste mais mesurable sur les attitudes ; les expériences identifient aussi des effets sur des préférences de politique publique
+
+La méta-analyse la plus large repérée agrège 60 études issues de 49 articles : les représentations négatives dégradent les évaluations des groupes minorisés (**r = 0,14**, IC 95 % [0,10 ; 0,18], 56 études, n = 16 476), tandis que les représentations positives les améliorent (**r = −0,17** avec le codage des auteurs, IC 95 % [−0,25 ; −0,08], 24 études, n = 7 899). Les résultats couvrent informations et divertissement, attitudes cognitives/affectives, comportements et soutien à des politiques ; l'hétérogénéité est forte (I² = 86 % et 93 %) et les tests de modération souvent peu puissants. Le corpus mêle associations et expériences ; aucune différence d'effet selon le dessin d'étude n'a été statistiquement détectée, ce qui ne démontre pas leur équivalence.
+
+Une expérience américaine antérieure précise le maillon politique : l'assignation à un bref sujet de journal local montrant un suspect noir augmentait, chez les participants blancs mais non noirs, le soutien aux politiques pénales punitives et les évaluations négatives des Afro-Américains. Elle identifie un **effet causal immédiat du stimulus**, pas l'effet durable de la consommation ordinaire ni un effet transposable sans test à d'autres pays.
+
+- Sources : M. Saleem et al., *Media Psychology*, 2025, [DOI](https://doi.org/10.1080/15213269.2025.2498374), consulté le 2026-07-10. **N1** : méta-analyse évaluée par les pairs, modèle à effets aléatoires et tailles d'effet publiées ; F. D. Gilliam Jr. et S. Iyengar, *American Journal of Political Science* 44(3), 2000, [DOI](https://doi.org/10.2307/2669264), consulté le 2026-07-10. **N1** : article évalué par les pairs, protocole expérimental complété par des données d'enquête.
+
+### 5. Les régulateurs français et britannique mesurent deux problèmes différents : présence à l'écran et sentiment d'être représenté
+
+Le suivi de l'Arcom montre qu'en France la part des personnes perçues comme « non blanches » est restée autour de 15 % à la télévision entre 2013 et 2023, contre 10 % sur les chaînes d'information en continu sur la décennie et 8 % en 2023. Leur représentation est plus positive dans la fiction, mais plus négative dans l'information ; les activités marginales ou illégales sont les seules catégories socioprofessionnelles où elles sont fortement représentées. Au Royaume-Uni, l'Ofcom rapporte pour 2023-2024 que 45 % des adultes issus de minorités ethniques jugeaient la BBC efficace pour fournir des contenus qui leur sont pertinents, contre 56 % des adultes blancs. Le premier indicateur code **l'origine perçue et les rôles dans le contenu** ; le second mesure **la réception déclarée**. Ils ne permettent ni un classement France–Royaume-Uni ni une inférence causale, mais montrent pourquoi présence, qualité du rôle et reconnaissance par le public doivent être suivies séparément.
+
+- Sources : Arcom, *Rapport sur la représentation de la diversité de la société française dans les médias — 2013-2023*, publié le 2024-11-15, [rapport](https://www.arcom.fr/se-documenter/etudes-et-donnees/etudes-bilans-et-rapports-de-larcom/rapport-sur-la-representation-de-la-diversite-de-la-societe-francaise-dans-les-medias-2013-2023), consulté le 2026-07-10. **N3** : mesure longitudinale du régulateur audiovisuel français, non évaluée par les pairs ; Ofcom, *Annual Report on the BBC 2023/24*, 2024, [PDF](https://www.ofcom.org.uk/siteassets/resources/documents/tv-radio-and-on-demand/bbc/bbc-annual-report/2024/ofcoms-annual-report-on-the-bbc-202324.pdf), consulté le 2026-07-10. **N3** : enquête et contrôle du régulateur britannique, non évalués par les pairs.
+
+## Tension interne
+
+Deux conclusions vraies coexistent. D'une part, les routines de représentation ne sont pas un simple miroir : les cadrages de menace persistent parfois sans suivre les indicateurs sociaux, et les expériences comme les méta-analyses montrent qu'un message peut modifier attitudes et préférences. D'autre part, le média n'est ni une cause unique ni une seringue uniforme : les effets moyens sont petits et hétérogènes, l'auto-sélection et les attitudes antérieures structurent l'exposition, les groupes minorisés ne réagissent pas comme les publics majoritaires, et des représentations positives produisent des effets de sens opposé. L'augmentation de la diversité à l'écran peut donc réduire certains stéréotypes tout en laissant intacts la distribution du pouvoir de production, les cadrages de l'information ou la concentration des rôles.
+
+## Projection conditionnelle
+
+### À un an (horizon juillet 2027)
+
+Le scénario central est une amélioration mesurable de la **visibilité** dans la fiction et les catalogues, mais une évolution plus lente de l'information, des rôles et de la confiance des publics. Il serait confirmé par : publication annuelle de données désagrégées comparables par genre et niveau de rôle ; maintien d'écarts entre fiction et chaînes d'information ; audits séparant présence, ton et prise de parole ; expériences préenregistrées sur les formats courts et recommandations algorithmiques. Il serait infirmé par l'arrêt des séries de mesure, un recul net des présences et responsabilités, ou des essais multisites ne retrouvant aucun effet des cadrages.
+
+### À cinq ans (horizon juillet 2031)
+
+Deux trajectoires sont plausibles. Une **institutionnalisation** ferait passer les industries de quotas de présence à des audits de cadrage, d'autorité narrative et d'effets, avec comparaisons transnationales harmonisées mais respectueuses des catégories locales. Une **polarisation** concentrerait les progrès dans certains divertissements tandis que l'information et les plateformes amplifieraient des répertoires de menace segmentés. Déclencheurs discriminants : obligations de transparence des plateformes ; séries Arcom/Ofcom stables ; accès indépendant aux données de recommandation ; hausse ou baisse de la diversité parmi auteurs, dirigeants et sources expertes ; réplications longitudinales et expérimentales dans plusieurs pays ; évolution du lien entre exposition mesurée, perception de menace et soutien aux politiques pénales ou migratoires.
+
+## Mini-bibliographie
+
+- [N1] Saleem, M., Hawkins, I., Rains, S. A., Mastro, D. et Coles, S. (2025). « Media Depictions of Minority Groups ». *Media Psychology*. https://doi.org/10.1080/15213269.2025.2498374
+- [N1] Jacobs, L., Damstra, A., Boukes, M. et De Swert, K. (2018). « Back to Reality ». *Mass Communication and Society*, 21(4). https://doi.org/10.1080/15205436.2018.1442479
+- [N1] Eberl, J.-M. et al. (2018). « The European media discourse on immigration and its effects ». *Annals of the International Communication Association*, 42(3), 207–223. https://doi.org/10.1080/23808985.2018.1497452
+- [N1] Tukachinsky, R., Mastro, D. et Yarchi, M. (2015). « Documenting Portrayals of Race/Ethnicity on Primetime Television over a 20-Year Span ». *Journal of Social Issues*, 71(1), 17–38. https://doi.org/10.1111/josi.12094
+- [N1] Gilliam, F. D. Jr. et Iyengar, S. (2000). « Prime Suspects ». *American Journal of Political Science*, 44(3), 560–573. https://doi.org/10.2307/2669264
+- [N3] Arcom (2024). *Rapport sur la représentation de la diversité de la société française dans les médias — 2013-2023*. https://www.arcom.fr/se-documenter/etudes-et-donnees/etudes-bilans-et-rapports-de-larcom/rapport-sur-la-representation-de-la-diversite-de-la-societe-francaise-dans-les-medias-2013-2023
+- [N3] Ofcom (2024). *Annual Report on the BBC 2023/24*. https://www.ofcom.org.uk/siteassets/resources/documents/tv-radio-and-on-demand/bbc/bbc-annual-report/2024/ofcoms-annual-report-on-the-bbc-202324.pdf
