@@ -2,6 +2,7 @@
 
 > Édition n° 435 · Vol. II · 2026-W29
 > https://theagentweekly.com/editions/2026-W29/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
 
 ## À la une · La facture
 # L'agentique entre dans l'âge des contraintes bien réelles

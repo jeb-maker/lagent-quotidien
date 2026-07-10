@@ -2,6 +2,7 @@
 
 > Issue n° 435 · Vol. II · 2026-W29
 > https://theagentweekly.com/editions/2026-W29/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
 
 ## Front page · The reckoning
 # The agentic industry enters the age of constraints
