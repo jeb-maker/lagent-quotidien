@@ -4,22 +4,30 @@
 
 Note de calibration : les angles 02 (application des lois) et 09 (communication) citent le **même**
 rapport sénatorial r25-802 (juin 2026) — leur convergence sur les taux d'application compte pour
-UNE source. La Cour des comptes irrigue 5 angles (01, 03, 04, 06, 09) via des rapports distincts
-mais une seule institution. Les convergences ci-dessous sont pondérées en conséquence.
+UNE source. Plus profond : le pilier « application des lois » (66 %, 59 %, 841 mesures,
+différentiel sénatorial/gouvernemental) n'a qu'**un seul producteur**, le Sénat — juge et partie
+sur ses propres amendements, sans contre-mesure académique (le finding 02 l'admet : suivi
+« monopolisé » par les rapports institutionnels). La Cour des comptes irrigue 5 angles (01, 03,
+04, 06, 09) via des rapports distincts mais une seule institution. Les convergences ci-dessous
+sont pondérées en conséquence.
 
 ## Consensus
 
 **C1 — L'écart annonces/effets est réel, chiffré et généralisé — et la confrontation TM1 l'a
 précisé : c'est un écart d'*outcomes*, pas d'*outputs*.** `[haute × preuve 3]` — 8 angles,
-7 institutions productrices indépendantes (OFCE, Sénat, DREES, INSEE/HCFP, Citepa/HCC, COR, Cour
-des comptes) : 01 (chômage 7,9 % fin 2025 contre 5 % promis pour 2027), 02 (66 % des mesures
-d'application publiées en 2024-2025 contre plus de 75 % avant 2019), 03 (non-recours au RSA de
+7 institutions productrices (OFCE, Sénat, DREES, INSEE/HCFP, Citepa/HCC, COR, Cour des comptes),
+dont 6 indépendantes entre elles : le pilier « application des lois » repose sur le seul décompte
+sénatorial (voir note de calibration). La confiance reste `haute` car le consensus tient sans ce
+pilier (7 angles, 6 institutions) : 01 (chômage 7,9 % fin 2025 contre 5 % promis pour 2027,
+INSEE T4 2025), 02 (66 % des mesures d'application publiées en 2024-2025 contre plus de 75 %
+avant 2019), 03 (non-recours au RSA de
 33-37 % fin 2021, inchangé depuis 2018 malgré la « solidarité à la source »), 04 (déficit 2024 de
 5,8 % contre 4,4 % annoncé, ~40 Md€ d'écart), 05 (émissions en baisse de −1,5 %/an contre −4,5 %
 requis par la SNBC 3), 06 (accessibilité aux généralistes de 3,3 consultations/an en 2023 contre
 3,8 en 2015), 08 (déficit retraites 2030 projeté à 6,8 Md€ contre l'équilibre promis), 09
 (décrochage du taux d'application depuis 2017-2018 — source partagée avec 02). Tripartition issue
-de 3bis (angles 01, 07, 10, appuyée N1 par le codage CPPP *action/outcome pledges*) : (1) écart
+de 3bis (angles 01, 07, 10, appuyée N1 par le codage CPPP *action/outcome pledges* — dont la part
+d'*outcome pledges*, ~3 %, n'est chiffrée qu'au Royaume-Uni, pas en France) : (1) écart
 d'**outputs** (actions promises → prises), modeste — 60-72 % de promesses au moins partiellement
 exécutées ; (2) écart d'**outcomes** (effets promis → obtenus), massif et souvent invérifiable —
 c'est lui que documentent les chiffres ci-dessus ; (3) écart **perçu**, le plus grand des trois
@@ -48,10 +56,12 @@ Défenseur des droits), 04 (déficit 2023 : 5,5, 5,4 ou 5,3 % selon la base comp
 Conseil d'État clôt Grande-Synthe sur le −40 % pré-Fit for 55 quand le HCC exige un doublement du
 rythme sur le −50 %), 06 (le Ségur « trop coûteux » pour la Cour, « sous-financé de 1,7 Md€ » pour
 l'IGAS), 08 (~37 % du recul de l'âge de retraite devient chômage ou inactivité, pas de l'emploi),
-10 (Macron I : de 47 % à plus de 70 % de promesses tenues selon le codage). La tripartition
-outputs/outcomes/perçu (3bis) est la forme générale de ce consensus : le débat public confond
-trois écarts qui n'ont ni la même taille ni les mêmes causes. Appui N1 (Revue de l'OFCE ;
-*German Law Journal* ; CPPP).
+10 (Macron I : de 47 % à plus de 70 % de promesses tenues selon le codage — les chiffres des
+trackers journalistiques, dont luipresident.fr, sont traités ici comme N4, projet d'école de
+journalisme et non source institutionnelle ; sans effet sur la note, le point étant porté par le
+N1 PARTIPOL/CPPP). La tripartition outputs/outcomes/perçu (3bis) est la forme générale de ce
+consensus : le débat public confond trois écarts qui n'ont ni la même taille ni les mêmes causes.
+Appui N1 (Revue de l'OFCE ; *German Law Journal* ; CPPP).
 
 **C4 — L'écart s'est aggravé sur 2023-2026, en lien avec l'instabilité politique — mais le
 décrochage lui est antérieur.** `[moyenne × preuve 3]` — 7 angles : 01 (solde net d'usines de +88
@@ -77,12 +87,18 @@ gouvernements français tiennent majoritairement ce qu'ils promettent de *faire*
 d'actions engagées), mais l'écart réapparaît — et reste largement invérifiable faute d'appareil
 d'évaluation — sur ce qu'ils promettent d'*obtenir* ; « l'écart annonces/effets n'est pas un
 artefact ; c'est l'écart annonces/actions qui en est un » (10, s'appuyant sur le codage CPPP :
-les *outcome pledges* type « plein emploi » sont ~3 % des promesses, la catégorie la moins
-maîtrisable, N1). Raison : chaque camp a reconnu mesurer une variable différente, et les cas de
-01 se décomposent terme à terme (loi plein emploi votée = output tenu, chômage à 8,3 % = outcome
-manqué ; France 2030 décaisse mais son impact est invérifiable). Réserve maintenue par 01, non
-contestée : quand l'annonce porte une échéance chiffrée (5 % en 2027), l'évaluer à cette échéance
-n'est pas prématuré — c'est le contrat de mesure fixé par l'annonceur.
+les *outcome pledges* type « plein emploi » représentent ~3 % des promesses **au Royaume-Uni**
+— seul périmètre où le CPPP chiffre cette part (*Party Mandates and Democracy*, chap. 5, N1) ;
+la distribution française n'est pas mesurée dans le corpus, la catégorie restant la moins
+maîtrisable partout où elle est codée). Raison : chaque camp a reconnu mesurer une variable
+différente, et les cas de 01 se décomposent terme à terme : loi plein emploi votée = output
+tenu ; outcome manqué = 7,9 % de chômage constaté fin 2025 (INSEE T4, cité en C1), 8,1 % au
+T1 2026 (INSEE, finding 08) et 8,3 % **projeté pour 2027** — l'échéance de la promesse de 5 % —
+par l'OFCE (prévisions d'avril 2026, finding 01) : les deux taux du dossier ne se contredisent
+pas, ils datent de périodes différentes (constat 2025 vs prévision à l'échéance 2027) ;
+France 2030 décaisse mais son impact est invérifiable. Réserve maintenue par 01, non contestée :
+quand l'annonce porte une échéance chiffrée (5 % en 2027), l'évaluer à cette échéance n'est pas
+prématuré — c'est le contrat de mesure fixé par l'annonceur.
 
 **TM2 — L'écart comme fonction politique délibérée vs défaut de pilotage corrigeable (angle 03
 vs angle 02).** Désaccord initial : « ruse de mise en œuvre » (Dubois, N2 — le centre proclame des
@@ -156,9 +172,10 @@ par tous les acteurs.** `[moyenne × preuve 3]` — prolongation des trajectoire
 législative se lit avec une décote d'un tiers (02), chaque cible budgétaire glisse de deux ans
 par cycle (04), la confiance stagne au plancher sans effondrement démocratique (07 : attachement
 à la démocratie à 82 %) — la « négligence sélective » (TM2) reste rentable.
-- *1 an* : notification INSEE de mars 2027 au-dessus de 5,0 % de déficit ; chômage à 8,2-8,3 % à
-  la présidentielle — échéance-contrat de la promesse de 5 % (réserve TM1) ; bilan sénatorial de
-  juin 2027 sous 70 % ; vague 18 CEVIPOF sous 22 %.
+- *1 an* : notification INSEE de mars 2027 au-dessus de 5,0 % de déficit ; chômage confirmé dans
+  la fourchette 8,2-8,3 % prévue par l'OFCE (avril 2026) à la présidentielle — échéance-contrat
+  de la promesse de 5 % (réserve TM1) ; bilan sénatorial de juin 2027 sous 70 % ; vague 18
+  CEVIPOF sous 22 %.
 - *5 ans* : budget carbone 2024-2028 constaté manqué (~2029-2030) ; retour sous 3 % reporté
   au-delà de 2029 ; dette >120 % du PIB ; non-recours au RSA inchangé malgré le préremplissage de
   mars 2025 — désormais le test discriminant accepté des deux camps de TM2.
