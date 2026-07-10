@@ -1,7 +1,7 @@
 # Angle 01 — Généalogies historiques et fabrication de la race
 
-**Enquête :** « Le racisme dans les cultures occidentales et son inscription dans les organisations sociales »  
-**Date :** 2026-07-10  
+**Enquête :** « Le racisme dans les cultures occidentales et son inscription dans les organisations sociales »
+**Date :** 2026-07-10
 **Question :** comment esclavage atlantique, empires coloniaux, dépossession autochtone et sciences raciales ont-ils produit des catégories et des routines persistantes dans les institutions occidentales contemporaines ?
 
 ## Cadrage et limites
