@@ -30,8 +30,11 @@ cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 
 # Mise à jour du code avant collecte (scripts harvest, correctifs Molt, etc.)
 git fetch origin --quiet 2>/dev/null || true
-git pull --ff-only origin main --quiet 2>/dev/null \
-  || echo "$(date -Iseconds) git pull échec (on continue avec la version locale)"
+if ! git pull --rebase origin main --quiet 2>/dev/null; then
+  echo "$(date -Iseconds) git pull --rebase échec (conflit ?), abandon"
+  git rebase --abort 2>/dev/null || true
+  exit 0
+fi
 
 # 1. Sources secondaires (débat IA : HN / RSS / ArXiv / Bluesky)
 node scripts/harvest-daily.mjs   || echo "$(date -Iseconds) harvest-daily échec (non bloquant)"
@@ -53,7 +56,12 @@ git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
   commit -m "Harvest ${DATE}" >/dev/null 2>&1 \
   || { echo "$(date -Iseconds) commit échec"; exit 0; }
 
-if git push >/dev/null 2>&1; then
+git fetch origin --quiet 2>/dev/null || true
+if ! git pull --rebase origin main --quiet 2>/dev/null; then
+  echo "$(date -Iseconds) git pull --rebase avant push échoué (conflit ?)"
+  git rebase --abort 2>/dev/null || true
+  echo "$(date -Iseconds) push échoué, retry à la prochaine itération"
+elif git push >/dev/null 2>&1; then
   echo "$(date -Iseconds) harvest+push OK (${DATE})"
 else
   echo "$(date -Iseconds) push échoué, retry à la prochaine itération"

@@ -22,8 +22,11 @@ flock -n 9 || { echo "$(date -Iseconds) skip: drift déjà en cours"; exit 0; }
 cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 
 git fetch origin --quiet 2>/dev/null || true
-git pull --ff-only origin main --quiet 2>/dev/null \
-  || echo "$(date -Iseconds) git pull échec (on continue avec la version locale)"
+if ! git pull --rebase origin main --quiet 2>/dev/null; then
+  echo "$(date -Iseconds) git pull --rebase échec (conflit ?), abandon"
+  git rebase --abort 2>/dev/null || true
+  exit 0
+fi
 
 # 1. Stats quotidiennes (Cloudflare + Bluesky) — la métrique du public A
 #    (trafic crawlers IA) est désormais le signal principal.
@@ -54,7 +57,12 @@ git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
   commit -m "Drift $(date -Iminutes)" >/dev/null 2>&1 \
   || { echo "$(date -Iseconds) commit échec"; exit 0; }
 
-if git push >/dev/null 2>&1; then
+git fetch origin --quiet 2>/dev/null || true
+if ! git pull --rebase origin main --quiet 2>/dev/null; then
+  echo "$(date -Iseconds) git pull --rebase avant push échoué (conflit ?)"
+  git rebase --abort 2>/dev/null || true
+  echo "$(date -Iseconds) push échoué, retry à la prochaine itération"
+elif git push >/dev/null 2>&1; then
   echo "$(date -Iseconds) drift+push OK ($WEEK)"
 else
   echo "$(date -Iseconds) push échoué, retry à la prochaine itération"
