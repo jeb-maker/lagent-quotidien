@@ -117,8 +117,13 @@ chaque tour) :
 
 ## Subagents desk
 
-Sept subagents dans `.opencode/agent/` : `veilleur`, `comère`, `facteur`,
-`archiviste`, `promoteur`, `éditeur`, `juge`.
+Neuf subagents dans `.opencode/agent/` : `veilleur`, `comère`, `facteur`,
+`archiviste`, `promoteur`, `éditeur`, `juge`, `detecteur`, `avocat-du-diable`.
+
+**Narrative Radar** (optionnel, pont infra 40 %) : taxonomie dans
+`data/taxonomy/` · flux `data/feeds-world.json` · harvest futur
+`data/narrative-radar/<date>.json`. Ordre **detecteur → avocat-du-diable**
+(isolation : adverse ne lit que `detecteur.md`). Voir `prompts/desk/README.md`.
 
 **Étape 1 (parallèle)** — lancer dans n'importe quel ordre :
 - `veilleur` → signaux faibles (lis les harvests)
