@@ -266,14 +266,52 @@ async function main() {
     }
   }
 
-  // Prefer non-EN items to meet quota target.
+  // Prefer non-EN items to meet quota target, while keeping some language diversity.
   const nonEnTarget = Math.ceil(MAX_ITEMS * 0.4);
   const nonEnItems = collected.filter(it => (it?.feed?.lang || 'en') !== 'en');
   const enItems = collected.filter(it => (it?.feed?.lang || 'en') === 'en');
-  out.items = [
-    ...nonEnItems.slice(0, Math.min(nonEnItems.length, nonEnTarget)),
-    ...enItems
-  ].slice(0, MAX_ITEMS);
+
+  const preferredNonEnLangs = ['fr', 'es', 'pt', 'ar', 'zh'];
+  const minPerLang = Math.max(3, Math.floor(nonEnTarget / Math.max(1, preferredNonEnLangs.length))); // typically 3-10
+
+  const picked = [];
+  const pickedIds = new Set();
+  const byLangMap = new Map();
+  for (const it of nonEnItems) {
+    const l = it?.feed?.lang || 'en';
+    if (!byLangMap.has(l)) byLangMap.set(l, []);
+    byLangMap.get(l).push(it);
+  }
+
+  // 1) Guarantee a small baseline per preferred non-EN language (if available)
+  for (const l of preferredNonEnLangs) {
+    const arr = byLangMap.get(l) || [];
+    for (const it of arr.slice(0, minPerLang)) {
+      if (picked.length >= nonEnTarget) break;
+      if (pickedIds.has(it.id)) continue;
+      picked.push(it);
+      pickedIds.add(it.id);
+    }
+  }
+
+  // 2) Fill remaining non-EN quota with any remaining non-EN items
+  for (const it of nonEnItems) {
+    if (picked.length >= nonEnTarget) break;
+    if (pickedIds.has(it.id)) continue;
+    picked.push(it);
+    pickedIds.add(it.id);
+  }
+
+  // 3) Fill the rest with EN items
+  const finalItems = [...picked];
+  for (const it of enItems) {
+    if (finalItems.length >= MAX_ITEMS) break;
+    if (pickedIds.has(it.id)) continue;
+    finalItems.push(it);
+    pickedIds.add(it.id);
+  }
+
+  out.items = finalItems.slice(0, MAX_ITEMS);
 
   // Coverage
   const byLang = {};
