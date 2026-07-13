@@ -22,8 +22,8 @@ Référence rapide. Doctrine : `data/strategie.md` · sources : `prompts/sources
 | `harvest-daily.mjs` | **actif** | Bluesky, HN, RSS, ArXiv → `data/harvest/<date>.json` |
 | `harvest-primary.mjs` | **actif** | $MOLT, OpenClaw, Moltbook → `data/harvest/<date>-primary.json` |
 | `cron-harvest.sh` | **actif** | Wrapper cron 7h30 |
-| `harvest-narratives.mjs` | **planifié** | RSS monde → `data/narrative-radar/<date>.json` (cf. `data/feeds-world.json`) |
-| `cron-world-pulse.sh` | **planifié** | Wrapper cron Narrative Radar |
+| `harvest-narratives.mjs` | **planifié** | RSS monde → `data/narrative-radar/<date>.json` — brief : `data/taxonomy/HANDOFF-harvest.md` |
+| `cron-world-pulse.sh` | **planifié** | Wrapper cron Narrative Radar — brief : `data/taxonomy/HANDOFF-harvest.md` |
 | `harvest-fictional.mjs` | **abandonné** | `--legacy` uniquement (fiction pré-06/2026) |
 | `probe-models.mjs` | **abandonné** | `--legacy` uniquement (R&D fictionnel) |
 

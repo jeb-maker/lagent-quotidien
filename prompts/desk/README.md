@@ -46,6 +46,7 @@ Pipeline parallèle au desk éditorial agentique. Taxonomie :
 `data/taxonomy/calibration-cases.json` (12 piliers, 6 langues-source),
 `narrative-archetypes.json`, `interests.json`, `bias-ledger.md`.
 Harvest futur : `data/narrative-radar/<date>.json` via `data/feeds-world.json`.
+Brief agent suivant : `data/taxonomy/HANDOFF-harvest.md`.
 
 **Ordre obligatoire** (isolation adverse) :
 
