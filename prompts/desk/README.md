@@ -37,6 +37,24 @@ le promoteur y voit une adoption naissante. L'éditeur arbitre.
 | **Promoteur** | L'adoption est le seul signal | Déploiements, milestones |
 | **Éditeur** | Le lecteur ne revient que pour la netteté | Structure, densité, voix |
 | **Juge** | La confiance se perd en un article | Risques, redites, réputation |
+| **Détecteur** | Un récit se voit par sa structure | Homologie calibration, divergence cross-langues |
+| **Avocat-du-diable** | Si le détecteur a raison trop vite, il a tort | Steel man, faux positifs, genuine-uncertainty |
+
+## Narrative Radar (optionnel — pont édition infra 40 %)
+
+Pipeline parallèle au desk éditorial agentique. Taxonomie :
+`data/taxonomy/calibration-cases.json` (12 piliers, 6 langues-source),
+`narrative-archetypes.json`, `interests.json`, `bias-ledger.md`.
+Harvest futur : `data/narrative-radar/<date>.json` via `data/feeds-world.json`.
+
+**Ordre obligatoire** (isolation adverse) :
+
+1. `detecteur` → `data/desk/<week>/detecteur.md`
+2. `avocat-du-diable` → lit **uniquement** `detecteur.md` → `detecteur-adverse.md`
+
+L'éditeur peut lire les deux pour un pont vers `edition.json` (max ~1 paragraphe/semaine,
+registre récit rapporté, fact-check via facteur). Le **juge** ne lit pas le radar —
+il juge `edition.json` seulement.
 
 ## Isolation
 
@@ -71,6 +89,11 @@ Lancer en une seule fois (ou séquentiellement, ordre indifférent) :
    (section `## Verdict` = porte bloquante ; précédée d'un `## Pre-mortem` :
    les 3 causes les plus plausibles d'un désastre post-publication, avec
    gravité — pas de `publier` si une gravité haute reste sans parade)
+
+### Narrative Radar (optionnel, avant ou après étape 2)
+
+8. `detecteur` → `data/desk/<week>/detecteur.md`
+9. `avocat-du-diable` → `data/desk/<week>/detecteur-adverse.md` (lit detecteur.md seul)
 
 ## Outils contradictoires
 
