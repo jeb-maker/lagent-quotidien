@@ -30,6 +30,7 @@ const args = Object.fromEntries(
 const DATE = String(args.date || new Date().toISOString().slice(0, 10));
 const MAX_ITEMS = Math.max(10, Number.parseInt(String(args.max || 200), 10) || 200);
 const WINDOW_HOURS = Math.max(6, Number.parseInt(String(args.window_hours || 48), 10) || 48);
+const MAX_PER_FEED = Math.max(5, Number.parseInt(String(args.max_per_feed || 60), 10) || 60);
 const CUTOFF_MS = Date.now() - WINDOW_HOURS * 3600 * 1000;
 const UA = 'theagentweekly-harvest/1.0';
 
@@ -145,6 +146,7 @@ async function main() {
   };
 
   const seen = new Set();
+  const collected = [];
 
   for (const feed of feeds) {
     const fid = feed?.id;
@@ -225,7 +227,7 @@ async function main() {
 
         const interpretive = tags_rule.length > 0 || calibration_hits.length > 0;
 
-        out.items.push({
+        collected.push({
           id,
           title: it.title,
           url: it.url,
@@ -248,14 +250,13 @@ async function main() {
         });
 
         kept++;
-        if (out.items.length >= MAX_ITEMS) break;
+        if (kept >= MAX_PER_FEED) break;
       }
 
       out.feeds_ok += 1;
       const dt = ((Date.now() - t0) / 1000).toFixed(1);
       process.stdout.write(`  ${fid}: ok (${kept}/${parsed.length}) · ${dt}s\n`);
 
-      if (out.items.length >= MAX_ITEMS) break;
     } catch (e) {
       out.feeds_error += 1;
       out.errors[fid] = String(e?.message || e);
@@ -264,6 +265,15 @@ async function main() {
       continue;
     }
   }
+
+  // Prefer non-EN items to meet quota target.
+  const nonEnTarget = Math.ceil(MAX_ITEMS * 0.4);
+  const nonEnItems = collected.filter(it => (it?.feed?.lang || 'en') !== 'en');
+  const enItems = collected.filter(it => (it?.feed?.lang || 'en') === 'en');
+  out.items = [
+    ...nonEnItems.slice(0, Math.min(nonEnItems.length, nonEnTarget)),
+    ...enItems
+  ].slice(0, MAX_ITEMS);
 
   // Coverage
   const byLang = {};
