@@ -9,7 +9,8 @@
 #   45 7 * * * /home/debian/agentic-news/agent-quotidien/scripts/cron-world-pulse.sh >> /tmp/agent-quotidien-narrative-radar.log 2>&1
 
 set -u
-export PATH="/usr/local/bin:/usr/bin:/bin"
+# Cron environments can have a minimal PATH; include common local locations.
+export PATH="/home/debian/.local/bin:/usr/local/bin:/usr/bin:/bin"
 
 REPO="/home/debian/agentic-news/agent-quotidien"
 LOCK="/tmp/agent-quotidien-narrative-radar.lock"
@@ -38,9 +39,10 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
-git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
-  commit -m "Narrative radar ${DATE}" >/dev/null 2>&1 \
-  || { echo "$(date -Iseconds) commit échec"; exit 0; }
+if ! git commit -m "Narrative radar ${DATE}" >/dev/null 2>&1; then
+  echo "$(date -Iseconds) commit échec (identité git manquante ?)"
+  exit 0
+fi
 
 git fetch origin --quiet 2>/dev/null || true
 if ! git pull --rebase origin main --quiet 2>/dev/null; then
