@@ -124,6 +124,7 @@ Neuf subagents dans `.opencode/agent/` : `veilleur`, `comère`, `facteur`,
 `data/taxonomy/` · flux `data/feeds-world.json` · harvest futur
 `data/narrative-radar/<date>.json`. Ordre **detecteur → avocat-du-diable**
 (isolation : adverse ne lit que `detecteur.md`). Voir `prompts/desk/README.md`.
+**Prochain agent (harvest)** : lire d’abord `data/taxonomy/HANDOFF-harvest.md`.
 
 **Étape 1 (parallèle)** — lancer dans n'importe quel ordre :
 - `veilleur` → signaux faibles (lis les harvests)
