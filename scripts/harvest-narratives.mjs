@@ -304,6 +304,29 @@ async function main() {
 
   // 3) Fill the rest with EN items
   const finalItems = [...picked];
+
+  const preferredEnBlocs = ['africa-en', 'asia-en', 'south-asia-en'];
+  const minEnPerBloc = 6;
+
+  const enByBloc = new Map();
+  for (const it of enItems) {
+    const b = it?.feed?.bloc || 'en';
+    if (!enByBloc.has(b)) enByBloc.set(b, []);
+    enByBloc.get(b).push(it);
+  }
+
+  // 3a) Ensure a baseline of EN items from non-Atlantic blocs (if available)
+  for (const b of preferredEnBlocs) {
+    const arr = enByBloc.get(b) || [];
+    for (const it of arr.slice(0, minEnPerBloc)) {
+      if (finalItems.length >= MAX_ITEMS) break;
+      if (pickedIds.has(it.id)) continue;
+      finalItems.push(it);
+      pickedIds.add(it.id);
+    }
+  }
+
+  // 3b) Then fill the remaining slots with EN items in feed order
   for (const it of enItems) {
     if (finalItems.length >= MAX_ITEMS) break;
     if (pickedIds.has(it.id)) continue;
