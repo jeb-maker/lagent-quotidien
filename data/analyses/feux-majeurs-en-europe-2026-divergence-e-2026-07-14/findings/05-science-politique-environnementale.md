@@ -1,0 +1,45 @@
+# 05. Science politique environnementale
+
+**Angle** : science politique. **Question** : L'activation du registre « urgence climatique » lors d'une catastrophe sert-elle surtout la mobilisation politique, la légitimation gouvernementale, ou les deux — et avec quels effets mesurables ?
+
+## Findings
+
+1. **Albert (Globalizations, 2022, DOI 10.1080/14747731.2022.2117501) analyse la « sécuritisation » climatique comme politique de l'extraordinaire : le registre urgence peut soit ouvrir une politique constituante démocratique, soit suspendre les normes démocratiques au profit d'actions rapides inégalitaires.** Albert engage le débat entre partisans de l'urgence climatique (action transformative au-delà de la politique « normale ») et critiques (risque de sécuritisations avortées ou de sacrifices de justice climatique) ([DOI 10.1080/14747731.2022.2117501](https://doi.org/10.1080/14747731.2022.2117501), **N1**). Conclusion : *« il existe un predicament tragique — pas de solution idéale, des trade-offs inévitables »*, mais des mobilisations d'urgence compatibles avec la justice climatique sont concevables si négociées. *Application* : la visite de Sánchez à Los Gallardos combine sécuritisation (mort, urgence) et promesse de pacte national — les deux faces décrites par Albert.
+
+2. **Lahsen & Ribot (WIREs Climate Change, DOI 10.1002/wcc.750 — cité « WCC 750 » dans la bibliographie d'atelier) montrent que l'attribution climatique des catastrophes sert des intérêts politiques divergents : responsabiliser le Nord global vs exonérer les gouvernements locaux de leurs fragilités.** Les auteurs documentent comment des dirigeants brésiliens ont attribué des inondations au climat pour déplacer le blâme vers les pays développés, tandis que le public peut préférer tenir le gouvernement responsable des investissements préventifs ([DOI 10.1002/wcc.750](https://doi.org/10.1002/wcc.750), **N1**). En Espagne, Sánchez inverse partiellement cette logique : il invoque l'urgence climatique **en tant que Premier ministre national**, appelant à un pacte et à un déploiement estatal anti-incendies ([Spain in English, 2026-07-13](https://www.spainenglish.com/2026/07/13/sanchez-praises-firefighters-and-climate-action-as-identification-of-wildfire-victims-begins/), **N3**) — mobilisation **et** légitimation gouvernementale simultanées.
+
+3. **McHugh et al. (npj Climate Action, 2023, DOI 10.1038/s44168-023-00087-w) critiquent les déclarations d'urgence climatique comme gestes performatifs susceptibles de rétrécir l'horizon politique aux seules émissions, au détriment de l'adaptation, de la décolonisation et de la justice.** L'article *Against a nation state of emergency* argue que les déclarations peuvent être *« un symbole de mobilisation sérieuse — un symbole d'action, notons-nous, pas l'action elle-même »* (citant McHugh et al., 2021), et que l'urgence d'État concentre le pouvoir chez les détenteurs existants, incompatible avec la justice climatique ([npj Climate Action, 2023](https://doi.org/10.1038/s44168-023-00087-w), **N1**). Test empirique pour Sánchez : le « grand pacte » annoncé le 13 juillet 2026 n'a pas encore de traduction législative vérifiable — registre performatif possible.
+
+4. **Pedro Sánchez à Los Gallardos, 13 juillet 2026 : discours vérifiable combinant condoléances, coordination inter-administrative, chiffres EFFIS 2025 (~400 000 ha en Espagne selon El Mundo) et formule « El cambio climático mata » / « The climate emergency kills ».** EFE : Sánchez et Juanma Moreno (PP, Andalousie) visitent le PCO de Turre ; appel à un « broad national pact » et promesse de soutien financier ; citation intégrale : *« The climate emergency kills, and we must rise to the challenge »* ([EFE, 2026-07-13](https://efe.com/english/latest-news/2026-07-13/spain-wildfire-almeria-casualties-containment/), **N3**). El Mundo précise le déplacement à 09h25 GMT, le bilan de 13 morts (majoritairement étrangers), la référence à la campagne anti-incendies promise en mai et aux ~400 000 ha brûlés en 2025 ([El Mundo, 2026-07-13](https://www.elmundo.es/espana/2026/07/13/6a54ca87fdddff663e8b4590-video.html), **N3**). Tweet officiel @sanchezcastejon (13 juillet) : *« Porque la emergencia climática mata »* ([Spain in English, 2026-07-13](https://www.spainenglish.com/2026/07/13/sanchez-praises-firefighters-and-climate-action-as-identification-of-wildfire-victims-begins/), **N3**). Moreno (PP) insiste sur la prudence opérationnelle et alerte sur un été difficile (triple surface brûlée vs début saison précédente) — cohabitation politique sans convergence sur le frame climatique.
+
+5. **Le detecteur W29 identifie l'intérêt `legitimacy` pour les gouvernements nationaux comme hypothèse corrélationnelle : lier la crise à l'urgence climatique peut justifier un agenda de reconstruction / pacte politique — confiance basse, preuve média.** Table intérêts plausibles, cluster `feux-europe-climat` : acteur « État (gouvernements nationaux) », evidence_type `correlational` ([detecteur.md W29](data/desk/2026-W29/detecteur.md), **N4**). L'avocat du diable note une hypothèse concurrente : acteurs politiques divers peuvent aussi contester le lien climat (*« ce n'est pas le climat / c'est la gestion locale »*) pour mobiliser leur propre base ([detecteur-adverse.md W29](data/desk/2026-W29/detecteur-adverse.md), **N4**). Juillet 2026 illustre la coexistence : Sánchez (climat) vs Moreno (gestion opérationnelle, alerte estivale) vs Nuñez en France (criminalité, record hectares 2026) ([DW, 2026-07-14](https://www.dw.com/en/france-fontainebleau-forest-fire-arson-suspects/a-77946073), **N3**).
+
+Non trouvé : sondage d'opinion post-visite Sánchez mesurant l'effet du cadrage « emergencia climática mata » sur l'approbation gouvernementale ou le soutien au pacte climatique.
+
+## Tension interne
+
+Albert (**N1**) et McHugh et al. (**N1**) partagent une méfiance envers la sécuritisation d'État, mais divergent sur la sortie : Albert voit une voie « politique de l'extraordinaire » compatible avec la justice ; McHugh et al. voient surtout greenwashing et concentration du pouvoir. Lahsen & Ribot (**N1**) ajoutent que le frame climat peut **déresponsabiliser** localement — en tension directe avec Sánchez, qui l'utilise pour **ré responsabiliser** l'action publique nationale. Troisième nœud : la visite de Sánchez avec Moreno (adversaire idéologique) produit une image d'unité de crise tout en laissant chaque camp interpréter le frame (climat vs opérations) — sécuritisation **symbolique** sans consensus sur la cause. Enfin, la France (Nuñez) privilégie le frame pénal et statistique (32 000 ha brûlés en 2026, 59 interpellations) plutôt que « climate emergency kills » — divergence intra-UE sur le registre d'urgence.
+
+## Projection
+
+**À 1 an.** Indicateurs politiques : (a) adoption ou enterrement du « grand pacte » climatique espagnol annoncé le 13 juillet 2026 ; (b) élections ou recompositions régionales en Andalousie — test de rétribution électorale pour Moreno (gestion) vs Sánchez (climat) ; (c) comparaison des budgets prévention incendie Espagne/France 2027 vs 2025 — si les discours d'urgence ne se traduisent pas en crédits, confirmation de la critique npj (performative politics).
+
+**À 5 ans.** Si les déclarations d'urgence climatique se multiplient après chaque été type 2025-2026, Albert prédit des trade-offs cumulatifs : soit institutionalisation (urgence normalisée, perte de saillance), soit backlash démocratique (fatigue sécuritaire, montée des frames « gestion locale » type Lahsen & Ribot). Surveiller les contentieux responsabilité (Endesa, incendiaires Fontainebleau) comme indicateurs de bascule du registre « urgence systémique » vers registre « faute identifiable ».
+
+## Recherche
+
+**Moteurs/bases interrogés** : doi.org, tandfonline.com, nature.com/articles, efe.com, elmundo.es, spainenglish.com, dw.com, data/desk/2026-W29/.
+
+**Requêtes exactes (verbatim)** :
+- `DOI 10.1080/14747731.2022.2117501 climate emergency securitization politics extraordinary`
+- `DOI 10.1002/wcc.750 Lahsen Ribot politics attributing extreme events disasters climate`
+- `npj climate action against nation state emergency climate justice 10.1038/s44168-023-00087-w`
+- `Pedro Sanchez Los Gallardos visit July 13 2026 climate emergency kills`
+- `climate emergency declaration politics wildfire Europe legitimacy`
+- `Juanma Moreno Los Gallardos July 2026 response`
+
+**Sources consultées mais écartées** :
+- https://www.e-ir.info/pdf/104336 — essai étudiant/e-IR (N5), cite Albert 2022 mais sans analyse empirique propre.
+- https://doi.org/10.1017/s2047102522000231 (Public Law Paradoxes of Climate Emergency Declarations) — N1 pertinent sur le statut juridique ambigu des déclarations, hors focus politique Espagne/France juillet 2026.
+- https://www.straitstimes.com/world/europe/spanish-pm-visits-site-of-deadly-wildfire — relais singapourien (N4), doublonne EFE sur la visite Sánchez.
+- https://doi.org/10.1038/s44168-025-00253-2 (npj 2025, déclarations locales Australie) — N1 sur performativité municipale, complémentaire mais hors cadre national ibérique/français.
