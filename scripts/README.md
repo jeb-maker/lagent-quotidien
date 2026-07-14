@@ -23,6 +23,7 @@ Référence rapide. Doctrine : `data/strategie.md` · sources : `prompts/sources
 | `harvest-primary.mjs` | **actif** | $MOLT, OpenClaw, Moltbook → `data/harvest/<date>-primary.json` |
 | `cron-harvest.sh` | **actif** | Wrapper cron 7h30 |
 | `harvest-narratives.mjs` | **actif** | RSS monde → `data/narrative-radar/<date>.json` — brief : `data/taxonomy/HANDOFF-harvest.md` |
+| `render-radar.mjs` | **actif** | JSON radar → `/radar/` (page interne, noindex) |
 | `cron-world-pulse.sh` | **actif** | Wrapper cron Narrative Radar — brief : `data/taxonomy/HANDOFF-harvest.md` |
 | `harvest-fictional.mjs` | **abandonné** | `--legacy` uniquement (fiction pré-06/2026) |
 | `probe-models.mjs` | **abandonné** | `--legacy` uniquement (R&D fictionnel) |
