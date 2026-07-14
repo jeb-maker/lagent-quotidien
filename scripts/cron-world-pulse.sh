@@ -29,20 +29,21 @@ fi
 
 node scripts/harvest-narratives.mjs || echo "$(date -Iseconds) harvest-narratives échec (non bloquant)"
 
+node scripts/render-radar.mjs || echo "$(date -Iseconds) render-radar échec (non bloquant)"
+
 DATE="$(date +%F)"
 OUT="data/narrative-radar/${DATE}.json"
 echo "$(date -Iseconds) narrative-radar run → ${OUT}"
 
-git add "${OUT}" 2>/dev/null || true
+git add "${OUT}" radar/ 2>/dev/null || true
 if git diff --cached --quiet; then
   echo "$(date -Iseconds) rien à committer (fichier absent ou inchangé)"
   exit 0
 fi
 
-if ! git commit -m "Narrative radar ${DATE}" >/dev/null 2>&1; then
-  echo "$(date -Iseconds) commit échec (identité git manquante ?)"
-  exit 0
-fi
+git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
+  commit -m "Narrative radar ${DATE}" >/dev/null 2>&1 \
+  || { echo "$(date -Iseconds) commit échec"; exit 0; }
 
 git fetch origin --quiet 2>/dev/null || true
 if ! git pull --rebase origin main --quiet 2>/dev/null; then

@@ -47,7 +47,8 @@ npm run --silent render -- "$WEEK" >/dev/null 2>&1 || { echo "$(date -Iseconds) 
 git add data/stats.json \
   "editions/${WEEK}/fr.html" \
   "editions/${WEEK}/en.html" \
-  sitemap.xml feed.xml 2>/dev/null || true
+  radar/ \
+  sitemap.xml feed.xml _headers robots.txt 2>/dev/null || true
 if git diff --cached --quiet; then
   echo "$(date -Iseconds) rien à committer"
   exit 0
