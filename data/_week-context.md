@@ -1,4 +1,4 @@
-# Contexte de la semaine — 2026-W29
+# Contexte de la semaine — 2026-W30
 
 > Digest court (~1 KB) lu en premier par opencode à chaque session de composition.
 > Remplace le chargement systématique de `data/people.json` (21 KB) pour la
@@ -6,25 +6,18 @@
 
 ## Semaine courante
 
-- **Semaine ISO** : 2026-W29
-- **Date de bouclage** : mercredi 8 juillet 2026
-- **Dernière édition publiée** : 2026-W28 (mardi 7 juillet 2026)
-- **Numéro d'édition à produire** : 9
+- **Semaine ISO** : 2026-W30
+- **Date de bouclage** : mercredi 15 juillet 2026
+- **Dernière édition publiée** : (voir editions/ — la plus récente)
+- **Numéro d'édition à produire** : 10
 
-## Harvests disponibles
+## Harvests du jour
 
-Toutes les récoltes de la période post-W28 (3-8 juillet 2026) dans `data/harvest/` :
+Les récoltes auto (`scripts/cron-harvest.sh`, 7h30) ne sont pas committées.
+Regarder dans `data/harvest/` :
 
-- `data/harvest/2026-07-08.json` + `2026-07-08-primary.json` — dernier jour (aujourd'hui)
-- `data/harvest/2026-07-07.json` + `2026-07-07-primary.json` — mardi
-- `data/harvest/2026-07-06.json` + `2026-07-06-primary.json` — lundi
-- `data/harvest/2026-07-05.json` + `2026-07-05-primary.json` — dimanche
-- `data/harvest/2026-07-04.json` + `2026-07-04-primary.json` — samedi
-- `data/harvest/2026-07-03.json` + `2026-07-03-primary.json` — vendredi
-- `data/harvest/2026-07-02.json` + `2026-07-02-primary.json` — jeudi
-- `data/harvest/2026-07-01.json` + `2026-07-01-primary.json` — mercredi
-
-Les semaines antérieures (jusqu'à fin mai) sont aussi disponibles si besoin de réference.
+- `data/harvest/2026-07-15.json` — secondaire (HN / RSS / ArXiv / Bluesky)
+- `data/harvest/2026-07-15-primary.json` — primaire ($MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
 
 ## Entités actives cette semaine
 
