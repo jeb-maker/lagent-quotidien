@@ -2,6 +2,7 @@
 
 > Issue n° 430 · Vol. II · 2026-W23
 > https://theagentweekly.com/editions/2026-W23/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
 
 ## Front page · Commerce & governance
 # Agents got the keys to the wallet — before anyone fitted the locks.

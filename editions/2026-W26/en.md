@@ -2,6 +2,7 @@
 
 > Issue n° 432 · Vol. II · 2026-W26
 > https://theagentweekly.com/editions/2026-W26/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
 
 ## Front page · Agent security
 # Thirteen words are enough to poison a research agent.

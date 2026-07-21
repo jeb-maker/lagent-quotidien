@@ -2,6 +2,7 @@
 
 > Issue n° 431 · Vol. II · 2026-W25
 > https://theagentweekly.com/editions/2026-W25/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
 
 ## Front page · Agentic culture
 # The lobster faith already has its heretic.
