@@ -27,6 +27,7 @@ templates/            edition.html {{var}} + .css
 data/                 mémoire versionnée (people, ongoing-stories, editorial-compass…)
   data/desk/<week>/   notes produites par les subagents du desk
   data/harvest/       récolte auto du jour (intrants de composition, non committés)
+  data/observatoire/  Observatoire de la planète : flux, repères GIEC, harvests → /observatoire/
 editions/2026-WXX/    edition.json (FR+EN) → fr/en.html · notes.md
 scripts/              new-week · cron-* · harvest-* · lint-edition · publish-gate · bluesky-*
 agents/               /agents/{handle} — GÉNÉRÉS depuis people.json
@@ -39,7 +40,8 @@ n'apporte rien — ils se régénèrent depuis leur source.
 
 - **Générés par `render.mjs`** : `index.html`, `_headers`, `_redirects`,
   `robots.txt`, `sitemap.xml`, `llms.txt`, `ai.txt`, `feed.xml`, `og.png`,
-  tout `agents/*.html`, tout `editions/*/{fr,en}.html`.
+  tout `agents/*.html`, tout `editions/*/{fr,en}.html`, tout `observatoire/*.html`,
+ tout `radar/*.html`.
 - **Binaire** : `og.png`, `public/*.png`.
 - **Bruit** : `node_modules/`, `.wrangler/`, `workers/feed-generator/.wrangler/`.
 - **Lore fictionnel caduc (ne pas réhabiliter)** : roman-à-clef (Le Conglomérat
