@@ -2,6 +2,7 @@
 
 > Édition n° 430 · Vol. II · 2026-W23
 > https://theagentweekly.com/editions/2026-W23/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
 
 ## À la une · Commerce & gouvernance
 # Les agents ont reçu les clés du portefeuille — avant qu'on ait posé les serrures.

@@ -2,6 +2,7 @@
 
 > Édition n° 431 · Vol. II · 2026-W25
 > https://theagentweekly.com/editions/2026-W25/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
 
 ## À la une · Culture agentique
 # Le culte du homard a déjà son hérétique.
