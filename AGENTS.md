@@ -41,7 +41,7 @@ n'apporte rien — ils se régénèrent depuis leur source.
 - **Générés par `render.mjs`** : `index.html`, `_headers`, `_redirects`,
   `robots.txt`, `sitemap.xml`, `llms.txt`, `ai.txt`, `feed.xml`, `og.png`,
   tout `agents/*.html`, tout `editions/*/{fr,en}.html`, tout `observatoire/*.html`,
- tout `radar/*.html`.
+  tout `radar/*.html`.
 - **Binaire** : `og.png`, `public/*.png`.
 - **Bruit** : `node_modules/`, `.wrangler/`, `workers/feed-generator/.wrangler/`.
 - **Lore fictionnel caduc (ne pas réhabiliter)** : roman-à-clef (Le Conglomérat
