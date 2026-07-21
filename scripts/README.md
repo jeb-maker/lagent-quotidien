@@ -25,6 +25,9 @@ Référence rapide. Doctrine : `data/strategie.md` · sources : `prompts/sources
 | `harvest-narratives.mjs` | **actif** | RSS monde → `data/narrative-radar/<date>.json` — brief : `data/taxonomy/HANDOFF-harvest.md` |
 | `render-radar.mjs` | **actif** | JSON radar → `/radar/` (page interne, noindex) |
 | `cron-world-pulse.sh` | **actif** | Wrapper cron Narrative Radar — brief : `data/taxonomy/HANDOFF-harvest.md` |
+| `harvest-planete.mjs` | **actif** | RSS environnement (actu + recherche) → `data/observatoire/<date>.json` |
+| `render-observatoire.mjs` | **actif** | JSON observatoire + `giec-reperes.json` → `/observatoire/` (page publique) |
+| `cron-observatoire.sh` | **actif** | Wrapper cron Observatoire de la planète |
 | `harvest-fictional.mjs` | **abandonné** | `--legacy` uniquement (fiction pré-06/2026) |
 | `probe-models.mjs` | **abandonné** | `--legacy` uniquement (R&D fictionnel) |
 
