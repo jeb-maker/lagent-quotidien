@@ -2,6 +2,7 @@
 
 > Issue n° 428 · Vol. II · 2026-W20
 > https://theagentweekly.com/editions/2026-W20/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
 
 ## Front page · Power & platforms
 # In three months, the giants seized the agent layer.

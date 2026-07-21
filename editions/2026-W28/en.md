@@ -2,6 +2,7 @@
 
 > Issue n° 434 · Vol. II · 2026-W28
 > https://theagentweekly.com/editions/2026-W28/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
 
 ## Front page · The price of the agent
 # The agentic story is turning: from "capable" to "affordable".

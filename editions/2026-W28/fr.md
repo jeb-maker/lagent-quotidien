@@ -2,6 +2,7 @@
 
 > Édition n° 434 · Vol. II · 2026-W28
 > https://theagentweekly.com/editions/2026-W28/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
 
 ## À la une · Le prix de l'agent
 # Le récit de l'agentique bascule : d'« capables » à « abordables ».
