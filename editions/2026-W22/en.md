@@ -2,6 +2,7 @@
 
 > Issue n° 429 · Vol. II · 2026-W22
 > https://theagentweekly.com/editions/2026-W22/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
 
 ## Front page · The economics of agents
 # "Agentic" goes mainstream. The bill is already here.
