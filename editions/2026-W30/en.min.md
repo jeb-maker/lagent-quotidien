@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Tuesday, July 21, 2026 · 2026-W30
-> https://theagentweekly.com/editions/2026-W30/en.md
+> https://theagentweekly.com/editions/2026-W30/en.html
 
 ## Front page · The proof
 # From constraints to proof of action

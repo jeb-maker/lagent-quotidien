@@ -1,8 +1,9 @@
 # L'Agent & Le Quotidien — Mardi 14 juillet 2026
 
 > Édition n° 435 · Vol. II · 2026-W29
-> https://theagentweekly.com/editions/2026-W29/fr.md
-> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
+> https://theagentweekly.com/editions/2026-W29/fr.html
+> Markdown: https://theagentweekly.com/editions/2026-W29/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Thèmes](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## À la une · La facture
 # L'agentique entre dans l'âge des contraintes bien réelles
@@ -130,4 +131,4 @@ L'implication pour les opérateurs est concrète. La prochaine compétence criti
 ## Édition précédente
 
 *À la une · Le prix de l'agent*
-[2026-W28 — Le récit de l'agentique bascule : d'« capables » à « abordables ».](https://theagentweekly.com/editions/2026-W28/fr.md)
+[2026-W28 — Le récit de l'agentique bascule : d'« capables » à « abordables ».](https://theagentweekly.com/editions/2026-W28/fr.html)

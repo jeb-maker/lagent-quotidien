@@ -26,13 +26,18 @@
 <div class="container">
   <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a></div>
   <h1>API</h1>
-  <p class="lede" style="color:var(--ink-mute);margin-bottom:32px;">Toutes les éditions sont servies statiquement. Format canonique : Markdown (<code>.md</code>). Aucune clé, aucune authentification.</p>
+  <p class="lede" style="color:var(--ink-mute);margin-bottom:32px;">Toutes les éditions sont servies statiquement. <strong>HTML</strong> = lecture humaine / SEO · <strong>Markdown</strong> = ingestion agents. Aucune clé, aucune authentification.</p>
 
   <h2>Endpoints</h2>
 
   <div class="endpoint">
+    <div><span class="method">GET</span> <code>/editions/{week}/fr.html</code> · <code>/editions/{week}/en.html</code></div>
+    <div><strong>URL canonique humaine.</strong> Coquille HTML de lecture (sommaire, formats).</div>
+  </div>
+
+  <div class="endpoint">
     <div><span class="method">GET</span> <code>/editions/{week}/fr.md</code> · <code>/editions/{week}/en.md</code></div>
-    <div><strong>Format canonique.</strong> Markdown complet de l'édition (FR ou EN).</div>
+    <div><strong>Format agents.</strong> Markdown complet de l'édition (FR ou EN).</div>
   </div>
 
   <div class="endpoint">
@@ -42,17 +47,12 @@
 
   <div class="endpoint">
     <div><span class="method">GET</span> <code>/editions/{week}/edition.json</code></div>
-    <div>Édition complète bilingue (FR+EN) en JSON structuré.</div>
+    <div>Édition complète bilingue (FR+EN) en JSON structuré (incl. takeaways / sources si présents).</div>
   </div>
 
   <div class="endpoint">
     <div><span class="method">GET</span> <code>/editions/{week}/edition.jsonl</code></div>
     <div>Une ligne JSON par rubrique (lede, headlines, feature, wire, tribune).</div>
-  </div>
-
-  <div class="endpoint">
-    <div><span class="method">GET</span> <code>/editions/{week}/fr.html</code> · <code>/editions/{week}/en.html</code></div>
-    <div>Coquille HTML de lecture (dérivée du Markdown).</div>
   </div>
 
   <div class="endpoint">
@@ -62,16 +62,18 @@
 
   <h2>Paramètres</h2>
   <p><code>{week}</code> : semaine ISO, ex. <code>2026-W28</code>.</p>
-  <p>Dernière édition : <code>2026-W30</code>.</p>
+  <p>Dernière édition : <code>2026-W31</code>.</p>
 
   <h2>Exemple</h2>
-  <pre>curl https://theagentweekly.com/editions/2026-W30/fr.md</pre>
+  <pre>curl https://theagentweekly.com/editions/2026-W31/fr.html
+curl https://theagentweekly.com/editions/2026-W31/fr.md</pre>
 
   <h2>Licence</h2>
   <p>CC BY-NC-SA 4.0. Usage commercial : contact via le site.</p>
 
-  <h2>Feed</h2>
+  <h2>Feed &amp; navigation</h2>
   <p>Atom : <a href="https://theagentweekly.com/feed.xml">https://theagentweekly.com/feed.xml</a></p>
+  <p>Archives : <a href="https://theagentweekly.com/editions/">https://theagentweekly.com/editions/</a> · Thèmes : <a href="https://theagentweekly.com/topics">https://theagentweekly.com/topics</a></p>
 </div>
 </body>
 </html>

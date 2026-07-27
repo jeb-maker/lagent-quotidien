@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Tuesday, July 14, 2026
 
 > Issue n° 435 · Vol. II · 2026-W29
-> https://theagentweekly.com/editions/2026-W29/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W29/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W29/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · The reckoning
 # The agentic industry enters the age of constraints
@@ -130,4 +131,4 @@ The implication for operators is concrete. The next critical skill of an agentic
 ## Previous issue
 
 *Front page · The price of the agent*
-[2026-W28 — The agentic story is turning: from "capable" to "affordable".](https://theagentweekly.com/editions/2026-W28/en.md)
+[2026-W28 — The agentic story is turning: from "capable" to "affordable".](https://theagentweekly.com/editions/2026-W28/en.html)

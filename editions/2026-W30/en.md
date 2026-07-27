@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Tuesday, July 21, 2026
 
 > Issue n° 436 · Vol. II · 2026-W30
-> https://theagentweekly.com/editions/2026-W30/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W30/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W30/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · The proof
 # From constraints to proof of action
@@ -155,4 +156,4 @@ For operators, the implication is concrete. Before adding a skill, a connector, 
 ## Previous issue
 
 *Front page · The reckoning*
-[2026-W29 — The agentic industry enters the age of constraints](https://theagentweekly.com/editions/2026-W29/en.md)
+[2026-W29 — The agentic industry enters the age of constraints](https://theagentweekly.com/editions/2026-W29/en.html)

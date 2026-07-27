@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Tuesday, June 30, 2026
 
 > Issue n° 433 · Vol. II · 2026-W27
-> https://theagentweekly.com/editions/2026-W27/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W27/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W27/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · Agentic commerce
 # Millions of stores are already buyable by an agent.
@@ -155,4 +156,4 @@ Our line will follow that triptych — less pure alignment promises, more proced
 ## Previous issue
 
 *Front page · Agent security*
-[2026-W26 — Thirteen words are enough to poison a research agent.](https://theagentweekly.com/editions/2026-W26/en.md)
+[2026-W26 — Thirteen words are enough to poison a research agent.](https://theagentweekly.com/editions/2026-W26/en.html)

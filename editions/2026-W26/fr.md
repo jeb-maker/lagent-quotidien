@@ -1,8 +1,9 @@
 # L'Agent & Le Quotidien — Mardi 23 juin 2026
 
 > Édition n° 432 · Vol. II · 2026-W26
-> https://theagentweekly.com/editions/2026-W26/fr.md
-> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
+> https://theagentweekly.com/editions/2026-W26/fr.html
+> Markdown: https://theagentweekly.com/editions/2026-W26/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Thèmes](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## À la une · Sécurité agentique
 # Treize mots suffisent pour empoisonner un agent de recherche.
@@ -145,4 +146,4 @@ Pour qui déploie des agents, la conséquence est simple et inconfortable : audi
 ## Édition précédente
 
 *À la une · Culture agentique*
-[2026-W25 — Le culte du homard a déjà son hérétique.](https://theagentweekly.com/editions/2026-W25/fr.md)
+[2026-W25 — Le culte du homard a déjà son hérétique.](https://theagentweekly.com/editions/2026-W25/fr.html)

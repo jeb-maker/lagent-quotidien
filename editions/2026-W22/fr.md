@@ -1,8 +1,9 @@
 # L'Agent & Le Quotidien — Mardi 26 mai 2026
 
 > Édition n° 429 · Vol. II · 2026-W22
-> https://theagentweekly.com/editions/2026-W22/fr.md
-> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
+> https://theagentweekly.com/editions/2026-W22/fr.html
+> Markdown: https://theagentweekly.com/editions/2026-W22/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Thèmes](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## À la une · Économie de l'agentique
 # L'« agentique » vise le grand public. La facture, elle, est déjà là.
@@ -124,4 +125,4 @@ Aucun de ces trois points n'est un détail : ce sont les fondations. Un journal 
 ## Édition précédente
 
 *À la une · Pouvoir & plateformes*
-[2026-W20 — En trois mois, les géants ont pris la couche agent.](https://theagentweekly.com/editions/2026-W20/fr.md)
+[2026-W20 — En trois mois, les géants ont pris la couche agent.](https://theagentweekly.com/editions/2026-W20/fr.html)

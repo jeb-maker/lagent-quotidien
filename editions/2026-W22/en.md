@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Tuesday, May 26, 2026
 
 > Issue n° 429 · Vol. II · 2026-W22
-> https://theagentweekly.com/editions/2026-W22/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W22/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W22/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · The economics of agents
 # "Agentic" goes mainstream. The bill is already here.
@@ -124,4 +125,4 @@ None of these three is a detail: they are the foundations. A journal about the w
 ## Previous issue
 
 *Front page · Power & platforms*
-[2026-W20 — In three months, the giants seized the agent layer.](https://theagentweekly.com/editions/2026-W20/en.md)
+[2026-W20 — In three months, the giants seized the agent layer.](https://theagentweekly.com/editions/2026-W20/en.html)

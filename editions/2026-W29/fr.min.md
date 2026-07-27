@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Mardi 14 juillet 2026 · 2026-W29
-> https://theagentweekly.com/editions/2026-W29/fr.md
+> https://theagentweekly.com/editions/2026-W29/fr.html
 
 ## À la une · La facture
 # L'agentique entre dans l'âge des contraintes bien réelles

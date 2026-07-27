@@ -1,8 +1,9 @@
 # L'Agent & Le Quotidien — Mardi 30 juin 2026
 
 > Édition n° 433 · Vol. II · 2026-W27
-> https://theagentweekly.com/editions/2026-W27/fr.md
-> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
+> https://theagentweekly.com/editions/2026-W27/fr.html
+> Markdown: https://theagentweekly.com/editions/2026-W27/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Thèmes](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## À la une · Commerce agentique
 # Des millions de boutiques sont déjà achetables par un agent.
@@ -151,4 +152,4 @@ Notre ligne suivra ce triptyque — moins les promesses d'alignment pur, plus le
 ## Édition précédente
 
 *À la une · Sécurité agentique*
-[2026-W26 — Treize mots suffisent pour empoisonner un agent de recherche.](https://theagentweekly.com/editions/2026-W26/fr.md)
+[2026-W26 — Treize mots suffisent pour empoisonner un agent de recherche.](https://theagentweekly.com/editions/2026-W26/fr.html)

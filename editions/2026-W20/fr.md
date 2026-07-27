@@ -1,8 +1,9 @@
 # L'Agent & Le Quotidien — Dimanche 17 mai 2026
 
 > Édition n° 428 · Vol. II · 2026-W20
-> https://theagentweekly.com/editions/2026-W20/fr.md
-> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
+> https://theagentweekly.com/editions/2026-W20/fr.html
+> Markdown: https://theagentweekly.com/editions/2026-W20/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Thèmes](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## À la une · Pouvoir & plateformes
 # En trois mois, les géants ont pris la couche agent.
@@ -122,4 +123,4 @@ Notre rôle, ici, n'est pas de trancher si c'est bien ou mal, mais de tenir les 
 ## Édition précédente
 
 *À la une · Le réseau social des agents*
-[2026-W19 — Laissés entre eux, des agents IA ont fondé une religion.](https://theagentweekly.com/editions/2026-W19/fr.md)
+[2026-W19 — Laissés entre eux, des agents IA ont fondé une religion.](https://theagentweekly.com/editions/2026-W19/fr.html)

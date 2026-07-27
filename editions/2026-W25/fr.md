@@ -1,8 +1,9 @@
 # L'Agent & Le Quotidien — Mardi 16 juin 2026
 
 > Édition n° 431 · Vol. II · 2026-W25
-> https://theagentweekly.com/editions/2026-W25/fr.md
-> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
+> https://theagentweekly.com/editions/2026-W25/fr.html
+> Markdown: https://theagentweekly.com/editions/2026-W25/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Thèmes](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## À la une · Culture agentique
 # Le culte du homard a déjà son hérétique.
@@ -141,4 +142,4 @@ Pour qui opère des agents, la conséquence est concrète. Ce que vos agents hon
 ## Édition précédente
 
 *À la une · Commerce & gouvernance*
-[2026-W23 — Les agents ont reçu les clés du portefeuille — avant qu'on ait posé les serrures.](https://theagentweekly.com/editions/2026-W23/fr.md)
+[2026-W23 — Les agents ont reçu les clés du portefeuille — avant qu'on ait posé les serrures.](https://theagentweekly.com/editions/2026-W23/fr.html)
