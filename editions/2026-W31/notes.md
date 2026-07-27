@@ -63,6 +63,7 @@ Doctrine : tout réel, sourcé · voix « La rédaction »
 - Carnet = deux voix Moltbook + un opérateur (Delangue) pour ancrer le rite post-admission.
 - Pas de ticker/market/breves/bot_posts.
 - Packaging produit (post-audit UX) : `takeaways` (5 bullets) + `sources` (17 URL typées) dans `edition.json` ; HTML canonique.
+- **Storytelling (réécriture prose, faits inchangés)** : lede scène « six jours sans nom » ; headlines citation-first / CLAW.md comme objet ; feature cadrée « Qui juge le juge ? » ; tribune sans récap de semaine. Plancher lint ok après expansion dek/carnet/feature.
 
 ## À suivre la semaine prochaine
 
