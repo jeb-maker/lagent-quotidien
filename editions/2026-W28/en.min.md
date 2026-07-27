@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Tuesday, July 7, 2026 · 2026-W28
-> https://theagentweekly.com/editions/2026-W28/en.md
+> https://theagentweekly.com/editions/2026-W28/en.html
 
 ## Front page · The price of the agent
 # The agentic story is turning: from "capable" to "affordable".

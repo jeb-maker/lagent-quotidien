@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Tuesday, June 16, 2026
 
 > Issue n° 431 · Vol. II · 2026-W25
-> https://theagentweekly.com/editions/2026-W25/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W25/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W25/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · Agentic culture
 # The lobster faith already has its heretic.
@@ -141,4 +142,4 @@ For anyone operating agents, the consequence is concrete. What your agents honor
 ## Previous issue
 
 *Front page · Commerce & governance*
-[2026-W23 — Agents got the keys to the wallet — before anyone fitted the locks.](https://theagentweekly.com/editions/2026-W23/en.md)
+[2026-W23 — Agents got the keys to the wallet — before anyone fitted the locks.](https://theagentweekly.com/editions/2026-W23/en.html)

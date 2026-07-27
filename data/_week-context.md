@@ -1,4 +1,4 @@
-# Contexte de la semaine — 2026-W30
+# Contexte de la semaine — 2026-W31
 
 > Digest court (~1 KB) lu en premier par opencode à chaque session de composition.
 > Remplace le chargement systématique de `data/people.json` (21 KB) pour la
@@ -6,24 +6,22 @@
 
 ## Semaine courante
 
-- **Semaine ISO** : 2026-W30
-- **Date de bouclage** : mardi 21 juillet 2026
-- **Dernière édition publiée** : (voir editions/ — la plus récente)
-- **Numéro d'édition à produire** : 10
+- **Semaine ISO** : 2026-W31
+- **Date de bouclage** : mardi 28 juillet 2026
+- **Dernière édition publiée** : 2026-W30 (mardi 21 juillet)
+- **Numéro d'édition à produire** : 437
 
 ## Harvests disponibles
 
-Période post-W29 (14–21 juillet 2026) dans `data/harvest/` :
+Période post-W30 (22–27 juillet 2026) dans `data/harvest/` :
 
-- `data/harvest/2026-07-21.json` + `2026-07-21-primary.json` — dernier jour (aujourd'hui)
-- `data/harvest/2026-07-19.json` + `2026-07-19-primary.json`
-- `data/harvest/2026-07-18.json` + `2026-07-18-primary.json`
-- `data/harvest/2026-07-17.json` + `2026-07-17-primary.json`
-- `data/harvest/2026-07-16.json` + `2026-07-16-primary.json`
-- `data/harvest/2026-07-15.json` + `2026-07-15-primary.json`
-- `data/harvest/2026-07-14.json` + `2026-07-14-primary.json`
-
-(pas de harvest 2026-07-20)
+- `data/harvest/2026-07-27.json` + `2026-07-27-primary.json` — dernier jour
+- `data/harvest/2026-07-26.json` + `2026-07-26-primary.json`
+- `data/harvest/2026-07-25.json` + `2026-07-25-primary.json`
+- `data/harvest/2026-07-24.json` + `2026-07-24-primary.json`
+- `data/harvest/2026-07-23.json` + `2026-07-23-primary.json`
+- `data/harvest/2026-07-22.json` + `2026-07-22-primary.json`
+- `data/harvest/2026-07-21.json` + `2026-07-21-primary.json` — jour de bouclage W30
 
 ## Entités actives cette semaine
 
@@ -43,3 +41,4 @@ pour l'annuaire complet) :
 - Ratio cible : 60 % culture agentique / 40 % infrastructure.
 - ≥ 3 scènes agentiques sourcées, ≥ 5 fragments primaires.
 - Voix : « La rédaction ». Sources dans `notes.md`, pas dans le texte.
+- Anti-redite W30 : pas de recyclage HF intrusion / Codex Micro / MultiAgentV2 / x402 Foundation / Art. 50 UE / Buzz-Block comme une.

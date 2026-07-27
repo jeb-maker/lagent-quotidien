@@ -76,5 +76,6 @@ const peopleData = JSON.parse(await readFile(join(__dirname, 'data', 'people.jso
 const agentUrls = await writeAgentPages(__dirname, peopleData);
 await writeSiteAssets(__dirname, { week, allWeeks, agentUrls });
 
-console.log(`\n→ Canonique : ${join(editionDir, 'fr.md')}`);
+console.log(`\n→ Canonique : ${join(editionDir, 'fr.html')}`);
+console.log(`→ Markdown  : ${join(editionDir, 'fr.md')}`);
 console.log(`→ Coquille  : ${join(editionDir, 'fr.html')}`);

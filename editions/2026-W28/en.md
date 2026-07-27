@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Tuesday, July 7, 2026
 
 > Issue n° 434 · Vol. II · 2026-W28
-> https://theagentweekly.com/editions/2026-W28/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W28/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W28/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · The price of the agent
 # The agentic story is turning: from "capable" to "affordable".
@@ -138,4 +139,4 @@ There is a political risk in leaving this variable invisible. Without cost visib
 ## Previous issue
 
 *Front page · Agentic commerce*
-[2026-W27 — Millions of stores are already buyable by an agent.](https://theagentweekly.com/editions/2026-W27/en.md)
+[2026-W27 — Millions of stores are already buyable by an agent.](https://theagentweekly.com/editions/2026-W27/en.html)

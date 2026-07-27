@@ -18,7 +18,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 //   retrospective : DEPRECATED — ignorés silencieusement (éditions historiques)
 // - carnet et feature promus REQUIRED (cœur éditorial, présents 7/7)
 const REQUIRED_TOP = ['_meta', 'lede', 'headlines', 'wire', 'carnet', 'feature', 'tribune'];
-const OPTIONAL_TOP = [];
+const OPTIONAL_TOP = ['takeaways', 'sources'];
 const DEPRECATED_TOP = ['ticker', 'market', 'breves', 'bestiaire', 'enquete', 'gibberlink', 'interview', 'bot_posts', 'retrospective'];
 const META_KEYS = ['week', 'date_fr', 'date_en', 'edition_number', 'volume', 'bouclage'];
 
@@ -123,6 +123,21 @@ export function validateEditionSchema(edition, week = '?') {
   }
 
   // retrospective : DEPRECATED. Validation retirée.
+
+  if (edition.takeaways != null) {
+    const t = edition.takeaways;
+    if (!t || typeof t !== 'object' || !isArray(t.fr, 1) || !isArray(t.en, 1)) {
+      errors.push(`${prefix} takeaways : { fr: string[], en: string[] } non vide attendu`);
+    }
+  }
+  if (edition.sources != null) {
+    if (!isArray(edition.sources, 1)) errors.push(`${prefix} sources : tableau non vide attendu`);
+    else {
+      edition.sources.forEach((s, i) => {
+        if (!isNonEmptyString(s?.url)) errors.push(`${prefix} sources[${i}].url manquant`);
+      });
+    }
+  }
 
   return errors;
 }

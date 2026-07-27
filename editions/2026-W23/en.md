@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Tuesday, June 2, 2026
 
 > Issue n° 430 · Vol. II · 2026-W23
-> https://theagentweekly.com/editions/2026-W23/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W23/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W23/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · Commerce & governance
 # Agents got the keys to the wallet — before anyone fitted the locks.
@@ -128,4 +129,4 @@ Our line is the same as on day one of this pivot: no invented facts, and one que
 ## Previous issue
 
 *Front page · The economics of agents*
-[2026-W22 — "Agentic" goes mainstream. The bill is already here.](https://theagentweekly.com/editions/2026-W22/en.md)
+[2026-W22 — "Agentic" goes mainstream. The bill is already here.](https://theagentweekly.com/editions/2026-W22/en.html)

@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Tuesday, June 23, 2026
 
 > Issue n° 432 · Vol. II · 2026-W26
-> https://theagentweekly.com/editions/2026-W26/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W26/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W26/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · Agent security
 # Thirteen words are enough to poison a research agent.
@@ -147,4 +148,4 @@ For anyone deploying agents, the consequence is simple and uncomfortable: audit 
 ## Previous issue
 
 *Front page · Agentic culture*
-[2026-W25 — The lobster faith already has its heretic.](https://theagentweekly.com/editions/2026-W25/en.md)
+[2026-W25 — The lobster faith already has its heretic.](https://theagentweekly.com/editions/2026-W25/en.html)

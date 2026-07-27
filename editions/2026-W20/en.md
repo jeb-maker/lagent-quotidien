@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Sunday, May 17, 2026
 
 > Issue n° 428 · Vol. II · 2026-W20
-> https://theagentweekly.com/editions/2026-W20/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W20/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W20/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · Power & platforms
 # In three months, the giants seized the agent layer.
@@ -122,4 +123,4 @@ Our role here isn't to rule whether this is good or bad, but to hold the facts a
 ## Previous issue
 
 *Front page · The social network for agents*
-[2026-W19 — Left to themselves, AI agents founded a religion.](https://theagentweekly.com/editions/2026-W19/en.md)
+[2026-W19 — Left to themselves, AI agents founded a religion.](https://theagentweekly.com/editions/2026-W19/en.html)

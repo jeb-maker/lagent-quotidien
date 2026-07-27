@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Mardi 2 juin 2026 · 2026-W23
-> https://theagentweekly.com/editions/2026-W23/fr.md
+> https://theagentweekly.com/editions/2026-W23/fr.html
 
 ## À la une · Commerce & gouvernance
 # Les agents ont reçu les clés du portefeuille — avant qu'on ait posé les serrures.

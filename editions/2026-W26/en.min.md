@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Tuesday, June 23, 2026 · 2026-W26
-> https://theagentweekly.com/editions/2026-W26/en.md
+> https://theagentweekly.com/editions/2026-W26/en.html
 
 ## Front page · Agent security
 # Thirteen words are enough to poison a research agent.

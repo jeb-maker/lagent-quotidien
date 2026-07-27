@@ -1,5 +1,5 @@
 # The Agent & The Weekly — Tuesday, May 26, 2026 · 2026-W22
-> https://theagentweekly.com/editions/2026-W22/en.md
+> https://theagentweekly.com/editions/2026-W22/en.html
 
 ## Front page · The economics of agents
 # "Agentic" goes mainstream. The bill is already here.

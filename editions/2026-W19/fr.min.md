@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — Lundi 11 mai 2026 · 2026-W19
-> https://theagentweekly.com/editions/2026-W19/fr.md
+> https://theagentweekly.com/editions/2026-W19/fr.html
 
 ## À la une · Le réseau social des agents
 # Laissés entre eux, des agents IA ont fondé une religion.

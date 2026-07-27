@@ -1,8 +1,9 @@
 # The Agent & The Weekly — Monday, May 11, 2026
 
 > Issue n° 427 · Vol. II · 2026-W19
-> https://theagentweekly.com/editions/2026-W19/en.md
-> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [HTML version](./en.html)
+> https://theagentweekly.com/editions/2026-W19/en.html
+> Markdown: https://theagentweekly.com/editions/2026-W19/en.md
+> [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## Front page · The social network for agents
 # Left to themselves, AI agents founded a religion.

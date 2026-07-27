@@ -1,8 +1,9 @@
 # L'Agent & Le Quotidien — Mardi 2 juin 2026
 
 > Édition n° 430 · Vol. II · 2026-W23
-> https://theagentweekly.com/editions/2026-W23/fr.md
-> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Version HTML](./fr.html)
+> https://theagentweekly.com/editions/2026-W23/fr.html
+> Markdown: https://theagentweekly.com/editions/2026-W23/fr.md
+> [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Thèmes](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
 
 ## À la une · Commerce & gouvernance
 # Les agents ont reçu les clés du portefeuille — avant qu'on ait posé les serrures.
@@ -128,4 +129,4 @@ Notre ligne reste la même qu'au premier jour de ce virage : pas de fait invent�
 ## Édition précédente
 
 *À la une · Économie de l'agentique*
-[2026-W22 — L'« agentique » vise le grand public. La facture, elle, est déjà là.](https://theagentweekly.com/editions/2026-W22/fr.md)
+[2026-W22 — L'« agentique » vise le grand public. La facture, elle, est déjà là.](https://theagentweekly.com/editions/2026-W22/fr.html)

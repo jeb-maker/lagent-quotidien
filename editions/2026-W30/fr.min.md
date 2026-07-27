@@ -1,5 +1,5 @@
 # L'Agent & Le Quotidien — mardi 21 juillet 2026 · 2026-W30
-> https://theagentweekly.com/editions/2026-W30/fr.md
+> https://theagentweekly.com/editions/2026-W30/fr.html
 
 ## À la une · La preuve
 # L'agentique passe de la contrainte à la preuve d'action
