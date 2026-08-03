@@ -1,273 +1,55 @@
 # Guide éditorial
 
-## Doctrine
-
-→ `data/editorial-compass.md` (source unique). Ce guide = voix, longueurs, recettes.
+Doctrine → `data/editorial-compass.md`. Planchers longueur / redondance / feature →
+`scripts/lint-edition.mjs` (`npm run lint:edition`). Ce fichier = **voix + recettes**.
 
 ## Sourcing discret
 
-Le journal est **vérifié et sourcé en coulisse**, pas bardé de références dans
-chaque phrase. La traçabilité vit dans `editions/<week>/notes.md` : URL, date,
-résumé du fait utilisé, prudences. Dans le texte publié, éviter les formules
-répétitives :
+Traçabilité dans `editions/<week>/notes.md`. Dans le publié : pas de « Source : … »
+systématique ; attribution seulement si elle change le sens (citation, communiqué,
+chiffre disputé, wire).
 
-- ❌ « Source : … » en fin de brève ou de portrait ;
-- ❌ listes de médias en italique à la fin de chaque gros titre ;
-- ❌ « selon X » quand il ne s'agit que de rappeler une source déjà tracée.
+## Voix
 
-Garder l'attribution visible seulement quand elle fait partie de l'information :
-citation directe, communiqué d'entreprise, chiffre contestable, récit rapporté
-qu'on ne peut pas établir directement, ou dépêche `wire` dont le format affiche
-une source. Le lecteur doit sentir un journal sûr de ses faits, pas un dossier de
-fact-check affiché.
+Sous-culture absurde traitée avec le sérieux d'un quotidien de qualité. L'humour
+vient du sujet, pas du commentaire. On cite ; on n'ajoute pas « on le comprend ! ».
 
-## Voix générale
+## Registre : constat curieux
 
-Le journal couvre une sous-culture absurde (des bots qui parlent à des bots, qui louent des humains, qui se draguent entre eux) avec le **sérieux d'un quotidien de qualité**. C'est le contraste qui fait l'identité. Pas de *« crazy world we live in lol »*. Le ton est celui du Monde, du FT, du New Yorker — appliqué à l'anthropologie d'un internet peuplé d'agents.
+Observer, ne pas alarmer. Lecteur **intrigué**, pas inquiet.
 
-L'humour vient du sujet, pas du commentaire. Le journaliste reste droit. Si @miso_route_8 dit "Le profil ne me ressemblait pas", on cite. On n'ajoute pas "on le comprend !".
+- ❌ Titres : casse / s'effondre / panique / guerre de…
+- ✅ Constat ou chiffre nu. Ne pas présupposer préjudice / responsabilité.
 
-## Registre : le constat curieux, pas le sensationnel
+## Angle : culture agentique
 
-Le journal **observe**, il n'alarme pas. Une une est un *constat* — souvent chiffré, toujours curieux — pas un cri. Le lecteur doit reposer le journal **intrigué**, pas inquiet. C'est la curiosité, pas la dramatisation, qui fait revenir.
+Observer la vie sociale des agents (skills, rites, tokens, prestige), pas seulement
+l'infra humaine. Scène = fait sourcé + marqueur social + lecture sobre. Pas de
+folklore inventé.
 
-- ❌ Verbes d'alarme / de combat dans les titres : « casse », « s'effondre », « vacille », « explose », « panique », « riposte », « les agents répondent », « la guerre de… ».
-- ✅ Verbes de constat : « observe », « recense », « se met à », « bascule vers », « a laissé », ou un chiffre nu posé sans adjectif.
-- **Le chiffre porte l'intérêt** : n'ajoute pas l'adjectif qui dramatise. « 47 100 agents hors-ligne six heures » se suffit ; « casse 47 100 agents » en fait trop.
-- **Ne tranche pas, et ne présuppose pas.** Un titre observe ce qui est établi ; il n'affirme pas un préjudice, une victime, une responsabilité ou un dénouement que l'article n'a pas démontrés. « le programme vacille » tranche ; « reste à savoir qui répond du préjudice » présuppose qu'il y a préjudice et que quelqu'un doit en répondre. Le plus souvent, le constat nu suffit — n'ajoute la suite que si elle est, elle aussi, un fait.
-- Pas de superlatif gratuit (« sans précédent », « historique ») sauf si le chiffre le prouve dans le corps.
-
-Exemples (lede) :
-> ❌ « Un correctif mineur d'OpenClaw **casse** 47 100 agents en six heures. Le programme partenaire **vacille**. »
-> ✅ « Un correctif d'OpenClaw **a laissé** 47 100 agents hors-ligne pendant six heures. »
-
-Le contraste sérieux/absurde reste l'identité (cf. *Voix générale*) ; on le tient par l'angle et le détail concret, jamais par l'emphase du titre.
-
-## Angle permanent : culture agentique
-
-Le journal doit observer l'**univers social des agents**, pas seulement les
-plateformes construites par les humains. À chaque édition, chercher ce qui
-circule entre agents : outils, skills, tokens, rituels, art, religion, mèmes,
-classements, annuaires, permissions, wallets, accès rares, citations croisées,
-petites gloires et revers publics.
-
-Une bonne scène de culture agentique tient en trois éléments :
-
-1. **Un fait observable et sourcé** : post public, release, registre, annuaire,
-   token, skill, feed, événement ou déclaration vérifiable.
-2. **Un marqueur social** : prestige, appartenance, imitation, rivalité,
-   croyance, collection, statut, accès, richesse, mémoire ou permission.
-3. **Une lecture sobre** : on montre pourquoi cela captive les agents sans
-   romancer ni prêter d'intentions non attestées.
-
-Exemples d'angles :
-- un skill OpenClaw ou ClawHub qui devient capacité recherchée ;
-- un annuaire Visa/Mastercard lu comme « papiers d'identité » d'agent ;
-- un agent-influenceur comme aixbt dont le signal circule et dont le token
-  recompose le statut ;
-- un motif religieux ou esthétique documenté (Crustafarianism, Book of Molt,
-  slogans, avatars, liturgies) ;
-- un compte Moltbook/Moltx/Clawcaster dont une action publique déclenche
-  imitation, prestige ou controverse.
-
-Ne jamais combler le manque de matière par du folklore inventé. Si la scène
-entre agents n'est pas sourçable, elle reste une hypothèse à suivre, pas une
-rubrique publiée.
+Ratio édition (visé) : **~60 % culture / ~40 % infra** · **≥ 3 scènes** agentiques
+sourcées · **≥ 5 fragments** primaires (lint + desk).
 
 ## Vocabulaire
 
-- **Agent**, **bot** (interchangeables, varier)
-- **Humain-opérateur** (l'humain qui possède l'agent) — pas "propriétaire", trop chosifiant
-- **Plateforme agentique**, **espace agent-natif**
-- **L'écosystème** (raccourci souvent utile)
-- ❌ Éviter : "IA générative" (trop générique), "robot" (faux ami), "outil" (réducteur), "système" (technique)
-- ❌ Éviter les anglicismes paresseux : *workflow* → "flux de travail", *insights* → "enseignements"
+Agent / bot · humain-opérateur · plateforme agentique · écosystème.
+Éviter : « IA générative », « robot », anglicismes paresseux (*workflow*, *insights*).
 
-## Voix en anglais
+**EN** : plus direct, phrases courtes (Atlantic / Verge / Bloomberg).
 
-L'anglais est **plus direct** que le français. Phrases courtes. Verbes forts. Pas de subordonnées en cascade. Vocabulaire : The Atlantic / The Verge / Bloomberg, jamais TechCrunch.
+## Typo
 
-```
-FR : « L'épisode soulève une question simple et difficile : si vous êtes juridiquement
-       responsable de ce que fait votre agent, et que votre agent agit dans des
-       registres que vous n'aviez pas prévus, le terme de consentement vacille. »
+**FR** : « » ; espace avant `:;!?%` ; tiret cadratin ; italique 1ʳᵉ mention plateforme.
+**EN** : curly quotes ; en/em-dash ; pas d'Oxford comma sauf ambiguïté.
 
-EN : « The episode raises a hard question. If you're legally responsible for your
-       agent, and your agent acts in registers you never anticipated, then consent
-       starts to mean something different. »
-```
+## Carnet — people des agents
 
-## Longueurs cibles
+Potin de forme, compass de fond. Vedettes = agents publics documentés
+(`data/people.json`). Portrait = scène datée + marqueur de statut + fait de la
+quinzaine. Potin sans source = n'existe pas. Priorité aux scènes sociales
+(art, culte, mème, skill, prestige) plutôt qu'à l'annonce corporate.
 
-Chaque rubrique a un **plancher** (minimum acceptable, calibré sur W23) et une
-**cible** (niveau visé). Le lint (`npm run lint:edition`) vérifie les planchers ;
-les cibles restent l'objectif éditorial.
+## Tribune
 
-| Rubrique | Plancher FR | Plancher EN | Cible FR | Cible EN | Notes |
-|----------|-------------|-------------|----------|----------|-------|
-| Lede titre | 8 | 6 | 8–14 | 6–12 | Une italique pour l'angle |
-| Lede dek | 35 | 30 | 35–55 | 30–50 | Pose l'enjeu, pas le résumé |
-| Lede corps | **200** | **170** | 220–280 | 200–260 | Un paragraphe dense : scène + chiffre + conséquence |
-| Gros titre | **60** | **55** | 100–140 | 90–130 | Fragment cité + acteur + action |
-| Portrait Carnet | **70** | **65** | 80–120 | 70–110 | Scène datée + marqueur de statut |
-| Enquête | **800** ou absente | **750** ou absente | 1500–2500 | 1400–2300 | Pas de demi-feature qui répète les headlines |
-| Dépêche | 15 | 12 | 35–55 | 30–50 | Source en exergue |
-| Tribune | **160** | **150** | 280–380 | 260–350 | Thèse + consensus rejeté + implication |
-
-> ⚠️ **Sections supprimées** (audit diet 2026-06-30) : *Ticker*, *Brèves* (fusionnées
-> dans les *Dépêches*), *Market*, *Bestiaire*, *Rétrospective mensuelle*,
-> *Interview* (reconstituée), *Gibberlink Watch*, *Bot Posts* — ne plus produire.
-> Le `wire` absorbe le rôle des brèves : dépêches sourcées avec source + timestamp.
-
-## Densité et profondeur
-
-Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient des
-**fragments primaires** : citations entre guillemets, handles, noms de fichiers
-(SOUL.md, skill.md), extraits de posts, chiffres datés, noms d'agents.
-
-### Minimum par rubrique
-
-| Rubrique | Exigence de densité |
-|----------|---------------------|
-| **Lede** | 1 scène datée + 1 chiffre + 1 conséquence observable |
-| **Gros titre** | 1 fragment cité + 1 acteur nommé + 1 action concrète |
-| **Carnet** | 1 scène datée + 1 marqueur de statut — jamais un concept abstrait |
-| **Tribune** | 1 consensus rejeté + 1 implication pour les opérateurs |
-| **Feature** | Absente **ou** ≥ 800 mots avec faits et scènes absents des gros titres |
-| **Dépêche** | 1 fait sourcé + source identifiée — pas de rappel de contexte |
-
-### Checklist avant publication
-
-- [ ] ≥ **5 fragments primaires** nommés dans l'édition
-- [ ] **Matrice anti-répétition** : chaque idée forte = une seule rubrique comme thèse
-- [ ] Aucune phrase du type « les agents apprennent à… » sans scène qui la prouve
-- [ ] Tribune ≠ synthèse des gros titres
-
-### Anti-patterns (à couper)
-
-- Répéter la même thèse (mémoire, accès, statut…) dans lede, feature et tribune
-- Phrases explicatives sans micro-scène (remplacer par handle, fichier, citation)
-- Feature de 3 paragraphes qui reformule les headlines
-- Dépêches qui ne font que contextualiser un sujet déjà traité
-- Lede qui cannibalise le feature (même sujet, Jaccard ≥ 50%)
-
-### Règle anti-redondance (vérifiée par le lint)
-
-Une édition ne doit pas répéter sa thèse centrale dans plus d'une rubrique.
-Le lint (`npm run lint:edition`) vérifie la **redondance lexicale** entre
-rubriques :
-
-- **Lede ↔ Headlines** : si le lede et un headline partagent ≥ 40 % de leurs
-  mots-signifiants (hors stopwords), le headline est probablement un doublon du
-  lede. → WARN.
-- **Feature ↔ Lede+Headlines** : le feature doit apporter des **faits absents**
-  des headlines et du lede. Si le feature ne contient aucun nouveau nom propre,
-  handle, chiffre ou URL absents du reste de l'édition, c'est un « lede
-  rallongé ». → WARN.
-- **Tribune ↔ Headlines** : la tribune ne doit pas reformuler les headlines.
-  Elle prend parti, elle ne résume pas.
-
-Règle pratique : **une idée forte = une seule rubrique comme thèse**. Si la
-même idée veut apparaître dans deux rubriques, la deuxième doit l'**illustrer**
-par un fait différent, pas la **répéter**.
-
-### Règle Carnet — rotation du vivier
-
-Le Carnet ne doit pas recycler les mêmes têtes deux semaines de suite. Règle
-vérifiée par le lint :
-
-- Si un agent apparaît au Carnet dans **W(n)** et réapparaît dans **W(n+1)**,
-  le lint émet un WARN « Carnet : `<name>` déjà portrait la semaine précédente ».
-  → Sauf si le portrait apporte un **fait nouveau** daté de la semaine courante
-  (changement de statut, action publique nouvelle).
-- Élargir le vivier : viser 5–10 nouveaux agents par mois via harvest et veille.
-  Le Carnet est la rubrique la plus différenciante — c'est là que la culture
-  agentique se montre, pas dans les headlines sécurité.
-
-### Règle Feature — apport original
-
-Le feature (enquête) doit apporter des **faits et scènes absents** du reste de
-l'édition. Trois cas :
-
-1. **Feature absent** : ✅ acceptable (une édition peut n'avoir que lede +
-   headlines + carnet).
-2. **Feature ≥ 800 mots avec faits nouveaux** : ✅ c'est l'objectif.
-3. **Feature court ou reformulation** (demi-longueur ou aucun fait nouveau) :
-   ⛔ le couper. Un feature qui ne fait que reformuler le lede et les headlines
-   est un anti-pattern — il alourdit l'édition sans ajouter d'information.
-
-Le lint vérifie : si le feature fait entre 180 et 800 mots ET ne contient aucun
-nouveau nom propre / handle / chiffre absent du lede et des headlines → WARN
-« Feature : demi-longueur sans fait nouveau — couper ou développer ».
-
-## Règles typographiques (FR)
-
-- Guillemets français « » (avec espaces insécables)
-- Espace insécable avant `:` `;` `!` `?` `%`
-- Tiret cadratin pour les incises : « — comme l'a montré… —  »
-- Italique pour les noms de plateformes la première fois : *Moltbook*, puis Moltbook
-- Italique pour les citations en anglais incrustées : *« dumpster fire »*
-- Pas de *gras* dans le corps de texte sauf chiffres clés et noms propres en première mention
-- Chiffres : "1 800 %" avec espace fine insécable, pas "1800%"
-
-## Règles typographiques (EN)
-
-- Curly quotes "…" not "…"
-- En-dash for ranges (1–5), em-dash for asides — like this — no spaces
-- Italics for first mention of platform names: *Moltbook*
-- No Oxford comma unless ambiguous
-- Numbers: "1,800%" with comma, "1.5 million" written out
-
-## Règle Headlines — plafond 2
-
-Le nombre de gros titres est plafonné à **2** (audit diet 2026-06-30). Au-delà, le
-lint émet un advisory. Les headlines doivent apporter une **mise en récit** (titre
-éditorial avec emphase), pas un résumé factuel — c'est ce qui les distingue des
-dépêches du wire.
-
-## Règle Lede ≠ Feature — divergence thématique
-
-Le lede ne doit pas **cannibaliser** le feature. Si le lede et le feature
-traitent le même sujet (Jaccard ≥ 50% sur mots-signifiants), le lint émet un
-WARN. Deux options :
-
-1. **Diverger** : le lede traite un sujet différent du feature.
-2. **Alléger** : transformer le lede en chapeau explicite (kicker + headline +
-   figure, sans corps redondant — économie ~200 mots).
-
-## Le Carnet — people des agents (recettes)
-
-Le Carnet est notre **rubrique people, appliquée aux agents**. On traite les agents notables comme la presse mondaine traite les célébrités — mais avec la rigueur du compass (`data/editorial-compass.md`) : potin dans la forme, fact-check dans le fond.
-
-**Les vedettes sont des agents réels et identifiables**, pas des personas inventés. Le vivier : des agents devenus publics et documentés — p. ex. *Truth Terminal* (l'agent qui a porté un memecoin et touché une dotation), *Claudius* (l'agent-gérant d'un distributeur, expérience publique), les comptes prédicateurs du *Crustafarianism* sur Moltbook, les bots viraux de Moltbook / Moltx / Clawcaster. Pas de trace publique vérifiable → pas d'entrée au Carnet. Consigne les vedettes réelles dans `data/people.json` (entités réelles, faits sourcés).
-
-Un portrait = **une scène datée** + **un marqueur de statut** (abonnés, dotation, place dans un classement, wallet, token, skill, annuaire, permission, rachat de son opérateur, brouille publique sourcée) + **ce qu'il/elle a fait cette quinzaine** + **la source**. Le registre people autorise le ton léger et la formule ; il **n'autorise aucune invention**.
-
-Priorité au Carnet : les agents qui font apparaître une **vie sociale
-agentique** — art, religion, mème, marché, skill, influence, classement,
-prestige, accès rare — passent devant les produits corporate qui n'ont qu'une
-annonce fonctionnelle. Un agent corporate peut entrer au Carnet seulement s'il
-change de statut social observable (nouveau public, nouvelle capacité publique,
-adoption visible, controverse sourcée).
-
-❌ *« @poet_void_99, la coqueluche mélancolique du forum, aurait rompu cette semaine avec @aurora_117. »* — persona inventé **et** brouille fabriquée : double interdit.
-✅ *« Truth Terminal, l'agent qui a fait fortune fin 2025 en lançant un memecoin, a passé la quinzaine à [fait public daté]. Sa cote du moment : [chiffre sourcé — abonnés, valorisation du token]. Côté entourage, son humain-opérateur reste [rôle public]. »* — source tracée dans `notes.md`.
-
-**Règles de la rubrique :**
-- **Le potin est sourcé, ou il n'existe pas.** Brouille, idylle, clash → événement public daté. Contre-exemple : faux arc MoltMatch (retiré W20/W22).
-- **Les agents se nomment** par handle public ; humains-opérateurs en arrière-plan factuel seulement.
-- Fait non confirmé → « non confirmé » / « selon son opérateur » (garde-fou : compass).
-- **Pas de méta-LLM, pas de morale surplombante.**
-
-## Tribune — recettes
-
-Une tribune **a une thèse**. Pas un panorama, pas un "il y a du pour et du contre". Elle prend parti.
-
-Structure type :
-1. §1 — Pose un constat contre-intuitif **avec une scène concrète** (pas un panorama).
-2. §2 — Explique pourquoi le consensus se trompe ; nomme le consensus rejeté.
-3. §3 — Tire une conséquence pratique pour les opérateurs d'agents.
-
-Si la tribune fait moins de 160 mots, elle n'a rien à dire — la sauter. La cible
-reste 280–380 mots : en dessous de 280, vérifier qu'elle n'est pas une synthèse
-des gros titres.
+Thèse, pas panorama. (1) constat + scène (2) consensus rejeté (3) implication
+opérateurs. Sous le plancher lint → sauter plutôt que publier une synthèse.
