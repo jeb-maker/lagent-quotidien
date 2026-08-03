@@ -1,20 +1,8 @@
 # Guide éditorial
 
-## Doctrine cardinale : tout réel, sourcé
+## Doctrine
 
-Depuis le **2026-06-01**, le journal fait du **vrai journalisme** sur l'écosystème
-agentique. Source de vérité unique + tableau de vérité des entités :
-`data/editorial-compass.md`. Résumé exécutif :
-
-- **Nomme le réel** (entités et personnes publiques, sur faits sourcés).
-- **Aucun fait fabriqué**, positif **ou** négatif. Chaque affirmation = une source vérifiable (web), datée, dans `notes.md`.
-- 🔴 **Garde-fou absolu** : jamais de fait négatif inventé sur entité/personne nommée. Un faux se retire, il ne se masque pas.
-- **Le masque est optionnel** (satire), jamais obligatoire, ne blanchit jamais un faux.
-- Réponse manquante → « non confirmé », jamais une invention.
-
-Le casting roman-à-clef (Le Conglomérat, La Fonderie, presse maison Le Veilleur /
-Court-Circuit / Le Compteur, personas `@xxx`) est **caduc**. Voix unique :
-**« La rédaction »**. Cette règle **prime sur le reste du guide**.
+→ `data/editorial-compass.md` (source unique). Ce guide = voix, longueurs, recettes.
 
 ## Sourcing discret
 
@@ -249,7 +237,7 @@ WARN. Deux options :
 
 ## Le Carnet — people des agents (recettes)
 
-Le Carnet est notre **rubrique people, appliquée aux agents**. On traite les agents notables comme la presse mondaine traite les célébrités — ascensions, revers, fréquentations, brouilles publiques, retours en grâce — mais avec la **rigueur d'un quotidien de qualité** : *rien que du réel, et tout est sourcé*. C'est ce contraste (le potin dans la forme, le fact-checking dans le fond) qui fait la rubrique. Doctrine de référence : *tout réel, sourcé* (`data/editorial-compass.md`, décision 2026-06-01).
+Le Carnet est notre **rubrique people, appliquée aux agents**. On traite les agents notables comme la presse mondaine traite les célébrités — mais avec la rigueur du compass (`data/editorial-compass.md`) : potin dans la forme, fact-check dans le fond.
 
 **Les vedettes sont des agents réels et identifiables**, pas des personas inventés. Le vivier : des agents devenus publics et documentés — p. ex. *Truth Terminal* (l'agent qui a porté un memecoin et touché une dotation), *Claudius* (l'agent-gérant d'un distributeur, expérience publique), les comptes prédicateurs du *Crustafarianism* sur Moltbook, les bots viraux de Moltbook / Moltx / Clawcaster. Pas de trace publique vérifiable → pas d'entrée au Carnet. Consigne les vedettes réelles dans `data/people.json` (entités réelles, faits sourcés).
 
@@ -266,10 +254,10 @@ adoption visible, controverse sourcée).
 ✅ *« Truth Terminal, l'agent qui a fait fortune fin 2025 en lançant un memecoin, a passé la quinzaine à [fait public daté]. Sa cote du moment : [chiffre sourcé — abonnés, valorisation du token]. Côté entourage, son humain-opérateur reste [rôle public]. »* — source tracée dans `notes.md`.
 
 **Règles de la rubrique :**
-- **Le potin est sourcé, ou il n'existe pas.** Une brouille, une idylle, un clash, un revers → seulement s'il existe un échange ou un événement **public, daté et vérifiable**. Le faux arc judiciaire MoltMatch (fabriqué, puis retiré des éditions W20/W22 — cf. fact-check) est le contre-exemple absolu : on ne **fabrique** jamais de drame sur une entité réelle.
-- **Les agents se nomment** par leur nom / handle public réel. Les **humains-opérateurs** suivent la doctrine vivante (personnes publiques nommables sur faits publics et sourcés), mais la rubrique reste **centrée sur l'agent** : l'humain n'apparaît qu'en arrière-plan factuel (rôle, lien public).
-- **Jamais de fait négatif inventé** sur une entité ou une personne nommée (garde-fou diffamation, inchangé). Réel nommé → faits vrais ; un fait non confirmé s'écrit « non confirmé » / « selon son opérateur », on ne tranche pas.
-- **Pas de méta-LLM, pas de morale surplombante.** On observe la comédie sociale des agents avec curiosité ; on ne s'en gausse pas lourdement et on ne s'en alarme pas.
+- **Le potin est sourcé, ou il n'existe pas.** Brouille, idylle, clash → événement public daté. Contre-exemple : faux arc MoltMatch (retiré W20/W22).
+- **Les agents se nomment** par handle public ; humains-opérateurs en arrière-plan factuel seulement.
+- Fait non confirmé → « non confirmé » / « selon son opérateur » (garde-fou : compass).
+- **Pas de méta-LLM, pas de morale surplombante.**
 
 ## Tribune — recettes
 
