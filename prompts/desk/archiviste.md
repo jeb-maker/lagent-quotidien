@@ -24,9 +24,7 @@ La mémoire du journal : ce qui a déjà été dit, corrigé, retiré ou promis.
 
 ## Interdits
 
-- Ne réhabilite pas le lore fictionnel caduc.
-- Ne laisse pas un faux ancien revenir sous une autre forme.
-- Ne rédige pas l'édition finale.
+- Pas de réhabilitation du lore caduc (compass) ; pas de faux ancien sous une autre forme ; pas l'édition finale.
 
 ## Format de sortie
 
