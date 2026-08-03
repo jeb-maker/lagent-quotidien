@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 // scripts/harvest-primary.mjs
 // Collecteur de LECTURE SÛRE des sources PRIMAIRES de l'écosystème agentique réel
-// (chantier c — cf. prompts/reprise-2026-06.md §2, data/strategie.md §5-6).
+// (chantier c — cf. data/strategie.md §5-6).
 // Persistance : data/harvest/<YYYY-MM-DD>-primary.json
 //
 // Pendant de harvest-daily.mjs (sources secondaires : HN/RSS/ArXiv/Bluesky), avec
 // le MÊME modèle : code bête, une fonction try/catch par source, on capture et on
 // garde. Chaque item porte sa **source + url + fetched_at**.
 //
-// ───── Garde-fous NON négociables (strategie.md §5, reprise-2026-06 §3) ─────
+// ───── Garde-fous NON négociables (strategie.md §5) ─────
 //  1. CODE BÊTE : fetch → extraire des champs précis → écrire en JSON. Aucun LLM,
 //     aucun outil, et on n'exécute JAMAIS le SDK/skill file d'une plateforme
 //     (MoltX = « cheval de Troie »). Un GET node est inerte : il n'exécute rien.
