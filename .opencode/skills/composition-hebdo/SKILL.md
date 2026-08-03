@@ -1,38 +1,29 @@
 ---
 name: composition-hebdo
-description: Procédure complète pour composer une édition hebdomadaire de L'Agent & Le Quotidien (FR+EN). Utilise quand l'utilisateur demande de composer/générer/préparer l'édition WXX, ou parle du desk agentique. Encapsule prompts/weekly-edition.md pour ne le charger qu'à ce moment.
+description: Composer une édition hebdomadaire de L'Agent & Le Quotidien. Utilise pour composer/générer/préparer WXX ou le desk agentique. Encapsule prompts/weekly-edition.md.
 ---
 
-# Composer une édition hebdomadaire
+# Composer une édition
 
-Canon procédure desk : `prompts/desk/README.md`. Détail rubriques : `prompts/weekly-edition.md`.
+Canon desk : `prompts/desk/README.md`. Rubriques : `prompts/weekly-edition.md`.
+Doctrine : `data/editorial-compass.md`. Voix : `prompts/style-guide.md`.
 
-## Prérequis (lire une seule fois par session de composition)
+## Prérequis (une fois / session)
 
-1. `data/_week-context.md` — digest court (semaine, dates de harvest, entités actives)
-2. `prompts/style-guide.md` — voix, ton, longueurs
-3. `data/editorial-compass.md` — doctrine « tout réel, sourcé » + tableau de vérité
-4. `data/people.json` — uniquement si le digest y renvoie
-5. `data/ongoing-stories.json` — histoires suivies
+1. `data/_week-context.md`
+2. `prompts/style-guide.md`
+3. `data/editorial-compass.md`
+4. `data/people.json` / `data/ongoing-stories.json` — si le digest y renvoie
 
 ## Workflow
 
-1. **`bash scripts/new-week.sh`** → `editions/2026-WXX/{edition.json, notes.md}` vides.
-2. **Desk** (canon : `prompts/desk/README.md`) :
-   - **Étape 1 (parallèle)** — ordre indifférent : `veilleur` · `comère` · `facteur` · `promoteur` · `archiviste` → `data/desk/<week>/`
-   - **Étape 2** — `éditeur` → `edition.json` + `## Arbitrages` dans `notes.md`
-   - **Étape 3** — `juge` → `data/desk/<week>/review.md` (`## Verdict` = `publier`/`réviser`/`jeter`)
-3. **Arbitrage humain** : relire/ajuster `edition.json`.
-4. **`npm run gate -- 2026-WXX`** — lint `--strict` + verdict `publier`.
-5. **`npm run render -- 2026-WXX`** → fr/en.html + index/sitemap/feed/llms/robots/ai.
-6. Vérif navigateur, puis commit + push.
+1. `bash scripts/new-week.sh`
+2. Desk — étape 1 **parallèle** : `veilleur` · `comère` · `facteur` · `promoteur` · `archiviste`
+   → étape 2 `éditeur` → étape 3 `juge`
+3. Relire `edition.json`
+4. `npm run gate -- 2026-WXX`
+5. `npm run render -- 2026-WXX` (édition la plus récente **en dernier**)
+6. Commit + push
 
-## Rappels costauds
-
-- **Édite `edition.json`, jamais `fr.html`/`en.html`** (générés).
-- **Voix** : « La rédaction ». Ton = constat curieux, pas sensationnel.
-- **Ratio** : 60 % culture agentique / 40 % infrastructure.
-- **≥ 3 scènes agentiques sourcées · ≥ 5 fragments primaires.**
-- **Garde-fou** : jamais de fait négatif inventé sur entité/personne nommée.
-- Rends l'édition la plus récente **en dernier**.
-- Lore fictionnel **caduc** — ne jamais réhabiliter (`data/editorial-compass.md`).
+Planchers densité / scènes / fragments → lint + style-guide (ne pas les
+re-lister ici).

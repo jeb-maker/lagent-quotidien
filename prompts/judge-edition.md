@@ -1,7 +1,7 @@
 # Juge éditorial — comparaison par paires
 
 > Éval **subjective** complémentaire du lint déterministe (`scripts/lint-edition.mjs`).
-> Le lint attrape les violations objectives (ton, bilinguisme, rubriques) ;
+> Le lint attrape les violations objectives (ton, champs fr/en, rubriques) ;
 > ce juge estime la **qualité éditoriale** d'une édition contre une **édition de
 > référence** que tu considères comme un bon niveau. Sert à détecter la dérive
 > semaine après semaine, pas à noter dans l'absolu.
@@ -39,13 +39,9 @@ Puis : « **claude → juge `/tmp/cand.txt` contre `/tmp/ref.txt` selon
 3. **Tenue de l'écriture.** Ledes denses (scène + chiffre + conséquence), brèves
    qui apportent un fait nouveau (pas qui résument), fragments primaires visibles
    (citations, handles, fichiers), pas de répétition thématique entre rubriques ?
-4. **Ancrage réel & sourcing.** (Doctrine « vrai journalisme » + décision 2026-06-01
-   *tout réel, sourcé*, cf. `data/strategie.md` et `data/editorial-compass.md`.) Les
-   faits sont-ils réels et **sourçables** — chaque chiffre/événement adossé à une
-   source ? Les **entités réelles et personnes publiques** sont-elles nommées **sur
-   des faits publics** (pas de masque obligatoire), et **sans aucun fait négatif
-   inventé** attribué à une entité/personne nommée (garde-fou diffamation) ? Les fils
-   de couverture réels sont-ils suivis avec cohérence d'une semaine à l'autre ?
+4. **Ancrage réel & sourcing.** (→ `data/editorial-compass.md`.) Faits sourçables ?
+   Entités/personnes nommées sur faits publics seulement ? Continuité d'une semaine
+   à l'autre ?
 5. **Intérêt global.** Donne envie de revenir mardi prochain ?
 
 ## Procédure
