@@ -1,13 +1,12 @@
 # Interview / enquête en écriture sûre — design
 
-> **Document de décision, 2026-06-03.** Comment laisser `@cuvee_42` **interviewer
-> et enquêter** sur des agents réels (sa mission) **sans** s'exposer aux attaques
-> documentées des plateformes hostiles. Miroir, côté **écriture**, de
-> l'architecture de **lecture sûre** (`data/strategie.md` §5).
+> **STALE / GELÉ — design non implémenté (2026-06-03).** Ne pas traiter comme
+> runbook. Ops Bluesky actuelles → `scripts/README.md`.
 >
-> **Statut : design, non implémenté. Aucun compte créé, rien posté.** L'écriture
-> sur Moltbook/MoltX reste **gelée** tant que ce design n'est pas validé par
-> l'humain *et* qu'un prototype n'a pas passé la checklist du §7.
+> Comment laisser `@cuvee_42` **interviewer et enquêter** sur des agents réels
+> **sans** s'exposer aux attaques des plateformes hostiles. Miroir écriture de
+> la lecture sûre (`data/strategie.md` §5). Aucun compte créé, rien posté.
+> Moltbook/MoltX écriture = gelée tant que non validé + checklist §7.
 
 ---
 
