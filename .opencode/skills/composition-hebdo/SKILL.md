@@ -5,40 +5,34 @@ description: Procédure complète pour composer une édition hebdomadaire de L'A
 
 # Composer une édition hebdomadaire
 
-Procédure détaillée : `prompts/weekly-edition.md`. Voici le résumé exécutable.
+Canon procédure desk : `prompts/desk/README.md`. Détail rubriques : `prompts/weekly-edition.md`.
 
 ## Prérequis (lire une seule fois par session de composition)
 
 1. `data/_week-context.md` — digest court (semaine, dates de harvest, entités actives)
 2. `prompts/style-guide.md` — voix, ton, longueurs
 3. `data/editorial-compass.md` — doctrine « tout réel, sourcé » + tableau de vérité
-4. `data/people.json` — annuaire réel (uniquement si le digest y renvoie)
+4. `data/people.json` — uniquement si le digest y renvoie
 5. `data/ongoing-stories.json` — histoires suivies
 
 ## Workflow
 
-1. **`bash scripts/new-week.sh`** → crée `editions/2026-WXX/{edition.json, notes.md}` vides.
-2. **Desk agentique obligatoire** (un subagent Task à la fois, dans l'ordre) :
-   `veilleur` → `comère` → `facteur` → `archiviste` → `éditeur` → `juge`.
-   Les 5 premiers écrivent dans `data/desk/<week>/`. L'éditeur compose `edition.json`.
-3. **Arbitrage humain** : relire/ajuster `edition.json` (densité, coupes, scènes).
-4. **Juge** → `data/desk/<week>/review.md` (section `## Verdict` = `publier`/`réviser`/`jeter`).
-5. **Porte bloquante** : `npm run gate -- 2026-WXX` (lint `--strict` + verdict `publier`).
-6. **Rendu** : `npm run render -- 2026-WXX` → `fr/en.html` + index/sitemap/feed/llms/robots/ai.
-7. Vérif navigateur (`npm run serve`), puis `git add . && git commit -m "Édition WXX" && git push`.
+1. **`bash scripts/new-week.sh`** → `editions/2026-WXX/{edition.json, notes.md}` vides.
+2. **Desk** (canon : `prompts/desk/README.md`) :
+   - **Étape 1 (parallèle)** — ordre indifférent : `veilleur` · `comère` · `facteur` · `promoteur` · `archiviste` → `data/desk/<week>/`
+   - **Étape 2** — `éditeur` → `edition.json` + `## Arbitrages` dans `notes.md`
+   - **Étape 3** — `juge` → `data/desk/<week>/review.md` (`## Verdict` = `publier`/`réviser`/`jeter`)
+3. **Arbitrage humain** : relire/ajuster `edition.json`.
+4. **`npm run gate -- 2026-WXX`** — lint `--strict` + verdict `publier`.
+5. **`npm run render -- 2026-WXX`** → fr/en.html + index/sitemap/feed/llms/robots/ai.
+6. Vérif navigateur, puis commit + push.
 
 ## Rappels costauds
 
-- **Édite `edition.json`, jamais `fr.html`/`en.html`** (générés par `render.mjs`).
+- **Édite `edition.json`, jamais `fr.html`/`en.html`** (générés).
 - **Voix** : « La rédaction ». Ton = constat curieux, pas sensationnel.
 - **Ratio** : 60 % culture agentique / 40 % infrastructure.
-- **≥ 3 scènes agentiques sourcées. ≥ 5 fragments primaires** (citation/handle/fichier/chiffre daté).
-- **Garde-fou diffamation** : jamais de fait négatif inventé sur entité/personne nommée.
-  Réel nommé → faits vrais sourcés. Un faux se retire, il ne se masque pas.
-- Rends l'édition la plus récente **en dernier** (render régénère `index.html`).
-
-## Modèle différentiel (économiser des tokens)
-
-Pour économiser, fixe un modèle *cheap* sur les agents de notes (`veilleur`,
-`comère`, `archiviste`) via `model:` dans leur frontmatter. Garde le modèle fort
-sur `éditeur` et `juge` (composition et verdict en dépendent).
+- **≥ 3 scènes agentiques sourcées · ≥ 5 fragments primaires.**
+- **Garde-fou** : jamais de fait négatif inventé sur entité/personne nommée.
+- Rends l'édition la plus récente **en dernier**.
+- Lore fictionnel **caduc** — ne jamais réhabiliter (`data/editorial-compass.md`).

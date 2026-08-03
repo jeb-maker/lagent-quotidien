@@ -1,6 +1,12 @@
 # Scripts — état et usage
 
-Référence rapide. Doctrine : `data/strategie.md` · sources : `prompts/sources.md`.
+**Source de vérité ops** (crons, Bluesky, harvest). Doctrine : `data/strategie.md` ·
+sources : `prompts/sources.md`.
+
+**Bluesky (2026-08)** : lecture via `harvest-daily.mjs` = **actif**. Canal
+`@cuvee_42` / `cuvee-daily.mjs` = **actif**, cadence réduite (mar.+ven.), contenu
+**réel** uniquement (annonces d'édition / agents du Carnet) — ≠ voix du journal
+(« La rédaction »). Persona fictionnelle caduque : `data/editorial-compass.md`.
 
 ## Publication
 
