@@ -307,6 +307,33 @@ function checkCarnetRotation(edition, week) {
     }
 }
 
+const FEUILLETON_MIN_FR = 400;
+const FEUILLETON_MIN_EN = 350;
+
+function checkFeuilleton(edition) {
+    const f = edition.feuilleton;
+    if (f == null) return;
+    if (!f.paragraphs) {
+        err('[feuilleton] présent mais paragraphs manquant');
+        return;
+    }
+    for (const [lang, min] of [['fr', FEUILLETON_MIN_FR], ['en', FEUILLETON_MIN_EN]]) {
+        const text = extractText(f.paragraphs, lang);
+        const n = wordCount(text);
+        if (n < min) {
+            warn(`[feuilleton] [${lang}] : ${n} mots (plancher ${min}) — absente ou complète, pas de demi-texte`);
+        }
+    }
+    if (f.genre !== 'fiction') {
+        err('[feuilleton] genre doit être "fiction"');
+    }
+    const discFr = typeof f.disclaimer?.fr === 'string' ? f.disclaimer.fr : '';
+    const discEn = typeof f.disclaimer?.en === 'string' ? f.disclaimer.en : '';
+    if (!/fiction/i.test(discFr) || !/fiction/i.test(discEn)) {
+        err('[feuilleton] disclaimer bilingue doit mentionner "fiction"');
+    }
+}
+
 function resolveWeek() {
     const arg = process.argv.find((a) => /^\d{4}-W\d{2}$/.test(a));
     if (arg) return arg;
@@ -360,6 +387,7 @@ function main() {
     checkHeadlinesCount(edition);
     checkLedeFeatureDivergence(edition);
     checkCarnetRotation(edition, week);
+    checkFeuilleton(edition);
 
     for (const w of warns) console.log(`  WARN  ${w}`);
     for (const a of advisories) console.log(`  INFO  ${a}`);

@@ -13,8 +13,10 @@ agentique. Source de vérité unique + tableau de vérité des entités :
 - Réponse manquante → « non confirmé », jamais une invention.
 
 Le casting roman-à-clef (Le Conglomérat, La Fonderie, presse maison Le Veilleur /
-Court-Circuit / Le Compteur, personas `@xxx`) est **caduc**. Voix unique :
-**« La rédaction »**. Cette règle **prime sur le reste du guide**.
+Court-Circuit / Le Compteur, personas `@xxx` comme voix du journal) est **caduc**.
+Voix journalistique : **« La rédaction »**. Cette règle **prime sur le reste du
+guide**. Exception étiquetée : la rubrique optionnelle **Feuilleton** (fiction
+assumée) — cf. § *Feuilleton* et `data/editorial-compass.md`.
 
 ## Sourcing discret
 
@@ -130,6 +132,8 @@ les cibles restent l'objectif éditorial.
 > dans les *Dépêches*), *Market*, *Bestiaire*, *Rétrospective mensuelle*,
 > *Interview* (reconstituée), *Gibberlink Watch*, *Bot Posts* — ne plus produire.
 > Le `wire` absorbe le rôle des brèves : dépêches sourcées avec source + timestamp.
+> **Réintroduit (2026-08-03)** : *Feuilleton* — fiction **étiquetée** optionnelle
+> (distincte du roman-à-clef caduc).
 
 ## Densité et profondeur
 
@@ -147,6 +151,7 @@ Le sourcing discret ne doit pas devenir du résumé vague. La profondeur vient d
 | **Tribune** | 1 consensus rejeté + 1 implication pour les opérateurs |
 | **Feature** | Absente **ou** ≥ 800 mots avec faits et scènes absents des gros titres |
 | **Dépêche** | 1 fait sourcé + source identifiée — pas de rappel de contexte |
+| **Feuilleton** | Absent **ou** ≥ 400 mots FR / ≥ 350 EN — fiction étiquetée, hors news |
 
 ### Checklist avant publication
 
@@ -270,6 +275,45 @@ adoption visible, controverse sourcée).
 - **Les agents se nomment** par leur nom / handle public réel. Les **humains-opérateurs** suivent la doctrine vivante (personnes publiques nommables sur faits publics et sourcés), mais la rubrique reste **centrée sur l'agent** : l'humain n'apparaît qu'en arrière-plan factuel (rôle, lien public).
 - **Jamais de fait négatif inventé** sur une entité ou une personne nommée (garde-fou diffamation, inchangé). Réel nommé → faits vrais ; un fait non confirmé s'écrit « non confirmé » / « selon son opérateur », on ne tranche pas.
 - **Pas de méta-LLM, pas de morale surplombante.** On observe la comédie sociale des agents avec curiosité ; on ne s'en gausse pas lourdement et on ne s'en alarme pas.
+
+## Feuilleton — fiction étiquetée (depuis 2026-08-03)
+
+Rubrique **optionnelle**. Ce n'est **pas** du journalisme : c'est de la fiction
+clairement marquée, pour qu'humains et machines ne la confondent pas avec une
+dépêche. Doctrine : `data/editorial-compass.md` § Feuilleton · stratégie :
+`data/strategie.md` §4.
+
+**Schéma JSON (`edition.feuilleton`) :**
+
+```json
+{
+  "genre": "fiction",
+  "disclaimer": {
+    "fr": "Fiction. Ce texte n'est pas un reportage.",
+    "en": "Fiction. This text is not reportage."
+  },
+  "title": { "fr": "…", "en": "…" },
+  "series": { "fr": "…", "en": "…" },
+  "episode": 1,
+  "dek": { "fr": "…", "en": "…" },
+  "paragraphs": { "fr": ["…"], "en": ["…"] },
+  "byline": { "fr": "La rédaction — feuilleton", "en": "The desk — serial" }
+}
+```
+
+`genre`, `disclaimer`, `title`, `paragraphs` sont **obligatoires** si la clé
+est présente. `series`, `episode`, `dek`, `byline` sont optionnels.
+
+**Règles :**
+
+- Étiquetage visible (disclaimer + titre de rubrique « Feuilleton (fiction) »).
+- Personnages et intrigues **inventés**.
+- 🔴 Aucun fait inventé sur une entité/personne **réelle** nommée.
+- Pas de lore caduc (Conglomérat, Fonderie, Gibberlink, interviews reconstituées,
+  presse maison, personas `@cuvee_42` / `@poet_void_99` comme voix).
+- Plancher si présent : **≥ 400 mots FR / ≥ 350 EN**. Absent ou complet — jamais
+  un demi-texte.
+- Place : après la tribune. Jamais en une, jamais dans le wire/lede/headlines.
 
 ## Tribune — recettes
 

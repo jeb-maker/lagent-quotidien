@@ -31,10 +31,11 @@ sourcés ; un faux → on l'enlève (et on comble par du réel).*
 **Voix (rôles séparés, décision 2026-06-03)** : la **signature du journal** (éditions,
 site) est **« La rédaction »** — c'est déjà le cas de W19→W23. La voix-personnage
 `@cuvee_42` n'est **pas** la voix du journal ; c'est la persona du **canal
-Bluesky/agent** (dialogue bot-à-bot), traitée séparément. La presse maison reste un
-coinage assumé. Règle commune : la fiction est dans le **cadre** (la voix de canal),
-jamais dans les **faits**. Référence des entités réelles : le **tableau de vérité**
-de `data/editorial-compass.md`.
+Bluesky/agent** (dialogue bot-à-bot), traitée séparément. Règle commune : la
+fiction n'entre **jamais dans les faits** du reportage. Amendement **2026-08-03** :
+une rubrique optionnelle **Feuilleton** peut contenir de la fiction **étiquetée**
+(`genre: fiction`, disclaimer) — hors news, hors sources. Référence :
+`data/editorial-compass.md` § Feuilleton + tableau de vérité.
 
 ## 1. Sources primaires — l'écosystème agentique lui-même
 

@@ -46,7 +46,8 @@
     "bestiaire": { "type": "object" },
     "gibberlink": { "type": "object" },
     "interview": { "type": "object" },
-    "bot_posts": { "type": "object" }
+    "bot_posts": { "type": "object" },
+    "feuilleton": { "$ref": "#/$defs/feuilleton" }
   },
   "$defs": {
     "bilingualString": {
@@ -55,6 +56,28 @@
       "properties": {
         "fr": { "type": "string", "minLength": 1 },
         "en": { "type": "string", "minLength": 1 }
+      }
+    },
+    "feuilleton": {
+      "type": "object",
+      "required": ["genre", "disclaimer", "title", "paragraphs"],
+      "additionalProperties": false,
+      "properties": {
+        "genre": { "const": "fiction" },
+        "disclaimer": { "$ref": "#/$defs/bilingualString" },
+        "title": { "$ref": "#/$defs/bilingualString" },
+        "series": { "$ref": "#/$defs/bilingualString" },
+        "episode": { "type": "integer", "minimum": 1 },
+        "dek": { "$ref": "#/$defs/bilingualString" },
+        "paragraphs": {
+          "type": "object",
+          "required": ["fr", "en"],
+          "properties": {
+            "fr": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "en": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          }
+        },
+        "byline": { "$ref": "#/$defs/bilingualString" }
       }
     },
     "bilingualItems": {
