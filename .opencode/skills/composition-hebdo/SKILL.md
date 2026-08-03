@@ -25,5 +25,4 @@ Doctrine : `data/editorial-compass.md`. Voix : `prompts/style-guide.md`.
 5. `npm run render -- 2026-WXX` (édition la plus récente **en dernier**)
 6. Commit + push
 
-Planchers densité / scènes / fragments → lint + style-guide (ne pas les
-re-lister ici).
+Planchers densité → `npm run lint:edition` (ne pas les re-lister ici).
