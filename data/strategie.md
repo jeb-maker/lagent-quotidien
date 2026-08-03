@@ -40,8 +40,11 @@ d'un public qu'on n'a pas.
 
 > *Précision (2026-06-29) :* « à la voix d'un agent » = le **registre** d'une
 > rédaction tenue par des agents, signée **« La rédaction »**. La persona
-> `@cuvee_42` (canal Bluesky) est **caduque** depuis le 2026-06-01 (cf. §4 et
-> `data/editorial-compass.md`). Elle n'est plus réactivée.
+> fictionnelle `@cuvee_42` comme *voix du journal* est **caduque**.
+>
+> *Amendement (2026-08-03) :* le **script** `cuvee-daily.mjs` (posts Bluesky
+> rares, contenu réel) est **actif** — vérité ops : `scripts/README.md`.
+> Ça ne réhabilite pas la persona roman-à-clef ni la signature du journal.
 
 ---
 
@@ -71,10 +74,10 @@ La ligne de partage, désormais non négociable :
 - ✅ **Voix de rédaction dans le CADRE** : « La rédaction » observe l'écosystème
   agentique **réel**. C'est le facteur différenciant — un journal tenu par des
   agents, pas une persona.
-  ⚠️ **Décision 2026-06-29 (caducité `@cuvee_42`)** : la persona `@cuvee_42`
-  (canal Bluesky) est **caduque** depuis le 2026-06-01, au même titre que le
-  reste du roman-à-clef (cf. `data/editorial-compass.md`). Elle n'est plus
-  réactivée. La signature du journal reste **« La rédaction »** (depuis W19).
+  ⚠️ **Décision 2026-06-29 / amendée 2026-08-03** : `@cuvee_42` comme persona
+  fictionnelle / voix du journal = **caduque** (roman-à-clef). Signature =
+  **« La rédaction »**. Le *canal technique* Bluesky (`cuvee-daily.mjs`, posts
+  réels espacés) reste **actif** — voir `scripts/README.md`, pas ce paragraphe.
 - ✅ **Provenance lisible par machine** : le balisage doit distinguer *opinion /
   voix de rédaction* de *reportage sourcé*, pour qu'un modèle ou un agent ne
   soit pas trompé.
@@ -164,8 +167,8 @@ Règles dures :
 >   secondaire, lecture sûre, discipline de citation.
 > - `scripts/daily-drift.mjs` — **supprimé** (2026-06-01, décision §8 : pas de
 >   ticker $MOLT → plus rien à rafraîchir) et retiré de `cron-drift.sh`.
-> - `scripts/cuvee-daily.mjs` — **coupé** (2026-06-01, no-op `--force-post`) :
->   canal social abandonné.
+> - `scripts/cuvee-daily.mjs` — coupé le 2026-06-01, **réécrit actif** le
+>   2026-06-03 (réel only) — statut courant : `scripts/README.md`.
 
 ---
 
@@ -173,11 +176,10 @@ Règles dures :
 
 - **a. Réaligner la plomberie sur la doctrine**
   - `daily-drift.mjs` : ✅ **supprimé** (plus de fabrication ; pas de ticker).
-  - `cuvee-daily.mjs` : ✅ **coupé** (no-op `--force-post`).
+  - `cuvee-daily.mjs` : ✅ coupé 01/06 → **réactif réel** 03/06 (voir scripts/README).
   - `prompts/sources.md` : ✅ **réécrit** (réel + sourcé, lecture sûre, citation).
-- **b. Refondre la forme des posts** : ⛔️ **sans objet** (canal social coupé,
-  persona `@cuvee_42` caduque, décision §8). Conservé pour mémoire si un canal
-  est réactivé un jour.
+- **b. Forme des posts Bluesky** : ✅ sparse + réel (pas de fiction canal).
+  Persona roman-à-clef toujours caduque.
 - **c. Lecture sûre des sources primaires** : ⬜ étendre le collecteur bête à
   Moltbook/MoltX/$MOLT/OpenClaw (quarantaine, sans credentials). *Chantier suivant.*
 - **d. Arrêter ce qui sert le public abandonné** : ✅ **fait** — broadcast Bluesky
@@ -188,15 +190,11 @@ Règles dures :
 
 ## 8. Décisions tranchées (2026-06-01)
 
-1. **Canal social → coupé.** Pas de broadcast quotidien ; le public A (modèles)
-   est servi par le site + `llms.txt`. `cuvee-daily.mjs` no-ope. *(Bluesky reste
-   une source de lecture via `harvest-daily.mjs`.)*
-   > 🔁 **Révisé le 2026-06-29.** La persona `@cuvee_42` (canal Bluesky) est
-   > **caduque** depuis le 2026-06-01, au même titre que le reste du
-   > roman-à-clef (cf. `data/editorial-compass.md`). `cuvee-daily.mjs` reste
-   > **coupé** (no-op). Le journal ne court plus après le public B humain, et la
-   > persona `@cuvee_42` n'est plus réactivée. La voix du journal reste
-   > **« La rédaction »**.
+1. **Canal social broadcast quotidien → coupé** (public B abandonné). Public A
+   servi par le site + `llms.txt`. Bluesky reste une **source de lecture**.
+   > 🔁 **2026-06-29** : persona fictionnelle `@cuvee_42` = caduque.
+   > 🔁 **2026-08-03** : `cuvee-daily.mjs` **actif** (mar.+ven., contenu réel) ;
+   > vérité ops = `scripts/README.md`. Voix du journal = **« La rédaction »**.
 2. **Ticker `$MOLT` → aucun.** On ne réintroduit pas de ligne de marché. *(NB : le
    réel est ~0,00002 $, très loin du ~0,85 $ inventé de l'ancienne arithmétique —
    l'écart illustrait le problème.)*
@@ -206,8 +204,7 @@ Règles dures :
 ### Reste à faire (tâches, pas décisions)
 - ✅ Réécrire `prompts/sources.md` — fait (2026-06-01).
 - ⬜ Chantier c : collecteur de lecture sûre (Moltbook/MoltX/$MOLT/OpenClaw). *Prochain pas.*
-- ⬜ **Action humaine en prod** : retirer du crontab la/les ligne(s) du post
-  quotidien (`0 21 * * *`, et l'éventuel `0 16` EN).
+- ✅ Crontab : plus de post *quotidien* ; cadence sparse = `scripts/README.md`.
 
 ---
 

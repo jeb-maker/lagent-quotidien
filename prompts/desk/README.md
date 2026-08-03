@@ -45,8 +45,8 @@ le promoteur y voit une adoption naissante. L'éditeur arbitre.
 Pipeline parallèle au desk éditorial agentique. Taxonomie :
 `data/taxonomy/calibration-cases.json` (12 piliers, 6 langues-source),
 `narrative-archetypes.json`, `interests.json`, `bias-ledger.md`.
-Harvest futur : `data/narrative-radar/<date>.json` via `data/feeds-world.json`.
-Brief agent suivant : `data/taxonomy/HANDOFF-harvest.md`.
+Harvest **actif** : `scripts/harvest-narratives.mjs` → `data/narrative-radar/<date>.json`
+(via `data/feeds-world.json`). État : `data/taxonomy/HANDOFF-harvest.md`.
 
 **Ordre obligatoire** (isolation adverse) :
 
