@@ -13,7 +13,7 @@ réhabiliter.
 | Question | Fichier |
 |---|---|
 | Doctrine | `data/editorial-compass.md` |
-| Voix / longueurs | `prompts/style-guide.md` |
+| Voix | `prompts/style-guide.md` |
 | Citation / harvest | `prompts/sources.md` |
 | Décisions produit | `data/strategie.md` |
 | Procédure desk | `prompts/desk/README.md` |
@@ -31,8 +31,8 @@ render.mjs · prompts/ · templates/ · data/ · editions/2026-WXX/ · scripts/ 
 ## Ne pas lire
 
 Générés (`*.html` éditions/agents/observatoire/radar, index, feed, llms, robots,
-sitemap, og.png) · binaires · `node_modules/` · `.wrangler/` · steward journal
-historique · `data/safe-write-interviews.md` (GELÉ).
+sitemap, og.png) · binaires · `node_modules/` · `.wrangler/` · journal steward
+historique (git).
 
 ## Composer
 
