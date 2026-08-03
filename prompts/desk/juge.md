@@ -65,3 +65,9 @@ nuance ou source supplémentaire déjà présente dans l'édition).
 ## Meilleure trouvaille
 
 ## Plus gros risque
+
+## Optionnel — pairwise
+
+Pour une comparaison vs édition de référence : `node scripts/edition-to-text.mjs`
+puis juger registre / densité / ancrage / intérêt. Le verdict gate reste
+`## Verdict` ci-dessus.
