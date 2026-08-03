@@ -27,8 +27,9 @@ techniques, commit non-éditorial, publier après gate vert + relecture humaine.
 **🟡 Feu vert humain :** commit `edition.json` sans gate ; modifier crons /
 doctrine ; poster Bluesky hors `cuvee-daily.mjs`.
 
-**🔴 Jamais :** fait inventé ; contourner le gate ; réhabiliter le lore fictionnel ;
-exfiltrer credentials.
+**🔴 Jamais :** fait inventé **dans le reportage** ; contourner le gate ;
+réhabiliter le lore fictionnel **caduc** ; exfiltrer credentials.
+Le Feuilleton étiqueté (`genre: fiction`) est autorisé — pas le roman-à-clef.
 
 ## Pièges
 

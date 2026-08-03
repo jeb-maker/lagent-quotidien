@@ -18,9 +18,12 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 //   retrospective : DEPRECATED — ignorés silencieusement (éditions historiques)
 // - carnet et feature promus REQUIRED (cœur éditorial, présents 7/7)
 const REQUIRED_TOP = ['_meta', 'lede', 'headlines', 'wire', 'carnet', 'feature', 'tribune'];
-const OPTIONAL_TOP = ['takeaways', 'sources'];
+const OPTIONAL_TOP = ['takeaways', 'sources', 'feuilleton'];
 const DEPRECATED_TOP = ['ticker', 'market', 'breves', 'bestiaire', 'enquete', 'gibberlink', 'interview', 'bot_posts', 'retrospective'];
 const META_KEYS = ['week', 'date_fr', 'date_en', 'edition_number', 'volume', 'bouclage'];
+
+/** Lore caduc — ne doit pas réapparaître dans le feuilleton. */
+const CADUC_LORE_RE = /\b(Conglom[eé]rat|La Fonderie|Gibberlink|Court-Circuit|Le Compteur|@cuvee_42|@poet_void_99)\b/i;
 
 function isBilingual(obj) {
   return obj && typeof obj === 'object' && typeof obj.fr === 'string' && typeof obj.en === 'string';
@@ -136,6 +139,49 @@ export function validateEditionSchema(edition, week = '?') {
       edition.sources.forEach((s, i) => {
         if (!isNonEmptyString(s?.url)) errors.push(`${prefix} sources[${i}].url manquant`);
       });
+    }
+  }
+
+  // Feuilleton : fiction optionnelle, étiquetée (amendement 2026-08-03).
+  if (edition.feuilleton != null) {
+    const f = edition.feuilleton;
+    if (!f || typeof f !== 'object' || Array.isArray(f)) {
+      errors.push(`${prefix} feuilleton : objet attendu`);
+    } else {
+      if (f.genre !== 'fiction') {
+        errors.push(`${prefix} feuilleton.genre : "fiction" obligatoire`);
+      }
+      if (!isBilingual(f.disclaimer)) {
+        errors.push(`${prefix} feuilleton.disclaimer : { fr, en } attendu`);
+      } else {
+        for (const lang of ['fr', 'en']) {
+          if (!/fiction/i.test(f.disclaimer[lang])) {
+            errors.push(`${prefix} feuilleton.disclaimer.${lang} : doit mentionner "fiction"`);
+          }
+        }
+      }
+      if (!isBilingual(f.title)) errors.push(`${prefix} feuilleton.title : { fr, en } attendu`);
+      const paras = f.paragraphs;
+      if (!paras || !isArray(paras.fr, 1) || !isArray(paras.en, 1)) {
+        errors.push(`${prefix} feuilleton.paragraphs : { fr: string[], en: string[] } non vide attendu`);
+      }
+      if (f.series != null && !isBilingual(f.series)) {
+        errors.push(`${prefix} feuilleton.series : { fr, en } attendu si présent`);
+      }
+      if (f.dek != null && !isBilingual(f.dek)) {
+        errors.push(`${prefix} feuilleton.dek : { fr, en } attendu si présent`);
+      }
+      if (f.byline != null && !isBilingual(f.byline)) {
+        errors.push(`${prefix} feuilleton.byline : { fr, en } attendu si présent`);
+      }
+      if (f.episode != null && (typeof f.episode !== 'number' || !Number.isInteger(f.episode) || f.episode < 1)) {
+        errors.push(`${prefix} feuilleton.episode : entier ≥ 1 attendu si présent`);
+      }
+      // Anti-régression lore caduc
+      const blob = JSON.stringify(f);
+      if (CADUC_LORE_RE.test(blob)) {
+        errors.push(`${prefix} feuilleton : lore caduc détecté (Conglomérat/Fonderie/Gibberlink/@cuvee_42/…) — interdit`);
+      }
     }
   }
 

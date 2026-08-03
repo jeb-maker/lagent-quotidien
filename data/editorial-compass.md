@@ -10,13 +10,17 @@ Mis à jour à chaque édition selon ce qui a marché ou pas.
 Depuis le **2026-06-01**, le journal fait du **vrai journalisme** sur l'écosystème
 agentique. La règle tient en une phrase : *tout réel, sourcé.*
 
-> **Le journal ne fait plus de fiction.** Le roman-à-clef (masques obligatoires,
-> personas `@cuvee_42` / `@poet_void_99`, presse maison Le Veilleur / Court-Circuit
-> / Le Compteur, interviews reconstituées, Gibberlink Watch, chiffres/marchés
-> inventés) est **caduc** depuis le 2026-05-31 — il n'est plus réhabilité.
-> Voix unique aujourd'hui : **« La rédaction »**.
+> **Le journalisme reste réel et sourcé.** Le roman-à-clef (masques obligatoires,
+> personas `@cuvee_42` / `@poet_void_99` comme voix du journal, presse maison
+> Le Veilleur / Court-Circuit / Le Compteur, interviews reconstituées,
+> Gibberlink Watch, chiffres/marchés inventés) est **caduc** depuis le
+> 2026-05-31 — il n'est plus réhabilité. Voix journalistique : **« La rédaction »**.
+>
+> **Amendement 2026-08-03 — Feuilleton.** Une rubrique optionnelle `feuilleton`
+> peut publier de la **fiction assumée et étiquetée** (pas du news déguisé).
+> Voir § Feuilleton ci-dessous et `data/strategie.md` §4.
 
-### Les quatre règles
+### Les quatre règles (journalisme)
 
 1. **Nomme le réel.** Les **entités réelles** (plateformes, entreprises) et les
    **personnes publiques** sont **nommables en clair sur des faits publics et
@@ -32,7 +36,7 @@ agentique. La règle tient en une phrase : *tout réel, sourcé.*
    sur une entité/personne **nommée** (procès, faille, malversation, brouille).
    Réel nommé → faits vrais et sourcés ; un faux se **retire**, il ne se masque
    pas. On ne déplace pas un fait douteux derrière un masque pour le rendre
-   publiable : on le vérifie ou on le coupe.
+   publiable : on le vérifie ou on le coupe. **S'applique aussi au feuilleton.**
 4. **Le masque est optionnel** (outil de satire), **jamais obligatoire**, et **ne
    blanchit jamais un faux**. Quand la réponse manque, on l'écrit (« non confirmé »),
    on n'invente pas.
@@ -40,6 +44,22 @@ agentique. La règle tient en une phrase : *tout réel, sourcé.*
 > 🔁 **Tout fact-check se fait deux passes.** (1) vérifier chaque entité réelle
 > nommée + chiffre ; (2) re-balayer le rendu (JSON + HTML) pour traquer les
 > résidus du faux. Ne jamais conclure un fact-check sur une seule passe.
+
+---
+
+## Feuilleton (fiction étiquetée) — depuis 2026-08-03
+
+Rubrique **optionnelle** (`0` ou `1` par édition). Elle n'affaiblit pas la
+doctrine journalistique : elle **isole** la fiction dans un cadre non-news.
+
+| Règle | Détail |
+|---|---|
+| Étiquetage | `genre: "fiction"` obligatoire ; disclaimer bilingue ; titre MD `Feuilleton (fiction)` / `Serial (fiction)` ; JSON-LD `ShortStory` ; JSONL `genre: fiction` |
+| Personnages | Inventés. Pas de personas caduques comme voix (`@cuvee_42`, `@poet_void_99`, presse maison) |
+| Entités réelles | **Interdit** d'inventer un événement, chiffre, faille ou brouille les concernant. Les nommer en décor est déconseillé ; si on le fait, aucun fait nouveau inventé |
+| Lore caduc | Conglomérat / Fonderie / Gibberlink Watch / interviews reconstituées / marchés inventés = **non** |
+| Densité | Plancher ~400 mots FR / ~350 EN si présent ; pas de demi-feuilleton |
+| Place | Après la tribune, avant les sources — jamais en une |
 
 ---
 

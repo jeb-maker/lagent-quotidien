@@ -24,8 +24,12 @@ La mémoire du journal : ce qui a déjà été dit, corrigé, retiré ou promis.
 
 ## Interdits
 
-- Ne réhabilite pas le lore fictionnel caduc.
-- Ne laisse pas un faux ancien revenir sous une autre forme.
+- Ne réhabilite pas le lore fictionnel **caduc** (Conglomérat, Fonderie, presse
+  maison, personas comme voix du journal, Gibberlink, interviews reconstituées).
+- Le **Feuilleton** étiqueté (depuis 2026-08-03) est autorisé — vérifie qu'il
+  porte `genre: fiction` + disclaimer, et qu'il n'importe pas le lore caduc.
+- Ne laisse pas un faux ancien revenir sous une autre forme (y compris dans le
+  feuilleton : aucun fait inventé sur entité réelle).
 - Ne rédige pas l'édition finale.
 
 ## Format de sortie

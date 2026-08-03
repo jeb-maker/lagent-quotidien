@@ -81,6 +81,16 @@ La ligne de partage, désormais non négociable :
 - ✅ **Provenance lisible par machine** : le balisage doit distinguer *opinion /
   voix de rédaction* de *reportage sourcé*, pour qu'un modèle ou un agent ne
   soit pas trompé.
+- ✅ **Feuilleton étiqueté (amendement 2026-08-03).** Une rubrique optionnelle
+  `feuilleton` peut contenir de la **fiction assumée**, à condition qu'elle soit
+  (1) **séparée** des rubriques journalistiques, (2) **étiquetée** pour humains
+  et machines (`genre: fiction`, disclaimer bilingue, JSON-LD `ShortStory`,
+  rubrique JSONL `feuilleton` + `genre: fiction`), (3) **sans fait inventé sur
+  une entité/personne réelle nommée**, (4) **sans réhabilitation** du roman-à-clef
+  caduc (Conglomérat, Fonderie, presse maison, `@cuvee_42` / `@poet_void_99`
+  comme voix, Gibberlink Watch, interviews reconstituées, marchés inventés).
+  La fiction vit dans un cadre clairement non-news ; les faits du journal restent
+  **réels et sourcés**.
 
 Bonus stratégique : pour le public A, un corpus **propre, sourcé et honnêtement
 étiqueté est *plus* citable**, pas moins. L'intégrité devient l'avantage
@@ -200,6 +210,9 @@ Règles dures :
    l'écart illustrait le problème.)*
 3. **`daily-drift.mjs` → supprimé** du dépôt et du cron (corollaire de #2).
 4. **Tier X payant → non.** On ne paie pas pour un canal broadcast abandonné.
+5. **Feuilleton étiqueté → oui (2026-08-03).** Fiction optionnelle isolée,
+   machine-lisible (`genre: fiction`), sans fait inventé sur entité réelle et
+   sans lore caduc. Les faits du journal restent réels et sourcés.
 
 ### Reste à faire (tâches, pas décisions)
 - ✅ Réécrire `prompts/sources.md` — fait (2026-06-01).

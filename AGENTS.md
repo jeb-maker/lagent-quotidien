@@ -68,6 +68,7 @@ Hook : `git config core.hooksPath scripts/hooks`
 - Éditer `edition.json`, jamais les HTML générés.
 - Sources dans `editions/<week>/notes.md` — pas « Source : … » dans le publié.
 - Ratio 60/40 · ≥ 3 scènes · ≥ 5 fragments · pas de fait négatif inventé.
+- Feuilleton optionnel = fiction étiquetée (`data/editorial-compass.md` § Feuilleton).
 
 ## Subagents
 

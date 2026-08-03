@@ -36,3 +36,5 @@ Canon procédure desk : `prompts/desk/README.md`. Détail rubriques : `prompts/w
 - **Garde-fou** : jamais de fait négatif inventé sur entité/personne nommée.
 - Rends l'édition la plus récente **en dernier**.
 - Lore fictionnel **caduc** — ne jamais réhabiliter (`data/editorial-compass.md`).
+- **Feuilleton** optionnel = fiction **étiquetée** (`genre: fiction`) — pas du
+  news déguisé ; aucun fait inventé sur entité réelle.
