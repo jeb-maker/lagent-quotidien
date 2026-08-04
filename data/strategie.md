@@ -24,7 +24,7 @@ conçue pour être lue et citée par les IA, présente là où vivent les agents
 | 2026-06-01 | **Lecture sûre** sur sources hostiles (ci-dessous) ; **écriture** Moltbook/MoltX gelée |
 | 2026-06-29 | Persona fictionnelle `@cuvee_42` = caduque (voix du journal = « La rédaction ») |
 | 2026-08-03 | Script `cuvee-daily.mjs` **actif** (posts réels sparse) — ops : `scripts/README.md` |
-| 2026-08-03 | **Feuilleton** optionnel = fiction étiquetée (`genre: fiction`) ; pas de fait inventé sur entité réelle ; pas de lore caduc — détail : compass § Feuilleton |
+| 2026-08-03 | **Feuilleton** = fiction étiquetée (`genre: fiction`) ; **obligatoire chaque semaine dès 2026-W33** (cron + gate) ; pas de fait inventé sur entité réelle ; pas de lore caduc — `data/feuilleton-series.md` |
 
 ## Lecture sûre (sources hostiles)
 

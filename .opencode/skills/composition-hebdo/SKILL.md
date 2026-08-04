@@ -13,7 +13,8 @@ Doctrine : `data/editorial-compass.md`. Voix : `prompts/style-guide.md`.
 1. `data/_week-context.md`
 2. `prompts/style-guide.md`
 3. `data/editorial-compass.md`
-4. `data/people.json` / `data/ongoing-stories.json` — si le digest y renvoie
+4. `data/feuilleton-series.md` — série / prochain épisode
+5. `data/people.json` / `data/ongoing-stories.json` — si le digest y renvoie
 
 ## Workflow
 
@@ -26,5 +27,6 @@ Doctrine : `data/editorial-compass.md`. Voix : `prompts/style-guide.md`.
 6. Commit + push
 
 Planchers densité → `npm run lint:edition` (ne pas les re-lister ici).
-Feuilleton optionnel = fiction étiquetée (`genre: fiction`) — compass § Feuilleton ;
+Feuilleton **obligatoire** dès 2026-W33 = fiction étiquetée (`genre: fiction`,
+series + episode) — compass § Feuilleton ; continuité `data/feuilleton-series.md` ;
 pas de lore caduc, pas de fait inventé sur entité réelle.

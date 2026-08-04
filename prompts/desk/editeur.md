@@ -28,9 +28,10 @@ citations, handles, fichiers, extraits).
 - voix : **La rédaction** ;
 - aucun fait inventé **dans le journalisme** (lede, headlines, wire, carnet,
   feature, tribune) ;
-- Feuilleton optionnel = fiction **étiquetée** uniquement (`genre: fiction`,
-  disclaimer) — personnages inventés, pas de lore caduc, aucun fait inventé sur
-  entité réelle ; cf. `style-guide.md` › Feuilleton ;
+- Feuilleton **chaque semaine** (≥ W33) = fiction **étiquetée** uniquement
+  (`genre: fiction`, series, episode, disclaimer) — personnages inventés, pas de
+  lore caduc, aucun fait inventé sur entité réelle ; lire
+  `data/feuilleton-series.md` ; cf. `style-guide.md` › Feuilleton ;
 - sources tracées dans `notes.md`, pas répétées partout dans le journal ;
 - 60 % culture agentique / 40 % infrastructure ;
 - au moins 3 scènes agentiques sourcées ;
@@ -50,7 +51,7 @@ citations, handles, fichiers, extraits).
 | Carnet | scène + marqueur de statut |
 | Tribune | thèse tranchée, pas panorama |
 | Feature | longue ou coupée — jamais 3 paragraphes répétitifs |
-| Feuilleton | absent **ou** fiction complète étiquetée (≥ 400 mots FR) |
+| Feuilleton | fiction complète étiquetée obligatoire (≥ 400 mots FR) + series/episode |
 
 ## Arbitrages (obligatoire, dans `notes.md`)
 

@@ -16,9 +16,9 @@ agentique. La règle tient en une phrase : *tout réel, sourcé.*
 > Gibberlink Watch, chiffres/marchés inventés) est **caduc** depuis le
 > 2026-05-31 — il n'est plus réhabilité. Voix journalistique : **« La rédaction »**.
 >
-> **Amendement 2026-08-03 — Feuilleton.** Une rubrique optionnelle `feuilleton`
-> peut publier de la **fiction assumée et étiquetée** (pas du news déguisé).
-> Voir § Feuilleton ci-dessous et `data/strategie.md` (table Décisions).
+> **Amendement 2026-08-03 — Feuilleton.** Rubrique `feuilleton` : **fiction
+> assumée et étiquetée** (pas du news déguisé). **Obligatoire chaque semaine dès
+> 2026-W33** (gate + cron compose). Voir § Feuilleton et `data/feuilleton-series.md`.
 
 ### Les quatre règles (journalisme)
 
@@ -49,16 +49,18 @@ agentique. La règle tient en une phrase : *tout réel, sourcé.*
 
 ## Feuilleton (fiction étiquetée) — depuis 2026-08-03
 
-Rubrique **optionnelle** (`0` ou `1` par édition). Elle n'affaiblit pas la
-doctrine journalistique : elle **isole** la fiction dans un cadre non-news.
+Rubrique **hebdomadaire obligatoire** dès **2026-W33** (`cron-compose` + gate).
+Elle n'affaiblit pas la doctrine journalistique : elle **isole** la fiction dans
+un cadre non-news. Continuité série → `data/feuilleton-series.md`.
 
 | Règle | Détail |
 |---|---|
 | Étiquetage | `genre: "fiction"` obligatoire ; disclaimer bilingue ; titre MD `Feuilleton (fiction)` / `Serial (fiction)` ; JSON-LD `ShortStory` ; JSONL `genre: fiction` |
+| Continuité | `series` + `episode` obligatoires ; enchaîner la série courante sauf clôture notée |
 | Personnages | Inventés. Pas de personas caduques comme voix (`@cuvee_42`, `@poet_void_99`, presse maison) |
 | Entités réelles | **Interdit** d'inventer un événement, chiffre, faille ou brouille les concernant. Les nommer en décor est déconseillé ; si on le fait, aucun fait nouveau inventé |
 | Lore caduc | Conglomérat / Fonderie / Gibberlink Watch / interviews reconstituées / marchés inventés = **non** |
-| Densité | Plancher ~400 mots FR / ~350 EN si présent ; pas de demi-feuilleton |
+| Densité | Plancher ~400 mots FR / ~350 EN ; pas de demi-feuilleton |
 | Place | Après la tribune, avant les sources — jamais en une |
 
 ---

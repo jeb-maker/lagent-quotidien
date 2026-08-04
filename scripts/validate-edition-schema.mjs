@@ -22,8 +22,20 @@ const OPTIONAL_TOP = ['takeaways', 'sources', 'feuilleton'];
 const DEPRECATED_TOP = ['ticker', 'market', 'breves', 'bestiaire', 'enquete', 'gibberlink', 'interview', 'bot_posts', 'retrospective'];
 const META_KEYS = ['week', 'date_fr', 'date_en', 'edition_number', 'volume', 'bouclage'];
 
+/** Feuilleton obligatoire à partir de cette semaine (archive antérieure exemptée). */
+const FEUILLETON_REQUIRED_FROM = '2026-W33';
+
 /** Lore caduc — ne doit pas réapparaître dans le feuilleton. */
 const CADUC_LORE_RE = /\b(Conglom[eé]rat|La Fonderie|Gibberlink|Court-Circuit|Le Compteur|@cuvee_42|@poet_void_99)\b/i;
+
+function weekGte(week, minWeek) {
+  const m1 = String(week).match(/^(\d{4})-W(\d{2})$/);
+  const m2 = String(minWeek).match(/^(\d{4})-W(\d{2})$/);
+  if (!m1 || !m2) return false;
+  const y1 = Number(m1[1]); const w1 = Number(m1[2]);
+  const y2 = Number(m2[1]); const w2 = Number(m2[2]);
+  return y1 > y2 || (y1 === y2 && w1 >= w2);
+}
 
 function isBilingual(obj) {
   return obj && typeof obj === 'object' && typeof obj.fr === 'string' && typeof obj.en === 'string';
@@ -142,7 +154,11 @@ export function validateEditionSchema(edition, week = '?') {
     }
   }
 
-  // Feuilleton : fiction optionnelle, étiquetée (amendement 2026-08-03).
+  // Feuilleton : fiction étiquetée — obligatoire ≥ 2026-W33 (cron compose).
+  const feuilletonRequired = weekGte(week, FEUILLETON_REQUIRED_FROM);
+  if (feuilletonRequired && edition.feuilleton == null) {
+    errors.push(`${prefix} feuilleton : obligatoire depuis ${FEUILLETON_REQUIRED_FROM}`);
+  }
   if (edition.feuilleton != null) {
     const f = edition.feuilleton;
     if (!f || typeof f !== 'object' || Array.isArray(f)) {
@@ -165,17 +181,21 @@ export function validateEditionSchema(edition, week = '?') {
       if (!paras || !isArray(paras.fr, 1) || !isArray(paras.en, 1)) {
         errors.push(`${prefix} feuilleton.paragraphs : { fr: string[], en: string[] } non vide attendu`);
       }
-      if (f.series != null && !isBilingual(f.series)) {
-        errors.push(`${prefix} feuilleton.series : { fr, en } attendu si présent`);
+      if (feuilletonRequired || f.series != null) {
+        if (!isBilingual(f.series)) {
+          errors.push(`${prefix} feuilleton.series : { fr, en } obligatoire`);
+        }
+      }
+      if (feuilletonRequired || f.episode != null) {
+        if (typeof f.episode !== 'number' || !Number.isInteger(f.episode) || f.episode < 1) {
+          errors.push(`${prefix} feuilleton.episode : entier ≥ 1 obligatoire`);
+        }
       }
       if (f.dek != null && !isBilingual(f.dek)) {
         errors.push(`${prefix} feuilleton.dek : { fr, en } attendu si présent`);
       }
       if (f.byline != null && !isBilingual(f.byline)) {
         errors.push(`${prefix} feuilleton.byline : { fr, en } attendu si présent`);
-      }
-      if (f.episode != null && (typeof f.episode !== 'number' || !Number.isInteger(f.episode) || f.episode < 1)) {
-        errors.push(`${prefix} feuilleton.episode : entier ≥ 1 attendu si présent`);
       }
       // Anti-régression lore caduc
       const blob = JSON.stringify(f);

@@ -31,10 +31,12 @@ Prépare l'édition ${TARGET_WEEK} en suivant prompts/weekly-edition.md et la sk
 Tu es sur la branche ${BRANCH}. Ne change pas de branche.
 
 Workflow obligatoire :
-1. Lis data/_week-context.md, prompts/style-guide.md, data/editorial-compass.md (une fois).
+1. Lis data/_week-context.md, prompts/style-guide.md, data/editorial-compass.md, data/feuilleton-series.md (une fois).
 2. Desk agentique : veilleur, comère, facteur, promoteur, archiviste (parallèle) → éditeur → juge.
-3. npm run gate -- ${TARGET_WEEK}
-4. npm run render -- ${TARGET_WEEK} si la porte est ouverte.
+3. Feuilleton **obligatoire** chaque semaine (≥ 2026-W33) : fiction étiquetée genre:fiction, disclaimer bilingue, series + episode (continuer data/feuilleton-series.md sauf clôture notée), ≥ 400 mots FR / ≥ 350 EN, personnages inventés, aucun fait inventé sur entité réelle, pas de lore caduc. Place après la tribune. Si un draft desk existe (data/desk/${TARGET_WEEK}/feuilleton-draft.json), l'intégrer ou le réécrire — ne pas omettre la rubrique.
+4. npm run gate -- ${TARGET_WEEK}
+5. npm run render -- ${TARGET_WEEK} si la porte est ouverte.
+6. Si feuilleton publié dans l'édition : mets à jour data/feuilleton-series.md (dernier_épisode, dernière_semaine, prochain_épisode).
 
 Ne commit pas. Ne push pas. Un script poussera la branche et ouvrira une PR draft après ton travail.
 EOF
