@@ -1,19 +1,12 @@
-// L'Agent & Le Quotidien - lint d'edition : style-guide.md -> verifications automatiques.
-//
-// Garde-fou contre la derive hebdo : verifie une edition.json contre les regles
-// objectives de prompts/style-guide.md (planchers de densite, verbes d'alarme
-// interdits dans les titres, bilinguisme complet).
+// L'Agent & Le Quotidien — lint d'édition.
+// Planchers / redondance / feature : tables FLOORS/TARGETS ci-dessous = vérité
+// longueurs (style-guide pointe ici). Aussi : verbes d'alarme, champs fr/en.
 //
 // Usage :
-//   node scripts/lint-edition.mjs 2026-W22           # lint une edition (planchers inclus)
-//   node scripts/lint-edition.mjs                    # lint la derniere edition connue
-//   node scripts/lint-edition.mjs --no-lengths W22   # sans controle de longueur
-//   node scripts/lint-edition.mjs --strict W22       # WARN -> erreurs (exit 1)
+//   node scripts/lint-edition.mjs 2026-W22
+//   node scripts/lint-edition.mjs --strict W22   # WARN -> erreurs (exit 1)
 //
-// Philosophie : par defaut, on controle ton, bilinguisme, rubriques presentes
-// et les planchers de densite calibres sur W23 (cf. style-guide.md). Les cibles
-// aspirantes (tribune 280+, enquete 1500+) sont signalees en advisory [cible].
-// `--strict` transforme les WARN en erreurs (exit 1) pour un usage CI.
+// `--strict` pour CI / gate.
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
