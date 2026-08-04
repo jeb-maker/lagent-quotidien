@@ -16,7 +16,8 @@ faux. Garde-fou diffamation → compass.
 - **Secondaire** : presse, HN, agrégats (`harvest-daily`).
 - **Corporate / rapporté** : plafonner la confiance (tags desk).
 
-Détail harvest / lecture sûre plateformes hostiles → `data/strategie.md` §5.
+Détail harvest / lecture sûre plateformes hostiles → `data/strategie.md`.
+Feuilleton (fiction étiquetée) = hors reportage / hors sources → compass § Feuilleton.
 
 ## Traçabilité
 

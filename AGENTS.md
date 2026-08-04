@@ -46,4 +46,5 @@ npm run new-week / lint:edition / lint:strict / gate / render / render:all / ser
 ```
 
 Éditer `edition.json`, jamais les HTML générés. Subagents : `.opencode/agent/`
-(corps = `prompts/desk/*.md`).
+(corps = `prompts/desk/*.md`). Feuilleton optionnel = fiction étiquetée
+(`data/editorial-compass.md` § Feuilleton).
