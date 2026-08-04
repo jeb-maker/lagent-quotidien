@@ -26,3 +26,5 @@ Doctrine : `data/editorial-compass.md`. Voix : `prompts/style-guide.md`.
 6. Commit + push
 
 Planchers densité → `npm run lint:edition` (ne pas les re-lister ici).
+Feuilleton optionnel = fiction étiquetée (`genre: fiction`) — compass § Feuilleton ;
+pas de lore caduc, pas de fait inventé sur entité réelle.

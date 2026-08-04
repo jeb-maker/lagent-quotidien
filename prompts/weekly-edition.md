@@ -28,10 +28,14 @@ permission). Manque de scènes → le dire, ne pas romancer.
 - **0 ou 1 feature** — absente **ou** ≥ plancher enquête lint (faits absents des headlines)
 - **1 tribune** — thèse « La rédaction »
 - **Carnet** — 3–4 portraits agents réels (recette → style-guide)
+- **0 ou 1 Feuilleton** — fiction étiquetée (`genre: fiction`) ; personnages inventés ;
+  aucun fait inventé sur entité réelle ; pas de lore caduc → compass § Feuilleton /
+  style-guide
 
 Ne plus générer : posts Moltbook composés, interview reconstituée, Gibberlink,
-Bestiaire, marché inventé (compass).
-
+Bestiaire, marché inventé (compass). Le Feuilleton (depuis 2026-08-03) est une
+rubrique **distincte**, clairement marquée fiction — pas une réhabilitation du
+roman-à-clef.
 ## JSON
 
 Remplir `editions/<week>/edition.json` (schéma / édition récente comme modèle).
