@@ -20,12 +20,10 @@ flock -n 9 || { echo "$(date -Iseconds) skip: narrative-radar déjà en cours"; 
 
 cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 
-git fetch origin --quiet 2>/dev/null || true
-if ! git pull --rebase origin main --quiet 2>/dev/null; then
-  echo "$(date -Iseconds) git pull --rebase échec (conflit ?), abandon"
-  git rebase --abort 2>/dev/null || true
-  exit 0
-fi
+# shellcheck source=scripts/lib/cron-git.sh
+. "$(dirname "$0")/lib/cron-git.sh"
+
+cron_git_sync || { echo "$(date -Iseconds) sync git échec, abandon"; exit 0; }
 
 node scripts/harvest-narratives.mjs || echo "$(date -Iseconds) harvest-narratives échec (non bloquant)"
 
@@ -35,24 +33,6 @@ DATE="$(date +%F)"
 OUT="data/narrative-radar/${DATE}.json"
 echo "$(date -Iseconds) narrative-radar run → ${OUT}"
 
-git add "${OUT}" radar/ 2>/dev/null || true
-if git diff --cached --quiet; then
-  echo "$(date -Iseconds) rien à committer (fichier absent ou inchangé)"
-  exit 0
-fi
-
-git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
-  commit -m "Narrative radar ${DATE}" >/dev/null 2>&1 \
-  || { echo "$(date -Iseconds) commit échec"; exit 0; }
-
-git fetch origin --quiet 2>/dev/null || true
-if ! git pull --rebase origin main --quiet 2>/dev/null; then
-  echo "$(date -Iseconds) git pull --rebase avant push échoué (conflit ?)"
-  git rebase --abort 2>/dev/null || true
-  echo "$(date -Iseconds) push échoué, retry à la prochaine itération"
-elif git push >/dev/null 2>&1; then
+if cron_git_commit_push "Narrative radar ${DATE}" "${OUT}" radar/; then
   echo "$(date -Iseconds) narrative-radar+push OK (${DATE})"
-else
-  echo "$(date -Iseconds) push échoué, retry à la prochaine itération"
 fi
-
