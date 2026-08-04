@@ -1,7 +1,8 @@
 #!/bin/bash
 # scripts/cron-compose.sh
 # Wrapper cron : lance l'agent Cursor en mode headless pour composer l'édition
-# de la semaine, puis pousse sur edition/<week> + ouvre une PR draft GitHub.
+# de la semaine (reportage + feuilleton obligatoire ≥ W33), puis pousse sur
+# edition/<week> + ouvre une PR draft GitHub.
 #
 # Forgiving : si une étape échoue, on log et on quitte sans planter le cron.
 #

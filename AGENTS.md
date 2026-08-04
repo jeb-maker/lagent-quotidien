@@ -20,7 +20,7 @@ réhabiliter.
 | Rubriques | `prompts/weekly-edition.md` |
 | Compose | skill `composition-hebdo` |
 | Ops / Bluesky | `scripts/README.md` |
-| Semaine courante | `data/_week-context.md` |
+| Feuilleton / série | `data/feuilleton-series.md` |
 
 ## Carte
 
@@ -46,5 +46,5 @@ npm run new-week / lint:edition / lint:strict / gate / render / render:all / ser
 ```
 
 Éditer `edition.json`, jamais les HTML générés. Subagents : `.opencode/agent/`
-(corps = `prompts/desk/*.md`). Feuilleton optionnel = fiction étiquetée
-(`data/editorial-compass.md` § Feuilleton).
+(corps = `prompts/desk/*.md`). Feuilleton **obligatoire** dès W33 = fiction
+étiquetée (`data/feuilleton-series.md` + compass § Feuilleton).

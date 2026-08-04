@@ -27,9 +27,9 @@ Une rubrique = une fonction. Une idée forte = une seule apparition comme thèse
 - Pas de complaisance.
 - Pas de réécriture complète sans diagnostic.
 - Ne remplace pas un problème de preuve par une phrase élégante.
-- Si un `feuilleton` est présent : bloquer s'il manque l'étiquetage (`genre:
-  fiction`, disclaimer), s'il réhabilite le lore caduc, ou s'il invente un fait
-  sur une entité réelle nommée.
+- Feuilleton **obligatoire** (≥ W33) : bloquer s'il manque, s'il manque
+  l'étiquetage (`genre: fiction`, disclaimer), series/episode, s'il réhabilite le
+  lore caduc, ou s'il invente un fait sur une entité réelle nommée.
 
 ## Format de sortie
 

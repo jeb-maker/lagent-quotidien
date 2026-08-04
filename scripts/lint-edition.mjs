@@ -302,10 +302,24 @@ function checkCarnetRotation(edition, week) {
 
 const FEUILLETON_MIN_FR = 400;
 const FEUILLETON_MIN_EN = 350;
+const FEUILLETON_REQUIRED_FROM = '2026-W33';
 
-function checkFeuilleton(edition) {
+function weekGte(week, minWeek) {
+    const m1 = String(week).match(/^(\d{4})-W(\d{2})$/);
+    const m2 = String(minWeek).match(/^(\d{4})-W(\d{2})$/);
+    if (!m1 || !m2) return false;
+    const y1 = Number(m1[1]); const w1 = Number(m1[2]);
+    const y2 = Number(m2[1]); const w2 = Number(m2[2]);
+    return y1 > y2 || (y1 === y2 && w1 >= w2);
+}
+
+function checkFeuilleton(edition, week) {
+    const required = weekGte(week, FEUILLETON_REQUIRED_FROM);
     const f = edition.feuilleton;
-    if (f == null) return;
+    if (f == null) {
+        if (required) err(`[feuilleton] obligatoire depuis ${FEUILLETON_REQUIRED_FROM}`);
+        return;
+    }
     if (!f.paragraphs) {
         err('[feuilleton] présent mais paragraphs manquant');
         return;
@@ -314,7 +328,8 @@ function checkFeuilleton(edition) {
         const text = extractText(f.paragraphs, lang);
         const n = wordCount(text);
         if (n < min) {
-            warn(`[feuilleton] [${lang}] : ${n} mots (plancher ${min}) — absente ou complète, pas de demi-texte`);
+            // Plancher bloquant dès que la rubrique est requise / présente
+            err(`[feuilleton] [${lang}] : ${n} mots (plancher ${min})`);
         }
     }
     if (f.genre !== 'fiction') {
@@ -380,7 +395,7 @@ function main() {
     checkHeadlinesCount(edition);
     checkLedeFeatureDivergence(edition);
     checkCarnetRotation(edition, week);
-    checkFeuilleton(edition);
+    checkFeuilleton(edition, week);
 
     for (const w of warns) console.log(`  WARN  ${w}`);
     for (const a of advisories) console.log(`  INFO  ${a}`);

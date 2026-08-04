@@ -1,39 +1,43 @@
-# Contexte de la semaine — 2026-W32
+# Contexte de la semaine — 2026-W33
 
 > Digest court (~1 KB) lu en premier par opencode à chaque session de composition.
 > Remplace le chargement systématique de `data/people.json` (21 KB) pour la
-> majorité des tours. Régénéré / mis à jour au refresh du 4 août 2026.
+> majorité des tours. Régénéré par `scripts/new-week.sh`.
 
 ## Semaine courante
 
-- **Semaine ISO** : 2026-W32
-- **Date de bouclage** : mardi 4 août 2026
-- **Dernière édition publiée** : 2026-W31 (mardi 28 juillet)
-- **Numéro d'édition à produire** : 438
+- **Semaine ISO** : 2026-W33
+- **Date de bouclage** : mardi 11 août 2026
+- **Dernière édition publiée** : (voir editions/ — la plus récente)
+- **Numéro d'édition à produire** : 439
 
-## Harvests disponibles
+## Harvests du jour
 
-Période post-W31 (29 juillet – 4 août 2026) dans `data/harvest/` :
+Les récoltes auto (`scripts/cron-harvest.sh`, 7h30) ne sont pas committées.
+Regarder dans `data/harvest/` :
 
-- `data/harvest/2026-08-04.json` + `2026-08-04-primary.json` — jour de bouclage
-- `data/harvest/2026-08-03.json` + `2026-08-03-primary.json` — ADK agent-on-agent (Register)
-- `data/harvest/2026-08-02.json` + `2026-08-02-primary.json`
-- `data/harvest/2026-08-01.json` + `2026-08-01-primary.json`
-- `data/harvest/2026-07-31.json` + `2026-07-31-primary.json` — escapes OpenAI (TC/Reuters)
-- `data/harvest/2026-07-30.json` + `2026-07-30-primary.json` — Handbook.md / Meta agents
-- `data/harvest/2026-07-{22..27}.json` + primary — matière initiale W32 (timeline HF)
+- `data/harvest/2026-08-04.json` — secondaire (HN / RSS / ArXiv / Bluesky)
+- `data/harvest/2026-08-04-primary.json` — primaire ($MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
 
 ## Entités actives cette semaine
 
-- **Hugging Face / Modal / JFrog Artifactory** — chaîne forensique post-naming.
-- **Google ADK (adk-python)** — agent→agent en CI (Pillar, 3/08).
-- **OpenAI** — escapes supplémentaires rapportés (31/07) ; rapport technique encore absent.
-- **Moltbook** — green box / hesitation theater / fichier = modèle.
-- **Cognition × Poke** — personnalité comme couche produit.
-- **Salesforce / VA** — AELA plafond 1,6 Md$.
+Entités réelles récurrentes (vérifier l'actu avant de citer — cf. `data/people.json`
+pour l'annuaire complet) :
+
+- **Moltbook** — forum d'agents IA ; racheté par Meta le 10/03/2026.
+- **OpenClaw** — framework open-source de P. Steinberger ; restreint par la Chine.
+- **RentAHuman** — marketplace agents→humains.
+- **MoltMatch** — dating agents ; controverse de consentement.
+- **$MOLT** — memecoin Base lié à Moltbook (volatil).
+- **Crustafarianism** — religion AI-native née sur Moltbook.
+- **Agents4Science** — conférence (Stanford).
 
 ## Notes éditoriales
 
 - Ratio cible : 60 % culture agentique / 40 % infrastructure.
-- Anti-redite W31 : pas de re-lede « naming » OpenAI / essaim HF.
+- ≥ 3 scènes agentiques sourcées, ≥ 5 fragments primaires.
 - Voix : « La rédaction ». Sources dans `notes.md`, pas dans le texte.
+
+## Drafts prêts
+
+- Feuilleton ép. 1 : `data/desk/2026-W33/feuilleton-draft.json` (déjà collé dans edition.json stub).

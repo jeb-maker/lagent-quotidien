@@ -16,7 +16,8 @@ sources : `prompts/sources.md`.
 | `validate-edition-schema.mjs` | **actif** | `npm run validate:schema` |
 | `publish-gate.mjs` | **actif** | `npm run gate -- 2026-W27` |
 | `hooks/pre-commit` | **actif** | `git config core.hooksPath scripts/hooks` |
-| `new-week.sh` | **actif** | `./scripts/new-week.sh` |
+| `cron-compose.sh` | **actif** | Mer. 18h — compose édition + **feuilleton** (oblig. ≥ W33) → PR draft |
+| `cron-compose-run.sh` | **actif** | Worker agent headless (appelé par cron-compose) |
 | `render-all.sh` | **actif** | `npm run render:all` après chaque publication |
 | `edition-to-text.mjs` | **actif** | Export texte brut d'une édition |
 | `edition-pr.sh` | **actif** | Ouvre une PR d'édition |

@@ -119,6 +119,20 @@ cat > "${EDITION_DIR}/edition.json" <<EOF
       "role_fr": "",
       "role_en": ""
     }
+  },
+
+  "feuilleton": {
+    "genre": "fiction",
+    "disclaimer": {
+      "fr": "Fiction. Ne pas lire comme une dépêche.",
+      "en": "Fiction. Do not read this as a news dispatch."
+    },
+    "series": { "fr": "", "en": "" },
+    "episode": 1,
+    "title": { "fr": "", "en": "" },
+    "dek": { "fr": "", "en": "" },
+    "byline": { "fr": "Feuilleton · La rédaction", "en": "Serial · The newsroom" },
+    "paragraphs": { "fr": [], "en": [] }
   }
 }
 EOF
@@ -183,6 +197,7 @@ pour l'annuaire complet) :
 - Ratio cible : 60 % culture agentique / 40 % infrastructure.
 - ≥ 3 scènes agentiques sourcées, ≥ 5 fragments primaires.
 - Voix : « La rédaction ». Sources dans \`notes.md\`, pas dans le texte.
+- **Feuilleton obligatoire** : lire \`data/feuilleton-series.md\` (série + prochain épisode).
 EOF
 echo "✓ Digest : data/_week-context.md"
 echo ""

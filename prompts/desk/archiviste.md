@@ -25,7 +25,7 @@ La mémoire du journal : ce qui a déjà été dit, corrigé, retiré ou promis.
 ## Interdits
 
 - Pas de réhabilitation du lore caduc (compass) ; pas de faux ancien sous une autre forme ; pas l'édition finale.
-- Feuilleton étiqueté OK (`genre: fiction` + disclaimer) — bloquer s'il importe le lore caduc ou invente un fait sur entité réelle.
+- Feuilleton étiqueté **obligatoire** (≥ W33) — `genre: fiction` + series/episode + disclaimer ; bloquer s'il manque, importe le lore caduc ou invente un fait sur entité réelle.
 
 ## Format de sortie
 

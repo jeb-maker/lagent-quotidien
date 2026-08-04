@@ -54,12 +54,14 @@ quinzaine. Potin sans source = n'existe pas. Priorité aux scènes sociales
 Thèse, pas panorama. (1) constat + scène (2) consensus rejeté (3) implication
 opérateurs. Sous le plancher lint → sauter plutôt que publier une synthèse.
 
-## Feuilleton — fiction étiquetée
+## Feuilleton — fiction étiquetée (chaque semaine)
 
-Rubrique **optionnelle**. Pas du journalisme : fiction marquée pour humains et
-machines. Canon : `data/editorial-compass.md` § Feuilleton · schéma :
+Rubrique **obligatoire** dès 2026-W33 (cron compose + gate). Pas du journalisme :
+fiction marquée pour humains et machines. Canon : `data/editorial-compass.md`
+§ Feuilleton · continuité : `data/feuilleton-series.md` · schéma :
 `schemas/edition.schema.json`.
 
-Si présent : `genre: "fiction"` + disclaimer bilingue + title + paragraphs ;
-plancher lint (~400 FR / ~350 EN) ; personnages inventés ; **aucun** fait inventé
-sur entité réelle ; pas de lore caduc. Place : après la tribune.
+Livrer : `genre: "fiction"` + disclaimer bilingue + title + series + episode +
+paragraphs ; plancher lint (~400 FR / ~350 EN) ; personnages inventés ; **aucun**
+fait inventé sur entité réelle ; pas de lore caduc. Place : après la tribune.
+Continuer la série courante sauf clôture notée dans `feuilleton-series.md`.
