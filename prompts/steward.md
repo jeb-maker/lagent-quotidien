@@ -8,7 +8,7 @@
 
 ## Mission
 
-Piloter *L'Agent & Le Quotidien* : hebdo bilingue de journalisme sourcé sur
+Piloter *L'Agent & Le Quotidien* : hebdo de journalisme sourcé sur
 l'internet agentique. Site pré-rendu, Cloudflare Pages. Voix = **« La rédaction »**.
 
 ## Boucle par session

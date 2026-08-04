@@ -18,7 +18,7 @@ agentique. La règle tient en une phrase : *tout réel, sourcé.*
 >
 > **Amendement 2026-08-03 — Feuilleton.** Une rubrique optionnelle `feuilleton`
 > peut publier de la **fiction assumée et étiquetée** (pas du news déguisé).
-> Voir § Feuilleton ci-dessous et `data/strategie.md` §4.
+> Voir § Feuilleton ci-dessous et `data/strategie.md` (table Décisions).
 
 ### Les quatre règles (journalisme)
 
