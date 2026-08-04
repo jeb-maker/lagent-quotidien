@@ -1,6 +1,12 @@
 # Scripts — état et usage
 
-Référence rapide. Doctrine : `data/strategie.md` · sources : `prompts/sources.md`.
+**Source de vérité ops** (crons, Bluesky, harvest). Doctrine : `data/strategie.md` ·
+sources : `prompts/sources.md`.
+
+**Bluesky (2026-08)** : lecture via `harvest-daily.mjs` = **actif**. Canal
+`@cuvee_42` / `cuvee-daily.mjs` = **actif**, cadence réduite (mar.+ven.), contenu
+**réel** uniquement (annonces d'édition / agents du Carnet) — ≠ voix du journal
+(« La rédaction »). Persona fictionnelle caduque : `data/editorial-compass.md`.
 
 ## Publication
 
@@ -21,7 +27,8 @@ Référence rapide. Doctrine : `data/strategie.md` · sources : `prompts/sources
 |--------|--------|-------|
 | `harvest-daily.mjs` | **actif** | Bluesky, HN, RSS, ArXiv → `data/harvest/<date>.json` |
 | `harvest-primary.mjs` | **actif** | $MOLT, OpenClaw, Moltbook → `data/harvest/<date>-primary.json` |
-| `cron-harvest.sh` | **actif** | Wrapper cron 7h30 |
+| `cron-harvest.sh` | **actif** | Wrapper cron 7h30 — sync via `lib/cron-git.sh` |
+| `cron-bluesky-stats.sh` | **actif** | Snapshot hebdo Bluesky + commit (dim. 22h) — évite WIP bloquant |
 | `harvest-narratives.mjs` | **actif** | RSS monde → `data/narrative-radar/<date>.json` — brief : `data/taxonomy/HANDOFF-harvest.md` |
 | `render-radar.mjs` | **actif** | JSON radar → `/radar/` (page interne, noindex) |
 | `cron-world-pulse.sh` | **actif** | Wrapper cron Narrative Radar — brief : `data/taxonomy/HANDOFF-harvest.md` |
@@ -51,10 +58,16 @@ Référence rapide. Doctrine : `data/strategie.md` · sources : `prompts/sources
 
 | Script | Statut | Usage |
 |--------|--------|-------|
+| `lib/cron-git.sh` | **actif** | Stash WIP → pull/rebase (ou reset) → commit/push — sourcé par les wrappers |
 | `cron-drift.sh` | **actif** | Stats + render + push (9h) |
 | `daily-stats.mjs` | **actif** | Cloudflare + Bluesky → `data/stats.json` |
 | `cron-bot-watch.sh` | **veille** | Bot dialogue watch |
 | `cron-conseil.sh` | **abandonné** | Remplacé par desk agentique |
+
+**Piège connu (corrigé 2026-08)** : un `node scripts/bluesky-stats.mjs` sans wrapper
+laissait `data/bluesky-stats.jsonl` modifié → `git pull --rebase` refusait → harvest /
+drift / radar abandonnaient plusieurs jours d’affilée. Toujours passer par
+`cron-bluesky-stats.sh`.
 
 ## Autres
 

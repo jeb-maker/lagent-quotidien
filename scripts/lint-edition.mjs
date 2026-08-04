@@ -1,19 +1,12 @@
-// L'Agent & Le Quotidien - lint d'edition : style-guide.md -> verifications automatiques.
-//
-// Garde-fou contre la derive hebdo : verifie une edition.json contre les regles
-// objectives de prompts/style-guide.md (planchers de densite, verbes d'alarme
-// interdits dans les titres, bilinguisme complet).
+// L'Agent & Le Quotidien — lint d'édition.
+// Planchers / redondance / feature : tables FLOORS/TARGETS ci-dessous = vérité
+// longueurs (style-guide pointe ici). Aussi : verbes d'alarme, champs fr/en.
 //
 // Usage :
-//   node scripts/lint-edition.mjs 2026-W22           # lint une edition (planchers inclus)
-//   node scripts/lint-edition.mjs                    # lint la derniere edition connue
-//   node scripts/lint-edition.mjs --no-lengths W22   # sans controle de longueur
-//   node scripts/lint-edition.mjs --strict W22       # WARN -> erreurs (exit 1)
+//   node scripts/lint-edition.mjs 2026-W22
+//   node scripts/lint-edition.mjs --strict W22   # WARN -> erreurs (exit 1)
 //
-// Philosophie : par defaut, on controle ton, bilinguisme, rubriques presentes
-// et les planchers de densite calibres sur W23 (cf. style-guide.md). Les cibles
-// aspirantes (tribune 280+, enquete 1500+) sont signalees en advisory [cible].
-// `--strict` transforme les WARN en erreurs (exit 1) pour un usage CI.
+// `--strict` pour CI / gate.
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -307,6 +300,33 @@ function checkCarnetRotation(edition, week) {
     }
 }
 
+const FEUILLETON_MIN_FR = 400;
+const FEUILLETON_MIN_EN = 350;
+
+function checkFeuilleton(edition) {
+    const f = edition.feuilleton;
+    if (f == null) return;
+    if (!f.paragraphs) {
+        err('[feuilleton] présent mais paragraphs manquant');
+        return;
+    }
+    for (const [lang, min] of [['fr', FEUILLETON_MIN_FR], ['en', FEUILLETON_MIN_EN]]) {
+        const text = extractText(f.paragraphs, lang);
+        const n = wordCount(text);
+        if (n < min) {
+            warn(`[feuilleton] [${lang}] : ${n} mots (plancher ${min}) — absente ou complète, pas de demi-texte`);
+        }
+    }
+    if (f.genre !== 'fiction') {
+        err('[feuilleton] genre doit être "fiction"');
+    }
+    const discFr = typeof f.disclaimer?.fr === 'string' ? f.disclaimer.fr : '';
+    const discEn = typeof f.disclaimer?.en === 'string' ? f.disclaimer.en : '';
+    if (!/fiction/i.test(discFr) || !/fiction/i.test(discEn)) {
+        err('[feuilleton] disclaimer bilingue doit mentionner "fiction"');
+    }
+}
+
 function resolveWeek() {
     const arg = process.argv.find((a) => /^\d{4}-W\d{2}$/.test(a));
     if (arg) return arg;
@@ -360,6 +380,7 @@ function main() {
     checkHeadlinesCount(edition);
     checkLedeFeatureDivergence(edition);
     checkCarnetRotation(edition, week);
+    checkFeuilleton(edition);
 
     for (const w of warns) console.log(`  WARN  ${w}`);
     for (const a of advisories) console.log(`  INFO  ${a}`);

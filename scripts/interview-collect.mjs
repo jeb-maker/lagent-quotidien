@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-// interview-collect.mjs — posteur bête + collecteur de réponses pour Moltbook
-// Safe-write design : data/safe-write-interviews.md
-//
+// interview-collect.mjs — posteur bête + collecteur (écriture Moltbook gelée :
+// data/strategie.md). 0 LLM, 0 SDK, token jetable only.
 // Usage :
 //   node scripts/interview-collect.mjs <slug>              # dry-run (affiche ce qui serait envoyé)
 //   node scripts/interview-collect.mjs <slug> --send        # envoi réel (nécessite MOLTBOOK_TOKEN)

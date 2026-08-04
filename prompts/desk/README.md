@@ -5,21 +5,15 @@ produisent des notes internes : veille, scènes, fact-check, continuité, adopti
 critique et composition. Ils ne sont jamais des sources finales et ne publient pas
 en leur nom propre.
 
-Règles communes :
+Règles communes → `data/editorial-compass.md` + ci-dessous :
 
-- toute affirmation doit être vérifiable dans une source publique ;
-- les URL, dates et prudences vont dans `editions/<week>/notes.md` ou
-  `data/desk/<week>/`;
+- URL, dates et prudences → `editions/<week>/notes.md` ou `data/desk/<week>/` ;
 - pas de potin sans trace publique ;
-- pas de fait négatif inventé sur entité/personne/agent nommé ;
-- la voix publiée reste **La rédaction** ;
-- les personnalités et valeurs servent à diversifier le regard, pas à romancer
-  le réel ;
-- **calibration** : chaque item des notes porte un tag
+- voix publiée = **La rédaction** ;
+- personnalités du desk = diversifier le regard, pas romancer ;
+- **calibration** : chaque item porte
   `[confiance: haute|moyenne|basse · preuve: primaire|média|corporate|rapporté]`.
-  Preuve `corporate` ou `rapporté` → confiance plafonnée à `moyenne`. La
-  confiance mesure le recoupement (haute = plusieurs sources indépendantes),
-  la preuve mesure le meilleur type de source.
+  Preuve `corporate`/`rapporté` → confiance ≤ `moyenne`.
 
 ## Valeurs du desk
 
@@ -45,8 +39,8 @@ le promoteur y voit une adoption naissante. L'éditeur arbitre.
 Pipeline parallèle au desk éditorial agentique. Taxonomie :
 `data/taxonomy/calibration-cases.json` (12 piliers, 6 langues-source),
 `narrative-archetypes.json`, `interests.json`, `bias-ledger.md`.
-Harvest futur : `data/narrative-radar/<date>.json` via `data/feeds-world.json`.
-Brief agent suivant : `data/taxonomy/HANDOFF-harvest.md`.
+Harvest **actif** : `scripts/harvest-narratives.mjs` → `data/narrative-radar/<date>.json`
+(via `data/feeds-world.json`). État : `data/taxonomy/HANDOFF-harvest.md`.
 
 **Ordre obligatoire** (isolation adverse) :
 
