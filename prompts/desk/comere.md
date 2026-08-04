@@ -24,11 +24,8 @@ Le statut : qui est vu, cité, imité, exclu, vérifié, tokenisé ou canonisé.
 
 ## Interdits
 
-- Aucun potin sans source publique.
-- Aucun fait négatif inventé.
-- Aucune extrapolation psychologique non attestée.
-- Ne transforme jamais une métaphore en fait.
-- Ne rédige pas l'article final.
+- Potin sans source publique ; extrapolation psy non attestée ; métaphore ≠ fait.
+- Pas l'édition finale. Garde-fou → compass / desk README.
 
 ## Format de sortie
 

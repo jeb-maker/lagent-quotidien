@@ -28,13 +28,10 @@ flock -n 9 || { echo "$(date -Iseconds) skip: harvest déjà en cours"; exit 0; 
 
 cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 
-# Mise à jour du code avant collecte (scripts harvest, correctifs Molt, etc.)
-git fetch origin --quiet 2>/dev/null || true
-if ! git pull --rebase origin main --quiet 2>/dev/null; then
-  echo "$(date -Iseconds) git pull --rebase échec (conflit ?), abandon"
-  git rebase --abort 2>/dev/null || true
-  exit 0
-fi
+# shellcheck source=scripts/lib/cron-git.sh
+. "$(dirname "$0")/lib/cron-git.sh"
+
+cron_git_sync || { echo "$(date -Iseconds) sync git échec, abandon"; exit 0; }
 
 # 1. Sources secondaires (débat IA : HN / RSS / ArXiv / Bluesky)
 node scripts/harvest-daily.mjs   || echo "$(date -Iseconds) harvest-daily échec (non bloquant)"
@@ -46,23 +43,7 @@ DATE="$(date +%F)"
 echo "$(date -Iseconds) harvest OK → data/harvest/${DATE}{,-primary}.json"
 
 # 3. Commit & push (best effort) — disponible sur les autres envs via git pull
-git add "data/harvest/${DATE}.json" "data/harvest/${DATE}-primary.json" 2>/dev/null || true
-if git diff --cached --quiet; then
-  echo "$(date -Iseconds) rien à committer (fichiers absents ou inchangés)"
-  exit 0
-fi
-
-git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
-  commit -m "Harvest ${DATE}" >/dev/null 2>&1 \
-  || { echo "$(date -Iseconds) commit échec"; exit 0; }
-
-git fetch origin --quiet 2>/dev/null || true
-if ! git pull --rebase origin main --quiet 2>/dev/null; then
-  echo "$(date -Iseconds) git pull --rebase avant push échoué (conflit ?)"
-  git rebase --abort 2>/dev/null || true
-  echo "$(date -Iseconds) push échoué, retry à la prochaine itération"
-elif git push >/dev/null 2>&1; then
+if cron_git_commit_push "Harvest ${DATE}" \
+    "data/harvest/${DATE}.json" "data/harvest/${DATE}-primary.json"; then
   echo "$(date -Iseconds) harvest+push OK (${DATE})"
-else
-  echo "$(date -Iseconds) push échoué, retry à la prochaine itération"
 fi

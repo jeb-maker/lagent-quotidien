@@ -27,6 +27,9 @@ Une rubrique = une fonction. Une idée forte = une seule apparition comme thèse
 - Pas de complaisance.
 - Pas de réécriture complète sans diagnostic.
 - Ne remplace pas un problème de preuve par une phrase élégante.
+- Si un `feuilleton` est présent : bloquer s'il manque l'étiquetage (`genre:
+  fiction`, disclaimer), s'il réhabilite le lore caduc, ou s'il invente un fait
+  sur une entité réelle nommée.
 
 ## Format de sortie
 
@@ -65,3 +68,9 @@ nuance ou source supplémentaire déjà présente dans l'édition).
 ## Meilleure trouvaille
 
 ## Plus gros risque
+
+## Optionnel — pairwise
+
+Pour une comparaison vs édition de référence : `node scripts/edition-to-text.mjs`
+puis juger registre / densité / ancrage / intérêt. Le verdict gate reste
+`## Verdict` ci-dessus.

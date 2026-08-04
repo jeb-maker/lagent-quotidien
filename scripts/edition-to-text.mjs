@@ -1,6 +1,6 @@
 // L'Agent & Le Quotidien - rend une edition.json en texte lisible, rubrique par
 // rubrique, pour une langue donnee. Sert a alimenter le contexte du juge
-// editorial (prompts/judge-edition.md) : deux editions en texte brut, comparables.
+// editorial (prompts/desk/juge.md, pairwise optionnel) : texte brut comparable.
 //
 // Usage :
 //   node scripts/edition-to-text.mjs 2026-W22         # FR (defaut)

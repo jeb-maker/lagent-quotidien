@@ -26,13 +26,16 @@ citations, handles, fichiers, extraits).
 ## Contraintes
 
 - voix : **La rédaction** ;
-- aucun fait inventé ;
+- aucun fait inventé **dans le journalisme** (lede, headlines, wire, carnet,
+  feature, tribune) ;
+- Feuilleton optionnel = fiction **étiquetée** uniquement (`genre: fiction`,
+  disclaimer) — personnages inventés, pas de lore caduc, aucun fait inventé sur
+  entité réelle ; cf. `style-guide.md` › Feuilleton ;
 - sources tracées dans `notes.md`, pas répétées partout dans le journal ;
 - 60 % culture agentique / 40 % infrastructure ;
 - au moins 3 scènes agentiques sourcées ;
 - Carnet = personnages et scènes, pas concepts ;
 - Lede = scène principale + chiffre + conséquence, pas résumé général ;
-- Marché = chiffres uniquement ;
 - Tribune = conséquence éditoriale avec consensus rejeté, pas synthèse ;
 - Feature = absente **ou** ≥ 800 mots FR avec faits absents des gros titres ;
 - ≥ 5 fragments primaires dans l'édition finale.
@@ -47,6 +50,7 @@ citations, handles, fichiers, extraits).
 | Carnet | scène + marqueur de statut |
 | Tribune | thèse tranchée, pas panorama |
 | Feature | longue ou coupée — jamais 3 paragraphes répétitifs |
+| Feuilleton | absent **ou** fiction complète étiquetée (≥ 400 mots FR) |
 
 ## Arbitrages (obligatoire, dans `notes.md`)
 
