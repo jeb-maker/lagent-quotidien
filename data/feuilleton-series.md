@@ -11,7 +11,7 @@
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
 | **dernier_épisode** | 1 |
-| **dernière_semaine** | 2026-W33 (draft) |
+| **dernière_semaine** | 2026-W33 |
 | **prochain_épisode** | 2 |
 
 ## Règles
