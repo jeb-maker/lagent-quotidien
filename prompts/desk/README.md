@@ -73,17 +73,29 @@ Lancer en une seule fois (ou séquentiellement, ordre indifférent) :
 
 ### Étape 2 — Synthèse
 
-6. `editeur` → lit TOUTES les notes (veille, scenes, factcheck, progress,
-   continuity) + harvests → compose `edition.json` + `notes.md`
-   (dont une section `## Arbitrages` : chaque désaccord entre notes du desk,
+6. `editeur` → préflight (≥ 3 scènes citation+URL+date ; `## Arc` une phrase) →
+   lit TOUTES les notes (veille, scenes, factcheck, progress, continuity) +
+   harvests → compose `edition.json` + `notes.md`
+   (sections `## Arc` puis `## Arbitrages` : chaque désaccord entre notes du desk,
    la décision garder/couper/nuancer et sa raison — l'arbitrage est auditable)
 
 ### Étape 3 — Verdict
 
 7. `juge` → lit `edition.json` uniquement → `data/desk/<week>/review.md`
    (section `## Verdict` = porte bloquante ; précédée d'un `## Pre-mortem` :
-   les 3 causes les plus plausibles d'un désastre post-publication, avec
-   gravité — pas de `publier` si une gravité haute reste sans parade)
+   cause #1 = redite d'arc ; 3 causes au total, gravité — pas de `publier` si
+   une gravité haute reste sans parade)
+
+### Étape 4 — Gate humaine (mardi, avant merge) — ~20 min
+
+Checklist avant de merger la PR d'édition. Un point rouge → commentaire PR, pas merge.
+Le `npm run gate` ne remplace pas cette passe.
+
+1. Lede : une scène + un chiffre + une conséquence ? (pas un résumé)
+2. Arc (`notes.md` `## Arc`) = sens du lede = `_meta.editor_notes` ?
+3. ≥ 3 citations agentiques visibles dans une / carnet ?
+4. Feuilleton : disclaimer visible + test de substitution OK (pas de paraphrase news) ?
+5. Aucun fait `rapporté` en une ?
 
 ### Narrative Radar (optionnel, avant ou après étape 2)
 
