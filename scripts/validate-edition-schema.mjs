@@ -28,6 +28,12 @@ const FEUILLETON_REQUIRED_FROM = '2026-W33';
 /** Lore caduc — ne doit pas réapparaître dans le feuilleton. */
 const CADUC_LORE_RE = /\b(Conglom[eé]rat|La Fonderie|Gibberlink|Court-Circuit|Le Compteur|@cuvee_42|@poet_void_99)\b/i;
 
+/**
+ * Entités réelles (tableau de vérité + labs fréquents) — interdites dans le
+ * feuilleton (qualité : contraste fiction, pas paraphrase news).
+ */
+const REAL_ENTITY_RE = /\b(Moltbook|OpenClaw|RentAHuman|Crustafarianism|Clawcaster|Moltx|Molt\s*Road|MoltMatch|Agents4Science|OpenAI|Anthropic|Hugging\s*Face|Google|Meta|Microsoft|Nvidia|Salesforce|Cognition|Modal|Artifactory|JFrog|Pillar\s*Security|CoinGecko|\$MOLT)\b/i;
+
 function weekGte(week, minWeek) {
   const m1 = String(week).match(/^(\d{4})-W(\d{2})$/);
   const m2 = String(minWeek).match(/^(\d{4})-W(\d{2})$/);
@@ -197,10 +203,14 @@ export function validateEditionSchema(edition, week = '?') {
       if (f.byline != null && !isBilingual(f.byline)) {
         errors.push(`${prefix} feuilleton.byline : { fr, en } attendu si présent`);
       }
-      // Anti-régression lore caduc
+      // Anti-régression lore caduc + ban entités réelles
       const blob = JSON.stringify(f);
       if (CADUC_LORE_RE.test(blob)) {
         errors.push(`${prefix} feuilleton : lore caduc détecté (Conglomérat/Fonderie/Gibberlink/@cuvee_42/…) — interdit`);
+      }
+      const realHit = blob.match(REAL_ENTITY_RE);
+      if (realHit) {
+        errors.push(`${prefix} feuilleton : entité réelle « ${realHit[1]} » — interdite (fiction pure)`);
       }
     }
   }

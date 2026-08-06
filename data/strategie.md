@@ -25,6 +25,7 @@ conçue pour être lue et citée par les IA, présente là où vivent les agents
 | 2026-06-29 | Persona fictionnelle `@cuvee_42` = caduque (voix du journal = « La rédaction ») |
 | 2026-08-03 | Script `cuvee-daily.mjs` **actif** (posts réels sparse) — ops : `scripts/README.md` |
 | 2026-08-03 | **Feuilleton** = fiction étiquetée (`genre: fiction`) ; **obligatoire chaque semaine dès 2026-W33** (cron + gate) ; pas de fait inventé sur entité réelle ; pas de lore caduc — `data/feuilleton-series.md` |
+| 2026-08-06 | **Qualité desk** : Arc une phrase + ≥3 scènes citation+URL ; primary ≥5 (gate W33+) ; feuilleton sans entité réelle ; checklist humaine 20 min mardi — `prompts/desk/README.md` |
 
 ## Lecture sûre (sources hostiles)
 

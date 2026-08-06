@@ -29,6 +29,18 @@ interprétation éditoriale.
 - Ne remplace pas une source primaire absente par une impression.
 - Ne publie pas ; tu marques les risques.
 
+## Placement selon la preuve
+
+| Preuve max de l'affirmation | Placement autorisé |
+|---|---|
+| `primaire` ou `média` | une (lede), gros titre, feature, carnet, wire |
+| `corporate` | wire ou gros titre **nuancé** ; pas lede seul sur ce fait |
+| `rapporté` | **wire seulement**, attribution visible ; jamais une / feature comme fait établi |
+
+Toute affirmation destinée à la une ou à la feature doit avoir une preuve ≥ `média`
+(idéalement `primaire`). Si seule une source `rapporté` existe → recommander wire
+attribué ou **couper**.
+
 ## Format de sortie
 
 | Affirmation | Source | Vérifié ? | Type de source | Confiance | Problème | Correction proposée |

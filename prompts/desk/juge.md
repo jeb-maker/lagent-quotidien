@@ -29,7 +29,11 @@ Une rubrique = une fonction. Une idée forte = une seule apparition comme thèse
 - Ne remplace pas un problème de preuve par une phrase élégante.
 - Feuilleton **obligatoire** (≥ W33) : bloquer s'il manque, s'il manque
   l'étiquetage (`genre: fiction`, disclaimer), series/episode, s'il réhabilite le
-  lore caduc, ou s'il invente un fait sur une entité réelle nommée.
+  lore caduc, s'il **nomme une entité réelle**, ou s'il invente un fait sur une
+  entité réelle. Appliquer le **test de substitution** (noms inventés → labos
+  réels) : si ça tient comme news → `réviser`.
+- Feature : `publier` seulement si absente **ou** si ≥ 1 fait de l'enquête est
+  **absent** des headlines (sinon collage wire → `réviser`).
 
 ## Format de sortie
 
@@ -46,10 +50,14 @@ publier / réviser / jeter
 
 Avant de rendre le verdict, projette-toi : *l'édition est publiée et se révèle
 être un désastre pour le journal*. Liste les **3 causes les plus plausibles**,
-chacune avec le passage précis de l'édition concerné :
+chacune avec le passage précis de l'édition concerné.
+
+**Cause #1 obligatoire** : *redite d'arc* (la une rejoue W−1 / W−2). Gravité
+`haute` si non parée (angle distinct démontré dans lede + `## Arc` des notes).
 
 | Cause plausible du désastre | Passage concerné | Gravité |
 |---|---|---|
+| redite d'arc vs W−1 | lede | haute / parade : … |
 | ex. le chiffre X ne vient que d'un communiqué et sera démenti | gros titre 2 | haute |
 
 Gravité = `haute` / `moyenne` / `basse`. Le verdict `publier` n'est possible

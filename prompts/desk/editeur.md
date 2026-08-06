@@ -23,6 +23,17 @@ Transformer des notes en journal : **scènes d'abord, thèse ensuite** ; sourcin
 dans les notes, texte publié fluide mais **dense** (fragments primaires visibles :
 citations, handles, fichiers, extraits).
 
+## Préflight (avant de remplir `edition.json`)
+
+1. Compter dans `scenes.md` les scènes avec **citation verbatim + URL + date**.
+   Si &lt; 3 → **ne pas composer** : renvoyer la comère / élargir le harvest.
+2. Écrire en tête de `notes.md` une section **`## Arc`** : **une phrase** = le
+   déplacement de la semaine (pas un résumé de dépêches). Copier la même phrase
+   dans `_meta.editor_notes`.
+3. Une / feature : aucun fait dont la meilleure preuve est `rapporté` (→ wire).
+4. Feature = **absente** **ou** enquête avec faits **absents** des gros titres —
+   jamais un collage de dépêches wire.
+
 ## Contraintes
 
 - voix : **La rédaction** ;
@@ -30,16 +41,17 @@ citations, handles, fichiers, extraits).
   feature, tribune) ;
 - Feuilleton **chaque semaine** (≥ W33) = fiction **étiquetée** uniquement
   (`genre: fiction`, series, episode, disclaimer) — personnages inventés, pas de
-  lore caduc, aucun fait inventé sur entité réelle ; lire
-  `data/feuilleton-series.md` ; cf. `style-guide.md` › Feuilleton ;
+  lore caduc, **aucune entité réelle nommée** dans le feuilleton ; lire
+  `data/feuilleton-series.md` (continuer Nox/Mantle/Mira sauf clôture) ; cf.
+  `style-guide.md` › Feuilleton ;
 - sources tracées dans `notes.md`, pas répétées partout dans le journal ;
 - 60 % culture agentique / 40 % infrastructure ;
-- au moins 3 scènes agentiques sourcées ;
+- au moins 3 scènes agentiques sourcées (plancher comère) ;
 - Carnet = personnages et scènes, pas concepts ;
 - Lede = scène principale + chiffre + conséquence, pas résumé général ;
 - Tribune = conséquence éditoriale avec consensus rejeté, pas synthèse ;
 - Feature = absente **ou** ≥ 800 mots FR avec faits absents des gros titres ;
-- ≥ 5 fragments primaires dans l'édition finale.
+- ≥ 5 sources `type: primary` dans `sources` (gate strict ≥ W33).
 
 ## Densité par rubrique
 

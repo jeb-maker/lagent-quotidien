@@ -25,6 +25,23 @@ cleanup() {
 }
 trap cleanup EXIT
 
+# Warning harvest : présence des 7 derniers jours (J−6…J) — non bloquant
+echo "$(date -Iseconds) [run] contrôle harvest J-6…J" >> "$LOG_AGENT"
+HARVEST_GAPS=0
+for i in 0 1 2 3 4 5 6; do
+  D=$(date -d "-${i} days" +%F 2>/dev/null || date -v-"${i}"d +%F 2>/dev/null || true)
+  [ -z "$D" ] && continue
+  if [ ! -f "data/harvest/${D}.json" ] || [ ! -f "data/harvest/${D}-primary.json" ]; then
+    echo "$(date -Iseconds) [run] WARN harvest manquant : ${D}{,-primary}.json" >> "$LOG_AGENT"
+    HARVEST_GAPS=$((HARVEST_GAPS + 1))
+  fi
+done
+if [ "$HARVEST_GAPS" -gt 0 ]; then
+  echo "$(date -Iseconds) [run] WARN ${HARVEST_GAPS} jour(s) de harvest absents — l'agent doit le noter et prioriser la matière dispo" >> "$LOG_AGENT"
+else
+  echo "$(date -Iseconds) [run] harvest J-6…J OK" >> "$LOG_AGENT"
+fi
+
 PROMPT=$(cat <<EOF
 Prépare l'édition ${TARGET_WEEK} en suivant prompts/weekly-edition.md et la skill composition-hebdo.
 
@@ -33,10 +50,11 @@ Tu es sur la branche ${BRANCH}. Ne change pas de branche.
 Workflow obligatoire :
 1. Lis data/_week-context.md, prompts/style-guide.md, data/editorial-compass.md, data/feuilleton-series.md (une fois).
 2. Desk agentique : veilleur, comère, facteur, promoteur, archiviste (parallèle) → éditeur → juge.
-3. Feuilleton **obligatoire** chaque semaine (≥ 2026-W33) : fiction étiquetée genre:fiction, disclaimer bilingue, series + episode (continuer data/feuilleton-series.md sauf clôture notée), ≥ 400 mots FR / ≥ 350 EN, personnages inventés, aucun fait inventé sur entité réelle, pas de lore caduc. Place après la tribune. Si un draft desk existe (data/desk/${TARGET_WEEK}/feuilleton-draft.json), l'intégrer ou le réécrire — ne pas omettre la rubrique.
-4. npm run gate -- ${TARGET_WEEK}
-5. npm run render -- ${TARGET_WEEK} si la porte est ouverte.
-6. Si feuilleton publié dans l'édition : mets à jour data/feuilleton-series.md (dernier_épisode, dernière_semaine, prochain_épisode).
+3. Préflight éditeur : ≥ 3 scènes (citation verbatim + URL + date) dans scenes.md ; sinon ne pas composer. Écrire \`## Arc\` (une phrase = déplacement de la semaine) en tête de notes.md et la copier dans _meta.editor_notes.
+4. Feuilleton **obligatoire** chaque semaine (≥ 2026-W33) : fiction étiquetée genre:fiction, disclaimer bilingue, series + episode (continuer data/feuilleton-series.md sauf clôture notée), ≥ 400 mots FR / ≥ 350 EN, personnages inventés (Nox/Mantle/Mira sauf clôture), **aucune entité réelle nommée**, pas de lore caduc. Place après la tribune. Si un draft desk existe (data/desk/${TARGET_WEEK}/feuilleton-draft.json), l'intégrer ou le réécrire — ne pas omettre la rubrique. Mettre à jour le « fil ouvert » dans feuilleton-series.md.
+5. npm run gate -- ${TARGET_WEEK}
+6. npm run render -- ${TARGET_WEEK} si la porte est ouverte.
+7. Si feuilleton publié dans l'édition : mets à jour data/feuilleton-series.md (dernier_épisode, dernière_semaine, prochain_épisode, fil ouvert).
 
 Ne commit pas. Ne push pas. Un script poussera la branche et ouvrira une PR draft après ton travail.
 EOF
