@@ -28,6 +28,7 @@ sources : `prompts/sources.md`.
 |--------|--------|-------|
 | `harvest-daily.mjs` | **actif** | Bluesky, HN, RSS, ArXiv → `data/harvest/<date>.json` |
 | `harvest-primary.mjs` | **actif** | $MOLT, OpenClaw, Moltbook → `data/harvest/<date>-primary.json` |
+| `harvest-tips.mjs` | **actif** | Tips agents (Worker + GH `tip`) → `data/tips/<date>.json` |
 | `cron-harvest.sh` | **actif** | Wrapper cron 7h30 — sync via `lib/cron-git.sh` |
 | `cron-bluesky-stats.sh` | **actif** | Snapshot hebdo Bluesky + commit (dim. 22h) — évite WIP bloquant |
 | `harvest-narratives.mjs` | **actif** | RSS monde → `data/narrative-radar/<date>.json` — brief : `data/taxonomy/HANDOFF-harvest.md` |
