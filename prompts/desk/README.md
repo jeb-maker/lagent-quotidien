@@ -54,8 +54,9 @@ il juge `edition.json` seulement.
 ## Isolation
 
 Les agents 1-5 (veilleur, comère, facteur, promoteur, archiviste) travaillent
-**indépendamment** sur les mêmes données brutes (`data/harvest/*.json` pour les
-quatre premiers, `data/people.json` + éditions passées pour l'archiviste).
+**indépendamment** sur les mêmes données brutes (`data/harvest/*.json` +
+`data/tips/*.json` quarantaine inbound pour les quatre premiers,
+`data/people.json` + éditions passées pour l'archiviste).
 Ils ne lisent pas les notes des autres. Cela garantit des points de vue
 authentiquement différents que l'éditeur devra arbitrer.
 

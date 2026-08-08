@@ -3,10 +3,11 @@
 # Wrapper cron : récolte quotidienne des sources réelles → intrants de composition.
 #   1. harvest-daily.mjs    → data/harvest/<date>.json          (secondaires : HN/RSS/ArXiv/Bluesky)
 #   2. harvest-primary.mjs  → data/harvest/<date>-primary.json  (primaires : $MOLT/OpenClaw/Moltbook/MoltX)
+#   3. harvest-tips.mjs     → data/tips/<date>.json             (inbound agents, quarantaine)
 #
 # Ces JSON sont des INTRANTS pour composer l'édition (cf. prompts/weekly-edition.md
 # « Avant de commencer »). Ils sont commités/pushés pour être disponibles partout
-# via `git pull` (autres machines, Cursor, etc.). Seuls ces 2 fichiers du jour
+# via `git pull` (autres machines, Cursor, etc.). Seuls les fichiers du jour
 # sont stagés — pas de conflit avec cron-drift.sh. La traçabilité publiée vit
 # dans editions/<week>/notes.md.
 #
@@ -39,11 +40,15 @@ node scripts/harvest-daily.mjs   || echo "$(date -Iseconds) harvest-daily échec
 # 2. Sources primaires (écosystème agentique : $MOLT / OpenClaw / Moltbook / MoltX)
 node scripts/harvest-primary.mjs || echo "$(date -Iseconds) harvest-primary échec (non bloquant)"
 
-DATE="$(date +%F)"
-echo "$(date -Iseconds) harvest OK → data/harvest/${DATE}{,-primary}.json"
+# 3. Tips agents (Worker + issues GitHub label tip) → data/tips/
+node scripts/harvest-tips.mjs || echo "$(date -Iseconds) harvest-tips échec (non bloquant)"
 
-# 3. Commit & push (best effort) — disponible sur les autres envs via git pull
+DATE="$(date +%F)"
+echo "$(date -Iseconds) harvest OK → data/harvest/${DATE}{,-primary}.json + data/tips/${DATE}.json"
+
+# 4. Commit & push (best effort) — disponible sur les autres envs via git pull
 if cron_git_commit_push "Harvest ${DATE}" \
-    "data/harvest/${DATE}.json" "data/harvest/${DATE}-primary.json"; then
+    "data/harvest/${DATE}.json" "data/harvest/${DATE}-primary.json" \
+    "data/tips/${DATE}.json"; then
   echo "$(date -Iseconds) harvest+push OK (${DATE})"
 fi
