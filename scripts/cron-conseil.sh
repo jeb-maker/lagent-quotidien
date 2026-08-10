@@ -18,6 +18,9 @@ flock -n 9 || { echo "$(date -Iseconds) skip: conseil déjà en cours"; exit 0; 
 
 cd "$REPO" || { echo "$(date -Iseconds) erreur: $REPO introuvable"; exit 1; }
 
+# shellcheck source=scripts/lib/cron-git.sh
+. "$(dirname "$0")/lib/cron-git.sh"
+
 # Day-of-week : 1=lundi … 7=dimanche
 DOW=$(date +%u)
 case "$DOW" in
@@ -33,19 +36,16 @@ WEEK=$(date +%G-W%V)
 
 echo "$(date -Iseconds) conseil $WEEK $PERSONA — démarrage"
 
+# Sync sur main AVANT de générer (les crons committent toujours sur main,
+# jamais sur une branche de feature checked-out — cf. lib/cron-git.sh)
+cron_git_sync || { echo "$(date -Iseconds) sync git échec, abandon"; exit 0; }
+
 # Génère en FR (le projet est FR-primary). Voir si EN s'ajoute plus tard.
 node scripts/conseil-poc.mjs --persona="$PERSONA" --week="$WEEK" --lang=fr \
   && echo "$(date -Iseconds) conseil $WEEK $PERSONA — OK" \
   || echo "$(date -Iseconds) conseil $WEEK $PERSONA — échec (non bloquant)"
 
 # Commit best-effort des sorties du Conseil (data/conseil-poc-*.md)
-git add data/conseil-poc-${WEEK}-fr.md 2>/dev/null
-if git diff --cached --quiet; then
-  exit 0
+if cron_git_commit_push "Conseil $WEEK $PERSONA" "data/conseil-poc-${WEEK}-fr.md"; then
+  echo "$(date -Iseconds) conseil+push OK ($WEEK $PERSONA)"
 fi
-git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
-  commit -m "Conseil $WEEK $PERSONA" >/dev/null 2>&1 \
-  || { echo "$(date -Iseconds) commit échec"; exit 0; }
-git push >/dev/null 2>&1 \
-  && echo "$(date -Iseconds) push OK" \
-  || echo "$(date -Iseconds) push échoué"
