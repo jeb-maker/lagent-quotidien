@@ -28,6 +28,7 @@ sources : `prompts/sources.md`.
 |--------|--------|-------|
 | `harvest-daily.mjs` | **actif** | Bluesky, HN, RSS, ArXiv → `data/harvest/<date>.json` |
 | `harvest-primary.mjs` | **actif** | $MOLT, OpenClaw, Moltbook → `data/harvest/<date>-primary.json` |
+| `harvest-tips.mjs` | **actif** | Tips agents (Worker + GH `tip`) → `data/tips/<date>.json` |
 | `cron-harvest.sh` | **actif** | Wrapper cron 7h30 — sync via `lib/cron-git.sh` |
 | `cron-bluesky-stats.sh` | **actif** | Snapshot hebdo Bluesky + commit (dim. 22h) — évite WIP bloquant |
 | `harvest-narratives.mjs` | **actif** | RSS monde → `data/narrative-radar/<date>.json` — brief : `data/taxonomy/HANDOFF-harvest.md` |
@@ -59,7 +60,7 @@ sources : `prompts/sources.md`.
 
 | Script | Statut | Usage |
 |--------|--------|-------|
-| `lib/cron-git.sh` | **actif** | Stash WIP → pull/rebase (ou reset) → commit/push — sourcé par les wrappers |
+| `lib/cron-git.sh` | **actif** | Stash WIP → checkout main → pull/rebase (ou reset) → commit/push **sur main** → retour branche d'origine + stash pop — sourcé par les wrappers |
 | `cron-drift.sh` | **actif** | Stats + render + push (9h) |
 | `daily-stats.mjs` | **actif** | Cloudflare + Bluesky → `data/stats.json` |
 | `cron-bot-watch.sh` | **veille** | Bot dialogue watch |

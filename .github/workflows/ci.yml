@@ -18,14 +18,29 @@ jobs:
       - name: Schéma — toutes les éditions
         run: node scripts/validate-edition-schema.mjs
 
+      # Les squelettes new-week.sh (_meta.draft: true) sont ignorés par la CI :
+      # ils ne sont pas bouclés. Le gate lancé à la main les REFUSE toujours.
       - name: Lint strict + porte — toutes les éditions
         run: |
           for WEEK in $(find editions -maxdepth 1 -type d -name '????-W??' -printf '%f\n' | sort); do
+            if node -e "process.exit(JSON.parse(require('fs').readFileSync('editions/'+process.argv[1]+'/edition.json','utf8'))?._meta?.draft===true?0:1)" "$WEEK" 2>/dev/null; then
+              echo "── gate $WEEK — skipped (draft) ──"
+              continue
+            fi
             echo "── gate $WEEK ──"
             npm run gate -- "$WEEK"
           done
 
       - name: Smoke test render
         run: |
-          WEEK=$(find editions -maxdepth 1 -type d -name '????-W??' -printf '%f\n' | sort | tail -1)
+          WEEK=$(node -e "
+            const { readdirSync, readFileSync } = require('fs');
+            const weeks = readdirSync('editions').filter(d => /^\d{4}-W\d{2}\$/.test(d)).sort().reverse();
+            const w = weeks.find(w => {
+              try { return JSON.parse(readFileSync('editions/' + w + '/edition.json', 'utf8'))?._meta?.draft !== true; }
+              catch { return false; }
+            });
+            if (w) console.log(w);
+          ")
+          if [ -z "$WEEK" ]; then echo "Aucune édition non-draft à rendre — skipped."; exit 0; fi
           npm run render -- "$WEEK"
