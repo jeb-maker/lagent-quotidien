@@ -55,6 +55,16 @@ function isArray(v, min = 0) {
   return Array.isArray(v) && v.length >= min;
 }
 
+/**
+ * Édition squelette non bouclée (posée par scripts/new-week.sh).
+ * Le CLI ci-dessous la saute avec un log « skipped (draft) » ; la fonction
+ * validateEditionSchema, elle, reste stricte (lint-edition et publish-gate
+ * continuent de refuser un draft — un brouillon n'est jamais publiable).
+ */
+export function isDraftEdition(edition) {
+  return !!edition && typeof edition === 'object' && edition._meta?.draft === true;
+}
+
 /** @returns {string[]} */
 export function validateEditionSchema(edition, week = '?') {
   const errors = [];
@@ -251,6 +261,10 @@ function main() {
     } catch (e) {
       console.error(`  ERR   ${week} : JSON invalide — ${e.message}`);
       total++;
+      continue;
+    }
+    if (isDraftEdition(edition)) {
+      console.log(`  SKIP  ${week} : skipped (draft) — squelette non bouclé (_meta.draft: true), retirer le marqueur après composition`);
       continue;
     }
     const errs = validateEditionSchema(edition, week);

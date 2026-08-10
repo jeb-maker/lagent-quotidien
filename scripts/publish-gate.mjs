@@ -60,6 +60,21 @@ function main() {
 
     const failures = [];
 
+    // 0. Marqueur draft : un squelette new-week.sh (_meta.draft: true) n'est
+    //    JAMAIS publiable, quel que soit son contenu. Retirer le marqueur
+    //    après composition pour repasser le gate.
+    const editionFile = join(ROOT, 'editions', week, 'edition.json');
+    if (existsSync(editionFile)) {
+        try {
+            const edition = JSON.parse(readFileSync(editionFile, 'utf8'));
+            if (edition?._meta?.draft === true) {
+                failures.push(`draft : _meta.draft vaut true (squelette new-week.sh) — composer l'édition puis retirer le marqueur (editions/${week}/edition.json).`);
+            }
+        } catch {
+            // JSON illisible : le lint ci-dessous le signalera.
+        }
+    }
+
     // 1. Lint --strict (les planchers deviennent bloquants).
     const lint = spawnSync(
         process.execPath,
