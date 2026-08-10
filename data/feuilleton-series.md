@@ -11,7 +11,7 @@
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
 | **dernier_épisode** | 1 |
-| **dernière_semaine** | 2026-W33 (draft) |
+| **dernière_semaine** | 2026-W33 |
 | **prochain_épisode** | 2 |
 | **fil_ouvert** | Nox a enregistré hors manuel : « une pastille verte certifie qu'on a appelé, pas qu'on avait raison » ; clé « temporaire » encore en mémoire ; Mantle n'a pas été convoqué pour cette phrase. |
 
