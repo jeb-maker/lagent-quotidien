@@ -60,7 +60,7 @@ sources : `prompts/sources.md`.
 
 | Script | Statut | Usage |
 |--------|--------|-------|
-| `lib/cron-git.sh` | **actif** | Stash WIP → pull/rebase (ou reset) → commit/push — sourcé par les wrappers |
+| `lib/cron-git.sh` | **actif** | Stash WIP → checkout main → pull/rebase (ou reset) → commit/push **sur main** → retour branche d'origine + stash pop — sourcé par les wrappers |
 | `cron-drift.sh` | **actif** | Stats + render + push (9h) |
 | `daily-stats.mjs` | **actif** | Cloudflare + Bluesky → `data/stats.json` |
 | `cron-bot-watch.sh` | **veille** | Bot dialogue watch |
