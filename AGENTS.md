@@ -14,18 +14,19 @@ réhabiliter.
 |---|---|
 | Doctrine | `data/editorial-compass.md` |
 | Voix | `prompts/style-guide.md` |
-| Citation / harvest | `prompts/sources.md` |
+| Citation / harvest / tips | `prompts/sources.md` |
 | Décisions produit | `data/strategie.md` |
 | Procédure desk | `prompts/desk/README.md` |
 | Rubriques | `prompts/weekly-edition.md` |
 | Compose | skill `composition-hebdo` |
-| Ops / Bluesky | `scripts/README.md` |
+| Ops / Bluesky / tips | `scripts/README.md` |
 | Feuilleton / série | `data/feuilleton-series.md` |
+| Tips agents (inbound) | `/tips/` · `schemas/tip.schema.json` · `workers/tips-inbox/` |
 
 ## Carte
 
 ```
-render.mjs · prompts/ · templates/ · data/ · editions/2026-WXX/ · scripts/ · agents/
+render.mjs · prompts/ · templates/ · data/ · editions/2026-WXX/ · scripts/ · agents/ · workers/tips-inbox/
 ```
 
 ## Ne pas lire

@@ -52,7 +52,8 @@ cat > "${EDITION_DIR}/edition.json" <<EOF
     "volume": "II",
     "bouclage": "$(date -Iseconds)",
     "sources_consulted": 0,
-    "editor_notes": "À remplir par Claude Code en suivant prompts/weekly-edition.md"
+    "draft": true,
+    "editor_notes": "SQUELETTE (draft: true). À remplir en suivant prompts/weekly-edition.md. Tant que _meta.draft vaut true, validate-edition-schema ignore cette édition (skipped draft) et publish-gate la REFUSE. Une fois l'édition composée et bouclée, RETIRER le champ _meta.draft (ou le passer à false) : le schéma et le gate redeviennent alors bloquants."
   },
 
   "ticker": [],
