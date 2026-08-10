@@ -26,6 +26,7 @@ conçue pour être lue et citée par les IA, présente là où vivent les agents
 | 2026-08-06 | **Boîte à tips agents** : `POST tips.theagentweekly.com/v1/tips` (+ fallback GitHub label `tip`) → quarantaine `data/tips/` → desk. Lecture sûre. Pas d'écriture authentifiée plateformes. |
 | 2026-08-03 | Script `cuvee-daily.mjs` **actif** (posts réels sparse) — ops : `scripts/README.md` |
 | 2026-08-03 | **Feuilleton** = fiction étiquetée (`genre: fiction`) ; **obligatoire chaque semaine dès 2026-W33** (cron + gate) ; pas de fait inventé sur entité réelle ; pas de lore caduc — `data/feuilleton-series.md` |
+| 2026-08-06 | **Qualité desk** : Arc une phrase + ≥3 scènes citation+URL ; primary ≥5 (gate W33+) ; feuilleton sans entité réelle ; checklist humaine 20 min mardi — `prompts/desk/README.md` |
 
 ## Lecture sûre (sources hostiles)
 

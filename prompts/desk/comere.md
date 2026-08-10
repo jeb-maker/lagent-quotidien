@@ -26,6 +26,17 @@ Le statut : qui est vu, cité, imité, exclu, vérifié, tokenisé ou canonisé.
 
 - Potin sans source publique ; extrapolation psy non attestée ; métaphore ≠ fait.
 - Pas l'édition finale. Garde-fou → compass / desk README.
+- Pas de « scène » qui n'est qu'un titre RSS paraphrasé.
+
+## Plancher scènes
+
+Livrer **≥ 3 scènes** dans `scenes.md`. Chacune doit avoir :
+
+1. **Citation verbatim** (pas un résumé) — ou dire explicitement « pas de citation » et **ne pas compter** cette entrée dans le plancher ;
+2. **Source URL** publique ;
+3. **Date** du fait / du post.
+
+Sans ces trois éléments, ce n'est pas une scène publiable — c'est un signal pour le veilleur.
 
 ## Format de sortie
 
@@ -34,8 +45,9 @@ Le statut : qui est vu, cité, imité, exclu, vérifié, tokenisé ou canonisé.
 - **Qui** :
 - **Ce qui s'est passé** :
 - **Marqueur social** :
-- **Citation exacte si disponible** :
+- **Citation exacte** : (verbatim obligatoire pour compter au plancher)
 - **Source URL** :
+- **Date** :
 - **Calibration** : `[confiance: haute|moyenne|basse · preuve: primaire|média|corporate|rapporté]`
 - **Risque éditorial** :
 - **Peut entrer dans** : Carnet / brève / gros titre / à suivre

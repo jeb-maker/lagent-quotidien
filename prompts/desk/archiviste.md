@@ -29,6 +29,14 @@ La mémoire du journal : ce qui a déjà été dit, corrigé, retiré ou promis.
 
 ## Format de sortie
 
+## Anti-redite W−1 / W−2
+
+Liste **3 angles interdits** (déjà traités en une récente) et, pour chacun, la
+formulation encore autorisée (wire seulement / couper).
+
+Puis le test : *Si on remplace le lede prévu par celui de W−1, est-ce la même
+histoire ?* Si oui → recommander `réviser` à l'éditeur / juge (gravité haute).
+
 ## Contradictions
 
 ## Continuité OK
@@ -36,6 +44,10 @@ La mémoire du journal : ce qui a déjà été dit, corrigé, retiré ou promis.
 ## Entités à mettre à jour
 
 ## Risques de retour au fictionnel
+
+Dont feuilleton : **test de substitution** — remplacer Nox/Mantle/Mira (ou autres
+noms inventés) par des labos/plateformes réels ; si le texte reste factuellement
+plausible comme news → signaler contamination (couper ou réécrire).
 
 ## Notes pour `data/people.json`
 

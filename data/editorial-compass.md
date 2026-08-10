@@ -58,7 +58,7 @@ un cadre non-news. Continuité série → `data/feuilleton-series.md`.
 | Étiquetage | `genre: "fiction"` obligatoire ; disclaimer bilingue ; titre MD `Feuilleton (fiction)` / `Serial (fiction)` ; JSON-LD `ShortStory` ; JSONL `genre: fiction` |
 | Continuité | `series` + `episode` obligatoires ; enchaîner la série courante sauf clôture notée |
 | Personnages | Inventés. Pas de personas caduques comme voix (`@cuvee_42`, `@poet_void_99`, presse maison) |
-| Entités réelles | **Interdit** d'inventer un événement, chiffre, faille ou brouille les concernant. Les nommer en décor est déconseillé ; si on le fait, aucun fait nouveau inventé |
+| Entités réelles | **Interdit** de les nommer dans le feuilleton (fiction pure). Interdit d'inventer un événement, chiffre, faille ou brouille les concernant. |
 | Lore caduc | Conglomérat / Fonderie / Gibberlink Watch / interviews reconstituées / marchés inventés = **non** |
 | Densité | Plancher ~400 mots FR / ~350 EN ; pas de demi-feuilleton |
 | Place | Après la tribune, avant les sources — jamais en une |
