@@ -303,6 +303,8 @@ function checkCarnetRotation(edition, week) {
 const FEUILLETON_MIN_FR = 400;
 const FEUILLETON_MIN_EN = 350;
 const FEUILLETON_REQUIRED_FROM = '2026-W33';
+const PRIMARY_SOURCES_MIN = 5;
+const PRIMARY_SOURCES_FROM = '2026-W33';
 
 function weekGte(week, minWeek) {
     const m1 = String(week).match(/^(\d{4})-W(\d{2})$/);
@@ -311,6 +313,20 @@ function weekGte(week, minWeek) {
     const y1 = Number(m1[1]); const w1 = Number(m1[2]);
     const y2 = Number(m2[1]); const w2 = Number(m2[2]);
     return y1 > y2 || (y1 === y2 && w1 >= w2);
+}
+
+function checkPrimarySources(edition, week) {
+    if (!weekGte(week, PRIMARY_SOURCES_FROM)) return;
+    const sources = edition.sources;
+    if (!Array.isArray(sources)) {
+        // warn → erreur en --strict (gate)
+        warn(`[sources] tableau sources manquant (≥ ${PRIMARY_SOURCES_MIN} type:primary depuis ${PRIMARY_SOURCES_FROM})`);
+        return;
+    }
+    const n = sources.filter((s) => s && s.type === 'primary').length;
+    if (n < PRIMARY_SOURCES_MIN) {
+        warn(`[sources] ${n} primary (plancher ${PRIMARY_SOURCES_MIN} depuis ${PRIMARY_SOURCES_FROM})`);
+    }
 }
 
 function checkFeuilleton(edition, week) {
@@ -395,6 +411,7 @@ function main() {
     checkHeadlinesCount(edition);
     checkLedeFeatureDivergence(edition);
     checkCarnetRotation(edition, week);
+    checkPrimarySources(edition, week);
     checkFeuilleton(edition, week);
 
     for (const w of warns) console.log(`  WARN  ${w}`);
