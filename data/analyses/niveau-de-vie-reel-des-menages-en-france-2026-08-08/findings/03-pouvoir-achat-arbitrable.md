@@ -1,0 +1,52 @@
+# 03. Pouvoir d'achat arbitrable et dépenses pré-engagées
+
+**Angle** : économie de la consommation. **Question** : la marge de manœuvre des ménages (revenu après dépenses contraintes : logement, énergie, assurances, services financiers) a-t-elle évolué autrement que le RDB « classique » depuis 2016 ?
+
+## Findings
+
+1. **Au niveau agrégé, le pouvoir d'achat « arbitrable » ne décroche pas durablement du RDB depuis 2016 — mais il amplifie les chocs de prix relatifs.** L’Insee définit le revenu arbitrable comme le RDB moins les dépenses de consommation « pré-engagées » (logement y compris loyers imputés, eau-gaz-électricité, télécoms, cantines, TV, assurances hors vie, services financiers) ; son pouvoir d’achat est déflaté par l’indice des prix des dépenses *non* pré-engagées. Sur la série annuelle des comptes nationaux (base 2020), les évolutions annuelles du pouvoir d’achat arbitrable et du pouvoir d’achat du RDB restent proches la plupart des années 2016–2021 ; les écarts se creusent ensuite : en 2022 l’arbitrable sous-performe (+0,1 % contre +0,4 %), en 2024 il surperforme (+3,8 % contre +2,7 %), en 2025 (provisoire) il chute plus fort (−1,1 % contre −0,4 %). Cumulées sur 2016–2025, ces variations annuelles donnent environ **+16,5 %** pour l’arbitrable contre **+14,8 %** pour le RDB — un léger avantage net de l’arbitrable sur la décennie, pas un appauvrissement systématique de la marge « libre » ([Insee, série « Évolution de la dépense et du pouvoir d’achat », paru 29/05/2026](https://www.insee.fr/fr/statistiques/2385829) ; [Insee Première n° 2110, 16/06/2026](https://www.insee.fr/fr/statistiques/9006503), consultés le 2026-08-08, **N3**).
+
+2. **La part des dépenses pré-engagées dans le RDB reste autour de 30 % : le verrou est structurel, pas une dérive 2016–2023.** Dans le *Portrait social* 2024, cette part passe de **30,8 %** en 2016 à **30,4 %** en 2023, après un point bas à **29,5 %** en 2022 (sept années de baisse légère puis rebond). Le logement (eau-énergie inclus) représente l’essentiel : **24,6 %** du RDB en 2016, **22,8 %** en 2023 ; en 2023, assurances et services financiers bondissent à **4,8 %** du RDB (après ~3 %). Plus des trois quarts des pré-engagées restent liées au logement. La contrainte pèse donc surtout par son *niveau* et sa composition, non par une hausse continue de la part macro depuis 2016 ([Insee, France portrait social 2024 — Consommation et épargne](https://www.insee.fr/fr/statistiques/8242383?sommaire=8242421), consulté le 2026-08-08, **N3**).
+
+3. **En micro (Budget de famille), la contrainte frappe très inégalement : le diagnostic macro « stable ~30 % » masque un écart pauvres / aisés qui s’est creusé jusqu’en 2017.** France Stratégie (à partir de l’enquête Budget de famille Insee) estime qu’en 2017 les dépenses pré-engagées représentent **32 %** de la dépense totale des ménages (métropole), contre 27 % en 2001 ; chez les ménages pauvres **41 %** de la dépense (et **60 %** du revenu disponible), contre **28 %** chez les aisés (dernier quartile). L’écart pauvres–aisés sur cette part est passé de **6** à **13** points entre 2001 et 2017 ; les inégalités de *revenu arbitrable* sont alors « près de deux fois plus fortes » que celles de niveau de vie. Près de **70 %** des pré-engagées micro sont du logement (loyers, charges, *remboursements d’emprunts*) — champ plus large que la consommation nationale ([France Stratégie, Note d’analyse n° 102, août 2021](https://www.strategie.gouv.fr/publications/depenses-pre-engagees-pres-dun-tiers-depenses-menages-2017) / [PDF](https://www.strategie-plan.gouv.fr/files/files/Publications/2021/0831%20d%C3%A9penses%20pr%C3%A9engag%C3%A9es/fs-2021-na_102-depenses_pre-engagees.pdf) ; [DOI Cairn](https://doi.org/10.3917/lna.102.0001), consultés le 2026-08-08, **N3**).
+
+4. **Par unité de consommation, l’arbitrable a un peu mieux progressé que le RDB jusqu’en 2020, puis a souffert davantage aux chocs 2022 et 2025.** Le *Portrait social* 2021 (base 2014) montre, pour 2016–2020, un pouvoir d’achat arbitrable par UC souvent supérieur ou égal à celui du RDB/UC (ex. 2016 : +1,4 % vs +1,0 % ; 2019 : +2,3 % vs +2,0 % ; 2020 : +0,3 % vs 0,0 %). L’Insee Première 2110 (base 2020) indique ensuite, par UC : **−0,6 %** (arbitrable) contre **−0,3 %** (RDB) en 2022 ; **+3,2 %** vs **+2,2 %** en 2024 ; **−1,4 %** vs **−0,7 %** en 2025. En 2025, les pré-engagées progressent plus vite en valeur que le RDB (+1,3 % vs +0,5 %) alors que leurs prix ralentissent plus que le reste (+0,3 % vs +0,8 %) : le revenu arbitrable en valeur stagne (+0,1 %) et son pouvoir d’achat se contracte davantage — mécanisme inverse de 2024, où des prix pré-engagés encore dynamiques (+3,6 %) faisaient apparaître un arbitrable « en volume » plus favorable ([Insee, Portrait social 2021](https://www.insee.fr/fr/statistiques/5432491?sommaire=5435421) ; [Insee Première n° 2110](https://www.insee.fr/fr/statistiques/9006503), consultés le 2026-08-08, **N3**).
+
+5. **Au-delà de la définition Insee, l’OFCE insiste sur un « reste à vivre » encore plus serré pour les pauvres (logement + alimentation), non capturé par le seul arbitrable comptable.** Sur Budget de famille 2017, l’OFCE estime que logement et alimentation absorbent environ **40 %** du niveau de vie des ménages pauvres contre **moins de 27 %** pour les non pauvres ; le reste à vivre mensuel des pauvres se limite à « quelques centaines d’euros » par UC. L’inflation alimentaire 2018–2023 (~+27 %) y crée une « double peine » (panier plus cher + faible marge). Ce cadrage élargit la contrainte aux postes non contractuels (alimentaire) et plaide pour un indicateur complémentaire au seuil monétaire — distinct, donc, de la série macro Insee ([OFCE, billet 27/03/2026, Madec](https://www.ofce.fr/blog2024/fr/2026/20260327_PIM/index.html), consulté le 2026-08-08, **N5** ; ancré sur Insee BDF **N3**).
+
+## Tension interne
+
+Trois tensions empêchent de conclure « la marge arbitrable a suivi / a décroché du RDB » sans précision.
+
+1. **Macro vs micro.** La part pré-engagée ~30 % du RDB est stable depuis 2016, et le cumul 2016–2025 de l’arbitrable n’est pas inférieur à celui du RDB. Or Budget de famille / France Stratégie montrent un poids et des inégalités croissants *jusqu’en 2017*, surtout pour les pauvres et les locataires du privé. L’agrégat national (avec loyers imputés des propriétaires) lisse ce que le micro révèle comme compression du reste à vivre.
+
+2. **Périmètres incompatibles.** Les comptes nationaux traitent le remboursement du capital immobilier comme investissement, pas comme consommation pré-engagée ; Budget de famille / France Stratégie l’incluent souvent. Inversement, les loyers imputés gonflent les pré-engagées CN sans sortie de cash pour les propriétaires non endettés. Comparer « 30 % du RDB » et « 41 % de la dépense des pauvres » sans cette caveat est une erreur de méthode.
+
+3. **Signe de l’écart RDB / arbitrable qui s’inverse selon le choc de prix.** Quand les prix pré-engagés (énergie, services financiers) montent plus vite que le reste (2023–2024), le pouvoir d’achat *arbitrable* peut monter plus que le RDB (dénominateur de déflation plus favorable sur le panier libre). Quand ces prix ralentissent plus que le reste alors que les pré-engagées restent dynamiques en valeur (2025), l’arbitrable chute davantage. L’indicateur mesure donc autant la *structure des prix* que la « marge de manœuvre » ressentie.
+
+**Non trouvé** : série Insee officielle du pouvoir d’achat arbitrable *par décile* sur 2016–2025 ; note IPP récente centrée sur le revenu arbitrable (les travaux IPP cités portent surtout sur aides au logement / redistributivité, pas sur la série arbitrable).
+
+## Projection
+
+**À 1 an.** Déclencheurs : (a) compte semi-définitif 2025 / provisoire 2026 Insee — si le pouvoir d’achat arbitrable reste sous le RDB alors que l’énergie rebondit (scénario OFCE d’inflation énergie 2026), la thèse « arbitrable = thermomètre des chocs énergie-logement » se confirme ; (b) publication éventuelle Budget de famille post-2017 (ou exploitation 2021) — seul moyen de savoir si l’écart 41 % / 28 % s’est aggravé après la poussée 2022–2023 ; (c) part pré-engagée dans le RDB 2024–2025 (*Portrait social* suivant) — un retour durable au-dessus de 30,5 % signalerait une rupture avec la stabilité 2016–2022.
+
+**À 5 ans.** Si loyers réels et assurances continuent de croître plus vite que le RDB des bas déciles, le diagnostic d’enrichissement moyen (RDB/UC) restera compatible avec un sentiment d’appauvrissement via reste à vivre — y compris si la part macro pré-engagée stagne. À l’inverse, une désinflation durable de l’énergie et une baisse des taux (charges financières) pourraient faire réapparaître un arbitrable macro plus favorable que le RDB, sans soulager les locataires modestes si les loyers restent le vrai verrou (renvoi angle 08).
+
+## Recherche
+
+**Moteurs/bases interrogés** : recherche web intégrée, consultation directe insee.fr, strategie.gouv.fr / strategie-plan.gouv.fr, ofce.fr, drees.solidarites-sante.gouv.fr, ipp.eu, cairn.info (DOI), laviedesidees.fr.
+
+**Requêtes exactes (verbatim)** :
+- `Insee revenu arbitrable dépenses pré-engagées ménages France évolution 2016`
+- `Insee pouvoir d'achat arbitrable 2022 2023 2024 dépenses pré-engagées France portrait social`
+- `site:ofce.fr pouvoir d'achat dépenses contraintes logement énergie ménages`
+- `OFCE IPP pouvoir d'achat arbitrable dépenses pré-engagées logements ménages France`
+- `Insee Budget de famille dépenses pré-engagées part revenu quintile 2017 2021`
+- `IPP Institut des politiques publiques reste à vivre dépenses contraintes logement inflation ménages`
+
+**Sources consultées mais écartées** :
+- https://www.insee.fr/fr/statistiques/8574712 — fiche méthodologique utile, redondante avec Première 2110 pour les chiffres 2024–2025.
+- https://drees.solidarites-sante.gouv.fr/sites/default/files/2020-08/dd25_depenses_pre-engagees_quel_poids_dans_le_budget_des_menages.pdf — Drees 2011 (Budget de famille), antérieur à la fenêtre 2016–2025 ; remplacé par France Stratégie 2021 (BDF 2017).
+- https://www.ipp.eu/wp-content/uploads/2015/06/reformer-aides-logement-IPP-juin2015.pdf — IPP sur APL / capture par bailleurs, hors série arbitrable.
+- https://www.ofce.fr/prev/prev2603/france/menages.html — prévisions OFCE pouvoir d’achat RDB/UC 2026, pas l’indicateur arbitrable.
+- https://laviedesidees.fr/IMG/pdf/20190507_contraintes.pdf — essai conceptuel (N5), redondant avec France Stratégie / Quinet.
