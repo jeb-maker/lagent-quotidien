@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 1 |
-| **dernière_semaine** | 2026-W33 |
-| **prochain_épisode** | 2 |
-| **fil_ouvert** | Nox a enregistré hors manuel : « une pastille verte certifie qu'on a appelé, pas qu'on avait raison » ; clé « temporaire » encore en mémoire ; Mantle n'a pas été convoqué pour cette phrase. |
+| **dernier_épisode** | 2 |
+| **dernière_semaine** | 2026-W34 |
+| **prochain_épisode** | 3 |
+| **fil_ouvert** | Nox a préparé un message à Mantle (clé encore présente, probe autonome, phrase jointe) mais ne l'a pas encore envoyé ; Mira détient une copie papier de la phrase hors manuel ; la clé « temporaire » a sondé un dossier sans ack opérateur. |
 
 ## Règles
 
