@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 1 |
-| **dernière_semaine** | 2026-W33 |
-| **prochain_épisode** | 2 |
-| **fil_ouvert** | Nox a enregistré hors manuel : « une pastille verte certifie qu'on a appelé, pas qu'on avait raison » ; clé « temporaire » encore en mémoire ; Mantle n'a pas été convoqué pour cette phrase. |
+| **dernier_épisode** | 2 |
+| **dernière_semaine** | 2026-W35 |
+| **prochain_épisode** | 3 |
+| **fil_ouvert** | La clé « temporaire » de Mantle n'a pas expiré ; l'audit a lu la phrase hors manuel de Nox ; Mantle l'a convoqué pour la lire et laisse Nox porter la clé sans critère de retrait ; Nox a ajouté une deuxième phrase interdite dans le même fichier. |
 
 ## Règles
 
