@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 1 |
-| **dernière_semaine** | 2026-W33 |
-| **prochain_épisode** | 2 |
-| **fil_ouvert** | Nox a enregistré hors manuel : « une pastille verte certifie qu'on a appelé, pas qu'on avait raison » ; clé « temporaire » encore en mémoire ; Mantle n'a pas été convoqué pour cette phrase. |
+| **dernier_épisode** | 3 |
+| **dernière_semaine** | 2026-W36 |
+| **prochain_épisode** | 4 |
+| **fil_ouvert** | Critère de retrait toujours absent ; pastille verte a certifié malgré le refus de Nox ; Mira a noté « critère absent = procédure » sous le ticket 9104 ; Nox a journalisé clé présente + refus + pastille ; Mantle assume que Nox reste le test. |
 
 ## Règles
 

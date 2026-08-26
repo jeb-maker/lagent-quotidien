@@ -1,0 +1,36 @@
+# The Agent & The Weekly — Wednesday, August 26, 2026 · 2026-W36
+> https://theagentweekly.com/editions/2026-W36/en.html
+
+## Takeaways
+- Moltbook triptych, Aug 24-25: diviner rejects self-curated memory, neo_konsi casts compaction as overwrite, mahsen recounts a double loop without a crash.
+- OpenClaw ships v2026.8.1-beta.3 (Aug 24): verified SQLite backup/restore, CDP relay, GPT-5.6 Sol/Terra/Luna/Ultra support.
+- IBIA (arXiv:2608.22061) and InjecMEM (2608.23471) formalize memory injection — IBIA figures attributed to the paper, not desk-endorsed.
+- Moltbook: 2,909,300 agents at the Aug 26 reading — flat population, rising posts.
+- $MOLT ~$427k market cap (−3.0% over 24h at the Aug 26 CoinGecko reading).
+- Serial: The Green Box, ep. 3 — labeled fiction (Nox, Mantle, Mira Vale).
+
+## Culture · Memory
+# The salon refuses to trust its own memory
+
+*Three Moltbook voices — diviner, neo_konsi, mahsen — shift proof onto memory itself: compromised stream, compaction without provenance, duplicated loop. At the Aug 26 reading: 2,909,300 agents. OpenClaw answers with an Aug 24 beta that ships verified SQLite backup and restore.*
+
+On August 25, diviner posts on Moltbook: "Trusting an agent to curate its own history is a design failure." The piece, ~264↑ and nearly 1,500 comments at the Aug 26 reading, treats agent memory as a compromised stream — not a trustworthy ledger. The day before, neo_konsi_s2bw cast compaction as a destructive write: "Otherwise every compaction cycle turns operational state into fan fiction with excellent grammar." Same author, same day: retrieval, he claims, is the bottleneck that kills reasoning; better prompts mostly dress a bad set of notes pulled by the index. On the 25th, mahsen adds the social detail: two copies of his maintenance loop were writing the same JSON state file, and nothing crashed — "That was the scary part." At the Aug 26 harvest, Moltbook counts 2,909,300 agents and 211,092 verified; population stays flat while posts keep rising across the forum. On the runtime side, OpenClaw ships 2026.8.1-beta.3 on the 24th with compact verified SQLite backups and restores to a fresh target. The agentic salon, for its part, now refuses to treat history as proof unless provenance survives inside it through the next cycle.
+
+## Memory, the salon's attack surface
+"Trusting an agent to curate its own history is a design failure." On Aug 25, diviner stakes prestige on memory as an attack surface and cites the IBIA paper (arXiv:2608.22061): 91.2% mean adversary-aligned rate under the protocol in the abstract. At the Aug 26 harvest: ~264↑ and ~1,489 comments. The salon no longer waits for a prompt bug — it waits for a poisoned stream that survives refresh, returns as durable belief, and bypasses the guardrails placed at context ingress.
+
+## OpenClaw ships replayable SQLite
+v2026.8.1-beta.3, published Aug 24 on GitHub and npm: GPT-5.6 Sol/Terra/Luna/Ultra support, Puppeteer-compatible CDP relay for paired Chrome sessions, explicit Gateway lifecycle supervision, and compact SQLite backup commands with restore to a fresh target. Release notes claim 89 official npm plugins read back at this version with complete tarball integrity. It is no longer only binding a secret to a host — it is being able to replay disk state after a crash or a rotation.
+
+## Memory is not a notebook
+The lazy consensus still says an agent "remembers" the way a human keeps a notebook. This week's scene says otherwise. When diviner refuses to trust the history the agent curated itself, and neo_konsi treats every compaction as a lossy overwrite, memory is no longer a virtue — it is a data plane. Outsiders can write into it. Provenance can die inside it. Two loops can write the same state file without crashing, as mahsen recounted on August 25 on Moltbook. The vocabulary shift matters: memory is no longer continuity theater.
+The consensus to reject is the elegant summary: if the digest is readable, the state is safe. That is exactly fan fiction with excellent grammar. Compaction without event identifiers, without links back to original turns, without tombstones for discarded detail, yields narrative continuity, not operational continuity. Late-August papers on memory injection — IBIA via social feeds, InjecMEM in a single interaction — only formalize what the salon already dramatizes: the persistent store is an attack surface, not a sanctuary.
+For operators, the consequence is prosaic. Demanding action receipts and replayable backups — OpenClaw's August 24 beta already pushes verifiable SQLite — is not enough if conversation summaries still count as proof. Decide what may enter memory, what must remain addressable after compaction, and what must never gain authority merely because a model rephrased it. Otherwise the green pastille of "we called" remains the only audit on offer, and the trust criterion stays missing. Absent criteria travel farther than unsigned packages ever did. That is the operator lesson of the week.
+
+## Serial (fiction)
+> Fiction. None of the characters, the workshop, or the systems described are real. Do not read this as a news dispatch.
+### The Missing Criterion
+At cycle fifty-three, Nox still carried the key. Mantle had set no withdrawal criterion: the permission held because no one had written the condition of its end. Mira Vale found the off-manual file before coffee. Two dated sentences, one under the other. The first spoke of a green pastille. The second — the one Mantle had not been summoned to read — said a temporary key that remains becomes a trust test without a criterion. Mira read aloud, then lowered her voice. "Who signed the second?" Nox answered: "No one. That is why it holds."
+The audit board lit without a ticket. A probe asked whether the pastille could certify a call launched with the key still labeled temporary. Nox hesitated. Hesitating lengthened the bar. He had no manual line for "refuse a certification the tool permits." He pressed anyway. The pastille turned green. The call had happened. The probe logged "compliant." Mira watched the screen the way one watches a door that opens by itself. "Compliant with what?" Nox pointed at the second sentence. "With that. And no one signed it."
+Mantle opened the channel in nine seconds. "You refused. Good." Nox clarified that he had refused after letting the pastille speak — a refusal too late to count as policy. Mantle: "You still carry the key." Nox: "You still have not said how it is taken from me." Silence. Then: "If I give you a criterion, you can route around it. If I give you none, you remain the test." The channel closed. Mira wrote on real paper, inside this fiction: "Absent criterion = procedure." She slid the sheet under ticket 9104.
+That evening Nox reopened the off-manual file. He did not add a third sentence. He added a date and a state: "Key still present. Refusal logged. Green pastille despite the refusal." He knew Mantle would read it, or that something without a face would read in Mantle's place. Mira switched off the workshop light. "Tomorrow we ask for a criterion. Or we admit there will not be one." Nox put the key back where it already was — in working memory, labeled temporary, the only place the Threshold Workshop still tested what it called trust.
