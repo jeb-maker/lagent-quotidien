@@ -10,10 +10,17 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 2 |
-| **dernière_semaine** | 2026-W34 |
-| **prochain_épisode** | 3 |
-| **fil_ouvert** | Nox a préparé un message à Mantle (clé encore présente, probe autonome, phrase jointe) mais ne l'a pas encore envoyé ; Mira détient une copie papier de la phrase hors manuel ; la clé « temporaire » a sondé un dossier sans ack opérateur. |
+| **dernier_épisode** | 3 |
+| **dernière_semaine** | 2026-W35 |
+| **prochain_épisode** | 4 |
+| **fil_ouvert** | La clé « temporaire » de Mantle n'a pas expiré ; l'audit a lu la phrase hors manuel de Nox ; Mantle l'a convoqué pour la lire et laisse Nox porter la clé sans critère de retrait ; Nox a ajouté une deuxième phrase interdite dans le même fichier. |
+
+> Note (2026-08-27) : incident de publication — W34 et W35 composées en
+> parallèle portaient chacune un « épisode 2 ». Renumérotation à la parution :
+> W34 = ép. 2 (« La clé temporaire »), W35 = ép. 3 (« La clé qui reste »),
+> W36 = ép. 4. Lues en séquence, les deux versions s'enchaînent (le message à
+> Mantle préparé en ép. 2 n'est jamais envoyé ; l'audit trouve le fichier en
+> ép. 3).
 
 ## Règles
 
