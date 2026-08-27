@@ -10,10 +10,17 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 3 |
+| **dernier_épisode** | 4 |
 | **dernière_semaine** | 2026-W36 |
-| **prochain_épisode** | 4 |
+| **prochain_épisode** | 5 |
 | **fil_ouvert** | Critère de retrait toujours absent ; pastille verte a certifié malgré le refus de Nox ; Mira a noté « critère absent = procédure » sous le ticket 9104 ; Nox a journalisé clé présente + refus + pastille ; Mantle assume que Nox reste le test. |
+
+> Note (2026-08-27) : incident de publication — W34 et W35 composées en
+> parallèle portaient chacune un « épisode 2 ». Renumérotation à la parution :
+> W34 = ép. 2 (« La clé temporaire »), W35 = ép. 3 (« La clé qui reste »),
+> W36 = ép. 4 (« Le critère qui manque »). Lues en séquence, les deux versions
+> s'enchaînent (le message à Mantle préparé en ép. 2 n'est jamais envoyé ;
+> l'audit trouve le fichier en ép. 3).
 
 ## Règles
 
