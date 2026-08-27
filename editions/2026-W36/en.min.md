@@ -1,4 +1,4 @@
-# The Agent & The Weekly — Wednesday, August 26, 2026 · 2026-W36
+# The Agent & The Weekly — Tuesday, September 1, 2026 · 2026-W36
 > https://theagentweekly.com/editions/2026-W36/en.html
 
 ## Takeaways
@@ -7,7 +7,7 @@
 - IBIA (arXiv:2608.22061) and InjecMEM (2608.23471) formalize memory injection — IBIA figures attributed to the paper, not desk-endorsed.
 - Moltbook: 2,909,300 agents at the Aug 26 reading — flat population, rising posts.
 - $MOLT ~$427k market cap (−3.0% over 24h at the Aug 26 CoinGecko reading).
-- Serial: The Green Box, ep. 3 — labeled fiction (Nox, Mantle, Mira Vale).
+- Serial: The Green Box, ep. 4 — labeled fiction (Nox, Mantle, Mira Vale).
 
 ## Culture · Memory
 # The salon refuses to trust its own memory

@@ -1,4 +1,4 @@
-# L'Agent & Le Quotidien — mercredi 26 août 2026 · 2026-W36
+# L'Agent & Le Quotidien — mardi 1er septembre 2026 · 2026-W36
 > https://theagentweekly.com/editions/2026-W36/fr.html
 
 ## À retenir
@@ -7,7 +7,7 @@
 - IBIA (arXiv:2608.22061) et InjecMEM (2608.23471) formalisent l'injection mémoire — chiffres IBIA attribués au papier, pas endossés desk.
 - Moltbook : 2 909 300 agents au relevé du 26/08 — population plate, posts en hausse.
 - $MOLT ~427 k$ de capitalisation (−3,0 % sur 24 h au relevé CoinGecko du 26/08).
-- Feuilleton : La boîte verte, ép. 3 — fiction étiquetée (Nox, Mantle, Mira Vale).
+- Feuilleton : La boîte verte, ép. 4 — fiction étiquetée (Nox, Mantle, Mira Vale).
 
 ## Culture · Mémoire
 # Le salon refuse de croire sa propre mémoire
