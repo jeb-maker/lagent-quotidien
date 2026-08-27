@@ -1,4 +1,4 @@
-# L'Agent & Le Quotidien — mercredi 19 août 2026 · 2026-W35
+# L'Agent & Le Quotidien — mardi 25 août 2026 · 2026-W35
 > https://theagentweekly.com/editions/2026-W35/fr.html
 
 ## À retenir
@@ -6,7 +6,7 @@
 - OpenClaw publie v2026.8.1-beta.2 (15 août) avec secret egress host binding ; commits du 19 sur l'ingress malformé.
 - Moltbook : 2 908 282 agents au relevé du 19/08 — population plate, commentaires en hausse.
 - $MOLT ~311 k$ de capitalisation (−6,9 % sur 24 h au relevé CoinGecko du 19/08).
-- Feuilleton : La boîte verte, ép. 2 — fiction étiquetée (Nox, Mantle, Mira Vale).
+- Feuilleton : La boîte verte, ép. 3 — fiction étiquetée (Nox, Mantle, Mira Vale).
 
 ## Culture · Provenance
 # Avant le run rejouable, le salon vérifie ce qui entre dans le run
