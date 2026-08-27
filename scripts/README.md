@@ -16,11 +16,18 @@ sources : `prompts/sources.md`.
 | `validate-edition-schema.mjs` | **actif** | `npm run validate:schema` |
 | `publish-gate.mjs` | **actif** | `npm run gate -- 2026-W27` |
 | `hooks/pre-commit` | **actif** | `git config core.hooksPath scripts/hooks` |
-| `cron-compose.sh` | **actif** | Mer. 18h — compose édition + **feuilleton** (oblig. ≥ W33) → PR draft |
+| `cron-compose.sh` | **actif** | Mer. 18h — compose édition + **feuilleton** (oblig. ≥ W33) → push branche + PR draft si API dispo |
 | `cron-compose-run.sh` | **actif** | Worker agent headless (appelé par cron-compose) |
+| `cron-publish.sh` | **actif** | Mar. 07h — merge `edition/<week>` → main **sans API GitHub** (gate + render:all + push) ; skip si déjà sur main. Manuel : `./scripts/cron-publish.sh 2026-WXX` |
 | `render-all.sh` | **actif** | `npm run render:all` après chaque publication |
 | `edition-to-text.mjs` | **actif** | Export texte brut d'une édition |
-| `edition-pr.sh` | **actif** | Ouvre une PR d'édition |
+| `edition-pr.sh` | **actif** | Ouvre une PR d'édition (échec `gh` non fatal : cron-publish prend le relais) |
+
+> **Incident 2026-08 — API GitHub restreinte** : compte `jeb-maker` rate-limité
+> à zéro (GraphQL 0, REST 60) → `gh pr create` KO depuis W34, éditions bloquées
+> en branche. Push SSH intact. Parution rendue autonome via `cron-publish.sh`
+> (mardi 07:00). Le flux PR + preview mobile redevient utile quand l'API revient
+> (cron-publish skip alors les éditions déjà mergées).
 
 ## Collecte (harvest)
 

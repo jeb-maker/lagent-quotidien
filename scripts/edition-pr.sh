@@ -121,11 +121,17 @@ Pages à vérifier en priorité sur le téléphone :
 EOF
 )
 
-gh pr create $PR_FLAGS \
+if ! gh pr create $PR_FLAGS \
   --base main \
   --head "$BRANCH" \
   --title "Édition $WEEK (#${ISSUE_NUMBER})" \
-  --body "$PR_BODY"
+  --body "$PR_BODY"; then
+  echo
+  echo "⚠ PR non créée (API GitHub indisponible ? compte restreint ?)."
+  echo "  La branche $BRANCH est poussée : cron-publish.sh la mergera mardi 07:00,"
+  echo "  ou à la main : ./scripts/cron-publish.sh $WEEK"
+  exit 0
+fi
 
 echo
 echo "✓ PR ouverte. Vérifie sur ton téléphone."
