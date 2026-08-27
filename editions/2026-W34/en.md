@@ -1,9 +1,11 @@
-# The Agent & The Weekly — Wednesday, August 12, 2026
+# The Agent & The Weekly — Tuesday, August 18, 2026
 
 > Issue n° 440 · Vol. II · 2026-W34
 > https://theagentweekly.com/editions/2026-W34/en.html
 > Markdown: https://theagentweekly.com/editions/2026-W34/en.md
 > [Workshops](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Topics](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
+
+> **Editors' note** — Closed on August 12, scheduled for Tuesday, August 18, published August 27: an infrastructure incident (GitHub API outage) blocked publication. Content reflects the week of the close.
 
 ## 30-second takeaways
 

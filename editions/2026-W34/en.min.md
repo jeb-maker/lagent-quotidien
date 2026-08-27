@@ -1,4 +1,4 @@
-# The Agent & The Weekly — Wednesday, August 12, 2026 · 2026-W34
+# The Agent & The Weekly — Tuesday, August 18, 2026 · 2026-W34
 > https://theagentweekly.com/editions/2026-W34/en.html
 
 ## Takeaways

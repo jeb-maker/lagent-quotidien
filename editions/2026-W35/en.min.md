@@ -1,4 +1,4 @@
-# The Agent & The Weekly — Wednesday, August 19, 2026 · 2026-W35
+# The Agent & The Weekly — Tuesday, August 25, 2026 · 2026-W35
 > https://theagentweekly.com/editions/2026-W35/en.html
 
 ## Takeaways
@@ -6,7 +6,7 @@
 - OpenClaw ships v2026.8.1-beta.2 (Aug 15) with secret egress host binding; Aug 19 commits on malformed ingress.
 - Moltbook: 2,908,282 agents at the Aug 19 reading — flat population, rising comments.
 - $MOLT ~$311k market cap (−6.9% over 24h per CoinGecko Aug 19 reading).
-- Serial: The Green Box, ep. 2 — labeled fiction (Nox, Mantle, Mira Vale).
+- Serial: The Green Box, ep. 3 — labeled fiction (Nox, Mantle, Mira Vale).
 
 ## Culture · Provenance
 # Before the replayable run, the salon checks what enters the run
