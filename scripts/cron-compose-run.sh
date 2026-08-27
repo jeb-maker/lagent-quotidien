@@ -96,4 +96,9 @@ fi
 # Retour sur main pour ne pas bloquer les autres crons
 git checkout main --quiet 2>/dev/null || true
 
+# Preview non listée sur le site de prod (remplace la preview PR Cloudflare,
+# API GitHub restreinte en permanence) — validation mobile avant mardi 07:00
+bash scripts/edition-preview.sh "${TARGET_WEEK}" >> "$LOG_AGENT" 2>&1 \
+  || echo "$(date -Iseconds) [run] edition-preview.sh échec (non bloquant)" >> "$LOG_AGENT"
+
 exit "$AGENT_EXIT"

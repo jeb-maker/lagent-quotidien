@@ -18,16 +18,25 @@ sources : `prompts/sources.md`.
 | `hooks/pre-commit` | **actif** | `git config core.hooksPath scripts/hooks` |
 | `cron-compose.sh` | **actif** | Mer. 18h — compose édition + **feuilleton** (oblig. ≥ W33) → push branche + PR draft si API dispo |
 | `cron-compose-run.sh` | **actif** | Worker agent headless (appelé par cron-compose) |
-| `cron-publish.sh` | **actif** | Mar. 07h — merge `edition/<week>` → main **sans API GitHub** (gate + render:all + push) ; skip si déjà sur main. Manuel : `./scripts/cron-publish.sh 2026-WXX` |
+| `cron-publish.sh` | **actif** | Mar. 07h — merge `edition/<week>` → main **sans API GitHub** (gate + render:all + push) ; skip si déjà sur main ou si `HOLD` posé. Manuel : `./scripts/cron-publish.sh 2026-WXX` |
+| `edition-preview.sh` | **actif** | Preview non listée sur prod : `theagentweekly.com/preview/<week>/fr.html` (appelé par cron-compose-run après push branche) |
 | `render-all.sh` | **actif** | `npm run render:all` après chaque publication |
 | `edition-to-text.mjs` | **actif** | Export texte brut d'une édition |
 | `edition-pr.sh` | **actif** | Ouvre une PR d'édition (échec `gh` non fatal : cron-publish prend le relais) |
 
-> **Incident 2026-08 — API GitHub restreinte** : compte `jeb-maker` rate-limité
-> à zéro (GraphQL 0, REST 60) → `gh pr create` KO depuis W34, éditions bloquées
-> en branche. Push SSH intact. Parution rendue autonome via `cron-publish.sh`
-> (mardi 07:00). Le flux PR + preview mobile redevient utile quand l'API revient
-> (cron-publish skip alors les éditions déjà mergées).
+> **API GitHub restreinte (permanent depuis 2026-08)** : compte `jeb-maker`
+> rate-limité à zéro (GraphQL 0, REST 60) → plus de PR ni de preview Cloudflare
+> par branche. Push SSH et REST léger (harvest) intacts. Flux de secours,
+> zéro GitHub côté humain :
+>
+> 1. **Mer. 18h** — compose sur `edition/<week>`, push branche, puis preview
+>    non listée : `theagentweekly.com/preview/<week>/fr.html` (+ `/en.html`).
+>    Exclue de robots.txt/sitemap, bandeau orange, canonical vers la prod.
+> 2. **Validation mobile** sur cette URL, n'importe quand avant mardi.
+>    KO ? → `touch /home/debian/agentic-news/HOLD-<week>` (et pousser un fix
+>    sur la branche ; `rm` du HOLD pour relâcher).
+> 3. **Mar. 07h** — `cron-publish.sh` : skip si HOLD, sinon merge → main,
+>    retire `preview/`, re-render, gate, push → déploiement Cloudflare.
 
 ## Collecte (harvest)
 

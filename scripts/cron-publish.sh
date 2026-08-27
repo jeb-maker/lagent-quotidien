@@ -35,8 +35,15 @@ case "$WEEK" in
   *) echo "$(date -Iseconds) erreur: semaine invalide ($WEEK)"; exit 1 ;;
 esac
 BRANCH="edition/${WEEK}"
+HOLD="/home/debian/agentic-news/HOLD-${WEEK}"
 
 echo "$(date -Iseconds) publication démarrée → ${WEEK}"
+
+# Veto humain posé après la preview (rm pour libérer, puis relancer ce script)
+if [ -f "$HOLD" ]; then
+  echo "$(date -Iseconds) HOLD présent (${HOLD}) — parution bloquée, rien fait"
+  exit 0
+fi
 
 git fetch origin --quiet 2>/dev/null || true
 
@@ -93,6 +100,11 @@ if ! git merge --no-ff --no-commit "$REF" --quiet 2>/dev/null; then
     finish; exit 0
   fi
   echo "$(date -Iseconds) conflits générés résolus (côté branche, re-render ensuite)"
+fi
+
+# La preview non listée a fait son temps : retirée à la parution
+if [ -d preview ]; then
+  git rm -r -f --quiet --ignore-unmatch preview 2>/dev/null || rm -rf preview
 fi
 
 # Re-render l'ensemble (liens précédente/suivante, index, feed, …)
