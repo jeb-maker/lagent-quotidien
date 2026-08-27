@@ -92,12 +92,19 @@ git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
   commit --quiet -m "Preview ${WEEK} — validation avant parution"
 
 if git push origin main --quiet 2>/dev/null; then
-  echo "$(date -Iseconds) ✓ preview en ligne (~1 min) : ${SITE}/preview/${WEEK}/fr.html"
-  echo "$(date -Iseconds)   EN : ${SITE}/preview/${WEEK}/en.html"
-  echo "$(date -Iseconds)   KO ? → touch /home/debian/agentic-news/HOLD-${WEEK}"
+  echo "$(date -Iseconds) main poussé"
 else
   echo "$(date -Iseconds) git push échec — preview commitée localement"
 fi
 
 finish
+
+# Déploiement direct Cloudflare (l'intégration GitHub est morte)
+if bash scripts/deploy-site.sh; then
+  echo "$(date -Iseconds) ✓ preview en ligne : ${SITE}/preview/${WEEK}/fr.html"
+  echo "$(date -Iseconds)   EN : ${SITE}/preview/${WEEK}/en.html"
+  echo "$(date -Iseconds)   KO ? → touch /home/debian/agentic-news/HOLD-${WEEK}"
+else
+  echo "$(date -Iseconds) deploy échec — preview non visible, relancer scripts/deploy-site.sh"
+fi
 exit 0

@@ -126,10 +126,13 @@ git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
   commit --quiet -m "Publication ${WEEK} — merge ${BRANCH} (cron-publish, sans PR)"
 
 if git push origin main --quiet 2>/dev/null; then
-  echo "$(date -Iseconds) ✓ ${WEEK} publiée — main poussé, déploiement Cloudflare en cours"
+  echo "$(date -Iseconds) ✓ ${WEEK} publiée — main poussé"
 else
   echo "$(date -Iseconds) git push échec — merge commité localement, pousser à la main (git push origin main)"
 fi
 
 finish
+
+# Déploiement direct Cloudflare (l'intégration GitHub est morte)
+bash scripts/deploy-site.sh || echo "$(date -Iseconds) deploy-site.sh échec — site non déployé, relancer à la main"
 exit 0

@@ -20,6 +20,7 @@ sources : `prompts/sources.md`.
 | `cron-compose-run.sh` | **actif** | Worker agent headless (appelé par cron-compose) |
 | `cron-publish.sh` | **actif** | Mar. 07h — merge `edition/<week>` → main **sans API GitHub** (gate + render:all + push) ; skip si déjà sur main ou si `HOLD` posé. Manuel : `./scripts/cron-publish.sh 2026-WXX` |
 | `edition-preview.sh` | **actif** | Preview non listée sur prod : `theagentweekly.com/preview/<week>/fr.html` (appelé par cron-compose-run après push branche) |
+| `deploy-site.sh` | **actif** | Déploie le Worker `lagent-quotidien` (wrangler, sans GitHub). Quotidien 09:30 + appelé par cron-publish et edition-preview. Requiert `CLOUDFLARE_DEPLOY_TOKEN` dans `~/.config/cloudflare/env` |
 | `render-all.sh` | **actif** | `npm run render:all` après chaque publication |
 | `edition-to-text.mjs` | **actif** | Export texte brut d'une édition |
 | `edition-pr.sh` | **actif** | Ouvre une PR d'édition (échec `gh` non fatal : cron-publish prend le relais) |
@@ -36,7 +37,13 @@ sources : `prompts/sources.md`.
 >    KO ? → `touch /home/debian/agentic-news/HOLD-<week>` (et pousser un fix
 >    sur la branche ; `rm` du HOLD pour relâcher).
 > 3. **Mar. 07h** — `cron-publish.sh` : skip si HOLD, sinon merge → main,
->    retire `preview/`, re-render, gate, push → déploiement Cloudflare.
+>    retire `preview/`, re-render, gate, push, puis `deploy-site.sh`.
+>
+> **Déploiement (2026-08-27)** : l'intégration GitHub→Cloudflare est morte avec
+> la restriction (dernier déploiement auto : 13/08). La prod est le Worker
+> `lagent-quotidien` (assets = racine filtrée par `.assetsignore`) : désormais
+> déployé depuis cette machine par `deploy-site.sh` (quotidien 09:30 + à chaque
+> preview/parution). GitHub ne sert plus que de remote git (push SSH).
 
 ## Collecte (harvest)
 
