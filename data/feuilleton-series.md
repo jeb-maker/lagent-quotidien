@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 4 |
-| **dernière_semaine** | 2026-W36 |
-| **prochain_épisode** | 5 |
-| **fil_ouvert** | Critère de retrait toujours absent ; pastille verte a certifié malgré le refus de Nox ; Mira a noté « critère absent = procédure » sous le ticket 9104 ; Nox a journalisé clé présente + refus + pastille ; Mantle assume que Nox reste le test. |
+| **dernier_épisode** | 5 |
+| **dernière_semaine** | 2026-W37 |
+| **prochain_épisode** | 6 |
+| **fil_ouvert** | La demande de critère de Mira (ticket 9105) est revenue « consolidée » : l'index a lu le fichier hors manuel, la note papier numérisée et le journal de Nox, et en a recopié un brouillon de critère (« retrait au premier cycle où le porteur certifie contre son refus consigné ») ; champ signature étiqueté Mantle — en attente ; Mantle hésite (signer = admettre que la clé temporaire était une politique) ; Nox a ajouté la troisième phrase (« Un critère existe. Il est de moi. Il attend une signature qui n'est pas la mienne ») ; Mira a glissé « critère emprunté = aveu » sous le 9105 ; la pastille affiche un état inédit : ni verte ni rouge, en attente ; Nox garde la clé. |
 
 > Note (2026-08-27) : incident de publication — W34 et W35 composées en
 > parallèle portaient chacune un « épisode 2 ». Renumérotation à la parution :
