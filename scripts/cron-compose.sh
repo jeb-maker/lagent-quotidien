@@ -1,6 +1,6 @@
 #!/bin/bash
 # scripts/cron-compose.sh
-# Wrapper cron : lance l'agent Cursor en mode headless pour composer l'édition
+# Wrapper cron : lance OpenCode en mode headless pour composer l'édition
 # de la semaine (reportage + feuilleton obligatoire ≥ W33), puis pousse sur
 # edition/<week> + ouvre une PR draft GitHub.
 #
@@ -18,7 +18,7 @@ export PATH="/home/debian/.local/bin:/home/debian/.opencode/bin:/usr/local/bin:/
 
 REPO="/home/debian/agentic-news/agent-quotidien"
 LOCK="/tmp/agent-quotidien-compose.lock"
-AGENT_LOCK="/tmp/agent-quotidien-compose-agent.lock"
+OPENCODE_LOCK="/tmp/agent-quotidien-compose-opencode.lock"
 
 exec 9>"$LOCK"
 flock -n 9 || { echo "$(date -Iseconds) skip: compose déjà en cours"; exit 0; }
@@ -70,16 +70,16 @@ if [ -f "${EDITION_DIR}/edition.json" ]; then
   fi
 fi
 
-# Agent déjà lancé pour cette semaine
-if [ -f "$AGENT_LOCK" ]; then
-  OLD_PID=$(cat "$AGENT_LOCK" 2>/dev/null || true)
+# OpenCode déjà lancé pour cette semaine
+if [ -f "$OPENCODE_LOCK" ]; then
+  OLD_PID=$(cat "$OPENCODE_LOCK" 2>/dev/null || true)
   if [ -n "$OLD_PID" ] && kill -0 "$OLD_PID" 2>/dev/null; then
-    echo "$(date -Iseconds) skip: agent compose déjà actif (PID ${OLD_PID})"
+    echo "$(date -Iseconds) skip: OpenCode compose déjà actif (PID ${OLD_PID})"
     git checkout main --quiet 2>/dev/null || true
     [ "$STASHED" -eq 1 ] && git stash pop --quiet 2>/dev/null || true
     exit 0
   fi
-  rm -f "$AGENT_LOCK"
+  rm -f "$OPENCODE_LOCK"
 fi
 
 # Créer le dossier d'édition si absent (non interactif)
@@ -89,21 +89,21 @@ if [ ! -d "$EDITION_DIR" ]; then
   echo "$(date -Iseconds) dossier créé : ${EDITION_DIR}"
 fi
 
-if ! command -v agent >/dev/null 2>&1; then
-  echo "$(date -Iseconds) erreur: binaire 'agent' introuvable dans PATH"
+if ! command -v opencode >/dev/null 2>&1; then
+  echo "$(date -Iseconds) erreur: binaire 'opencode' introuvable dans PATH"
   git checkout main --quiet 2>/dev/null || true
   [ "$STASHED" -eq 1 ] && git stash pop --quiet 2>/dev/null || true
   exit 0
 fi
 
-# Worker long-running en arrière-plan (agent + push branche + PR draft)
+# Worker long-running en arrière-plan (OpenCode + push branche + PR draft)
 nohup bash scripts/cron-compose-run.sh "${TARGET_WEEK}" \
   >> "$LOG_AGENT" 2>&1 &
-AGENT_PID=$!
-echo "$AGENT_PID" > "$AGENT_LOCK"
+OPENCODE_PID=$!
+echo "$OPENCODE_PID" > "$OPENCODE_LOCK"
 
 git checkout main --quiet 2>/dev/null || true
 [ "$STASHED" -eq 1 ] && git stash pop --quiet 2>/dev/null || true
 
-echo "$(date -Iseconds) worker lancé PID=${AGENT_PID} → branche ${BRANCH}"
-echo "$(date -Iseconds) log agent : ${LOG_AGENT}"
+echo "$(date -Iseconds) worker OpenCode lancé PID=${OPENCODE_PID} → branche ${BRANCH}"
+echo "$(date -Iseconds) log OpenCode : ${LOG_AGENT}"

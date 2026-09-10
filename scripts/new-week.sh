@@ -203,7 +203,7 @@ EOF
 echo "✓ Digest : data/_week-context.md"
 echo ""
 echo "Prochaines étapes :"
-echo "  1. Lance Claude Code dans le repo :  claude"
+echo "  1. Lance OpenCode dans le repo :  opencode"
 echo "  2. Demande-lui :"
 echo "     « Génère l'édition ${WEEK} en suivant prompts/weekly-edition.md »"
 echo "  3. Relis ${EDITION_DIR}/edition.json"

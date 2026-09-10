@@ -1,7 +1,7 @@
 #!/bin/bash
 # scripts/cron-compose-run.sh
 # Worker lancé en arrière-plan par cron-compose.sh :
-#   agent headless → edition-pr.sh --draft (push branche + PR GitHub)
+#   OpenCode headless → edition-pr.sh --draft (push branche + PR GitHub)
 #
 # Usage interne :
 #   cron-compose-run.sh 2026-W30
@@ -10,7 +10,7 @@ set -u
 export PATH="/home/debian/.local/bin:/home/debian/.opencode/bin:/usr/local/bin:/usr/bin:/bin"
 
 REPO="/home/debian/agentic-news/agent-quotidien"
-AGENT_LOCK="/tmp/agent-quotidien-compose-agent.lock"
+OPENCODE_LOCK="/tmp/agent-quotidien-compose-opencode.lock"
 
 TARGET_WEEK="${1:-}"
 [ -z "$TARGET_WEEK" ] && exit 1
@@ -21,7 +21,7 @@ LOG_AGENT="/tmp/agent-quotidien-compose-${TARGET_WEEK}.log"
 BRANCH="edition/${TARGET_WEEK}"
 
 cleanup() {
-  rm -f "$AGENT_LOCK"
+  rm -f "$OPENCODE_LOCK"
 }
 trap cleanup EXIT
 
@@ -37,7 +37,7 @@ for i in 0 1 2 3 4 5 6; do
   fi
 done
 if [ "$HARVEST_GAPS" -gt 0 ]; then
-  echo "$(date -Iseconds) [run] WARN ${HARVEST_GAPS} jour(s) de harvest absents — l'agent doit le noter et prioriser la matière dispo" >> "$LOG_AGENT"
+  echo "$(date -Iseconds) [run] WARN ${HARVEST_GAPS} jour(s) de harvest absents — OpenCode doit le noter et prioriser la matière dispo" >> "$LOG_AGENT"
 else
   echo "$(date -Iseconds) [run] harvest J-6…J OK" >> "$LOG_AGENT"
 fi
@@ -60,29 +60,48 @@ Ne commit pas. Ne push pas. Un script poussera la branche et ouvrira une PR draf
 EOF
 )
 
-echo "$(date -Iseconds) [run] agent démarré → ${TARGET_WEEK}" >> "$LOG_AGENT"
+echo "$(date -Iseconds) [run] OpenCode démarré → ${TARGET_WEEK}" >> "$LOG_AGENT"
 
-if command -v agent >/dev/null 2>&1; then
-  agent --print --trust --force --workspace "$REPO" "$PROMPT" \
+if command -v opencode >/dev/null 2>&1; then
+  opencode run --auto "$PROMPT" \
     >> "$LOG_AGENT" 2>&1
-  AGENT_EXIT=$?
+  OPENCODE_EXIT=$?
 else
-  echo "$(date -Iseconds) [run] erreur: binaire agent introuvable" >> "$LOG_AGENT"
+  echo "$(date -Iseconds) [run] erreur: binaire opencode introuvable" >> "$LOG_AGENT"
   exit 1
 fi
 
-echo "$(date -Iseconds) [run] agent terminé (exit ${AGENT_EXIT})" >> "$LOG_AGENT"
+echo "$(date -Iseconds) [run] OpenCode terminé (exit ${OPENCODE_EXIT})" >> "$LOG_AGENT"
 
-# Push branche + PR draft (même si gate KO — tu vois l'avancement sur GitHub)
+# Gate avant rendu : un squelette ou un résultat OpenCode incomplet ne doit pas
+# déclencher le renderer ni une fausse preview.
+GATE_OK=0
+if [ "$OPENCODE_EXIT" -eq 0 ] && npm run --silent gate -- "${TARGET_WEEK}" >> "$LOG_AGENT" 2>&1; then
+  GATE_OK=1
+  echo "$(date -Iseconds) [run] gate OK → rendu autorisé" >> "$LOG_AGENT"
+else
+  echo "$(date -Iseconds) [run] gate fermé ou OpenCode en échec → push sans rendu" >> "$LOG_AGENT"
+fi
+
+# Push branche + PR draft, même si gate KO, mais sans lancer le renderer dans ce cas.
 if command -v gh >/dev/null 2>&1; then
-  if bash scripts/edition-pr.sh "${TARGET_WEEK}" --draft >> "$LOG_AGENT" 2>&1; then
+  PR_ARGS=("${TARGET_WEEK}" "--draft")
+  [ "$GATE_OK" -eq 1 ] || PR_ARGS+=("--no-render")
+  if bash scripts/edition-pr.sh "${PR_ARGS[@]}" >> "$LOG_AGENT" 2>&1; then
     echo "$(date -Iseconds) [run] branche ${BRANCH} poussée, PR draft ouverte" >> "$LOG_AGENT"
   else
     echo "$(date -Iseconds) [run] edition-pr.sh échec" >> "$LOG_AGENT"
+    if [ "$GATE_OK" -eq 1 ]; then
+      echo "$(date -Iseconds) [run] fallback : push sans rendu" >> "$LOG_AGENT"
+      bash scripts/edition-pr.sh "${TARGET_WEEK}" --draft --no-render >> "$LOG_AGENT" 2>&1 \
+        || echo "$(date -Iseconds) [run] fallback edition-pr.sh échec" >> "$LOG_AGENT"
+    fi
   fi
 else
   echo "$(date -Iseconds) [run] gh absent — push branche seul (ouvre la PR à la main sur GitHub)" >> "$LOG_AGENT"
-  npm run --silent render -- "${TARGET_WEEK}" >> "$LOG_AGENT" 2>&1 || true
+  if [ "$GATE_OK" -eq 1 ]; then
+    npm run --silent render -- "${TARGET_WEEK}" >> "$LOG_AGENT" 2>&1 || true
+  fi
   git add editions/"${TARGET_WEEK}" data/desk/"${TARGET_WEEK}" data/_week-context.md 2>/dev/null || true
   if ! git diff --cached --quiet; then
     git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
@@ -96,9 +115,13 @@ fi
 # Retour sur main pour ne pas bloquer les autres crons
 git checkout main --quiet 2>/dev/null || true
 
-# Preview non listée sur le site de prod (remplace la preview PR Cloudflare,
+# Preview non listée sur le site de prod uniquement après gate + rendu (remplace la preview PR Cloudflare,
 # API GitHub restreinte en permanence) — validation mobile avant mardi 07:00
-bash scripts/edition-preview.sh "${TARGET_WEEK}" >> "$LOG_AGENT" 2>&1 \
-  || echo "$(date -Iseconds) [run] edition-preview.sh échec (non bloquant)" >> "$LOG_AGENT"
+if [ "$GATE_OK" -eq 1 ] && [ -f "editions/${TARGET_WEEK}/fr.html" ] && [ -f "editions/${TARGET_WEEK}/en.html" ]; then
+  bash scripts/edition-preview.sh "${TARGET_WEEK}" >> "$LOG_AGENT" 2>&1 \
+    || echo "$(date -Iseconds) [run] edition-preview.sh échec (non bloquant)" >> "$LOG_AGENT"
+else
+  echo "$(date -Iseconds) [run] preview ignorée : gate fermé ou HTML absent" >> "$LOG_AGENT"
+fi
 
-exit "$AGENT_EXIT"
+exit "$OPENCODE_EXIT"
