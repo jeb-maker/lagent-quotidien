@@ -7,7 +7,7 @@
 #
 # Ces JSON sont des INTRANTS pour composer l'édition (cf. prompts/weekly-edition.md
 # « Avant de commencer »). Ils sont commités/pushés pour être disponibles partout
-# via `git pull` (autres machines, Cursor, etc.). Seuls les fichiers du jour
+# via `git pull` (autres machines, OpenCode, etc.). Seuls les fichiers du jour
 # sont stagés — pas de conflit avec cron-drift.sh. La traçabilité publiée vit
 # dans editions/<week>/notes.md.
 #
