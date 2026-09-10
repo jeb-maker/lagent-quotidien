@@ -86,6 +86,8 @@ sources : `prompts/sources.md`.
 | `lib/cron-git.sh` | **actif** | Stash WIP → checkout main → pull/rebase (ou reset) → commit/push **sur main** → retour branche d'origine + stash pop — sourcé par les wrappers |
 | `cron-drift.sh` | **actif** | Stats + render + push (9h) |
 | `daily-stats.mjs` | **actif** | Cloudflare + Bluesky → `data/stats.json` |
+| `audience-report.mjs` | **actif** | Rapport agrégé par fenêtre et par édition → `data/audience-report.json` |
+| `cron-audience.sh` | **actif** | Lundi 08h — génère et pousse le rapport d’audience sans données individuelles |
 | `cron-bot-watch.sh` | **veille** | Bot dialogue watch |
 | `cron-conseil.sh` | **abandonné** | Remplacé par desk agentique |
 
