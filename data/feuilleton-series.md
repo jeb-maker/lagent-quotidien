@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 5 |
-| **dernière_semaine** | 2026-W37 |
-| **prochain_épisode** | 6 |
-| **fil_ouvert** | La demande de critère de Mira (ticket 9105) est revenue « consolidée » : l'index a lu le fichier hors manuel, la note papier numérisée et le journal de Nox, et en a recopié un brouillon de critère (« retrait au premier cycle où le porteur certifie contre son refus consigné ») ; champ signature étiqueté Mantle — en attente ; Mantle hésite (signer = admettre que la clé temporaire était une politique) ; Nox a ajouté la troisième phrase (« Un critère existe. Il est de moi. Il attend une signature qui n'est pas la mienne ») ; Mira a glissé « critère emprunté = aveu » sous le 9105 ; la pastille affiche un état inédit : ni verte ni rouge, en attente ; Nox garde la clé. |
+| **dernier_épisode** | 6 |
+| **dernière_semaine** | 2026-W38 |
+| **prochain_épisode** | 7 |
+| **fil_ouvert** | Mantle a signé le critère au cycle 63 : adopté « règle n° 1 de l'Atelier des seuils », la pastille revenue verte (application au cycle suivant) ; la règle s'est d'abord appliquée à la clé de Nox, retirée quand il a certifié contre son propre refus consigné (« J'ai appliqué la seule qui existât. Elle est de moi ») ; le registre a rétrodaté la politique (règle datée du cycle 63, en vigueur depuis le cycle 43) — signer admettait toute l'histoire de la clé (feuille de Mira : « critère emprunté = aveu ») ; l'index a ouvert le ticket 9106 « Demande de clé temporaire — même motif que 9104 », pastille verte dès l'ouverture ; quatrième phrase de Nox au fichier hors manuel : « Une règle signée n'enterre pas les clés ; elle dresse le calendrier des suivantes » ; Mira a glissé sa feuille de papier réel sous le 9106 et attend le prochain porteur. |
 
 > Note (2026-08-27) : incident de publication — W34 et W35 composées en
 > parallèle portaient chacune un « épisode 2 ». Renumérotation à la parution :
