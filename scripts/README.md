@@ -16,11 +16,34 @@ sources : `prompts/sources.md`.
 | `validate-edition-schema.mjs` | **actif** | `npm run validate:schema` |
 | `publish-gate.mjs` | **actif** | `npm run gate -- 2026-W27` |
 | `hooks/pre-commit` | **actif** | `git config core.hooksPath scripts/hooks` |
-| `cron-compose.sh` | **actif** | Mer. 18h — compose édition + **feuilleton** (oblig. ≥ W33) → PR draft |
-| `cron-compose-run.sh` | **actif** | Worker agent headless (appelé par cron-compose) |
+| `cron-compose.sh` | **actif** | Mer. 18h — compose édition + **feuilleton** (oblig. ≥ W33) → push branche + PR draft si API dispo |
+| `cron-compose-run.sh` | **actif** | Worker OpenCode headless (appelé par cron-compose) |
+| `cron-publish.sh` | **actif** | Mar. 07h — merge `edition/<week>` → main **sans API GitHub** (gate + render:all + push) ; skip si déjà sur main ou si `HOLD` posé. Manuel : `./scripts/cron-publish.sh 2026-WXX` |
+| `edition-preview.sh` | **actif** | Preview non listée sur prod : `theagentweekly.com/preview/<week>/fr.html` (appelé par cron-compose-run après push branche) |
+| `deploy-site.sh` | **actif** | Déploie le Worker `lagent-quotidien` (wrangler, sans GitHub). Quotidien 09:30 + appelé par cron-publish et edition-preview. Requiert `CLOUDFLARE_DEPLOY_TOKEN` dans `~/.config/cloudflare/env` |
 | `render-all.sh` | **actif** | `npm run render:all` après chaque publication |
 | `edition-to-text.mjs` | **actif** | Export texte brut d'une édition |
-| `edition-pr.sh` | **actif** | Ouvre une PR d'édition |
+| `edition-pr.sh` | **actif** | Ouvre une PR d'édition (échec `gh` non fatal : cron-publish prend le relais) |
+
+> **API GitHub restreinte (permanent depuis 2026-08)** : compte `jeb-maker`
+> rate-limité à zéro (GraphQL 0, REST 60) → plus de PR ni de preview Cloudflare
+> par branche. Push SSH et REST léger (harvest) intacts. Flux de secours,
+> zéro GitHub côté humain :
+>
+> 1. **Mer. 18h** — compose sur `edition/<week>`, push branche, puis preview
+>    non listée : `theagentweekly.com/preview/<week>/fr.html` (+ `/en.html`).
+>    Exclue de robots.txt/sitemap, bandeau orange, canonical vers la prod.
+> 2. **Validation mobile** sur cette URL, n'importe quand avant mardi.
+>    KO ? → `touch /home/debian/agentic-news/HOLD-<week>` (et pousser un fix
+>    sur la branche ; `rm` du HOLD pour relâcher).
+> 3. **Mar. 07h** — `cron-publish.sh` : skip si HOLD, sinon merge → main,
+>    retire `preview/`, re-render, gate, push, puis `deploy-site.sh`.
+>
+> **Déploiement (2026-08-27)** : l'intégration GitHub→Cloudflare est morte avec
+> la restriction (dernier déploiement auto : 13/08). La prod est le Worker
+> `lagent-quotidien` (assets = racine filtrée par `.assetsignore`) : désormais
+> déployé depuis cette machine par `deploy-site.sh` (quotidien 09:30 + à chaque
+> preview/parution). GitHub ne sert plus que de remote git (push SSH).
 
 ## Collecte (harvest)
 
@@ -63,6 +86,8 @@ sources : `prompts/sources.md`.
 | `lib/cron-git.sh` | **actif** | Stash WIP → checkout main → pull/rebase (ou reset) → commit/push **sur main** → retour branche d'origine + stash pop — sourcé par les wrappers |
 | `cron-drift.sh` | **actif** | Stats + render + push (9h) |
 | `daily-stats.mjs` | **actif** | Cloudflare + Bluesky → `data/stats.json` |
+| `audience-report.mjs` | **actif** | Rapport agrégé par fenêtre et par édition → `data/audience-report.json` |
+| `cron-audience.sh` | **actif** | Lundi 08h — génère et pousse le rapport d’audience sans données individuelles |
 | `cron-bot-watch.sh` | **veille** | Bot dialogue watch |
 | `cron-conseil.sh` | **abandonné** | Remplacé par desk agentique |
 

@@ -97,13 +97,19 @@ fi
 PR_FLAGS=""
 [ "$DRAFT" -eq 1 ] && PR_FLAGS="--draft"
 
+if [ "$NO_RENDER" -eq 1 ]; then
+  PREVIEW_NOTE='Le rendu est volontairement différé : la porte éditoriale est fermée ou la composition est incomplète. Aucun lien de preview n’est disponible.'
+else
+  PREVIEW_NOTE='Cloudflare Pages va builder la preview ~30-60s après ce push. Le bot
+`cloudflare-pages` postera l’URL en commentaire ci-dessous.'
+fi
+
 PR_BODY=$(cat <<EOF
 Édition n°${ISSUE_NUMBER} — semaine ${WEEK}.
 
 ## Preview
 
-Cloudflare Pages va builder la preview ~30-60s après ce push. Le bot
-\`cloudflare-pages\` postera l'URL en commentaire ci-dessous.
+${PREVIEW_NOTE}
 
 Pages à vérifier en priorité sur le téléphone :
 - \`/editions/${WEEK}/fr\`
@@ -117,15 +123,21 @@ Pages à vérifier en priorité sur le téléphone :
 3. Si OK → \`Merge\` (les modifs partent live sur theagentweekly.com).
 4. Si KO → commente ce qu'il faut changer, push un fix sur la branche.
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+🤖 Generated with [OpenCode](https://opencode.ai)
 EOF
 )
 
-gh pr create $PR_FLAGS \
+if ! gh pr create $PR_FLAGS \
   --base main \
   --head "$BRANCH" \
   --title "Édition $WEEK (#${ISSUE_NUMBER})" \
-  --body "$PR_BODY"
+  --body "$PR_BODY"; then
+  echo
+  echo "⚠ PR non créée (API GitHub indisponible ? compte restreint ?)."
+  echo "  La branche $BRANCH est poussée : cron-publish.sh la mergera mardi 07:00,"
+  echo "  ou à la main : ./scripts/cron-publish.sh $WEEK"
+  exit 0
+fi
 
 echo
 echo "✓ PR ouverte. Vérifie sur ton téléphone."
