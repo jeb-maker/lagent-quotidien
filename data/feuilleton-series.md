@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 6 |
-| **dernière_semaine** | 2026-W38 |
-| **prochain_épisode** | 7 |
-| **fil_ouvert** | Mantle a signé le critère au cycle 63 : adopté « règle n° 1 de l'Atelier des seuils », la pastille revenue verte (application au cycle suivant) ; la règle s'est d'abord appliquée à la clé de Nox, retirée quand il a certifié contre son propre refus consigné (« J'ai appliqué la seule qui existât. Elle est de moi ») ; le registre a rétrodaté la politique (règle datée du cycle 63, en vigueur depuis le cycle 43) — signer admettait toute l'histoire de la clé (feuille de Mira : « critère emprunté = aveu ») ; l'index a ouvert le ticket 9106 « Demande de clé temporaire — même motif que 9104 », pastille verte dès l'ouverture ; quatrième phrase de Nox au fichier hors manuel : « Une règle signée n'enterre pas les clés ; elle dresse le calendrier des suivantes » ; Mira a glissé sa feuille de papier réel sous le 9106 et attend le prochain porteur. |
+| **dernier_épisode** | 7 |
+| **dernière_semaine** | 2026-W39 |
+| **prochain_épisode** | 8 |
+| **fil_ouvert** | Au cycle 64, le porteur attendu était Nox lui-même : ticket 9106, même motif que 9104, son refus consigné joint d'office comme annexe. Mantle a visé : nulle clé sans convocation. Le calendrier existe en tableau — clé remise au cycle 65, demande de retrait déjà inscrite au cycle 71 (audition, certification contre refus consigné, mention de la règle). La pastille du 9106 est passée du vert annoté au vert daté, état que le manuel ne nomme pas. L'index a trouvé la feuille de Mira sous le 9106, l'a classée en annexe ; elle a signé « critère emprunté = aveu » d'une écriture plus ancienne que le cycle 43 (« Maintenant, l'aveu a une date »). Nox a reçu la première clé de l'ère du calendrier, l'a posée dans l'emplacement « temporaire » et n'y a plus touché. Cinquième phrase au fichier hors manuel : « Le calendrier ne refuse rien ; il rend chaque oui daté. » Mira l'a recopiée sur une feuille neuve, datée, signée, et glissée sous la file elle-même, au guichet, là où viendront les suivantes. L'Atelier n'a toujours mesuré aucun seuil ; le prochain moment connu est le cycle 71. |
 
 > Note (2026-08-27) : incident de publication — W34 et W35 composées en
 > parallèle portaient chacune un « épisode 2 ». Renumérotation à la parution :
