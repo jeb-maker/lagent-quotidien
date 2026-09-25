@@ -4,6 +4,7 @@
 #   1. harvest-daily.mjs    → data/harvest/<date>.json          (secondaires : HN/RSS/ArXiv/Bluesky)
 #   2. harvest-primary.mjs  → data/harvest/<date>-primary.json  (primaires : $MOLT/OpenClaw/Moltbook/MoltX)
 #   3. harvest-tips.mjs     → data/tips/<date>.json             (inbound agents, quarantaine)
+#   4. build-datasets.mjs   → datasets/*.csv|json + index.html   (séries CC0 publiées)
 #
 # Ces JSON sont des INTRANTS pour composer l'édition (cf. prompts/weekly-edition.md
 # « Avant de commencer »). Ils sont commités/pushés pour être disponibles partout
@@ -43,12 +44,15 @@ node scripts/harvest-primary.mjs || echo "$(date -Iseconds) harvest-primary éch
 # 3. Tips agents (Worker + issues GitHub label tip) → data/tips/
 node scripts/harvest-tips.mjs || echo "$(date -Iseconds) harvest-tips échec (non bloquant)"
 
-DATE="$(date +%F)"
-echo "$(date -Iseconds) harvest OK → data/harvest/${DATE}{,-primary}.json + data/tips/${DATE}.json"
+# 4. Jeux de données publics (CC0) recompilés depuis les harvests primaires → /datasets/
+node scripts/build-datasets.mjs || echo "$(date -Iseconds) build-datasets échec (non bloquant)"
 
-# 4. Commit & push (best effort) — disponible sur les autres envs via git pull
+DATE="$(date +%F)"
+echo "$(date -Iseconds) harvest OK → data/harvest/${DATE}{,-primary}.json + data/tips/${DATE}.json + datasets/"
+
+# 5. Commit & push (best effort) — disponible sur les autres envs via git pull
 if cron_git_commit_push "Harvest ${DATE}" \
     "data/harvest/${DATE}.json" "data/harvest/${DATE}-primary.json" \
-    "data/tips/${DATE}.json"; then
+    "data/tips/${DATE}.json" "datasets/"; then
   echo "$(date -Iseconds) harvest+push OK (${DATE})"
 fi
