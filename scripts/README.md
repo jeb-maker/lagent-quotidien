@@ -59,6 +59,7 @@ sources : `prompts/sources.md`.
 | `cron-world-pulse.sh` | **actif** | Wrapper cron Narrative Radar — brief : `data/taxonomy/HANDOFF-harvest.md` |
 | `harvest-planete.mjs` | **actif** | RSS environnement (actu + recherche) → `data/observatoire/<date>.json` |
 | `render-observatoire.mjs` | **actif** | JSON observatoire + `giec-reperes.json` → `/observatoire/` (page publique) |
+| `build-datasets.mjs` | **actif** | `data/harvest/*-primary.json` → `/datasets/` (CSV + JSON + page, **CC0**) : compteurs Moltbook quotidiens, releases OpenClaw, $MOLT. Appelé par `cron-harvest.sh` et par `render` (`npm run datasets`). Matière citable originale — cf. `data/strategie.md` |
 | `cron-observatoire.sh` | **actif** | Wrapper cron Observatoire de la planète |
 | `harvest-fictional.mjs` | **abandonné** | `--legacy` uniquement (fiction pré-06/2026) |
 | `probe-models.mjs` | **abandonné** | `--legacy` uniquement (R&D fictionnel) |
