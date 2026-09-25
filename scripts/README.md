@@ -17,7 +17,7 @@ sources : `prompts/sources.md`.
 | `publish-gate.mjs` | **actif** | `npm run gate -- 2026-W27` |
 | `hooks/pre-commit` | **actif** | `git config core.hooksPath scripts/hooks` |
 | `cron-compose.sh` | **actif** | Mer. 18h — compose édition + **feuilleton** (oblig. ≥ W33) → push branche + PR draft si API dispo |
-| `cron-compose-run.sh` | **actif** | Worker OpenCode headless (appelé par cron-compose) |
+| `cron-compose-run.sh` | **actif** | Worker agent Cursor headless (`agent --print --force`, appelé par cron-compose) |
 | `cron-publish.sh` | **actif** | Mar. 07h — merge `edition/<week>` → main **sans API GitHub** (gate + render:all + push) ; skip si déjà sur main ou si `HOLD` posé. Manuel : `./scripts/cron-publish.sh 2026-WXX` |
 | `edition-preview.sh` | **actif** | Preview non listée sur prod : `theagentweekly.com/preview/<week>/fr.html` (appelé par cron-compose-run après push branche) |
 | `deploy-site.sh` | **actif** | Déploie le Worker `lagent-quotidien` (wrangler, sans GitHub). Quotidien 09:30 + appelé par cron-publish et edition-preview. Requiert `CLOUDFLARE_DEPLOY_TOKEN` dans `~/.config/cloudflare/env` |
