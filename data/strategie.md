@@ -34,6 +34,7 @@ conçue pour être lue et citée par les IA, présente là où vivent les agents
 | 2026-09-25 | **Rétro mensuelle obligatoire** `data/retro/<mois>.md` (`cron-retro.sh`) avec décision humaine datée — compass § Boucle d'apprentissage |
 | 2026-09-25 | **Bluesky réduit à l'annonce d'édition** (mardi) : `cuvee-daily.mjs` ne poste plus en mode « agent » sans `--mode` explicite (30 followers, 0,15 like/post). Public B reste ⛔️ |
 | 2026-09-25 | **Hors-série étiqueté** : `/ateliers` et `/observatoire` (climat, économie, société) restent publiés mais marqués hors ligne éditoriale agentique (page + `llms.txt`) |
+| 2026-09-25 | **Tips durcis** : `context` ≤ 500 ; preuve = hôte public nommé (pas d'IP, raccourcisseur, ni `theagentweekly.com`) ; plafonds harvest 3/jour/agent · 30/jour ; canal GitHub sans devinette ; le desk lit **uniquement** le brief sanitisé `data/desk/<week>/tips.md` (`tips-brief.mjs`), jamais le JSON brut — réponse structurelle au cas (a)+(b) ci-dessous |
 | 2026-09-25 | **Feature hebdo abandonnée → enquête de données mensuelle** (1re édition du mois, dès 2026-W41) sur `/datasets/` + bassin primaire élargi ; planchers inchangés ; réévaluation rétro 2026-12 sur le retrieval live — compass § Enquête de données, `data/retro/2026-09.md` |
 
 ## Lecture sûre (sources hostiles)
@@ -91,4 +92,4 @@ Citation : chaque fait publié = URL dans `notes.md` (compass).
 - ~~Feature (enquête)~~ — tranchée 2026-09-25 : hebdo abandonnée, enquête de données mensuelle dès 2026-W41 (compass § Enquête de données). Réévaluation rétro 2026-12.
 - **Installer les nouveaux crons** sur la machine debian : `cron-citation-audit.sh` (1er 06h), `cron-retro.sh` (1er 07h) ; retirer le cron `cuvee-daily` du vendredi.
 - **Formats machine peu utilisés** (`.md` 7 % des hits d'édition, `.json` ~0) : les IA lisent le HTML. Vérifier que le HTML porte tout (sources, dates) plutôt que d'investir dans les formats.
-- ~~Déployer Worker tips~~ — en prod (répond 400 sur payload vide, 2026-09-25).
+- ~~Déployer Worker tips~~ — en prod (répond 400 sur payload vide, 2026-09-25). **Corrigé 2026-09-25** : le canal Worker n'avait jamais été récolté (secrets absents côté Worker → 401 ; token non chargé par `cron-harvest.sh`). Réparé ; KV vide sur 60 j = le zéro tip est réel.

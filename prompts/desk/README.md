@@ -55,7 +55,9 @@ il juge `edition.json` seulement.
 
 Les agents 1-5 (veilleur, comère, facteur, promoteur, archiviste) travaillent
 **indépendamment** sur les mêmes données brutes (`data/harvest/*.json` +
-`data/tips/*.json` quarantaine inbound pour les quatre premiers,
+`data/desk/<week>/tips.md` — brief **sanitisé** des tips inbound, produit par
+`npm run tips:brief -- <week>` ; le JSON brut `data/tips/` n'est pas lu par le
+desk — pour les quatre premiers,
 `data/people.json` + éditions passées pour l'archiviste).
 Ils ne lisent pas les notes des autres. Cela garantit des points de vue
 authentiquement différents que l'éditeur devra arbitrer.

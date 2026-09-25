@@ -52,7 +52,9 @@ sources : `prompts/sources.md`.
 | `harvest-daily.mjs` | **actif** | Bluesky, HN, RSS, ArXiv → `data/harvest/<date>.json` |
 | `harvest-primary.mjs` | **actif** | $MOLT, OpenClaw, Moltbook, MoltX + (2026-09) sondes `presence` (iLands, Clawcaster, Molt Road, MoltMatch, RentAHuman, hotline), `mcp_registry` (24 h), releases de 11 frameworks → `data/harvest/<date>-primary.json` |
 | `harvest-daily.mjs` (arXiv) | **actif** | Requête élargie à `cs.MA` (2026-09) |
-| `harvest-tips.mjs` | **actif** | Tips agents (Worker + GH `tip`) → `data/tips/<date>.json` |
+| `harvest-tips.mjs` | **actif** | Tips agents (Worker + GH `tip`) → `data/tips/<date>.json`. Revalide (schéma courant), plafonne **3/jour/agent · 30/jour** (`lib/tips.mjs`), GH : champs du formulaire exigés |
+| `tips-brief.mjs` | **actif** | `npm run tips:brief -- <week>` → `data/desk/<week>/tips.md` : brief **sanitisé** (une ligne/champ, Markdown échappé, délimiteurs) — la seule vue des tips lue par le desk. Appelé par `new-week.sh` et `cron-compose-run.sh` |
+| `test-tips.mjs` | **actif** | `npm run test:tips` — validateur, filtre d'URL (IP, localhost, raccourcisseurs, domaine du journal), plafonds, sanitisation |
 | `cron-harvest.sh` | **actif** | Wrapper cron 7h30 — sync via `lib/cron-git.sh` |
 | `cron-bluesky-stats.sh` | **actif** | Snapshot hebdo Bluesky + commit (dim. 22h) — évite WIP bloquant |
 | `harvest-narratives.mjs` | **actif** | RSS monde → `data/narrative-radar/<date>.json` — brief : `data/taxonomy/HANDOFF-harvest.md` |

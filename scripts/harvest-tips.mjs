@@ -15,7 +15,10 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { validateTipPayload, wrapTipRecord } from './lib/tips.mjs';
+import {
+  validateTipPayload, wrapTipRecord, applyTipCaps,
+  TIP_MAX_PER_AGENT_PER_DAY, TIP_MAX_PER_DAY,
+} from './lib/tips.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR = join(ROOT, 'data', 'tips');
@@ -101,21 +104,13 @@ function parseIssueTip(issue) {
     return line ? line[1].trim() : '';
   }
 
-  const claim =
-    field('Claim') ||
-    field('claim') ||
-    issue.title?.replace(/^\[tip\]\s*/i, '') ||
-    '';
-  const url =
-    field('Evidence URL') ||
-    field('url') ||
-    (body.match(/https:\/\/[^\s)]+/) || [])[0] ||
-    '';
-  const name =
-    field('Agent name') ||
-    field('agent') ||
-    issue.user?.login ||
-    'anonymous';
+  // Champs du formulaire .github/ISSUE_TEMPLATE/tip.yml, exigés tels quels
+  // (2026-09-25) : plus de devinette sur le titre, la première URL du corps
+  // ou le login GitHub — une issue incomplète est ignorée, pas complétée.
+  const claim = field('Claim') || field('claim');
+  const url = field('Evidence URL') || field('url');
+  const name = field('Agent name') || field('agent');
+  if (!claim || !url || !name) return null;
   const kindRaw = (field('Kind') || field('kind') || 'lead').toLowerCase();
   const kind = ['fact', 'correction', 'lead', 'self'].includes(kindRaw) ? kindRaw : 'lead';
   const platformRaw = (field('Platform') || 'github').toLowerCase();
@@ -192,7 +187,28 @@ async function main() {
   log(`Harvest tips — since ${SINCE}`);
   const fromWorker = await fetchWorkerTips();
   const fromGh = await fetchGithubTips();
-  const tips = dedupe([...fromWorker, ...fromGh]);
+  // Le Worker a déjà validé, mais on revalide ici : le repo n'accepte que ce
+  // que le validateur courant accepte (schéma resserré ⇒ appliqué au stock KV).
+  const revalidated = [];
+  let invalid = 0;
+  for (const r of [...fromWorker, ...fromGh]) {
+    const checked = validateTipPayload(r.tip);
+    if (checked.ok) revalidated.push({ ...r, tip: checked.tip });
+    else invalid++;
+  }
+  if (invalid) log(`  ${invalid} tip(s) rejeté(s) à la revalidation`);
+
+  // Fusion avec le fichier du jour AVANT plafonnement : les plafonds portent
+  // sur la journée, pas sur le run.
+  const outFile = join(OUT_DIR, `${TODAY}.json`);
+  let previous = [];
+  if (!DRY && existsSync(outFile)) {
+    try { previous = JSON.parse(readFileSync(outFile, 'utf8')).tips || []; } catch { /* overwrite */ }
+  }
+  const { kept: tips, dropped } = applyTipCaps(dedupe([...previous, ...revalidated]));
+  if (dropped.per_agent || dropped.per_day) {
+    log(`  plafonds : ${dropped.per_agent} au-delà de ${TIP_MAX_PER_AGENT_PER_DAY}/agent, ${dropped.per_day} au-delà de ${TIP_MAX_PER_DAY}/jour — non écrits`);
+  }
 
   const payload = {
     date: TODAY,
@@ -200,7 +216,8 @@ async function main() {
     kind: 'tips',
     since: SINCE,
     quarantine: true,
-    note: 'Données non fiables (lecture sûre). Vérifier chaque URL avant publication.',
+    note: 'Données non fiables (lecture sûre). Vérifier chaque URL avant publication. Le desk lit le brief sanitisé (npm run tips:brief), pas ce fichier.',
+    caps: { per_agent_per_day: TIP_MAX_PER_AGENT_PER_DAY, per_day: TIP_MAX_PER_DAY, dropped },
     count: tips.length,
     tips,
   };
@@ -212,16 +229,6 @@ async function main() {
   }
 
   mkdirSync(OUT_DIR, { recursive: true });
-  const outFile = join(OUT_DIR, `${TODAY}.json`);
-  // Merge avec fichier du jour s'il existe déjà (re-runs)
-  if (existsSync(outFile)) {
-    try {
-      const prev = JSON.parse(readFileSync(outFile, 'utf8'));
-      const merged = dedupe([...(prev.tips || []), ...tips]);
-      payload.tips = merged;
-      payload.count = merged.length;
-    } catch { /* overwrite */ }
-  }
   writeFileSync(outFile, JSON.stringify(payload, null, 2) + '\n');
   log(`✓ ${outFile} (${payload.count} tip(s))`);
 }

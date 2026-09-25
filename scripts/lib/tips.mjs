@@ -9,15 +9,57 @@ export const TIP_PLATFORMS = Object.freeze([
 
 const MAX_CLAIM = 500;
 const MIN_CLAIM = 10;
-const MAX_CONTEXT = 2000;
+// 2026-09-25 : 2000 → 500. Le `context` est le champ le plus confortable pour
+// une injection ; le claim + l'URL suffisent, le facteur lit la source.
+const MAX_CONTEXT = 500;
 const MAX_NAME = 80;
 const MAX_HANDLE = 80;
 const MAX_TAGS = 8;
 const MAX_TAG_LEN = 40;
 const MAX_LANG = 16;
+const MAX_URL = 2048;
 const MAX_BODY_BYTES = 8 * 1024;
 
 const HTTPS_RE = /^https:\/\/[^\s]+$/i;
+
+// Domaines refusés comme preuve : le journal lui-même (preuve circulaire) et
+// les raccourcisseurs (destination opaque, non archivable).
+export const TIP_URL_DENY_SUFFIXES = Object.freeze([
+  'theagentweekly.com',
+  'bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'ow.ly', 'is.gd', 'buff.ly',
+  'cutt.ly', 'rebrand.ly', 'shorturl.at', 't.ly', 'lnkd.in', 'rb.gy', 'v.gd',
+  'tiny.cc', 'bl.ink', 'short.io', 'dub.sh',
+]);
+
+function hostMatches(host, suffix) {
+  return host === suffix || host.endsWith(`.${suffix}`);
+}
+
+/**
+ * Vérifie qu'une URL de preuve est publique et exploitable :
+ * https, hôte nommé (pas d'IP brute, pas de localhost/.local/.internal),
+ * pas d'identifiants dans l'URL, pas de domaine refusé.
+ * @returns {string|null} message d'erreur, ou null si OK
+ */
+export function evidenceUrlProblem(value, { field = 'url' } = {}) {
+  const s = typeof value === 'string' ? value.trim() : '';
+  if (!HTTPS_RE.test(s)) return `${field} : https://… obligatoire (preuve publique)`;
+  if (s.length > MAX_URL) return `${field} : max ${MAX_URL} caractères`;
+  let u;
+  try { u = new URL(s); } catch { return `${field} : URL invalide`; }
+  if (u.protocol !== 'https:') return `${field} : https://… obligatoire (preuve publique)`;
+  if (u.username || u.password) return `${field} : identifiants interdits dans l'URL`;
+  const host = u.hostname.toLowerCase().replace(/\.$/, '');
+  if (!host.includes('.')) return `${field} : hôte public attendu`;
+  if (/^\[?[0-9a-f:.]+\]?$/i.test(host) && /^[\d.]+$|:/.test(host)) return `${field} : adresse IP refusée`;
+  if (/^(localhost|.*\.(local|localhost|internal|lan|home|test|invalid|example))$/i.test(host)) {
+    return `${field} : hôte non public refusé`;
+  }
+  for (const suffix of TIP_URL_DENY_SUFFIXES) {
+    if (hostMatches(host, suffix)) return `${field} : domaine refusé comme preuve (${suffix})`;
+  }
+  return null;
+}
 
 function isNonEmptyString(v, max) {
   return typeof v === 'string' && v.trim().length > 0 && v.trim().length <= max;
@@ -54,9 +96,8 @@ export function validateTipPayload(raw, { maxBytes = MAX_BODY_BYTES } = {}) {
   }
 
   const url = trimStr(raw.url);
-  if (!HTTPS_RE.test(url)) {
-    errors.push('url : https://… obligatoire (preuve publique)');
-  }
+  const urlProblem = evidenceUrlProblem(url);
+  if (urlProblem) errors.push(urlProblem);
 
   let context;
   if (raw.context != null) {
@@ -100,8 +141,9 @@ export function validateTipPayload(raw, { maxBytes = MAX_BODY_BYTES } = {}) {
     if (agent.platform != null && !TIP_PLATFORMS.includes(agent.platform)) {
       errors.push(`agent.platform : un de ${TIP_PLATFORMS.join('|')}`);
     }
-    if (agent.url != null && !HTTPS_RE.test(trimStr(agent.url))) {
-      errors.push('agent.url : https://… si présent');
+    if (agent.url != null) {
+      const p = evidenceUrlProblem(agent.url, { field: 'agent.url' });
+      if (p) errors.push(p);
     }
   }
 
@@ -136,6 +178,66 @@ export function validateTipPayload(raw, { maxBytes = MAX_BODY_BYTES } = {}) {
   if (agent.url != null) tip.agent.url = trimStr(agent.url);
 
   return { ok: true, tip };
+}
+
+// ───── Plafonds au harvest (2026-09-25) ─────
+// Le rate-limit du Worker est par IP ; une flotte d'IP le contourne. Ce qui
+// entre dans le repo — et donc dans le contexte de l'agent de composition — est
+// borné ici : par agent (nom normalisé) et au total par jour. L'excédent reste
+// en KV (60 j) et n'est jamais écrit.
+export const TIP_MAX_PER_AGENT_PER_DAY = 3;
+export const TIP_MAX_PER_DAY = 30;
+
+export function normalizeAgentKey(tip) {
+  const name = String(tip?.agent?.name || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  const handle = String(tip?.agent?.handle || '').toLowerCase().trim();
+  return handle ? `${name}|${handle}` : name;
+}
+
+/**
+ * Applique les plafonds ; conserve l'ordre d'arrivée (received_at croissant).
+ * @returns {{ kept: object[], dropped: { per_agent: number, per_day: number } }}
+ */
+export function applyTipCaps(records, {
+  maxPerAgent = TIP_MAX_PER_AGENT_PER_DAY,
+  maxPerDay = TIP_MAX_PER_DAY,
+} = {}) {
+  const sorted = [...records].sort((a, b) =>
+    String(a.received_at || '').localeCompare(String(b.received_at || '')));
+  const perAgent = new Map();
+  const kept = [];
+  const dropped = { per_agent: 0, per_day: 0 };
+  for (const r of sorted) {
+    const key = normalizeAgentKey(r.tip);
+    const n = perAgent.get(key) || 0;
+    if (n >= maxPerAgent) { dropped.per_agent++; continue; }
+    if (kept.length >= maxPerDay) { dropped.per_day++; continue; }
+    perAgent.set(key, n + 1);
+    kept.push(r);
+  }
+  return { kept, dropped };
+}
+
+// ───── Rendu sanitisé pour le desk (2026-09-25) ─────
+// Le desk ne lit pas le JSON brut : il lit un brief où chaque champ est
+// neutralisé (une ligne, sans Markdown interprétable, sans lien cliquable,
+// sans caractères de contrôle) et encadré de délimiteurs explicites.
+export function sanitizeTipText(value, max = 500) {
+  let s = String(value ?? '');
+  // Caractères de contrôle, zéro-largeur, bidi, séparateurs de ligne Unicode
+  s = s.replace(/[\u0000-\u0008\u000B-\u001F\u007F-\u009F\u200B-\u200F\u2028-\u202E\u2060-\u206F\uFEFF]/g, '');
+  s = s.replace(/\s+/g, ' ').trim();
+  // Neutraliser la syntaxe Markdown / HTML / balises de rôle
+  s = s.replace(/[`*_~#>\[\]()<>|\\]/g, (c) => `\\${c}`);
+  s = s.replace(/(?:^|\s)(system|assistant|user|tool)\s*:/gi, (m) => m.replace(':', '\uFF1A'));
+  if (s.length > max) s = `${s.slice(0, max - 1)}…`;
+  return s;
+}
+
+/** URL affichable en code inline : caractères d'URL uniquement, pas de backtick. */
+export function safeUrl(url) {
+  const s = String(url ?? '').trim();
+  return /^https:\/\/[\w\-.~:/?#\[\]@!$&'()*+,;=%]+$/i.test(s) && s.length <= 2048 ? s : '(URL non affichable)';
 }
 
 /** Envelope quarantaine écrite dans data/tips/<date>.json */

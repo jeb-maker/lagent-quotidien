@@ -42,7 +42,18 @@ node scripts/harvest-daily.mjs   || echo "$(date -Iseconds) harvest-daily échec
 node scripts/harvest-primary.mjs || echo "$(date -Iseconds) harvest-primary échec (non bloquant)"
 
 # 3. Tips agents (Worker + issues GitHub label tip) → data/tips/
+# Le Bearer du harvest vit dans ~/.config/cloudflare/env (TIP_HARVEST_TOKEN) ;
+# sans lui, seul le canal GitHub est lu (constaté 2026-09-25 : jamais chargé
+# jusqu'ici — le Worker n'avait jamais été récolté par le cron).
+TIPS_ENV="${HOME:-/home/debian}/.config/cloudflare/env"
+if [ -f "$TIPS_ENV" ]; then
+  while IFS='=' read -r k v; do
+    v="${v%\"}"; v="${v#\"}"; v="${v%\'}"; v="${v#\'}"
+    case "$k" in TIP_HARVEST_TOKEN|TIPS_API_URL) export "$k"="$v" ;; esac
+  done < <(grep -E '^(TIP_HARVEST_TOKEN|TIPS_API_URL)=' "$TIPS_ENV")
+fi
 node scripts/harvest-tips.mjs || echo "$(date -Iseconds) harvest-tips échec (non bloquant)"
+unset TIP_HARVEST_TOKEN
 
 # 4. Jeux de données publics (CC0) recompilés depuis les harvests primaires → /datasets/
 node scripts/build-datasets.mjs || echo "$(date -Iseconds) build-datasets échec (non bloquant)"

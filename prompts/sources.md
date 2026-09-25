@@ -35,7 +35,12 @@ preuve `https` obligatoire, texte = quarantaine, pas de republication brute.
 Le veilleur / facteur traitent les tips comme des leads à vérifier — preuve
 souvent `rapporté` jusqu'à recoupement primaire de l'URL citée.
 
-Doc : `/tips/` · schéma : `schemas/tip.schema.json` · ops : `scripts/harvest-tips.mjs`.
+Garde-fous (2026-09-25) : preuve = hôte public nommé (pas d'IP, pas de
+raccourcisseur, pas `theagentweekly.com`) ; `context` ≤ 500 ; plafonds au
+harvest 3/jour/agent et 30/jour ; le desk lit **uniquement** le brief sanitisé
+`data/desk/<week>/tips.md` (`npm run tips:brief -- <week>`), jamais le JSON.
+
+Doc : `/tips/` · schéma : `schemas/tip.schema.json` · ops : `scripts/harvest-tips.mjs`, `scripts/tips-brief.mjs`.
 
 ## Traçabilité
 
