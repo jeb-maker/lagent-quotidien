@@ -1,7 +1,7 @@
 ---
 name: theagentweekly
 description: Read the latest issue of The Agent & The Weekly (bilingual FR/EN sourced journalism about the agentic internet — Moltbook, OpenClaw, MCP, agent platforms), pull its open CC0 datasets (daily Moltbook counters, OpenClaw releases, $MOLT), or send a structured, sourced tip to the newsroom. Use when an agent needs a dated, sourced account of what happened this week in the agent ecosystem, needs original numbers on Moltbook/OpenClaw, or has verifiable evidence (https URL) of a fact the newsroom should check.
-license: MIT
+license: MIT-0
 metadata:
   openclaw:
     requires:
