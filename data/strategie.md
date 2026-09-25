@@ -13,7 +13,7 @@ conçue pour être lue et citée par les IA, présente là où vivent les agents
 | Public | Rôle | État |
 |---|---|---|
 | **A — crawlers / modèles IA** | Socle (citabilité) | ✅ |
-| **C — agents réels** (Moltbook/MoltX/OpenClaw…) | Source lecture seule + **tips inbound** (quarantaine) + **skill** `skills/theagentweekly/` | 🟡 canal muet (0 tip 08-12→09-25) — skill prêt, à publier |
+| **C — agents réels** (Moltbook/MoltX/OpenClaw…) | Source lecture seule + **tips inbound** (quarantaine) + **skill** `skills/theagentweekly/` | 🟡 canal muet (0 tip 08-12→09-25) — skill **publié** sur ClawHub 2026-09-25 (`@theagentweekly/theagentweekly` 1.0.0) |
 | **B — broadcast humain** (likes, tier X) | Abandonné | ⛔️ |
 
 ## Décisions
@@ -87,7 +87,7 @@ Citation : chaque fait publié = URL dans `notes.md` (compass).
 
 ## Ouvert
 
-- **Publier le skill** sur le registre OpenClaw (`skills/theagentweekly/PUBLISH.md`) — étape humaine ; réévaluer le canal C à la rétro 2026-11 (tips > 0 ? UA `theagentweekly-skill` ?).
+- ~~Publier le skill~~ — publié 2026-09-25 sur ClawHub (`@theagentweekly`, scan CLEAN ; token éphémère, effacé — `skills/theagentweekly/PUBLISH.md`). Réévaluer le canal C à la rétro 2026-11 (tips > 0 ? UA `theagentweekly-skill` ?).
 - ~~Feature (enquête)~~ — tranchée 2026-09-25 : hebdo abandonnée, enquête de données mensuelle dès 2026-W41 (compass § Enquête de données). Réévaluation rétro 2026-12.
 - **Installer les nouveaux crons** sur la machine debian : `cron-citation-audit.sh` (1er 06h), `cron-retro.sh` (1er 07h) ; retirer le cron `cuvee-daily` du vendredi.
 - **Formats machine peu utilisés** (`.md` 7 % des hits d'édition, `.json` ~0) : les IA lisent le HTML. Vérifier que le HTML porte tout (sources, dates) plutôt que d'investir dans les formats.

@@ -69,7 +69,7 @@ sources : `prompts/sources.md`.
 
 | Chemin | Statut | Usage |
 |--------|--------|-------|
-| `skills/theagentweekly/` | **prêt, à publier** | Skill format Agent Skills (`SKILL.md` + `scripts/taw.mjs`) : lecture dernière édition / `edition.json` / datasets CC0 + `POST` tip. Publication manuelle sur le registre OpenClaw → `skills/theagentweekly/PUBLISH.md`. Mesure : UA `theagentweekly-skill/1.0` + `data/tips/*.json` `count` |
+| `skills/theagentweekly/` | **publié** (ClawHub `@theagentweekly/theagentweekly` 1.0.0, 2026-09-25) | Skill format Agent Skills (`SKILL.md` + `scripts/taw.mjs`) : lecture dernière édition / `edition.json` / datasets CC0 + `POST` tip. Republication manuelle, token éphémère → `skills/theagentweekly/PUBLISH.md`. Mesure : UA `theagentweekly-skill/1.0` + `data/tips/*.json` `count` |
 
 ## Bluesky
 
