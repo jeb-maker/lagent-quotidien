@@ -9,7 +9,7 @@
 - **Semaine ISO** : 2026-W38
 - **Date de bouclage** : mercredi 9 septembre 2026
 - **Dernière édition publiée** : (voir editions/ — la plus récente)
-- **Numéro d'édition à produire** : 18
+- **Numéro d'édition à produire** : 446 (dernier publié + 1 ; corrigé 2026-09-25 — `new-week.sh` ne compte plus les dossiers)
 
 ## Harvests du jour
 

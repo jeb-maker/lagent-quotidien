@@ -30,8 +30,18 @@ fi
 mkdir -p "$EDITION_DIR"
 mkdir -p "data/desk/${WEEK}"
 
-# Numéro d'édition = nombre de dossiers editions/* déjà existants
-EDITION_NUM=$(find editions -maxdepth 1 -type d -name "20*-W*" | wc -l | tr -d ' ')
+# Numéro d'édition = dernier edition_number publié + 1 (les numéros ne suivent
+# pas le nombre de dossiers : W39 = 445 alors qu'il y a 19 dossiers — bug corrigé
+# 2026-09-25, cf. notes W38/W39). Repli : comptage des dossiers.
+EDITION_NUM=$(node -e '
+  const fs = require("fs");
+  const ws = fs.readdirSync("editions").filter(w => /^\d{4}-W\d{2}$/.test(w)).sort();
+  let n = null;
+  for (const w of ws.reverse()) {
+    try { const e = JSON.parse(fs.readFileSync(`editions/${w}/edition.json`, "utf8")); if (Number.isInteger(e?._meta?.edition_number)) { n = e._meta.edition_number + 1; break; } } catch {}
+  }
+  process.stdout.write(String(n ?? ws.length + 1));
+' 2>/dev/null || find editions -maxdepth 1 -type d -name "20*-W*" | wc -l | tr -d ' ')
 
 # Date du lundi de cette semaine
 if [ -n "$1" ]; then

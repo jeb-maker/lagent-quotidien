@@ -22,17 +22,21 @@ réhabiliter.
 | Ops / Bluesky / tips | `scripts/README.md` |
 | Feuilleton / série | `data/feuilleton-series.md` |
 | Tips agents (inbound) | `/tips/` · `schemas/tip.schema.json` · `workers/tips-inbox/` |
+| Skill agents (sortant) | `skills/theagentweekly/` (SKILL.md + `PUBLISH.md`) |
+| Datasets CC0 | `/datasets/` ← `scripts/build-datasets.mjs` (harvests primaires) |
+| Mesure public A | `data/audience-report.json` → `retrieval.live` (`scripts/lib/ai-bots.mjs`) |
+| Rétro mensuelle | `data/retro/<mois>.md` ← `npm run retro` · desk README § Étape 5 |
 
 ## Carte
 
 ```
-render.mjs · prompts/ · templates/ · data/ · editions/2026-WXX/ · scripts/ · agents/ · workers/tips-inbox/
+render.mjs · prompts/ · templates/ · data/ · editions/2026-WXX/ · scripts/ · agents/ · workers/tips-inbox/ · skills/ · datasets/
 ```
 
 ## Ne pas lire
 
-Générés (`*.html` éditions/agents/observatoire/radar, index, feed, llms, robots,
-sitemap, og.png) · binaires · `node_modules/` · `.wrangler/` · journal steward
+Générés (`*.html` éditions/agents/observatoire/radar/datasets, `datasets/*.csv|json`,
+index, feed, llms, robots, sitemap, og.png) · binaires · `node_modules/` · `.wrangler/` · journal steward
 historique (git).
 
 ## Composer
@@ -44,6 +48,7 @@ Détail → skill + `prompts/desk/README.md`.
 
 ```bash
 npm run new-week / lint:edition / lint:strict / gate / render / render:all / serve
+npm run datasets / retro -- --month=YYYY-MM / audience-report / citation-audit
 ```
 
 Éditer `edition.json`, jamais les HTML générés. Subagents : `.opencode/agent/`
