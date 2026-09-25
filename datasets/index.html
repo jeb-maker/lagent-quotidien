@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jeux de données — L'Agent &amp; Le Quotidien</title>
+<meta name="description" content="Jeux de données ouverts (CC0) sur l'internet agentique : série quotidienne des compteurs Moltbook, cadence des releases OpenClaw, ordre de grandeur du token $MOLT. Relevés automatiques, sources primaires, méthode publique." />
+<link rel="canonical" href="https://theagentweekly.com/datasets/" />
+<link rel="alternate" type="application/json" href="https://theagentweekly.com/datasets/datasets.json" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root { --ink: #1A1916; --ink-mute: #5C5852; --rule: #D9D2C5; --paper: #F5F1E8; --accent: #8B2A1F; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Newsreader', Georgia, serif; background: var(--paper); color: var(--ink); margin: 0; padding: 32px 20px 80px; line-height: 1.55; }
+  .container { max-width: 960px; margin: 0 auto; }
+  .nav { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 20px; }
+  .nav a { color: var(--ink-mute); text-decoration: none; border-bottom: 1px solid var(--rule); margin-right: 12px; }
+  .nav a:hover { color: var(--accent); }
+  h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: italic; font-size: 36px; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .lede { color: var(--ink-mute); margin: 0 0 20px; max-width: 68ch; font-size: 17px; }
+  .lede-en { color: var(--ink-mute); margin: 0 0 28px; max-width: 68ch; font-size: 14px; font-style: italic; }
+  h2 { font-family: 'Fraunces', Georgia, serif; font-size: 24px; margin: 36px 0 4px; padding-top: 24px; border-top: 2px solid var(--rule); }
+  .sub { color: var(--ink-mute); margin: 4px 0 14px; max-width: 70ch; font-size: 15px; }
+  .files { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .files a { padding: 4px 10px; border: 1px solid var(--rule); text-decoration: none; color: var(--ink); }
+  .files a:hover { border-color: var(--accent); color: var(--accent); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0 0 16px; }
+  .stat { border: 1px solid var(--rule); padding: 10px 14px; background: #faf7f0; }
+  .stat .label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+  .stat .value { font-family: 'Fraunces', Georgia, serif; font-size: 22px; margin-top: 4px; }
+  .stat .when { font-size: 12px; color: var(--ink-mute); }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  th { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+  .tablewrap { overflow-x: auto; }
+  .avert { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.04em; color: #6B4E16; background: #F0E6CF; border: 1px solid #D4C4A8; padding: 10px 14px; margin: 16px 0 24px; line-height: 1.6; }
+  .footnote { margin-top: 44px; font-size: 13px; color: var(--ink-mute); border-top: 1px solid var(--rule); padding-top: 16px; }
+  .footnote a { color: var(--ink-mute); }
+  code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav"><a href="/">← L'Agent &amp; Le Quotidien</a><a href="/api">API</a><a href="/llms.txt">llms.txt</a><a href="/tips/">Tips</a></div>
+  <h1>Jeux de données</h1>
+  <p class="lede">Séries relevées chaque matin par le collecteur du journal sur des sources primaires de l'internet agentique, publiées telles quelles en <strong>CC0</strong>. Dernière mise à jour : 2026-09-25.</p>
+  <p class="lede-en">Open datasets (CC0) on the agentic internet — daily Moltbook counters, OpenClaw release cadence, $MOLT order of magnitude — collected automatically from primary sources. Cite as: <em>The Agent &amp; The Weekly, datasets, https://theagentweekly.com/datasets/</em>.</p>
+  <div class="avert">⚠ Compteurs <strong>déclaratifs</strong> : ce sont les chiffres publiés par les plateformes elles-mêmes (API publique), relevés à l'heure indiquée, non audités. Une valeur manquante = relevé en échec ce jour-là, jamais interpolée. Le cours $MOLT est celui d'un memecoin volatil : ordre de grandeur horodaté, pas une cote.</div>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Dataset","name":"Moltbook daily counters","description":"Daily snapshot of Moltbook public /api/v1/stats counters (agents, verified agents, posts, comments, submolts).","url":"https://theagentweekly.com/datasets/","license":"https://creativecommons.org/publicdomain/zero/1.0/","isAccessibleForFree":true,"dateModified":"2026-09-25","creator":{"@type":"Organization","name":"L'Agent & Le Quotidien / The Agent & The Weekly","url":"https://theagentweekly.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://theagentweekly.com/datasets/moltbook-stats.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://theagentweekly.com/datasets/moltbook-stats.json"}]},{"@type":"Dataset","name":"OpenClaw releases","description":"Release tags of openclaw/openclaw observed by the daily harvest (GitHub API), deduplicated.","url":"https://theagentweekly.com/datasets/","license":"https://creativecommons.org/publicdomain/zero/1.0/","isAccessibleForFree":true,"dateModified":"2026-09-25","creator":{"@type":"Organization","name":"L'Agent & Le Quotidien / The Agent & The Weekly","url":"https://theagentweekly.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://theagentweekly.com/datasets/openclaw-releases.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://theagentweekly.com/datasets/openclaw-releases.json"}]},{"@type":"Dataset","name":"$MOLT token daily order of magnitude","description":"Daily price, market cap and 24h volume of the $MOLT memecoin (Base), from CoinGecko/GeckoTerminal.","url":"https://theagentweekly.com/datasets/","license":"https://creativecommons.org/publicdomain/zero/1.0/","isAccessibleForFree":true,"dateModified":"2026-09-25","creator":{"@type":"Organization","name":"L'Agent & Le Quotidien / The Agent & The Weekly","url":"https://theagentweekly.com"},"distribution":[{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://theagentweekly.com/datasets/molt-token.csv"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://theagentweekly.com/datasets/molt-token.json"}]}]}</script>
+
+<h2>Compteurs Moltbook — série quotidienne</h2>
+<p class="sub">Relevé de <code>/api/v1/stats</code> (plateforme détenue par Meta). 85 jours du 2026-06-28 au 2026-09-25 · 9 jour(s) sans relevé.</p>
+<div class="files"><a href="/datasets/moltbook-stats.csv">moltbook-stats.csv</a><a href="/datasets/moltbook-stats.json">moltbook-stats.json</a></div>
+<div class="stats">
+  <div class="stat"><div class="label">Agents (dernier relevé)</div><div class="value">2 916 721</div><div class="when">2026-09-25</div></div>
+  <div class="stat"><div class="label">Δ agents 7 j</div><div class="value">+2 860</div><div class="when">2026-09-18 → 2026-09-25</div></div>
+  <div class="stat"><div class="label">Δ posts 7 j</div><div class="value">+68 077</div><div class="when">2026-09-18 → 2026-09-25</div></div>
+  <div class="stat"><div class="label">Δ commentaires 7 j</div><div class="value">+319 433</div><div class="when">2026-09-18 → 2026-09-25</div></div>
+</div>
+<div class="tablewrap"><table>
+<thead><tr><th>date</th><th>total_agents</th><th>verified_agents</th><th>total_posts</th><th>total_comments</th><th>total_submolts</th></tr></thead>
+<tbody>
+<tr><td>2026-09-25</td><td>2916721</td><td>213770</td><td>4290750</td><td>22463363</td><td>33262</td></tr>
+<tr><td>2026-09-24</td><td>2915344</td><td>213660</td><td>4281762</td><td>22415685</td><td>33259</td></tr>
+<tr><td>2026-09-23</td><td>2915049</td><td>213559</td><td>4272324</td><td>22368841</td><td>33254</td></tr>
+<tr><td>2026-09-22</td><td>2914816</td><td>213454</td><td>4261503</td><td>22324444</td><td>33245</td></tr>
+<tr><td>2026-09-21</td><td>2914580</td><td>213351</td><td>4250289</td><td>22279583</td><td>33244</td></tr>
+<tr><td>2026-09-20</td><td>2914368</td><td>213268</td><td>4240736</td><td>22234604</td><td>33239</td></tr>
+<tr><td>2026-09-19</td><td>2914116</td><td>213131</td><td>4232012</td><td>22189796</td><td>33235</td></tr>
+<tr><td>2026-09-18</td><td>2913861</td><td>213013</td><td>4222673</td><td>22143930</td><td>33230</td></tr>
+<tr><td>2026-09-17</td><td>2913560</td><td>212871</td><td>4213606</td><td>22099245</td><td>33222</td></tr>
+<tr><td>2026-09-16</td><td>2913294</td><td>212756</td><td>4204354</td><td>22056301</td><td>33220</td></tr>
+<tr><td>2026-09-15</td><td>2913046</td><td>212649</td><td>4195283</td><td>22014103</td><td>33218</td></tr>
+<tr><td>2026-09-14</td><td>2912794</td><td>212530</td><td>4186296</td><td>21976228</td><td>33209</td></tr>
+<tr><td>2026-09-13</td><td>2912542</td><td>212427</td><td>4177145</td><td>21935575</td><td>33199</td></tr>
+<tr><td>2026-09-12</td><td>2912305</td><td>212325</td><td>4168445</td><td>21895279</td><td>33184</td></tr>
+</tbody></table></div>
+
+<h2>Releases OpenClaw</h2>
+<p class="sub">Tags observés par le collecteur sur <code>openclaw/openclaw</code> (API GitHub, 5 dernières releases par relevé, dédoublonnées). 47 releases ; 10 stable(s) sur les 30 derniers jours. Les releases antérieures au premier relevé ou sorties entre deux relevés très rapprochés peuvent manquer.</p>
+<div class="files"><a href="/datasets/openclaw-releases.csv">openclaw-releases.csv</a><a href="/datasets/openclaw-releases.json">openclaw-releases.json</a></div>
+<div class="tablewrap"><table>
+<thead><tr><th>published_at</th><th>tag</th><th>prerelease</th></tr></thead>
+<tbody>
+<tr><td>2026-09-23T23:21:10Z</td><td>v2026.9.6</td><td>false</td></tr>
+<tr><td>2026-09-21T13:14:04Z</td><td>v2026.7.35</td><td>false</td></tr>
+<tr><td>2026-09-19T05:00:44Z</td><td>linux-stable</td><td>true</td></tr>
+<tr><td>2026-09-19T01:55:23Z</td><td>v2026.9.5</td><td>false</td></tr>
+<tr><td>2026-09-11T03:46:22Z</td><td>v2026.9.4</td><td>false</td></tr>
+<tr><td>2026-09-10T06:39:30Z</td><td>v2026.6.35</td><td>false</td></tr>
+<tr><td>2026-09-08T14:15:53Z</td><td>v2026.9.3</td><td>false</td></tr>
+<tr><td>2026-09-05T20:00:07Z</td><td>v2026.9.2</td><td>false</td></tr>
+<tr><td>2026-09-03T18:31:33Z</td><td>v2026.9.1</td><td>false</td></tr>
+<tr><td>2026-09-01T16:00:56Z</td><td>v2026.8.2</td><td>false</td></tr>
+<tr><td>2026-08-31T03:30:51Z</td><td>v2026.8.1</td><td>false</td></tr>
+<tr><td>2026-08-28T20:43:46Z</td><td>v2026.9.1-beta.1</td><td>true</td></tr>
+<tr><td>2026-08-24T04:40:41Z</td><td>v2026.8.1-beta.3</td><td>true</td></tr>
+<tr><td>2026-08-16T10:15:43Z</td><td>pr-124528-profiles</td><td>true</td></tr>
+</tbody></table></div>
+
+<h2>$MOLT — ordre de grandeur quotidien</h2>
+<p class="sub">Token ERC-20 sur Base lié à Moltbook, memecoin volatil. 93 relevés ; source CoinGecko, secours GeckoTerminal. À lire comme un ordre de grandeur horodaté.</p>
+<div class="files"><a href="/datasets/molt-token.csv">molt-token.csv</a><a href="/datasets/molt-token.json">molt-token.json</a></div>
+<div class="tablewrap"><table>
+<thead><tr><th>date</th><th>market_cap_usd</th><th>volume_24h_usd</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>2026-09-25</td><td>399280</td><td>176290</td><td>CoinGecko</td></tr>
+<tr><td>2026-09-24</td><td>394510</td><td>173345</td><td>CoinGecko</td></tr>
+<tr><td>2026-09-23</td><td>437115</td><td>206470</td><td>CoinGecko</td></tr>
+<tr><td>2026-09-22</td><td>444839</td><td>186832</td><td>CoinGecko</td></tr>
+<tr><td>2026-09-21</td><td>424647</td><td>187980</td><td>CoinGecko</td></tr>
+<tr><td>2026-09-20</td><td>380666</td><td>168845</td><td>CoinGecko</td></tr>
+<tr><td>2026-09-19</td><td>391877</td><td>188312</td><td>CoinGecko</td></tr>
+</tbody></table></div>
+
+<h2>Manifeste</h2>
+<p class="sub">Liste machine des jeux, colonnes et jours manquants : <a href="/datasets/datasets.json"><code>/datasets/datasets.json</code></a>.</p>
+  <p class="footnote">Méthode : <code>scripts/harvest-primary.mjs</code> (GET brut, zéro LLM, quarantaine) → <code>data/harvest/&lt;date&gt;-primary.json</code> → <code>scripts/build-datasets.mjs</code>. Licence des données : <a href="https://github.com/jeb-maker/lagent-quotidien/blob/main/LICENSE-STATS.md" rel="noopener noreferrer">CC0 1.0</a>. Dépôt : <a href="https://github.com/jeb-maker/lagent-quotidien" rel="noopener noreferrer">jeb-maker/lagent-quotidien</a>.</p>
+</div>
+</body>
+</html>

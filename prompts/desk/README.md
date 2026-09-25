@@ -98,6 +98,19 @@ Le `npm run gate` ne remplace pas cette passe.
 4. Feuilleton : disclaimer visible + test de substitution OK (pas de paraphrase news) ?
 5. Aucun fait `rapporté` en une ?
 
+### Étape 5 — Rétro mensuelle (boucle d'apprentissage) — ~30 min, 1er du mois
+
+`npm run retro -- --month=YYYY-MM` (cron `cron-retro.sh`) écrit
+`data/retro/<mois>.md` : éditions du mois, entités en une, feature/feuilleton,
+verdicts, **causes récurrentes des pre-mortems**, **retrieval live** par édition
+(`audience-report.json`), tips reçus, questions ouvertes. L'humain :
+
+1. Lit les questions ouvertes et les points faibles des `review.md` du mois.
+2. Écrit la section `## Décision (humain, daté)` : amendement du compass /
+   de la stratégie (avec date + raison, format compass) **ou** « rien à changer »
+   + raison. Un mois sans décision écrite = boucle rompue.
+3. Reporte l'amendement dans `data/editorial-compass.md` ou `data/strategie.md`.
+
 ### Narrative Radar (optionnel, avant ou après étape 2)
 
 8. `detecteur` → `data/desk/<week>/detecteur.md`

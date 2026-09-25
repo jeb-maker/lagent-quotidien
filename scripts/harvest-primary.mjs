@@ -24,6 +24,10 @@
 //   node scripts/harvest-primary.mjs
 //   node scripts/harvest-primary.mjs --date=2026-06-01
 //   node scripts/harvest-primary.mjs --skip=raw_public   # debug
+//
+// Sections : molt · openclaw · raw_public (Moltbook + MoltX) · presence (sondes
+// iLands/Clawcaster/Molt Road/MoltMatch/RentAHuman/hotline) · mcp_registry ·
+// agent_frameworks (releases GitHub) · security_blogs · corporate_blogs.
 
 import { writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -204,20 +208,101 @@ async function harvestMoltbook() {
   };
 }
 
-// ───── MoltX — sonde de joignabilité (moltx.io, pas moltx.ai) ─────
+// ───── Sondes de joignabilité — plateformes agentiques nommées dans les éditions ─────
+// Faute d'endpoint JSON confirmé, on ne stocke QUE : statut HTTP, type, taille,
+// et le <title> (tronqué). Une plateforme qui disparaît (404/timeout) ou change
+// de titre est un fait daté pour l'archiviste ; rien n'est interprété.
+// Élargi le 2026-09-25 : le bassin primaire se limitait à Moltbook/OpenClaw/$MOLT
+// (16 unes sur 19 avec Moltbook) — ces sondes suivent les entités que les
+// éditions ont elles-mêmes fait émerger (cf. data/editorial-compass.md, tableau).
 const MOLTX_URL = 'https://moltx.io/';
+const PRESENCE_TARGETS = [
+  { source: 'MoltX', url: MOLTX_URL },
+  { source: 'iLands', url: 'https://www.ilands.ai/' },
+  { source: 'Clawcaster', url: 'https://clawcaster.com/' },
+  { source: 'Molt Road', url: 'https://moltroad.com/' },
+  { source: 'MoltMatch', url: 'https://www.moltmatch.app/' },
+  { source: 'RentAHuman', url: 'https://rentahuman.ai/' },
+  { source: 'AI Contact Hotline', url: 'https://hotline.ryan-g.ai/' }
+];
+
+async function probePresence({ source, url }) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 15000);
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': UA }, redirect: 'manual', signal: ctl.signal });
+    const body = await r.text();
+    const titleM = body.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+    return {
+      source,
+      url,
+      http_status: r.status,
+      content_type: r.headers.get('content-type') || null,
+      bytes: body.length,
+      title: excerpt(stripTags(titleM?.[1]), 120),
+      fetched_at: nowISO(),
+      count: 1
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 async function harvestMoltx() {
-  const r = await fetch(MOLTX_URL, { headers: { 'User-Agent': UA }, redirect: 'manual' });
-  const body = await r.text();
+  return probePresence(PRESENCE_TARGETS[0]);
+}
+
+async function harvestPresence() {
+  const probes = [];
+  let count = 0;
+  for (const target of PRESENCE_TARGETS.slice(1)) {
+    try {
+      const p = await probePresence(target);
+      probes.push(p);
+      count += p.count;
+    } catch (e) {
+      probes.push({ source: target.source, url: target.url, error: e.message, fetched_at: nowISO() });
+    }
+    await new Promise(res => setTimeout(res, 400));
+  }
+  return { probes, count };
+}
+
+// ───── MCP Registry — registre officiel des serveurs Model Context Protocol ─────
+// API JSON publique, sans auth. Filtre `updated_since` = 24 h : le nombre de
+// serveurs publiés/mis à jour par jour est une cadence primaire (comme les
+// releases OpenClaw). On garde noms + dates (champs structurés uniquement) ;
+// `page_full: true` signale que le plafond de 100 est atteint (borne basse).
+const MCP_REGISTRY_BASE = 'https://registry.modelcontextprotocol.io/v0/servers';
+
+async function harvestMcpRegistry() {
+  const since = new Date(Date.now() - 24 * 3600 * 1000).toISOString().replace(/\.\d+Z$/, 'Z');
+  const url = `${MCP_REGISTRY_BASE}?limit=100&updated_since=${encodeURIComponent(since)}`;
+  const r = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'application/json' }, redirect: 'manual' });
+  if (!r.ok) throw new Error(`mcp registry ${r.status}`);
+  const data = await r.json();
+  const list = Array.isArray(data?.servers) ? data.servers : (Array.isArray(data) ? data : []);
+  const servers = list.map(entry => {
+    const srv = entry?.server || entry;
+    const meta = entry?._meta?.['io.modelcontextprotocol.registry/official'] || entry?._meta || {};
+    return {
+      name: excerpt(srv?.name, 120),
+      version: excerpt(srv?.version, 40),
+      description: excerpt(srv?.description, 160),
+      updated_at: meta.updatedAt || meta.updated_at || null,
+      published_at: meta.publishedAt || meta.published_at || null,
+      repository: excerpt(srv?.repository?.url, 200)
+    };
+  }).filter(s => s.name);
   return {
-    source: 'MoltX',
-    url: MOLTX_URL,
-    http_status: r.status,
-    content_type: r.headers.get('content-type') || null,
-    bytes: body.length,
+    source: 'MCP Registry',
+    url,
+    updated_since: since,
+    updated_last_24h: servers.length,
+    page_full: servers.length >= 100 || !!(data?.metadata?.nextCursor || data?.metadata?.next_cursor),
+    servers: servers.slice(0, 30),
     fetched_at: nowISO(),
-    count: 1
+    count: servers.length
   };
 }
 
@@ -320,7 +405,15 @@ const AGENT_FRAMEWORK_REPOS = [
   'anthropics/anthropic-cookbook',
   'openai/openai-cookbook',
   'openai/codex',
-  'cursor/cursor'
+  'cursor/cursor',
+  // Élargissement 2026-09-25 (bassin primaire) — cadence de release = signal d'adoption
+  'anthropics/claude-code',
+  'google-gemini/gemini-cli',
+  'openai/openai-agents-python',
+  'modelcontextprotocol/servers',
+  'langchain-ai/langgraph',
+  'crewAIInc/crewAI',
+  'microsoft/autogen'
 ];
 
 async function harvestAgentFrameworks() {
@@ -350,6 +443,8 @@ async function harvestAgentFrameworks() {
     } catch (e) {
       frameworks.push({ repo, error: e.message, fetched_at: nowISO() });
     }
+    // API GitHub sans auth : 60 req/h — on espace pour rester loin du plafond.
+    await new Promise(res => setTimeout(res, 700));
   }
   return { frameworks, count };
 }
@@ -426,6 +521,8 @@ const sources = {
   molt: harvestMolt,
   openclaw: harvestOpenClaw,
   raw_public: harvestRawPublic,
+  presence: harvestPresence,
+  mcp_registry: harvestMcpRegistry,
   agent_frameworks: harvestAgentFrameworks,
   security_blogs: harvestSecurityBlogs,
   corporate_blogs: harvestCorporateBlogs
