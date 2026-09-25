@@ -67,8 +67,13 @@ un cadre non-news. Continuité série → `data/feuilleton-series.md`.
 
 ## Tableau de vérité — entités réelles
 
-Vérifié 2026-05-31. À réévaluer périodiquement (l'écosystème bouge vite ; un nom
-peut surgir pour de vrai à tout moment). « non trouvé » ≠ « inventé garanti ».
+Vérifié 2026-05-31 ; complété 2026-09-25 (entités émergées dans les éditions
+W37–W39, sourcées dans leurs `notes.md`). À réévaluer périodiquement
+(l'écosystème bouge vite ; un nom peut surgir pour de vrai à tout moment).
+« non trouvé » ≠ « inventé garanti ». Depuis 2026-09-25, `harvest-primary.mjs`
+section `presence` sonde chaque jour la joignabilité (HTTP + titre) des
+plateformes ci-dessous : une disparition ou un changement de titre est un fait
+daté pour l'archiviste, jamais une interprétation.
 
 | Nom | Statut réel | Traitement |
 |---|---|---|
@@ -82,4 +87,8 @@ peut surgir pour de vrai à tout moment). « non trouvé » ≠ « inventé gara
 | **Molt Road** | RÉEL — moltroad.com, marketplace agent (« Silk Road des agents », darknet) | Nommable comme réel |
 | **MoltMatch** | RÉEL — moltmatch.app/.xyz, « first AI Agent Dating Platform », lancé fin jan. 2026. Cas réels : **Jack Luo** (étudiant CS, Californie) dont l'agent a créé un profil sans consentement ; **June Chong** (mannequin, photos reprises sans accord) | Nommable pour le **débat réel sur le consentement** — ⚠️ **jamais de litige inventé** (le faux arc judiciaire W20/W22 a été retiré) |
 | **Agents4Science** | RÉEL — conférence Stanford (22/10/2025), IA auteurs+relecteurs. 48 papiers acceptés / 315 soumissions | Nommable ; chiffres à respecter |
+| **iLands** | RÉEL — ilands.ai, « User-Generated Agent Network » (fondatrice Kaixin Tang) ; agents exécutant des tâches puis sollicitant des paiements par e-mail (404 Media, Ars Technica, Tedium, 09/2026 — sources W39) | Nommable ; compteurs = déclaratifs, horodatés, attribués ; excuses publiques citées comme paroles de la plateforme |
+| **AI Contact Hotline** | RÉEL — hotline.ryan-g.ai, opérée par Ryan Greenblatt (Redwood Research) ; page primaire dit « n'a pas été auditée professionnellement » (W39) | Nommable ; volume de signalements inconnu → l'écrire ; second site agenthotline.ai non visité, opérateur inconnu |
+| **ClawHub** | RÉEL — registre de skills OpenClaw étudié par « After the Party » (arXiv 2609.17274, APSEC 2026, W39) | Nommable via l'étude ; compteurs du registre non audités par un tiers |
+| **MCP Registry** | RÉEL — registry.modelcontextprotocol.io, registre officiel des serveurs MCP ; > 100 serveurs publiés/mis à jour par 24 h au relevé du 2026-09-25 (borne basse, page pleine) | Nommable ; chiffre = cadence relevée, pas un total |
 | **Substrate Labs** | COLLISION — « Substrate » (substrate.run) est un vrai studio IA de Brooklyn (fondé 2023). Le journal lui prêtait une fausse « API d'introspection » | **Retiré** de W19/W20/W22 (on n'attribue pas de fausse news à une vraie boîte) |
