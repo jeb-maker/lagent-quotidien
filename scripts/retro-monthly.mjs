@@ -182,7 +182,16 @@ lines.push(`- ${tipsCount} tip(s) reçu(s) sur ${tipsDays} jour(s) de relevé.${
 lines.push('## Questions ouvertes pour la décision humaine', '');
 const q = [];
 if (n && topEntities[0] && topEntities[0][1] / n >= 0.6) q.push(`**${topEntities[0][0]}** est en une ${topEntities[0][1]} fois sur ${n} : le bassin primaire élargi (\`presence\`, \`mcp_registry\`, \`agent_frameworks\`) a-t-il servi ?`);
-if (n && rows.filter(r => r.feature).length === 0) q.push('Aucune feature (enquête) ce mois : la rubrique est-elle abandonnée (à écrire dans le compass) ou à ré-armer (le feuilleton obligatoire a-t-il pris sa place) ?');
+// Compass § Enquête de données (2026-09-25) : feature = 1 enquête de données par mois (1re édition).
+const featureRows = rows.filter(r => r.feature);
+if (n && featureRows.length === 0) q.push('Aucune enquête de données ce mois (attendu ≥ 1, 1re édition du mois — compass § Enquête de données) : matière `/datasets/` insuffisante, ou règle non appliquée par le desk ?');
+if (featureRows.length && rows.length > 1) {
+  const others = rows.filter(r => !r.feature && r.live7 != null);
+  const avgOthers = others.length ? others.reduce((s, r) => s + r.live7, 0) / others.length : null;
+  for (const f of featureRows) {
+    if (f.live7 != null && avgOthers != null) q.push(`Enquête de données ${f.week} : retrieval live 7 j ${f.live7} vs ${Math.round(avgOthers)} en moyenne pour les autres éditions — l’écart compte pour la réévaluation de la rétro 2026-12 (compass § Enquête de données).`);
+  }
+}
 if ((causeCount['redite'] || 0) >= Math.max(1, n)) q.push('La redite d’arc est la cause n° 1 de chaque pre-mortem : contrainte de procédure ou vrai risque ? Si vrai risque, quelle règle de rotation des unes ?');
 if (tipsCount === 0 && tipsDays) q.push('Zéro tip : le public C reste théorique. Publier le skill (`skills/theagentweekly/PUBLISH.md`) et fixer une échéance de réévaluation.');
 if (best && worst && best.live7 && worst.live7 != null && best.live7 >= 3 * Math.max(1, worst.live7)) q.push(`Écart ×${Math.round(best.live7 / Math.max(1, worst.live7))} de retrieval entre ${best.week} et ${worst.week} : qu’avait la une de ${best.week} que celle de ${worst.week} n’avait pas ?`);

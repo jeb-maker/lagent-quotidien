@@ -63,9 +63,29 @@ en une, feature/feuilleton, causes des pre-mortems, **retrieval live** par
 même, ou « rien à changer » motivé. Indicateur-cible du public A = retrieval
 live (`scripts/lib/ai-bots.mjs`), pas le volume brut de bots.
 
-Question laissée ouverte à la première rétro (2026-10) : la feature est-elle
-abandonnée au profit du feuilleton (à écrire), ou ré-armée (avec quelle
-matière — les `datasets/` et le bassin primaire élargi sont faits pour ça) ?
+Question posée à la première rétro : la feature est-elle abandonnée au profit
+du feuilleton, ou ré-armée ? **Tranchée le 2026-09-25** (`data/retro/2026-09.md`
+§ Décision) → § Enquête de données ci-dessous.
+
+---
+
+## Enquête de données (ex-feature) — amendement 2026-09-25
+
+Constat : 0 feature sur 7 éditions (W33→W39), toujours pour la même raison
+notée par l'éditeur (« pas de matière ≥ 800 mots dont les faits soient absents
+des gros titres »). En régime hebdo, la une et les gros titres consomment le
+plancher de scènes, le feuilleton occupe le long format : exiger chaque semaine
+un second jeu de faits indépendant est une contrainte impossible, pas une
+défaillance du desk. La meilleure semaine du mois en retrieval live (W38) n'avait
+pas de feature.
+
+| Règle | Détail |
+|---|---|
+| Hebdo | **Abandonnée.** Une édition sans feature est l'état normal ; le desk ne la « coupe » pas, il ne la programme pas |
+| Mensuelle | **Une enquête de données dans la première édition de chaque mois** (première : 2026-W41). `feature` = ce texte |
+| Matière | Séries `/datasets/` (CC0 : compteurs Moltbook, releases OpenClaw, $MOLT) + bassin primaire élargi (`presence`, `mcp_registry`, `agent_frameworks`). Une tendance sur ≥ 4 semaines, chiffres datés et attribués — jamais un collage de dépêches wire |
+| Planchers | Inchangés : ≥ 800 mots FR / 750 EN (lint) ; faits **absents** des gros titres (juge) ; preuve ≥ `média`, idéalement `primaire` |
+| Mesure | Rétro mensuelle : feature ≥ 1/mois ; retrieval live de l'édition-enquête vs les autres. Réévaluation rétro 2026-12 : si l'écart est nul ou négatif deux fois sur trois, la rubrique disparaît du schéma |
 
 ---
 

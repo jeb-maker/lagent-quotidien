@@ -33,7 +33,9 @@ Une rubrique = une fonction. Une idée forte = une seule apparition comme thèse
   entité réelle. Appliquer le **test de substitution** (noms inventés → labos
   réels) : si ça tient comme news → `réviser`.
 - Feature : `publier` seulement si absente **ou** si ≥ 1 fait de l'enquête est
-  **absent** des headlines (sinon collage wire → `réviser`).
+  **absent** des headlines (sinon collage wire → `réviser`). Première édition du
+  mois sans enquête de données (compass § Enquête de données, dès W41) : ne pas
+  bloquer, mais le noter en point faible — la rétro le comptera.
 
 ## Format de sortie
 
