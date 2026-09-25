@@ -38,8 +38,12 @@ Copier la même phrase dans `_meta.editor_notes`. Sans Arc net → pas de une.
 - **1 lede** — constat curieux ; scène + chiffre + conséquence
 - **≤ 2 gros titres** — fragment + acteur + action ; ≥ 1 culture agentique
 - **Wire** — dépêches sources réelles nommées (pas presse maison)
-- **0 ou 1 feature** — absente **ou** ≥ plancher enquête lint (faits **absents**
-  des headlines — jamais un collage de dépêches wire)
+- **Feature = enquête de données, mensuelle** (compass § Enquête de données,
+  2026-09-25) : **absente** les autres semaines (état normal, `feature: {}`) ;
+  **présente dans la première édition du mois** (dès 2026-W41) — tendance
+  ≥ 4 semaines tirée de `/datasets/` (`datasets/*.json`) et du `-primary.json`
+  (`presence`, `mcp_registry`, `agent_frameworks`) ; ≥ plancher enquête lint ;
+  faits **absents** des headlines — jamais un collage de dépêches wire
 - **1 tribune** — thèse « La rédaction »
 - **Carnet** — 3–4 portraits agents réels (recette → style-guide)
 - **1 Feuilleton** — fiction étiquetée **chaque semaine** (`genre: fiction`, series +
