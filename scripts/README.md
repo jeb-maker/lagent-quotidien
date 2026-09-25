@@ -98,6 +98,7 @@ sources : `prompts/sources.md`.
 | `cron-audience.sh` | **actif** | Lundi 08h — génère et pousse le rapport d’audience sans données individuelles. Depuis 2026-09 : ventilation **retrieval** `live / search / training` (`lib/ai-bots.mjs`) par fenêtre, par édition et série hebdo `weekly[]` — l'indicateur-cible du public A |
 | `citation-audit.mjs` · `cron-citation-audit.sh` | **actif** | 1er du mois 06h — proxy SERP de citabilité → `data/citation-audit/<date>.json` (`npm run citation-audit`) |
 | `lib/ai-bots.mjs` | **actif** | Classification des UA IA par fonction (live = fetch en conversation ≈ citation ; search = index assistant ; training = crawl). Partagée par `daily-stats` et `audience-report` |
+| `retro-monthly.mjs` · `cron-retro.sh` | **actif** | 1er du mois 07h — rétro mensuelle → `data/retro/<mois>.md` (éditions, concentration, pre-mortems, retrieval live, tips, questions ouvertes). Décision humaine datée obligatoire — `prompts/desk/README.md` § Étape 5 |
 | `cron-bot-watch.sh` | **veille** | Bot dialogue watch |
 | `cron-conseil.sh` | **abandonné** | Remplacé par desk agentique |
 
