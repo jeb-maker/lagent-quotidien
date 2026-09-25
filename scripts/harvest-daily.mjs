@@ -172,7 +172,9 @@ async function harvestRSS() {
 
 // ───── ArXiv ─────
 async function harvestArXiv() {
-  const query = 'cat:cs.AI+AND+(abs:agent+OR+abs:agentic+OR+abs:autonomous)';
+  // cs.MA (multi-agent systems) ajouté le 2026-09-25 : sociétés d'agents, registres,
+  // benchmarks collectifs — la matière des gros titres W38/W39 venait de là.
+  const query = '(cat:cs.AI+OR+cat:cs.MA)+AND+(abs:agent+OR+abs:agentic+OR+abs:autonomous)';
   const url = `http://export.arxiv.org/api/query?search_query=${query}&start=0&max_results=20&sortBy=submittedDate&sortOrder=descending`;
   const r = await fetch(url, { headers: { 'User-Agent': 'theagentweekly-harvest/1.0' } });
   if (!r.ok) throw new Error(`arxiv ${r.status}`);

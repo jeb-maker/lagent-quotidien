@@ -1,0 +1,2197 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Narrative Radar — 2026-08-28</title>
+<style>
+  :root { --ink: #1A1916; --ink-mute: #5C5852; --rule: #D9D2C5; --paper: #F5F1E8; --accent: #8B2A1F; --warn: #6B4E16; --warn-bg: #F0E6CF; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Newsreader', Georgia, serif; background: var(--paper); color: var(--ink); margin: 0; padding: 32px 20px 80px; line-height: 1.55; }
+  .container { max-width: 920px; margin: 0 auto; }
+  .banner { background: var(--warn-bg); border: 1px solid #D4C4A8; color: var(--warn); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 14px; margin-bottom: 24px; }
+  .nav { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 20px; }
+  .nav a { color: var(--ink-mute); text-decoration: none; border-bottom: 1px solid var(--rule); margin-right: 12px; }
+  .nav a:hover, .dates a:hover { color: var(--accent); }
+  .dates { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; }
+  .dates a { padding: 4px 10px; border: 1px solid var(--rule); text-decoration: none; color: var(--ink-mute); }
+  .dates a.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-style: italic; font-size: 34px; margin: 0 0 6px; }
+  .lede { color: var(--ink-mute); margin: 0 0 24px; max-width: 62ch; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .stat { border: 1px solid var(--rule); padding: 12px 14px; background: #faf7f0; }
+  .stat .label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+  .stat .value { font-family: 'Fraunces', Georgia, serif; font-size: 24px; margin-top: 4px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+  h2 { font-family: 'Fraunces', Georgia, serif; font-size: 22px; margin: 0 0 12px; }
+  .cov-row { display: grid; grid-template-columns: 36px 1fr 36px; gap: 8px; align-items: center; margin-bottom: 6px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; }
+  .cov-bar { height: 8px; background: #e8e4db; border-radius: 1px; overflow: hidden; }
+  .cov-bar span { display: block; height: 100%; background: var(--accent); }
+  .cluster { border: 1px solid var(--rule); padding: 12px 14px; margin-bottom: 10px; background: #faf7f0; }
+  .cluster-head { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); margin-bottom: 8px; }
+  .cluster ul { margin: 0; padding-left: 18px; font-size: 14px; }
+  .lang-inline { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; border: 1px solid var(--rule); padding: 0 4px; margin-right: 6px; }
+  .lang-block { margin-bottom: 36px; }
+  .lang-block .count { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--ink-mute); font-weight: 400; }
+  ol.items { list-style: none; padding: 0; margin: 0; }
+  .item { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .item-meta { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 4px; display: flex; flex-wrap: wrap; gap: 8px 12px; }
+  .item-meta .lang { border: 1px solid var(--rule); padding: 1px 5px; }
+  .item-title { color: var(--ink); font-size: 17px; text-decoration: none; border-bottom: 1px dotted var(--rule); }
+  .item-title:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .excerpt { margin: 6px 0 0; font-size: 14px; color: var(--ink-mute); }
+  .tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; padding: 2px 6px; border-radius: 2px; }
+  .tag.archetype { background: #e8dfd0; color: #5c4a32; }
+  .tag.calibration { background: #dde5ea; color: #2a4555; }
+  .desk { margin-top: 40px; padding-top: 28px; border-top: 2px solid var(--rule); }
+  .desk .md-body h2 { font-size: 20px; margin-top: 24px; }
+  .desk .md-body table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  .desk .md-body th, .desk .md-body td { border: 1px solid var(--rule); padding: 6px 8px; vertical-align: top; }
+  .muted { color: var(--ink-mute); font-size: 14px; }
+  .footnote { margin-top: 40px; font-size: 13px; color: var(--ink-mute); border-top: 1px solid var(--rule); padding-top: 16px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="banner">Usage interne · non indexé · homologie ≠ manipulation prouvée</div>
+  <div class="nav"><a href="/">← Édition</a></div>
+  <div class="dates"><a href="/radar/2026-07-13.html">2026-07-13</a>
+    <a href="/radar/2026-07-14.html">2026-07-14</a>
+    <a href="/radar/2026-07-15.html">2026-07-15</a>
+    <a href="/radar/2026-07-30.html">2026-07-30</a>
+    <a href="/radar/2026-07-31.html">2026-07-31</a>
+    <a href="/radar/2026-08-01.html">2026-08-01</a>
+    <a href="/radar/2026-08-02.html">2026-08-02</a>
+    <a href="/radar/2026-08-05.html">2026-08-05</a>
+    <a href="/radar/2026-08-06.html">2026-08-06</a>
+    <a href="/radar/2026-08-07.html">2026-08-07</a>
+    <a href="/radar/2026-08-08.html">2026-08-08</a>
+    <a href="/radar/2026-08-09.html">2026-08-09</a>
+    <a href="/radar/2026-08-10.html">2026-08-10</a>
+    <a href="/radar/2026-08-11.html">2026-08-11</a>
+    <a href="/radar/2026-08-12.html">2026-08-12</a>
+    <a href="/radar/2026-08-13.html">2026-08-13</a>
+    <a href="/radar/2026-08-14.html">2026-08-14</a>
+    <a href="/radar/2026-08-15.html">2026-08-15</a>
+    <a href="/radar/2026-08-16.html">2026-08-16</a>
+    <a href="/radar/2026-08-17.html">2026-08-17</a>
+    <a href="/radar/2026-08-18.html">2026-08-18</a>
+    <a href="/radar/2026-08-19.html">2026-08-19</a>
+    <a href="/radar/2026-08-20.html">2026-08-20</a>
+    <a href="/radar/2026-08-21.html">2026-08-21</a>
+    <a href="/radar/2026-08-22.html">2026-08-22</a>
+    <a href="/radar/2026-08-23.html">2026-08-23</a>
+    <a href="/radar/2026-08-24.html">2026-08-24</a>
+    <a href="/radar/2026-08-25.html">2026-08-25</a>
+    <a href="/radar/2026-08-26.html">2026-08-26</a>
+    <a href="/radar/2026-08-27.html">2026-08-27</a>
+    <a href="/radar/2026-08-28.html" class="active" aria-current="page">2026-08-28</a>
+    <a href="/radar/2026-08-29.html">2026-08-29</a>
+    <a href="/radar/2026-08-30.html">2026-08-30</a>
+    <a href="/radar/2026-08-31.html">2026-08-31</a>
+    <a href="/radar/2026-09-01.html">2026-09-01</a>
+    <a href="/radar/2026-09-02.html">2026-09-02</a>
+    <a href="/radar/2026-09-03.html">2026-09-03</a>
+    <a href="/radar/2026-09-04.html">2026-09-04</a>
+    <a href="/radar/2026-09-05.html">2026-09-05</a>
+    <a href="/radar/2026-09-06.html">2026-09-06</a>
+    <a href="/radar/2026-09-07.html">2026-09-07</a>
+    <a href="/radar/2026-09-08.html">2026-09-08</a>
+    <a href="/radar/2026-09-09.html">2026-09-09</a>
+    <a href="/radar/2026-09-10.html">2026-09-10</a>
+    <a href="/radar/2026-09-11.html">2026-09-11</a>
+    <a href="/radar/2026-09-12.html">2026-09-12</a>
+    <a href="/radar/2026-09-13.html">2026-09-13</a>
+    <a href="/radar/2026-09-14.html">2026-09-14</a>
+    <a href="/radar/2026-09-15.html">2026-09-15</a>
+    <a href="/radar/2026-09-16.html">2026-09-16</a>
+    <a href="/radar/2026-09-17.html">2026-09-17</a>
+    <a href="/radar/2026-09-18.html">2026-09-18</a>
+    <a href="/radar/2026-09-19.html">2026-09-19</a>
+    <a href="/radar/2026-09-20.html">2026-09-20</a>
+    <a href="/radar/2026-09-21.html">2026-09-21</a>
+    <a href="/radar/2026-09-22.html">2026-09-22</a>
+    <a href="/radar/2026-09-23.html">2026-09-23</a>
+    <a href="/radar/2026-09-24.html">2026-09-24</a>
+    <a href="/radar/2026-09-25.html">2026-09-25</a></div>
+  <h1>Narrative Radar</h1>
+<p class="lede">Fenêtre 48h · collecte 28 août 2026, 07:45 · 200 items · 40% hors anglais</p>
+
+<div class="stats">
+  <div class="stat"><div class="label">Flux OK</div><div class="value">23</div></div>
+  <div class="stat"><div class="label">Items</div><div class="value">200</div></div>
+  <div class="stat"><div class="label">Hors EN</div><div class="value">40%</div></div>
+  <div class="stat"><div class="label">Taggés</div><div class="value">9</div></div>
+</div>
+
+<div class="grid-2">
+  <section>
+    <h2>Couverture linguistique</h2>
+    <div class="cov-row">
+  <span class="cov-lang">EN</span>
+  <div class="cov-bar"><span style="width:60%"></span></div>
+  <span class="cov-count">120</span>
+</div>
+<div class="cov-row">
+  <span class="cov-lang">FR</span>
+  <div class="cov-bar"><span style="width:8%"></span></div>
+  <span class="cov-count">16</span>
+</div>
+<div class="cov-row">
+  <span class="cov-lang">ES</span>
+  <div class="cov-bar"><span style="width:8%"></span></div>
+  <span class="cov-count">16</span>
+</div>
+<div class="cov-row">
+  <span class="cov-lang">PT</span>
+  <div class="cov-bar"><span style="width:8%"></span></div>
+  <span class="cov-count">16</span>
+</div>
+<div class="cov-row">
+  <span class="cov-lang">AR</span>
+  <div class="cov-bar"><span style="width:8%"></span></div>
+  <span class="cov-count">16</span>
+</div>
+<div class="cov-row">
+  <span class="cov-lang">ZH</span>
+  <div class="cov-bar"><span style="width:8%"></span></div>
+  <span class="cov-count">16</span>
+</div>
+  </section>
+  <section>
+    <h2>Clusters titre</h2>
+    <div class="cluster">
+  <div class="cluster-head">2 flux · titres alignés</div>
+  <ul><li><span class="lang-inline">ZH</span> 尼泊尔警方：尼泊尔北部山洪遇难人数升至469人</li><li><span class="lang-inline">ZH</span> 尼泊尔北部山洪遇难人数升至469人</li></ul>
+</div>
+  </section>
+</div>
+
+
+
+<h2>Items par langue</h2>
+<section class="lang-block">
+  <h2>EN <span class="count">120</span></h2>
+  <ol class="items"><li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">28 août 2026, 07:23</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608280079.html" rel="noopener noreferrer">South Africa: Western Cape Dam Dip Raises Water Security Concerns - South African News Briefs - August 28, 2026</a>
+  <p class="excerpt">[allAfrica]</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">28 août 2026, 06:10</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608280036.html" rel="noopener noreferrer">Malawi: Chikangawa Plane Crash Inquiry Hears Conflicting Visibility Reports</a>
+  <p class="excerpt">[Nyasa Times] A former weather station chief has delivered explosive testimony to the parliamentary inquiry investigating the Chikangawa plane crash that killed Vice-President Saulos Chilima and eight others, telling the committee the doomed military aircraft could in fact have landed safely at Mzuzu Airport on the morning of the tragedy.</p>
+  <div class="tags"><span class="tag calibration" title="score 1 · interprétatif">opioid-crisis</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">28 août 2026, 06:28</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608280076.html" rel="noopener noreferrer">Nigeria: Over 7,000 People Kidnapped Across Nigeria, Boko Haram Got 90% of Ransom - Report</a>
+  <p class="excerpt">[Premium Times] SBM Intelligence, a research think tank, said about 7,825 people were kidnapped in one year, with at least N7.78 billion paid in ransom, while Boko Haram pocketed over 90 per cent of the proceeds.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">28 août 2026, 06:13</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608280053.html" rel="noopener noreferrer">Uganda: Muhoozi Declares Presidential Bid, Targets Uganda's 2031 Election</a>
+  <p class="excerpt">[Capital FM] Uganda's military chief, General Muhoozi Kainerugaba, has announced that he will run for president in 2031, positioning himself as a potential successor to his father, long-serving President Yoweri Museveni.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">28 août 2026, 06:13</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608280041.html" rel="noopener noreferrer">Kenya: No Kenyan Should Lose Life, Liberty or Dignity for Criticising Govt - Ruto</a>
+  <p class="excerpt">[Capital FM] Nairobi -- President William Ruto has reaffirmed the constitutional right of Kenyans to criticise the Government, express unpopular views and participate in peaceful demonstrations, saying no citizen should lose their life, liberty or dignity for exercising those freedoms.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">28 août 2026, 06:05</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608280033.html" rel="noopener noreferrer">Congo-Kinshasa: UN Chief Condemns 'Indifference' As Ebola Cases Mount in DR Congo</a>
+  <p class="excerpt">[UN News] The Ebola Bundibugyo outbreak in the Democratic Republic of the Congo (DRC) requires &quot;urgent&quot; action and funding to rein in its alarming spread, the UN Secretary-General told reporters at UN Headquarters on Thursday.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">CNA (Asia)</span>
+    <span class="when">28 août 2026, 07:17</span>
+  </div>
+  <a class="item-title" href="https://www.channelnewsasia.com/asia/malaysia-human-resources-minister-m-saravanan-charged-bribes-corruption-6346946" rel="noopener noreferrer">Malaysia’s former HR minister charged with receiving over US$270,000 in bribes</a>
+  <p class="excerpt">M Saravanan is accused of receiving the money in 2022 to approve foreign worker quotas for an engineering firm.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">CNA (Asia)</span>
+    <span class="when">28 août 2026, 06:58</span>
+  </div>
+  <a class="item-title" href="https://www.channelnewsasia.com/east-asia/japan-asian-games-no-room-6347021" rel="noopener noreferrer">'Find your own room': Japan says can't handle added Asian Games numbers</a>
+  <p class="excerpt">There is no dedicated athletes' village, with organisers instead relying on a cruise ship, temporary wooden containers and hotels.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">CNA (Asia)</span>
+    <span class="when">28 août 2026, 06:04</span>
+  </div>
+  <a class="item-title" href="https://www.channelnewsasia.com/asia/haze-malaysia-indonesia-asean-burning-6344956" rel="noopener noreferrer">‘Big hassle for everyone’: Malaysia braces for worsening haze as dry season bites</a>
+  <p class="excerpt">Malaysia’s geography puts parts of the country directly in the path of smoke from fire hotspots in Indonesia’s Kalimantan and Sumatra, with air quality in parts of Sarawak and Klang Valley reaching “unhealthy” levels.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">CNA (Asia)</span>
+    <span class="when">28 août 2026, 05:16</span>
+  </div>
+  <a class="item-title" href="https://www.channelnewsasia.com/asia/stocks-advance-federal-reserve-warsh-speech-6346781" rel="noopener noreferrer">Most Asian stocks advance as attention turns to Warsh speech</a>
+  
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">CNA (Asia)</span>
+    <span class="when">28 août 2026, 03:03</span>
+  </div>
+  <a class="item-title" href="https://www.channelnewsasia.com/asia/nepal-tibet-flood-landslide-live-update-day-3-6346556" rel="noopener noreferrer">Nepal-Tibet disaster: Rescue efforts at Tibet disaster epicentre halted over flood risk</a>
+  <p class="excerpt">A lake formed by immense piles of debris after a mudslide hit the China-Nepal border has begun overflowing, says state broadcaster CCTV.</p>
+  <div class="tags"><span class="tag calibration" title="score 1 · interprétatif">covid-origin-uncertainty</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">CNA (Asia)</span>
+    <span class="when">28 août 2026, 01:49</span>
+  </div>
+  <a class="item-title" href="https://www.channelnewsasia.com/east-asia/south-korea-two-killed-oil-tanker-fire-6346531" rel="noopener noreferrer">Two killed in oil tanker fire off South Korea: Report</a>
+  <p class="excerpt">The two victims were found dead in the engine room, Yonhap said. The remaining 16 crew members were rescued by the Coast Guard.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Hindu (International)</span>
+    <span class="when">28 août 2026, 07:31</span>
+  </div>
+  <a class="item-title" href="https://www.thehindu.com/news/international/bangladesh-govt-positively-weighs-joining-mecca-pact-opposition-throws-in-support/article71399207.ece" rel="noopener noreferrer">Bangladesh govt. positively weighs joining Mecca Pact; Opposition throws in support</a>
+  <p class="excerpt">The government said the interests of the country and its people would be given the highest priority in joining any defence agreement or alliance</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Hindu (International)</span>
+    <span class="when">28 août 2026, 07:28</span>
+  </div>
+  <a class="item-title" href="https://www.thehindu.com/news/international/nepal-flash-floods-death-toll-surges-nearly-1500-missing-fresh-flood-threat-glacier-collapse-live-updates-august-28-2026/article71398953.ece" rel="noopener noreferrer">Nepal flash floods LIVE: Nepal doesn't need foreign rescue help, Foreign Ministry says as death toll reaches 469</a>
+  <p class="excerpt">Nepali Army helicopter rescue teams are working to rescue around 100 people trapped inside a tunnel at a hydropower project</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Hindu (International)</span>
+    <span class="when">28 août 2026, 07:22</span>
+  </div>
+  <a class="item-title" href="https://www.thehindu.com/news/international/trump-signs-order-renaming-lake-ontario-as-lake-america-in-us/article71397955.ece" rel="noopener noreferrer">Trump signs order renaming Lake Ontario as ‘Lake America’ in U.S.</a>
+  <p class="excerpt">Donald Trump has been floating the idea of the name change in recent days as the U.S. announced it was imposing 50% tariffs on $20 billion worth of Canadian goods over the weekend after talks between the countries broke down</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Hindu (International)</span>
+    <span class="when">28 août 2026, 07:18</span>
+  </div>
+  <a class="item-title" href="https://www.thehindu.com/news/national/x-account-blocked-for-several-hours-rues-organisation-hosting-bhagwats-new-york-event/article71397896.ece" rel="noopener noreferrer">X account blocked for several hours, rues organisation hosting Bhagwat's New York event</a>
+  <p class="excerpt">The X account of American Hindus for Engagement and Dialogue (AHEAD) Forum – @AheadForum1 remained &quot;unavailable&quot; to users and was restored after intervention from X</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Hindu (International)</span>
+    <span class="when">28 août 2026, 07:11</span>
+  </div>
+  <a class="item-title" href="https://www.thehindu.com/news/national/india-china-open-door-to-clarifying-lac-perceptions/article71397448.ece" rel="noopener noreferrer">India, China open door to clarifying LAC perceptions</a>
+  <p class="excerpt">An eight-point outcome document released on Wednesday says the two sides ‘discussed ways to improve understanding of LAC in appropriate areas, for better border management’</p>
+  <div class="tags"><span class="tag calibration" title="score 1 · interprétatif">covid-origin-uncertainty</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Hindu (International)</span>
+    <span class="when">28 août 2026, 05:45</span>
+  </div>
+  <a class="item-title" href="https://www.thehindu.com/news/international/trump-administration-seeks-to-restrict-internships-for-international-students/article71399036.ece" rel="noopener noreferrer">Trump administration seeks to restrict internships for international students</a>
+  <p class="excerpt">U.S. President Trump has targeted universities with probes and funding threats over issues like pro-Palestinian protests against U.S. ally Israel’s assault on Gaza, diversity initiatives, climate programs and transgender policies.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 18:13</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/videos/cp80m87pez3o?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Tracing the deadly path of the Nepal-Tibet flash flood</a>
+  <p class="excerpt">BBC Verify traces the path of the destructive Nepal-Tibet flash flood using verified video.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">28 août 2026, 05:41</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cm2q7z5mlrmo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Trump administration illegally retaliated against Anthropic, judge rules</a>
+  <p class="excerpt">The AI startup has been at loggerheads with the Pentagon over the use of AI by the US military.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">28 août 2026, 03:43</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/c9v9nndjznvo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Tate brothers blast US jail conditions as they seek bail in UK extradition fight</a>
+  <p class="excerpt">Andrew and Tristan Tate's legal team argued in a Miami court that the two were not a flight risk.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">28 août 2026, 00:10</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/c3d7exngd5no?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">What we know after the big Grand Theft Auto 6 preview</a>
+  <p class="excerpt">The official look at the blockbuster video game leaves fans and critics impressed.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 22:39</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/c33keeyyv70o?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Jury deliberating in trial of Lindsay Clancy, US woman accused of killing her children</a>
+  <p class="excerpt">Prosecutors argued Clancy made a calculated decision to murder the children, while the defence argued that she was suffering from postpartum psychosis.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 18:00</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/c15844gwe0wo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Optimus Prime and Eeyore voice actor Peter Cullen dies</a>
+  <p class="excerpt">Cullen voiced the heroic Optimus Prime in the Transformers TV series and then the Hollywood films.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 19:42</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cqxvrnvrr5do?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Norwegians lay flowers at palace as King Harald's condition worsens</a>
+  <p class="excerpt">The 89-year-old's condition is described as &quot;extremely serious&quot; and members of his family have visited him in hospital.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">28 août 2026, 05:15</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cd948kn02e5o?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">What we know about deadly Nepal-Tibet floods</a>
+  <p class="excerpt">Hundreds have died or are missing in Wednesday's flooding and landslides on the border of Nepal and Tibet.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 19:07</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cgqdy8g2zlgo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Two killed in 'domestic violence incident' at school near Berlin</a>
+  <p class="excerpt">Police have arrested a 19-year-old male suspect after an incident in which two people were killed near the German capital.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 13:23</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cpwl54kddeko?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Man who attacked nun on CCTV in Jerusalem acquitted on grounds of mental health</a>
+  <p class="excerpt">A Jerusalem court said the Jewish attacker was having a psychotic episode when he assaulted the nun, in an incident which caused outrage.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 16:17</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cew92l07kwzo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Board of Peace's Gaza envoy criticises Israeli strikes and Hamas actions</a>
+  <p class="excerpt">Nickolay Mladenov warns that a collapse of last October's ceasefire would be &quot;a point of no return&quot; for the region.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 14:41</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/ckgw9gw34yqo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Thieves steal Bronze Age artefacts from Spanish museum in four-minute heist</a>
+  <p class="excerpt">The Treasure of Villena is a unique trove of almost ten kilos of gold, bowls, bottles and bracelets dating back to the Bronze Age.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">28 août 2026, 01:14</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/ckgwdn1g58yo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Trump signs order to rename Lake Ontario as Lake America</a>
+  <p class="excerpt">Trump's order comes after the trade talks between the US and Canada collapsed late last week.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 16:49</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cy8znx3g4e2o?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Jellyfish force partial shutdown of French nuclear plant</a>
+  <p class="excerpt">It is the second consecutive year that jellyfish has forced the closure of the Gravelines power station in northern France.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 20:12</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cgl744j0ww1o?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Allan Little: I met dangerously fanatical Mladić early in Bosnian war</a>
+  <p class="excerpt">BBC special correspondent Allan Little met the &quot;Butcher of Bosnia&quot; in the early months of the Bosnian war.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">28 août 2026, 05:23</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cd08z840p8lo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">'The flood took everything': Nepal survivors describe horror of loved ones being swept away</a>
+  <p class="excerpt">One woman says her father, mother, sister and sister's children were carried away before her eyes.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 19:02</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cx2z8l8xdg2o?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">What we should make of CIA boss's secret trip to Moscow</a>
+  <p class="excerpt">There is nothing routine about John Ratcliffe making a secret, 10,000-mile return dash to Moscow, writes Frank Gardner.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 20:13</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/articles/cg7mlmg475go?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Key moments in trial of Lindsay Clancy, the mother accused of murdering her three children</a>
+  <p class="excerpt">A jury is deliberating in the trial of the Massachusetts mother charged with murdering her three small children</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 12:17</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/videos/ckgxnrg8j19o?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">What caused the Nepal-Tibet flash floods?</a>
+  <p class="excerpt">At least 270 people have died in the massive flash floods, while more than 800 others are missing.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">27 août 2026, 08:02</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/videos/cq63431rgljo?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">People pulled from mud in Nepal after deadly flash floods</a>
+  <p class="excerpt">At least 160 people have been killed along the Nepal-Tibet border as rescuers struggle to reach the disaster zone.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">BBC World</span>
+    <span class="when">26 août 2026, 14:36</span>
+  </div>
+  <a class="item-title" href="https://www.bbc.co.uk/news/videos/c62jmlgev3po?at_medium=RSS&amp;at_campaign=rss" rel="noopener noreferrer">Video shows scale of flash flood hitting Nepal-Tibet border</a>
+  <p class="excerpt">This video has been edited by the BBC with white flashes, due to the distressing content.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/technology/2026/aug/28/meta-facebook-us-lawsuit-settlement-world-impact" rel="noopener noreferrer">What could Meta’s US settlement mean around the world – and what now for other claims against firm?</a>
+  <p class="excerpt">Other governments could seek similar concessions, while separate legal action is pending in places ranging from Kenya to the Netherlands In October 2021, Abrham Meareg’s father, a professor of chemistry in Ethiopia’s northern town of Bahir Dar, was shot at close range and died outside his family home. This was in the middle of the country’s civil war. For weeks, Facebook’s algorithm had actively promoted posts calling for the academic to be murde</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 10:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/27/uk-urged-to-help-free-british-egyptian-arrested-in-cairo-over-sisters-activism" rel="noopener noreferrer">UK urged to help free British-Egyptian ‘arrested in Cairo over sister’s activism’</a>
+  <p class="excerpt">Lawyers claim Eman el-Shazly, from Birmingham, was detained in effort to silence her sister, a critic of Sisi regime The UK Foreign Office has been asked to intervene to secure the release of a British-Egyptian woman who it is claimed has been arrested in Cairo because of her sister’s political activism. Eman el-Shazly, a 45-year-old based in Birmingham, was arrested on 16 August while visiting Egypt. Her lawyers say she has been detained in an a</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">26 août 2026, 17:09</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/26/south-african-police-arrest-two-thai-men-smuggling-parrot-eggs" rel="noopener noreferrer">South African police arrest two Thai men for allegedly smuggling parrot eggs</a>
+  <p class="excerpt">Bird eggs intercepted in homemade incubators at Johannesburg airport as officials try to halt wildlife trafficking South African police have arrested two Thai nationals in separate incidents for allegedly attempting to smuggle endangered parrot eggs out of the country as authorities try to stem the tide of wildlife trafficking. A 50-year-old Thai national was arrested at OR Tambo international airport in Johannesburg on 20 August, carrying 50 bir</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">26 août 2026, 13:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/global-development/2026/aug/26/global-health-mpox-outbreak-explainer-children" rel="noopener noreferrer">Mpox is back – and in new countries. How can this outbreak be contained?</a>
+  <p class="excerpt">The public health emergencies in 2022 and 2024 saw the virus reported in 145 countries, but in the new cases children appear particularly affected A fresh outbreak of mpox in Guinea Bissau – the country’s first – means the virus formerly known as monkey pox is back in the headlines. So what has changed? Since 2022, there have been almost 190,000 lab-confirmed cases of mpox reported worldwide in 145 countries. Before then, outbreaks of mpox tended</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">26 août 2026, 11:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/global-development/2026/aug/26/moringa-lattes-and-tigernut-kebabs-the-young-ghanaians-taking-back-the-power-of-their-food" rel="noopener noreferrer">Moringa lattes and tigernut kebabs: the Ghanaians ‘taking back the power’ of their food</a>
+  <p class="excerpt">In Ghana, a grassroots movement is championing nutritious, homegrown, climate-resilient produce, rather than western imports After three years at catering school in Accra, Abiro Wisdom was certain of one thing – he did not want to go into catering. At least not the route that he might be expected to take. His course had prepared students for working in international hotels, focusing on French, Italian and Mexican cuisine. The nutritious, homegrow</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 00:55</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/27/trump-renames-lake-ontario-america" rel="noopener noreferrer">Trump signs executive order to rename Lake Ontario as Lake America</a>
+  <p class="excerpt">Mark Carney rejects attempt to rename lake as did several US governors, with Tony Evers mocking the move US politics live – latest updates Donald Trump signed an executive order on Thursday directing the federal government to rename Lake Ontario, making it Lake America, amid his escalating trade war with Canada. The order directs federal agencies to adopt the name-change on US maps, documents and databases. But Trump has no authority to rename Ca</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">26 août 2026, 20:15</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/26/trump-canada-trade-war" rel="noopener noreferrer">How to lose Trump’s trade war: test Canada’s resolve with threats to hockey sticks</a>
+  <p class="excerpt">The US president expected Ottawa to bow to tariff demands, but Canada is striking back – and it could cost Americans This was originally published in This Week in Trumpland. Sign up to receive it in your inbox every Wednesday Earlier this year, a survey found that Canada , along with Switzerland , was the best-liked country in the world. We all know this kind of polling is about as scientific as a high school popularity contest, but at least anec</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">26 août 2026, 12:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/26/paper-product-toilet-paper-tariffs-us-canada" rel="noopener noreferrer">Wiped out: US faces surging toilet paper prices amid trade war with Canada</a>
+  <p class="excerpt">Paper products among hardest-hit sectors after trade negotiations broke down, with 25-50% tariffs estimated Are you a Canadian boycotting US products? We’d like to hear from you Using the bathroom or having a cry is about to become more expensive for North Americans as the US and Canada enter a full-fledged trade war that threatens to flush away decades of peaceful trading between the two nations. After trade negotiations broke down between the t</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 07:38</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/live/2026/aug/28/nepal-tibet-flash-floods-hundreds-dead-missing-day-three-live-updates" rel="noopener noreferrer">Nepal-Tibet flash flood live updates: China halts rescue at epicentre over flood risk, state media reports; death toll at 469, say Nepali police</a>
+  <p class="excerpt">Lake formed by debris is overflowing towards area rescuers were headed, broadcaster says; 1,300 people still missing amid race to find survivors Nearly 1,400 missing, mostly tourists, and hundreds killed Nepal-Tibet flash flood: what we know so far on day three Visual guide: how the deadly flooding unfolded Tell us: have you been affected by the flash floods? More now on the Nepali army’s rescue operation to save about 100 people trapped in a tun</p>
+  <div class="tags"><span class="tag calibration" title="score 1 · interprétatif">covid-origin-uncertainty</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 07:25</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/28/never-tidy-paramedics-shoes-japan-custom-etiquette" rel="noopener noreferrer">Please don’t rearrange our shoes when we turn up, paramedics in Japan urge</a>
+  <p class="excerpt">It is polite to reposition a guest’s shoes when they arrive, but the emergency services in one city advise just skipping that part Etiquette, manners and consideration for others are integral pillars of Japanese society but there are times when they might go a step too far, according to one city’s emergency services. The fire department in the central city of Kanazawa has urged people not to tidy up the shoes that paramedic crews have taken off w</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 05:06</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/28/south-korea-missing-persons-police-scandal-bodies-jeju" rel="noopener noreferrer">South Korea to re-examine 310,000 missing person cases after fake record scandal</a>
+  <p class="excerpt">Renewed scrutiny comes after police officer accused of falsifying records in order to close the cases of people who were later found dead South Korean police will re-examine about 310,000 missing persons cases closed over the past three years, prompted by a scandal in which an officer was arrested on suspicion of falsifying records to close files on two people who were later found dead. The case has drawn national attention, with President Lee Ja</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 17:05</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/27/uss-abraham-lincoln-thailand-visit" rel="noopener noreferrer">USS Abraham Lincoln to visit port in Thailand after more than 250 days at sea</a>
+  <p class="excerpt">Thai navy says ‘routine’ visit’ will allow personnel to rest and recuperate amid reports of poor conditions onboard The USS Abraham Lincoln aircraft carrier is set to make a temporary stop in Thailand next week as it heads back to the United States, Thai navy officials said, after spending more than 250 consecutive days at sea supporting US operations against Iran amid recent reports of poor living conditions and low morale onboard the vessel. Th</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 14:41</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/27/what-caused-nepal-flash-flood-glacial-collapse-tibet-border" rel="noopener noreferrer">Nearly 1,400 missing, mostly tourists, after Nepal-Tibet flash flood kills at least 356</a>
+  <p class="excerpt">Entire villages swept away after glacial collapse triggers flood in mountainous region popular with trekkers and pilgrims Nepal-Tibet flash flood – latest updates Have you been affected by the flash floods? Rescuers are searching for nearly 1,400 people, most of them tourists, who are missing after a catastrophic flash flood hit Nepal and Tibet, thundering down valleys, obliterating entire villages and killing at least 356 people. Efforts to loca</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 07:38</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/australia-news/live/2026/aug/28/nepal-floods-australians-missing-penny-wong-anthony-albanese-angus-taylor-liberal-party-pauline-hanson-one-nation-ntwnfb" rel="noopener noreferrer">Australia news live: Antarctic staff withdrawn from Macquarie Island due to ‘psychological stress’ from bird flu risk; dolphin dies from H5</a>
+  <p class="excerpt">Follow today’s news live Get our breaking news email , free app or daily news podcast Greens say Australia needs to ‘step up and really commit’ to aiding rebuilding in Nepal David Shoebridge, the Greens’ spokesperson on foreign affairs, told RN Breakfast earlier the Australian commitment of $5m for affected communities in Nepal “won’t come close to touching the sides” of the calamity. I think Australia needs to step up and really commit to helpin</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 07:20</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/australia-news/2026/aug/28/identity-of-high-profile-queensland-man-drawn-into-extortion-case-to-remain-secret-after-court-ruling-ntwnfb" rel="noopener noreferrer">Identity of high-profile Queensland man drawn into extortion case to remain secret after court ruling</a>
+  <p class="excerpt">Man – referred to as MM by court – will keep his identity hidden after legal challenge against suppression dismissed The identity of a high-profile Queensland man drawn into a Cairns extortion case will remain secret, after the state’s supreme court threw out a legal challenge against a suppression order. The man – referred to as MM by the court – was drawn into an extortion case earlier this year . He is not a party to the case and is not accuse</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 06:49</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/28/how-to-help-nepal-community-flood-disaster-relief-funding-australia" rel="noopener noreferrer">How Nepali diaspora is responding to flood disaster and how Australians can help in relief effort</a>
+  <p class="excerpt">Nepali and Tibetan communities plan vigils and work to raise funds for recovery in ‘devastating’ time Get our breaking news email , free app or daily news podcast Australia’s Nepali community plan to host vigils to remember the victims of the Nepal-Tibet flood disaster to coincide with a day of mourning, as the number of people killed continues to rise. As Australia’s Nepali diaspora wait for the full scale of the disaster to become clear, commun</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 06:25</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/australia-news/2026/aug/28/sydney-library-returns-book-how-to-sell-a-genocide-to-shelves-after-state-library-intervenes-ntwnfb" rel="noopener noreferrer">Bondi library returns book How to Sell a Genocide to shelves after State Library ‘outlines the law’</a>
+  <p class="excerpt">Book was removed for review earlier this month following complaint but reinstated after petition and State Library letter to Waverley council Follow our Australia news live blog for latest updates Get our breaking news email , free app or daily news podcast A Sydney library has returned to its borrowing shelves a book critical of Israel called How to Sell a Genocide following a public campaign and an intervention from the State Library of New Sou</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 06:10</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/australia-news/2026/aug/28/coronial-inquest-findings-death-belgian-tourist-celine-cremer-tasmania" rel="noopener noreferrer">‘Confluence of errors’ led to Belgian tourist Celine Cremer’s death in Tasmanian wilderness, coroner finds</a>
+  <p class="excerpt">Coronor finds 31-year-old deviated from a walking track as dusk fell, four days before the winter solstice Follow our Australia news live blog for latest updates Get our breaking news email , free app or daily news podcast Overlapping errors, including a lack of preparation in near-freezing winter weather, contributed to the death of a Belgian tourist on a wilderness track. Celine Cremer set off on a walk at Philosopher Falls in Tasmania’s remote</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 21:26</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/27/britain-ukraine-war-russia" rel="noopener noreferrer">Russia says UK ‘playing with fire’ amid reports CIA chief has warned Kremlin not to attack Nato</a>
+  <p class="excerpt">Moscow threatens retaliation after Andy Burnham says UK will help Ukraine start producing long-range missiles Russia has said it could retaliate against the UK for its support of Kyiv by striking military targets inside and outside Ukraine, amid reports that the director of the CIA warned the Kremlin against attacking Nato during a secretive visit this week. Andy Burnham, Britain’s prime minister, said on Monday the UK would allow Kyiv access to </p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 19:11</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/music/2026/aug/27/greek-orthodox-priest-and-cult-musician-clarifies-views-on-homosexuality" rel="noopener noreferrer">Greek Orthodox priest and cult musician clarifies views on homosexuality</a>
+  <p class="excerpt">Father Dionysios Tabakis says his views are those of Orthodox church, ‘nothing more, nothing less’ A Greek Orthodox priest whose home-recorded album of drone metal and religious dubstep has made him a cult figure in experimental music circles has issued a statement in which he has clarified his stance on homosexuality and the Greek radical right. “As can be seen from my musical expression, I am in favour of unity, love, empathy and help for every</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 18:12</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/27/ratko-mladic-the-butcher-of-bosnia-dies-aged-84" rel="noopener noreferrer">Ratko Mladić, the ‘Butcher of Bosnia’, dies in The Hague</a>
+  <p class="excerpt">Bosnian Serb commander responsible for Srebrenica massacre dies in prison while serving life sentence for genocide From the archive: Fourteen years a fugitive: the hunt for the Butcher of Bosnia Ratko Mladić will die in jail. But go to Bosnia: you’ll see that he won Ratko Mladić, the infamous Serbian general who was serving a life sentence for genocide committed during the Bosnian war, has died in prison in The Hague. Mladić had been one of the m</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 17:47</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/culture/2026/aug/27/thieves-steal-bronze-age-treasure-of-villena-in-four-minute-heist" rel="noopener noreferrer">Bronze age treasure stolen in four-minute Spanish museum heist</a>
+  <p class="excerpt">Gold collection known as Treasure of Villena, worth at least €1.7m, is target of ‘very well planned’ raid Thieves in Spain have raided the Treasure of Villena – a stunning collection of bronze age gold artefacts that has been described as the most important prehistoric trove in Europe – in the latest high-profile smash-and-grab heist on the continent. The raid on Thursday morning of the 66 mostly gold objects in the Spanish town of Villena lasted</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 17:23</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/27/malaria-outbreak-kills-two-staff-at-frankfurt-airport-germany" rel="noopener noreferrer">Officials urge calm after malaria outbreak kills two staff at Frankfurt airport</a>
+  <p class="excerpt">Mosquito traps are set up at Germany’s biggest airport and doctors are asked to look out for symptoms of disease German health officials are seeking to reassure the public after two workers at the country’s biggest airport died of malaria. Mosquito traps have been set up at Frankfurt airport and a mosquito monitoring process is under way. A detailed investigation is being conducted to clarify how the workers contracted the disease. Continue readi</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">26 août 2026, 20:21</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/26/trump-cia-director-moscow-visit" rel="noopener noreferrer">Trump downplays Moscow visit by CIA director as ‘semi-routine’</a>
+  <p class="excerpt">President denies visit was to gain support for Iran sanctions or due to fears that Putin plans to ‘test Nato resolve’ Donald Trump has downplayed a visit to Moscow by the CIA director, John Ratcliffe, as “semi-routine” after he turned up in the Russian capital unannounced, triggering a wave of speculation about the reasons for his trip. Ratcliffe was reported to have flown to Moscow on a government transport plane on Tuesday in a rare visit after</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">26 août 2026, 13:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/26/gaza-farmers-struggle-scraps-of-land-constant-threat" rel="noopener noreferrer">On scraps of land and under constant threat, Gaza farmers struggle to survive</a>
+  <p class="excerpt">Efforts to rebuild domestic food production face severe challenges and have come at deadly cost As Gaza’s population of 2.1 million has been hemmed into an ever smaller slice of the territory, farmers are using every last remaining patch of unspoiled earth, no matter how tiny, in their struggle to survive. With severe shortages of water, fertiliser and pesticide, and with more than 80% of greenhouses ruined, it has taken inventiveness and determi</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 06:48</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/27/nepal-tibet-flash-floods-aid" rel="noopener noreferrer">Race to get aid into Nepal and Tibet amid warnings flood lake could burst</a>
+  <p class="excerpt">Flash floods have killed at least 469 people while homes and infrastructure have been swept away Nepal-Tibet flash flood – latest updates What caused the flash flood in Nepal and Tibet? The international community was scrambling to get aid into flood-stricken parts of Nepal and Tibet on Thursday as authorities warned that a lake ⁠formed at the ⁠site ⁠where the ​deadly torrents occurred ⁠was rising and ⁠at risk ​of ‌bursting. The catastrophic flas</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 04:29</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/live/2026/aug/27/nepal-flash-flood-live-updates-tibet-border-death-toll-missing-himalayas-floods-flooding-latest-news" rel="noopener noreferrer">Warning of fresh danger from rising lake water in Nepal – as it happened</a>
+  <p class="excerpt">This live blog has now closed – but our coverage continues at a new blog here Eyewitness accounts have been emerging from the Tibetan side of the border , with a woman saying she was travelling from Gyirong town towards Nepal on Wednesday morning when her group encountered the flood about 4km from Gyirong port. “Trees and electricity poles had already been knocked down, and the flood water was bearing down on us. We didn’t dare turn around, so we</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 20:25</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/27/climate-crisis-mountain-areas-glaciers-nepal-tibet" rel="noopener noreferrer">Climate crisis could be destabilising mountain areas like Nepal, experts warn</a>
+  <p class="excerpt">Unusual heat this year may have melted ice and thawed bonds that hold glaciers in place – leading to catastrophe Nepal-Tibet flash flood – latest updates What caused the flash flood in Nepal and Tibet? The devastating flash flood that has ripped through the border communities of Nepal and Tibet has heightened fears that the climate crisis is destabilising the geology of mountain and polar regions, threatening millions of people. Satellite imagery</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 20:02</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/27/britons-missing-flash-floods-nepal-tibet" rel="noopener noreferrer">Search is on for at least 33 Britons missing after flash floods in Nepal and Tibet</a>
+  <p class="excerpt">Rescue teams try to locate nearly 1,400 missing people, mostly tourists, while police report recovery of 389 bodies Nepal-Tibet flash flood – latest updates Rescue teams in Nepal are searching for at least 33 British nationals who are among those missing after flash floods ravaged its border with Tibet, killing more than 380 people. Nearly 1,400 people are missing, most of them tourists, authorities have said, after a glacier collapse triggered f</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">26 août 2026, 09:05</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/world/2026/aug/26/newborn-babies-die-fire-pakistan-hospital-maternity-ward" rel="noopener noreferrer">At least 14 newborn babies die in fire at Pakistan hospital’s maternity ward</a>
+  <p class="excerpt">Authorities at biggest state hospital in Islamabad say 15 babies were in the ward when fire broke out At least 14 newborn babies have died in a fire that broke out in the maternity ward at one of Pakistan’s most prominent state hospitals. The blaze began in the early hours of Wednesday and engulfed the ward at the Pakistan Institute of Medical Sciences, the biggest state hospital in Islamabad. Continue reading...</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/uk-news/2026/aug/28/seven-charged-damaging-trump-scottish-golf-course-accused-terrorist-connection" rel="noopener noreferrer">Seven charged with damaging Trump’s Scottish golf course accused of ‘terrorist connection’</a>
+  <p class="excerpt">Course at Donald Trump’s Turnberry resort was painted with words ‘Gaza is not 4 sale’ and clubhouse was sprayed with graffiti Seven people charged with vandalising Donald Trump’s Turnberry golf course in Scotland have been accused of malicious damage “having a terrorist connection”. The clubhouse at the five-star Trump Turnberry hotel and resort on the west coast of Scotland was graffitied on 8 March last year and the course was dug up and painte</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/culture/2026/aug/28/lorde-little-simz-star-at-world-first-festival-run-on-clean-power" rel="noopener noreferrer">‘No precedent’: Lorde and Little Simz to star at world-first festival run on clean power</a>
+  <p class="excerpt">A zero-emission compact hydrogen power plant will drive the main stage at Clifton Down in Bristol When Lorde, Little Simz and Wet Leg stride on to stages in Bristol this weekend, they will not only be entertaining tens of thousands of festivalgoers but taking part in what is being billed as a world-first clean power project. The two stages at Forwards festival on Clifton Down are being driven almost entirely by green power – a combination of hydr</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/environment/2026/aug/28/woolston-eyes-cheshire-wetland-black-necked-grebe" rel="noopener noreferrer">‘Nature thrives when given a chance’: restored Cheshire wetland now a haven for rare grebe</a>
+  <p class="excerpt">Woolston Eyes in Warrington, a dumping ground for canal dredgings, has become best place in UK for black-necked grebe A dumping ground for dredgings from the Manchester Ship Canal has become the best place in Britain for the rare and beautiful black-necked grebe, hosting 64% of Britain’s breeding population. Since 2021, Woolston Eyes in Cheshire has been restored, extended and turned into a mosaic of freshwater pools, reedbeds, willow scrub and r</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 23:30</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/money/2026/aug/27/burnham-to-tackle-rogue-bailiffs-cowboy-builders-debts" rel="noopener noreferrer">Burnham announces crackdown on rogue bailiffs and ‘cowboy builders’</a>
+  <p class="excerpt">New rules are aimed at protecting people in debt in England and Wales and stopping homeowners being ripped off A clampdown on “rogue bailiffs” has been launched by Andy Burnham amid concerns that vulnerable people are being overcharged and face aggressive behaviour. In the latest in a series of “everyday fixes” to ease the cost of living and “make Britain fairer”, the prime minister said he was strengthening the rules that apply to bailiffs in En</p>
+  <div class="tags"><span class="tag archetype" title="interprétatif">moral-panic-war</span><span class="tag calibration" title="score 1 · interprétatif">war-on-drugs</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 20:51</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/politics/2026/aug/27/andy-burnham-political-donation-reduced-over-time" rel="noopener noreferrer">Burnham accused of U-turn after initially backing political donations cap to fall below £500k</a>
+  <p class="excerpt">Exclusive: Campaigner says PM wrote in email he believed £500k cap should be reduced over time to guard against undue influences Andy Burnham recently supported an even lower donations cap than previously reported, according to correspondence seen by the Guardian, as the row over next week’s elections bill escalates. The prime minister wrote to a campaigner in May outlining his support for a £500,000 individual donations cap, which he said would </p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 04:31</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/28/federal-judge-halts-trump-executive-order-mail-voting-midterms" rel="noopener noreferrer">Federal judge again halts Trump’s executive order limiting mail voting in midterms</a>
+  <p class="excerpt">President’s directive stalls for a second time about a week before the first postal ballots are due to be sent out A federal judge on Thursday halted – at least for the moment – attempts to implement Donald Trump’s executive order limiting mail voting. The president’s directive stalled for a second time about a week before the first mail ballots are due to be sent out for the rapidly approaching midterm elections. In the US district court, Judge </p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/live/2026/aug/27/cia-moscow-nato-ratcliffe-rutte-colby-trump-paxton-voting-latest-news-updates" rel="noopener noreferrer">Canadian prime minister and New York lawmaker denounce Trump’s move to rename Lake Ontario as Lake America – as it happened</a>
+  <p class="excerpt">This live blog is now closed. Sign up for the Breaking News US email On Wednesday, Trump officially signed a proclamation on Wednesday that suspends higher tariffs on 300,000 metric tons of foreign beef imports for 90 days. This comes after backlash to the proposal – designed to lower grocery costs for Americans in the run-up to the November midterms. Several Republicans – in states with sizable cattle farming industries – have criticized the pol</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 03:19</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/27/fda-approves-updated-covid-19-vaccines" rel="noopener noreferrer">FDA approves updated Covid-19 vaccines for dominant XFG variant</a>
+  <p class="excerpt">Decision allows manufacturers to begin shipping doses, but confusion remains about insurance coverage The US Food and Drug Administration approved updated Covid-19 vaccines on Thursday, allowing manufacturers to begin shipping doses to pharmacies and doctors’ offices across the country. The FDA approved Moderna, Novavax-Sanofi and Pfizer-BioNTech’s updated Covid vaccines, the companies ⁠said on Thursday, ⁠after ​an advisory panel recommended that</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">28 août 2026, 01:33</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/27/journalists-sue-pentagon-stars-and-stripes" rel="noopener noreferrer">Three journalists sue Pentagon after being fired from military news outlet</a>
+  <p class="excerpt">Three employees of Stars and Stripes, a government-funded news service, allege they were fired after reporting on USS Abraham Lincoln Three journalists who were fired by the Pentagon from a US government-funded news outlet sued the Department of Defense in federal court on Thursday, arguing their dismissals were illegal and violated their first amendment rights to free speech. The three journalists were all employees of Stars and Stripes, which t</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">The Guardian World</span>
+    <span class="when">27 août 2026, 22:33</span>
+  </div>
+  <a class="item-title" href="https://www.theguardian.com/us-news/2026/aug/27/democrats-investigation-trump-jr-1798-capital" rel="noopener noreferrer">Democrats to investigate ‘miraculous’ rise of Trump Jr’s investment firm</a>
+  <p class="excerpt">Congressman Jamie Raskin asks president’s son to detail firm’s recent success after he joined 1789 Capital as partner Democrats on a powerful US congressional committee have launched an investigation into a venture capital firm which has thrived since recruiting Donald Trump’s son. Donald Trump Jr joined 1789 Capital as a partner just days after his father won a second term in office in November 2024. Congressman Jamie Raskin, ranking member of t</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 07:30</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/c377139e-b53c-4043-86b2-36b9d73cde9a?syn-25a6b1a6=1" rel="noopener noreferrer">The US consumer is showing some strain</a>
+  <p class="excerpt">Spending is rising, but not on the right stuff</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 07:15</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/5e6db1ad-6ea5-44db-80fd-fd7073d9e676?syn-25a6b1a6=1" rel="noopener noreferrer">FirstFT: US corporate profits surge as wages lag</a>
+  <p class="excerpt">Also in this newsletter: Europe’s defence rebuke and Saudi Arabia’s mega-project revamp</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 07:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/75d1b474-7885-42ee-a08b-d221c5e96d1c?syn-25a6b1a6=1" rel="noopener noreferrer">US assesses European allies’ allegiance in pointed Nato questionnaire</a>
+  <p class="excerpt">Also in this newsletter: The EU’s rich states call for a drastically smaller shared budget</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/4f5a0247-7f56-48e7-b97e-87fbe8945e49?syn-25a6b1a6=1" rel="noopener noreferrer">The great junior consultant reskilling</a>
+  <p class="excerpt">As AI takes over more technical tasks, consulting executives are considering ordering junior staff back to the office</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/6f3ada65-c56c-499c-8eb6-008fac58949d?syn-25a6b1a6=1" rel="noopener noreferrer">US corporate profits surge to record as worker payouts wilt</a>
+  <p class="excerpt">Pre-tax earnings hit highest level since after the second world war as employee remuneration slides</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/7783b779-7ed5-4816-a7e3-38eba4a8987e?syn-25a6b1a6=1" rel="noopener noreferrer">Burnham retreats from backing return of Parthenon sculptures to Greece</a>
+  <p class="excerpt">UK prime minister previously called for British Museum to ‘send them back, no strings attached’</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/8faac5d4-af01-4c36-949f-bb059acee910?syn-25a6b1a6=1" rel="noopener noreferrer">Healey could suffer £4bn headroom hit because of lower immigration forecasts</a>
+  <p class="excerpt">New chancellor is seeking to reassure investors as he prepares for first Budget in October</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/5d7957b7-6ad8-48d3-a84e-87f3c6eac326?syn-25a6b1a6=1" rel="noopener noreferrer">Saudi Arabia shakes up flagship real estate project</a>
+  <p class="excerpt">British CEO replaced in latest change after review of portfolio companies of sovereign wealth fund</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/9a60246e-30de-4c12-911a-c57cf31f4ced?syn-25a6b1a6=1" rel="noopener noreferrer">Burnham’s devolution push delays police merger plans</a>
+  <p class="excerpt">Regional mayors have expressed concern about the government’s drive to create bigger regional forces for England and Wales</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/8e93c159-2c02-444a-9f22-dcda14bc451f?syn-25a6b1a6=1" rel="noopener noreferrer">Zero-interest convertible bonds set for record year</a>
+  <p class="excerpt">Issuance on track for highest-ever level amid high AI stock volatility and as companies seek to limit borrowing costs</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/ef0e436b-5a9f-4284-8df5-1f6bbddf6167?syn-25a6b1a6=1" rel="noopener noreferrer">Meta’s $18bn settlement shows the wrong way to keep kids safe</a>
+  <p class="excerpt">Relying on mutual compromise is a flawed way to protect young users</p>
+  <div class="tags"><span class="tag calibration" title="score 1 · interprétatif">opioid-crisis</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/007e0862-ffe7-4b8f-a540-05a19d1a45dc?syn-25a6b1a6=1" rel="noopener noreferrer">The cowboy clinics selling unproven longevity treatments</a>
+  <p class="excerpt">An FT investigation has found a thriving market for stem cell therapies in the US promising longer, healthier lives. Experts say such claims are dangerous</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/42009512-6b88-4808-adbb-1418995429e1" rel="noopener noreferrer">Letting tax cheats off the hook is costing America</a>
+  <p class="excerpt">Politicised enforcement is targeting minnows while allowing the wealthiest scofflaws to escape unscathed</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/42935d28-2998-4c1b-a2f3-82ec0e462ec4?syn-25a6b1a6=1" rel="noopener noreferrer">Is China’s ‘wise camel’ the winner from the US-Iran war?</a>
+  <p class="excerpt">Beijing has threatened to retaliate with ‘all necessary measures’ if the US hits it with sanctions</p>
+  <div class="tags"><span class="tag calibration" title="score 1 · interprétatif">covid-origin-uncertainty</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/257f7067-c3d6-435d-87a8-3f7252182975?syn-25a6b1a6=1" rel="noopener noreferrer">Sunak at 10 by Anthony Seldon — the reluctant prime minister</a>
+  <p class="excerpt">A reappraisal of the former UK leader and his attempts to steady a beleaguered Conservative government that was already heading towards electoral disaster</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/239aa5f8-2cd1-41f5-a4df-ab1bcc99158a?syn-25a6b1a6=1" rel="noopener noreferrer">Hotel groups expand beyond Med’s swarming coastal strips</a>
+  <p class="excerpt">Appeal of Europe’s inland towns and rural destinations boosted by AI and social media</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/77dffbc8-a1fa-4507-b299-1dacdcfe76ce" rel="noopener noreferrer">Postcard from Spain: the ultimate pilgrimage for carnivores</a>
+  <p class="excerpt">In a series of underground cellars in rural León, La Cúpula offers an 18-course homage to the ox — part feast, part ceremony, part obsession</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/f43ca249-ad8a-427f-8884-a49070b7587c?syn-25a6b1a6=1" rel="noopener noreferrer">Big Chicken</a>
+  <p class="excerpt">This series examines how chicken became the world’s favourite protein and the tension between keeping costs low and animal welfare</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/fd88ca7f-b6a7-493e-9c04-d2dc9234a041?syn-25a6b1a6=1" rel="noopener noreferrer">EU industrial push strains ties with Switzerland and Norway</a>
+  <p class="excerpt">The bloc’s closest partners warn that ‘Made in Europe’ policies leave them out in the cold</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/30ac3572-06a9-4718-8043-60b1dee50c40?syn-25a6b1a6=1" rel="noopener noreferrer">How Costco’s $4.99 rotisserie chicken defies inflation</a>
+  <p class="excerpt">The retailer built its own factory to keep costs low for the famous bird. But resisting rising prices is a constant struggle</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 06:00</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/1e77a7db-9d70-437e-b81f-23562f0f016c?syn-25a6b1a6=1" rel="noopener noreferrer">EU policy could ice out closest trading partners</a>
+  <p class="excerpt">Switzerland and Norway warn that ‘Made in Europe’ policies leave them out in the cold</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 04:49</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/ae0441b1-653e-406e-b9e8-7584ffd76f3f?syn-25a6b1a6=1" rel="noopener noreferrer">Anthropic wins legal battle with Pentagon in California</a>
+  <p class="excerpt">Federal judge rules Trump administration cannot punish AI lab in clash over military use of its models</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 03:37</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/547e5366-b476-4695-81e6-579fc452bed6?syn-25a6b1a6=1" rel="noopener noreferrer">China bets on exports of cheap 3D-printed drone killers</a>
+  <p class="excerpt">Chinese companies rush into sector as global conflicts raise demand for interceptors</p>
+  <div class="tags"><span class="tag calibration" title="score 1 · interprétatif">covid-origin-uncertainty</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 03:30</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/c83f1e1a-86fd-41d9-835d-97f2c9d32144?syn-25a6b1a6=1" rel="noopener noreferrer">Juspay’s Sheetal Lalwani: payments are all about balancing fraud and friction</a>
+  <p class="excerpt">Open source is key to the Indian financial infrastructure company’s global expansion</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">Financial Times</span>
+    <span class="when">28 août 2026, 01:01</span>
+  </div>
+  <a class="item-title" href="https://www.ft.com/content/91c79aa8-12c5-49b3-b073-58c7e1aca9a7" rel="noopener noreferrer">De-dollarisation may not be over</a>
+  <p class="excerpt">Recent pick-up in dollar’s share of global foreign exchange reserves does not amount to a trend reversal</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 14:09</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270458.html" rel="noopener noreferrer">Kenya: Power Won At Ballot Box Must Be Exercised Within Constitutional Limits - Ruto</a>
+  <p class="excerpt">[Capital FM] Nairobi -- President William Ruto has said an electoral mandate does not give an elected government unlimited authority, insisting that power secured at the ballot box must always be exercised within the confines of the Constitution.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 12:43</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270304.html" rel="noopener noreferrer">Uganda: U.S. Donates Experimental Antibody Treatment to Bolster Uganda's Fight Against Ebola</a>
+  <p class="excerpt">[Nile Post] The United States government has delivered an experimental antibody treatment for Ebola to Uganda's Ministry of Health, strengthening the country's preparedness amid an ongoing outbreak of Bundibugyo virus disease in neighbouring Democratic Republic of the Congo (DRC).</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 11:43</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270150.html" rel="noopener noreferrer">Nigeria: Unpaid Arrears - Plateau Varsity Lecturers Begin Indefinite Strike</a>
+  <p class="excerpt">[Premium Times] Lecturers at Plateau State University, Bokkos, have declared an indefinite strike over unpaid salary-related arrears and other unresolved demands.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 11:42</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270149.html" rel="noopener noreferrer">Kenya: AI Is Already in Kenya's Classrooms. Is the Education System Ready?</a>
+  <p class="excerpt">[Capital FM] Nairobi -- Artificial intelligence is already changing how Kenyan students learn, even as schools and universities race to determine how they should teach in an AI-enabled world.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 09:00</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270082.html" rel="noopener noreferrer">Africa: All of Africa Today - August 27, 2026</a>
+  <p class="excerpt">[allAfrica]</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 07:49</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270075.html" rel="noopener noreferrer">Guinea: Guinea President Sacks 173 Soldiers for Desertion</a>
+  <p class="excerpt">[allAfrica] President Mamadi Doumbouya has dismissed 173 military personnel for alleged desertion. This includes Colonel Michel Lamah, a member of the elite Special Forces unit who helped him seize power in the 2021 coup.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">28 août 2026, 06:13</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608280039.html" rel="noopener noreferrer">Kenya: Nairobi Identifies 16 Flood Hotspots As County Steps Up El Niño Preparations</a>
+  <p class="excerpt">[Capital FM] Nairobi -- Nairobi has intensified preparations for the anticipated El Niño rains, with Governor Johnson Sakaja saying multi-agency teams have been mobilised to minimise flooding and other emergencies.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">28 août 2026, 06:05</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608280032.html" rel="noopener noreferrer">Africa: FIFA in Africa - Has Gianni Infantino Really Helped Football Development?</a>
+  <p class="excerpt">[The Conversation Africa] Gianni Infantino might have backed down from his proposal to sell a minority stake of Fifa to corporate investors and he may be facing a backlash from all sides, but the steady commercialisation of the game continues.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 17:36</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270584.html" rel="noopener noreferrer">Ghana: Xenophobia - Ghana Rejects MTN's Donation for Affected Ghanaians</a>
+  <p class="excerpt">[Premium Times] Ghana said it had already made adequate financial provision for the evacuation and reintegration of affected Ghanaian citizens.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 14:11</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270462.html" rel="noopener noreferrer">South Africa: Thai National Arrested At or Tambo With 50 Suspected Parrot Eggs</a>
+  <p class="excerpt">[SAnews.gov.za] A 50-year-old Thai national has been arrested at OR Tambo International Airport after allegedly attempting to smuggle 50 parrot eggs out of South Africa in a homemade incubator bag.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 13:41</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270410.html" rel="noopener noreferrer">Africa: Africa CDC Unveils Statue Honoring Dr. Senait Fisseha</a>
+  <p class="excerpt">[Africa CDC] Addis Ababa -- A special moment at Africa CDC today as we welcomed Dr. Senait Fisseha, Vice President of Global Programs at the Susan Thompson Buffett Foundation. During her visit, Africa CDC unveiled a surprise statue in her honour, recognising her leadership, partnership and longstanding commitment to strengthening African institutions and advancing health across the continent. Dr. Fisseha's journey is a powerful reminder that last</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 14:03</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270441.html" rel="noopener noreferrer">Sudan: Displaced in South Darfur Shelters Face Critical Humanitarian Conditions</a>
+  <p class="excerpt">[Dabanga] Nyala -- The emergency room and health centres in Nyala, the capital of South Darfur, warn of deteriorating humanitarian conditions in several displacement shelters across the city. They say the basic needs of hundreds of families remain inadequately met, amid shortages of food, water, medicines, shelter materials, and hygiene supplies.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 14:01</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270436.html" rel="noopener noreferrer">Nigeria: Bandits Go After Families Compensated for Boat Mishap, Kill 4</a>
+  <p class="excerpt">[Daily Trust] Bandits have killed four people and abducted four others in Gorau community, Goronyo Local Government Area of Sokoto State.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 13:42</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270412.html" rel="noopener noreferrer">Uganda: More South Sudanese Refugees Arrested Over Imvepi Riots</a>
+  <p class="excerpt">[Independent (Kampala)] Over forty South Sudanese refugees have been arrested and detained in Terego District in connection with Tuesday's riots at Imvepi Refugee Settlement that left offices belonging to the Office of the Prime Minister (OPM), UNHCR and police damaged or burnt.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 12:50</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270328.html" rel="noopener noreferrer">Mozambique: Peace Is Not Built Solely Through Formal Negotiations - Graça Machel</a>
+  <p class="excerpt">[AIM] Maputo -- Mozambique's former first lady, Graça Machel, the widow of the country's first president, Samora Machel, believes that peace and social cohesion are not built solely through formal negotiations or in the courts, but above all through everyday interactions between individuals and social groups.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">EN</span>
+    <span class="feed">AllAfrica (latest)</span>
+    <span class="when">27 août 2026, 12:49</span>
+  </div>
+  <a class="item-title" href="https://allafrica.com/stories/202608270326.html" rel="noopener noreferrer">Africa: Unusual Suspects - Elders in West Africa's Changing Drug Trade</a>
+  <p class="excerpt">[ISS] The apparent rise of trafficking by older adults could reflect a new criminal adaptation rather than individual criminality.</p>
+  
+</li></ol>
+</section>
+<section class="lang-block">
+  <h2>FR <span class="count">16</span></h2>
+  <ol class="items"><li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 11:00</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270122.html" rel="noopener noreferrer">Afrique: Revue de presse de l'Afrique Francophone du 27 août 2026</a>
+  <p class="excerpt">[allAfrica] Le fils du président ougandais annonce sa candidature à la magistrature suprême pour 2031</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 19:09</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270650.html" rel="noopener noreferrer">Afrique Centrale: L'Ouganda déclare officiellement la fin de son épidémie d'Ebola après 42 jours sans nouveau cas</a>
+  <p class="excerpt">[allAfrica] L'Ouganda a officiellement mis fin à son épidémie d'Ebola causée par l'espèce Bundibugyo, ont annoncé conjointement les Centres africains de contrôle et de prévention des maladies (Africa CDC) et l'Organisation mondiale de la santé (OMS) ce 27 août 2026.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 15:47</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270523.html" rel="noopener noreferrer">Congo-Kinshasa: La richesse du Congo ne fait pas encore sa puissance</a>
+  <p class="excerpt">[allAfrica] La République démocratique du Congo dispose des minerais et du potentiel hydroélectrique nécessaires pour devenir une grande puissance industrielle. Encore faut-il bâtir la paix, les institutions et les infrastructures capables de transformer ces atouts en prospérité partagée.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 10:41</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270114.html" rel="noopener noreferrer">Afrique de l'Ouest: Frontière Côte d'Ivoire-Mali - Les deux pays adoptent définitivement le tracé</a>
+  <p class="excerpt">[Fratmat.info] À l'issue des travaux de la Commission technique mixte de matérialisation de la frontière Côte d'Ivoire-Mali tenus du 21 au 25 août 2026 à Bamako, au Mali, les deux parties prenantes ont adopté consensuellement le tracé définitif de leur frontière commune, ainsi que l'avant-projet de Traité de délimitation de cette frontière.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 10:38</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270113.html" rel="noopener noreferrer">Ethiopie: L'envoyé spécial de l'UA pour la Corne de l'Afrique effectue une nouvelle visite au Tigré</a>
+  <p class="excerpt">[RFI] L'ancien président nigérian était en visite à Mekelle, la capitale de la région, lundi 24 août, alors que les tensions entre le gouvernement fédéral d'Addis Abeba et le Front de libération du peuple du Tigré (TPLF) s'accroissent à nouveau. Il s'agissait de sa deuxième visite sur place en à peine plus de deux mois.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 11:08</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270123.html" rel="noopener noreferrer">Maroc: Les données de 70 000 policiers et agents du renseignement divulguées</a>
+  <p class="excerpt">[RFI] Revendiquée par le groupe de hackers Jabaroot qui se présente comme un soutien d'Alger, la fuite, jugée au moins en partie authentique par d'ex-membres du renseignement du royaume, est un « cadeau » fait à l'Europe après la crise migratoire de Ceuta à la fin du mois de juillet, affirment les pirates. Ces derniers accusent des responsables sécuritaires marocains d'avoir facilité le passage ve</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 10:23</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270105.html" rel="noopener noreferrer">Madagascar: Refondation - Timing serré pour les échéances électorales</a>
+  <p class="excerpt">[L'Express de Madagascar] Le calendrier de la concertation nationale risque de serrer les délais de la Refondation. Les résolutions ne sont attendues qu'après mai 2027, alors qu'une première échéance électorale devrait se tenir entre mai et juillet.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 18:19</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270624.html" rel="noopener noreferrer">Congo-Kinshasa: Dans l'ombre d'Ebola, la flambée des cas de choléra inquiète l'OMS</a>
+  <p class="excerpt">[La Prospérité] Alors que l'épidémie d'Ebola concentre l'attention en République démocratique du Congo, le pays reste confronté à une flambée prolongée de choléra. Près de 39 500 cas suspects et 1 173 décès ont été enregistrés depuis le début de l'année 2026. La létalité est surtout beaucoup plus élevée dans les provinces qui ne sont</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 17:33</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270579.html" rel="noopener noreferrer">Afrique de l'Est: Phénomène climatique El Niño - «Il pourrait y avoir 3 millions de personnes déplacées»</a>
+  <p class="excerpt">[RFI] Selon une étude publiée le 24 août 2026 par le Conseil danois pour les réfugiés (DRC), El Niño, qui arrive progressivement dans la Corne de l'Afrique, va considérablement aggraver les inondations lors de la saison des pluies à venir. Selon les modélisations de l'ONG, qui s'est focalisée sur quatre pays est-africains (Kenya, Ouganda, Somalie, Soudan du Sud), ce phénomène climatique </p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 17:33</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270578.html" rel="noopener noreferrer">Cameroun: Une série de féminicides ravive le débat sur un durcissement de la législation</a>
+  <p class="excerpt">[RFI] Au Cameroun, l'émotion est vive après une série de féminicides. Au moins 8 meurtres de femmes y ont été enregistrés durant la semaine du 17 au 23 août. Le ministère de la Promotion de la femme et de la famille milite pour le dépôt d'une proposition de loi dès la prochaine session parlementaire. Ce qui rejoint en partie une position de la société civile quant à l'urge</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 17:25</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270571.html" rel="noopener noreferrer">Afrique: Lutte contre les comportements abusifs - Les engagements de MSF</a>
+  <p class="excerpt">[MSF] Depuis huit ans, nous publions les chiffres annuels relatifs aux abus et aux comportements répréhensibles signalés au sein de Médecins sans frontières. Les chiffres les plus récents sont parlants, et difficiles. Comme les années précédentes, le nombre de plaintes a continué d'augmenter. Cela peut signifier que nos dispositifs de signalement sont mieux connus, et que des personnes se sentent </p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 14:26</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270475.html" rel="noopener noreferrer">Congo-Kinshasa: Quand la tradition devient une violence</a>
+  <p class="excerpt">[DW] En RDC, des filles et des femmes subissent encore l'excision au nom de la tradition. Des victimes témoignent de graves conséquences, tandis que les associations alertent sur l'ampleur du phénomène.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 11:37</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270142.html" rel="noopener noreferrer">Guinée: Découverte d'une fosse commune - La société civile demande à l'ONU de superviser l'enquête</a>
+  <p class="excerpt">[RFI] La découverte de six corps dans une fosse commune dans la préfecture de Forécariah, à une centaine de kilomètres au sud-est de Conakry, la capitale guinéenne, lundi 24 août, a donné lieu à l'ouverture d'une enquête. Soucieuses qu'elle se déroule en toute indépendance et en toute transparence, les organisations de la société civile demandent au Haut-Commissariat des Nation</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 11:32</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270141.html" rel="noopener noreferrer">Kenya: La société civile s'inquiète d'une forte hausse du budget sécuritaire à un an des élections générales</a>
+  <p class="excerpt">[RFI] Au Kenya, les agences de sécurité vont recevoir une dotation supplémentaire de 44,5 milliards de shillings, soit environ 295 millions d'euros, selon le Bulletin officiel. Ces financements, votés par le Parlement, sont destinés à des projets de modernisation des infrastructures policières, à de nouvelles unités administratives, mais aussi aux préparatifs des élections générales</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 11:30</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270140.html" rel="noopener noreferrer">Afrique Centrale: L'Angola et la RDC signent un contrat de concession pour la ligne ferroviaire Dilolo-Sakania</a>
+  <p class="excerpt">[RFI] En RDC, le corridor de Lobito pourrait enfin devenir une réalité grâce à un joint-venture entre Kinshasa et Luanda. Les deux capitales ont signé mercredi le contrat de concession de la ligne ferroviaire Dilolo-Sakania dans le sud-est congolais à l'occasion d'une visite de travail du président angolais Joao Lourenco à Kinshasa. Le projet est stratégique pour relier le sud-est de la RDC au port ang</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">FR</span>
+    <span class="feed">AllAfrica (dernières · FR)</span>
+    <span class="when">27 août 2026, 11:30</span>
+  </div>
+  <a class="item-title" href="https://fr.allafrica.com/stories/202608270139.html" rel="noopener noreferrer">Sénégal: Le Pastef demande au gouvernement de respecter le calendrier électoral des prochaines élections locales</a>
+  <p class="excerpt">[RFI] Alors que ni le décret fixant la date du scrutin, ni celui fixant le montant de la caution électorale n'ont encore été publiés par l'exécutif, le parti majoritaire à l'Assemblée vient de publier un communiqué dans lequel il assure que les prochaines élections locales devraient se tenir au plus tard le dimanche 17 janvier 2027. Il y rappelle aussi que « le respect du calendrier élec</p>
+  
+</li></ol>
+</section>
+<section class="lang-block">
+  <h2>ES <span class="count">16</span></h2>
+  <ol class="items"><li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/espana/2026-08-28/marlaska-regresa-al-congreso-tras-el-choque-con-robles.html" rel="noopener noreferrer">Marlaska acude al Congreso tras el choque con Robles dispuesto a defender su versión</a>
+  <p class="excerpt">Los ministros José Manuel Albares y Elma Saiz también comparecen este viernes para dar cuenta de su gestión en la crisis migratoria en Ceuta</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/espana/2026-08-28/el-gobierno-pide-al-pp-que-le-ayude-a-parar-la-violencia-en-ceuta-en-medio-de-bloqueos-del-reparto-de-comida-a-los-inmigrantes.html" rel="noopener noreferrer">El Gobierno pide al PP que le ayude a parar la violencia en Ceuta en medio de bloqueos del reparto de comida a los inmigrantes</a>
+  <p class="excerpt">Torres y Vivas pactaron un llamamiento contra la violencia, pero un centenar de personas carga contra la Cruz Roja</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/internacional/2026-08-28/el-estrecho-de-ormuz-sigue-siendo-un-campo-de-batalla-seis-meses-despues-del-inicio-de-la-guerra.html" rel="noopener noreferrer">El estrecho de Ormuz tras seis meses de guerra: bloqueo, drones y barcos fantasma</a>
+  <p class="excerpt">Se suceden los ataques a buques en el estratégico estrecho mientras Irán y Omán ultiman las negociaciones sobre una nueva ruta</p>
+  <div class="tags"><span class="tag calibration" title="score 1 · interprétatif">war-on-drugs</span></div>
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 06:36</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/internacional/2026-08-28/el-riesgo-de-una-segunda-riada-amenaza-nepal-y-tibet-tras-una-catastrofe-que-deja-ya-al-menos-472-muertos.html" rel="noopener noreferrer">El riesgo de una segunda riada amenaza Nepal y Tíbet, tras una catástrofe que deja ya al menos 472 muertos</a>
+  <p class="excerpt">Las lluvias alimentan varios represamientos naturales, mientras más de 1.500 personas continúan desaparecidas</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/internacional/2026-08-28/una-fuerza-inimaginable-y-densa-como-el-hormigon-liquido-que-origino-el-deslizamiento-masivo-de-tierra-entre-nepal-y-tibet.html" rel="noopener noreferrer">“Una fuerza inimaginable y densa como el hormigón líquido”: ¿Qué originó la riada entre Nepal y Tíbet?</a>
+  <p class="excerpt">Dos geólogos responden a las incógnitas sobre la riada que ha causado cientos de muertos y más de mil desaparecidos</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/internacional/2026-08-28/mapas-e-imagenes-satelitales-de-la-devastadora-riada-en-nepal.html" rel="noopener noreferrer">Mapas e imágenes satelitales de la devastadora riada en Nepal</a>
+  <p class="excerpt">El colapso de un glaciar en el Himalaya habría originado las trágicas inundaciones en la frontera con Tíbet</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">27 août 2026, 21:00</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/cultura/2026-08-27/el-pais-accede-en-exclusiva-a-gta-vi-de-la-mano-de-sus-creadores-primeras-impresiones-del-videojuego-mas-esperado-de-la-historia.html" rel="noopener noreferrer">EL PAÍS accede en exclusiva a ‘GTA VI’ de la mano de sus creadores: primeras impresiones del videojuego más esperado de la historia</a>
+  <p class="excerpt">Entramos en la cocina de Rockstar, la compañía detrás de la saga más famosa de la industria, para ver el juego. “Espero que cumplamos las expectativas”, afirma Rob Nelson, codirector del estudio</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:11</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/internacional/2026-08-28/el-eclipse-parcial-de-luna-en-imagenes.html" rel="noopener noreferrer">El eclipse parcial de luna, en imágenes</a>
+  <p class="excerpt">La luna de sangre ha sido visible en algunos países de América y Europa</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/babelia/2026-08-28/andrea-abreu-vuelve-tras-el-fenomeno-panza-de-burro-que-sentido-tiene-publicar-cada-dos-anos-si-no-hay-nada-que-decir-prefiero-sacar-un-libro-cada-decada.html" rel="noopener noreferrer">Andrea Abreu vuelve tras el fenómeno ‘Panza de burro’: “¿Qué sentido tiene publicar cada dos años si no hay nada que decir? Prefiero sacar un libro cada década”</a>
+  <p class="excerpt">La tinerfeña publica ‘Pajaritos preñados’, una “novela antipostal” de 500 páginas en la que la oralidad se reivindica frente a la asimilación peninsular y la violencia turística</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/estilo-de-vida/2026-08-28/llegar-a-lo-mas-alto-y-querer-bajarse-esta-cambiando-nuestra-idea-del-exito.html" rel="noopener noreferrer">Llegar a lo más alto y querer bajarse: ¿está cambiando nuestra idea del éxito?</a>
+  <p class="excerpt">Karoline Leavitt, la secretaria de prensa de la Casa Blanca más joven de la historia de Estados Unidos, acaba de dejar su cargo. Su caso abre el debate de cómo para algunas personas el prestigio, el sueldo y el poder se ponen a la altura del tiempo, la autonomía y el bienestar</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/smoda/2026-08-28/las-mujeres-que-visten-a-sus-novios-como-john-kennedy-jr-en-tiktok.html" rel="noopener noreferrer">Las mujeres que visten a sus novios como John Kennedy Jr. en TikTok</a>
+  <p class="excerpt">Un nuevo nivel de delirio por la pareja dorada del Manhattan de finales de los 90 lleva ya no solo a emular el estilo de Carolyn Bessette, sino a intentar convertir a parejas y maridos en una copia del “príncipe de América”</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/opinion/2026-08-28/el-error-generacional-de-los-politicos-en-las-redes.html" rel="noopener noreferrer">El error generacional de los políticos en las redes</a>
+  <p class="excerpt">Los partidos siguen obsesionados con conquistar a los jóvenes en TikTok, cuando millones de ciudadanos de todas las edades participan ya del mismo ecosistema algorítmico</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/television/2026-08-28/la-rebelion-de-la-senora-de-cuenca.html" rel="noopener noreferrer">La rebelión de la señora de Cuenca</a>
+  <p class="excerpt">El público mayor pasa cada vez más tiempo en las plataformas y eso debería preocupar a los directivos de la televisión en abierto</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://elpais.com/economia/2026-08-28/los-jubilados-pueden-volver-a-trabajar-como-autonomos-desde-este-viernes-y-mantener-parte-de-la-pension.html" rel="noopener noreferrer">Los jubilados pueden volver a trabajar como autónomos desde este viernes y mantener parte de la pensión</a>
+  <p class="excerpt">El Gobierno culmina las reformas del sistema con incentivos para que los trabajadores prolonguen su vida laboral</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:15</span>
+  </div>
+  <a class="item-title" href="https://cincodias.elpais.com/companias/2026-08-28/la-ciudad-deportiva-del-real-madrid-necesitara-1235-millones-para-levantar-oficinas-hotel-hospital-privado-y-residencias.html" rel="noopener noreferrer">La ciudad deportiva del Real Madrid necesitará 1.235 millones para levantar oficinas, hotel, hospital privado y residencias</a>
+  <p class="excerpt">La consultora Savills detalla en el expediente del proyecto la necesidad de este tipo de activos</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ES</span>
+    <span class="feed">El País</span>
+    <span class="when">28 août 2026, 05:30</span>
+  </div>
+  <a class="item-title" href="https://cincodias.elpais.com/mercados-financieros/2026-08-28/el-supremo-bendice-las-comisiones-de-apertura-de-las-hipotecas-si-son-transparentes-y-no-superan-el-15.html" rel="noopener noreferrer">El Supremo bendice las comisiones de apertura de las hipotecas si son transparentes y no superan el 1,5%</a>
+  <p class="excerpt">Los bancos pueden cobrar por abrir los préstamos si la cláusula es clara y su precio se sitúa en la media estadística. Bankinter y Unicaja son las únicas grandes entidades que la incluyen en sus ofertas públicas</p>
+  
+</li></ol>
+</section>
+<section class="lang-block">
+  <h2>PT <span class="count">16</span></h2>
+  <ol class="items"><li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 06:28</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/ciencia/2026/08/eclipse-lunar-ocorre-nesta-quinta-e-sexta-feira-veja-fotos.shtml" rel="noopener noreferrer">Eclipse lunar ocorre nesta quinta e sexta-feira; veja fotos</a>
+  <p class="excerpt">Um eclipse lunar parcial pode ser acompanhado entre o fim da noite desta quinta-feira (27) e a madrugada desta sexta-feira (28). O fen�meno ocorre quando a Terra fica entre o Sol e a Lua e a sombra do planeta � projetada no sat�lite natural. Leia mais (08/28/2026 - 01h28)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:40</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/colunas/painel/2026/08/uso-do-termo-pilantra-para-se-referir-a-lobista-surpreendeu-campanha-de-lula.shtml" rel="noopener noreferrer">Uso do termo &amp;apos;pilantra&amp;apos; para se referir a lobista surpreendeu campanha de Lula</a>
+  <p class="excerpt">O adjetivo mais forte empregado pelo presidente Luiz In�cio Lula da Silva para caracterizar a lobista Roberta Luchsinger na entrevista ao Jornal Nacional, de que ela � &quot;pilantra&quot; , surpreendeu membros de sua campanha. Leia mais (08/27/2026 - 23h40)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:15</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/ilustrada/2026/08/entidades-do-cinema-pedem-revisao-do-orcamento-da-spcine-e-criticam-prefeitura.shtml" rel="noopener noreferrer">Entidades do cinema pedem revis�o do or�amento da Spcine e criticam prefeitura</a>
+  <p class="excerpt">Entidades do audiovisual assinaram uma carta � Prefeitura de S�o Paulo , � Secretaria da Fazenda, � Secretaria de Cultura e Economia Criativa e � presid�ncia da Spcine pedindo uma revis�o do or�amento destinado � empresa respons�vel por fomentar o cinema na capital paulista. Leia mais (08/27/2026 - 23h15)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:03</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/blogs/o-mundo-e-uma-bola/2026/08/melhor-do-mundo-sem-favorito-e-sem-coerencia.shtml" rel="noopener noreferrer">Melhor do mundo, sem favorito e sem coer�ncia</a>
+  <p class="excerpt">Come�ou na Europa a temporada 2026/2027. Grandes clubes das principais ligas do continente v�o em busca de t�tulos, nacionais e/ou internacionais, at� maio. Leia mais (08/27/2026 - 23h03)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:03</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/colunas/lucianacoelho/2026/08/com-ameacas-interplanetarias-presidente-curtis-leva-politica-ao-absurdo.shtml" rel="noopener noreferrer">Com amea�as interplanet�rias, &amp;apos;Presidente Curtis&amp;apos; leva pol�tica ao absurdo</a>
+  <p class="excerpt">Um presidente autocentrado, com pouca no��o da realidade, cujas a��es n�o raramente culminam em desgra�a. S� para n�o parecer a descri��o exata de tantos governos por a� , em diferentes per�odos, ele tamb�m combate amea�as espaciais e conta com a ajuda de uma agente ciborgue e de um sujeito sem nenhum apre�o por leis e limites para defend�-lo (bom, essa parte soa realista novamente). Leia mais (08/27/2026 - 23h03)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/ilustrada/2026/08/quer-assistir-a-um-musical-em-casa-veja-7-filmes-disponiveis-no-streaming.shtml" rel="noopener noreferrer">Quer assistir a um musical em casa? Veja 7 filmes dispon�veis no streaming</a>
+  <p class="excerpt">Esta � a edi��o da Maratonar, a newsletter da Folha que ajuda voc� a se achar no meio de tantas op��es de s�ries e filmes no streaming . Quer receb�-la todas as sextas no seu email? Inscreva-se abaixo: Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/poder/2026/08/renan-santos-tem-redes-sociais-beneficiadas-apos-escapar-de-filtro-do-tse-aplicado-a-rivais.shtml" rel="noopener noreferrer">Renan Santos tem redes sociais beneficiadas ap�s escapar de filtro do TSE aplicado a rivais</a>
+  <p class="excerpt">As redes sociais do candidato � Presid�ncia Renan Santos (Miss�o) receberam tratamento desigual pelos algoritmos das plataformas em rela��o aos seus rivais durante mais de dez dias de campanha eleitoral. Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/comida/2026/08/existe-sabor-pudim-sobremesa-se-transforma-em-cheesecake-sorvete-e-ate-drinque-na-capital.shtml" rel="noopener noreferrer">Existe sabor pudim? Sobremesa se transforma em cheesecake, sorvete e at� drinque na capital</a>
+  <p class="excerpt">O debate sobre ter ou n�o furinho j� n�o � mais o �nico que ronda as formas de pudim. A receita, onipresente no imagin�rio dos doces brasileiros, se transformou em sabor tem�tico para bolos , sorvetes , cheesecakes e at� de batidas no balc�o de bar -em uma aposta na popularidade e nostalgia do preparo � base de ovos, leite e leite condensado. Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/poder/2026/08/lobista-tratou-com-ex-chefe-de-gabinete-de-lula-sobre-tentativa-de-acelerar-compra-de-kits-de-dengue-diz-pf.shtml" rel="noopener noreferrer">Lobista tratou com ex-chefe de gabinete de Lula sobre tentativa de acelerar compra de kits de dengue, diz PF</a>
+  <p class="excerpt">A lobista Roberta Luchsinger pediu que o ent�o chefe de gabinete do presidente Lula (PT) Marco Aur�lio Ribeiro, conhecido como Marcola, intermediasse uma tentativa de venda de kits de teste da dengue para o Minist�rio da Sa�de, segundo investiga��o da Pol�cia Federal . Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://guia.folha.uol.com.br/passeios/2026/08/trabalhos-com-tecido-de-sheila-hicks-e-obras-de-tatiana-blass-ocupam-tomie-ohtake.shtml" rel="noopener noreferrer">Trabalhos com tecido de Sheila Hicks e obras de Tatiana Blass ocupam Tomie Ohtake</a>
+  <p class="excerpt">O Instituto Tomie Ohtake abre duas novas exposi��es nesta sexta (28). &quot; Sheila Hicks: O que que � Isso? &quot; re�ne obras da artista americana que demonstram como o fio pode sair do lugar-comum de mat�ria-prima t�xtil para se transformar em objetos com estrutura e volume. J� &quot;Tatiana Blass - Contrarregra&quot; agrupa pinturas, esculturas e instala��es da brasileira. Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/mundo/2026/08/trump-desmonta-o-oriente-medio-em-6-meses-de-guerra-no-ira.shtml" rel="noopener noreferrer">Trump desmonta o Oriente M�dio em 6 meses de guerra no Ir�</a>
+  <p class="excerpt">A guerra lan�ada por Donald Trump contra o Ir� completa seis meses nesta sexta-feira (28) e, se n�o tem um fim previs�vel no horizonte, j� pode ter creditado em sua conta o desmonte do Oriente M�dio como era conhecido nas �ltimas d�cadas. Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/colunas/monicabergamo/2026/08/flavio-bolsonaro-tem-alivio-com-caso-lulinha-mas-eleitor-indeciso-cobra-explicacao-sobre-dark-horse.shtml" rel="noopener noreferrer">Fl�vio Bolsonaro tem al�vio com caso Lulinha, mas eleitor indeciso cobra explica��o sobre &amp;apos;Dark Horse&amp;apos;</a>
+  <p class="excerpt">A perda de espa�o do caso Dark Horse no notici�rio para as suspeitas envolvendo F�bio Lu�s Lula da Silva, o Lulinha , em um esc�ndalo de lobby no governo Lula trouxe al�vio para a campanha presidencial de Fl�vio Bolsonaro ( PL ) -mas n�o apagou o epis�dio da mem�ria de eleitores indecisos. Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/poder/2026/08/lula-vai-a-bahia-turbinar-jeronimo-e-conter-avanco-do-voto-luneto.shtml" rel="noopener noreferrer">Lula vai � Bahia turbinar Jer�nimo e conter avan�o do &amp;apos;voto LuNeto&amp;apos;</a>
+  <p class="excerpt">O presidente Lula ( PT ) desembarca em Salvador nesta sexta-feira (28) para refor�ar a campanha � reelei��o do governador Jer�nimo Rodrigues (PT) e tentar conter a expans�o do voto &quot;LuNeto&quot;, formado por eleitores que apoiam o petista para a Presid�ncia e ACM Neto (Uni�o Brasil) para o governo. Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/mercado/2026/08/bc-faz-leilao-de-dolares-em-meio-a-saida-de-recursos-estrangeiros-do-pais.shtml" rel="noopener noreferrer">BC faz leil�o de d�lares em meio � sa�da de recursos estrangeiros do pa�s</a>
+  <p class="excerpt">O BC ( Banco Central ) realizou na manh� desta quinta-feira (27) duas opera��es simult�neas de compra e venda de d�lares para injetar liquidez no mercado cambial. Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://guia.folha.uol.com.br/restaurantes/2026/08/mezzo-napolitana-mezzo-kitsch-da-michele-tem-pizzas-realmente-boas.shtml" rel="noopener noreferrer">Mezzo napolitana mezzo kitsch, Da Michele tem pizzas realmente boas</a>
+  <p class="excerpt">Cr�tica | SP L&amp;apos;Antica Pizzeria da Michele Tr�s estrelas (Bom) R. C�nego Eug�nio Leite, 359, Pinheiros, regi�o oeste. @pizzeriadamichelebra Leia mais (08/27/2026 - 23h00)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">PT</span>
+    <span class="feed">Folha de S.Paulo</span>
+    <span class="when">28 août 2026, 04:00</span>
+  </div>
+  <a class="item-title" href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/mercado/2026/08/nova-proposta-de-reforma-da-previdencia-busca-estabilizar-gasto-com-idade-minima-de-67-anos-e-capitalizacao.shtml" rel="noopener noreferrer">Nova proposta de reforma da Previd�ncia busca estabilizar gasto com idade m�nima de 67 anos e capitaliza��o</a>
+  <p class="excerpt">Uma nova proposta de reforma da Previd�ncia , que ser� apresentada aos candidatos � Presid�ncia da Rep�blica , vai al�m de mudan�as pontuais e lan�a a ideia de alterar completamente a arquitetura dos sistemas de aposentadorias e benef�cios do INSS (Instituto Nacional do Seguro Social). Leia mais (08/27/2026 - 23h00)</p>
+  
+</li></ol>
+</section>
+<section class="lang-block">
+  <h2>AR <span class="count">16</span></h2>
+  <ol class="items"><li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">28 août 2026, 04:34</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/news/2026/8/28/%d8%aa%d8%b1%d9%85%d8%a8-%d9%8a%d8%b9%d9%84%d9%86-%d9%87%d8%b1%d9%85%d8%b2-%d8%b6%d9%85%d9%86-%d8%a7%d9%84%d8%a3%d9%82%d8%a7%d9%84%d9%8a%d9%85-%d8%a7%d9%84%d8%a3%d9%85%d8%b1%d9%8a%d9%83%d9%8a%d8%a9?traffic_source=rss" rel="noopener noreferrer">ترمب يعلن هرمز ضمن الأقاليم الأمريكية وطهران تضع شروطها لفتح المضيق</a>
+  <p class="excerpt">نشر دونالد ترمب صورة تُدرج مضيق هرمز كإقليم أمريكي، مؤكدا فرض السيطرة الكاملة عليه، بالتزامن مع شروط إيرانية ومساعٍ قطرية لإعادة فتح الممر المائي المتأثر بالحصار والتصعيد.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">28 août 2026, 04:04</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/politics/2026/8/28/200-%d9%81%d9%8a-%d9%85%d8%ae%d8%b2%d9%86-%d9%88%d8%a7%d8%ad%d8%af-%d9%86%d8%a7%d8%ac-%d9%85%d9%86-%d8%af%d9%82%d8%b1%d9%8a%d8%b3-%d9%8a%d8%b1%d9%88%d9%8a?traffic_source=rss" rel="noopener noreferrer">&quot;200 في مخزن واحد&quot;.. ناجٍ من &quot;دقريس&quot; يروي للجزيرة نت جحيم الاعتقال والموت اليومي</a>
+  <p class="excerpt">تشير تقديرات الحكومة السودانية في مذكرة موجهة إلى مجلس الأمن وصادرة بتاريخ 13 يونيو/حزيران 2026، إلى أن قوات الدعم السريع تحتجز نحو 19 ألفا و800 شخص في سجن دقريس وحده.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">28 août 2026, 02:33</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/news/2026/8/28/%d9%83%d8%a7%d9%86-%d9%81%d9%8a-%d8%ad%d8%a7%d9%84%d8%a9-%d8%b0%d9%87%d8%a7%d9%86%d9%8a%d8%a9-%d9%85%d8%ad%d9%83%d9%85%d8%a9-%d8%a5%d8%b3%d8%b1%d8%a7%d8%a6%d9%8a%d9%84%d9%8a%d8%a9?traffic_source=rss" rel="noopener noreferrer">تبرئة مستوطن اعتدى على راهبة فرنسية بالقدس</a>
+  <p class="excerpt">برأت محكمة إسرائيلية مستوطنا اعتدى على راهبة فرنسية في القدس، بعد ثبوت أنه كان في &quot;حالة ذهانية&quot; وقت الحادث، وأمرت بإيداعه المستشفى للعلاج.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">28 août 2026, 01:40</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/news/2026/8/28/%d9%86%d9%81%d8%b7-%d9%81%d9%86%d8%b2%d9%88%d9%8a%d9%84%d8%a7-%d8%b9%d9%84%d9%89-%d8%b7%d8%a7%d9%88%d9%84%d8%a9-%d9%88%d8%a7%d8%b4%d9%86%d8%b7%d9%86-%d9%85%d9%81%d8%a7%d9%88%d8%b6%d8%a7%d8%aa?traffic_source=rss" rel="noopener noreferrer">نفط فنزويلا على طاولة واشنطن.. مفاوضات على &quot;صفقة هائلة&quot;</a>
+  <p class="excerpt">كشفت مصادر أن الولايات المتحدة تُجري محادثات مع الحكومة المؤقتة في فنزويلا بشأن &quot;صفقة هائلة&quot; تمنحها حصة في أكثر من 12 حقلا نفطيا تضم نحو 90 مليار برميل من الاحتياطيات المؤكدة.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">28 août 2026, 01:40</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/politics/2026/8/28/%d9%81%d9%88%d8%b1%d9%8a%d9%86-%d8%a8%d9%88%d9%84%d9%8a%d8%b3%d9%8a-%d8%b5%d8%b9%d9%88%d8%af-%d8%aa%d8%b1%d9%83%d9%8a%d8%a7-%d9%8a%d8%ae%d9%8a%d9%81-%d9%84%d8%a5%d8%b3%d8%b1%d8%a7%d8%a6%d9%8a%d9%84?traffic_source=rss" rel="noopener noreferrer">صراع حليفين بسوريا.. كيف تنظر أمريكا للتوتر بين تركيا وإسرائيل؟</a>
+  <p class="excerpt">يكشف تصاعد التنافس التركي الإسرائيلي في سوريا صراعا على النفوذ في الشرق الأوسط بعد تراجع إيران وحزب الله، وهو ما يضع واشنطن أمام تحدي منع حليفين من الانزلاق إلى مواجهة مباشرة.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">28 août 2026, 00:50</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/news/2026/8/28/%d8%aa%d8%ad%d8%b0%d9%8a%d8%b1%d8%a7%d8%aa-%d8%a8%d8%a5%d8%ae%d9%84%d8%a7%d8%a1-%d9%85%d8%af%d9%8a%d9%86%d8%a9-%d8%a3%d9%88%d9%83%d8%b1%d8%a7%d9%86%d9%8a%d8%a9-%d9%88%d9%85%d9%88%d8%b3%d9%83%d9%88?traffic_source=rss" rel="noopener noreferrer">دعوات لإخلاء خيرسون وموسكو تهدد بضرب أهداف بريطانية</a>
+  <p class="excerpt">دعت سلطات خيرسون سكان المدينة الأوكرانية إلى مغادرتها مع تصاعد الهجمات الروسية وخطر انقطاع الكهرباء والتدفئة، فيما هددت موسكو بضرب أهداف عسكرية بريطانية ردا على دعم لندن العسكري لأوكرانيا.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">28 août 2026, 00:39</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/politics/2026/8/28/%d8%aa%d8%b9%d8%a7%d9%88%d9%86-%d8%b9%d8%b3%d9%83%d8%b1%d9%8a-%d8%a5%d8%ab%d9%8a%d9%88%d8%a8%d9%8a-%d8%a3%d9%85%d8%b1%d9%8a%d9%83%d9%8a-%d8%b1%d8%b3%d8%a7%d9%84%d8%a9-%d9%84%d9%85%d8%b5%d8%b1?traffic_source=rss" rel="noopener noreferrer">تعاون عسكري إثيوبي أمريكي.. رسالة لمصر و5 نسخ لأطراف أخرى</a>
+  <p class="excerpt">في الوسط، ظهر اللواء تيشومي جيميتشو ببزة ميدانية مموهة تزينها شارة عسكرية ذهبية بنجمة وسيفين متقاطعين، وإلى جانبه ضباط من الوفد الإثيوبي وآخرون من البنتاغون.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 23:52</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/news/2026/8/28/%d8%b1%d8%b6%d8%a7%d8%a6%d9%8a-%d9%8a%d9%86%d9%81%d9%8a-%d8%aa%d8%ae%d8%b7%d9%8a%d8%b7-%d8%a5%d9%8a%d8%b1%d8%a7%d9%86-%d9%84%d8%a7%d8%ba%d8%aa%d9%8a%d8%a7%d9%84-%d8%a8%d8%a7%d8%b1%d9%88%d9%86?traffic_source=rss" rel="noopener noreferrer">رضائي ينفي تخطيط إيران لاغتيال بارون ترمب</a>
+  <p class="excerpt">نفى ⁠أمين عام ⁠المجلس الأعلى للأمن القومي الإيراني محسن رضائي صحة التقارير التي تتحدث عن ⁠مؤامرة محتملة لاغتيال بارون نجل الرئيس ​الأمريكي دونالد ترمب الأصغر.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 23:28</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/politics/2026/8/28/%d9%85%d9%86-%d8%ad%d8%b1%d8%a8-%d8%b8%d9%84-%d8%a5%d9%84%d9%89-%d9%85%d9%88%d8%a7%d8%ac%d9%87%d8%a9-%d9%85%d9%81%d8%aa%d9%88%d8%ad%d8%a9-%d8%b3%d9%8a%d9%86%d8%a7%d8%b1%d9%8a%d9%88%d9%87%d8%a7%d8%aa?traffic_source=rss" rel="noopener noreferrer">احتمالات حرب روسيا والناتو.. ترمب غير قلق والحسم في الساعات الأولى</a>
+  <p class="excerpt">تتزايد المخاوف من تداعيات أي اختبار روسي للناتو عبر هجمات هجينة أو توغل محدود في البلطيق، وذلك وسط شكوك بشأن سرعة ووحدة الرد الأطلسي ودور واشنطن، بما قد يحول مواجهة غامضة إلى حرب واسعة بين الطرفين.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 22:33</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/news/2026/8/28/%d9%86%d8%aa%d9%86%d9%8a%d8%a7%d9%87%d9%88-%d9%8a%d8%ad%d8%b0%d8%b1-%d9%85%d9%86-%d8%ae%d8%b3%d8%a7%d8%b1%d8%a9-%d8%a7%d9%84%d9%8a%d9%85%d9%8a%d9%86-%d9%88%d9%8a%d8%af%d8%b9%d9%88-%d8%a8%d9%86?traffic_source=rss" rel="noopener noreferrer">نتنياهو يدعو بن غفير وسموتريتش لخوض الانتخابات بقائمة موحدة</a>
+  <p class="excerpt">حذر رئيس الوزراء الإسرائيلي بنيامين نتنياهو من خسارة اليمين في الانتخابات المقبلة، داعيا إيتمار بن غفير وبتسلئيل سموتريتش إلى خوض انتخابات الكنيست بقائمة موحدة لتجنب تشتت الأصوات.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 21:40</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/culture/2026/8/28/%d9%85%d9%87%d8%b1%d8%ac%d8%a7%d9%86-%d8%a7%d9%84%d8%aa%d8%b1%d8%a7%d8%ab-%d8%a7%d9%84%d8%a5%d8%b3%d9%84%d8%a7%d9%85%d9%8a-%d8%a8%d9%83%d8%a7%d9%84%d8%ba%d8%a7%d8%b1%d9%8a?traffic_source=rss" rel="noopener noreferrer">مهرجان التراث الإسلامي بكالغاري.. احتفاء بالتنوع وردّ حضاري على تصاعد &quot;الإسلاموفوبيا&quot; في كندا</a>
+  <p class="excerpt">مهرجان التراث الإسلامي الـ16 في كالغاري بكندا، شهد إقبالاً عائلياً واسعاً لمواجهة حوادث الإسلاموفوبيا ورسائل الكراهية بالحوار الثقافي المباشر.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 21:00</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/sport/2026/8/28/%d9%85%d8%a8%d8%a7%d8%a8%d9%8a-%d8%b1%d9%88%d9%86%d8%a7%d9%84%d8%af%d9%88-100-%d9%85%d8%b3%d8%a7%d9%87%d9%85%d8%a9-%d8%aa%d9%87%d8%af%d9%8a%d9%81%d9%8a%d8%a9-%d9%85%d9%82%d8%a7%d8%b1%d9%86%d8%a9?traffic_source=rss" rel="noopener noreferrer">ظل رونالدو يلاحق مبابي.. 100 مساهمة تهديفية مع الريال لا تكفي لتجاوز الدون</a>
+  <p class="excerpt">سجل مبابي ثلاثية في فوز ريال مدريد الأخير على حساب ريال سوسيداد، ليتجاوز حاجز الـ 100 مساهمة تهديفية، محققا ذلك في غضون عامين فقط من انضمامه للنادي الملكي.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 20:39</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/video/scenarios/2026/8/28/%d8%b3%d9%86%d8%a7%d8%b1%d9%8a%d9%88%d9%87%d8%a7%d8%aa-%d9%8a%d9%86%d8%a7%d9%82%d8%b4-%d8%a3%d8%b3%d8%a8%d8%a7%d8%a8-%d8%a7%d9%84%d8%aa%d8%b5%d8%b9%d9%8a%d8%af-%d8%a8%d9%8a%d9%86?traffic_source=rss" rel="noopener noreferrer">&quot;سيناريوهات&quot; يناقش أسباب التصعيد بين تركيا وإسرائيل</a>
+  <p class="excerpt">شكل القصف الإسرائيلي لمطار أبو الظهور السوري، على بعد 70 كيلومترا من الحدود التركية، تصعيدا خطيرا بين أنقرة وتل أبيب، وبررت إسرائيل الضربات بمنع تركيا من نشر منظومات دفاع جوي في المطار.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 20:36</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/politics/2026/8/28/%d9%87%d9%84-%d8%a3%d8%b1%d8%a7%d8%af%d8%aa-%d8%a5%d8%b3%d8%b1%d8%a7%d8%a6%d9%8a%d9%84-%d8%a7%d8%b3%d8%aa%d8%af%d8%b1%d8%a7%d8%ac-%d8%aa%d8%b1%d9%83%d9%8a%d8%a7?traffic_source=rss" rel="noopener noreferrer">هل أرادت إسرائيل استدراج تركيا للمواجهة؟</a>
+  <p class="excerpt">يمثل القصف الإسرائيلي لمطار أبو الظهور السوري، على بعد 70 كيلومترا من الحدود التركية، منعطفا خطيرا في العلاقات بين أنقرة وتل أبيب، وسط تنافس إستراتيجي حول مستقبل سوريا وتحركات واشنطن لمنع المواجهة.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 20:32</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/news/2026/8/28/%d8%a3%d8%b3%d8%b1%d9%89-%d8%a3%d8%b3%d9%8a%d8%b1-%d8%a5%d8%a8%d8%a7%d8%af%d8%a9-%d8%a7%d8%ad%d8%aa%d9%84%d8%a7%d9%84-%d8%ba%d8%b2%d8%a9-%d8%a7%d9%84%d8%b6%d9%81%d8%a9?traffic_source=rss" rel="noopener noreferrer">أمضى 22 عاما.. أسير فلسطيني يعلم بوفاة والديه بعد تحرره</a>
+  <p class="excerpt">مقطع فيديو يظهر الأسير حسن عرار الذي أفرج عنه الاحتلال بعد اعتقال دام 22 عاما، في المستشفى مرهقا ومتعبا، وفور تلقيه خبر وفاة والديه أجهش بالبكاء.</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">AR</span>
+    <span class="feed">Al Jazeera Arabic</span>
+    <span class="when">27 août 2026, 20:28</span>
+  </div>
+  <a class="item-title" href="https://www.aljazeera.net/ebusiness/2026/8/28/%d9%84%d8%aa%d8%ac%d8%a7%d9%88%d8%b2-%d8%aa%d8%a8%d8%a7%d8%b7%d8%a4-%d8%a7%d9%84%d9%86%d9%85%d9%88-%d8%b4%d9%8a-%d8%a5%d9%86-%d8%aa%d8%b1%d8%a7%d9%87%d9%86-%d8%b9%d9%84%d9%89?traffic_source=rss" rel="noopener noreferrer">لتجاوز تباطؤ النمو.. &quot;شي إن&quot; تراهن على الاستحواذ على علامات أزياء</a>
+  <p class="excerpt">تتجه &quot;شي إن&quot; للاستحواذ على علامات أزياء جديدة لتعويض تباطؤ نموها، بعد طرحها في بورصة هونغ كونغ بتقييم يتجاوز 26 مليار دولار، مقارنة بذروة بلغت 100 مليار في 2022.</p>
+  
+</li></ol>
+</section>
+<section class="lang-block">
+  <h2>ZH <span class="count">16</span></h2>
+  <ol class="items"><li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 06:53</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685754.shtml" rel="noopener noreferrer">韩国一工厂发生火灾 已致1死2失踪</a>
+  <p class="excerpt">据韩国方面8月28日消息，韩国忠清南道天安市一家油漆原料生产工厂发生火灾，已造成1人死亡，2人失踪。(央视新闻客户端)</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 06:35</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685719.shtml" rel="noopener noreferrer">毛里塔尼亚拦截一艘载有161人的移民船</a>
+  <p class="excerpt">中新网北京8月28日电 努瓦克肖特消息：毛里塔尼亚海岸警卫队当地时间27日表示，其在该国附近海域拦截了一艘移民船，船上载有161名试图前往欧洲的移民，其中包括17名儿童。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 05:20</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685716.shtml" rel="noopener noreferrer">日本东京都23区8月核心CPI同比上涨1.8%</a>
+  <p class="excerpt">中新网东京8月28日电(记者朱晨曦)日本总务省28日公布的统计数据显示，8月份日本东京都23区去除生鲜食品后的核心消费价格指数(CPI)为102.3，同比上涨1.8%。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 05:17</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685677.shtml" rel="noopener noreferrer">尼日利亚绑匪过去一年收取赎金580万美元</a>
+  <p class="excerpt">中新网北京8月28日电 阿布贾消息：尼日利亚一研究机构日前发布报告称，该国的绑匪在过去一年时间里通过绑架平民勒索到约580万美元赎金。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 05:16</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685676.shtml" rel="noopener noreferrer">德国一学校发生暴力事件致两人死亡 嫌疑人已被捕</a>
+  <p class="excerpt">中新网柏林8月28日电 综合德国媒体27日报道，德国东部勃兰登堡州一所中学当天发生暴力事件，造成两人死亡。目前嫌疑人已被警方逮捕。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 05:14</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685713.shtml" rel="noopener noreferrer">日本前首相鸠山由纪夫反对高市政权强军扩武</a>
+  <p class="excerpt">视频：日本前首相鸠山由纪夫反对高市政权强军扩武来源：人民网-国际频道</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:57</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685686.shtml" rel="noopener noreferrer">过去一周伊朗展开密集外交沟通 释放哪些信号</a>
+  <p class="excerpt">中新网8月28日电 综合外媒报道，过去一周，伊朗同卡塔尔、阿曼、巴基斯坦等有关方展开了密集外交沟通，重点就霍尔木兹海峡未来等关键问题等进行磋商斡旋。这一系列外交接触，释放出哪些信号？美伊何时会重返谈判桌？</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:57</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685699.shtml" rel="noopener noreferrer">美国威胁对阿曼动武？虚张声势难掩战略困局</a>
+  <p class="excerpt">零时差丨美国威胁对阿曼动武？虚张声势难掩战略困局</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:54</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685695.shtml" rel="noopener noreferrer">尼泊尔警方：尼泊尔北部山洪遇难人数升至469人</a>
+  <p class="excerpt">中新网8月28日电 据英国广播公司(BBC)报道，当地时间8月28日，尼泊尔警方称，尼泊尔北部地区山洪造成的死亡人数升至469人。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:47</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685685.shtml" rel="noopener noreferrer">尼泊尔北部山洪遇难人数升至469人</a>
+  <p class="excerpt">当地时间8月28日，根据尼泊尔警方公布的数据，尼泊尔北部26日暴发山洪后已找到469具遇难者遗体。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:45</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685682.shtml" rel="noopener noreferrer">一窑火，一片瓷砖——中国技术赋能“非洲制造”</a>
+  <p class="excerpt">新华社达喀尔/达累斯萨拉姆8月27日电 题：一窑火，一片瓷砖——中国技术赋能“非洲制造”</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:38</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685674.shtml" rel="noopener noreferrer">布基纳法索：全球发展倡议回应发展诉求</a>
+  <p class="excerpt">全球瞭望丨布基纳法索：全球发展倡议回应发展诉求</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:23</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685602.shtml" rel="noopener noreferrer">《习近平谈治国理政》第五卷法文版推介会在巴黎举行</a>
+  <p class="excerpt">中新网巴黎8月28日电 (记者 李洋)《习近平谈治国理政》第五卷法文版推介会暨“中国式现代化”研讨会当地时间26日在巴黎举行。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:22</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685612.shtml" rel="noopener noreferrer">非盟拟于10月启动非洲信用评级机构</a>
+  <p class="excerpt">中新网约翰内斯堡8月28日电 非洲联盟委员会债务问题技术顾问保罗·西卡泽(Paul Sikazwe)26日在肯尼亚首都内罗毕举行的一场债务与发展会议上表示，由非盟支持的“非洲同行审议机制”(APRM)将于今年10月启动一家覆盖非洲大陆的信用评级机构，以应对非洲国家长期面临的高融资成本问题。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:22</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685633.shtml" rel="noopener noreferrer">卡尼回应美方“改名令”：加拿大将始终使用“安大略湖”这个名字</a>
+  <p class="excerpt">中新社北京8月28日电 渥太华消息：当地时间8月27日，针对特朗普政府将安大略湖更名为“美国湖”，加拿大总理卡尼回应称，安大略湖的名称承载着历史渊源，无论外部环境如何变化，加拿大人都将始终使用“安大略湖”这个名字。</p>
+  
+</li>
+<li class="item">
+  <div class="item-meta">
+    <span class="lang">ZH</span>
+    <span class="feed">中国新闻网 · 国际</span>
+    <span class="when">28 août 2026, 04:21</span>
+  </div>
+  <a class="item-title" href="https://www.chinanews.com.cn/gj/2026/08-28/10685644.shtml" rel="noopener noreferrer">前波黑塞族部队司令姆拉迪奇在荷兰去世</a>
+  <p class="excerpt">中新网海牙8月28日电 联合国下属的刑事法庭余留事项国际处理机制27日通报，前波黑塞族部队司令姆拉迪奇在荷兰去世，终年84岁。</p>
+  
+</li></ol>
+</section>
+  <p class="footnote">Narrative Radar — harvest RSS depuis <code>data/feeds-world.json</code>. Tags et scores marqués <em>interprétatifs</em> dans le JSON source. Non publié dans le sitemap ni le feed.</p>
+</div>
+</body>
+</html>

@@ -11,14 +11,24 @@
 #
 # Logs :
 #   /tmp/agent-quotidien-compose.log          — orchestration cron
-#   /tmp/agent-quotidien-compose-<week>.log   — agent + edition-pr.sh
+#   /tmp/agent-quotidien-compose-<week>.log   — agent Cursor + edition-pr.sh
 
 set -u
-export PATH="/home/debian/.local/bin:/home/debian/.opencode/bin:/usr/local/bin:/usr/bin:/bin"
+export HOME="${HOME:-/home/debian}"
+export PATH="/home/debian/.local/bin:/usr/local/bin:/usr/bin:/bin"
 
 REPO="/home/debian/agentic-news/agent-quotidien"
 LOCK="/tmp/agent-quotidien-compose.lock"
-AGENT_LOCK="/tmp/agent-quotidien-compose-agent.lock"
+AGENT_LOCK="/tmp/agent-quotidien-compose-cursor.lock"
+# Ancien verrou : un job OpenCode encore vivant ne doit pas doubler le compose.
+LEGACY_LOCK="/tmp/agent-quotidien-compose-opencode.lock"
+
+lock_pid_alive() {
+  local lock="$1" pid
+  [ -f "$lock" ] || return 1
+  pid=$(cat "$lock" 2>/dev/null || true)
+  [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null
+}
 
 exec 9>"$LOCK"
 flock -n 9 || { echo "$(date -Iseconds) skip: compose déjà en cours"; exit 0; }
@@ -70,17 +80,19 @@ if [ -f "${EDITION_DIR}/edition.json" ]; then
   fi
 fi
 
-# Agent déjà lancé pour cette semaine
-if [ -f "$AGENT_LOCK" ]; then
-  OLD_PID=$(cat "$AGENT_LOCK" 2>/dev/null || true)
-  if [ -n "$OLD_PID" ] && kill -0 "$OLD_PID" 2>/dev/null; then
-    echo "$(date -Iseconds) skip: agent compose déjà actif (PID ${OLD_PID})"
-    git checkout main --quiet 2>/dev/null || true
-    [ "$STASHED" -eq 1 ] && git stash pop --quiet 2>/dev/null || true
-    exit 0
+# Agent déjà lancé pour cette semaine (Cursor, ou ancien job OpenCode)
+if lock_pid_alive "$AGENT_LOCK" || lock_pid_alive "$LEGACY_LOCK"; then
+  if lock_pid_alive "$AGENT_LOCK"; then
+    OLD_PID=$(cat "$AGENT_LOCK" 2>/dev/null || true)
+  else
+    OLD_PID=$(cat "$LEGACY_LOCK" 2>/dev/null || true)
   fi
-  rm -f "$AGENT_LOCK"
+  echo "$(date -Iseconds) skip: compose déjà actif (PID ${OLD_PID})"
+  git checkout main --quiet 2>/dev/null || true
+  [ "$STASHED" -eq 1 ] && git stash pop --quiet 2>/dev/null || true
+  exit 0
 fi
+rm -f "$AGENT_LOCK" "$LEGACY_LOCK"
 
 # Créer le dossier d'édition si absent (non interactif)
 if [ ! -d "$EDITION_DIR" ]; then
@@ -90,13 +102,13 @@ if [ ! -d "$EDITION_DIR" ]; then
 fi
 
 if ! command -v agent >/dev/null 2>&1; then
-  echo "$(date -Iseconds) erreur: binaire 'agent' introuvable dans PATH"
+  echo "$(date -Iseconds) erreur: binaire 'agent' (Cursor) introuvable dans PATH"
   git checkout main --quiet 2>/dev/null || true
   [ "$STASHED" -eq 1 ] && git stash pop --quiet 2>/dev/null || true
   exit 0
 fi
 
-# Worker long-running en arrière-plan (agent + push branche + PR draft)
+# Worker long-running en arrière-plan (agent Cursor + push branche + PR draft)
 nohup bash scripts/cron-compose-run.sh "${TARGET_WEEK}" \
   >> "$LOG_AGENT" 2>&1 &
 AGENT_PID=$!
@@ -105,5 +117,5 @@ echo "$AGENT_PID" > "$AGENT_LOCK"
 git checkout main --quiet 2>/dev/null || true
 [ "$STASHED" -eq 1 ] && git stash pop --quiet 2>/dev/null || true
 
-echo "$(date -Iseconds) worker lancé PID=${AGENT_PID} → branche ${BRANCH}"
+echo "$(date -Iseconds) worker Cursor lancé PID=${AGENT_PID} → branche ${BRANCH}"
 echo "$(date -Iseconds) log agent : ${LOG_AGENT}"

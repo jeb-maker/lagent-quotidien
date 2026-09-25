@@ -31,8 +31,11 @@ citations, handles, fichiers, extraits).
    déplacement de la semaine (pas un résumé de dépêches). Copier la même phrase
    dans `_meta.editor_notes`.
 3. Une / feature : aucun fait dont la meilleure preuve est `rapporté` (→ wire).
-4. Feature = **absente** **ou** enquête avec faits **absents** des gros titres —
-   jamais un collage de dépêches wire.
+4. Feature = **absente** (état normal, `feature: {}`) **sauf première édition du
+   mois** (dès 2026-W41) : enquête de données sur `/datasets/` + `presence` /
+   `mcp_registry` / `agent_frameworks` (tendance ≥ 4 semaines, chiffres datés et
+   attribués), faits **absents** des gros titres — jamais un collage de
+   dépêches wire (compass § Enquête de données).
 
 ## Contraintes
 
@@ -50,7 +53,8 @@ citations, handles, fichiers, extraits).
 - Carnet = personnages et scènes, pas concepts ;
 - Lede = scène principale + chiffre + conséquence, pas résumé général ;
 - Tribune = conséquence éditoriale avec consensus rejeté, pas synthèse ;
-- Feature = absente **ou** ≥ 800 mots FR avec faits absents des gros titres ;
+- Feature = absente, **ou** (1re édition du mois) enquête de données ≥ 800 mots FR
+  avec faits absents des gros titres ;
 - ≥ 5 sources `type: primary` dans `sources` (gate strict ≥ W33).
 
 ## Densité par rubrique

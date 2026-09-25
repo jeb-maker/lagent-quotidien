@@ -30,8 +30,18 @@ fi
 mkdir -p "$EDITION_DIR"
 mkdir -p "data/desk/${WEEK}"
 
-# Numéro d'édition = nombre de dossiers editions/* déjà existants
-EDITION_NUM=$(find editions -maxdepth 1 -type d -name "20*-W*" | wc -l | tr -d ' ')
+# Numéro d'édition = dernier edition_number publié + 1 (les numéros ne suivent
+# pas le nombre de dossiers : W39 = 445 alors qu'il y a 19 dossiers — bug corrigé
+# 2026-09-25, cf. notes W38/W39). Repli : comptage des dossiers.
+EDITION_NUM=$(node -e '
+  const fs = require("fs");
+  const ws = fs.readdirSync("editions").filter(w => /^\d{4}-W\d{2}$/.test(w)).sort();
+  let n = null;
+  for (const w of ws.reverse()) {
+    try { const e = JSON.parse(fs.readFileSync(`editions/${w}/edition.json`, "utf8")); if (Number.isInteger(e?._meta?.edition_number)) { n = e._meta.edition_number + 1; break; } } catch {}
+  }
+  process.stdout.write(String(n ?? ws.length + 1));
+' 2>/dev/null || find editions -maxdepth 1 -type d -name "20*-W*" | wc -l | tr -d ' ')
 
 # Date du lundi de cette semaine
 if [ -n "$1" ]; then
@@ -156,12 +166,15 @@ EOF
 echo "✓ Édition ${WEEK} créée : ${EDITION_DIR}/"
 echo "✓ Desk : data/desk/${WEEK}/"
 
-# Régénère le digest de semaine lu en premier par opencode (AGENTS.md).
+# Brief sanitisé des tips inbound (le desk ne lit jamais data/tips/*.json brut).
+node scripts/tips-brief.mjs "${WEEK}" || echo "⚠ tips-brief en échec (non bloquant)"
+
+# Régénère le digest de semaine lu en premier par l'agent (AGENTS.md).
 HARVEST_DATE=$(date +%Y-%m-%d)
 cat > data/_week-context.md <<EOF
 # Contexte de la semaine — ${WEEK}
 
-> Digest court (~1 KB) lu en premier par opencode à chaque session de composition.
+> Digest court (~1 KB) lu en premier par l'agent Cursor à chaque session de composition.
 > Remplace le chargement systématique de \`data/people.json\` (21 KB) pour la
 > majorité des tours. Régénéré par \`scripts/new-week.sh\`.
 
@@ -203,7 +216,7 @@ EOF
 echo "✓ Digest : data/_week-context.md"
 echo ""
 echo "Prochaines étapes :"
-echo "  1. Lance Claude Code dans le repo :  claude"
+echo "  1. Lance l'agent Cursor dans le repo :  agent"
 echo "  2. Demande-lui :"
 echo "     « Génère l'édition ${WEEK} en suivant prompts/weekly-edition.md »"
 echo "  3. Relis ${EDITION_DIR}/edition.json"
