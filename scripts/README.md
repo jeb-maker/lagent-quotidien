@@ -87,7 +87,9 @@ sources : `prompts/sources.md`.
 | `cron-drift.sh` | **actif** | Stats + render + push (9h) |
 | `daily-stats.mjs` | **actif** | Cloudflare + Bluesky → `data/stats.json` |
 | `audience-report.mjs` | **actif** | Rapport agrégé par fenêtre et par édition → `data/audience-report.json` |
-| `cron-audience.sh` | **actif** | Lundi 08h — génère et pousse le rapport d’audience sans données individuelles |
+| `cron-audience.sh` | **actif** | Lundi 08h — génère et pousse le rapport d’audience sans données individuelles. Depuis 2026-09 : ventilation **retrieval** `live / search / training` (`lib/ai-bots.mjs`) par fenêtre, par édition et série hebdo `weekly[]` — l'indicateur-cible du public A |
+| `citation-audit.mjs` · `cron-citation-audit.sh` | **actif** | 1er du mois 06h — proxy SERP de citabilité → `data/citation-audit/<date>.json` (`npm run citation-audit`) |
+| `lib/ai-bots.mjs` | **actif** | Classification des UA IA par fonction (live = fetch en conversation ≈ citation ; search = index assistant ; training = crawl). Partagée par `daily-stats` et `audience-report` |
 | `cron-bot-watch.sh` | **veille** | Bot dialogue watch |
 | `cron-conseil.sh` | **abandonné** | Remplacé par desk agentique |
 
