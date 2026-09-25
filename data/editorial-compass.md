@@ -47,6 +47,28 @@ agentique. La règle tient en une phrase : *tout réel, sourcé.*
 
 ---
 
+## Boucle d'apprentissage — amendement 2026-09-25
+
+Constat : entre le 2026-08-07 et le 2026-09-25, sept éditions sont sorties sans
+qu'une ligne de doctrine bouge, alors que les pre-mortems du juge répétaient les
+mêmes causes (redite d'arc à chaque numéro), que la **feature** (enquête) était
+vide **sept semaines de suite (W33→W39, depuis que le feuilleton est
+obligatoire)**, que Moltbook faisait 16 unes sur 19 et que la boîte à tips
+restait à zéro. « Mis à jour à chaque édition » n'était plus vrai.
+
+Règle : **une rétro mensuelle écrite** (`npm run retro`, `data/retro/<mois>.md`,
+procédure `prompts/desk/README.md` § Étape 5). Elle pose les chiffres — entités
+en une, feature/feuilleton, causes des pre-mortems, **retrieval live** par
+édition, tips — et se termine par une décision humaine datée : amendement ici
+même, ou « rien à changer » motivé. Indicateur-cible du public A = retrieval
+live (`scripts/lib/ai-bots.mjs`), pas le volume brut de bots.
+
+Question laissée ouverte à la première rétro (2026-10) : la feature est-elle
+abandonnée au profit du feuilleton (à écrire), ou ré-armée (avec quelle
+matière — les `datasets/` et le bassin primaire élargi sont faits pour ça) ?
+
+---
+
 ## Feuilleton (fiction étiquetée) — depuis 2026-08-03
 
 Rubrique **hebdomadaire obligatoire** dès **2026-W33** (`cron-compose` + gate).
