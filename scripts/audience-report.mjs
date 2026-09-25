@@ -5,6 +5,7 @@
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { retrievalBreakdown, RETRIEVAL_CLASSES } from './lib/ai-bots.mjs';
 
 const ROOT = join(fileURLToPath(new URL('..', import.meta.url)));
 const STATS_PATH = join(ROOT, 'data', 'stats.json');
@@ -40,6 +41,8 @@ function summarize(rows) {
   const urls = {};
   const totals = { requests: 0, page_views: 0, reported_uniques: 0, days: rows.length };
 
+  const formats = { html_edition: 0, markdown: 0, json: 0, txt: 0 };
+
   for (const row of rows) {
     const cloudflare = row.cloudflare || {};
     totals.requests += Number(cloudflare.requests) || 0;
@@ -48,10 +51,27 @@ function summarize(rows) {
     for (const key of CATEGORY_KEYS) {
       categories[key] += Number(cloudflare.user_agents?.categories?.[key]) || 0;
     }
+    // Les UA arrivent avec une casse variable (ClaudeBot / claudebot) : on fusionne.
     for (const [name, count] of Object.entries(cloudflare.user_agents?.ai_bots_detail || {})) {
-      aiBots[name] = (aiBots[name] || 0) + (Number(count) || 0);
+      const key = String(name).toLowerCase();
+      aiBots[key] = (aiBots[key] || 0) + (Number(count) || 0);
+    }
+    for (const item of cloudflare.top_urls || []) {
+      const path = String(item.path || '');
+      if (!/^\/editions\/\d{4}-W\d{2}\//.test(path)) continue;
+      const hits = Number(item.hits) || 0;
+      if (/\.md$/.test(path)) formats.markdown += hits;
+      else if (/\.jsonl?$/.test(path)) formats.json += hits;
+      else if (/\.txt$/.test(path)) formats.txt += hits;
+      else formats.html_edition += hits;
     }
   }
+
+  // Indicateur-cible du public A : retrieval en direct ≠ crawl d'entraînement.
+  const { unknown, ...retrieval } = retrievalBreakdown(aiBots);
+  const aiTotal = RETRIEVAL_CLASSES.reduce((sum, key) => sum + retrieval[key], 0);
+  retrieval.live_share_pct = aiTotal ? Math.round((retrieval.live / aiTotal) * 1000) / 10 : 0;
+  retrieval.unclassified = unknown;
 
   addUrlHits(urls, rows);
   const topUrls = Object.entries(urls)
@@ -62,7 +82,37 @@ function summarize(rows) {
     .sort((a, b) => b[1] - a[1])
     .map(([name, requests]) => ({ name, requests }));
 
-  return { ...totals, categories, top_ai_bots: topAiBots, top_urls: topUrls };
+  return { ...totals, categories, retrieval, edition_formats: formats, top_ai_bots: topAiBots, top_urls: topUrls };
+}
+
+// Série hebdomadaire (semaine ISO du relevé) : la tendance du retrieval est la
+// mesure de progrès de l'étoile polaire ; les fenêtres glissantes ne la montrent pas.
+function isoWeekOf(dateStr) {
+  const d = new Date(`${dateStr}T00:00:00Z`);
+  const day = (d.getUTCDay() + 6) % 7;
+  d.setUTCDate(d.getUTCDate() - day + 3);
+  const firstThursday = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  const week = 1 + Math.round(((d - firstThursday) / 86400000 - 3 + ((firstThursday.getUTCDay() + 6) % 7)) / 7);
+  return `${d.getUTCFullYear()}-W${String(week).padStart(2, '0')}`;
+}
+
+function weeklySeries(stats) {
+  const byWeek = new Map();
+  for (const row of stats) {
+    const week = isoWeekOf(row.date);
+    if (!byWeek.has(week)) byWeek.set(week, []);
+    byWeek.get(week).push(row);
+  }
+  return [...byWeek.entries()].map(([week, rows]) => {
+    const s = summarize(rows);
+    return {
+      week,
+      days: rows.length,
+      page_views: s.page_views,
+      retrieval: { live: s.retrieval.live, search: s.retrieval.search, training: s.retrieval.training },
+      edition_formats: s.edition_formats
+    };
+  });
 }
 
 function dateRange(rows) {
@@ -127,11 +177,14 @@ const report = {
   report_type: 'audience',
   as_of: stats.at(-1)?.date || null,
   rolling: rollingWindows(stats),
+  weekly: weeklySeries(stats),
   editions: editionWindows(stats, loadEditions()),
   bluesky: blueskySummary(bsky),
   interpretation: {
     reported_uniques: 'Cloudflare aggregate, not a count of identified people.',
     user_agents: 'Observations from the adaptive user-agent query; categories are not page views and may use a different window.',
+    retrieval: 'AI user-agents split by function (scripts/lib/ai-bots.mjs): live = user-triggered fetch during a conversation (closest proxy of an actual citation), search = assistant search index, training = training crawl. live_share_pct = live / all AI observations.',
+    edition_formats: 'Hits on /editions/<week>/ paths from the daily top-URL sample, split by format (HTML page vs .md / .json(l) / .txt). Sample-based: a lower bound, not a total.',
     human_audience: 'No individual tracking. Human-likely traffic is intentionally not asserted from these aggregates.'
   }
 };
@@ -144,6 +197,9 @@ if (AS_JSON) {
   const week = report.rolling['7d'];
   console.log(`Audience report ${report.as_of || 'sans données'}`);
   console.log(`7 jours : ${week.page_views} page views · ${week.reported_uniques} uniques Cloudflare rapportés · ${week.categories.ai_bot} observations bots IA`);
+  console.log(`Retrieval 7 j : live ${week.retrieval.live} · search ${week.retrieval.search} · training ${week.retrieval.training} · part live ${week.retrieval.live_share_pct} %`);
+  const trend = report.weekly.slice(-4).map(w => `${w.week} live=${w.retrieval.live}`).join(' · ');
+  console.log(`Tendance : ${trend}`);
   console.log(`Bluesky : ${report.bluesky?.followers ?? 0} followers · ${report.bluesky?.engagement?.likes_total ?? 0} likes sur l'échantillon récent`);
   console.log(`Écrit : ${OUTPUT_PATH}`);
 }
