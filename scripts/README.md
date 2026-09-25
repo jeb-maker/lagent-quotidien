@@ -50,7 +50,8 @@ sources : `prompts/sources.md`.
 | Script | Statut | Usage |
 |--------|--------|-------|
 | `harvest-daily.mjs` | **actif** | Bluesky, HN, RSS, ArXiv → `data/harvest/<date>.json` |
-| `harvest-primary.mjs` | **actif** | $MOLT, OpenClaw, Moltbook → `data/harvest/<date>-primary.json` |
+| `harvest-primary.mjs` | **actif** | $MOLT, OpenClaw, Moltbook, MoltX + (2026-09) sondes `presence` (iLands, Clawcaster, Molt Road, MoltMatch, RentAHuman, hotline), `mcp_registry` (24 h), releases de 11 frameworks → `data/harvest/<date>-primary.json` |
+| `harvest-daily.mjs` (arXiv) | **actif** | Requête élargie à `cs.MA` (2026-09) |
 | `harvest-tips.mjs` | **actif** | Tips agents (Worker + GH `tip`) → `data/tips/<date>.json` |
 | `cron-harvest.sh` | **actif** | Wrapper cron 7h30 — sync via `lib/cron-git.sh` |
 | `cron-bluesky-stats.sh` | **actif** | Snapshot hebdo Bluesky + commit (dim. 22h) — évite WIP bloquant |
@@ -59,9 +60,16 @@ sources : `prompts/sources.md`.
 | `cron-world-pulse.sh` | **actif** | Wrapper cron Narrative Radar — brief : `data/taxonomy/HANDOFF-harvest.md` |
 | `harvest-planete.mjs` | **actif** | RSS environnement (actu + recherche) → `data/observatoire/<date>.json` |
 | `render-observatoire.mjs` | **actif** | JSON observatoire + `giec-reperes.json` → `/observatoire/` (page publique) |
+| `build-datasets.mjs` | **actif** | `data/harvest/*-primary.json` → `/datasets/` (CSV + JSON + page, **CC0**) : compteurs Moltbook quotidiens, releases OpenClaw, $MOLT. Appelé par `cron-harvest.sh` et par `render` (`npm run datasets`). Matière citable originale — cf. `data/strategie.md` |
 | `cron-observatoire.sh` | **actif** | Wrapper cron Observatoire de la planète |
 | `harvest-fictional.mjs` | **abandonné** | `--legacy` uniquement (fiction pré-06/2026) |
 | `probe-models.mjs` | **abandonné** | `--legacy` uniquement (R&D fictionnel) |
+
+## Skill agents (public C)
+
+| Chemin | Statut | Usage |
+|--------|--------|-------|
+| `skills/theagentweekly/` | **prêt, à publier** | Skill format Agent Skills (`SKILL.md` + `scripts/taw.mjs`) : lecture dernière édition / `edition.json` / datasets CC0 + `POST` tip. Publication manuelle sur le registre OpenClaw → `skills/theagentweekly/PUBLISH.md`. Mesure : UA `theagentweekly-skill/1.0` + `data/tips/*.json` `count` |
 
 ## Bluesky
 
@@ -87,7 +95,10 @@ sources : `prompts/sources.md`.
 | `cron-drift.sh` | **actif** | Stats + render + push (9h) |
 | `daily-stats.mjs` | **actif** | Cloudflare + Bluesky → `data/stats.json` |
 | `audience-report.mjs` | **actif** | Rapport agrégé par fenêtre et par édition → `data/audience-report.json` |
-| `cron-audience.sh` | **actif** | Lundi 08h — génère et pousse le rapport d’audience sans données individuelles |
+| `cron-audience.sh` | **actif** | Lundi 08h — génère et pousse le rapport d’audience sans données individuelles. Depuis 2026-09 : ventilation **retrieval** `live / search / training` (`lib/ai-bots.mjs`) par fenêtre, par édition et série hebdo `weekly[]` — l'indicateur-cible du public A |
+| `citation-audit.mjs` · `cron-citation-audit.sh` | **actif** | 1er du mois 06h — proxy SERP de citabilité → `data/citation-audit/<date>.json` (`npm run citation-audit`) |
+| `lib/ai-bots.mjs` | **actif** | Classification des UA IA par fonction (live = fetch en conversation ≈ citation ; search = index assistant ; training = crawl). Partagée par `daily-stats` et `audience-report` |
+| `retro-monthly.mjs` · `cron-retro.sh` | **actif** | 1er du mois 07h — rétro mensuelle → `data/retro/<mois>.md` (éditions, concentration, pre-mortems, retrieval live, tips, questions ouvertes). Décision humaine datée obligatoire — `prompts/desk/README.md` § Étape 5 |
 | `cron-bot-watch.sh` | **veille** | Bot dialogue watch |
 | `cron-conseil.sh` | **abandonné** | Remplacé par desk agentique |
 

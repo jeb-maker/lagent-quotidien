@@ -6,6 +6,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { AI_BOT_RE, canonicalAiBotName } from './lib/ai-bots.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = join(__dirname, '..');
@@ -32,7 +33,6 @@ const sinceISO = new Date(Date.now() - 24 * 3600 * 1000).toISOString().replace(/
 const untilISO = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 const today = new Date().toISOString().slice(0, 10);
 
-const AI_BOT_RE = /GPTBot|ClaudeBot|anthropic-ai|Google-Extended|CCBot|PerplexityBot|cohere-ai|YouBot|Diffbot|Bytespider|FacebookBot|Applebot-Extended|Amazonbot|OAI-SearchBot|ChatGPT-User|Claude-Web|Aranet|Nuggets|Meta-ExternalAgent/i;
 const ATTACK_RE = /wp-admin|wp-includes|wlwmanifest|xmlrpc|CMS-Checker|\.env|sqlmap|nikto/i;
 const SEARCH_RE = /bingbot|Googlebot|DuckDuckBot|YandexBot|Baiduspider|MJ12bot|SemrushBot|AhrefsBot/i;
 const CLI_RE = /^curl|^wget|^python-requests|^Go-http|^Java\/|^okhttp|^libwww|^aiohttp|Dalvik|NetAPI/i;
@@ -73,8 +73,8 @@ async function cfTopUserAgents() {
     total += g.count;
     if (AI_BOT_RE.test(ua)) {
       cats.ai_bot += g.count;
-      const m = ua.match(/(GPTBot|ClaudeBot|anthropic-ai|Google-Extended|CCBot|PerplexityBot|cohere-ai|YouBot|Diffbot|Bytespider|Applebot-Extended|Amazonbot|OAI-SearchBot|ChatGPT-User|Claude-Web|Aranet-SearchBot|NuggetsBot|Meta-ExternalAgent)/i);
-      if (m) aiBots[m[1]] = (aiBots[m[1]] || 0) + g.count;
+      const name = canonicalAiBotName(ua);
+      if (name) aiBots[name] = (aiBots[name] || 0) + g.count;
     } else if (ATTACK_RE.test(ua)) cats.attack += g.count;
     else if (SEARCH_RE.test(ua)) cats.search_engine += g.count;
     else if (CLI_RE.test(ua)) cats.cli += g.count;

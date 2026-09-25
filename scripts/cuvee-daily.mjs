@@ -110,10 +110,17 @@ function agentItem() {
     : `The agents' register — ${pick.name}.\n\n${tagline}${extra}\n\n${editionUrl}`;
 }
 
-// Mode : --mode=edition|agent force ; sinon mardi=édition, autre jour=agent.
+// Mode : --mode=edition|agent force ; sinon mardi=édition. Décision 2026-09-25
+// (data/strategie.md) : le mode « agent » hors mardi n'est plus automatique —
+// 30 followers, 0,15 like/post sur 81 posts : coût sans retour. Le canal ne
+// porte plus que l'annonce d'édition ; un run cron un autre jour sort sans poster.
 const modeArg = (process.argv.find(a => a.startsWith('--mode=')) || '').slice(7);
 const dow = new Date().getDay(); // 0 = dimanche, 2 = mardi
-const mode = modeArg || (dow === 2 ? 'edition' : 'agent');
+if (!modeArg && dow !== 2) {
+  console.log('cuvee-daily : hors mardi et sans --mode explicite → rien à poster (décision 2026-09-25).');
+  process.exit(0);
+}
+const mode = modeArg || 'edition';
 const text = mode === 'edition' ? editionAnnounce() : agentItem();
 
 // Sécurité longueur (max Bluesky = 300)
