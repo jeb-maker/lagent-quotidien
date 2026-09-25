@@ -123,7 +123,7 @@ Pages à vérifier en priorité sur le téléphone :
 3. Si OK → \`Merge\` (les modifs partent live sur theagentweekly.com).
 4. Si KO → commente ce qu'il faut changer, push un fix sur la branche.
 
-🤖 Generated with [OpenCode](https://opencode.ai)
+🤖 Generated with [Cursor Agent](https://cursor.com)
 EOF
 )
 

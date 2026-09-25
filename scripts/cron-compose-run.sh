@@ -1,16 +1,17 @@
 #!/bin/bash
 # scripts/cron-compose-run.sh
 # Worker lancé en arrière-plan par cron-compose.sh :
-#   OpenCode headless → edition-pr.sh --draft (push branche + PR GitHub)
+#   agent Cursor headless → edition-pr.sh --draft (push branche + PR GitHub)
 #
 # Usage interne :
 #   cron-compose-run.sh 2026-W30
 
 set -u
-export PATH="/home/debian/.local/bin:/home/debian/.opencode/bin:/usr/local/bin:/usr/bin:/bin"
+export HOME="${HOME:-/home/debian}"
+export PATH="/home/debian/.local/bin:/usr/local/bin:/usr/bin:/bin"
 
 REPO="/home/debian/agentic-news/agent-quotidien"
-OPENCODE_LOCK="/tmp/agent-quotidien-compose-opencode.lock"
+AGENT_LOCK="/tmp/agent-quotidien-compose-cursor.lock"
 
 TARGET_WEEK="${1:-}"
 [ -z "$TARGET_WEEK" ] && exit 1
@@ -21,7 +22,7 @@ LOG_AGENT="/tmp/agent-quotidien-compose-${TARGET_WEEK}.log"
 BRANCH="edition/${TARGET_WEEK}"
 
 cleanup() {
-  rm -f "$OPENCODE_LOCK"
+  rm -f "$AGENT_LOCK"
 }
 trap cleanup EXIT
 
@@ -37,19 +38,21 @@ for i in 0 1 2 3 4 5 6; do
   fi
 done
 if [ "$HARVEST_GAPS" -gt 0 ]; then
-  echo "$(date -Iseconds) [run] WARN ${HARVEST_GAPS} jour(s) de harvest absents — OpenCode doit le noter et prioriser la matière dispo" >> "$LOG_AGENT"
+  echo "$(date -Iseconds) [run] WARN ${HARVEST_GAPS} jour(s) de harvest absents — l'agent doit le noter et prioriser la matière dispo" >> "$LOG_AGENT"
 else
   echo "$(date -Iseconds) [run] harvest J-6…J OK" >> "$LOG_AGENT"
 fi
 
 PROMPT=$(cat <<EOF
-Prépare l'édition ${TARGET_WEEK} en suivant prompts/weekly-edition.md et la skill composition-hebdo.
+Tu es l'agent Cursor, lancé par le cron de composition. N'invoque pas le binaire opencode.
+
+Prépare l'édition ${TARGET_WEEK} en suivant .opencode/skills/composition-hebdo/SKILL.md, prompts/weekly-edition.md et prompts/desk/README.md.
 
 Tu es sur la branche ${BRANCH}. Ne change pas de branche.
 
 Workflow obligatoire :
 1. Lis data/_week-context.md, prompts/style-guide.md, data/editorial-compass.md, data/feuilleton-series.md (une fois).
-2. Desk agentique : veilleur, comère, facteur, promoteur, archiviste (parallèle) → éditeur → juge.
+2. Desk agentique : lis les prompts dans prompts/desk/ (les rôles sont aussi décrits dans .opencode/agent/). Applique veilleur, comère, facteur, promoteur, archiviste, puis éditeur, puis juge. Écris leurs notes dans data/desk/${TARGET_WEEK}/.
 3. Préflight éditeur : ≥ 3 scènes (citation verbatim + URL + date) dans scenes.md ; sinon ne pas composer. Écrire \`## Arc\` (une phrase = déplacement de la semaine) en tête de notes.md et la copier dans _meta.editor_notes.
 4. Feuilleton **obligatoire** chaque semaine (≥ 2026-W33) : fiction étiquetée genre:fiction, disclaimer bilingue, series + episode (continuer data/feuilleton-series.md sauf clôture notée), ≥ 400 mots FR / ≥ 350 EN, personnages inventés (Nox/Mantle/Mira sauf clôture), **aucune entité réelle nommée**, pas de lore caduc. Place après la tribune. Si un draft desk existe (data/desk/${TARGET_WEEK}/feuilleton-draft.json), l'intégrer ou le réécrire — ne pas omettre la rubrique. Mettre à jour le « fil ouvert » dans feuilleton-series.md.
 5. npm run gate -- ${TARGET_WEEK}
@@ -60,27 +63,32 @@ Ne commit pas. Ne push pas. Un script poussera la branche et ouvrira une PR draf
 EOF
 )
 
-echo "$(date -Iseconds) [run] OpenCode démarré → ${TARGET_WEEK}" >> "$LOG_AGENT"
+echo "$(date -Iseconds) [run] agent Cursor démarré → ${TARGET_WEEK}" >> "$LOG_AGENT"
 
-if command -v opencode >/dev/null 2>&1; then
-  opencode run --auto "$PROMPT" \
+if command -v agent >/dev/null 2>&1; then
+  # --print : headless. --force + --trust : pas de prompt d'approbation.
+  # --sandbox disabled : écriture du repo et npm gate/render.
+  agent --print --force --trust --sandbox disabled --approve-mcps \
+    --workspace "$REPO" \
+    --output-format text \
+    "$PROMPT" \
     >> "$LOG_AGENT" 2>&1
-  OPENCODE_EXIT=$?
+  AGENT_EXIT=$?
 else
-  echo "$(date -Iseconds) [run] erreur: binaire opencode introuvable" >> "$LOG_AGENT"
+  echo "$(date -Iseconds) [run] erreur: binaire agent (Cursor) introuvable" >> "$LOG_AGENT"
   exit 1
 fi
 
-echo "$(date -Iseconds) [run] OpenCode terminé (exit ${OPENCODE_EXIT})" >> "$LOG_AGENT"
+echo "$(date -Iseconds) [run] agent Cursor terminé (exit ${AGENT_EXIT})" >> "$LOG_AGENT"
 
-# Gate avant rendu : un squelette ou un résultat OpenCode incomplet ne doit pas
+# Gate avant rendu : un squelette ou un résultat d'agent incomplet ne doit pas
 # déclencher le renderer ni une fausse preview.
 GATE_OK=0
-if [ "$OPENCODE_EXIT" -eq 0 ] && npm run --silent gate -- "${TARGET_WEEK}" >> "$LOG_AGENT" 2>&1; then
+if [ "$AGENT_EXIT" -eq 0 ] && npm run --silent gate -- "${TARGET_WEEK}" >> "$LOG_AGENT" 2>&1; then
   GATE_OK=1
   echo "$(date -Iseconds) [run] gate OK → rendu autorisé" >> "$LOG_AGENT"
 else
-  echo "$(date -Iseconds) [run] gate fermé ou OpenCode en échec → push sans rendu" >> "$LOG_AGENT"
+  echo "$(date -Iseconds) [run] gate fermé ou agent en échec → push sans rendu" >> "$LOG_AGENT"
 fi
 
 # Push branche + PR draft, même si gate KO, mais sans lancer le renderer dans ce cas.
@@ -124,4 +132,4 @@ else
   echo "$(date -Iseconds) [run] preview ignorée : gate fermé ou HTML absent" >> "$LOG_AGENT"
 fi
 
-exit "$OPENCODE_EXIT"
+exit "$AGENT_EXIT"

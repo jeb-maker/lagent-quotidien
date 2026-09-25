@@ -166,12 +166,12 @@ EOF
 echo "✓ Édition ${WEEK} créée : ${EDITION_DIR}/"
 echo "✓ Desk : data/desk/${WEEK}/"
 
-# Régénère le digest de semaine lu en premier par opencode (AGENTS.md).
+# Régénère le digest de semaine lu en premier par l'agent (AGENTS.md).
 HARVEST_DATE=$(date +%Y-%m-%d)
 cat > data/_week-context.md <<EOF
 # Contexte de la semaine — ${WEEK}
 
-> Digest court (~1 KB) lu en premier par opencode à chaque session de composition.
+> Digest court (~1 KB) lu en premier par l'agent Cursor à chaque session de composition.
 > Remplace le chargement systématique de \`data/people.json\` (21 KB) pour la
 > majorité des tours. Régénéré par \`scripts/new-week.sh\`.
 
@@ -213,7 +213,7 @@ EOF
 echo "✓ Digest : data/_week-context.md"
 echo ""
 echo "Prochaines étapes :"
-echo "  1. Lance OpenCode dans le repo :  opencode"
+echo "  1. Lance l'agent Cursor dans le repo :  agent"
 echo "  2. Demande-lui :"
 echo "     « Génère l'édition ${WEEK} en suivant prompts/weekly-edition.md »"
 echo "  3. Relis ${EDITION_DIR}/edition.json"

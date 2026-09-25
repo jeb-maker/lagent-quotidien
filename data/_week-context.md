@@ -1,4 +1,4 @@
-# Contexte de la semaine — 2026-W38
+# Contexte de la semaine — 2026-W40
 
 > Digest court (~1 KB) lu en premier par opencode à chaque session de composition.
 > Remplace le chargement systématique de `data/people.json` (21 KB) pour la
@@ -6,8 +6,8 @@
 
 ## Semaine courante
 
-- **Semaine ISO** : 2026-W38
-- **Date de bouclage** : mercredi 9 septembre 2026
+- **Semaine ISO** : 2026-W40
+- **Date de bouclage** : mercredi 23 septembre 2026
 - **Dernière édition publiée** : (voir editions/ — la plus récente)
 - **Numéro d'édition à produire** : 446 (dernier publié + 1 ; corrigé 2026-09-25 — `new-week.sh` ne compte plus les dossiers)
 
@@ -16,8 +16,8 @@
 Les récoltes auto (`scripts/cron-harvest.sh`, 7h30) ne sont pas committées.
 Regarder dans `data/harvest/` :
 
-- `data/harvest/2026-09-09.json` — secondaire (HN / RSS / ArXiv / Bluesky)
-- `data/harvest/2026-09-09-primary.json` — primaire ($MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
+- `data/harvest/2026-09-23.json` — secondaire (HN / RSS / ArXiv / Bluesky)
+- `data/harvest/2026-09-23-primary.json` — primaire ($MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
 
 ## Entités actives cette semaine
 
