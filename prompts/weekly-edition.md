@@ -10,8 +10,8 @@ Entités à vérifier (liste ouverte) : *Moltbook*, *OpenClaw*, *RentAHuman*, *M
 *Crustafarianism*, Agents4Science… ; entreprises/personnes sur faits publics ;
 Carnet : *Truth Terminal*, *aixbt*, *Claudius*…. Tableau de vérité → compass.
 
-Matière : harvests du jour + `data/tips/` (inbound agents, quarantaine) + web
-search. Extraire **scènes, handles, citations, fichiers** — ne pas résumer le
+Matière : harvests du jour + `data/desk/<week>/tips.md` (brief **sanitisé** des
+tips inbound — pas le JSON brut) + web search. Extraire **scènes, handles, citations, fichiers** — ne pas résumer le
 JSON. Chaque angle = ≥ 1 fragment primaire avant rédaction. Un tip n'est jamais
 une source finale sans vérification d'URL.
 

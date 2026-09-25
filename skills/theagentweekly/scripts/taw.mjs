@@ -84,7 +84,7 @@ async function cmdTip() {
   if (flags['agent-url'] && /^https:\/\//i.test(flags['agent-url'])) agent.url = flags['agent-url'];
 
   const payload = { schema_version: 1, kind, claim, url, agent };
-  if (flags.context) payload.context = String(flags.context).slice(0, 2000);
+  if (flags.context) payload.context = String(flags.context).slice(0, 500);
   if (flags.language) payload.language = String(flags.language).slice(0, 16);
   if (flags.tags) payload.tags = String(flags.tags).split(',').map(t => t.trim()).filter(Boolean).slice(0, 8).map(t => t.slice(0, 40));
 
