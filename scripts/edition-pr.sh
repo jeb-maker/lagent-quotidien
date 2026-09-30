@@ -78,7 +78,7 @@ git add -A
 if git diff --cached --quiet; then
   echo "→ Rien à committer (déjà à jour)"
 else
-  git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
+  git -c user.email="282136299+jeb-maker@users.noreply.github.com" -c user.name="jeb-maker" \
     commit -m "Édition $WEEK (#${ISSUE_NUMBER}) — preview"
   echo "→ Commit créé"
 fi

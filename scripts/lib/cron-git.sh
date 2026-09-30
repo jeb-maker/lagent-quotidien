@@ -138,7 +138,7 @@ cron_git_commit_push() {
     return 0
   fi
 
-  if ! git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
+  if ! git -c user.email="282136299+jeb-maker@users.noreply.github.com" -c user.name="jeb-maker" \
       commit -m "$msg" >/dev/null 2>&1; then
     echo "$(date -Iseconds) commit échec"
     cron_git_restore_stash

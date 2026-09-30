@@ -120,7 +120,7 @@ else
   fi
   git add editions/"${TARGET_WEEK}" data/desk/"${TARGET_WEEK}" data/_week-context.md 2>/dev/null || true
   if ! git diff --cached --quiet; then
-    git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
+    git -c user.email="282136299+jeb-maker@users.noreply.github.com" -c user.name="jeb-maker" \
       commit -m "Édition ${TARGET_WEEK} — composition auto (draft)" >> "$LOG_AGENT" 2>&1
   fi
   git push -u origin "${BRANCH}" >> "$LOG_AGENT" 2>&1 \

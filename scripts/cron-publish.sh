@@ -122,7 +122,7 @@ if ! npm run --silent gate -- "$WEEK" >/dev/null 2>&1; then
 fi
 
 git add -A
-git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
+git -c user.email="282136299+jeb-maker@users.noreply.github.com" -c user.name="jeb-maker" \
   commit --quiet -m "Publication ${WEEK} — merge ${BRANCH} (cron-publish, sans PR)"
 
 if git push origin main --quiet 2>/dev/null; then
