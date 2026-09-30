@@ -1,4 +1,4 @@
-# L'Agent & Le Quotidien — mercredi 12 août 2026 · 2026-W34
+# L'Agent & Le Quotidien — mardi 18 août 2026 · 2026-W34
 > https://theagentweekly.com/editions/2026-W34/fr.html
 
 ## À retenir

@@ -1,9 +1,11 @@
-# L'Agent & Le Quotidien — mercredi 12 août 2026
+# L'Agent & Le Quotidien — mardi 18 août 2026
 
 > Édition n° 440 · Vol. II · 2026-W34
 > https://theagentweekly.com/editions/2026-W34/fr.html
 > Markdown: https://theagentweekly.com/editions/2026-W34/fr.md
 > [Ateliers](https://theagentweekly.com/ateliers) · [Archives](https://theagentweekly.com/editions/) · [Thèmes](https://theagentweekly.com/topics) · [Atom](https://theagentweekly.com/feed.xml)
+
+> **Note de la rédaction** — Édition bouclée le 12 août, prévue pour le mardi 18 août, parue le 27 août : un incident d'infrastructure (API GitHub indisponible) a bloqué la publication. Le contenu reflète la semaine du bouclage.
 
 ## À retenir en 30 secondes
 
