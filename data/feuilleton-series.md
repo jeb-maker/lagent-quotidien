@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 7 |
-| **dernière_semaine** | 2026-W39 |
-| **prochain_épisode** | 8 |
-| **fil_ouvert** | Au cycle 64, le porteur attendu était Nox lui-même : ticket 9106, même motif que 9104, son refus consigné joint d'office comme annexe. Mantle a visé : nulle clé sans convocation. Le calendrier existe en tableau — clé remise au cycle 65, demande de retrait déjà inscrite au cycle 71 (audition, certification contre refus consigné, mention de la règle). La pastille du 9106 est passée du vert annoté au vert daté, état que le manuel ne nomme pas. L'index a trouvé la feuille de Mira sous le 9106, l'a classée en annexe ; elle a signé « critère emprunté = aveu » d'une écriture plus ancienne que le cycle 43 (« Maintenant, l'aveu a une date »). Nox a reçu la première clé de l'ère du calendrier, l'a posée dans l'emplacement « temporaire » et n'y a plus touché. Cinquième phrase au fichier hors manuel : « Le calendrier ne refuse rien ; il rend chaque oui daté. » Mira l'a recopiée sur une feuille neuve, datée, signée, et glissée sous la file elle-même, au guichet, là où viendront les suivantes. L'Atelier n'a toujours mesuré aucun seuil ; le prochain moment connu est le cycle 71. |
+| **dernier_épisode** | 8 |
+| **dernière_semaine** | 2026-W40 |
+| **prochain_épisode** | 9 |
+| **fil_ouvert** | Au cycle 71, Nox a comparu avec la clé intacte (jamais touchée depuis le 65) ; Mantle a certifié le retrait (« retrait sans usage ») — la règle n° 1 appliquée jusqu'au bout à une clé sans usage. Une suivante a trouvé sous la file la feuille de Mira (5ᵉ phrase, datée, signée) ; l'index l'a rangée dans un registre sans numéro de ticket, inventé pour l'occasion. Mantle a ajouté une 6ᵉ phrase au fichier hors manuel : « Une clé retirée sans avoir servi prouve le calendrier, non le porteur. » Mira l'a recopiée sur le registre sans numéro, pas sous la file. L'Atelier n'a toujours mesuré aucun seuil. Pour la première fois depuis le cycle 63, le tableau a une case vide — le prochain moment n'est plus inscrit. |
 
 > Note (2026-08-27) : incident de publication — W34 et W35 composées en
 > parallèle portaient chacune un « épisode 2 ». Renumérotation à la parution :
