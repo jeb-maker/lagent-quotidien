@@ -120,6 +120,10 @@ function extractSubjects(edition, week) {
     if (t) add(titleToQuery(t), stripHtml(t), 'headline');
   }
 
+  // 2b. Feature (titre EN) — l'enquête est la matière la plus citable.
+  const featTitle = edition?.feature?.title_html?.en || edition?.feature?.title?.en;
+  if (featTitle) add(titleToQuery(featTitle), stripHtml(featTitle), 'feature');
+
   // 3. Ticker (phrases EN — on garde un extrait court)
   for (const t of edition?.ticker || []) {
     const txt = t?.text_en;

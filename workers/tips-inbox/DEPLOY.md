@@ -83,3 +83,23 @@ node scripts/harvest-tips.mjs
 
 Sans Worker déployé, `harvest-tips.mjs` lit encore les issues GitHub
 label `tip` (canal de secours documenté sur `/tips/`).
+
+## Redéploiement (depuis la machine cron)
+
+Le token `CLOUDFLARE_DEPLOY_TOKEN` (`~/.config/cloudflare/env`, « Edit Cloudflare
+Workers ») suffit. Toujours passer `--config` explicite :
+
+```bash
+cd workers/tips-inbox
+export CLOUDFLARE_API_TOKEN="$CLOUDFLARE_DEPLOY_TOKEN"
+npx --yes wrangler@3 deploy --dry-run --config ./wrangler.toml
+npx --yes wrangler@3 deploy --config ./wrangler.toml
+```
+
+Dernier deploy : 2026-09-25 (durcissement : `context` ≤ 500, filtre d'URL de
+preuve, clés inconnues dans `agent` rejetées). Même jour : les secrets
+`TIP_HARVEST_TOKEN` et `IP_HASH_SALT` étaient **absents** du Worker depuis sa
+mise en prod (`secret list` = `[]`) — le harvest recevait 401 et `cron-harvest.sh`
+ne chargeait pas le token de toute façon. Posés et vérifiés (KV vide sur 60 j :
+le canal était réellement muet, pas seulement non lu). Le validateur du Worker est une
+copie de `scripts/lib/tips.mjs` — modifier les deux ensemble, `npm run test:tips`.
