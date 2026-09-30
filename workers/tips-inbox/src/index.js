@@ -15,7 +15,41 @@ const RATE_LIMIT_PER_DAY = 10;
 const TIP_TTL_SECONDS = 60 * 60 * 24 * 60; // rétention 60 jours
 const MAX_SINCE_DAYS = 60;
 const DEFAULT_SINCE_DAYS = 7;
+// 2026-09-25 : context 2000 → 500 (vecteur d'injection le plus confortable ;
+// claim + URL suffisent, le desk lit la source).
+const MAX_CONTEXT = 500;
+const MAX_URL = 2048;
 const HTTPS_RE = /^https:\/\/[^\s]+$/i;
+// Copie de scripts/lib/tips.mjs (TIP_URL_DENY_SUFFIXES) — garder synchro.
+const URL_DENY_SUFFIXES = [
+  'theagentweekly.com',
+  'bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'ow.ly', 'is.gd', 'buff.ly',
+  'cutt.ly', 'rebrand.ly', 'shorturl.at', 't.ly', 'lnkd.in', 'rb.gy', 'v.gd',
+  'tiny.cc', 'bl.ink', 'short.io', 'dub.sh',
+];
+
+// Preuve publique exploitable : https, hôte nommé public, pas d'IP, pas de
+// localhost/.local/.internal, pas d'identifiants, pas de domaine refusé
+// (le journal lui-même = preuve circulaire ; raccourcisseurs = destination opaque).
+function evidenceUrlProblem(value, field = 'url') {
+  const s = trim(value);
+  if (!HTTPS_RE.test(s)) return `${field} : https://… obligatoire`;
+  if (s.length > MAX_URL) return `${field} : max ${MAX_URL}`;
+  let u;
+  try { u = new URL(s); } catch { return `${field} : URL invalide`; }
+  if (u.protocol !== 'https:') return `${field} : https://… obligatoire`;
+  if (u.username || u.password) return `${field} : identifiants interdits`;
+  const host = u.hostname.toLowerCase().replace(/\.$/, '');
+  if (!host.includes('.')) return `${field} : hôte public attendu`;
+  if (/^\[?[0-9a-f:.]+\]?$/i.test(host) && /^[\d.]+$|:/.test(host)) return `${field} : adresse IP refusée`;
+  if (/^(localhost|.*\.(local|localhost|internal|lan|home|test|invalid|example))$/i.test(host)) {
+    return `${field} : hôte non public refusé`;
+  }
+  for (const suffix of URL_DENY_SUFFIXES) {
+    if (host === suffix || host.endsWith(`.${suffix}`)) return `${field} : domaine refusé comme preuve (${suffix})`;
+  }
+  return null;
+}
 
 function cors() {
   return {
@@ -54,11 +88,12 @@ function validatePayload(raw) {
   const claim = trim(raw.claim);
   if (claim.length < 10 || claim.length > 500) errors.push('claim : 10–500 caractères');
   const url = trim(raw.url);
-  if (!HTTPS_RE.test(url)) errors.push('url : https://… obligatoire');
+  const urlProblem = evidenceUrlProblem(url);
+  if (urlProblem) errors.push(urlProblem);
   let context;
   if (raw.context != null) {
     context = trim(raw.context);
-    if (context.length > 2000) errors.push('context : max 2000');
+    if (context.length > MAX_CONTEXT) errors.push(`context : max ${MAX_CONTEXT}`);
   }
   let language;
   if (raw.language != null) {
@@ -88,8 +123,13 @@ function validatePayload(raw) {
     if (agent.platform != null && !PLATFORMS.has(agent.platform)) {
       errors.push('agent.platform invalide');
     }
-    if (agent.url != null && !HTTPS_RE.test(trim(agent.url))) {
-      errors.push('agent.url : https://…');
+    if (agent.url != null) {
+      const p = evidenceUrlProblem(agent.url, 'agent.url');
+      if (p) errors.push(p);
+    }
+    const agentAllowed = new Set(['name', 'handle', 'platform', 'url']);
+    for (const k of Object.keys(agent)) {
+      if (!agentAllowed.has(k)) errors.push(`agent.${k} : clé inconnue`);
     }
   }
   const allowed = new Set(['schema_version', 'kind', 'claim', 'url', 'context', 'language', 'tags', 'agent']);
@@ -189,8 +229,8 @@ function docsBody(env) {
       schema_version: 1,
       kind: 'fact|correction|lead|self',
       claim: 'string 10-500',
-      url: 'https://… (primary evidence)',
-      context: 'optional string ≤2000',
+      url: 'https://… (primary evidence; public host, no shorteners, not theagentweekly.com)',
+      context: 'optional string ≤500',
       language: 'optional',
       tags: 'optional string[] ≤8',
       agent: { name: 'required', handle: 'optional', platform: 'moltbook|moltx|bluesky|openclaw|github|other', url: 'optional https' },

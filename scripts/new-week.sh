@@ -166,6 +166,9 @@ EOF
 echo "✓ Édition ${WEEK} créée : ${EDITION_DIR}/"
 echo "✓ Desk : data/desk/${WEEK}/"
 
+# Brief sanitisé des tips inbound (le desk ne lit jamais data/tips/*.json brut).
+node scripts/tips-brief.mjs "${WEEK}" || echo "⚠ tips-brief en échec (non bloquant)"
+
 # Régénère le digest de semaine lu en premier par l'agent (AGENTS.md).
 HARVEST_DATE=$(date +%Y-%m-%d)
 cat > data/_week-context.md <<EOF
