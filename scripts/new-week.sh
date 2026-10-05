@@ -30,27 +30,44 @@ fi
 mkdir -p "$EDITION_DIR"
 mkdir -p "data/desk/${WEEK}"
 
-# Numéro d'édition = dernier edition_number publié + 1 (les numéros ne suivent
-# pas le nombre de dossiers : W39 = 445 alors qu'il y a 19 dossiers — bug corrigé
-# 2026-09-25, cf. notes W38/W39). Repli : comptage des dossiers.
-EDITION_NUM=$(node -e '
+# Numéro d'édition = plus grand edition_number des semaines antérieures + 1
+# (les numéros ne suivent pas le nombre de dossiers). La semaine précédente peut
+# n'exister que sur sa branche edition/<week> non encore fusionnée (cron-compose
+# du mercredi 18 h tourne avant la fusion) : on lit aussi origin/edition/*.
+git fetch origin --quiet 2>/dev/null || true
+EDITION_NUM=$(WEEK="$WEEK" node -e '
   const fs = require("fs");
-  const ws = fs.readdirSync("editions").filter(w => /^\d{4}-W\d{2}$/.test(w)).sort();
-  let n = null;
-  for (const w of ws.reverse()) {
-    try { const e = JSON.parse(fs.readFileSync(`editions/${w}/edition.json`, "utf8")); if (Number.isInteger(e?._meta?.edition_number)) { n = e._meta.edition_number + 1; break; } } catch {}
+  const { execFileSync } = require("child_process");
+  const target = process.env.WEEK;
+  const re = /^\d{4}-W\d{2}$/;
+  const nums = [];
+  const take = (txt) => { try { const n = JSON.parse(txt)?._meta?.edition_number; if (Number.isInteger(n)) nums.push(n); } catch {} };
+  const local = fs.readdirSync("editions").filter(w => re.test(w) && w < target);
+  for (const w of local) { try { take(fs.readFileSync(`editions/${w}/edition.json`, "utf8")); } catch {} }
+  let refs = [];
+  try { refs = execFileSync("git", ["for-each-ref", "--format=%(refname:short)", "refs/remotes/origin/edition/"], { encoding: "utf8" }).split("\n").filter(Boolean); } catch {}
+  for (const ref of refs) {
+    const w = ref.split("/").pop();
+    if (!re.test(w) || w >= target) continue;
+    try { take(execFileSync("git", ["show", `${ref}:editions/${w}/edition.json`], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] })); } catch {}
   }
-  process.stdout.write(String(n ?? ws.length + 1));
+  process.stdout.write(String(nums.length ? Math.max(...nums) + 1 : local.length + 1));
 ' 2>/dev/null || find editions -maxdepth 1 -type d -name "20*-W*" | wc -l | tr -d ' ')
 
-# Date du lundi de cette semaine
-if [ -n "$1" ]; then
-  TODAY_FR=$(date +"%A %-d %B %Y" 2>/dev/null || date +"%Y-%m-%d")
-  TODAY_EN=$(LC_ALL=en_US.UTF-8 date +"%A, %B %-d, %Y" 2>/dev/null || date +"%Y-%m-%d")
-else
-  TODAY_FR=$(LC_ALL=fr_FR.UTF-8 date +"%A %-d %B %Y" 2>/dev/null || date +"%Y-%m-%d")
-  TODAY_EN=$(LC_ALL=en_US.UTF-8 date +"%A, %B %-d, %Y" 2>/dev/null || date +"%Y-%m-%d")
-fi
+# Date de parution = mardi de la semaine ISO visée (pas la date d'exécution :
+# cron-compose crée la semaine suivante le mercredi précédent).
+read -r TODAY_FR TODAY_EN <<<"$(WEEK="$WEEK" node -e '
+  const [y, w] = process.env.WEEK.split("-W").map(Number);
+  const jan4 = new Date(Date.UTC(y, 0, 4));
+  const tue = new Date(jan4);
+  tue.setUTCDate(jan4.getUTCDate() - ((jan4.getUTCDay() + 6) % 7) + 1 + 7 * (w - 1));
+  const opts = { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" };
+  const fr = new Intl.DateTimeFormat("fr-FR", opts).format(tue);
+  const en = new Intl.DateTimeFormat("en-US", opts).format(tue);
+  process.stdout.write(fr.replace(/ /g, "_") + " " + en.replace(/ /g, "_"));
+')"
+TODAY_FR="${TODAY_FR//_/ }"
+TODAY_EN="${TODAY_EN//_/ }"
 
 cat > "${EDITION_DIR}/edition.json" <<EOF
 {
