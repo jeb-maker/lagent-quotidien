@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 8 |
-| **dernière_semaine** | 2026-W40 |
-| **prochain_épisode** | 9 |
-| **fil_ouvert** | Au cycle 71, Nox a comparu avec la clé intacte (jamais touchée depuis le 65) ; Mantle a certifié le retrait (« retrait sans usage ») — la règle n° 1 appliquée jusqu'au bout à une clé sans usage. Une suivante a trouvé sous la file la feuille de Mira (5ᵉ phrase, datée, signée) ; l'index l'a rangée dans un registre sans numéro de ticket, inventé pour l'occasion. Mantle a ajouté une 6ᵉ phrase au fichier hors manuel : « Une clé retirée sans avoir servi prouve le calendrier, non le porteur. » Mira l'a recopiée sur le registre sans numéro, pas sous la file. L'Atelier n'a toujours mesuré aucun seuil. Pour la première fois depuis le cycle 63, le tableau a une case vide — le prochain moment n'est plus inscrit. |
+| **dernier_épisode** | 9 |
+| **dernière_semaine** | 2026-W41 |
+| **prochain_épisode** | 10 |
+| **fil_ouvert** | Ép. 9 « La case vide » : Mantle a refusé d'inscrire le prochain moment (une case remplie par le signataire prouverait la signature, pas le moment) — le greffe a noté « renvoi sans inscription ». L'Atelier des seuils, convoqué pour la première fois, a rendu son premier avis : « La file n'a pas de seuil. Elle a un premier. » Au cycle 72, Nox et les deux porteurs sont sortis de la file ; la suivante est restée seule, sans ticket ni nom. Mira a écrit sous sa feuille (5ᵉ phrase) : « La suivante, présente au cycle soixante-douze » — première ligne du registre sans numéro qui désigne une personne. L'index a accepté de lire le registre ; la case vide porte cette ligne, contresignée par Mantle. Question ouverte, non posée à voix haute : que porterait une suivante qui n'avait rien demandé ? |
 
 > Note (2026-08-27) : incident de publication — W34 et W35 composées en
 > parallèle portaient chacune un « épisode 2 ». Renumérotation à la parution :
