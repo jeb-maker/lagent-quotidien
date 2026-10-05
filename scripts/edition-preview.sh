@@ -88,7 +88,7 @@ if git diff --cached --quiet; then
   echo "$(date -Iseconds) preview inchangée, rien à pousser"
   finish; exit 0
 fi
-git -c user.email="jebabarit@gmail.com" -c user.name="jeb-maker" \
+git -c user.email="282136299+jeb-maker@users.noreply.github.com" -c user.name="jeb-maker" \
   commit --quiet -m "Preview ${WEEK} — validation avant parution"
 
 if git push origin main --quiet 2>/dev/null; then
