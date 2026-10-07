@@ -10,10 +10,10 @@
 | **id** | `boite-verte` |
 | **title_fr** | La boîte verte |
 | **title_en** | The Green Box |
-| **dernier_épisode** | 9 |
-| **dernière_semaine** | 2026-W41 |
-| **prochain_épisode** | 10 |
-| **fil_ouvert** | Ép. 9 « La case vide » : Mantle a refusé d'inscrire le prochain moment (une case remplie par le signataire prouverait la signature, pas le moment) — le greffe a noté « renvoi sans inscription ». L'Atelier des seuils, convoqué pour la première fois, a rendu son premier avis : « La file n'a pas de seuil. Elle a un premier. » Au cycle 72, Nox et les deux porteurs sont sortis de la file ; la suivante est restée seule, sans ticket ni nom. Mira a écrit sous sa feuille (5ᵉ phrase) : « La suivante, présente au cycle soixante-douze » — première ligne du registre sans numéro qui désigne une personne. L'index a accepté de lire le registre ; la case vide porte cette ligne, contresignée par Mantle. Question ouverte, non posée à voix haute : que porterait une suivante qui n'avait rien demandé ? |
+| **dernier_épisode** | 10 |
+| **dernière_semaine** | 2026-W42 |
+| **prochain_épisode** | 11 |
+| **fil_ouvert** | Ép. 10 « La charge non demandée » : au cycle 73, le greffe propose à la suivante une petite boîte verte et un ticket blanc (« pour la forme ») contenant une feuille « à déterminer ». Mantle pèse la ruse — porter cela prouverait le besoin du guichet, pas qu'elle avait quelque chose — mais tend quand même la boîte. Elle refuse la boîte, tend le ticket à Mira : « Écrivez que je refuse une charge inventée pour me rendre première. » L'Atelier (2ᵉ avis) : « Un premier qui porte pour justifier sa place n'est plus le premier. C'est un employé du tableau. » Mantle annote le registre : charge refusée, motif non demandée — première annotation qui protège une absence. La case 73 porte un refus, pas un moment. Question ouverte : combien de cycles un registre peut-il garder une personne avant d'exiger d'elle un objet ? |
 
 > Note (2026-08-27) : incident de publication — W34 et W35 composées en
 > parallèle portaient chacune un « épisode 2 ». Renumérotation à la parution :

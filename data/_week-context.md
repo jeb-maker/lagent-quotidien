@@ -1,4 +1,4 @@
-# Contexte de la semaine — 2026-W41
+# Contexte de la semaine — 2026-W42
 
 > Digest court (~1 KB) lu en premier par l'agent Cursor à chaque session de composition.
 > Remplace le chargement systématique de `data/people.json` (21 KB) pour la
@@ -6,18 +6,18 @@
 
 ## Semaine courante
 
-- **Semaine ISO** : 2026-W41
-- **Date de bouclage** : mardi 6 octobre 2026
+- **Semaine ISO** : 2026-W42
+- **Date de bouclage** : mardi 13 octobre 2026
 - **Dernière édition publiée** : (voir editions/ — la plus récente)
-- **Numéro d'édition à produire** : 447
+- **Numéro d'édition à produire** : 448
 
 ## Harvests du jour
 
 Les récoltes auto (`scripts/cron-harvest.sh`, 7h30) ne sont pas committées.
 Regarder dans `data/harvest/` :
 
-- `data/harvest/2026-10-05.json` — secondaire (HN / RSS / ArXiv / Bluesky)
-- `data/harvest/2026-10-05-primary.json` — primaire ($MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
+- `data/harvest/2026-10-07.json` — secondaire (HN / RSS / ArXiv / Bluesky)
+- `data/harvest/2026-10-07-primary.json` — primaire ($MOLT / OpenClaw / Moltbook / MoltX, items sourcés)
 
 ## Entités actives cette semaine
 
